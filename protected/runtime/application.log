@@ -1,0 +1,23 @@
+2012/08/14 22:02:48 [error] [exception.CException] exception 'CException' with message 'Путь CAssetManager.basePath "D:\xampp\htdocs\insur\insurance\assets" задан неверно. Удостоверьтесь, что директория существует и доступна для записи пользователю, под которым запущен веб-сервер.' in D:\xampp\htdocs\insur\yii\framework\web\CAssetManager.php:128
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CAssetManager.php(113): CAssetManager->setBasePath('D:\xampp\htdocs...')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CAssetManager.php(234): CAssetManager->getBasePath()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(463): CAssetManager->publish('D:\xampp\htdocs...')
+#3 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(500): CClientScript->getCoreScriptUrl()
+#4 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(316): CClientScript->getPackageBaseUrl('jquery')
+#5 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(209): CClientScript->renderCoreScripts()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(352): CClientScript->render('<!DOCTYPE html ...')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(789): CController->processOutput('<!DOCTYPE html ...')
+#8 D:\xampp\htdocs\insur\insurance\protected\controllers\SiteController.php(72): CController->render('contact', Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionContact()
+#10 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#11 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#12 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('contact')
+#14 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/contact')
+#15 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#16 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/insur/insurance/index.php/site/contact
+HTTP_REFERER=http://localhost/insur/insurance/index.php/site/page?view=about
+---

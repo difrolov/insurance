@@ -8,9 +8,13 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
+	'charset'=>'UTF-8',
+	'language'=>'ru',
+	'timeZone'=>'Europe/Moscow',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
+	'defaultController' => 'site',
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -28,6 +32,9 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 		*/
+			'admin'=>array(
+					'class'=>'application.modules.admin.AdminModule',
+			),
 	),
 
 	// application components
@@ -37,16 +44,23 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
+				'admin'=>'admin',
+				'admin/<controller:\w+>'=>'admin/<controller>',
+				'admin/<controller:\w+>/<action:\w+>/show/<show:\d+>'=>'admin/<controller>/<action>',
+				'admin/<controller:\w+>/<action:\w+>/show/<show:\w+>'=>'admin/<controller>/<action>',
+				'admin/<controller:\w+>/<action:\w+>/prid/<prid:\d+>'=>'admin/<controller>/<action>',
+				'admin/<controller:\w+>/<action:\w+>/rid/<rid:\d+>'=>'admin/<controller>/<action>',
+				'admin/<controller:\w+>/<action:\w+>/run/<run:\w+>'=>'admin/<controller>/<action>',
+				'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
+
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
@@ -72,11 +86,11 @@ return array(
 					'levels'=>'error, warning',
 				),
 				// uncomment the following to show log messages on web pages
-				/*
 				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
+           			 'class' => 'CWebLogRoute',
+			         'categories' => 'application',
+			         'showInFireBug' => true,
+			    ),
 			),
 		),
 	),
