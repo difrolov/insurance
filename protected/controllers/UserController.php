@@ -30,6 +30,7 @@ class UserController extends Controller
 			$identity=new UserIdentity($_POST['Users']['login'],$_POST['Users']['password']);
 			if($identity->authenticate()){
 				Yii::app()->user->login($identity);
+				var_dump(Yii::app()->user->group);
 				$this->redirect('index');
 			}else{
 				echo $identity->errorMessage;

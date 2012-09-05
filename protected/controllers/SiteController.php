@@ -1,5 +1,6 @@
 <?php
-
+//контроллер для сайта
+echo 1;
 class SiteController extends Controller
 {
 	/**
