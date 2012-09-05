@@ -1,5 +1,6 @@
 <?php
-//вот тут-то все и началось
+// I really born to make you happy, Sarha!
+// How are you, Marry?
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';
@@ -11,3 +12,5 @@ defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
 require_once($yii);
 Yii::createWebApplication($config)->run();
+//вот тут-то все и закончилосьааааа
+echo 1;
