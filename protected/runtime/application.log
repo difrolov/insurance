@@ -204,3 +204,11 @@ in D:\xampp\htdocs\insur\insurance\index.php (13)
 in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
 in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
 in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/06 00:30:49 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (48)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/06 00:30:52 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (48)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
