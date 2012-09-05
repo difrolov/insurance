@@ -20,6 +20,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		/* 'application.extensions.firephp.*', */
+
 	),
 
 	'modules'=>array(
@@ -93,6 +95,14 @@ return array(
 			         'categories' => 'application',
 			         'showInFireBug' => true,
 			    ),
+				array(
+					/* 'class'=>'FirePHP',
+					'config'=>array(
+							'enabled'=>false,
+							'dateFormat'=>'Y/m/d H:i:s',
+					),
+					'levels'=>'error, warning, trace, profile, info', */
+				),
 			),
 		),
 	),

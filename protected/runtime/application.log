@@ -188,3 +188,19 @@ in D:\xampp\htdocs\insur\insurance\index.php (13)
 in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
 in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
 in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:24:30 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:38:33 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:42:12 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:42:28 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
