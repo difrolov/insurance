@@ -95,14 +95,14 @@ return array(
 			         'categories' => 'application',
 			         'showInFireBug' => true,
 			    ),
-				array(
-					/* 'class'=>'FirePHP',
+				/*array(
+					 'class'=>'FirePHP',
 					'config'=>array(
 							'enabled'=>false,
 							'dateFormat'=>'Y/m/d H:i:s',
 					),
-					'levels'=>'error, warning, trace, profile, info', */
-				),
+					'levels'=>'error, warning, trace, profile, info', 
+				),*/
 			),
 		),
 	),
