@@ -1,5 +1,6 @@
 <?php
 // I really born to make you happy, Sarha!
+// How are you, Marry?
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';
