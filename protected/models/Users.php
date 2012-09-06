@@ -12,6 +12,7 @@
  */
 class Users extends CActiveRecord
 {
+	const ROLE_ADMIN = 'admin';
 	public $rememberMe;
 	/**
 	 * Returns the static model of the specified AR class.
@@ -39,13 +40,13 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, login, password, status, group', 'required'),
-			array('id, status, group', 'numerical', 'integerOnly'=>true),
+			array('id, login, password, status, role', 'required'),
+			array('id, status, role', 'numerical', 'integerOnly'=>true),
 			array('login', 'length', 'max'=>100),
 			array('password', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, login, password, status, group', 'safe', 'on'=>'search'),
+			array('id, login, password, status, role', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,11 +86,7 @@ class Users extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
 		$criteria->compare('login',$this->login,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('status',$this->status);
 		$criteria->compare('group',$this->group);
 
 		return new CActiveDataProvider($this, array(
