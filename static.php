@@ -4,7 +4,7 @@
 		$bg=$_GET['bg'];
 		$bootstrap="static";
 		$menu=$_GET['menu'];
-		// здесь тестовая строка
+		// А я не хочу по евоному, хочу по-моёму!
 		$submenu=$_GET['submenu'];
 		if($menu&&$menu!='main') $crumbs=true;
 ?>
