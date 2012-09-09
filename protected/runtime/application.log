@@ -212,6 +212,7 @@ in D:\xampp\htdocs\insur\insurance\index.php (13)
 in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (48)
 in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
 in D:\xampp\htdocs\insur\insurance\index.php (13)
+<<<<<<< HEAD
 2012/09/06 22:08:41 [error] [exception.CException] exception 'CException' with message 'Either "{parent}" or "readPost" does not exist.' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:104
 Stack trace:
 #0 D:\xampp\htdocs\insur\yii\framework\web\auth\CAuthItem.php(194): CPhpAuthManager->addItemChild('reader', 'readPost')
@@ -486,4 +487,32 @@ Stack trace:
 #12 D:\xampp\htdocs\insur\insurance\index.php(12): CApplication->run()
 #13 {main}
 REQUEST_URI=/insur/insurance/admin
+=======
+2012/09/07 01:22:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "insur/_docs/sources/BG_mock.gif".' in Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('insur/_docs/sou...')
+#1 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/insur/_docs/sources/BG_mock.gif
+HTTP_REFERER=http://localhost/insur/insurance/static.php
+---
+2012/09/08 18:04:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "css/info@otkritie.ru".' in Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('css/info@otkrit...')
+#1 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/css/info@otkritie.ru
+HTTP_REFERER=http://localhost/insur/insurance/static.php?menu=main
+---
+2012/09/08 18:04:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "css/info@otkritie.ru".' in Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('css/info@otkrit...')
+#1 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/css/info@otkritie.ru
+HTTP_REFERER=http://localhost/insur/insurance/static.php?menu=main
+>>>>>>> d04431d97f2d8f7807a9cfeea6330ca1a9ac3c14
 ---
