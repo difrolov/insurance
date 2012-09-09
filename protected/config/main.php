@@ -9,7 +9,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
 	'charset'=>'UTF-8',
-	'language'=>'ru',
+	//'language'=>'ru',
 	'timeZone'=>'Europe/Moscow',
 
 	// preloading 'log' component
@@ -42,7 +42,9 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
+			'class' => 'WebUser',
 			'allowAutoLogin'=>true,
+			'loginUrl'=>array('user/login'),
 		),
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
@@ -63,6 +65,10 @@ return array(
 				'<controller:\w+>/<action:\w+>/n_present/<n_present:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/y_present/<y_present:\w+>'=>'<controller>/<action>',
 			),
+		),
+		'authManager'=>array(
+				'class'=>'PhpAuthManager',
+				'defaultRoles'=>'guest',
 		),
 
 		/* 'db'=>array(

@@ -30,7 +30,7 @@ class UserController extends Controller
 			$identity=new UserIdentity($_POST['Users']['login'],$_POST['Users']['password']);
 			if($identity->authenticate()){
 				Yii::app()->user->login($identity);
-				var_dump(Yii::app()->user->group);
+
 				$this->redirect('index');
 			}else{
 				echo $identity->errorMessage;
@@ -39,6 +39,11 @@ class UserController extends Controller
 			Yii::app()->user->logout();
 		}
 		$this->render('login',array('model'=>$model));
+	}
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
 	}
 
 	protected function performAjaxValidation($model)

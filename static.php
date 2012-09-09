@@ -1,10 +1,10 @@
-<?php /* @var $this Controller */ 
-		
+<?php /* @var $this Controller */
+
 		$go=false;
 		$bg=$_GET['bg'];
 		$bootstrap="static";
 		$menu=$_GET['menu'];
-		// А я не хочу по евоному, хочу по-моёму!
+		// изменил Дима
 		$submenu=$_GET['submenu'];
 		if($menu&&$menu!='main') $crumbs=true;
 ?>
@@ -33,21 +33,21 @@ div#breadcrumbs{
 <body>
 <div align="center">
   <div class="container" id="page">
-<? 	
+<?
 if($bg==2){
 	echo "<img src=\"images/BG_mock_strong.gif\" width=\"1021\" height=\"1453\">";
 }else{
 	if ($tp){?><h3>fit_height</h3><? }?>
-    <div id="fit_height"> 
-      <div> 	
-<?	if ($tp){?><h3>header</h3><? }?>    
+    <div id="fit_height">
+      <div>
+<?	if ($tp){?><h3>header</h3><? }?>
 	    <div id="header">
-<?		if ($tp){?><h3>header_top</h3><? }?>    
+<?		if ($tp){?><h3>header_top</h3><? }?>
           <div id="header_top">
             <div style="float:left;"><a href="http://www.open.ru"><span class="txtLightBlue">www.open</span>.ru</a></div>
             <div style="float:right;"><a href="map.php" class="txtLightBlue">карта сайта</a></div>
           </div>
-<?		if ($tp){?><h3>/header_top</h3><? }?>    
+<?		if ($tp){?><h3>/header_top</h3><? }?>
 		  <div id="logo" align="left">
           	<a href="index.php"><img alt="Открытие Страхование" title="На главную" src="images/logos.gif" width="435" height="97" border="0"></a>
 	      <?php //echo CHtml::encode(Yii::app()->name); ?>
@@ -66,17 +66,17 @@ if($bg==2){
 			</div>
           </div>
 		</div>
-<?	if ($tp){?><h3>/header</h3><? }?>    
+<?	if ($tp){?><h3>/header</h3><? }?>
     <!-- header -->
-<?	if ($tp){?><h3>mainmenu</h3><? }?>    
+<?	if ($tp){?><h3>mainmenu</h3><? }?>
     <!-- mainmenu -->
 	    <div id="mainmenu" align="left">
 <?	function buildMenu( $bg=false,
 						$submenu=false,
 						$arrMenu=false
-                      ){?>        
+                      ){?>
         	<ul>
-<?		if (!$arrMenu)	
+<?		if (!$arrMenu)
 			$arrMenu=array(
 						'main'=>'Главная',
 						'company'=>'О компании',
@@ -86,14 +86,14 @@ if($bg==2){
 						'useful'=>'Полезная информация'
 						);
 		foreach($arrMenu as $alias=>$text):?>
-				<li<? 
+				<li<?
 			if( $_GET['menu']==$alias
 				||(!$_GET['menu']&&$alias=='main')
-			   ):?> class="mainmenu_active"<? 
+			   ):?> class="mainmenu_active"<?
 			endif;?>><a href="static.php?menu=<? echo $alias;
 			if ($bg):?>&bg=<? echo $bg; endif;
 			if ($submenu):?>&submenu=<? echo $submenu; endif;?>"><?=$text?></a></li>
-	<?php 
+	<?php
 		endforeach;?>
     		</ul>
 <?	}
@@ -108,12 +108,12 @@ if($bg==2){
 					array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
 					array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 				),
-			)); 
+			));
 		}?>
 	</div>
 <?	if ($tp){?><h3>/mainmenu</h3>
-		<h3>main_submenu</h3><? 
-	}?>    
+		<h3>main_submenu</h3><?
+	}?>
     	<div id="main_submenu" align="right">
         	<ul>
         <?    $arrSubMenu=array(
@@ -122,21 +122,21 @@ if($bg==2){
 							'question'=>'Задать вопрос'
 		  					);
 	foreach($arrSubMenu as $alias=>$text):?>
-    		<li<? 
-		if($_GET['submenu']==$alias):?> class="submenu_active"<? 
+    		<li<?
+		if($_GET['submenu']==$alias):?> class="submenu_active"<?
 		endif;?>><a href="<?=$bootstrap?>.php?submenu=<? echo $alias;
 		if ($bg):?>&bg=<? echo $bg; endif;
 		if ($menu):?>&menu=<? echo $menu; endif;?>"><?=$text?></a></li>
-<?php 
+<?php
 	endforeach;?>
       	  </ul>
        	</div>
-<?	if ($tp){?><h3>/main_submenu</h3><? 
+<?	if ($tp){?><h3>/main_submenu</h3><?
 	}
 	if ($crumbs){
 		if ($tp){?><h3>breadcrumbs</h3><? }?>
     <div id="breadcrumbs" align="left">
-	<?php 
+	<?php
 		if ($this){
 			if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -159,13 +159,13 @@ if($bg==2){
 <?		if ($tp){?><h3>/slide_marks</h3><? }
 	}?>
         <!-- slide_marks -->
-<?	if ($tp){?><h3>tblSlides</h3><? }?>        
+<?	if ($tp){?><h3>tblSlides</h3><? }?>
         <table width="100%" cellspacing="0" cellpadding="0" id="tblSlides">
           <tr valign="top">
             <td class="slidesPointer"><a href="#"><img src="images/pointer_left.png" width="9" height="18" border="0"></a></td>
             <td width="100%">
         <div align="left" id="slides">
-          <div>	
+          <div>
             <div class="solution_content">
             	<img src="images/ready_solutions/for_companies.jpg" width="252" height="143">
                 <div>готовые решения для
@@ -200,9 +200,9 @@ if($bg==2){
             <td class="slidesPointer"><a href="#"><img src="images/pointer_right.png" width="9" height="18" border="0"></a></td>
           </tr>
         </table>
-<?php 	
+<?php
 	if ($tp){?><h3>/tblSlides</h3>
-    <h3>content</h3><? 
+    <h3>content</h3><?
 	}
 	if ($go) echo $content;  ?>
 		<div id="content_from_left" align="left">
@@ -221,45 +221,45 @@ if($bg==2){
        	  <img src="images/pix/museum.jpg" width="180" height="233">
        	  <div id="our_museum" class="txtHeader2">Наш музей</div>
         </div>
-<?	if ($tp){?><h3>/content</h3><? }?>    
+<?	if ($tp){?><h3>/content</h3><? }?>
 		<div class="clear"></div>
         <div id="news_block">
-<?	if ($tp){?><h3>last_articles</h3><? }?>    
+<?	if ($tp){?><h3>last_articles</h3><? }?>
             <div align="left" id="last_articles">
               <div>
                 <div class="txtHeader2 txtLightBlue">последние статьи</div>
                 <div id="last_articles_previews">
-                    <div class="floatLeft"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
-    
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna 
-    
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et 
-    
-            justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
-    
+                    <div class="floatLeft"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+
+            diam nonumy eirmod tempor invidunt ut labore et dolore magna
+
+            aliquyam erat, sed diam voluptua. At vero eos et accusam et
+
+            justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+
             sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
-                    <div class="floatRight"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
-    
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna 
-    
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et 
-    
-            justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
-    
+                    <div class="floatRight"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+
+            diam nonumy eirmod tempor invidunt ut labore et dolore magna
+
+            aliquyam erat, sed diam voluptua. At vero eos et accusam et
+
+            justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+
             sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
                 </div>
               </div>
             </div>
-<?	if ($tp){?><h3>/last_articles</h3><? }?>  
+<?	if ($tp){?><h3>/last_articles</h3><? }?>
 		  <div align="left" id="last_news">
             	<div class="txtHeader3 txtLightBlue">новости</div>
             <p id="issue_date">31.08.2012</p>
             <p>В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
             	<p id="all_news"><a href="#">все новости...</a></p>
-            </div>  
+            </div>
 		</div>
 		<div class="clear"></div>
-<?	if ($tp){?><h3>last_seen</h3><? }?>  
+<?	if ($tp){?><h3>last_seen</h3><? }?>
         <div id="last_seen">
         	<span id="last_seen_header" class="txtHeader2 txtLightBlue">
             	вы недавно смотрели
@@ -275,7 +275,7 @@ if($bg==2){
 						'family'=>'Готовое решение &quot;Семья&quot;',
 						'autosuit'=>'Автоподбор физ. лица',
 						'useful'=>'Полезная информация'
-					  );	
+					  );
 	$i=1;
 	foreach($arrLastSeen as $alias=>$header):?>
     		<div>
@@ -283,7 +283,7 @@ if($bg==2){
 			  	if ($menu):echo "?menu=$menu"; endif;
 				if ($submenu):
 					$usign=($menu)? "&":"?";
-					echo $usign."submenu=$submenu"; 
+					echo $usign."submenu=$submenu";
 				endif;
 				echo ($usign||$menu)? "&":"?"?>article=<?=$alias?>">
             	<img border="0" src="images/pix/<?=$i?>-<?=$alias?>.jpg" width="146" height="92">
@@ -291,7 +291,7 @@ if($bg==2){
               </a>
             </div>
 <?		$i++;
-	endforeach;?>    
+	endforeach;?>
                 	</td>
             		<td class="slidesPointer">
             			<a href="#"><img src="images/pointer_right.png" width="9" height="18" border="0"></a>
@@ -299,21 +299,21 @@ if($bg==2){
               	</tr>
             </table>
         </div>
-<?	if ($tp){?><h3>/last_seen</h3><? }?>  
+<?	if ($tp){?><h3>/last_seen</h3><? }?>
       </div>
 	</div>
 <?	if ($tp){?><h3>/fit_height</h3>
-	<h3>footer</h3><? 
-	}?>    
+	<h3>footer</h3><?
+	}?>
 	<div id="footer">
-<?	if ($tp){?><h3>bottom_menu</h3><? }?>  
+<?	if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
 	<?	buildMenu($bg,$submenu);?>
         </div>
 <?	if ($tp){?>
 		<h3>/bottom_menu</h3>
         <h3>footer_content</h3>
-<? 	}?>  
+<? 	}?>
     	<div id="footer_content">
         	<div align="left" class="floatLeft">
             	<div style="display:inline-block">
@@ -323,12 +323,12 @@ if($bg==2){
                 </div>
                 <div id="call_us_free" align="center">
                 	<div>8 800 200 71 00</div>
-					<div>круглосуточно</div>       
+					<div>круглосуточно</div>
 				</div>
             </div>
             <div class="floatRight">&nbsp;</div>
         </div>
-<?	if ($tp){?><h3>/footer_content</h3><? }?>  
+<?	if ($tp){?><h3>/footer_content</h3><? }?>
 	</div>
     <!-- footer -->
 <?	if ($tp){?><h3>/footer</h3><? }
