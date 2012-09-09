@@ -4,7 +4,7 @@
 		$bg=$_GET['bg'];
 		$bootstrap="static";
 		$menu=$_GET['menu'];
-		//dddddddddddddddddddddddddddddddddd
+		// изменил Дима
 		$submenu=$_GET['submenu'];
 		if($menu&&$menu!='main') $crumbs=true;
 ?>
