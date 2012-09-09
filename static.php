@@ -4,6 +4,7 @@
 		$bg=$_GET['bg'];
 		$bootstrap="static";
 		$menu=$_GET['menu'];
+		// здесь тестовая строка
 		$submenu=$_GET['submenu'];
 		if($menu&&$menu!='main') $crumbs=true;
 ?>
