@@ -1,5 +1,5 @@
 <?php
-// OK! A make it read+write access!
+// Ветку-то добавил, но где она?!
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';

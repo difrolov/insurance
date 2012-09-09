@@ -1,0 +1,372 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	color:#666;
+}
+a {
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:underline;
+}
+body, html{
+	background:#FFF; 
+	height:100%;
+	margin:0;
+	text-align:center;
+}
+#bottom_menu{
+	line-height:30px;
+	/*background:#009900;*/
+}
+.bold{
+	font-weight:bold;
+}
+div#bottom_menu ul a{
+	font-size:13px;
+}
+div#breadcrumbs{
+	font-size:0.8em;
+	line-height:28px;
+	margin-left:8px;
+	[disabled]margin-bottom:8px;
+}
+div#call_us{
+	padding-top:31px;
+	font-size:24px;
+}
+div#call_us input[type="text"]{
+	border:none;
+	float:left;
+	height:26px;
+	padding-left:4px;
+	width:150px;
+	/*background:#99FF99;*/
+}
+div#call_us input[type="image"]{
+	float:left;
+	margin:6px;
+	/*background:#FF0;*/
+}
+div#call_us > 
+	div:first-child{
+	display:inline-block;
+}
+div#call_us div#free_line {
+	font-size:0.95em;
+	letter-spacing:0.01em;
+}
+div#call_us > 
+	div:first-child div{
+	font-size:0.7em;
+}
+div#call_us > 
+	div:first-child > 
+		div:first-child
+		+div
+		+div{
+	font-size:0.90em;
+	/*background:#FFFF00;*/
+}
+div#call_us_free{
+	display:inline-block; 
+	vertical-align:central;
+}
+div#call_us_free div{
+	margin-left:40px;
+}
+div#call_us_free 
+	> div:first-child{
+	font-size:31px;
+}
+div#call_us_free 
+	> div:last-child{
+	font-size:20px;
+}
+.clear{
+	clear:both;
+}
+div#content_from_right{
+	padding-top:16px;
+}
+div#content_from_left{
+	display:inline-block;
+	padding-left:20px; 
+	vertical-align:top;
+	width:680px;
+}
+div#content_from_right{
+	width:230px;
+}
+div#content_from_right{
+	background-image:url(../images/separator_window_main_right_module.png); 
+	background-position:top right;
+	background-repeat:no-repeat;
+	display:inline-block;
+	padding-top:23px;
+}
+.floatLeft{
+	float:left;
+}
+.floatRight{
+	float:right;
+}
+#footer{
+	height:110px;
+	width:980px;
+	/*background:#CCFFCC;*/
+}
+#footer_content div[class="floatLeft"]:before{
+	 width:75%;
+}
+#footer_content div[class="floatRight"]:before{
+	 content:"e-mail: info@otkritie.ru";
+	 width:25%;
+}
+#header{
+	height:190px;
+	padding-top:8px;
+	border-bottom: solid 8px #00B2DF;
+}
+#header_top{
+	height:27px; 
+	border:solid 5px #A7A9AC; 
+	border-left:none;
+	border-right:none; 
+	line-height:27px;
+}
+#header_top a{
+	font-size:1.1em;
+}
+div#last_articles{
+	display:inline-block;
+	height:212px;
+	margin-top:20px;
+	vertical-align:top;
+	width:705px;
+}
+div#last_articles div#last_articles_previews div{
+	width:48%;
+	padding-right:2%;
+}
+div#last_articles > div:first-child{
+	padding:20px;
+}
+div#last_articles, div#content_from_right{
+	background-color:#EAEBEC;
+}
+div#last_news{
+	display:inline-block;
+	padding-left:20px;
+	padding-top:49px;
+	width:210px;
+}
+div#last_news p#issue_date{
+	margin-bottom:-12px;
+}
+div#last_news p#all_news{
+	margin-top:-12px;
+	text-align:right;
+}
+div#last_news > div:first-child[class*="txtHeader"]{
+	margin-bottom:19px;
+}
+div#last_seen{
+	border-top:solid 8px #808285;
+}
+div#last_seen div{
+	background-color:#D3D5D9;
+	background-image:url(../images/separator_last_seen_middle.png);
+	background-position:top right;
+	background-repeat:no-repeat;
+	display:inline-block;
+	font-size:10px;
+	margin-right:11px;
+	padding:13px 16px 13px 13px;
+}
+div#last_seen span[class*="txtHeader"]{
+	display:block;
+	margin:10px 20px;
+	text-align:left;
+	width:100%;
+}
+div#last_seen div span{
+	display:block;
+	margin-top:10px;
+	text-align:left;
+	text-transform:uppercase;
+}
+div#last_seen > div:last-child{
+	margin-right:0;
+}
+div#logo{
+	padding-top:29px;
+	float:left;
+}
+div#main_submenu{
+	background:#D3D5D9;
+	height:38px;
+	line-height:38px;
+	padding-bottom:2px;
+}
+div#main_submenu ul{
+	display:inline-block;
+	margin:0px 20px;
+}
+div#main_submenu ul li{
+	background:#FFF;
+	border:solid 1px #999;
+	display:inline;
+	font-size:0.7em;
+	line-height:27px;
+	list-style: none; 
+	margin-left:5px;
+	padding:8px 30px;
+	text-align:right;
+}
+div#page{
+	box-shadow:0 0 40px 10px #ccc;
+	margin-bottom:-110px;	
+	min-height:100%;
+	padding:0 20px;
+	width:980px;
+	/*background:#FFFF00;*/
+}
+div#search{
+	height:27px;
+	border:solid 1px #CCC;
+	margin-top:10px;
+}
+li.submenu_active{
+	background:#00B2DF !important;
+}
+li.submenu_active a{
+	color:#FFF;
+}
+div#mainmenu{
+	height:30px;
+	text-align:left;
+}
+div#mainmenu ul{
+	margin:10px 0 8px 0;
+	margin-left:-10px;
+}
+div#mainmenu ul li, div#bottom_menu ul li{
+	border-right:solid 1px #ccc;
+	display:inline;
+	list-style: none;
+	margin-left:-4px; 
+	padding:8px 10px;
+	text-align:left;
+}
+div#mainmenu ul li{
+	text-transform:uppercase;
+}
+div#mainmenu ul >li:first-child{
+	margin-left:-30px;
+}
+div#mainmenu ul >li:first-child[class!="mainmenu_active"]{
+	padding-left:0;
+}
+div#mainmenu ul a{
+	font-size:0.7em;
+}
+div#mainmenu ul 
+	> li:last-child,
+div#bottom_menu ul 
+	> li:last-child{
+	border-right:none;
+}
+li.mainmenu_active{
+	background:#4D4D4F;
+}
+li.mainmenu_active a{
+	color:#dedede;
+}
+div#our_museum{
+	margin-top:10px;
+	margin-bottom:6px;
+}
+div#search form{
+	margin:0;
+	padding:0;
+}
+div#slide_marks{
+	margin:-5px 0 3px 31px;
+}
+div#slide_marks div{
+	background:#999;
+	display:inline-block;
+	font-size:6px; 
+	height:8px; 
+	margin-right:2px; 
+	width:9px; 
+}
+div#slides{
+	height:250px;
+	margin-bottom:12px;
+	text-align:left;
+	/*padding-left:10px;
+	background:#FFCCCC;*/
+}
+div#slides > div:first-child, 
+div#slides > div:first-child +div, 
+div#slides > div:first-child +div +div{
+	display:inline-block;
+}
+div#slides div.solution_content{
+	background:url(../images/separator_window_biggest.png) top right no-repeat;
+	border:solid 1px #CCCCCC;
+	display:inline-block;
+	font-size:0.8em;
+	height:195px;
+	margin:0 10px;
+	padding:20px 23px 0 20px;
+	text-transform:uppercase;
+	/*background:#99FF99;*/
+}
+div#slides div.solutions_all{
+	background:url(../images/separator_vertical.png) 0 10px no-repeat;
+	height:50px;
+	margin-left:34px;
+	padding:7px 10px;
+	text-align:left;
+	/*background:#FFFF99;*/
+}
+div#slides 
+	div.solution_content 
+	> img:first-child +div {
+	margin-top:6px;
+}
+div#slides 
+	div.solution_content 
+	> img:first-child +div span{
+	display:block;
+	color: #00B2DF;
+	line-height:23px;
+}
+table#tblSlides{
+	margin-bottom:26px;
+}
+td.slidesPointer{
+	padding-top:62px;
+}
+table#tblSlidesLastSeen td.slidesPointer{
+	padding-top:0;
+}
+.txtHeader2, .txtHeader3{
+	text-transform:uppercase;
+}
+.txtHeader2{
+	font-size:24px;
+}
+.txtHeader3{
+	font-size:14px;
+}
+.txtLightBlue *, .txtLightBlue{
+	color:#00BCE4;
+}
+ul.insideDiv{
+	margin-left:-20px;
+}

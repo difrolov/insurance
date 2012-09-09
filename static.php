@@ -1,26 +1,41 @@
 <?php /* @var $this Controller */ 
-		// переменные на время тестирования:
-		$test=true;
+		
+		$go=false;
 		$bg=$_GET['bg'];
 		$bootstrap="static";
 		$menu=$_GET['menu'];
 		$submenu=$_GET['submenu'];
-		if($menu&&$menu!='main') $crumbs=true;?>
-<!DOCTYPE HTML>
+		if($menu&&$menu!='main') $crumbs=true;
+?>
+<!DOCTYPE>
 <html>
 <head>
-<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-<meta charset="utf-8">
-<meta name="language" content="ru">
-<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" rel="stylesheet" type="text/css">
-<!--[if lt IE 8]>
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-<![endif]-->
+	<title><?php // echo CHtml::encode($this->pageTitle); ?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="ru" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+<style>
+<? 	if ($bg): echo "\nbody > div:first-child{
+	background:url(images/BG_mock.gif)";
+	echo(!strstr($_SERVER['HTTP_HOST'],"localhost"))? "10":"78";
+	echo "px 0;
+}";
+	else: echo "
+div#breadcrumbs{
+\tmargin-bottom:8px;\n
+}";
+	endif;
+	if ($bg) echo "\ndiv#slide_marks div{
+\tbackground:#ff9900;\n}\n";?>
+</style>
 </head>
 <body>
 <div align="center">
   <div class="container" id="page">
 <? 	
+if($bg==2){
+	echo "<img src=\"images/BG_mock_strong.gif\" width=\"1021\" height=\"1453\">";
+}else{
 	if ($tp){?><h3>fit_height</h3><? }?>
     <div id="fit_height"> 
       <div> 	
@@ -55,18 +70,7 @@
 <?	if ($tp){?><h3>mainmenu</h3><? }?>    
     <!-- mainmenu -->
 	    <div id="mainmenu" align="left">
-<?	if (!$test) {
-		$this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); 
-	}else{
-		function buildMenu( $bg=false,
+<?	function buildMenu( $bg=false,
 						$submenu=false,
 						$arrMenu=false
                       ){?>        
@@ -80,20 +84,31 @@
 						'personal'=>'Физическим лицам',
 						'useful'=>'Полезная информация'
 						);
-			foreach($arrMenu as $alias=>$text):?>
-					<li<? 
-				if( $_GET['menu']==$alias
-					||(!$_GET['menu']&&$alias=='main')
-				   ):?> class="mainmenu_active"<? 
-				endif;?>><a href="static.php?menu=<? echo $alias;
-				if ($bg):?>&bg=<? echo $bg; endif;
-				if ($submenu):?>&submenu=<? echo $submenu; endif;?>"><?=$text?></a></li>
-		<?php 
-			endforeach;?>
+		foreach($arrMenu as $alias=>$text):?>
+				<li<? 
+			if( $_GET['menu']==$alias
+				||(!$_GET['menu']&&$alias=='main')
+			   ):?> class="mainmenu_active"<? 
+			endif;?>><a href="static.php?menu=<? echo $alias;
+			if ($bg):?>&bg=<? echo $bg; endif;
+			if ($submenu):?>&submenu=<? echo $submenu; endif;?>"><?=$text?></a></li>
+	<?php 
+		endforeach;?>
     		</ul>
-<?		}
-		buildMenu($bg,$submenu);
-	}?>
+<?	}
+	buildMenu($bg,$submenu);
+	if ($go) {
+		if ($this)
+			$this->widget('zii.widgets.CMenu',array(
+				'items'=>array(
+					array('label'=>'Home', 'url'=>array('/site/index')),
+					array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+					array('label'=>'Contact', 'url'=>array('/site/contact')),
+					array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
+					array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				),
+			)); 
+		}?>
 	</div>
 <?	if ($tp){?><h3>/mainmenu</h3>
 		<h3>main_submenu</h3><? 
@@ -121,12 +136,12 @@
 		if ($tp){?><h3>breadcrumbs</h3><? }?>
     <div id="breadcrumbs" align="left">
 	<?php 
-		if(isset($this->breadcrumbs)){?>
+		if ($this){
+			if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-				'links'=>$this->breadcrumbs,
-			));
-		}else{
-			?>
+			'links'=>$this->breadcrumbs,
+		)); endif;
+		}else{?>
 	<a href="#">Главная</a> / <a href="#">Ссылка</a> / <a href="#">Ссылка</a>
     </div>
 	<?	}
@@ -188,7 +203,7 @@
 	if ($tp){?><h3>/tblSlides</h3>
     <h3>content</h3><? 
 	}
-	if (!$test) echo $content;  ?>
+	if ($go) echo $content;  ?>
 		<div id="content_from_left" align="left">
 		  <div class="txtHeader2 txtLightBlue bold">О компании</div>
 		  <p>Сайт предназначен для:</p>
@@ -240,7 +255,7 @@
             <p id="issue_date">31.08.2012</p>
             <p>В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
             	<p id="all_news"><a href="#">все новости...</a></p>
-          </div>  
+            </div>  
 		</div>
 		<div class="clear"></div>
 <?	if ($tp){?><h3>last_seen</h3><? }?>  
@@ -315,7 +330,8 @@
 <?	if ($tp){?><h3>/footer_content</h3><? }?>  
 	</div>
     <!-- footer -->
-<?	if ($tp){?><h3>/footer</h3><? }?><br>
+<?	if ($tp){?><h3>/footer</h3><? }
+}?><br>
   </div><!-- page -->
 </div>
 </body>
