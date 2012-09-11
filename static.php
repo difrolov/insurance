@@ -1,11 +1,10 @@
 <?php /* @var $this Controller */
 
 		$go=false;
-		$bg=$_GET['bg'];
+		$bg=(isset($_GET['bg']))?$_GET['bg'] : null;
 		$bootstrap="static";
-		$menu=$_GET['menu'];
-		// изменил Дима
-		$submenu=$_GET['submenu'];
+		$menu=(isset($_GET['menu']))?$_GET['menu'] : null;
+		$submenu=(isset($_GET['submenu']))?$_GET['submenu'] : null;
 		if($menu&&$menu!='main') $crumbs=true;
 ?>
 <!DOCTYPE>

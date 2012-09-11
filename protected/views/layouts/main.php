@@ -2,10 +2,15 @@
 <?php /* @var $this Controller */
 		// переменные на время тестирования:
 		$test=true;
-		$bg=$_GET['bg'];
+		$bg=(isset($_GET['bg']))?$_GET['bg'] : false;
 		$bootstrap="static";
-		$menu=$_GET['menu'];
-		$submenu=$_GET['submenu'];
+		$menu=(isset($_GET['menu']))?$_GET['menu'] : false;
+		$submenu=(isset($_GET['submenu']))?$_GET['submenu'] : false;
+		if (isset($tp)) {
+			$tp=true;
+		}else{
+			$tp=false;
+		}
 		if($menu&&$menu!='main') $crumbs=true;?>
 <!DOCTYPE HTML>
 <html>
@@ -56,6 +61,7 @@
 <?	if ($tp){?><h3>mainmenu</h3><? }?>
     <!-- mainmenu -->
 	    <div id="mainmenu" align="left">
+
 <?	if (!$test) {
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
@@ -72,7 +78,10 @@
 						$arrMenu=false
                       ){?>
         	<ul>
-<?		if (!$arrMenu)
+<?
+		$menu=(isset($_GET['menu']))?$_GET['menu'] : false;
+		$submenu=(isset($_GET['submenu']))?$_GET['submenu'] : false;
+		if (!$arrMenu)
 			$arrMenu=array(
 						'main'=>'Главная',
 						'company'=>'О компании',
@@ -83,8 +92,8 @@
 						);
 			foreach($arrMenu as $alias=>$text):?>
 					<li<?
-				if( $_GET['menu']==$alias
-					||(!$_GET['menu']&&$alias=='main')
+				if( $menu==$alias
+					||(!$menu && $alias=='main')
 				   ):?> class="mainmenu_active"<?
 				endif;?>><a href="static.php?menu=<? echo $alias;
 				if ($bg):?>&bg=<? echo $bg; endif;
@@ -108,7 +117,7 @@
 		  					);
 	foreach($arrSubMenu as $alias=>$text):?>
     		<li<?
-		if($_GET['submenu']==$alias):?> class="submenu_active"<?
+		if($submenu==$alias):?> class="submenu_active"<?
 		endif;?>><a href="<?=$bootstrap?>.php?submenu=<? echo $alias;
 		if ($bg):?>&bg=<? echo $bg; endif;
 		if ($menu):?>&menu=<? echo $menu; endif;?>"><?=$text?></a></li>
@@ -118,7 +127,7 @@
        	</div>
 <?	if ($tp){?><h3>/main_submenu</h3><?
 	}
-	if ($crumbs){
+	if (isset($crumbs)){
 		if ($tp){?><h3>breadcrumbs</h3><? }?>
     <div id="breadcrumbs" align="left">
 	<?php
@@ -270,7 +279,7 @@
 					$usign=($menu)? "&":"?";
 					echo $usign."submenu=$submenu";
 				endif;
-				echo ($usign||$menu)? "&":"?"?>article=<?=$alias?>">
+				echo (isset($usign)||$menu)? "&":"?"?>article=<?=$alias?>">
             	<img border="0" src="images/pix/<?=$i?>-<?=$alias?>.jpg" width="146" height="92">
                 <span><?=$header?></span>
               </a>

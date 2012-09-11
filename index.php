@@ -1,6 +1,7 @@
 <?php
 // Ветку-то добавил, но где она?!
 // change the following paths if necessary
+error_reporting(E_ALL);
 $yii=dirname(__FILE__).'/../yii/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';
 
