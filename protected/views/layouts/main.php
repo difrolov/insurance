@@ -1,4 +1,3 @@
-
 <?php /* @var $this Controller */
 		// переменные на время тестирования:
 		$test=true;
