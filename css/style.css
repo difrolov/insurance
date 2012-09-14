@@ -23,6 +23,9 @@ body, html{
 .bold{
 	font-weight:bold;
 }
+div#bottom_menu ul{
+	margin-left:-40px;
+}
 div#bottom_menu ul a{
 	font-size:13px;
 }
@@ -39,7 +42,7 @@ div#call_us{
 div#call_us input[type="text"]{
 	border:none;
 	float:left;
-	height:26px;
+	height:25px;
 	padding-left:4px;
 	width:150px;
 	/*background:#99FF99;*/
@@ -86,6 +89,24 @@ div#call_us_free
 }
 .clear{
 	clear:both;
+}
+div.company_news{
+}
+div.company_news div[align="right"]{
+	margin-top:-28px;
+}
+div.company_news div[align="right"] a{
+	font-size:12px;
+}
+div.company_news img{
+	margin-right:6px;
+}
+div#content{
+	text-align:left;
+	padding:0 10px;
+}
+div#content > h1:first-child{
+	font-size:1.25em;
 }
 div#content_from_right{
 	padding-top:16px;
@@ -138,6 +159,30 @@ div#content_from_right{
 }
 #header_top a{
 	font-size:1.1em;
+}
+table.inner_layout{
+	width:100%;
+}
+table.inner_layout p{
+	margin-top:0;
+	padding-top:0;
+	padding-bottom:14px;
+}
+table.inner_layout td{
+	padding:0;
+	vertical-align:top;
+}
+table.inner_layout tbody tr > td:first-child{
+	width:20%;
+}
+table.inner_layout tbody tr > td:first-child ul{
+	margin-left:-10px;
+}
+table.inner_layout tbody tr > td:first-child +td{
+	padding-left:14px;
+}
+table.inner_layout tbody tr > td:first-child +td +td{
+	padding-left:14px;
 }
 div#last_articles{
 	display:inline-block;
@@ -287,6 +332,15 @@ li.mainmenu_active a{
 div#our_museum{
 	margin-top:10px;
 	margin-bottom:6px;
+}
+.ready_solutions{
+	background:#CCFFFF;
+	clear:both;
+	margin-top:20px;
+	padding:10px;
+}
+.ready_solutions:after{
+	content:"Готовые решения";
 }
 div#search form{
 	margin:0;

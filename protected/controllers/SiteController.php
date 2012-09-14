@@ -1,4 +1,7 @@
 <?php
+require_once(dirname(__FILE__)."/../components/helpers/ready_solutions.php"); 
+require_once(dirname(__FILE__)."/../components/helpers/set_html.php"); 
+
 class SiteController extends Controller
 {
 	/**
@@ -71,6 +74,27 @@ class SiteController extends Controller
 	public function actionPartneram()
 	{	$partners="Контент страницы \"Партнёрам\"";
 		$this->render('partneram', array('res'=>$partners));
+	}
+	/**
+	  *
+	  */
+	public function actionEsli_proizoshel_strahovoj_sluchay()
+	{	$event="Контент страницы \"Если произошёл страховой случай\"";
+		$this->render('esli_proizoshel_strahovoj_sluchay', array('res'=>$event));
+	}
+	/**
+	  *
+	  */
+	public function actionOtpravit_zajavku()
+	{	$send_app="Контент страницы \"Отправить заявку\"";
+		$this->render('otpravit_zajavku', array('res'=>$send_app));
+	}
+	/**
+	  *
+	  */
+	public function actionZadat_vopros()
+	{	$ask_us="Контент страницы \"Задать вопрос\"";
+		$this->render('zadat_vopros', array('res'=>$ask_us));
 	}
 	/**
 	 * This is the action to handle external exceptions.

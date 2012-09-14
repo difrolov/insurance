@@ -983,3 +983,1645 @@ REQUEST_URI=/insur/insurance/
 in D:\xampp\htdocs\insur\insurance\protected\views\layouts\main.php (282)
 in D:\xampp\htdocs\insur\insurance\protected\views\layouts\column1.php (6)
 in D:\xampp\htdocs\insur\insurance\protected\controllers\SiteController.php (31)
+2012/09/14 12:44:33 [error] [php] Undefined variable: about (Z:\home\localhost\www\insur\insurance\protected\views\site\o_kompanii.php:12)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\site\o_kompanii.php (12)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 12:44:59 [error] [php] Undefined variable: about (Z:\home\localhost\www\insur\insurance\protected\views\site\o_kompanii.php:12)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\site\o_kompanii.php (12)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 12:50:46 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:7)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (7)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 12:55:22 [error] [php] Undefined variable: _SESSION (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:9)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii?test=0
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (9)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 13:29:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/o_kompanii
+---
+2012/09/14 13:29:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php
+---
+2012/09/14 13:29:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php
+---
+2012/09/14 13:31:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:31:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:32:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:33:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:42:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/rea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/poi...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=1
+---
+2012/09/14 13:43:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:43:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:43:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:44:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:44:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:44:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:45:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:45:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/log...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:45:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:54:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:54:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "site".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('site')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('site')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/site/image...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/site/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:54:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:54:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:54:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:55:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:55:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:55:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:55:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/sea...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:57:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php?test=0
+---
+2012/09/14 13:57:44 [error] [php] Undefined variable: _SESSION (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:11)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (11)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 13:58:18 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:12)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (12)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 13:58:44 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:127)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (127)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 14:00:21 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:134)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (134)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 14:00:51 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:179)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (179)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 14:01:10 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php:340)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(77): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate()
+#2 Z:\home\localhost\www\insur\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(207): CContentDecorator->run()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(301): SiteController->endWidget()
+#5 Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php(6): SiteController->endContent()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): SiteController->renderInternal()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CController.php(785): SiteController->renderFile()
+#9 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(43): SiteController->render()
+#10 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionO_kompanii()
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#13 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#14 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#15 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#16 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\main.php (340)
+in Z:\home\localhost\www\insur\insurance\protected\views\layouts\column1.php (6)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (43)
+2012/09/14 14:02:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/o_kompanii
+---
+2012/09/14 15:17:43 [error] [php] Undefined variable: tp (Z:\home\localhost\www\insur\insurance\protected\views\site\index.php:9)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(31): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/index
+in Z:\home\localhost\www\insur\insurance\protected\views\site\index.php (9)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (31)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 15:18:46 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\site\index.php:196)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(31): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/index
+in Z:\home\localhost\www\insur\insurance\protected\views\site\index.php (196)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (31)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 15:19:45 [error] [php] Undefined variable: test (Z:\home\localhost\www\insur\insurance\protected\views\site\index.php:205)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(31): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/index
+in Z:\home\localhost\www\insur\insurance\protected\views\site\index.php (205)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (31)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 15:20:19 [error] [php] Undefined variable: bg (Z:\home\localhost\www\insur\insurance\protected\views\site\index.php:98)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(31): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/index
+in Z:\home\localhost\www\insur\insurance\protected\views\site\index.php (98)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (31)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 15:20:55 [error] [php] Undefined variable: content (Z:\home\localhost\www\insur\insurance\protected\views\site\index.php:204)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(31): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/index
+in Z:\home\localhost\www\insur\insurance\protected\views\site\index.php (204)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (31)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 15:21:22 [error] [php] Undefined variable: bootstrap (Z:\home\localhost\www\insur\insurance\protected\views\site\index.php:278)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(31): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/index
+in Z:\home\localhost\www\insur\insurance\protected\views\site\index.php (278)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (31)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 15:23:05 [error] [php] Undefined variable: menu (Z:\home\localhost\www\insur\insurance\protected\views\site\index.php:279)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): SiteController->renderFile()
+#1 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): SiteController->renderPartial()
+#2 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(31): SiteController->render()
+#3 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): SiteController->runAction()
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): SiteController->runActionWithFilters()
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): SiteController->run()
+#8 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#9 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#10 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/index
+in Z:\home\localhost\www\insur\insurance\protected\views\site\index.php (279)
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (31)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
+2012/09/14 16:02:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "esli-proizoshel-strahovoj-sluchay".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('esli-proizoshel...')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('esli-proizoshel...')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/esli-proiz...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/esli-proizoshel-strahovoj-sluchay
+HTTP_REFERER=http://localhost/insur/insurance/site/partneram
+---
+2012/09/14 16:10:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "esli-proizoshel-strahovoj-sluchay".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('esli-proizoshel...')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('esli-proizoshel...')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/esli-proiz...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/esli-proizoshel-strahovoj-sluchay
+HTTP_REFERER=http://localhost/insur/insurance/site/partneram
+---
+2012/09/14 16:10:52 [error] [exception.CException] exception 'CException' with message 'SiteController cannot find the requested view "esli_proizoshel_strahovoj_sluchay".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:879
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): CController->renderPartial('esli_proizoshel...', Array, true)
+#1 Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php(80): CController->render('esli_proizoshel...', Array)
+#2 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionEsli_proizoshel_strahovoj_sluchay()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('esli_proizoshel...')
+#7 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/esli_proiz...')
+#8 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/site/esli_proizoshel_strahovoj_sluchay
+HTTP_REFERER=http://localhost/insur/insurance/site/esli-proizoshel-strahovoj-sluchay
+---
+2012/09/14 16:12:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/index
+---
+2012/09/14 16:13:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/index
+---
+2012/09/14 16:13:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php
+---
+2012/09/14 16:13:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php
+---
+2012/09/14 16:13:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/index.php
+---
+2012/09/14 16:14:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/malomu_i_srednemu_biznesu
+---
+2012/09/14 16:14:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('index.php')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('index.php')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/index.php')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/index.php
+HTTP_REFERER=http://localhost/insur/insurance/site/index
+---
+2012/09/14 19:16:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/images/pix...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/site/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/site/o_kompanii
+---
+2012/09/14 19:55:18 [error] [php] Undefined variable: yiic (Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php:2)
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#1 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 Z:\home\localhost\www\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/site/o_kompanii
+in Z:\home\localhost\www\insur\insurance\protected\controllers\SiteController.php (2)
+in Z:\home\localhost\www\insur\insurance\index.php (14)
