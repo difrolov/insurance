@@ -30,7 +30,48 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('index');
 	}
-
+	/**
+	  *
+	  */
+	public function actionO_kompanii()
+	{	//обращаемся к модели и получаем данные таблицы:
+		/*$about=Genre::model()->findAll( array('select'=>'name',
+								     	'condition'=>' name <> "" '
+									  ), //условие запроса
+								     array('order'=>' id DESC '
+								   )
+								 );*/
+		$about="Контент страницы \"О компании\"";
+		$this->render('o_kompanii', array('res'=>$about));
+	}
+	/**
+	  *
+	  */
+	public function actionKorporativnym_klientam()
+	{	$corporative="Контент страницы \"Корпоративным клиентам\"";
+		$this->render('korporativnym_klientam', array('res'=>$corporative));
+	}
+	/**
+	  *
+	  */
+	public function actionMalomu_i_srednemu_biznesu()
+	{	$smallBusiness="Контент страницы \"Малому и среднему бизнесу\"";
+		$this->render('malomu_i_srednemu_biznesu', array('res'=>$smallBusiness));
+	}
+	/**
+	  *
+	  */
+	public function actionFizicheskim_litzam()
+	{	$privatePersons="Контент страницы \"Физическим лицам\"";
+		$this->render('fizicheskim_litzam', array('res'=>$privatePersons));
+	}
+	/**
+	  *
+	  */
+	public function actionPartneram()
+	{	$partners="Контент страницы \"Партнёрам\"";
+		$this->render('partneram', array('res'=>$partners));
+	}
 	/**
 	 * This is the action to handle external exceptions.
 	 */
@@ -70,8 +111,4 @@ class SiteController extends Controller
 		}
 		$this->render('contact',array('model'=>$model));
 	}
-
-
-
-
 }
