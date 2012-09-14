@@ -172,6 +172,9 @@ table.inner_layout td{
 	padding:0;
 	vertical-align:top;
 }
+table.inner_layout th{
+	padding-bottom:14px;
+}
 table.inner_layout tbody tr > td:first-child{
 	width:20%;
 }
@@ -277,6 +280,26 @@ div#page{
 	padding:0 20px;
 	width:980px;
 	/*background:#FFFF00;*/
+}
+div.ready_solutions_preview{
+	margin-bottom:10px;
+}
+div.ready_solutions_preview div.clear{
+	clear:both;
+	height:6px;
+	background: #0F0;
+}
+div.ready_solutions_preview > div:first-child{
+	clear:left;
+	float:left;
+	width:70px;
+}
+div.ready_solutions_preview > div:first-child +div{
+	float:left;
+	width:120px;
+	/*background:#00CCFF;*/
+}
+div.ready_solutions_preview{
 }
 div#search{
 	height:27px;

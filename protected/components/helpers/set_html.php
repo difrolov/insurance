@@ -20,5 +20,19 @@ class setHTML{
     </div>
     <br>
 <?	}
+	/**
+	  *
+	  */
+	function showReadySolution($icon_src=false,$content=false){
+		if (!$content) {
+			$content="Наименование продукта";
+		}?>
+	<div class="ready_solutions_preview">
+    	<div><img align="left" name="placeholder" src="<?=$icon_src?>" width="64" height="64" alt="" style="background-color: #ededed" />
+		</div>
+		<div><a href="#"><?=$content?></a></div>
+    </div>
+    <div class="clear">&nbsp;</div>
+<?	}
 }
 ?>
