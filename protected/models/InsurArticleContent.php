@@ -1,36 +1,36 @@
 <?php
 
 /**
- * This is the model class for table "users".
+ * This is the model class for table "insur_article_content".
  *
- * The followings are the available columns in table 'users':
+ * The followings are the available columns in table 'insur_article_content':
  * @property integer $id
- * @property string $login
- * @property string $password
+ * @property string $content
+ * @property string $created
  * @property integer $status
- * @property integer $group
+ * @property integer $insur_coworkers_id
+ *
+ * The followings are the available model relations:
+ * @property InsurCoworkers $insurCoworkers
  */
-class Users extends CActiveRecord
+class InsurArticleContent extends CActiveRecord
 {
-	const ROLE_ADMIN = 'admin';
-	public $rememberMe;
-	public $role;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Users the static model class
+	 * @return InsurArticleContent the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
+	
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'insur_users';
+		return 'insur_article_content';
 	}
 
 	/**
@@ -41,13 +41,12 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, login, password, status, role', 'required'),
-			array('id, status, role', 'numerical', 'integerOnly'=>true),
-			array('login', 'length', 'max'=>100),
-			array('password', 'length', 'max'=>255),
+			array('insur_coworkers_id', 'required'),
+			array('status, insur_coworkers_id', 'numerical', 'integerOnly'=>true),
+			array('content, created', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, login, password, status, role', 'safe', 'on'=>'search'),
+			array('id, content, created, status, insur_coworkers_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +58,7 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'insurCoworkers' => array(self::BELONGS_TO, 'InsurCoworkers', 'insur_coworkers_id'),
 		);
 	}
 
@@ -69,11 +69,10 @@ class Users extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'login' => 'Логин',
-			'password' => 'Пароль',
+			'content' => 'Content',
+			'created' => 'Created',
 			'status' => 'Status',
-			'group' => 'Group',
-			'rememberMe' => 'Запомнить',
+			'insur_coworkers_id' => 'Insur Coworkers',
 		);
 	}
 
@@ -87,8 +86,12 @@ class Users extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-		$criteria->compare('login',$this->login,true);
-		$criteria->compare('group',$this->group);
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('content',$this->content,true);
+		$criteria->compare('created',$this->created,true);
+		$criteria->compare('status',$this->status);
+		$criteria->compare('insur_coworkers_id',$this->insur_coworkers_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

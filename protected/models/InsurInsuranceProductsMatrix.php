@@ -1,36 +1,34 @@
 <?php
 
 /**
- * This is the model class for table "users".
+ * This is the model class for table "insur_insurance_products_matrix".
  *
- * The followings are the available columns in table 'users':
+ * The followings are the available columns in table 'insur_insurance_products_matrix':
  * @property integer $id
- * @property string $login
- * @property string $password
- * @property integer $status
- * @property integer $group
+ * @property integer $id_parent_product
+ * @property integer $id_product
+ *
+ * The followings are the available model relations:
+ * @property InsurInsuranceProducts $idParentProduct
  */
-class Users extends CActiveRecord
+class InsurInsuranceProductsMatrix extends CActiveRecord
 {
-	const ROLE_ADMIN = 'admin';
-	public $rememberMe;
-	public $role;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Users the static model class
+	 * @return InsurInsuranceProductsMatrix the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
+	
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'insur_users';
+		return 'insur_insurance_products_matrix';
 	}
 
 	/**
@@ -41,13 +39,11 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, login, password, status, role', 'required'),
-			array('id, status, role', 'numerical', 'integerOnly'=>true),
-			array('login', 'length', 'max'=>100),
-			array('password', 'length', 'max'=>255),
+			array('id_parent_product', 'required'),
+			array('id_parent_product, id_product', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, login, password, status, role', 'safe', 'on'=>'search'),
+			array('id, id_parent_product, id_product', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +55,7 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idParentProduct' => array(self::BELONGS_TO, 'InsurInsuranceProducts', 'id_parent_product'),
 		);
 	}
 
@@ -69,11 +66,8 @@ class Users extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'login' => 'Логин',
-			'password' => 'Пароль',
-			'status' => 'Status',
-			'group' => 'Group',
-			'rememberMe' => 'Запомнить',
+			'id_parent_product' => 'Id Parent Product',
+			'id_product' => 'Id Product',
 		);
 	}
 
@@ -87,8 +81,10 @@ class Users extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-		$criteria->compare('login',$this->login,true);
-		$criteria->compare('group',$this->group);
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('id_parent_product',$this->id_parent_product);
+		$criteria->compare('id_product',$this->id_product);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
