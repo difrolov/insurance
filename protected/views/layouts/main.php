@@ -198,7 +198,7 @@
 	if ($tp){?><h3>/tblSlides</h3>
     <h3>content</h3><?
 	}
-	if (!$test) echo $content;  ?>
+	echo $content;  ?>
 		<div id="content_from_left" align="left">
 		  <div class="txtHeader2 txtLightBlue bold">О компании</div>
 		  <p>Сайт предназначен для:</p>

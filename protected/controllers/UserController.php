@@ -36,7 +36,7 @@ class UserController extends Controller
 				echo $identity->errorMessage;
 			}
 			// Выходим
-			Yii::app()->user->logout();
+
 		}
 		$this->render('login',array('model'=>$model));
 	}
