@@ -7,6 +7,9 @@
 a {
 	text-decoration:none;
 }
+.aBlue a, a.blue{
+	color:#00a2bF;
+}
 a:hover{
 	text-decoration:underline;
 }
@@ -289,6 +292,9 @@ div#main_submenu ul li{
 	margin-left:5px;
 	padding:8px 30px;
 	text-align:right;
+}
+.noTopMargin{
+	margin-top:0;
 }
 div#page{
 	box-shadow:0 0 40px 10px #ccc;

@@ -42,7 +42,7 @@ class setHTML{
 	  *
 	  */
 	function setButtonPrint(){?>
-    <button>Печать страницы</button>
+    <button onClick="window.print();">Печать страницы</button>
 <?	}
 	/**
 	  * @package		content
