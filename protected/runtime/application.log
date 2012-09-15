@@ -3444,3 +3444,91 @@ REQUEST_URI=/insur/insurance/o_kompanii
 in Z:\home\localhost\www\insur\insurance\protected\views\o_kompanii\index.php (71)
 in Z:\home\localhost\www\insur\insurance\protected\controllers\O_kompaniiController.php (35)
 in Z:\home\localhost\www\insur\insurance\index.php (13)
+2012/09/15 16:46:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('korporativnym_k...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/korporativnym_klientam
+HTTP_REFERER=http://localhost/insur/insurance/o_kompanii
+---
+2012/09/15 16:46:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in Z:\home\localhost\www\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 Z:\home\localhost\www\insur\yii\framework\web\CController.php(271): CController->missingAction('')
+#1 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#2 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('korporativnym_k...')
+#3 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/korporativnym_klientam
+HTTP_REFERER=http://localhost/insur/insurance/malomu_i_srednemu_biznesu
+---
+2012/09/15 17:39:00 [error] [exception.CException] exception 'CException' with message 'Fizicheskim_litzamController and its behaviors do not have a method or closure named "showReadySolution".' in Z:\home\localhost\www\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 Z:\home\localhost\www\insur\insurance\protected\components\helpers\setHTML.php(28): CComponent->__call('showReadySoluti...', Array)
+#1 Z:\home\localhost\www\insur\insurance\protected\components\helpers\setHTML.php(28): Fizicheskim_litzamController->showReadySolution()
+#2 Z:\home\localhost\www\insur\insurance\protected\views\fizicheskim_litzam\index.php(13): setHTML->buildCatalogue()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require('Z:\home\localho...')
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('Z:\home\localho...', Array, true)
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('Z:\home\localho...', Array, true)
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): CController->renderPartial('index', Array, true)
+#7 Z:\home\localhost\www\insur\insurance\protected\controllers\Fizicheskim_litzamController.php(30): CController->render('index', Array)
+#8 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): Fizicheskim_litzamController->actionIndex()
+#9 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#10 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#13 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('fizicheskim_lit...')
+#14 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#15 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/insur/insurance/fizicheskim_litzam
+HTTP_REFERER=http://localhost/insur/insurance/o_kompanii
+---
+2012/09/15 19:50:45 [error] [exception.CException] exception 'CException' with message 'Fizicheskim_litzamController and its behaviors do not have a method or closure named "showReadySolutionBlock".' in Z:\home\localhost\www\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 Z:\home\localhost\www\insur\insurance\protected\components\helpers\setHTML.php(30): CComponent->__call('showReadySoluti...', Array)
+#1 Z:\home\localhost\www\insur\insurance\protected\components\helpers\setHTML.php(30): Fizicheskim_litzamController->showReadySolutionBlock()
+#2 Z:\home\localhost\www\insur\insurance\protected\views\fizicheskim_litzam\index.php(12): setHTML->buildCatalogue()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require('Z:\home\localho...')
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('Z:\home\localho...', Array, true)
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('Z:\home\localho...', Array, true)
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): CController->renderPartial('index', Array, true)
+#7 Z:\home\localhost\www\insur\insurance\protected\controllers\Fizicheskim_litzamController.php(30): CController->render('index', Array)
+#8 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): Fizicheskim_litzamController->actionIndex()
+#9 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#10 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#13 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('fizicheskim_lit...')
+#14 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#15 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/insur/insurance/fizicheskim_litzam
+HTTP_REFERER=http://localhost/insur/insurance/korporativnym_klientam
+---
+2012/09/15 19:50:58 [error] [exception.CException] exception 'CException' with message 'Fizicheskim_litzamController and its behaviors do not have a method or closure named "showReadySolutionBlock".' in Z:\home\localhost\www\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 Z:\home\localhost\www\insur\insurance\protected\components\helpers\setHTML.php(30): CComponent->__call('showReadySoluti...', Array)
+#1 Z:\home\localhost\www\insur\insurance\protected\components\helpers\setHTML.php(30): Fizicheskim_litzamController->showReadySolutionBlock()
+#2 Z:\home\localhost\www\insur\insurance\protected\views\fizicheskim_litzam\index.php(12): setHTML->buildCatalogue()
+#3 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(127): require('Z:\home\localho...')
+#4 Z:\home\localhost\www\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('Z:\home\localho...', Array, true)
+#5 Z:\home\localhost\www\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('Z:\home\localho...', Array, true)
+#6 Z:\home\localhost\www\insur\yii\framework\web\CController.php(783): CController->renderPartial('index', Array, true)
+#7 Z:\home\localhost\www\insur\insurance\protected\controllers\Fizicheskim_litzamController.php(30): CController->render('index', Array)
+#8 Z:\home\localhost\www\insur\yii\framework\web\actions\CInlineAction.php(50): Fizicheskim_litzamController->actionIndex()
+#9 Z:\home\localhost\www\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#10 Z:\home\localhost\www\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#11 Z:\home\localhost\www\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#13 Z:\home\localhost\www\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('fizicheskim_lit...')
+#14 Z:\home\localhost\www\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#15 Z:\home\localhost\www\insur\insurance\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/insur/insurance/fizicheskim_litzam
+HTTP_REFERER=http://localhost/insur/insurance/malomu_i_srednemu_biznesu
+---
