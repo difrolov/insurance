@@ -43,7 +43,7 @@ div#content{
 <? 	}?>
 </head>
 <body>
-<div align="center" style="height:100%; background:lightcyan;">
+<div align="center">
 <!-- page -->
 <? 	if ($tp){?><h3>page</h3><? }?>
   <div align="left" class="container" id="page">
@@ -118,18 +118,35 @@ div#content{
 					endforeach;?>
 				</ul>
 	<?		}else{
-				$this_object->widget('zii.widgets.CMenu',array(
-					'items'=>array(
-						array('label'=>'Главная', 'url'=>array('/site/index')),
-						array('label'=>'О компании', 'url'=>array('/o_kompanii/')),
-						array('label'=>'Корпоративным клиентам', 'url'=>array('/korporativnym_klientam/')),
-						array('label'=>'Малому и среднему бизнесу', 'url'=>array('/malomu_i_srednemu_biznesu/')),
-						array('label'=>'Физическим лицам', 'url'=>array('/fizicheskim_litzam/')),
-						array('label'=>'Партнёрам', 'url'=>array('/partneram/')),
-						//array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
-						//array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-					),
-				));
+				$this_object->widget( 'zii.widgets.CMenu',
+									  array(
+										'items'=>array(
+											array( 'label'=>'Главная', 
+												   'url'=>array('/site/index')
+												 ),
+											array( 'label'=>'О компании', 
+												   'url'=>array('/o_kompanii/'), 
+												   'active' => Yii::app()->controller->getId() == 'o_kompanii'
+												 ),
+											array( 'label'=>'Корпоративным клиентам', 
+												   'url'=>array('/korporativnym_klientam/'), 
+												   'active' => Yii::app()->controller->getId() == 'korporativnym_klientam'
+												 ),
+											array( 'label'=>'Малому и среднему бизнесу', 
+												   'url'=>array('/malomu_i_srednemu_biznesu/'), 
+												   'active' => Yii::app()->controller->getId() == 'malomu_i_srednemu_biznesu'
+												 ),
+											array( 'label'=>'Физическим лицам', 
+												   'url'=>array('/fizicheskim_litzam/'), 
+												   'active' => Yii::app()->controller->getId() == 'fizicheskim_litzam'
+												 ),
+											array( 'label'=>'Партнёрам', 
+												   'url'=>array('/partneram/'), 
+												   'active' => Yii::app()->controller->getId() == 'partneram'
+												 ),
+										),
+									)
+								);
 			}	
 		}
 	if (isset($test)) buildMenu(false,$test,$bg);
@@ -159,7 +176,7 @@ div#content{
 <?	}else{
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Если произошёл страховой случай', 'url'=>array('/esli_proizoshel_strahovoj_sluchay/')),
+				array('label'=>'Если произошёл страховой случай', 'url'=>array('/esli_proizoshel_strahovoj_sluchay/'), 'active' => Yii::app()->controller->getId() == 'esli_proizoshel_strahovoj_sluchay'),
 				array('label'=>'Отправить заявку', 'url'=>array('/site/otpravit_zajavku')),
 				array('label'=>'Задать вопрос', 'url'=>array('/site/zadat_vopros')),
 			),

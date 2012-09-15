@@ -24,7 +24,7 @@ class Korporativnym_klientamController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionKorporativnym_klientam()
+	public function actionIndex()
 	{	$corporative="Контент страницы \"Корпоративным клиентам\"";
 			$this->render('index', array('res'=>$corporative));
 	}	
