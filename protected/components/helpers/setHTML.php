@@ -1,6 +1,8 @@
 <?
 class setHTML{
 	/**
+	  * @package		HTML
+	  * @subpackage		product
 	  *
 	  */
 	function buildCatalogue( $solutions=false, 	// готовые решения
@@ -23,11 +25,11 @@ class setHTML{
     <th>Программы</th>
   </tr>
   <tr>
-    <td>
+    <td id="cellSolutions">
 <?	for($i=0;$i<$scount;$i++)
-		readySolutions::showReadySolution();?>      
+		self::showReadySolutionBlock();?>      
 	</td>
-    <td>
+    <td id="cellProgramms">
 <?	for($i=0;$i<$pcount;$i++)
 		readySolutions::showProgram();?>      
 	</td>
@@ -35,12 +37,16 @@ class setHTML{
 </table>
 <?	}
 	/**
-	 *
-	 */
+	  * @package		interface
+	  * @subpackage		buttons
+	  *
+	  */
 	function setButtonPrint(){?>
     <button>Печать страницы</button>
 <?	}
 	/**
+	  * @package		content
+	  * @subpackage		news
 	  *
 	  */
 	function showNews($src=false,$content=false){
@@ -54,11 +60,13 @@ class setHTML{
     <br>
 <?	}
 	/**
+	  * @package		content
+	  * @subpackage		product
 	  *
 	  */
-	function showReadySolution($icon_src=false,$content=false){
+	function showReadySolutionBlock($icon_src=false,$content=false){
 		if (!$content) {
-			$content="Наименование продукта";
+			$content="Готовое решение (наименование)";
 		}?>
 	<div class="ready_solutions_preview">
     	<div><img align="left" name="placeholder" src="<?=$icon_src?>" width="64" height="64" alt="" style="background-color: #ededed" />

@@ -1,6 +1,8 @@
 <?
 class readySolutions{
 	/**
+	  * @package		content
+	  * @subpackage		program
 	  *
 	  */
 	function showProgram(){?>
@@ -9,6 +11,8 @@ class readySolutions{
     </div>		
 <?	}
 	/**
+	  * @package		content
+	  * @subpackage		solution
 	  *
 	  */
 	function showReadySolution(){?>

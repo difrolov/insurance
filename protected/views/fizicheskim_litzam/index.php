@@ -6,9 +6,8 @@
 $this->pageTitle=Yii::app()->name . ' - Физическим лицам';
 $this->breadcrumbs=array(
 	'Физическим лицам',
-);
+); //var_dump("<h1>res:</h1><pre>",$res,"</pre>");
 ?>
 <h1>Физическим лицам</h1>
-<?	//var_dump("<h1>res:</h1><pre>",$res,"</pre>");
-setHTML::buildCatalogue();?>
+<?	setHTML::buildCatalogue(false,false,'privatePersons');?>
 

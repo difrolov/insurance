@@ -94,6 +94,9 @@ div#call_us_free
 	> div:last-child{
 	font-size:20px;
 }
+td#cellProgramms > div:first-child {
+	margin-top:0;
+}
 .clear{
 	clear:both;
 }
@@ -183,11 +186,17 @@ table.inner_layout td{
 table.inner_layout th{
 	padding-bottom:14px;
 }
+table.inner_layout tbody 
+	> tr:first-child 
+		> th:last-child{
+	padding-left:14px;
+}
 table.inner_layout tbody tr > td:first-child{
 	width:20%;
 }
 table.inner_layout tbody tr > td:first-child ul{
 	margin-left:-10px;
+	margin-top:0;
 }
 table.inner_layout tbody tr > td:first-child +td{
 	padding-left:14px;

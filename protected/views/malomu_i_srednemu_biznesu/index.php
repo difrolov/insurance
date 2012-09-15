@@ -9,18 +9,4 @@ $this->breadcrumbs=array(
 );
 ?>
 <h1>Малому и среднему бизнесу</h1>
-<?	//var_dump("<h1>res:</h1><pre>",$res,"</pre>");?>
-<table class="inner_layout" cellspacing="0">
-  <tr>
-    <th>Готовые решения</th>
-    <th>Программы</th>
-  </tr>
-  <tr>
-    <td>
-<?	for($i=0;$i<10;$i++)
-		setHTML::showReadySolution();?>      
-	</td>
-    <td>
-	</td>
-  </tr>
-</table>
+<?	setHTML::buildCatalogue(false,false,'smallBusiness');?>
