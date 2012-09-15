@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__)."/../components/helpers/ready_solutions.php"); 
 require_once(dirname(__FILE__)."/../components/helpers/set_html.php"); 
 
-class SiteController extends Controller
+class Korporativnym_klientamController extends Controller
 {
 	/**
 	 * Declares class-based actions.
@@ -27,40 +27,10 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
-	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
-	}
-	/**
-	  *
-	  */
-	/*public function actionName()
-	{	//обращаемся к модели и получаем данные таблицы:
-		//$res=ClassName::model()->findAll( array('select'=>'name',
-			//					     	'condition'=>' name <> "" '
-				//					  ), //условие запроса
-					//			     array('order'=>' id DESC '
-						//		   )
-							//	 );
-		$res="Контент страницы \"Name\"";
-		$this->render('file_name_in_this_view', array('res'=>$res));
-	}*/
-	/**
-	  *
-	  */
-	public function actionOtpravit_zajavku()
-	{	$send_app="Контент страницы \"Отправить заявку\"";
-		$this->render('otpravit_zajavku', array('res'=>$send_app));
-	}
-	/**
-	  *
-	  */
-	public function actionZadat_vopros()
-	{	$ask_us="Контент страницы \"Задать вопрос\"";
-		$this->render('zadat_vopros', array('res'=>$ask_us));
-	}
+	public function actionKorporativnym_klientam()
+	{	$corporative="Контент страницы \"Корпоративным клиентам\"";
+			$this->render('index', array('res'=>$corporative));
+	}	
 	/**
 	 * This is the action to handle external exceptions.
 	 */

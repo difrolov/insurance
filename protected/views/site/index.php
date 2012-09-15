@@ -1,28 +1,15 @@
-<?php
-/* @var $this SiteController */
-$this->pageTitle=Yii::app()->name;
-
-$tp=(isset($_GET['tp'])&&$_GET['tp'])? true:false;
-if (isset($_GET['test'])) {
-	if(	!$_GET['test']
-		|| $_GET['test']=='0'
-		|| strstr($_GET['test'],'-')
-	  ) $_SESSION['test']=false;
-	else $_SESSION['test']=$_GET['test'];			
-}
-$test=(isset($_SESSION['test']))? $_SESSION['test']:false;
-	
-	// режим тестирования и загружена "Главная" стрю:
-	if ($tp){?><h3>slide_marks</h3><? }?>
+<!-- slide_marks -->
+<?	// режим тестирования и загружена "Главная" стрю:
+		if ($tp){?><h3>slide_marks</h3><? }?>
 		<div align="left" id="slide_marks">
 <?	for($i=0;$i<8;$i++):?>
 			<div>&nbsp;</div>
 <?		endfor;?>
 		</div>
 <?		if ($tp){?><h3>/slide_marks</h3><? }?>
-		<!-- slide_marks -->
-<?	
-		if ($tp){?><h3>tblSlides</h3><? }?>
+		<!-- /slide_marks -->
+		<!-- tblSlides -->
+<?		if ($tp){?><h3>tblSlides</h3><? }?>
 			<table width="100%" cellspacing="0" cellpadding="0" id="tblSlides">
 			  <tr valign="top">
 				<td class="slidesPointer"><a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_left.png" width="9" height="18" border="0"></a></td>
@@ -64,9 +51,8 @@ $test=(isset($_SESSION['test']))? $_SESSION['test']:false;
 			  </tr>
 			</table>
 	<?php
-		if ($tp){?><h3>/tblSlides</h3>
-			<h3>content</h3><?
-		}?>
+		if ($tp){?><h3>/tblSlides</h3><? }?>
+		<!-- /tblSlides -->
 			<div id="content_from_left" align="left">
 			  <div class="txtHeader2 txtLightBlue bold">О компании</div>
 			  <p>Сайт предназначен для:</p>
@@ -83,7 +69,6 @@ $test=(isset($_SESSION['test']))? $_SESSION['test']:false;
 			  <img src="<?=Yii::app()->request->baseUrl?>/images/pix/museum.jpg" width="180" height="233">
 			  <div id="our_museum" class="txtHeader2">Наш музей</div>
 			</div>
-	<?	if ($tp){?><h3>/content</h3><? }?>
 			<div class="clear"></div>
 			<div id="news_block">
 	<?	if ($tp){?><h3>last_articles</h3><? }?>
@@ -162,5 +147,3 @@ $test=(isset($_SESSION['test']))? $_SESSION['test']:false;
 				</table>
 			</div>
 	<?	if ($tp){?><h3>/last_seen</h3><? }?>
-	  </div>
-	</div>

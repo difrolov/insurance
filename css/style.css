@@ -16,12 +16,19 @@ body, html{
 	margin:0;
 	text-align:center;
 }
-#bottom_menu{
-	line-height:30px;
-	/*background:#009900;*/
+body > div:first-child{
+	min-height:100%;
+}
+div#fit_height { /* fit_height*/
+	padding-bottom:110px;
+	background:#FFFF00;
 }
 .bold{
 	font-weight:bold;
+}
+#bottom_menu{
+	line-height:30px;
+	/*background:#009900;*/
 }
 div#bottom_menu ul{
 	margin-left:-40px;
@@ -136,7 +143,7 @@ div#content_from_right{
 #footer{
 	height:110px;
 	width:980px;
-	/*background:#CCFFCC;*/
+	background:#CCFFCC;
 }
 #footer_content div[class="floatLeft"]:before{
 	 width:75%;

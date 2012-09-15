@@ -23,35 +23,35 @@
 				$tp=false;
 			}
 			if($menu&&$menu!='main') $crumbs=true;
-		
-		?>
-<!DOCTYPE HTML>
+?><!DOCTYPE HTML>
 <html>
 <head>
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <meta charset="utf-8">
 <meta name="language" content="ru">
-<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" rel="stylesheet" type="text/css">
+<link href="<?php echo Yii::app()->request->baseUrl."/css/style.css"; ?>" rel="stylesheet" type="text/css">
 <!--[if lt IE 8]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->
 <?	// если главная, удалим отступы главного контейнера:
-	if (!isset($this->breadcrumbs)||!$this->breadcrumbs):?>
+	if (!isset($this->breadcrumbs)||!$this->breadcrumbs){?>
 <style>
 div#content{
 	padding:0;
 }
 </style>
-<? 	endif;?>
+<? 	}?>
 </head>
 <body>
-<div align="center">
-  <div class="container" id="page">
-<?
-	if ($tp){?><h3>fit_height</h3><? }?>
-    <div id="fit_height">
-      <div>
-<?	if ($tp){?><h3>header</h3><? }?>
+<? die();?>
+<div align="center" style="height:100%; background:lightcyan;">
+<? 	if ($tp){?><h3>page</h3><? }?>
+  <div align="left" class="container" id="page">
+	<!-- fit_height -->
+	<?	if ($tp){?><h3>fit_height</h3><? }?>
+    	<div id="fit_height">
+    <!-- header -->
+	<?	if ($tp){?><h3>header</h3><? }?>
 	    <div id="header">
 <?		if ($tp){?><h3>header_top</h3><? }?>
           <div id="header_top">
@@ -77,10 +77,10 @@ div#content{
 			</div>
           </div>
 		</div>
-<?	if ($tp){?><h3>/header</h3><? }?>
-    <!-- header -->
-<?	if ($tp){?><h3>mainmenu</h3><? }?>
+			<?	if ($tp){?><h3>/header</h3><? }?>
+    <!-- /header -->
     <!-- mainmenu -->
+	<?	if ($tp){?><h3>mainmenu</h3><? }?>
 	    <div id="mainmenu" align="left">
 
 <?	
@@ -121,11 +121,11 @@ div#content{
 				$this_object->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						array('label'=>'Главная', 'url'=>array('/site/index')),
-						array('label'=>'О компании', 'url'=>array('/site/o_kompanii')),
-						array('label'=>'Корпоративным клиентам', 'url'=>array('/site/korporativnym_klientam')),
-						array('label'=>'Малому и среднему бизнесу', 'url'=>array('/site/malomu_i_srednemu_biznesu')),
-						array('label'=>'Физическим лицам', 'url'=>array('/site/fizicheskim_litzam')),
-						array('label'=>'Партнёрам', 'url'=>array('/site/partneram')),
+						array('label'=>'О компании', 'url'=>array('/o_kompanii/')),
+						array('label'=>'Корпоративным клиентам', 'url'=>array('/korporativnym_klientam/')),
+						array('label'=>'Малому и среднему бизнесу', 'url'=>array('/malomu_i_srednemu_biznesu/')),
+						array('label'=>'Физическим лицам', 'url'=>array('/fizicheskim_litzam/')),
+						array('label'=>'Партнёрам', 'url'=>array('/partneram/')),
 						//array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
 						//array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 					),
@@ -135,9 +135,10 @@ div#content{
 	if (isset($test)) buildMenu(false,$test,$bg);
 	else buildMenu($this);?>
 	</div>
-<?	if ($tp){?><h3>/mainmenu</h3>
-		<h3>main_submenu</h3><?
-	}?>
+			<?	if ($tp){?><h3>/mainmenu</h3><? }?>
+    <!-- /mainmenu -->
+    <!-- main_submenu -->
+	<?	if ($tp){?><h3>main_submenu</h3><? }?>
     	<div id="main_submenu" align="right">
 <?	if(isset($test)&&$test=='1'){?>        
         	<ul>
@@ -158,17 +159,17 @@ div#content{
 <?	}else{
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Если произошёл страховой случай', 'url'=>array('/site/esli_proizoshel_strahovoj_sluchay')),
+				array('label'=>'Если произошёл страховой случай', 'url'=>array('/esli_proizoshel_strahovoj_sluchay/')),
 				array('label'=>'Отправить заявку', 'url'=>array('/site/otpravit_zajavku')),
 				array('label'=>'Задать вопрос', 'url'=>array('/site/zadat_vopros')),
 			),
 		));
 	}?>          
        	</div>
-<?	if ($tp){?><h3>/main_submenu</h3><?
-	}
-
-	if ($tp){?><h3>breadcrumbs</h3><? }?>
+			<?	if ($tp){?><h3>/main_submenu</h3><? }?>
+    <!-- /main_submenu -->
+	<!-- breadcrumbs -->
+	<?	if ($tp){?><h3>breadcrumbs</h3><? }?>
 		<div id="breadcrumbs" align="left">
 <?php
 	if(isset($this->breadcrumbs)){?>
@@ -179,18 +180,21 @@ div#content{
 		echo "\n";?><a href="#">Главная</a> / <a href="#">Ссылка</a> / <a href="#">Ссылка</a>
 <?	}?>
 		</div>
-<?	if ($tp){?><h3>/breadcrumbs</h3><? }?>
-	<!-- breadcrumbs -->
-	<?php echo $content;
-	
-	if ($tp){?><h3>/fit_height</h3>
-	<h3>footer</h3><?
-	}?>
-	<div align="left" id="footer">
+			<?	if ($tp){?><h3>/breadcrumbs</h3><? }?>
+	<!-- /breadcrumbs -->
+	<?php echo $content;?>
+  		</div>
+	<? if ($tp){?><h3>/fit_height</h3><? }?>
+	<!-- /fit_height -->
+	<? 	if ($tp){?><h3>/page</h3><? }?>
+  </div>
+<!-- footer -->
+<? 	if ($tp){?><h3>footer</h3><? }?>
+  <div align="left" id="footer">
 <?	if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
 	<?	if (isset($test)) buildMenu(false,$test,$bg,$submenu);
-		else buildMenu($this);?>
+		else buildMenu($this); echo "\n"?>
         </div>
 <?	if ($tp){?>
 		<h3>/bottom_menu</h3>
@@ -211,10 +215,8 @@ div#content{
             <div class="floatRight">&nbsp;</div>
         </div>
 <?	if ($tp){?><h3>/footer_content</h3><? }?>
-	</div>
-    <!-- footer -->
-<?	if ($tp){?><h3>/footer</h3><? }?><br>
-  </div><!-- page -->
+  </div>
+		<?	if ($tp){?><h3>/footer</h3><? }?>
 </div>
 </body>
 </html>
