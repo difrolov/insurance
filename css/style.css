@@ -364,6 +364,15 @@ div#our_museum{
 	margin-top:10px;
 	margin-bottom:6px;
 }
+.ready_program{
+	background:#ededed;
+	clear:both;
+	margin-top:20px;
+	padding:10px;
+}
+.ready_program:after{
+	content:"Программа";
+}
 .ready_solutions{
 	background:#CCFFFF;
 	clear:both;

@@ -1,6 +1,40 @@
 <?
 class setHTML{
 	/**
+	  *
+	  */
+	function buildCatalogue( $solutions=false, 	// готовые решения
+							 $programs=false,	// программы
+							 $consumer_type=false
+						   ){
+	if (!$solutions){
+		$scount=10;
+	}else{
+		$scount=count($solutions);
+	}
+	if (!$programs){
+		$pcount=10;
+	}else{
+		$pcount=count($programs);
+	}?>
+<table class="inner_layout" cellspacing="0">
+  <tr>
+    <th>Готовые решения</th>
+    <th>Программы</th>
+  </tr>
+  <tr>
+    <td>
+<?	for($i=0;$i<$scount;$i++)
+		readySolutions::showReadySolution();?>      
+	</td>
+    <td>
+<?	for($i=0;$i<$pcount;$i++)
+		readySolutions::showProgram();?>      
+	</td>
+  </tr>
+</table>
+<?	}
+	/**
 	 *
 	 */
 	function setButtonPrint(){?>

@@ -9,6 +9,6 @@ $this->breadcrumbs=array(
 );
 ?>
 <h1>Физическим лицам</h1>
-Тут ващета тоже контент, так-то!
-<?	var_dump("<h1>res:</h1><pre>",$res,"</pre>");?>
+<?	//var_dump("<h1>res:</h1><pre>",$res,"</pre>");
+setHTML::buildCatalogue();?>
 
