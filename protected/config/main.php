@@ -20,6 +20,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.components.helpers.*',
 		/* 'application.extensions.firephp.*', */
 
 	),

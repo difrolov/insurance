@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__FILE__)."/../components/helpers/ready_solutions.php"); 
-require_once(dirname(__FILE__)."/../components/helpers/set_html.php"); 
+//require_once(dirname(__FILE__)."/../helpers/ready_solutions.php"); 
+//require_once(dirname(__FILE__)."/../helpers/set_html.php"); 
 
 class O_kompaniiController extends Controller
 {

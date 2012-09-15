@@ -1,4 +1,4 @@
-﻿<?
+<?
 class readySolutions{
 
 	function showReadySolution(){?>

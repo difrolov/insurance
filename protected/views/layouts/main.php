@@ -43,8 +43,8 @@ div#content{
 <? 	}?>
 </head>
 <body>
-<? die();?>
 <div align="center" style="height:100%; background:lightcyan;">
+<!-- page -->
 <? 	if ($tp){?><h3>page</h3><? }?>
   <div align="left" class="container" id="page">
 	<!-- fit_height -->
@@ -188,18 +188,21 @@ div#content{
 	<!-- /fit_height -->
 	<? 	if ($tp){?><h3>/page</h3><? }?>
   </div>
+	<? 	if ($tp){?><h3>/page</h3><? }?>
+<!-- /page -->
 <!-- footer -->
 <? 	if ($tp){?><h3>footer</h3><? }?>
   <div align="left" id="footer">
-<?	if ($tp){?><h3>bottom_menu</h3><? }?>
+  	<!--bottom_menu-->
+	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
 	<?	if (isset($test)) buildMenu(false,$test,$bg,$submenu);
 		else buildMenu($this); echo "\n"?>
         </div>
-<?	if ($tp){?>
-		<h3>/bottom_menu</h3>
-        <h3>footer_content</h3>
-<? 	}?>
+			<?	if ($tp){?><h3>/bottom_menu</h3><? }?>
+  	<!--/bottom_menu-->
+  	<!--footer_content-->
+	<?	if ($tp){?><h3>footer_content</h3><? }?>
     	<div id="footer_content">
         	<div align="left" class="floatLeft">
             	<div style="display:inline-block">
@@ -214,9 +217,11 @@ div#content{
             </div>
             <div class="floatRight">&nbsp;</div>
         </div>
-<?	if ($tp){?><h3>/footer_content</h3><? }?>
+			<?	if ($tp){?><h3>/footer_content</h3><? }?>
+  	<!--/footer_content-->
   </div>
-		<?	if ($tp){?><h3>/footer</h3><? }?>
+	<?	if ($tp){?><h3>/footer</h3><? }?>
+<!-- /footer -->
 </div>
 </body>
 </html>

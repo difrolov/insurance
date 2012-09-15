@@ -1,4 +1,5 @@
-<!-- slide_marks -->
+<? $tp=false;
+?><!-- slide_marks -->
 <?	// режим тестирования и загружена "Главная" стрю:
 		if ($tp){?><h3>slide_marks</h3><? }?>
 		<div align="left" id="slide_marks">
