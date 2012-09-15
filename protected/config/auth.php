@@ -19,7 +19,7 @@ return array(
         'type' => CAuthItem::TYPE_ROLE,
         'description' => 'admin',
         'children' => array(
-            'guest',         // позволим админу всё, что позволено модератору
+            'user',         // позволим админу всё, что позволено модератору
         ),
         'bizRule' => null,
         'data' => null

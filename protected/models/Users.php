@@ -14,6 +14,7 @@ class Users extends CActiveRecord
 {
 	const ROLE_ADMIN = 'admin';
 	public $rememberMe;
+	public $role;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -29,7 +30,7 @@ class Users extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'users';
+		return 'insur_users';
 	}
 
 	/**

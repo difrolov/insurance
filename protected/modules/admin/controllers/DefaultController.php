@@ -4,7 +4,7 @@ class DefaultController extends Controller
 {
 	public function actionIndex()
 	{
-
+		//var_dump(Yii::app()->user->login);die;
 		if(Yii::app()->user->checkAccess('admin')){
 	    	echo "hello, I'm administrator";die;
 		}
