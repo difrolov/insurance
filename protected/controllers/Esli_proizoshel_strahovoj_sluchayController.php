@@ -1,7 +1,4 @@
 <?php
-require_once(dirname(__FILE__)."/../components/helpers/ready_solutions.php"); 
-require_once(dirname(__FILE__)."/../components/helpers/set_html.php"); 
-
 class Esli_proizoshel_strahovoj_sluchayController extends Controller
 {
 	/**
