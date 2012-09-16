@@ -7,6 +7,9 @@
 a {
 	text-decoration:none;
 }
+.aBlue a, a.blue{
+	color:#00a2bF;
+}
 a:hover{
 	text-decoration:underline;
 }
@@ -16,12 +19,22 @@ body, html{
 	margin:0;
 	text-align:center;
 }
+body > div:first-child{
+	height:100%;
+}
+div#fit_height { /* fit_height*/
+	padding-bottom:140px;
+	/*background:#FFFF00;*/
+}
+.bold{
+	font-weight:bold;
+}
 #bottom_menu{
 	line-height:30px;
 	/*background:#009900;*/
 }
-.bold{
-	font-weight:bold;
+div#bottom_menu ul{
+	margin-left:-40px;
 }
 div#bottom_menu ul a{
 	font-size:13px;
@@ -39,7 +52,7 @@ div#call_us{
 div#call_us input[type="text"]{
 	border:none;
 	float:left;
-	height:26px;
+	height:25px;
 	padding-left:4px;
 	width:150px;
 	/*background:#99FF99;*/
@@ -84,8 +97,29 @@ div#call_us_free
 	> div:last-child{
 	font-size:20px;
 }
+td#cellProgramms > div:first-child {
+	margin-top:0;
+}
 .clear{
 	clear:both;
+}
+div.company_news{
+}
+div.company_news div[align="right"]{
+	margin-top:-28px;
+}
+div.company_news div[align="right"] a{
+	font-size:12px;
+}
+div.company_news img{
+	margin-right:6px;
+}
+div#content{
+	text-align:left;
+	padding:0 10px;
+}
+div#content > h1:first-child{
+	font-size:1.25em;
 }
 div#content_from_right{
 	padding-top:16px;
@@ -115,6 +149,7 @@ div#content_from_right{
 #footer{
 	height:110px;
 	width:980px;
+	padding-bottom:10px;
 	/*background:#CCFFCC;*/
 }
 #footer_content div[class="floatLeft"]:before{
@@ -138,6 +173,39 @@ div#content_from_right{
 }
 #header_top a{
 	font-size:1.1em;
+}
+table.inner_layout{
+	width:100%;
+}
+table.inner_layout p{
+	margin-top:0;
+	padding-top:0;
+	padding-bottom:14px;
+}
+table.inner_layout td{
+	padding:0;
+	vertical-align:top;
+}
+table.inner_layout th{
+	padding-bottom:14px;
+}
+table.inner_layout tbody 
+	> tr:first-child 
+		> th:last-child{
+	padding-left:14px;
+}
+table.inner_layout tbody tr > td:first-child{
+	width:20%;
+}
+table.inner_layout tbody tr > td:first-child ul{
+	margin-left:-10px;
+	margin-top:0;
+}
+table.inner_layout tbody tr > td:first-child +td{
+	padding-left:14px;
+}
+table.inner_layout tbody tr > td:first-child +td +td{
+	padding-left:14px;
 }
 div#last_articles{
 	display:inline-block;
@@ -225,23 +293,46 @@ div#main_submenu ul li{
 	padding:8px 30px;
 	text-align:right;
 }
+.noTopMargin{
+	margin-top:0;
+}
 div#page{
 	box-shadow:0 0 40px 10px #ccc;
-	margin-bottom:-110px;	
+	margin-bottom:-136px;	
 	min-height:100%;
 	padding:0 20px;
 	width:980px;
 	/*background:#FFFF00;*/
+}
+div.ready_solutions_preview{
+	margin-bottom:10px;
+}
+div.ready_solutions_preview div.clear{
+	clear:both;
+	height:6px;
+	background: #0F0;
+}
+div.ready_solutions_preview > div:first-child{
+	clear:left;
+	float:left;
+	width:70px;
+}
+div.ready_solutions_preview > div:first-child +div{
+	float:left;
+	width:120px;
+	/*background:#00CCFF;*/
+}
+div.ready_solutions_preview{
 }
 div#search{
 	height:27px;
 	border:solid 1px #CCC;
 	margin-top:10px;
 }
-li.submenu_active{
+div#main_submenu li.active{
 	background:#00B2DF !important;
 }
-li.submenu_active a{
+div#main_submenu li.active a{
 	color:#FFF;
 }
 div#mainmenu{
@@ -266,7 +357,7 @@ div#mainmenu ul li{
 div#mainmenu ul >li:first-child{
 	margin-left:-30px;
 }
-div#mainmenu ul >li:first-child[class!="mainmenu_active"]{
+div#mainmenu ul >li:first-child[class!="active"]{
 	padding-left:0;
 }
 div#mainmenu ul a{
@@ -278,15 +369,33 @@ div#bottom_menu ul
 	> li:last-child{
 	border-right:none;
 }
-li.mainmenu_active{
+li.active{
 	background:#4D4D4F;
 }
-li.mainmenu_active a{
+li.active a{
 	color:#dedede;
 }
 div#our_museum{
 	margin-top:10px;
 	margin-bottom:6px;
+}
+.ready_program{
+	background:#ededed;
+	clear:both;
+	margin-top:20px;
+	padding:10px;
+}
+.ready_program:after{
+	content:"Программа";
+}
+.ready_solutions{
+	background:#CCFFFF;
+	clear:both;
+	margin-top:20px;
+	padding:10px;
+}
+.ready_solutions:after{
+	content:"Готовые решения";
 }
 div#search form{
 	margin:0;
