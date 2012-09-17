@@ -7,7 +7,7 @@ class readySolutions{
 	  */
 	function showProgram(){?>
 	<div class="ready_program">
-    
+    	Контент программы страхования
     </div>		
 <?	}
 	/**
@@ -17,7 +17,7 @@ class readySolutions{
 	  */
 	function showReadySolution(){?>
 	<div class="ready_solutions">
-    
+    	Контент готового решения
     </div>		
 <?	}
 }

@@ -30,8 +30,11 @@ class setHTML{
 		self::showReadySolutionBlock();?>      
 	</td>
     <td id="cellProgramms">
-<?	for($i=0;$i<$pcount;$i++)
-		readySolutions::showProgram();?>      
+<?	for($i=0;$i<$pcount;$i+=2){?>
+		<div class="floatLeft"><?	readySolutions::showProgram();?></div>
+		<div class="floatRight"><?	readySolutions::showProgram();?></div>
+	<?
+	}?>      
 	</td>
   </tr>
 </table>
