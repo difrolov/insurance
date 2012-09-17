@@ -143,6 +143,10 @@ div#content >
 	h1:first-child{
 	font-size:1.25em;
 }
+div#content
+	h2.txtLightBlue{
+	font-size:1.2em;
+}
 div#content_from_right{
 	padding-top:16px;
 }

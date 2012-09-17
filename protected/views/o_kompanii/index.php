@@ -65,6 +65,7 @@ $this->breadcrumbs=array(
 		justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
 
 		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      <p><a href="<?php echo Yii::app()->request->baseUrl; ?>/o_kompanii/kontakty">Контакты</a></p>
         
 
 <?	setHTML::setButtonPrint();

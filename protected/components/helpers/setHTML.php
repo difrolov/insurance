@@ -5,10 +5,11 @@ class setHTML{
 	  * @subpackage		product
 	  *
 	  */
-	function buildCatalogue( $solutions=false, 	// готовые решения
-							 $programs=false,	// программы
+	function buildCatalogue( $programs=false,	// программы
 							 $consumer_type=false
 						   ){
+	// получить все решения для данного типа субъекта:
+	$solutions=readySolutions::getAllSolutionsNames(Yii::app()->controller->getId());
 	if (!$solutions){
 		$scount=10;
 	}else{
@@ -26,8 +27,8 @@ class setHTML{
   </tr>
   <tr>
     <td id="cellSolutions">
-<?	for($i=0;$i<$scount;$i++)
-		self::showReadySolutionBlock();?>      
+<?	foreach($solutions as $solution)
+		self::showReadySolutionBlock($solution);?>      
 	</td>
     <td id="cellProgramms">
 <?	for($i=0;$i<$pcount;$i+=2){?>
@@ -65,19 +66,46 @@ class setHTML{
     </div>
     <br>
 <?	}
+	function setPageContent( $this_obj,
+							 $current_page,
+							 $main_header,
+							 $title=false
+							 ){?>
+		<h1><?=$main_header?></h1>
+		<?	
+		if (isset($_GET['solution'])) {
+			$this_obj->breadcrumbs=array(
+			$current_page=>array('index'), // page in this view
+						'Готовое решение' // define it as an array above to make link
+			); 
+			require_once dirname(__FILE__)."/../../modules/ready_solution/index.php";
+		}else{ 
+			if (!$title) $title=$current_page;
+			$this_obj->pageTitle=Yii::app()->name . ' - '.$title;
+			$this_obj->breadcrumbs=array(
+				$current_page,
+			); 
+			self::buildCatalogue();
+		}
+	}
 	/**
 	  * @package		content
 	  * @subpackage		product
 	  *
 	  */
-	function showReadySolutionBlock($icon_src=false,$content=false){
-		if (!$content) {
-			$content="Готовое решение (наименование)";
+	function showReadySolutionBlock($params=NULL){
+		if (!$params['name']) {
+			$solution_name="Готовое решение (наименование)";
+		}else $solution_name=$params['name'];
+		if (!$params['id']) {
+			$link="#";
+		}else{ 
+			$link=Yii::app()->request->baseUrl."/".Yii::app()->controller->getId()."/?solution=".$params['id'];
 		}?>
 	<div class="ready_solution_preview">
-    	<div><img align="left" name="placeholder" src="<?=$icon_src?>" width="64" height="64" alt="" style="background-color: #ededed" />
+    	<div><img align="left" name="placeholder" src="<?=$params['icon_src']?>" width="64" height="64" alt="" style="background-color: #ededed" />
 		</div>
-		<div><a href="#"><?=$content?></a></div>
+		<div><a href="<?=$link?>"><?=$solution_name?></a></div>
     </div>
     <div class="clear">&nbsp;</div>
 <?	}
