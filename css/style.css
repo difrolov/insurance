@@ -104,7 +104,7 @@ div#call_us_free >
 	div:last-child{
 	font-size:20px;
 }
-td#cellProgramms > 
+td#cellPrograms > 
 	div{
 	display:inline-block;
 	margin-bottom:20px;
@@ -112,7 +112,7 @@ td#cellProgramms >
 	vertical-align:top;
 	width:47%; 
 }
-td#cellProgramms > 
+td#cellPrograms > 
 	div div{
 	background:#ededed;
 	padding:10px;

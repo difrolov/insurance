@@ -5,16 +5,18 @@ class setHTML{
 	  * @subpackage		product
 	  *
 	  */
-	function buildCatalogue( $programs=false,	// программы
-							 $consumer_type=false
-						   ){
+	function buildCatalogue($consumer_type=false){
+	// получить тип субъекта:
+	$current_controller=Yii::app()->controller->getId();
 	// получить все решения для данного типа субъекта:
-	$solutions=readySolutions::getAllSolutionsNames(Yii::app()->controller->getId());
+	$solutions=readySolutions::getAllSolutionsNames($current_controller);
 	if (!$solutions){
 		$scount=10;
 	}else{
 		$scount=count($solutions);
 	}
+	// получить все программы для данного типа субъекта:
+	$programs=readySolutions::getAllProgramsNames($current_controller);
 	if (!$programs){
 		$pcount=10;
 	}else{
@@ -30,15 +32,18 @@ class setHTML{
 <?	foreach($solutions as $solution)
 		self::showReadySolutionBlock($solution);?>      
 	</td>
-    <td id="cellProgramms">
-<?	for($i=0;$i<$pcount;$i+=2){?>
+    <td id="cellPrograms">
+<?	//var_dump("<h1>programs:</h1><pre>",$programs,"</pre>");
+	for ($i=0,$j=count($programs);$i<$j;$i+=2){?>
 	  <div>
-		<? readySolutions::showProgram();?>
+		<? readySolutions::showProgram($programs[$i]);?>
       </div>
+	<?	if(($i+1)<$j){?>
 	  <div>
-		<? readySolutions::showProgram();?>
+		<? readySolutions::showProgram($programs[$i+1]);?>
       </div>
-<?	}?>      
+<?		}
+	}?>      
 	</td>
   </tr>
 </table>
