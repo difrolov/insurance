@@ -4328,3 +4328,1727 @@ Stack trace:
 REQUEST_URI=/insur/insurance/gii/images/search_button.png
 HTTP_REFERER=http://localhost/insur/insurance/gii/
 ---
+2012/09/15 09:48:34 [error] [php] in_array() expects parameter 2 to be array, string given (D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:77)
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): WebUser->checkAccess()
+#1 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#3 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): DefaultController->runAction()
+#4 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): DefaultController->run()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#7 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 D:\xampp\htdocs\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/admin
+in D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php (8)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 09:52:52 [error] [exception.CException] exception 'CException' with message 'В классе AdminModule и его поведениях не найден метод или замыкание с именем "createUrl".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CComponent->__call('createUrl', Array)
+#1 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): AdminModule->createUrl('user/login')
+#2 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(91): AdminModule->init()
+#3 D:\xampp\htdocs\insur\yii\framework\YiiBase.php(208): CModule->__construct('admin', NULL, Array)
+#4 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(283): YiiBase::createComponent('application.mod...', 'admin', NULL, Array)
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(338): CModule->getModule('admin')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(277): CWebApplication->createController('admin')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 09:54:45 [error] [exception.CException] exception 'CException' with message 'В классе AdminModule и его поведениях не найден метод или замыкание с именем "redirect".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CComponent->__call('redirect', Array)
+#1 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): AdminModule->redirect('/insur/insuranc...')
+#2 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(91): AdminModule->init()
+#3 D:\xampp\htdocs\insur\yii\framework\YiiBase.php(208): CModule->__construct('admin', NULL, Array)
+#4 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(283): YiiBase::createComponent('application.mod...', 'admin', NULL, Array)
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(338): CModule->getModule('admin')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(277): CWebApplication->createController('admin')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 09:54:46 [error] [exception.CException] exception 'CException' with message 'В классе AdminModule и его поведениях не найден метод или замыкание с именем "redirect".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CComponent->__call('redirect', Array)
+#1 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): AdminModule->redirect('/insur/insuranc...')
+#2 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(91): AdminModule->init()
+#3 D:\xampp\htdocs\insur\yii\framework\YiiBase.php(208): CModule->__construct('admin', NULL, Array)
+#4 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(283): YiiBase::createComponent('application.mod...', 'admin', NULL, Array)
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(338): CModule->getModule('admin')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(277): CWebApplication->createController('admin')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 09:55:07 [error] [exception.CException] exception 'CException' with message 'В классе CWebApplication и его поведениях не найден метод или замыкание с именем "redirect".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CComponent->__call('redirect', Array)
+#1 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CWebApplication->redirect('/insur/insuranc...')
+#2 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(91): AdminModule->init()
+#3 D:\xampp\htdocs\insur\yii\framework\YiiBase.php(208): CModule->__construct('admin', NULL, Array)
+#4 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(283): YiiBase::createComponent('application.mod...', 'admin', NULL, Array)
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(338): CModule->getModule('admin')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(277): CWebApplication->createController('admin')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 09:55:11 [error] [exception.CException] exception 'CException' with message 'В классе CWebApplication и его поведениях не найден метод или замыкание с именем "redirect".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CComponent->__call('redirect', Array)
+#1 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CWebApplication->redirect('/insur/insuranc...')
+#2 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(91): AdminModule->init()
+#3 D:\xampp\htdocs\insur\yii\framework\YiiBase.php(208): CModule->__construct('admin', NULL, Array)
+#4 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(283): YiiBase::createComponent('application.mod...', 'admin', NULL, Array)
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(338): CModule->getModule('admin')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(277): CWebApplication->createController('admin')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 09:55:11 [error] [exception.CException] exception 'CException' with message 'В классе CWebApplication и его поведениях не найден метод или замыкание с именем "redirect".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CComponent->__call('redirect', Array)
+#1 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CWebApplication->redirect('/insur/insuranc...')
+#2 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(91): AdminModule->init()
+#3 D:\xampp\htdocs\insur\yii\framework\YiiBase.php(208): CModule->__construct('admin', NULL, Array)
+#4 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(283): YiiBase::createComponent('application.mod...', 'admin', NULL, Array)
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(338): CModule->getModule('admin')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(277): CWebApplication->createController('admin')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 09:56:17 [error] [exception.CException] exception 'CException' with message 'В классе CWebApplication и его поведениях не найден метод или замыкание с именем "controller".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CComponent->__call('controller', Array)
+#1 D:\xampp\htdocs\insur\insurance\protected\modules\admin\AdminModule.php(10): CWebApplication->controller()
+#2 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(91): AdminModule->init()
+#3 D:\xampp\htdocs\insur\yii\framework\YiiBase.php(208): CModule->__construct('admin', NULL, Array)
+#4 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(283): YiiBase::createComponent('application.mod...', 'admin', NULL, Array)
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(338): CModule->getModule('admin')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(277): CWebApplication->createController('admin')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:56:58 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 09:57:07 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 09:57:08 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "UserIdentity.role".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:174
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\UserIdentity.php(17): CComponent->__set('role', 'admin')
+#1 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(31): UserIdentity->authenticate()
+#2 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#3 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/user/login
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:58:49 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "UserIdentity.role".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:174
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\UserIdentity.php(16): CComponent->__set('role', 'admin')
+#1 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(31): UserIdentity->authenticate()
+#2 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#3 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/user/login
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 09:59:35 [error] [php] in_array() expects parameter 2 to be array, string given (D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:77)
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): WebUser->checkAccess()
+#1 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#3 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): DefaultController->runAction()
+#4 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#5 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): DefaultController->run()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#7 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 D:\xampp\htdocs\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/admin
+in D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php (8)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 10:25:24 [error] [php] Missing argument 1 for CWebUser::checkAccess(), called in D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php on line 7 and defined (D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php:793)
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#1 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): DefaultController->runAction()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): DefaultController->runActionWithFilters()
+#3 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): DefaultController->run()
+#4 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController()
+#5 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#6 D:\xampp\htdocs\insur\insurance\index.php(14): CWebApplication->run()
+REQUEST_URI=/insur/insurance/admin
+in D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php (7)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 10:28:46 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 10:28:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 10:28:55 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 10:29:56 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 10:30:32 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 10:31:17 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:20:33 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:20:33 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:20:34 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:20:34 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:20:34 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:20:34 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:20:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/ready_solutions/for_business.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/r...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/ready_solutions/for_companies.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/r...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/logos.gif".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/l...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pointer_left.png".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pix/museum.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pointer_right.png".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/ready_solutions/for_persons.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/r...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pix/1-insur.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pix/4-autosuit.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pix/2-flats.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pix/3-family.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/search_button.png".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/s...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "logout/images/pix/5-useful.jpg".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('logout/images/p...')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/logout/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/logout/
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:21:41 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:21:48 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin/
+---
+2012/09/15 11:26:07 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 11:26:11 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 11:26:14 [error] [exception.CException] exception 'CException' with message 'Неизвестный элемент авторизации "".' in D:\xampp\htdocs\insur\yii\framework\web\auth\CPhpAuthManager.php:180
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\PhpAuthManager.php(17): CPhpAuthManager->assign(NULL, '1')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CModule.php(388): PhpAuthManager->init()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(186): CModule->getComponent('authManager')
+#3 D:\xampp\htdocs\insur\yii\framework\web\auth\CWebUser.php(798): CWebApplication->getAuthManager()
+#4 D:\xampp\htdocs\insur\insurance\protected\modules\admin\controllers\DefaultController.php(8): CWebUser->checkAccess('admin')
+#5 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): DefaultController->actionIndex()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('')
+#10 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('admin')
+#11 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#13 {main}
+REQUEST_URI=/insur/insurance/admin
+---
+2012/09/15 11:27:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/15 11:27:45 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 11:27:48 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (53)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (14)
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_left.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/log...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/logos.gif
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_persons.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_companies.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/poi...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pointer_right.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/rea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/ready_solutions/for_business.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/museum.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/1-insur.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/2-flats.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/3-family.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/5-useful.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/pix...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/pix/4-autosuit.jpg
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
+2012/09/15 11:27:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "images".' in D:\xampp\htdocs\insur\yii\framework\web\CController.php:484
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CController.php(271): CController->missingAction('images')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('images')
+#2 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/images/sea...')
+#3 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 D:\xampp\htdocs\insur\insurance\index.php(14): CApplication->run()
+#5 {main}
+REQUEST_URI=/insur/insurance/user/images/search_button.png
+HTTP_REFERER=http://localhost/insur/insurance/user/index
+---
