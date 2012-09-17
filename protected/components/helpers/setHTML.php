@@ -31,10 +31,13 @@ class setHTML{
 	</td>
     <td id="cellProgramms">
 <?	for($i=0;$i<$pcount;$i+=2){?>
-		<div class="floatLeft"><?	readySolutions::showProgram();?></div>
-		<div class="floatRight"><?	readySolutions::showProgram();?></div>
-	<?
-	}?>      
+	  <div>
+		<? readySolutions::showProgram();?>
+      </div>
+	  <div>
+		<? readySolutions::showProgram();?>
+      </div>
+<?	}?>      
 	</td>
   </tr>
 </table>
@@ -71,7 +74,7 @@ class setHTML{
 		if (!$content) {
 			$content="Готовое решение (наименование)";
 		}?>
-	<div class="ready_solutions_preview">
+	<div class="ready_solution_preview">
     	<div><img align="left" name="placeholder" src="<?=$icon_src?>" width="64" height="64" alt="" style="background-color: #ededed" />
 		</div>
 		<div><a href="#"><?=$content?></a></div>

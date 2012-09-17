@@ -97,13 +97,16 @@ div#call_us_free
 	> div:last-child{
 	font-size:20px;
 }
-td#cellProgramms > div:first-child, 
-td#cellProgramms > div:first-child +div {
-	margin-top:0;
+td#cellProgramms > div{
+	display:inline-block;
+	margin-bottom:20px;
+	margin-right:2.5%;
+	vertical-align:top;
+	width:47%; 
 }
-td#cellProgramms div{
-	width:32%;
-	margin-right:3%;
+td#cellProgramms > div div{
+	background:#ededed;
+	padding:10px;
 }
 .clear{
 	clear:both;
@@ -179,8 +182,17 @@ div#content_from_right{
 #header_top a{
 	font-size:1.1em;
 }
+img[align="left"]{
+	margin-left:0;
+	margin-right:8px;
+}
+img[align="right"]{
+	margin-left:8px;
+	margin-right:0;
+}
 table.inner_layout{
 	width:100%;
+	border-spacing:0;
 }
 table.inner_layout p{
 	margin-top:0;
@@ -194,20 +206,12 @@ table.inner_layout td{
 table.inner_layout th{
 	padding-bottom:14px;
 }
-table.inner_layout tbody 
-	> tr:first-child 
-		> th:last-child{
-	padding-left:14px;
-}
 table.inner_layout td#cellSolutions{
 	width:30%;
 }
 table.inner_layout tbody tr > td:first-child ul{
 	margin-left:-10px;
 	margin-top:0;
-}
-table.inner_layout tbody tr > td:first-child +td{
-	padding-left:14px;
 }
 table.inner_layout tbody tr > td:first-child +td +td{
 	padding-left:14px;
@@ -384,22 +388,13 @@ div#our_museum{
 	margin-top:10px;
 	margin-bottom:6px;
 }
-.ready_program{
-	background:#ededed;
-	clear:both;
-	margin-top:20px;
-	padding:10px;
-}
-.ready_program:after{
-	content:"Программа";
-}
-.ready_solutions{
+.ready_solution{
 	background:#CCFFFF;
 	clear:both;
 	margin-top:20px;
 	padding:10px;
 }
-.ready_solutions:after{
+.ready_solution:after{
 	content:"Готовые решения";
 }
 div#search form{

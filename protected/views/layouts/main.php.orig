@@ -190,14 +190,6 @@ div#content{
 		<div id="breadcrumbs" align="left">
 <?php
 <<<<<<< HEAD
-	if(isset($this->breadcrumbs)){?>
-	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		));
-	}elseif($test==1){
-		echo "\n";?><a href="#">Главная</a> / <a href="#">Ссылка</a> / <a href="#">Ссылка</a>
-<?	}?>
-=======
 	if ($tp){?><h3>/tblSlides</h3>
     <h3>content</h3><?
 	}
@@ -254,7 +246,15 @@ div#content{
             <p>В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
             	<p id="all_news"><a href="#">все новости...</a></p>
           </div>
->>>>>>> d89c6c6... Merge branch 'master' of https://github.com/difrolov/insurance
+=======
+	if(isset($this->breadcrumbs)){?>
+	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+			'links'=>$this->breadcrumbs,
+		));
+	}elseif($test==1){
+		echo "\n";?><a href="#">Главная</a> / <a href="#">Ссылка</a> / <a href="#">Ссылка</a>
+<?	}?>
+>>>>>>> frontend
 		</div>
 			<?	if ($tp){?><h3>/breadcrumbs</h3><? }?>
 	<!-- /breadcrumbs -->
