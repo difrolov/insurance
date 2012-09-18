@@ -29,7 +29,7 @@
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <meta charset="utf-8">
 <meta name="language" content="ru">
-<link href="<?php echo Yii::app()->request->baseUrl."/css/style.css"; ?>" rel="stylesheet" type="text/css">
+<link href="<?=Yii::app()->request->baseUrl?>/css/style.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 8]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->
@@ -41,6 +41,9 @@ div#content{
 }
 </style>
 <? 	}?>
+<? // include jQuery, jQuery UI	?>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-ui-1.8.23.custom.min.js"></script>
 </head>
 <body>
 <div align="center">
@@ -82,75 +85,7 @@ div#content{
     <!-- mainmenu -->
 	<?	if ($tp){?><h3>mainmenu</h3><? }?>
 	    <div id="mainmenu" align="left">
-
-<?	
-		function buildMenu(
-						$this_object=false,
-						$test=false, 
-						$bg=false,
-						$submenu=false,
-						$arrMenu=false
-                      ){
-			if ($test==1){
-		?>
-        	<ul>
-<?
-				$menu=(isset($_GET['menu']))?$_GET['menu'] : false;
-				$submenu=(isset($_GET['submenu']))?$_GET['submenu'] : false;
-				if (!$arrMenu)
-					$arrMenu=array(
-								'main'=>'Главная',
-								'company'=>'О компании',
-								'corporative'=>'Корпоративным клиентам',
-								'business'=>'Малому и среднему бизнесу',
-								'personal'=>'Физическим лицам',
-								'useful'=>'Полезная информация'
-								);
-					foreach($arrMenu as $alias=>$text):?>
-							<li<?
-						if( $menu==$alias
-							||(!$menu && $alias=='main')
-						   ):?> class="mainmenu_active"<?
-						endif;?>><a href="static.php?menu=<? echo $alias;
-						if ($bg):?>&bg=<? echo $bg; endif;
-						if ($submenu):?>&submenu=<? echo $submenu; endif;?>"><?=$text?></a></li>
-				<?php
-					endforeach;?>
-				</ul>
-	<?		}else{
-				$this_object->widget( 'zii.widgets.CMenu',
-									  array(
-										'items'=>array(
-											array( 'label'=>'Главная', 
-												   'url'=>array('/site/index')
-												 ),
-											array( 'label'=>'О компании', 
-												   'url'=>array('/o_kompanii/'), 
-												   'active' => Yii::app()->controller->getId() == 'o_kompanii'
-												 ),
-											array( 'label'=>'Корпоративным клиентам', 
-												   'url'=>array('/korporativnym_klientam/'), 
-												   'active' => Yii::app()->controller->getId() == 'korporativnym_klientam'
-												 ),
-											array( 'label'=>'Малому и среднему бизнесу', 
-												   'url'=>array('/malomu_i_srednemu_biznesu/'), 
-												   'active' => Yii::app()->controller->getId() == 'malomu_i_srednemu_biznesu'
-												 ),
-											array( 'label'=>'Физическим лицам', 
-												   'url'=>array('/fizicheskim_litzam/'), 
-												   'active' => Yii::app()->controller->getId() == 'fizicheskim_litzam'
-												 ),
-											array( 'label'=>'Партнёрам', 
-												   'url'=>array('/partneram/'), 
-												   'active' => Yii::app()->controller->getId() == 'partneram'
-												 ),
-										),
-									)
-								);
-			}	
-		}
-	if (isset($test)) buildMenu(false,$test,$bg);
-	else buildMenu($this);?>
+<?	setHTML::buildMenu($this);?>
 	</div>
 			<?	if ($tp){?><h3>/mainmenu</h3><? }?>
     <!-- /mainmenu -->
@@ -213,8 +148,7 @@ div#content{
   	<!--bottom_menu-->
 	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
-	<?	if (isset($test)) buildMenu(false,$test,$bg,$submenu);
-		else buildMenu($this); echo "\n"?>
+	<?	setHTML::buildMenu($this); echo "\n"?>
         </div>
 			<?	if ($tp){?><h3>/bottom_menu</h3><? }?>
   	<!--/bottom_menu-->

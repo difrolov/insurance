@@ -1,5 +1,6 @@
 <?
 class setHTML{
+	static $arrMenuWidget;
 	/**
 	  * @package		HTML
 	  * @subpackage		product
@@ -48,6 +49,54 @@ class setHTML{
   </tr>
 </table>
 <?	}
+	/**
+	  * @package		HTML
+	  * @subpackage		menu
+	  *
+	  */
+	function buildDropDownMenu(){?>
+<?	}
+	/**
+	  * @package		HTML
+	  * @subpackage		menu
+	  *
+	  */
+	function buildMenu(
+					$this_object,
+					$arrMenu=false,
+					$submenu=false
+				  ){
+		if (!self::$arrMenuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
+			$arrMenu=self::getMenuItems();
+			foreach($arrMenu as $title=>$alias) {
+				$arr=array('label'=>$title, 'url'=>array('/'.$alias.'/'));
+				if ($alias!='site/index')
+					$arr['active']=Yii::app()->controller->getId() == $alias;
+				self::$arrMenuWidget[]=$arr; 
+			}
+		}
+		$this_object->widget( 'zii.widgets.CMenu',
+							  array('items'=>self::$arrMenuWidget)
+							);
+	}
+	/**
+	  * @package		HTML
+	  * @subpackage		menu
+	  *
+	  */
+	function getMenuItems($menuItems=false){
+		if(!$menuItems){
+			$menuItems=array(
+					'Главная'=>'site/index',
+					'О компании'=>'o_kompanii',
+					'Корпоративным клиентам'=>'korporativnym_klientam',
+					'Малому и среднему бизнесу'=>'malomu_i_srednemu_biznesu',
+					'Физическим лицам'=>'fizicheskim_litzam',
+					'Партнёрам'=>'partneram',
+				);
+		}
+		return $menuItems;
+	}
 	/**
 	  * @package		interface
 	  * @subpackage		buttons
