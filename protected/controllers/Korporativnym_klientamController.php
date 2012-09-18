@@ -28,6 +28,14 @@ class Korporativnym_klientamController extends Controller
 	{	$corporative="Контент страницы \"Корпоративным клиентам\"";
 			$this->render('index', array('res'=>$corporative));
 	}	
+	public function actionGotovoye_reshenije()
+	{	//$corporative="Контент страницы \"Корпоративным клиентам\"";
+		$this->actionIndex();
+	}	
+	public function actionPrograma()
+	{	//$corporative="Контент страницы \"Корпоративным клиентам\"";
+		$this->actionIndex();
+	}	
 	/**
 	 * This is the action to handle external exceptions.
 	 */

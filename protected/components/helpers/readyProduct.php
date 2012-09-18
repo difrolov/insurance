@@ -1,5 +1,5 @@
 <?
-class readySolutions{
+class readyProduct{
 	/**
 	  * @package		content
 	  * @subpackage		program

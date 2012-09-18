@@ -9,14 +9,14 @@ class setHTML{
 	// получить тип субъекта:
 	$current_controller=Yii::app()->controller->getId();
 	// получить все решения для данного типа субъекта:
-	$solutions=readySolutions::getAllSolutionsNames($current_controller);
+	$solutions=readyProduct::getAllSolutionsNames($current_controller);
 	if (!$solutions){
 		$scount=10;
 	}else{
 		$scount=count($solutions);
 	}
 	// получить все программы для данного типа субъекта:
-	$programs=readySolutions::getAllProgramsNames($current_controller);
+	$programs=readyProduct::getAllProgramsNames($current_controller);
 	if (!$programs){
 		$pcount=10;
 	}else{
@@ -36,11 +36,11 @@ class setHTML{
 <?	//var_dump("<h1>programs:</h1><pre>",$programs,"</pre>");
 	for ($i=0,$j=count($programs);$i<$j;$i+=2){?>
 	  <div>
-		<? readySolutions::showProgram($programs[$i]);?>
+		<? readyProduct::showProgram($programs[$i]);?>
       </div>
 	<?	if(($i+1)<$j){?>
 	  <div>
-		<? readySolutions::showProgram($programs[$i+1]);?>
+		<? readyProduct::showProgram($programs[$i+1]);?>
       </div>
 <?		}
 	}?>      
@@ -71,19 +71,35 @@ class setHTML{
     </div>
     <br>
 <?	}
+	/**
+	  * @package		content
+	  * @subpackage		product
+	  *
+	  */
 	function setPageContent( $this_obj,
 							 $current_page,
 							 $main_header,
 							 $title=false
 							 ){?>
 		<h1><?=$main_header?></h1>
-		<?	
-		if (isset($_GET['solution'])) {
+	<?	$url=explode("/",$_SERVER['REQUEST_URI']);
+		if ( /*isset($_GET['solution'])
+			 || isset($_GET['program'])*/
+			 in_array('Gotovoye_reshenije',$url)
+			 || in_array('Programa',$url)
+		   ) {
+			
+			if (in_array('Gotovoye_reshenije',$url)) {
+				$crumb_chain_text="Готовое решение";
+				$file="readySolution";
+			}else{
+				$crumb_chain_text="Программа";
+				$file="readyProgram";
+			}
+			$product_id=array_pop($url);
 			$this_obj->breadcrumbs=array(
-			$current_page=>array('index'), // page in this view
-						'Готовое решение' // define it as an array above to make link
-			); 
-			require_once dirname(__FILE__)."/../../modules/ready_solution/index.php";
+			$current_page=>array('index'),$crumb_chain_text); 
+			require_once dirname(__FILE__)."/../../modules/readyProduct/".$file.".php";
 		}else{ 
 			if (!$title) $title=$current_page;
 			$this_obj->pageTitle=Yii::app()->name . ' - '.$title;
@@ -105,7 +121,7 @@ class setHTML{
 		if (!$params['id']) {
 			$link="#";
 		}else{ 
-			$link=Yii::app()->request->baseUrl."/".Yii::app()->controller->getId()."/?solution=".$params['id'];
+			$link=Yii::app()->request->baseUrl."/".Yii::app()->controller->getId()."/Gotovoye_reshenije/".$params['id'];
 		}?>
 	<div class="ready_solution_preview">
     	<div><img align="left" name="placeholder" src="<?=$params['icon_src']?>" width="64" height="64" alt="" style="background-color: #ededed" />

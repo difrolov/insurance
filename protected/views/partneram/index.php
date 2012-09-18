@@ -68,7 +68,7 @@ $this->breadcrumbs=array(
         
 
 <?	setHTML::setButtonPrint();
-	readySolutions::showReadySolution();?>
+	readyProduct::showReadySolution();?>
     </td>
   </tr>
 </table>
