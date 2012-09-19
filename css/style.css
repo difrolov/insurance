@@ -397,7 +397,7 @@ div#mainmenu{
 div#mainmenu div[id*="ddMenu_"]{ /* drop-down menu	*/
 	background:#FFF;
 	border:solid 1px #CCCCCC;
-	box-shadow:0 0 4px #ededed;
+	box-shadow:3px 4px 4px #ededed;
 	/*display:none;*/
 	padding:8px;
 	position:absolute;
@@ -408,7 +408,8 @@ div[id*="ddMenu_"] a{	/* drop-down menu link	*/
 	padding:4px;
 }
 div[id*="ddMenu_"] a:hover{
-	background:#00bce4;
+	background:#77F4FF;
+	text-decoration:none;
 }
 div#mainmenu 
 	ul{
