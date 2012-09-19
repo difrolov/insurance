@@ -69,7 +69,6 @@ try{
 	for(i=0;i<ddMenus.length;i++){
 		var li=ulMenus.item(i+1);
 		var pos = jQuery(li).offset().left; 
-		//alert(li.innerHTML+'\n'+pos);
 		var ddM=ddMenus.item(i); 
 		$(ddM).offset({left:pos+8}); 
 	}
@@ -81,61 +80,70 @@ var manageDDMenu = function(e) {
 	
 	var testBlock=document.getElementById("AfterMenu");
 	var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
+	var nodeTagName=e.srcElement.nodeName.toLowerCase();
+	var nodeParent1=e.srcElement.parentNode;
+	var nodeParent2=nodeParent1.parentNode;
 	
-	if ( ( e.srcElement.nodeName.toLowerCase() == 'li'
-		   && e.srcElement.parentNode.parentNode == mMenu
+	if ( ( nodeTagName == 'li'	// li in menu
+		   && nodeParent2 == mMenu
 		 ) ||
-		 ( e.srcElement.nodeName.toLowerCase() == 'a'
-		   && e.srcElement.parentNode.parentNode.parentNode == mMenu
-		 )
+		 ( nodeTagName == 'a'	// a inside li
+		   && nodeParent2.parentNode == mMenu
+		 ) ||
+		 ( nodeTagName == 'div' // drop-down menu
+		   && nodeParent1 == mMenu
+		 ) 
 	   ) {  
 		var eventSourceElement=e.srcElement;
 		// получить телущий элемент li:
 		if (eventSourceElement.nodeName.toLowerCase() == 'li'){
-			//testBlock.innerHTML+='<br>ddMenuIndexeventSourceElement= '+$(ULlist).index(eventSourceElement);
-			var ddMenuIndex=$(ULlist).index(eventSourceElement)-1; // текущий индекс для элемента вып.меню
-		
-		}else{
-			var ddMenuIndex=$(ULlist).index(eventSourceElement.parentNode);
+			var targetLI=eventSourceElement;
+		}else{ // A
+			var targetLI=eventSourceElement.parentNode;
 		}
 		
+		var ddMenuIndex=$(ULlist).index(targetLI)-1; // текущий индекс для элемента вып.меню
+		if (ddMenuIndex<0) alert(targetLI.innerHTML);
 		//testBlock.innerHTML+='<br>ddMenuIndex= '+ddMenuIndex+'<br>';
 		var currentDDMenu=ddMenus.item(ddMenuIndex); // элемент вып.меню
 		
 		if(e.type=='mouseover') { 
 			testBlock.innerHTML='<br>OVER<br>';
-			currentDDMenu.style.top='20px';
+			if (currentDDMenu) currentDDMenu.style.top='26px';
 			//alert('OVER');
 		
-		}else if(e.type=='mouseout'){
+		}else if( e.type=='mouseout'
+				  && currentDDMenu
+				){
 			
 			var belongToBundle=false;
 			var relToElement=e.relatedTarget ;
 
 			var menuBundle=new Array();
 			
-			for (i=0;i<eventSourceElement.childNodes.length;i++){
-				var currentNode=eventSourceElement.childNodes[i];
+			for (i=0;i<targetLI.childNodes.length;i++){
+				var currentNode=targetLI.childNodes[i];
 				if (currentNode.tagName) {
-					//testBlock.innerHTML+='<br>obj tag: '+currentNode.nodeName+'<br>';
+					testBlock.innerHTML+='<br>obj tag: '+currentNode.nodeName+'<br>';
 				}else{ 
-					//testBlock.innerHTML+='<br>obj text: '+currentNode.nodeText+'<br>';
+					testBlock.innerHTML+='<br>obj text: '+currentNode.nodeText+'<br>';
 				}
+				menuBundle[i]=targetLI.childNodes[i];
 			}
-			for(obj in eventSourceElement.childNodes){
-				if (obj.tagName) {
-					//testBlock.innerHTML+='<br>obj tag: '+obj.nodeName+'<br>';
-				}else{ 
-					//testBlock.innerHTML+='<br>obj text: '+obj.nodeText+'<br>';
-				}
-				menuBundle[i]=obj;
-			}
+
 			menuBundle[i]=currentDDMenu;
-			for(obj in currentDDMenu.childNodes){
+			for(i=0;i<currentDDMenu.childNodes.length;i++){
+				++i;
+				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
+				menuBundle[i]=currentDDMenu.childNodes[i];
+			}
+			//if (!currentDDMenu) alert('!currentDDMenu');
+			for(obj in currentDDMenu){
 				++i;
 				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
 				menuBundle[i]=obj;
 			}//alert('menuBundle');
+			
 			for(i=0;i<menuBundle.length;i++){
 
 				if (relToElement==menuBundle[i]) {
@@ -146,6 +154,7 @@ var manageDDMenu = function(e) {
 			}
 			if (!belongToBundle) currentDDMenu.style.top='-90px';			
 			testBlock.innerHTML='OUT: '+relToElement.tagName;
+			alert('OUT');
 		}
 	}
 			//testBlock.innerHTML+='beyond menuBundle: '+e.srcElement.nodeName;
