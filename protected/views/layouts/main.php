@@ -84,39 +84,24 @@ div#content{
     <!-- /header -->
     <!-- mainmenu -->
 	<?	if ($tp){?><h3>mainmenu</h3><? }?>
-	    <div id="mainmenu" align="left">
-<?	setHTML::buildMenu($this);?>
-	</div>
+	    <div id="mainmenu" align="left" style="position:relative;">
+<?	setHTML::buildMenu($this); // главное меню
+	setHTML::buildDropDownMenu();	// выпадающее меню
+?>
+		</div>
 			<?	if ($tp){?><h3>/mainmenu</h3><? }?>
     <!-- /mainmenu -->
     <!-- main_submenu -->
 	<?	if ($tp){?><h3>main_submenu</h3><? }?>
     	<div id="main_submenu" align="right">
-<?	if(isset($test)&&$test=='1'){?>        
-        	<ul>
-        <?    $arrSubMenu=array(
-		  					'event'=>'Если произошёл страховой случай',
-							'application'=>'Отправить заявку',
-							'question'=>'Задать вопрос'
-		  					);
-	foreach($arrSubMenu as $alias=>$text):?>
-    		<li<?
-		if($submenu==$alias):?> class="submenu_active"<?
-		endif;?>><a href="<?=$bootstrap?>.php?submenu=<? echo $alias;
-		if ($bg):?>&bg=<? echo $bg; endif;
-		if ($menu):?>&menu=<? echo $menu; endif;?>"><?=$text?></a></li>
-<?php
-	endforeach;?>
-      	  </ul>
-<?	}else{
-		$this->widget('zii.widgets.CMenu',array(
+<?	$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Если произошёл страховой случай', 'url'=>array('/esli_proizoshel_strahovoj_sluchay/'), 'active' => Yii::app()->controller->getId() == 'esli_proizoshel_strahovoj_sluchay'),
 				array('label'=>'Отправить заявку', 'url'=>array('/site/otpravit_zajavku')),
 				array('label'=>'Задать вопрос', 'url'=>array('/site/zadat_vopros')),
 			),
 		));
-	}?>          
+	?>          
        	</div>
 			<?	if ($tp){?><h3>/main_submenu</h3><? }?>
     <!-- /main_submenu -->

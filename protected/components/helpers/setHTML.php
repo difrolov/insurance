@@ -54,7 +54,81 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
-	function buildDropDownMenu(){?>
+	function buildDropDownMenu(){
+		$menuItems=self::getMenuItems();
+		$dx=array_shift($menuItems);
+		foreach($menuItems as $key=>$alias){?>
+		<div id="ddMenu_<?=$alias?>"><?=$alias?></div> 	
+	<?	}?>
+<script type="text/javascript">
+// set ddMenu positions
+try{	
+	var mMenu=document.getElementById('mainmenu');
+	var ddMenus=mMenu.getElementsByTagName('div');
+	var ulMenus=document.getElementById('mainmenu').getElementsByTagName('li');
+	for(i=0;i<ddMenus.length;i++){
+		var li=ulMenus.item(i+1);
+		var pos = jQuery(li).offset().left; 
+		//alert(li.innerHTML+'\n'+pos);
+		var ddM=ddMenus.item(i); 
+		$(ddM).offset({left:pos+8}); 
+	}
+}catch(e){
+	alert(e.message);
+}
+var manageDDMenu = function(e) {	
+  try{
+	var showSubmenu=false;
+	if ( e.type=='mouseover') { 
+		
+		if ( e.srcElement.nodeName.toLowerCase() == 'li'
+			 && e.srcElement.parentNode.parentNode == mMenu
+		   ) { //alert('manageDDMenu');
+				var childs=new Array(e.srcElement.childNodes); //все дочерние объекты
+				alert(childs.length);
+				childs.push(mMenu); // добавить объект подменю
+				alert(childs.length);
+				var lis=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li');
+				var ddMenuIndex=$(lis).index(e.srcElement)-1;
+				//ddMenus.item(ddMenuIndex).style.display='block';
+				var topPos;
+					ddMenus.item(ddMenuIndex).style.top='14px';
+			/*else if (e.type=='mouseout') {
+				if ( e.srcElement.nodeName.toLowerCase() == 'div'
+					 && e.srcElement.id.indexOf('ddMenu_')!=-1
+				   ) { 
+				   showSubmenu='submenu works';  
+				   
+				}else{
+					document.title=e.srcElement.nodeName+', '+e.srcElement.id;
+				}
+				
+				if (!showSubmenu){
+					topPos='-400';
+					ddMenus.item(ddMenuIndex).style.top=topPos+'px';
+				}
+			}*/
+		}/*else if( e.srcElement.nodeName.toLowerCase() == 'div'
+			   	  && e.srcElement.id.indexOf('ddMenu_')!=-1
+			 ){
+			showSubmenu=true;
+			document.title='showSubmenu: '+showSubmenu;
+		}*/
+	 }/*else if (e.type=='mouseout') {
+	 	if ( !showSubmenu
+		     || 
+		   ) {
+			document.title='HIDE: '+e.srcElement.nodeName;
+			
+		}
+	 }*/
+  }catch(e){
+	  alert(e.message);
+  }
+}
+document.addEventListener('mouseover', manageDDMenu, false);
+document.addEventListener('mouseout', manageDDMenu, false);
+</script>    
 <?	}
 	/**
 	  * @package		HTML

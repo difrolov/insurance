@@ -394,6 +394,14 @@ div#mainmenu{
 	height:30px;
 	text-align:left;
 }
+div#mainmenu div[id*="ddMenu_"]{ /* drop-down menu*/
+	background:#FFFFCC;
+	box-shadow:0 0 4px #ededed;
+	/*display:none;*/
+	padding:8px;
+	position:absolute;
+	top:-400px;
+}
 div#mainmenu 
 	ul{
 	margin:10px 0 8px 0;
