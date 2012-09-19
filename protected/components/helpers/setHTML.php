@@ -58,7 +58,11 @@ class setHTML{
 		$menuItems=self::getMenuItems();
 		$dx=array_shift($menuItems);
 		foreach($menuItems as $key=>$alias){?>
-		<div id="ddMenu_<?=$alias?>"><a href="#"><?=$alias?></a></div> 	
+        <div id="ddMenu_<?=$alias?>">
+		<?	for($i=0,$j=rand(1,8);$i<$j;$i++):?>
+		<a href="#"><? echo $alias.' '.$i; ?></a>	
+		<?	endfor;?>
+        </div> 
 	<?	}?>
 <script type="text/javascript">
 // set ddMenu positions
@@ -77,7 +81,8 @@ try{
 }
 var manageDDMenu = function(e) {	
   try{
-	
+	// ВНИМАНИЕ! Важно: уровень вложенности элементов внутри блока с выпадающим меню.
+	// устанавливается в начале метода (HTML) и в блоке для события mouseout
 	var testBlock=document.getElementById("AfterMenu");
 	var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
 	var eventSource=e.srcElement; // event source
@@ -85,80 +90,48 @@ var manageDDMenu = function(e) {
 	var eventSourceParent=eventSource.parentNode; // event source parent
 	var eventSourceParentParent=eventSourceParent.parentNode; // event source parent parent
 	
-	if ( ( eventSourceTagName == 'li' // li in menu
-		   && eventSourceParentParent == mMenu
-		 ) ||
-		 ( eventSourceTagName == 'a' // a inside li
-		   && eventSourceParentParent.parentNode == mMenu
-		 ) ||
-		 ( eventSourceTagName == 'div' // drop-down menu
-		   && eventSourceParent == mMenu
-		 ) 
+	if ( // li in menu:
+		 ( eventSourceTagName=='li'&&eventSourceParentParent==mMenu ) 
+		 || // a inside li:
+		 ( eventSourceTagName=='a'&&eventSourceParentParent.parentNode==mMenu ) 
+		 || // drop-down menu:
+		 ( eventSourceTagName=='div'&&eventSourceParent==mMenu&&eventSource.id.indexOf("ddMenu_")!=-1 )
 	   ) {  
-		// получить текущий элемент li:
-		if (eventSourceTagName == 'li'){
-			var targetLI=eventSource;
-		}else{ // A
-			var targetLI=eventSourceParent;
+		// получить объект списка (ul) в меню:
+		var UL=mMenu.getElementsByTagName('ul').item(0);
+		// получить все пункты меню в виде набора объектов:
+		var ULlist=UL.getElementsByTagName('li'); 
+		// первое меню, без подменю:
+		var firstLI=UL.getElementsByTagName('li').item(0);
+		
+		if (eventSourceTagName!='div') {
+			if ( eventSource!=firstLI
+			 	 && eventSourceParent!=firstLI
+			   ) { //alert(eventSource.innerHTML+'\n'+firstLI.innerHTML);
+				// получить объект текущего элемента li:
+				var targetLI=(eventSourceTagName=='li')? eventSource:eventSourceParent;
+				// получить индекс текущего пункта меню и на его основе - индекс объекта выпадающего меню:
+				var LiIndex=$(ULlist).index(targetLI)-1;
+				// получить объект выпадающего меню:
+				var dropDownMenuDIV=ddMenus.item(LiIndex);
+			}
+		}else dropDownMenuDIV=eventSource;
+		
+		if(e.type=='mouseover') {
+			if ( dropDownMenuDIV) dropDownMenuDIV.style.top='22px';
+		}else if(e.type=='mouseout'){
+			var relToElement=e.relatedTarget; // to Element
+			if ( relToElement 
+				 && dropDownMenuDIV
+			   ) {
+				if( relToElement.id.indexOf("ddMenu_")==-1
+				    && relToElement.parentNode.id.indexOf("ddMenu_")==-1
+					&& relToElement.parentNode.parentNode.id.indexOf("ddMenu_")==-1
+				  )
+				dropDownMenuDIV.style.top='-4000px';
+			}
 		}
-		
-		var ddMenuIndex=$(ULlist).index(targetLI)-1; // текущий индекс для элемента вып.меню
-		if (ddMenuIndex<0) alert(targetLI.innerHTML);
-		//testBlock.innerHTML+='<br>ddMenuIndex= '+ddMenuIndex+'<br>';
-		var currentDDMenu=ddMenus.item(ddMenuIndex); // элемент вып.меню
-		
-		if(e.type=='mouseover') { 
-			testBlock.innerHTML='<br>OVER<br>';
-			if (currentDDMenu) currentDDMenu.style.top='26px';
-			//alert('OVER');
-		
-		}else if( e.type=='mouseout'
-				  && currentDDMenu
-				){
-			
-			var belongToBundle=false;
-			var relToElement=e.relatedTarget ;
-
-			var menuBundle=new Array();
-			
-			for (i=0;i<targetLI.childNodes.length;i++){
-				var currentNode=targetLI.childNodes[i];
-				if (currentNode.tagName) {
-					testBlock.innerHTML+='<br>obj tag: '+currentNode.nodeName+'<br>';
-				}else{ 
-					testBlock.innerHTML+='<br>obj text: '+currentNode.nodeText+'<br>';
-				}
-				menuBundle[i]=targetLI.childNodes[i];
-			}
-
-			menuBundle[i]=currentDDMenu;
-			for(i=0;i<currentDDMenu.childNodes.length;i++){
-				++i;
-				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
-				menuBundle[i]=currentDDMenu.childNodes[i];
-			}
-			//if (!currentDDMenu) alert('!currentDDMenu');
-			for(obj in currentDDMenu){
-				++i;
-				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
-				menuBundle[i]=obj;
-			}//alert('menuBundle');
-			
-			for(i=0;i<menuBundle.length;i++){
-
-				if (relToElement==menuBundle[i]) {
-					belongToBundle=true;
-					//alert(belongToBundle);
-					break;
-				}
-			}
-			if (!belongToBundle) currentDDMenu.style.top='-90px';			
-			testBlock.innerHTML='OUT: '+relToElement.tagName;
-			alert('OUT');
-		}
-	}
-			//testBlock.innerHTML+='beyond menuBundle: '+e.srcElement.nodeName;
-			
+	}			
   }catch(e){
 	  alert(e.message);
   }

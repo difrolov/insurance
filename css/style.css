@@ -394,13 +394,21 @@ div#mainmenu{
 	height:30px;
 	text-align:left;
 }
-div#mainmenu div[id*="ddMenu_"]{ /* drop-down menu*/
-	background:#FFFFCC;
+div#mainmenu div[id*="ddMenu_"]{ /* drop-down menu	*/
+	background:#FFF;
+	border:solid 1px #CCCCCC;
 	box-shadow:0 0 4px #ededed;
 	/*display:none;*/
 	padding:8px;
 	position:absolute;
-	top:-400px;
+	top:-4000px;
+}
+div[id*="ddMenu_"] a{	/* drop-down menu link	*/
+	display:block;
+	padding:4px;
+}
+div[id*="ddMenu_"] a:hover{
+	background:#00bce4;
 }
 div#mainmenu 
 	ul{
