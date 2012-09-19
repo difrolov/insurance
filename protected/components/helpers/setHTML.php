@@ -83,16 +83,42 @@ var manageDDMenu = function(e) {
 	if ( e.srcElement.nodeName.toLowerCase() == 'li'
 		 && e.srcElement.parentNode.parentNode == mMenu
 	   ) {  
+		var activeLI=e.srcElement;
+		// получить телущий элемент li:
+		var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
+		var ddMenuIndex=$(ULlist).index(activeLI)-1; // текущий индекс для элемента вып.меню
+		var currentDDMenu=ddMenus.item(ddMenuIndex); // элемент вып.меню
+		
 		if(e.type=='mouseover') { 
 		
-			var activeLI=e.srcElement;
-			// получить телущий элемент li:
-			var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
-			var ddMenuIndex=$(ULlist).index(activeLI)-1; // текущий индекс для элемента вып.меню
-			var currentDDMenu=ddMenus.item(ddMenuIndex); // элемент вып.меню
-			currentDDMenu.style.top='-30px';
+			currentDDMenu.style.top='20px';
+		
 		}else if(e.type=='mouseout'){
+			var belongToBundle=false;
 			var relToElement=e.relatedTarget ;
+
+			var menuBundle=new Array();
+			//testBlock.innerHTML='menuBundle typeof(0): '+typeof(menuBundle);
+			for(obj in activeLI.childNodes){
+				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
+				menuBundle[i]=obj;
+				i++;
+			}
+			menuBundle[i]=currentDDMenu;
+			for(obj in currentDDMenu.childNodes){
+				++i;
+				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
+				menuBundle[i]=obj;
+			}
+			for(i=0;i<menuBundle.length;i++){
+
+				if (relToElement==menuBundle[i]) {
+					belongToBundle=true;
+					//alert(belongToBundle);
+					break;
+				}
+			}
+			if (!belongToBundle) currentDDMenu.style.top='-90px';			
 			testBlock.innerHTML='OUT: '+relToElement.tagName;
 		}
 	}
