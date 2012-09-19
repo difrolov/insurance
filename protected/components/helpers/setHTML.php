@@ -93,7 +93,7 @@ var manageDDMenu = function(e) {
 			currentDDMenu.style.top='-30px';
 		}else if(e.type=='mouseout'){
 			var relToElement=e.relatedTarget ;
-			testBlock.innerHTML='OUT: '+relToElement.innerHTML;
+			testBlock.innerHTML='OUT: '+relToElement.tagName;
 		}
 	}
 			//testBlock.innerHTML+='beyond menuBundle: '+e.srcElement.nodeName;
