@@ -80,26 +80,26 @@ var manageDDMenu = function(e) {
 	
 	var testBlock=document.getElementById("AfterMenu");
 	var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
-	var nodeTagName=e.srcElement.nodeName.toLowerCase();
-	var nodeParent1=e.srcElement.parentNode;
-	var nodeParent2=nodeParent1.parentNode;
+	var eventSource=e.srcElement; // event source
+	var eventSourceTagName=eventSource.nodeName.toLowerCase(); // event source tag name
+	var eventSourceParent=eventSource.parentNode; // event source parent
+	var eventSourceParentParent=eventSourceParent.parentNode; // event source parent parent
 	
-	if ( ( nodeTagName == 'li'	// li in menu
-		   && nodeParent2 == mMenu
+	if ( ( eventSourceTagName == 'li' // li in menu
+		   && eventSourceParentParent == mMenu
 		 ) ||
-		 ( nodeTagName == 'a'	// a inside li
-		   && nodeParent2.parentNode == mMenu
+		 ( eventSourceTagName == 'a' // a inside li
+		   && eventSourceParentParent.parentNode == mMenu
 		 ) ||
-		 ( nodeTagName == 'div' // drop-down menu
-		   && nodeParent1 == mMenu
+		 ( eventSourceTagName == 'div' // drop-down menu
+		   && eventSourceParent == mMenu
 		 ) 
 	   ) {  
-		var eventSourceElement=e.srcElement;
-		// получить телущий элемент li:
-		if (eventSourceElement.nodeName.toLowerCase() == 'li'){
-			var targetLI=eventSourceElement;
+		// получить текущий элемент li:
+		if (eventSourceTagName == 'li'){
+			var targetLI=eventSource;
 		}else{ // A
-			var targetLI=eventSourceElement.parentNode;
+			var targetLI=eventSourceParent;
 		}
 		
 		var ddMenuIndex=$(ULlist).index(targetLI)-1; // текущий индекс для элемента вып.меню
