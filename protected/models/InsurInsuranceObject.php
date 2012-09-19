@@ -1,25 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "insur_insurance_products".
+ * This is the model class for table "insur_insurance_object".
  *
- * The followings are the available columns in table 'insur_insurance_products':
+ * The followings are the available columns in table 'insur_insurance_object':
  * @property integer $id
  * @property string $name
  * @property integer $status
  * @property integer $parent_id
+ * @property string $action
+ * @property integer $category_id
+ * @property string $date_changes
  *
  * The followings are the available model relations:
- * @property InsurInsuranceProductsMatrix[] $insurInsuranceProductsMatrixes
- * @property InsurSetForSubjectsMatrix[] $insurSetForSubjectsMatrixes
- * @property InsurSetOfProductsMatrix[] $insurSetOfProductsMatrixes
+ * @property InsurArticleContent[] $insurArticleContents
+ * @property InsurObjectCategory $category
  */
-class InsurInsuranceProducts extends CActiveRecord
+class InsurInsuranceObject extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return InsurInsuranceProducts the static model class
+	 * @return InsurInsuranceObject the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -31,7 +33,7 @@ class InsurInsuranceProducts extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'insur_insurance_products';
+		return 'insur_insurance_object';
 	}
 
 	/**
@@ -43,11 +45,13 @@ class InsurInsuranceProducts extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('status, parent_id', 'numerical', 'integerOnly'=>true),
+			array('status, parent_id, category_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>100),
+			array('action', 'length', 'max'=>255),
+			array('date_changes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, status, parent_id', 'safe', 'on'=>'search'),
+			array('id, name, status, parent_id, action, category_id, date_changes', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,9 +63,8 @@ class InsurInsuranceProducts extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'insurInsuranceProductsMatrixes' => array(self::HAS_MANY, 'InsurInsuranceProductsMatrix', 'id_parent_product'),
-			'insurSetForSubjectsMatrixes' => array(self::HAS_MANY, 'InsurSetForSubjectsMatrix', 'id_product'),
-			'insurSetOfProductsMatrixes' => array(self::HAS_MANY, 'InsurSetOfProductsMatrix', 'product_id'),
+			'insurArticleContents' => array(self::HAS_MANY, 'InsurArticleContent', 'object_id'),
+			'category' => array(self::BELONGS_TO, 'InsurObjectCategory', 'category_id'),
 		);
 	}
 
@@ -75,6 +78,9 @@ class InsurInsuranceProducts extends CActiveRecord
 			'name' => 'Name',
 			'status' => 'Status',
 			'parent_id' => 'Parent',
+			'action' => 'Action',
+			'category_id' => 'Category',
+			'date_changes' => 'Date Changes',
 		);
 	}
 
@@ -93,6 +99,9 @@ class InsurInsuranceProducts extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('parent_id',$this->parent_id);
+		$criteria->compare('action',$this->action,true);
+		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('date_changes',$this->date_changes,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

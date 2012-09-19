@@ -1,23 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "insur_set_for_subjects_matrix".
+ * This is the model class for table "insur_object_category".
  *
- * The followings are the available columns in table 'insur_set_for_subjects_matrix':
+ * The followings are the available columns in table 'insur_object_category':
  * @property integer $id
- * @property integer $id_subject
- * @property integer $id_product
+ * @property string $name
  *
  * The followings are the available model relations:
- * @property InsurInsuranceProducts $idProduct
- * @property InsurSubjectOfInsurance $idSubject
+ * @property InsurInsuranceObject[] $insurInsuranceObjects
  */
-class InsurSetForSubjectsMatrix extends CActiveRecord
+class InsurObjectCategory extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return InsurSetForSubjectsMatrix the static model class
+	 * @return InsurObjectCategory the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,7 +27,7 @@ class InsurSetForSubjectsMatrix extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'insur_set_for_subjects_matrix';
+		return 'insur_object_category';
 	}
 
 	/**
@@ -40,11 +38,11 @@ class InsurSetForSubjectsMatrix extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_subject, id_product', 'required'),
-			array('id_subject, id_product', 'numerical', 'integerOnly'=>true),
+			array('name', 'required'),
+			array('name', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, id_subject, id_product', 'safe', 'on'=>'search'),
+			array('id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,8 +54,7 @@ class InsurSetForSubjectsMatrix extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idProduct' => array(self::BELONGS_TO, 'InsurInsuranceProducts', 'id_product'),
-			'idSubject' => array(self::BELONGS_TO, 'InsurSubjectOfInsurance', 'id_subject'),
+			'insurInsuranceObjects' => array(self::HAS_MANY, 'InsurInsuranceObject', 'category_id'),
 		);
 	}
 
@@ -68,8 +65,7 @@ class InsurSetForSubjectsMatrix extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'id_subject' => 'Id Subject',
-			'id_product' => 'Id Product',
+			'name' => 'Name',
 		);
 	}
 
@@ -85,8 +81,7 @@ class InsurSetForSubjectsMatrix extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('id_subject',$this->id_subject);
-		$criteria->compare('id_product',$this->id_product);
+		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

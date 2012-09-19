@@ -58,20 +58,90 @@
 		)); */
 
 		$items = array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Products', 'url'=>'#', 'items'=>array(
-						array('label'=>'Web', 'url'=>'#', 'items'=>array(
-								array('label'=>'NLSClientScript', 'url'=>array('/site/page', 'view'=>'nlsclientscript')),
-								array('label'=>'EFgMenu', 'url'=>array('/site/page', 'view'=>'efgmenu')),
-								array('label'=>'XCruder', 'url'=>'#')
+				array('label'=>'Главная', 'url'=>array('/site/index')),
+				array('label'=>'О компании', 'url'=>array('/site/page', 'view'=>'about'), 'items'=>array(
+						array('label'=>'История', 'url'=>'#'),
+						array('label'=>'О корпорации', 'url'=>'#'),
+						array('label'=>'Руководство', 'url'=>'#'),
+						array('label'=>'Раскрытие информации', 'url'=>'#', 'items'=>array(
+								array('label'=>'Документ', 'url'=>'#'),
 						)),
-						array('label'=>'Desktop', 'url'=>'#', 'items'=>array(
-								array('label'=>'BatchReplacePro', 'url'=>'#'),
-								array('label'=>'DeformerPro', 'url'=>'#')
-						))
-				))
+						array('label'=>'Музей страхования', 'url'=>'#'),
+						array('label'=>'Вакансии', 'url'=>'#', 'items'=>array(
+								array('label'=>'Анкета для кондидата', 'url'=>'#'),
+						)),
+						array('label'=>'Новости компании', 'url'=>'#', 'items'=>array(
+								array('label'=>'Новость', 'url'=>'#'),
+						)),
+						array('label'=>'Контакты', 'url'=>'#'),
+						array('label'=>'финансовые показатели', 'url'=>'#'),
+						array('label'=>'Новости Страхования', 'url'=>'#', 'items'=>array(
+								array('label'=>'Новость', 'url'=>'#'),
+								array('label'=>'Новость', 'url'=>'#'),
+						)),
+				)),
+				array('label'=>'Каталог для корпоративных клиентов', 'url'=>array('/site/contact'), 'items'=>array(
+						array('label'=>'Готовое решение 1', 'url'=>'#'),
+						array('label'=>'Готовое решение 2', 'url'=>'#'),
+						array('label'=>'Автострахование', 'url'=>'#'),
+						array('label'=>'ДМС', 'url'=>'#', 'items'=>array(
+							array('label'=>'Если произошел страховой случай', 'url'=>'#')
+						)),
+						array('label'=>'Полезная информация', 'url'=>'#'),
+				)),
+				array('label'=>'Каталог для малого и среднего бизнеса', 'url'=>array('/site/contact'), 'items'=>array(
+						array('label'=>'Строительным компаниям', 'url'=>'#', 'items'=>array(
+								array('label'=>'Страхование имущества', 'url'=>'#'),
+								array('label'=>'Страхование опасных объектов', 'url'=>'#'),
+								array('label'=>'Страхование строительно-монтажных работ', 'url'=>'#'),
+								array('label'=>'ДМС', 'url'=>'#'),
+								array('label'=>'НС', 'url'=>'#'),
+								array('label'=>'ВЗР', 'url'=>'#'),
+								array('label'=>'Страхование автопарка', 'url'=>'#'),
+						)),
+						array('label'=>'Производственные компании', 'url'=>'#'),
+						array('label'=>'Компании перевозчики', 'url'=>'#'),
+						array('label'=>'Фармоцевтические компании', 'url'=>'#'),
+						array('label'=>'ДМС', 'url'=>'#'),
+						array('label'=>'ВЗР', 'url'=>'#'),
+						array('label'=>'Автострахование', 'url'=>'#', 'items'=>array(
+								array('label'=>'Осаго', 'url'=>'#'),
+								array('label'=>'Каско', 'url'=>'#'),
+						)),
+						array('label'=>'Полезная информация', 'url'=>'#'),
+				)),
+				array('label'=>'Каталог для физических лиц', 'url'=>array('/site/contact'), 'items'=>array(
+						array('label'=>'Автовладельцы', 'url'=>'#', 'items'=>array(
+								array('label'=>'ГО', 'url'=>'#'),
+								array('label'=>'ВЗР', 'url'=>'#'),
+								array('label'=>'НС', 'url'=>'#'),
+								array('label'=>'ДМС', 'url'=>'#'),
+								array('label'=>'Автострахование', 'url'=>'#'),
+								array('label'=>'Страхование имущества', 'url'=>'#'),
+						)),
+						array('label'=>'Владельцы недвижимости', 'url'=>'#'),
+						array('label'=>'Туристы', 'url'=>'#'),
+						array('label'=>'Индивидуальный подбор решений', 'url'=>'#'),
+						array('label'=>'Взр', 'url'=>'#'),
+						array('label'=>'Страхование имущества', 'url'=>'#', 'items'=>array(
+								array('label'=>'Квартиры', 'url'=>'#', 'items'=>array(
+										array('label'=>'Калькулятор', 'url'=>'#'),
+								)),
+								array('label'=>'Загородные дома', 'url'=>'#'),
+								array('label'=>'Дачи', 'url'=>'#'),
+						)),
+						array('label'=>'Полезная информация', 'url'=>'#'),
+				)),
+				array('label'=>'Партнерам', 'url'=>array('/site/contact'), 'items'=>array(
+						array('label'=>'Банкам', 'url'=>'#'),
+						array('label'=>'Брокерам', 'url'=>'#'),
+						array('label'=>'Семья', 'url'=>'#'),
+						array('label'=>'Меденцинским учреждениям', 'url'=>'#'),
+						array('label'=>'Автосалонам', 'url'=>'#'),
+				)),
+				array('label'=>'Отправить заявку', 'url'=>'#'),
+				array('label'=>'Задать вопрос', 'url'=>'#'),
+				array('label'=>'Если произошел страховой случай', 'url'=>'#'),
 		);
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
