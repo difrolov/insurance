@@ -89,6 +89,7 @@ div#content{
 	setHTML::buildDropDownMenu();	// выпадающее меню
 ?>
 		</div>
+        <div id="AfterMenu">TEST</div>
 			<?	if ($tp){?><h3>/mainmenu</h3><? }?>
     <!-- /mainmenu -->
     <!-- main_submenu -->

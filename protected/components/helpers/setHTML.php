@@ -58,9 +58,10 @@ class setHTML{
 		$menuItems=self::getMenuItems();
 		$dx=array_shift($menuItems);
 		foreach($menuItems as $key=>$alias){?>
-		<div id="ddMenu_<?=$alias?>"><?=$alias?></div> 	
+		<div id="ddMenu_<?=$alias?>"><a href="#"><?=$alias?></a></div> 	
 	<?	}?>
 <script type="text/javascript">
+menuBundle=false;
 // set ddMenu positions
 try{	
 	var mMenu=document.getElementById('mainmenu');
@@ -78,29 +79,65 @@ try{
 }
 var manageDDMenu = function(e) {	
   try{
-	var showSubmenu=false;
-	if ( e.type=='mouseover') { 
+
+	var testBlock=document.getElementById("AfterMenu");
+	testBlock.innerHTML='type: '+e.type;
+	if (e.type=='mouseover') { 
 		
 		if ( e.srcElement.nodeName.toLowerCase() == 'li'
 			 && e.srcElement.parentNode.parentNode == mMenu
-		   ) { //alert('manageDDMenu');
-				var childs=new Array(e.srcElement.childNodes); //все дочерние объекты
-				alert(childs.length);
-				childs.push(mMenu); // добавить объект подменю
-				alert(childs.length);
-				var lis=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li');
-				var ddMenuIndex=$(lis).index(e.srcElement)-1;
+		   ) {  
+			var activeLI=e.srcElement;
+			var i=0;
+			
+			menuBundle=new Array();
+			//testBlock.innerHTML='menuBundle typeof(0): '+typeof(menuBundle);
+			for(obj in activeLI.childNodes){
+				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
+				menuBundle[i]=obj;
+				i++;
+			}
+			// получить телущий элемент li:
+			var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
+			var ddMenuIndex=$(ULlist).index(activeLI)-1; // текущий индекс для элемента вып.меню
+			var currentDDMenu=ddMenus.item(ddMenuIndex); // элемент вып.меню
+			//alert(typeof(activeLI.childNodes));
+			menuBundle[i]=currentDDMenu;
+			for(obj in currentDDMenu.childNodes){
+				++i;
+				//document.getElementById("AfterMenu").innerHTML+='<hr>type: '+typeof(obj);
+				menuBundle[i]=obj;
+			}
+			currentDDMenu.style.top='-30px';
+			/*for(i=0;i<menuBundle.length;i++){
+				testBlock.innerHTML+='<hr>type: '+typeof(menuBundle[i]);
+				if (typeof(menuBundle[i]=="string"))
+					testBlock.innerHTML+=menuBundle[i]+'<hr>';
+				else if (typeof(menuBundle[i]=="object"))
+					testBlock.innerHTML+=menuBundle[i].innerHMTL+'<hr>';
+			}*/
+			//menuBundle=childs.push(currentDDMenu); // добавить объект подменю
+			//var ddChilds=currentDDMenu.childNodes; // дочерние элементы вып.меню
+			//menuBundle=allElems.concat(ddChilds); // добавить в массив дочерние элементы вып.меню
+			//var str=childs.join("\n");
+			//alert(childs.length);
+			//for(i=0;i<childs.length;i++)
+				//document.getElementById("AfterMenu").innerHTML+='<hr>'+childs[i].innerHTML;
+				//'tag: '+currentDDMenu.tagName+', nodes= '+currentDDMenu.childNodes.length+'<hr>'+currentDDMenu.innerHTML;
+				//+=allElems[i].innerHTML;
+				//
 				//ddMenus.item(ddMenuIndex).style.display='block';
-				var topPos;
-					ddMenus.item(ddMenuIndex).style.top='14px';
+				//var topPos;
+				//ddMenus.item(ddMenuIndex).style.top='124px';
 			/*else if (e.type=='mouseout') {
-				if ( e.srcElement.nodeName.toLowerCase() == 'div'
-					 && e.srcElement.id.indexOf('ddMenu_')!=-1
+				if ( activeLI.nodeName.toLowerCase() == 'div'
+					 && activeLI.id.indexOf('ddMenu_')!=-1
 				   ) { 
 				   showSubmenu='submenu works';  
 				   
+					//alert(childs.length);
 				}else{
-					document.title=e.srcElement.nodeName+', '+e.srcElement.id;
+					document.title=activeLI.nodeName+', '+activeLI.id;
 				}
 				
 				if (!showSubmenu){
@@ -108,26 +145,38 @@ var manageDDMenu = function(e) {
 					ddMenus.item(ddMenuIndex).style.top=topPos+'px';
 				}
 			}*/
-		}/*else if( e.srcElement.nodeName.toLowerCase() == 'div'
-			   	  && e.srcElement.id.indexOf('ddMenu_')!=-1
-			 ){
-			showSubmenu=true;
-			document.title='showSubmenu: '+showSubmenu;
-		}*/
-	 }/*else if (e.type=='mouseout') {
-	 	if ( !showSubmenu
-		     || 
-		   ) {
-			document.title='HIDE: '+e.srcElement.nodeName;
-			
 		}
-	 }*/
+		if( menuBundle
+		    //&& e.srcElement!=activeLI
+		  ){
+			  
+			testBlock.innerHTML='OVER: '+e.srcElement.nodeName+'<hr><br><br>';
+			var belongToBundle=false;
+			for(i=0;i<menuBundle.length;i++){
+				testBlock.innerHTML+='<br>Source item('+i+'): <br>'+e.srcElement.innerHTML;
+				testBlock.innerHTML+='<br>BUNDLE ITEM('+i+'): <br>'+menuBundle[i].innerHTML+'<hr>';
+				if (e.srcElement==menuBundle[i]) {
+					belongToBundle=true;
+					alert(belongToBundle);
+					break;
+				}
+			}
+			if (!belongToBundle)
+				currentDDMenu.style.top='-90px';
+		}
+	}
+			//testBlock.innerHTML+='beyond menuBundle: '+e.srcElement.nodeName;
+			
+	if(e.type=='mouseout'){
+		var relToElement=e.relatedTarget ;
+		testBlock.innerHTML='OUT: '+relToElement.innerHTML;
+	}
   }catch(e){
 	  alert(e.message);
   }
 }
 document.addEventListener('mouseover', manageDDMenu, false);
-document.addEventListener('mouseout', manageDDMenu, false);
+//document.addEventListener('mouseout', manageDDMenu, false);
 </script>    
 <?	}
 	/**
