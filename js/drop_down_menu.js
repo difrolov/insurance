@@ -19,7 +19,10 @@ var manageDDMenu = function(e) {
 	// устанавливается в начале метода (HTML) и в блоке для события mouseout
 	var testBlock=document.getElementById("AfterMenu");
 	var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
-	var eventSource=e.srcElement; // event source
+	if (navigator.appName=='Netscape') {
+		var eventSource=e.target;
+		//alert('Netscape: '+navigator.appName);
+	}else var eventSource=e.srcElement; // event source
 	var eventSourceTagName=eventSource.nodeName.toLowerCase(); // event source tag name
 	var eventSourceParent=eventSource.parentNode; // event source parent
 	var eventSourceParentParent=eventSourceParent.parentNode; // event source parent parent
