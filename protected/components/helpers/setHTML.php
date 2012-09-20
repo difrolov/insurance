@@ -169,6 +169,7 @@ document.addEventListener('mouseout', manageDDMenu, false);
 	  *
 	  */
 	function getMenuItems($menuItems=false){
+		// извлечь из базы
 		if(!$menuItems){
 			$menuItems=array(
 					'Главная'=>'site/index',
