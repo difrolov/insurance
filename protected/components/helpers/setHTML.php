@@ -169,12 +169,8 @@ document.addEventListener('mouseout', manageDDMenu, false);
 	  *
 	  */
 	function getMenuItems($menuItems=false){
-		$model=InsurInsuranceObject::model()->find(array(
-								'select'=>'title',
-								'condition'=>'postID=:postID',
-								'params'=>array(':postID'=>10),
-								)
-							);
+		/*$model=InsurInsuranceObject::model()->find()
+							);*/
 		if(!$menuItems){
 			$menuItems=array(
 					'Главная'=>'site/index',
