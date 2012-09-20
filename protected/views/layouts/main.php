@@ -160,5 +160,6 @@ div#content{
 	<?	if ($tp){?><h3>/footer</h3><? }?>
 <!-- /footer -->
 </div>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script>
 </body>
 </html>
