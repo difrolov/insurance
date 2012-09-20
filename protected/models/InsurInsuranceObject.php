@@ -27,7 +27,7 @@ class InsurInsuranceObject extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -75,7 +75,7 @@ class InsurInsuranceObject extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Имя',
 			'status' => 'Status',
 			'parent_id' => 'Parent',
 			'action' => 'Action',

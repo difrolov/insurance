@@ -56,7 +56,7 @@
 			        array('label'=>'Messages', 'url'=>'#'),
 			    ),
 		)); */
-
+print_r(HelperAdmin::menuItem());
 		$items = array(
 				array('label'=>'Главная', 'url'=>array('/site/index')),
 				array('label'=>'О компании', 'url'=>array('/site/page', 'view'=>'about'), 'items'=>array(
