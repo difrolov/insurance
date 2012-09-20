@@ -32,6 +32,13 @@ class O_kompaniiController extends Controller
 		$this->render('index', array('res'=>$about));
 	}
 	/**
+	  *
+	  */
+	public function actionKontakty()
+	{	$contacts="Контент страницы \"Контакты\"";
+		$this->render('kontakty', array('res'=>$contacts));
+	}
+	/**
 	 * This is the action to handle external exceptions.
 	 */
 	public function actionError()

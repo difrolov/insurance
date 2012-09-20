@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
 <?	for($i=0;$i<3;$i++)
 		setHTML::showNews();?>      
     </td>
-    <td><p><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pix/3-family.jpg" width="144" height="91" hspace="8" align="left" />Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
+    <td><p><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/pix/3-family.jpg" width="144" height="91" align="left" />Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
       
       diam nonumy eirmod tempor invidunt ut labore et dolore magna 
       
@@ -65,10 +65,11 @@ $this->breadcrumbs=array(
 		justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
 
 		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      <p><a href="<?php echo Yii::app()->request->baseUrl; ?>/o_kompanii/kontakty">Контакты</a></p>
         
 
 <?	setHTML::setButtonPrint();
-	readySolutions::showReadySolution();?>
+	readyProduct::showReadySolution();?>
     </td>
   </tr>
 </table>
