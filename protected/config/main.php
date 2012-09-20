@@ -25,6 +25,10 @@ return array(
 
 	),
 
+		'preload'=>array(
+			'bootstrap', // preload the bootstrap component
+		),
+
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 
@@ -69,7 +73,10 @@ return array(
 		),
 		'authManager'=>array(
 				'class'=>'PhpAuthManager',
-				'defaultRoles'=>'guest',
+				'defaultRoles'=>array('guest'),
+		),
+		'bootstrap'=>array(
+				'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
 		),
 
 		/* 'db'=>array(

@@ -1,27 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "insur_users".
+ * This is the model class for table "users".
  *
- * The followings are the available columns in table 'insur_users':
+ * The followings are the available columns in table 'users':
  * @property integer $id
  * @property string $login
  * @property string $password
  * @property integer $status
- * @property string $role
+ * @property integer $group
  */
-class InsurUsers extends CActiveRecord
+class Users extends CActiveRecord
 {
+	const ROLE_ADMIN = 'admin';
+	public $rememberMe;
+	public $role;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return InsurUsers the static model class
+	 * @return Users the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,11 +41,10 @@ class InsurUsers extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('login, password, status, role', 'required'),
-			array('status', 'numerical', 'integerOnly'=>true),
+			array('id, login, password, status, role', 'required'),
+			array('id, status, role', 'numerical', 'integerOnly'=>true),
 			array('login', 'length', 'max'=>100),
 			array('password', 'length', 'max'=>255),
-			array('role', 'length', 'max'=>25),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, login, password, status, role', 'safe', 'on'=>'search'),
@@ -67,10 +69,11 @@ class InsurUsers extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'login' => 'Login',
-			'password' => 'Password',
+			'login' => 'Логин',
+			'password' => 'Пароль',
 			'status' => 'Status',
-			'role' => 'Role',
+			'group' => 'Group',
+			'rememberMe' => 'Запомнить',
 		);
 	}
 
@@ -84,12 +87,8 @@ class InsurUsers extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
 		$criteria->compare('login',$this->login,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('status',$this->status);
-		$criteria->compare('role',$this->role,true);
+		$criteria->compare('group',$this->group);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

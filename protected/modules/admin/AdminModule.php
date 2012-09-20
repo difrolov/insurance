@@ -6,7 +6,9 @@ class AdminModule extends CWebModule
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
+		if (Yii::app()->user->isGuest){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
 		// import the module-level models and components
 		$this->setImport(array(
 			'admin.models.*',
