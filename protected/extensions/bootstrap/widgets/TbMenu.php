@@ -7,7 +7,7 @@
  * @package bootstrap.widgets
  */
 
-Yii::import('bootstrap.widgets.TbBaseMenu');
+Yii::import('application.extensions.bootstrap.widgets.TbBaseMenu');
 
 /**
  * Bootstrap menu.
