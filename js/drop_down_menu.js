@@ -1,5 +1,6 @@
 // JavaScript Document
 // set ddMenu positions
+var nav=navigator.appName;
 try{	
 	var mMenu=document.getElementById('mainmenu');
 	var ddMenus=mMenu.getElementsByTagName('div');
@@ -19,10 +20,12 @@ var manageDDMenu = function(e) {
 	// устанавливается в начале метода (HTML) и в блоке для события mouseout
 	var testBlock=document.getElementById("AfterMenu");
 	var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
-	if (navigator.appName=='Netscape') {
+	if (nav=='Netscape') {
 		var eventSource=e.target;
-		//alert('Netscape: '+navigator.appName);
-	}else var eventSource=e.srcElement; // event source
+		//
+	}else{ 
+		var eventSource=e.srcElement; // event source
+	}
 	var eventSourceTagName=eventSource.nodeName.toLowerCase(); // event source tag name
 	var eventSourceParent=eventSource.parentNode; // event source parent
 	var eventSourceParentParent=eventSourceParent.parentNode; // event source parent parent
@@ -43,7 +46,7 @@ var manageDDMenu = function(e) {
 		
 		if (eventSourceTagName!='div') {
 			if ( eventSource!=firstLI
-			 	 && eventSourceParent!=firstLI
+				 && eventSourceParent!=firstLI
 			   ) { //alert(eventSource.innerHTML+'\n'+firstLI.innerHTML);
 				// получить объект текущего элемента li:
 				var targetLI=(eventSourceTagName=='li')? eventSource:eventSourceParent;
@@ -57,12 +60,12 @@ var manageDDMenu = function(e) {
 		if(e.type=='mouseover') {
 			if ( dropDownMenuDIV) dropDownMenuDIV.style.top='22px';
 		}else if(e.type=='mouseout'){
-			var relToElement=e.relatedTarget; // to Element
+			var relToElement=(nav=='Microsoft Internet Explorer')? e.toElement:e.relatedTarget; // to Element
 			if ( relToElement 
 				 && dropDownMenuDIV
 			   ) {
 				if( relToElement.id.indexOf("ddMenu_")==-1
-				    && relToElement.parentNode.id.indexOf("ddMenu_")==-1
+					&& relToElement.parentNode.id.indexOf("ddMenu_")==-1
 					&& relToElement.parentNode.parentNode.id.indexOf("ddMenu_")==-1
 				  )
 				dropDownMenuDIV.style.top='-4000px';

@@ -54,17 +54,33 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
-	function buildDropDownMenu(){
-		$menuItems=self::getMenuItems();
+	function buildDropDownMenu($menuItems=false){
+		if(!$menuItems) $menuItems=self::getMenuItems();
 		$dx=array_shift($menuItems);
-		foreach($menuItems as $key=>$alias){?>
-        <div id="ddMenu_<?=$alias?>">
-		<?	for($i=0,$j=rand(1,8);$i<$j;$i++):?>
-		<a href="#"><? echo $alias.' '.$i; ?></a>	
-		<?	endfor;?>
-        </div> 
-	<?	}
+		foreach($menuItems as $alias){
+			self::buildDropDownSubMenu($alias);
+		}
 	}
+	/**
+	  * @package		HTML
+	  * @subpackage		menu
+	  *
+	  */
+	function buildDropDownSubMenu($parent_alias=''){?>
+        <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }?>>
+	<?	if (!isset($subMenuItems)){
+			$j=rand(1,8);
+			for ($i=0;$i<$j;$i++) {
+				$subMenuItems[$i]['text']="Текст меню ".$i;
+				$subMenuItems[$i]['alias']="url_alias";
+			}
+		}	
+		for($i=0,$j=count($subMenuItems);$i<$j;$i++):?>
+		<a href="<?php echo Yii::app()->request->baseUrl.'/'.$subMenuItems[$i]['alias']?>"><?
+			echo $subMenuItems[$i]['text'];?></a>	
+	<?	endfor;?>
+        </div> 
+<?	}
 	/**
 	  * @package		HTML
 	  * @subpackage		menu
@@ -75,16 +91,29 @@ class setHTML{
 					$arrMenu=false,
 					$submenu=false
 				  ){
+		$mainPageAlias='site/index';
 		if (!self::$arrMenuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
 			$arrMenu=self::getMenuItems();
 			foreach($arrMenu as $title=>$alias) {
 				$arr=array('label'=>$title, 'url'=>array('/'.$alias.'/'));
-				if ($alias!='site/index')
+				if ($alias!=$mainPageAlias)
 					$arr['active']=Yii::app()->controller->getId() == $alias;
 				self::$arrMenuWidget[]=$arr; 
 			}
 		}
-		$this_object->widget( 'zii.widgets.CMenu',
+		if (self::detectOldIE()){?>
+        <ul<? //id=yw0?>>
+		<?	foreach(self::$arrMenuWidget as $i=>$currentMenu){
+				$alias=$currentMenu['url'][0];
+				$text=$currentMenu['label'];?>
+			<li><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
+					echo $text;?></a>
+			<?	if ($alias!='/'.$mainPageAlias.'/')
+                    self::buildDropDownSubMenu();?>
+            </li>	
+		<?	}?>
+        </ul>
+	<?	}else $this_object->widget( 'zii.widgets.CMenu',
 							  array('items'=>self::$arrMenuWidget)
 							);
 	}
@@ -101,17 +130,19 @@ class setHTML{
 		for($i=0,$j=count($model);$i<$j;$i++){
 			$menuItems[$model[$i]->name]=$model[$i]->alias;
 		}
-		/*if(!$menuItems){
-			$menuItems=array(
-					'Главная'=>'site/index',
-					'О компании'=>'o_kompanii',
-					'Корпоративным клиентам'=>'korporativnym_klientam',
-					'Малому и среднему бизнесу'=>'malomu_i_srednemu_biznesu',
-					'Физическим лицам'=>'fizicheskim_litzam',
-					'Партнёрам'=>'partneram',
-				);
-		}*/
 		return $menuItems;
+	}
+	/**
+	  * @package		interface
+	  * @subpackage		browser
+	  *
+	  */
+	function detectOldIE(){
+		$usAg=$_SERVER['HTTP_USER_AGENT'];
+		if ( stristr($usAg,'MSIE 6.0') 
+			 || stristr($usAg, 'MSIE 7.0')
+			 || stristr($usAg, 'MSIE 8.0')
+		   ) return true;	
 	}
 	/**
 	  * @package		interface
