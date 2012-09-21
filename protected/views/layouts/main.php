@@ -23,14 +23,18 @@
 				$tp=false;
 			}
 			if($menu&&$menu!='main') $crumbs=true;
-?><!DOCTYPE HTML>
+
+if ($oldIE=setHTML::detectOldIE()) {
+  echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+  echo "\n";    			
+}else{?><!DOCTYPE HTML><? }?>
 <html>
 <head>
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <meta charset="utf-8">
 <meta name="language" content="ru">
 <link href="<?=Yii::app()->request->baseUrl?>/css/style.css" rel="stylesheet" type="text/css">
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->
 <?	// если главная, удалим отступы главного контейнера:
@@ -86,7 +90,7 @@ div#content{
 	<?	if ($tp){?><h3>mainmenu</h3><? }?>
 	    <div id="mainmenu" align="left" style="position:relative;">
 <?	setHTML::buildMenu($this); // главное меню
-	setHTML::buildDropDownMenu();	// выпадающее меню
+	if (!$oldIE) setHTML::buildDropDownMenu();	// выпадающее меню
 ?>
 		</div>
         <!--<div id="AfterMenu">TEST</div>-->
@@ -160,6 +164,8 @@ div#content{
 	<?	if ($tp){?><h3>/footer</h3><? }?>
 <!-- /footer -->
 </div>
+<?	if (!$oldIE) :?> 
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script>
+<?	endif;?>
 </body>
 </html>
