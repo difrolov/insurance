@@ -26,7 +26,7 @@
 
 	<div id="header">
 		<div id="main_submenu">
-		<?php $this->widget('bootstrap.widgets.TbMenu', array(
+		<?php $this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
 		    'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(
@@ -34,7 +34,7 @@
 		        array('label'=>'Profile', 'url'=>'#'),
 		        array('label'=>'Messages', 'url'=>'#'),
 		    ),
-	)); ?>
+		)); ?>
 	</div>
 	<!-- mainmenu -->
 	</div>
@@ -47,15 +47,7 @@
 		)); ?><!-- breadcrumbs -->
 	<?php endif?>
 	<div class="menu_left">
-		<?php /* $this->widget('bootstrap.widgets.TbMenu', array(
-			    'type'=>'list', // '', 'tabs', 'pills' (or 'list')
-			    'stacked'=>true, // whether this is a stacked menu
-			    'items'=>array(
-			        array('label'=>'Home', 'url'=>'#', 'active'=>true),
-			        array('label'=>'Profile', 'url'=>'#'),
-			        array('label'=>'Messages', 'url'=>'#'),
-			    ),
-		)); */
+		<?php
 print_r(HelperAdmin::menuItem());
 		$items = array(
 				array('label'=>'Главная', 'url'=>array('/site/index')),
