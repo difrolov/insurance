@@ -92,24 +92,32 @@ class setHTML{
 					$submenu=false
 				  ){
 		$mainPageAlias='site/index';
+		$currentController=Yii::app()->controller->getId();
 		if (!self::$arrMenuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
+			$newborn_menu=true;
 			$arrMenu=self::getMenuItems();
 			foreach($arrMenu as $title=>$alias) {
 				$arr=array('label'=>$title, 'url'=>array('/'.$alias.'/'));
 				if ($alias!=$mainPageAlias)
-					$arr['active']=Yii::app()->controller->getId() == $alias;
+					$arr['active']= $currentController == $alias;
 				self::$arrMenuWidget[]=$arr; 
 			}
 		}
-		if (self::detectOldIE()){?>
+		if (self::detectOldIE()){ //
+			$URL=explode("/",$_SERVER['REQUEST_URI']);
+			$nURL=array_reverse($URL);
+			if ($nURL[1]=='index')
+				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
+			else $urlAlias='/'.$nURL[1].'/';?>
         <ul<? //id=yw0?>>
 		<?	foreach(self::$arrMenuWidget as $i=>$currentMenu){
 				$alias=$currentMenu['url'][0];
 				$text=$currentMenu['label'];?>
-			<li><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
+			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
 					echo $text;?></a>
-			<?	if ($alias!='/'.$mainPageAlias.'/')
-                    self::buildDropDownSubMenu();?>
+			<?	if ( $alias!='/'.$mainPageAlias.'/'
+			         && isset($newborn_menu)
+				   ) self::buildDropDownSubMenu();?>
             </li>	
 		<?	}?>
         </ul>

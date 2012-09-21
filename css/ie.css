@@ -17,9 +17,26 @@ div#mainmenu ul li div {
 	border:solid 1px #CCCCCC;
 	box-shadow:3px 4px 4px #ededed;
 	/*display:none;*/
+	left:4px;
 	padding:8px;
 	position:absolute;
 	top:-4000px;
+}
+div#mainmenu ul li {
+	position:relative;
+}
+div#mainmenu ul li div a{
+	color:#666;
+	display:block;
+	padding:4px;
+	white-space:nowrap;
+}
+div#mainmenu ul li div a:hover{
+	background:#77F4FF;
+	text-decoration:none;
+}
+div#mainmenu ul li:hover div{
+	top:24px;
 }
 /*
 
