@@ -82,14 +82,14 @@ return array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		), */
 		// uncomment the following to use a MySQL database
-
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=insur_db',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
+				'connectionString' => 'mysql:host=insur.mysql;dbname=insur_db',
+				'emulatePrepare' => true,
+				'username' => 'insur_mysql',
+				'password' => '64z3tzev',
+				'charset' => 'utf8',
 		),
+
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
