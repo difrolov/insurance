@@ -54,11 +54,11 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
-	function buildDropDownMenu($menuItems=false){
-		if(!$menuItems) $menuItems=self::getMenuItems();
-		$dx=array_shift($menuItems);
-		foreach($menuItems as $alias){
-			self::buildDropDownSubMenu($alias);
+	function buildDropDownMenu(){
+		$menuItems=self::getMenuItems();
+		$dx=array_shift($menuItems); // удалить элемент главной страницы
+		foreach($menuItems as $parent_id=>$parent_data){
+			self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
 		}
 	}
 	/**
@@ -66,9 +66,10 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
-	function buildDropDownSubMenu($parent_alias=''){?>
+	function buildDropDownSubMenu($parent_alias='',$parent_id=false){?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }?>>
-	<?	if (!isset($subMenuItems)){
+	<?	$subMenuItems=self::getSubMenuItems($parent_id);
+		if (!isset($subMenuItems)){
 			$j=rand(1,8);
 			for ($i=0;$i<$j;$i++) {
 				$subMenuItems[$i]['text']="Текст меню ".$i;
@@ -96,8 +97,10 @@ class setHTML{
 		if (!self::$arrMenuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
 			$newborn_menu=true;
 			$arrMenu=self::getMenuItems();
-			foreach($arrMenu as $title=>$alias) {
-				$arr=array('label'=>$title, 'url'=>array('/'.$alias.'/'));
+			foreach($arrMenu as $parent_id=>$parent_data) {
+				$text=$parent_data['text'];
+				$alias=$parent_data['alias'];
+				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
 				if ($alias!=$mainPageAlias)
 					$arr['active']= $currentController == $alias;
 				self::$arrMenuWidget[]=$arr; 
@@ -110,14 +113,16 @@ class setHTML{
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
 			else $urlAlias='/'.$nURL[1].'/';?>
         <ul<? //id=yw0?>>
-		<?	foreach(self::$arrMenuWidget as $i=>$currentMenu){
-				$alias=$currentMenu['url'][0];
-				$text=$currentMenu['label'];?>
+		<?	$menuItems=self::getMenuItems();
+			$dx=array_shift($menuItems);
+			foreach($menuItems as $parent_id=>$parentData){
+				$alias=$parentData['alias'];
+				$text=$parentData['text'];?>
 			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
 					echo $text;?></a>
 			<?	if ( $alias!='/'.$mainPageAlias.'/'
 			         && isset($newborn_menu)
-				   ) self::buildDropDownSubMenu();?>
+				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
             </li>	
 		<?	}?>
         </ul>
@@ -132,13 +137,30 @@ class setHTML{
 	  */
 	function getMenuItems($menuItems=false){
 		$model=InsurInsuranceObject::model()->findAll(
-					array('select'=>'name, alias',
+					array('select'=>'id, name, alias',
 							'condition'=>'parent_id = -1 AND status = 1'
 						));
 		for($i=0,$j=count($model);$i<$j;$i++){
-			$menuItems[$model[$i]->name]=$model[$i]->alias;
+			$menuItems[$model[$i]->id]=array('text'=>$model[$i]->name,
+											 'alias'=>$model[$i]->alias
+											);
 		}
 		return $menuItems;
+	}
+	/**
+	  * @package		HTML
+	  * @subpackage		menu
+	  *
+	  */
+	function getSubMenuItems($parent_id){
+		$model=InsurInsuranceObject::model()->findAll(
+					array('select'=>'id, name, alias',
+							'condition'=>'parent_id = '.$parent_id.' AND status = 1'
+						));
+		for($i=0,$j=count($model);$i<$j;$i++){
+			$subMenuItems[$model[$i]->name]=$model[$i]->alias;
+		}
+		return $subMenuItems;
 	}
 	/**
 	  * @package		interface
