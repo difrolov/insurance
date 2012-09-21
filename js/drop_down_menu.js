@@ -60,13 +60,14 @@ var manageDDMenu = function(e) {
 		if(e.type=='mouseover') {
 			if ( dropDownMenuDIV) dropDownMenuDIV.style.top='22px';
 		}else if(e.type=='mouseout'){
-			var relToElement=(nav=='Microsoft Internet Explorer')? e.toElement:e.relatedTarget; // to Element
+			var relToElement=e.relatedTarget; // to Element
 			if ( relToElement 
 				 && dropDownMenuDIV
 			   ) {
 				if( relToElement.id.indexOf("ddMenu_")==-1
 					&& relToElement.parentNode.id.indexOf("ddMenu_")==-1
 					&& relToElement.parentNode.parentNode.id.indexOf("ddMenu_")==-1
+					/*&& relToElement.parentNode.nodeName.toLowerCase()!='li'*/
 				  )
 				dropDownMenuDIV.style.top='-4000px';
 			}
