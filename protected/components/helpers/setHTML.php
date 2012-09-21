@@ -56,9 +56,9 @@ class setHTML{
 	  */
 	function buildDropDownMenu(){
 		$menuItems=self::getMenuItems();
-		$dx=array_shift($menuItems); // удалить элемент главной страницы
 		foreach($menuItems as $parent_id=>$parent_data){
-			self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
+			if ($parent_data['alias']!='site/index') 
+				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
 		}
 	}
 	/**
@@ -69,6 +69,7 @@ class setHTML{
 	function buildDropDownSubMenu($parent_alias='',$parent_id=false){?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }?>>
 	<?	$subMenuItems=self::getSubMenuItems($parent_id);
+		//var_dump("<h1>subMenuItems:</h1><pre>",$subMenuItems,"</pre>"); //die();
 		if (!isset($subMenuItems)){
 			$j=rand(1,8);
 			for ($i=0;$i<$j;$i++) {
@@ -76,10 +77,10 @@ class setHTML{
 				$subMenuItems[$i]['alias']="url_alias";
 			}
 		}	
-		for($i=0,$j=count($subMenuItems);$i<$j;$i++):?>
-		<a href="<?php echo Yii::app()->request->baseUrl.'/'.$subMenuItems[$i]['alias']?>"><?
-			echo $subMenuItems[$i]['text'];?></a>	
-	<?	endfor;?>
+		foreach($subMenuItems as $id=>$array):?>
+		<a href="<?php echo Yii::app()->request->baseUrl.'/'.$subMenuItems[$id]['alias']?>"><?
+			echo $subMenuItems[$id]['text'];?></a>	
+	<?	endforeach;?>
         </div> 
 <?	}
 	/**
@@ -152,13 +153,17 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
-	function getSubMenuItems($parent_id){
+	function getSubMenuItems($parent_id){ 
 		$model=InsurInsuranceObject::model()->findAll(
 					array('select'=>'id, name, alias',
 							'condition'=>'parent_id = '.$parent_id.' AND status = 1'
 						));
+		$subMenuItems=array();
 		for($i=0,$j=count($model);$i<$j;$i++){
-			$subMenuItems[$model[$i]->name]=$model[$i]->alias;
+			$subMenuItems[$model[$i]->name]=array(
+									'text'=>$model[$i]->name,
+									'alias'=>$model[$i]->alias
+								);
 		}
 		return $subMenuItems;
 	}

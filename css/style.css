@@ -406,9 +406,11 @@ div#mainmenu div[id*="ddMenu_"]{ /* drop-down menu	*/
 div[id*="ddMenu_"] a{	/* drop-down menu link	*/
 	display:block;
 	padding:4px;
+	white-space:nowrap;
 }
 div[id*="ddMenu_"] a:hover{
-	background:#77F4FF;
+	background:#27BCE4;
+	color:#FFF;
 	text-decoration:none;
 }
 div#mainmenu 
