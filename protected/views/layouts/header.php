@@ -13,6 +13,14 @@
 div#content{
 	padding:0;
 }
+<? if ($_GET['border']){?>
+div {
+	border:solid 1px #0000FF;
+}
+table {
+	border:solid 1px #FF0000;
+}
+<? }?>
 </style>
 <? 	}
 // include jQuery, jQuery UI	?>

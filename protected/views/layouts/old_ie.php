@@ -2,7 +2,7 @@
 <body>
 <table id="main_content" cellspacing="0">
   <tr>
-    <td height="190" colspan="2" valign="top">
+    <td height="190" valign="top">
 	<?	setHTML::buildHeaderRoof();?>    	
         <table class="noPadding" id="hat" cellspacing="0">
           <tr>
@@ -18,18 +18,20 @@
     </td>
   </tr>
   <tr>
-    <td class="noPadding" height="30" colspan="2">
+    <td class="noPadding" height="30">
     	<div id="mainmenu" align="left" style="position:relative;">
 <?	setHTML::buildMenu($this); // главное меню?>
 		</div>
+<?	setHTML::buildMainSubmenu($this); ?>        
 </td>
   </tr>
   <tr>
-    <td width="680" bgcolor="#99FFFF">&nbsp;</td>
-    <td>&nbsp;</td>
+    <td bgcolor="#99FFFF"><?
+    	echo $content;
+	?></td>
   </tr>
   <tr>
-    <td colspan="2"><?
+    <td><?
     setHTML::buildFooterBlock($tp);
 	?></td>
   </tr>

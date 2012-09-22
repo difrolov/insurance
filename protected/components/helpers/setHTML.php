@@ -3,6 +3,23 @@ class setHTML{
 	static $arrMenuWidget;
 	/**
 	  * @package		HTML
+	  * @subpackage		navigation
+	  *
+	  */
+	function buildBreadCrumbs(){?>
+    		<div id="breadcrumbs" align="left">
+<?php
+	if(isset($this->breadcrumbs)){?>
+	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+			'links'=>$this->breadcrumbs,
+		));
+	}elseif($test==1){
+		echo "\n";?><a href="#">Главная</a> / <a href="#">Ссылка</a> / <a href="#">Ссылка</a>
+<?	}?>
+		</div>
+<?	}
+	/**
+	  * @package		HTML
 	  * @subpackage		product
 	  *
 	  */
@@ -153,6 +170,23 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
+	function buildMainSubmenu($thisObject){?>
+		<div id="main_submenu" align="right">
+<?	$thisObject->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=>'Если произошёл страховой случай', 'url'=>array('/esli_proizoshel_strahovoj_sluchay/'), 'active' => Yii::app()->controller->getId() == 'esli_proizoshel_strahovoj_sluchay'),
+				array('label'=>'Отправить заявку', 'url'=>array('/site/otpravit_zajavku')),
+				array('label'=>'Задать вопрос', 'url'=>array('/site/zadat_vopros')),
+			),
+		));
+	?>          
+       	</div>
+<?	}
+	/**
+	  * @package		HTML
+	  * @subpackage		menu
+	  *
+	  */
 	function buildMenu(
 					$this_object,
 					$arrMenu=false,
@@ -198,13 +232,46 @@ class setHTML{
 	}
 		/**
 	  * @package		HTML
-	  * @subpackage		menu
+	  * @subpackage		logo
 	  *
 	  */
 	function buildLogosBlock(){?>
 				<div id="logo" align="left">
                     <a href="/insur/insurance/site/index"><img alt="Открытие Страхование" title="На главную" src="/insur/insurance/images/logos.gif" width="435" height="97" border="0"></a>
                 </div>
+<?	}
+		/**
+	  * @package		HTML
+	  * @subpackage		logo
+	  *
+	  */
+	function buildReadySolutionsBlock($consumer_type){
+		switch($consumer_type){
+			case "corporative":
+				$img="for_companies";
+				$ready_target="производственных компаний";
+				$all_ready_target="корпоративных клиентов";
+			break;
+			case "smallBusiness":
+				$img="for_business";
+				$ready_target="малого и среднего бизнеса";
+				$all_ready_target="малого и среднего бизнеса";
+			break;
+			case "privatePersons":
+				$img="for_persons";
+				$ready_target="клиентов банка &quot;Открытие&quot;";
+				$all_ready_target="физических лиц";
+			break;			
+		}?>
+				<div class="solution_content">
+					<img src="<?=Yii::app()->request->baseUrl?>/images/ready_solutions/<?=$img?>.jpg" width="252" height="143">
+					<div>готовые решения для
+						<span><?=$ready_target?></span>
+					</div>
+				</div>
+				<div class="solutions_all">Все решения для<br><?
+					echo $all_ready_target;
+					?></div>
 <?	}
 	/**
 	  * @package		HTML

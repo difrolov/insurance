@@ -15,6 +15,7 @@
 			  <tr valign="top">
 				<td class="slidesPointer"><a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_left.png" width="9" height="18" border="0"></a></td>
 				<td width="100%">
+	<? 	$readySolutionsBlock=setHTML::buildReadySolutionsBlock();?>                
 			<div align="left" id="slides">
 			  <div>
 				<div class="solution_content">
@@ -23,7 +24,7 @@
 						<span>производственных компаний</span>
 					</div>
 				</div>
-					<div class="solutions_all">Все решения для<br>
+				<div class="solutions_all">Все решения для<br>
 					корпоративных клиентов</div>
 			  </div>
 			  <div>
@@ -33,7 +34,7 @@
 						<span>малого и среднего бизнеса</span>
 					</div>
 				</div>
-					<div class="solutions_all">Все решения для<br>
+				<div class="solutions_all">Все решения для<br>
 					малого и среднего бизнеса</div>
 			  </div>
 			  <div>
@@ -43,9 +44,9 @@
 						<span>клиентов банка открытие</span>
 					</div>
 				</div>
-					<div class="solutions_all">Все решения для<br>
+				<div class="solutions_all">Все решения для<br>
 					физических лиц</div>
-				</div>
+			  </div>
 			</div>
 				</td>
 				<td class="slidesPointer"><a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_right.png" width="9" height="18" border="0"></a></td>
@@ -127,13 +128,7 @@
 		$i=1;
 		foreach($arrLastSeen as $alias=>$header):?>
 				<div>
-				  <a href="<? echo "site/";
-					//if ($menu):echo "?menu=$menu"; endif;
-					//if ($submenu):
-						//$usign=($menu)? "&":"?";
-						//echo $usign."submenu=$submenu";
-					//endif;
-					//echo (isset($usign)||$menu)? "&":"?"?>article=<?=$alias?>">
+				  <a href="<? echo "site/";?>article=<?=$alias?>">
 					<img border="0" src="<?=Yii::app()->request->baseUrl?>/images/pix/<?=$i?>-<?=$alias?>.jpg" width="146" height="92">
 					<span><?=$header?></span>
 				  </a>
