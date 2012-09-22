@@ -10,7 +10,9 @@ if (isset($_GET['test'])) {
 }
 if (isset($_SESSION['test'])) $test=$_SESSION['test'];
 
-if ($oldIE=setHTML::detectOldIE()) 
-	require_once dirname(__FILE__)."/old_ie.php";
-else
-	require_once dirname(__FILE__)."/default.php";
+if ($oldIE=setHTML::detectOldIE()) {?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?	require_once dirname(__FILE__)."/old_ie.php";
+}else{?><!DOCTYPE HTML>
+<?	require_once dirname(__FILE__)."/default.php";
+}
