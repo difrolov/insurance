@@ -172,12 +172,13 @@ class setHTML{
 	  * @subpackage		browser
 	  *
 	  */
-	function detectOldIE(){
+	function detectOldIE($version=array(6,7,8)){
 		$usAg=$_SERVER['HTTP_USER_AGENT'];
-		if ( stristr($usAg,'MSIE 6.0') 
-			 || stristr($usAg, 'MSIE 7.0')
-			 || stristr($usAg, 'MSIE 8.0')
-		   ) return true;	
+		for($i=0,$j=count($version);$i<$j;$i++)
+			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
+				$old_versions[]=$version[$i];
+			}
+		return (isset($old_versions))? true:false;	
 	}
 	/**
 	  * @package		interface
