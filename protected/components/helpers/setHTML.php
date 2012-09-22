@@ -51,6 +51,26 @@ class setHTML{
 <?	}
 	/**
 	  * @package		HTML
+	  * @subpackage		contacts
+	  *
+	  */
+	function buildContactsAndSearchBlock(){?>
+    		<div id="call_us" align="right">
+          	<div align="center">
+           	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
+			  <div class="txtLightBlue">круглосуточно</div>
+                <div align="center">+7 (495) 649-71-71</div>
+              	<div id="search">
+                	<form>
+                		<input name="search" type="text">
+                    	<input type="image" src="<?=Yii::app()->request->baseUrl?>/images/search_button.png">
+                    </form>
+                </div>
+			</div>
+          </div>
+<? 	}
+	/**
+	  * @package		HTML
 	  * @subpackage		menu
 	  *
 	  */
@@ -82,6 +102,51 @@ class setHTML{
 			echo $subMenuItems[$id]['text'];?></a>	
 	<?	endforeach;?>
         </div> 
+<?	}
+	/**
+	  * @package		HTML
+	  * @subpackage		footer
+	  *
+	  */
+	function buildFooterBlock($tp=false){?>
+			<div align="left" id="footer">
+  	<!--bottom_menu-->
+	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
+        <div align="left" id="bottom_menu">
+	<?	setHTML::buildMenu($this); echo "\n"?>
+        </div>
+			<?	if ($tp){?><h3>/bottom_menu</h3><? }?>
+  	<!--/bottom_menu-->
+  	<!--footer_content-->
+	<?	if ($tp){?><h3>footer_content</h3><? }?>
+    	<div id="footer_content">
+        	<div align="left" class="floatLeft">
+            	<div style="display:inline-block">
+                	<div>&copy; &quot;ОТКРЫТИЕ СТРАХОВАНИЕ&quot; 2012</div>
+                    <div>Все права защищены.</div>
+                    <div>Адрес: Москва, рядом с Кремлём.</div>
+                </div>
+                <div id="call_us_free" align="center">
+                	<div>8 800 200 71 00</div>
+					<div>круглосуточно</div>
+				</div>
+            </div>
+            <div class="floatRight">&nbsp;</div>
+        </div>
+			<?	if ($tp){?><h3>/footer_content</h3><? }?>
+  	<!--/footer_content-->
+  </div>
+<?	}	
+	/**
+	  * @package		HTML
+	  * @subpackage		header
+	  *
+	  */
+	function buildHeaderRoof(){?>
+		<div id="header_top">
+            <div style="float:left;"><a href="http://www.open.ru"><span class="txtLightBlue">www.open</span>.ru</a></div>
+            <div style="float:right;"><a href="map.php" class="txtLightBlue">карта сайта</a></div>
+          </div>
 <?	}
 	/**
 	  * @package		HTML
@@ -131,6 +196,16 @@ class setHTML{
 							  array('items'=>self::$arrMenuWidget)
 							);
 	}
+		/**
+	  * @package		HTML
+	  * @subpackage		menu
+	  *
+	  */
+	function buildLogosBlock(){?>
+				<div id="logo" align="left">
+                    <a href="/insur/insurance/site/index"><img alt="Открытие Страхование" title="На главную" src="/insur/insurance/images/logos.gif" width="435" height="97" border="0"></a>
+                </div>
+<?	}
 	/**
 	  * @package		HTML
 	  * @subpackage		menu

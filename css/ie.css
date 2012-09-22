@@ -12,6 +12,12 @@
 ----------------------------------------------------------------------- */
 
 /* ie.css */
+div#bottom_menu ul{
+	margin-left:-4px;
+}
+div#footer{
+	height:auto !important;
+}
 table#hat{
 	border-bottom:solid 8px #00B2DF;
 	height:147px;
@@ -28,6 +34,13 @@ table#main_content td{
 }
 div#header_top {
 	margin-top:7px;
+}
+div#mainmenu ul {
+	margin-left:20px;
+}
+div#mainmenu ul li{
+	margin:0 10px;
+	padding-right:10px !important;
 }
 div#mainmenu ul li div {
 	background:#FFF;
