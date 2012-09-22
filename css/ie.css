@@ -12,6 +12,14 @@
 ----------------------------------------------------------------------- */
 
 /* ie.css */
+table#hat{
+	border-bottom:solid 8px #00B2DF;
+	height:147px;
+	width:100%
+}
+table#hat td{
+	padding:0px;
+}
 table#main_content{
 	 width:918px;
 }
@@ -46,6 +54,9 @@ div#mainmenu ul li div a:hover{
 }
 div#mainmenu ul li:hover div{
 	top:22px;
+}
+.noPadding *{
+	padding:0px !important;
 }
 /*
 

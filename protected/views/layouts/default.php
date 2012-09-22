@@ -42,7 +42,7 @@
 	<?	if ($tp){?><h3>mainmenu</h3><? }?>
 	    <div id="mainmenu" align="left" style="position:relative;">
 <?	setHTML::buildMenu($this); // главное меню
-	if (!$oldIE) setHTML::buildDropDownMenu();	// выпадающее меню
+	setHTML::buildDropDownMenu();	// выпадающее меню
 ?>
 		</div>
         <!--<div id="AfterMenu">TEST</div>-->
@@ -116,8 +116,6 @@
 	<?	if ($tp){?><h3>/footer</h3><? }?>
 <!-- /footer -->
 </div>
-<?	if (!$oldIE) :?> 
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script>
-<?	endif;?>
 </body>
 </html>
