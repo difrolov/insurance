@@ -13,7 +13,7 @@
 div#content{
 	padding:0;
 }
-<? if ($_GET['border']){?>
+<? if (isset($_GET['border'])){?>
 div {
 	border:solid 1px #0000FF;
 }

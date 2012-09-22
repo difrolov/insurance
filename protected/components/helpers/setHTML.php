@@ -240,7 +240,15 @@ class setHTML{
                     <a href="/insur/insurance/site/index"><img alt="Открытие Страхование" title="На главную" src="/insur/insurance/images/logos.gif" width="435" height="97" border="0"></a>
                 </div>
 <?	}
-		/**
+	/**
+	  * @package		HTML
+	  * @subpackage		navigation
+	  *
+	  */
+	function buildPointersNext($direction){?>
+		<a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_<?=$direction?>.png" width="9" height="18" border="0">
+<?	}
+	/**
 	  * @package		HTML
 	  * @subpackage		logo
 	  *

@@ -26,7 +26,7 @@
 </td>
   </tr>
   <tr>
-    <td bgcolor="#99FFFF"><?
+    <td><?
     	echo $content;
 	?></td>
   </tr>
