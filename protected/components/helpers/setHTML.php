@@ -230,7 +230,50 @@ class setHTML{
 							  array('items'=>self::$arrMenuWidget)
 							);
 	}
-		/**
+	/**
+	  * @package		HTML
+	  * @subpackage		logo
+	  *
+	  */
+	function buildLastArticles(){
+		ob_start();?>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+	
+				diam nonumy eirmod tempor invidunt ut labore et dolore magna
+	
+				aliquyam erat, sed diam voluptua. At vero eos et accusam et
+	
+				justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+	
+				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>        
+<?		$articles[]=ob_get_contents();
+		ob_end_clean();
+		ob_start();?>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+	
+				diam nonumy eirmod tempor invidunt ut labore et dolore magna
+	
+				aliquyam erat, sed diam voluptua. At vero eos et accusam et
+	
+				justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+	
+				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>        
+<?		$articles[]=ob_get_contents();
+		ob_end_clean();
+		return $articles;
+	}
+	/**
+	  * @package		HTML
+	  * @subpackage		data
+	  *
+	  */
+	function buildLastNews(){?>
+					<div class="txtHeader3 txtLightBlue">новости</div>
+					<p id="issue_date">31.08.2012</p>
+					<p>В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
+					<p id="all_news"><a href="#">все новости...</a></p>
+<?	}
+	/**
 	  * @package		HTML
 	  * @subpackage		logo
 	  *
@@ -349,7 +392,7 @@ class setHTML{
 			<p>А в последствии, между прочим, новости будут гороздо новостней, чем сейчас.</p>";
 		}?>
 	<div class="company_news"><img align="left" name="placeholder" src="<?=$src?>" width="48" height="64" alt="" style="background-color: #99FFCC" /><?=$content?>
-    	<div align="right"><a href="#">Подробности &gt;&gt;&gt;</a></div>
+    	<div align="right"><a href="#">Подробности <? echo "&gt;&gt;&gt;";?></a></div>
     </div>
     <br>
 <?	}

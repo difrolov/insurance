@@ -35,6 +35,9 @@ table#main_content td{
 div#header_top {
 	margin-top:7px;
 }
+div#last_seen div{
+	display:inline !important;
+}
 div#mainmenu ul {
 	margin-left:20px;
 }

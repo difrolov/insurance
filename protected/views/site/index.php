@@ -1,4 +1,6 @@
-<? $tp=false; ?>
+<?	
+$articles=setHTML::buildLastArticles();
+$tp=false; ?>
 		<div align="left" id="slide_marks">
 <?	for($i=0;$i<8;$i++):?>
 			<div>&nbsp;</div>
@@ -10,3 +12,4 @@ if ($oldIE=setHTML::detectOldIE()) {
 }else{
 	require_once dirname(__FILE__).'/index/default.php';
 }
+require_once dirname(__FILE__).'/index/html/last_seen.php';?>
