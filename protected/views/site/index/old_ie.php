@@ -5,7 +5,7 @@
                 ?></td>
 		<td width="100%">
         	<table width="100%" cellspacing="0" cellpadding="0">
-              <tr>
+              <tr id="slides">
                 <td><? 	
 		setHTML::buildReadySolutionsBlock('corporative');?></td>
                 <td><? 	

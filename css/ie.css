@@ -92,3 +92,19 @@ div#slide_marks
 	margin-top:10px; 
 	width:9px; 
 }
+tr#slides 
+	div.solution_content > 
+		img:first-child +div {
+	margin-top:6px;
+}
+tr#slides 
+	div.solution_content > 
+		img:first-child +div span{
+	display:block;
+	color: #00B2DF;
+	line-height:23px;
+}
+tr#slides td, 
+table#tblSlides td{
+	padding:0;
+}
