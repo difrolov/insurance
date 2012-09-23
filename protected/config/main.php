@@ -63,6 +63,10 @@ return array(
 				'admin/<controller:\w+>/<action:\w+>/rid/<rid:\d+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>/run/<run:\w+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
+				array(
+						'class' => 'application.components.urlRules',
+						'connectionID' => 'db',
+				),
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
