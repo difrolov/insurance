@@ -16,4 +16,6 @@ if ($oldIE=setHTML::detectOldIE()) {?>
 <?	require_once dirname(__FILE__)."/old_ie.php";
 }else{?><!DOCTYPE HTML>
 <?	require_once dirname(__FILE__)."/default.php";
-}
+}?>
+</body>
+</html>

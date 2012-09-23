@@ -2,7 +2,8 @@
 <body>
 <table id="main_content" cellspacing="0">
   <tr>
-    <td height="190" valign="top">
+    <td id="shadowLeft" rowspan="4" valign="top">&nbsp;</td>
+    <td width="918" height="190" valign="top">
 	<?	setHTML::buildHeaderRoof();?>    	
         <table class="noPadding" id="hat" cellspacing="0">
           <tr>
@@ -16,6 +17,7 @@
 		
         
     </td>
+    <td id="shadowRight" rowspan="4" valign="top">&nbsp;</td>
   </tr>
   <tr>
     <td class="noPadding" height="30">
@@ -36,5 +38,3 @@
 	?></td>
   </tr>
 </table>
-</body>
-</html>
