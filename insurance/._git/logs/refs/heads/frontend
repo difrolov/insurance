@@ -1,0 +1,48 @@
+0000000000000000000000000000000000000000 22d7a95f0c4c21c593e99e089b5b2a4426427eee serge-serg <srgg67@gmail.com> 1347562857 +0400	branch: Created from 22d7a95f0c4c21c593e99e089b5b2a4426427eee
+22d7a95f0c4c21c593e99e089b5b2a4426427eee b7d2363785b18c7e27c0a8d143fcd8e98874c881 serge-serg <srgg67@gmail.com> 1347624135 +0400	commit: Начало реализации frontend'а
+b7d2363785b18c7e27c0a8d143fcd8e98874c881 098656deeec1feb45325f0df90f5224ab697c036 serge-serg <srgg67@gmail.com> 1347640733 +0400	commit: Работы по созданию оболочки frontend'а
+098656deeec1feb45325f0df90f5224ab697c036 7a5d7454860c9cf6f56b924dba46318c73e6eb74 serge-serg <srgg67@gmail.com> 1347642620 +0400	commit: Начало работы над стр. Каталог для корпоративных клиентов
+7a5d7454860c9cf6f56b924dba46318c73e6eb74 415b0638de8f60e16620b3a139845ab3261751ec serge-serg <srgg67@gmail.com> 1347703985 +0400	commit: Препарирование макета
+415b0638de8f60e16620b3a139845ab3261751ec 3d83845c75dd88e195d6c4fcfaaa05b927945feb serge-serg <srgg67@gmail.com> 1347711067 +0400	commit: Разборки с подключаемыми классами.
+3d83845c75dd88e195d6c4fcfaaa05b927945feb c2dcf588595abc53c72bb878700cff5c3b65ed53 serge-serg <srgg67@gmail.com> 1347711826 +0400	commit: Подключение helper'ов и удаление ненужных подключений в файлах контроллеров для view.
+c2dcf588595abc53c72bb878700cff5c3b65ed53 255f07cbe728992e365f6b5faeb1ad00bdc5a478 serge-serg <srgg67@gmail.com> 1347714910 +0400	commit: Наладка активного меню.
+255f07cbe728992e365f6b5faeb1ad00bdc5a478 f5560670fdd04eb9f2010323792784085e1da0b5 serge-serg <srgg67@gmail.com> 1347716674 +0400	commit: Работа с каталогом решений и программ. Модификация классов helper'ов.
+f5560670fdd04eb9f2010323792784085e1da0b5 495d351058ccde597dc731d48e74f16519509133 serge-serg <srgg67@gmail.com> 1347725480 +0400	commit: Доработка метода генерации таблицы готовых решений и программ для клиентов.
+495d351058ccde597dc731d48e74f16519509133 cda814aa9ad7e79efe929ae74157daf950d5af03 serge-serg <srgg67@gmail.com> 1347727115 +0400	commit: Доработка оболочки сайта.
+cda814aa9ad7e79efe929ae74157daf950d5af03 5214fd333802fdac212085d0bb377f4c34400ea4 serge-serg <srgg67@gmail.com> 1347727142 +0400	commit: чтобы не потерять...
+5214fd333802fdac212085d0bb377f4c34400ea4 c5f051ac1fccdbbc1198486a09d4fee78caaa8c1 serge-serg <srgg67@gmail.com> 1347737532 +0400	commit (cherry-pick): Merge branch 'master' of https://github.com/difrolov/insurance
+c5f051ac1fccdbbc1198486a09d4fee78caaa8c1 40ab7c818edc697bc672f4d0991f3638dd01e17e serge-serg <srgg67@gmail.com> 1347737868 +0400	commit: чтобы было
+40ab7c818edc697bc672f4d0991f3638dd01e17e fa2dbdbc0e7474f69f755a8841f5a79da6011c1b serge-serg <srgg67@gmail.com> 1347738138 +0400	commit: Чтой-то с .docx не совсем понятно....
+fa2dbdbc0e7474f69f755a8841f5a79da6011c1b 2835fbee205cd39c4d165bef9e800a47a974c6ad serge-serg <srgg67@gmail.com> 1347876922 +0400	commit: Начало доработки блоков с готовыми решениями и программами.
+2835fbee205cd39c4d165bef9e800a47a974c6ad 48245353a83a8c931f4f3638144ff298c792fa20 serge-serg <srgg67@gmail.com> 1347881783 +0400	commit: Дальнейшая добратка макета блоков с продуктами.
+48245353a83a8c931f4f3638144ff298c792fa20 df974cf0ca4f9dcd9c07af9b8d2512f3827bb7a4 serge-serg <srgg67@gmail.com> 1347882898 +0400	commit: Модификация таблицы стилей.
+df974cf0ca4f9dcd9c07af9b8d2512f3827bb7a4 60570e6692f7fd57333c5bfd897570533d0174fb serge-serg <srgg67@gmail.com> 1347899808 +0400	commit: Продолжение разработки объекта "Готовое решение"
+60570e6692f7fd57333c5bfd897570533d0174fb f0ebd451bd3ee2d69a085a2825ac1f9745a31c04 serge-serg <srgg67@gmail.com> 1347905876 +0400	commit: Начало разработки модуля программ страхования.
+f0ebd451bd3ee2d69a085a2825ac1f9745a31c04 df14fbeef1d38565897c36e15fed78dd048a46d3 serge-serg <srgg67@gmail.com> 1347949242 +0400	commit: Модификация имён файлов, процедур и способа генерации URL для готовых решений и программ.
+df14fbeef1d38565897c36e15fed78dd048a46d3 e56b8fd25e7fd079afddacf5730d0815267854ab serge-serg <srgg67@gmail.com> 1348004878 +0400	commit: Подключение jQuery, jQueryUI, модификация скриптов генерации главного меню, создание прототипов методов генерации drop-down меню.
+e56b8fd25e7fd079afddacf5730d0815267854ab 57edb7fbd62854f0f3c6ffe35d92edcad413ff25 serge-serg <srgg67@gmail.com> 1348017501 +0400	commit: js
+57edb7fbd62854f0f3c6ffe35d92edcad413ff25 fbdddee03190b581b0feb1a62ed598e8d230e2c2 serge-serg <srgg67@gmail.com> 1348053734 +0400	commit: Клиентский скрипт
+fbdddee03190b581b0feb1a62ed598e8d230e2c2 eb9066be67c1c8a18fa26e76a0bd1db60c163434 serge-serg <srgg67@gmail.com> 1348084509 +0400	merge js2: Fast-forward
+eb9066be67c1c8a18fa26e76a0bd1db60c163434 1f4a8891dcbd50363e7aac2eddacee7eb4790682 serge-serg <srgg67@gmail.com> 1348148357 +0400	commit: иллюстрации об ошибках, отправлены хостеру
+1f4a8891dcbd50363e7aac2eddacee7eb4790682 adcf210363100bdef54b636421b18ac3738bb27e serge-serg <srgg67@gmail.com> 1348163442 +0400	commit: тестовое изменение
+adcf210363100bdef54b636421b18ac3738bb27e e5ce5292827ff3c5ac84d9699e00057fc5e6995b serge-serg <srgg67@gmail.com> 1348163725 +0400	commit (merge): Merge branch 'master' into frontend
+e5ce5292827ff3c5ac84d9699e00057fc5e6995b 503da93ae64aa9959e0fc21fed723200bde418dc serge-serg <srgg67@gmail.com> 1348167113 +0400	merge after_fixed_css: Fast-forward
+503da93ae64aa9959e0fc21fed723200bde418dc e982c70dbddd63c11868cb3d5e5cd03d648ae05d serge-serg <srgg67@gmail.com> 1348171591 +0400	commit: Вынос скрипта генерации подменю из класса helper'а в отдельный .js-класс
+e982c70dbddd63c11868cb3d5e5cd03d648ae05d b4f4ab5fc36dab0914a8ca5cb62e1f7c5f117f40 serge-serg <srgg67@gmail.com> 1348173299 +0400	commit: Починка глюка FireFox с eventSource.
+b4f4ab5fc36dab0914a8ca5cb62e1f7c5f117f40 563afd79c7803e5d3af19dcf06383cca466dd328 serge-serg <srgg67@gmail.com> 1348219694 +0400	commit: Модификация меню для старых версий IE
+563afd79c7803e5d3af19dcf06383cca466dd328 5e4373f64307d727c4040a0eff0dcf536a69d33f serge-serg <srgg67@gmail.com> 1348222630 +0400	commit: Дораотка стилей меню для старых версий IE.
+5e4373f64307d727c4040a0eff0dcf536a69d33f db6d33c9745dfa071f2c82f4c2309ef865dc01e2 serge-serg <srgg67@gmail.com> 1348224069 +0400	commit: Доработка скрипта для выпадающего меню.
+db6d33c9745dfa071f2c82f4c2309ef865dc01e2 85df2386542b1004b9597a894f4cd6707138250a serge-serg <srgg67@gmail.com> 1348224305 +0400	merge master: Merge made by the 'recursive' strategy.
+85df2386542b1004b9597a894f4cd6707138250a 7f667bee7ce271be5e0b780e25259e2259b93f87 serge-serg <srgg67@gmail.com> 1348227827 +0400	commit: модификация методов построения меню.
+7f667bee7ce271be5e0b780e25259e2259b93f87 868147be2f438828badabdb741740f203475ea94 serge-serg <srgg67@gmail.com> 1348253271 +0400	merge master: Merge made by the 'recursive' strategy.
+868147be2f438828badabdb741740f203475ea94 f41b4054246100632c67978541d85376e971f472 serge-serg <srgg67@gmail.com> 1348258018 +0400	commit: Доработка методов генерации меню и подменю.
+f41b4054246100632c67978541d85376e971f472 9a41e50a337e7dc79d06d9432dd43c8843728fae serge-serg <srgg67@gmail.com> 1348310031 +0400	commit: Создание отдельных страниц - для современных браузеров и для старых версий IE.
+9a41e50a337e7dc79d06d9432dd43c8843728fae 5067d49dfe7dcf7c14f51733bb338ae2f0698bb4 serge-serg <srgg67@gmail.com> 1348322402 +0400	commit: продолжение работ над шаблоном для старых версий IE.
+5067d49dfe7dcf7c14f51733bb338ae2f0698bb4 6de721978a61d37ed462ac2223e86abcf035987e serge-serg <srgg67@gmail.com> 1348323411 +0400	commit: дальнейшая адаптация.
+6de721978a61d37ed462ac2223e86abcf035987e eafdf81b2181be36a3c4697613cd5899d8aedafa serge-serg <srgg67@gmail.com> 1348326400 +0400	commit: Вынесение части HTML-блоков в setHTML.
+eafdf81b2181be36a3c4697613cd5899d8aedafa 2668b966d312a053871529b87ec72095f200bffa serge-serg <srgg67@gmail.com> 1348330446 +0400	commit: Вынесение блока готовых решений (site/index.php) в setHTML.php.
+2668b966d312a053871529b87ec72095f200bffa 40ee4369070854923e48416858b3f47f001ec859 serge-serg <srgg67@gmail.com> 1348332098 +0400	commit: Работа над контентом главной страницы для разных браузеров.
+40ee4369070854923e48416858b3f47f001ec859 f76478f34863f117b790c62861e2b4c6d68a5f56 serge-serg <srgg67@gmail.com> 1348334540 +0400	commit: Доработка макета для разных браузеров.
+f76478f34863f117b790c62861e2b4c6d68a5f56 0c90a83f5f972db4de085eeaef8489188d38604a serge-serg <srgg67@gmail.com> 1348383568 +0400	commit: Модификация макета для старых версий ie.
+0c90a83f5f972db4de085eeaef8489188d38604a fdf0f14d99c64e4bfe9ebbfd6e7928e16c4fd9a0 serge-serg <srgg67@gmail.com> 1348384723 +0400	commit: Доработка таблицы стилей для old ie.
+fdf0f14d99c64e4bfe9ebbfd6e7928e16c4fd9a0 d99fcd6d2db1764c451100055e08a0e73ab50756 serge-serg <srgg67@gmail.com> 1348402175 +0400	commit: Настройка обработки алиасов (скрыто).

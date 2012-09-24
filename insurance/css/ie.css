@@ -1,0 +1,110 @@
+/* -----------------------------------------------------------------------
+
+
+ Blueprint CSS Framework 1.0.1
+ http://blueprintcss.org
+
+   * Copyright (c) 2007-Present. See LICENSE for more info.
+   * See README for instructions on how to use Blueprint.
+   * For credits and origins, see AUTHORS.
+   * This is a compressed file. See the sources in the 'src' directory.
+
+----------------------------------------------------------------------- */
+
+/* ie.css */
+div#bottom_menu ul{
+	margin-left:-4px;
+}
+div#footer{
+	height:auto !important;
+}
+table#hat{
+	border-bottom:solid 8px #00B2DF;
+	height:147px;
+	width:100%
+}
+table#hat td{
+	padding:0px;
+}
+table#main_content{
+	 width:100%;
+}
+table#main_content td{
+	padding:0 20px;
+}
+div#header_top {
+	margin-top:7px;
+}
+div#last_seen div{
+	display:inline !important;
+}
+div#mainmenu ul {
+	margin-left:20px;
+}
+div#mainmenu ul li{
+	margin:0 10px;
+	padding-right:10px !important;
+}
+div#mainmenu ul li div {
+	background:#FFF;
+	border:solid 1px #CCCCCC;
+	box-shadow:3px 4px 4px #ededed;
+	/*display:none;*/
+	left:4px;
+	padding:8px;
+	position:absolute;
+	top:-4000px;
+}
+div#mainmenu ul li {
+	position:relative;
+}
+div#mainmenu ul li div a{
+	color:#666;
+	display:block;
+	padding:4px;
+	white-space:nowrap;
+}
+div#mainmenu ul li div a:hover{
+	background:#77F4FF;
+	text-decoration:none;
+}
+div#mainmenu ul li:hover div{
+	top:22px;
+}
+.noPadding *{
+	padding:0px !important;
+}
+td#shadowLeft{
+	background:url(../images/ie/body_shadow_left.png) right repeat-y;
+	width:50%;
+}
+td#shadowRight{
+	background:url(../images/ie/body_shadow_right.png) repeat-y;
+	width:50%;
+}
+div#slide_marks 
+	div{
+	background:#999;
+	display:inline;
+	font-size:6px; 
+	height:8px; 
+	margin-right:2px;
+	margin-top:10px; 
+	width:9px; 
+}
+tr#slides 
+	div.solution_content > 
+		img:first-child +div {
+	margin-top:6px;
+}
+tr#slides 
+	div.solution_content > 
+		img:first-child +div span{
+	display:block;
+	color: #00B2DF;
+	line-height:23px;
+}
+tr#slides td, 
+table#tblSlides td{
+	padding:0;
+}
