@@ -2,8 +2,7 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-Data::setMetaData($this,$res,true);?>
-<h1>О компании</h1>
+Data::setPageData($this,$res,true);?>
 <table class="inner_layout" cellspacing="0">
   <tr>
     <td>

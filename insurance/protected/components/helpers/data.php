@@ -23,17 +23,38 @@ class Data {
 	 *	@package		content
 	 *	@subpackage		metadata
 	 */
-	function setMetaData($this_obj, $metadata, $test=false){
-		$this_obj->pageTitle=Yii::app()->name . ' - '.$metadata->title;
-		$this_obj->breadcrumbs=array(
-			$metadata->name,
-		);
-		Yii::app()->clientScript->registerMetaTag($metadata->description, 'description');
-		
+	function setPageData($this_obj, $section_data, $test=false){
+		// генерирует и размещает title страницы:
+		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
+		// генерирует и размещает название страницы в цепочке breadcrumbs:
+		$breadcrumbs=array();
+		if ($section_data->parent_id>0)	{	
+			$parentName=InsurInsuranceObject::model()->find(array(
+							'select'=>'name',
+							'condition'=>'id = '.$section_data->parent_id,
+						)); 
+			$this_obj->breadcrumbs=array(
+				$parentName->name=>array('index'),
+				$section_data->name
+			);
+		}else 
+			$this_obj->breadcrumbs=array(
+				$section_data->name,
+			);
+		// устанавливает description страницы:
+		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
+		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
+		// если заголовок не установлен (нет в БД), подставляет название страницы:
+		if (!$section_data->first_header)
+			$section_data->first_header=$section_data->name;
+		echo "<hr>parent_id = ".$section_data->parent_id."</hr>";
+		// это он - заголовок :)
+		echo "<h1>".$section_data->first_header."</h1>";
+		// если тестируемся:
 		if ($test) {
-			echo "title: ".$metadata->title."<hr>";
-			echo "keywords: ".$metadata->keywords."<hr>";
-			echo "description: ".$metadata->description."<hr>";
+			echo "title: ".$section_data->title."<hr>";
+			echo "keywords: ".$section_data->keywords."<hr>";
+			echo "description: ".$section_data->description."<hr>";
 		}
 	}
 }

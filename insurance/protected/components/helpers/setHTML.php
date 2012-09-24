@@ -401,16 +401,14 @@ class setHTML{
 	  * @subpackage		product
 	  *
 	  */
-	function setPageContent( $this_obj,
+	/*function setPageContent( $this_obj,
 							 $current_page,
-							 $main_header,
+							 $main_header, // parent section name
 							 $title=false
 							 ){?>
 		<h1><?=$main_header?></h1>
 	<?	$url=explode("/",$_SERVER['REQUEST_URI']);
-		if ( /*isset($_GET['solution'])
-			 || isset($_GET['program'])*/
-			 in_array('Gotovoye_reshenije',$url)
+		if ( in_array('Gotovoye_reshenije',$url)
 			 || in_array('Programa',$url)
 		   ) {
 			
@@ -422,18 +420,24 @@ class setHTML{
 				$file="readyProgram";
 			}
 			$product_id=array_pop($url);
+			
 			$this_obj->breadcrumbs=array(
-			$current_page=>array('index'),$crumb_chain_text); 
+					$current_page=>array('index'),
+					$crumb_chain_text); 
+			
 			require_once dirname(__FILE__)."/../../modules/readyProduct/".$file.".php";
 		}else{ 
 			if (!$title) $title=$current_page;
 			$this_obj->pageTitle=Yii::app()->name . ' - '.$title;
+			
 			$this_obj->breadcrumbs=array(
 				$current_page,
 			); 
+			
+			
 			self::buildCatalogue();
 		}
-	}
+	}*/
 	/**
 	  * @package		content
 	  * @subpackage		product
