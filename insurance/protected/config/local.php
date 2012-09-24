@@ -57,15 +57,11 @@ return array(
 			'rules'=>array(
 				// правила для обработки URL подразделов:
 				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
-				
 				'korporativnym_klientam/<alias:\w+>' =>  'korporativnym_klientam/index',
-
 				'malomu_i_srednemu_biznesu/<alias:\w+>' =>  'malomu_i_srednemu_biznesu/index',
-				
 				'fizicheskim_litzam/<alias:\w+>' =>  'fizicheskim_litzam/index',
-				
 				'partneram/<alias:\w+>' =>  'partneram/index',
-
+				// admin:
 				'admin'=>'admin',
 				'admin/<controller:\w+>'=>'admin/<controller>',
 				'admin/<controller:\w+>/<action:\w+>/show/<show:\d+>'=>'admin/<controller>/<action>',
@@ -74,11 +70,10 @@ return array(
 				'admin/<controller:\w+>/<action:\w+>/rid/<rid:\d+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>/run/<run:\w+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
+				// common rules:
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>/n_present/<n_present:\w+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>/y_present/<y_present:\w+>'=>'<controller>/<action>',
 			),
 		),
 		'authManager'=>array(
