@@ -3,7 +3,12 @@
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
 
-Data::setMetaData($this,$res,true);?>
+$this->pageTitle=Yii::app()->name . ' - Партнёрам';
+$this->breadcrumbs=array(
+	'Партнёрам',
+);
+//var_dump("<h1>res:</h1><pre>",$res,"</pre>");
+?>
 <h1>Партнёрам</h1>
 <table class="inner_layout" cellspacing="0">
   <tr>

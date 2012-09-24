@@ -2,5 +2,9 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-Data::setMetaData($this,$res,true);?>
+setHTML::setPageContent( 
+				$this,
+				'Физическим лицам',
+				'Каталог для физических лиц'
+			  );?>
 
