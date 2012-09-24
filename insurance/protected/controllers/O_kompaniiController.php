@@ -24,7 +24,7 @@ class O_kompaniiController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex($alias)
+	public function actionIndex($alias=false)
 	{
 		die('alias='.$alias);
 		if (($model = Product::model()->findByAttributes(array('alias' => $alias))) === null) {

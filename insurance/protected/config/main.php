@@ -64,14 +64,14 @@ return array(
 				'admin/<controller:\w+>/<action:\w+>/run/<run:\w+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
 				
-				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
+/*				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
 
 				'korporativnym_klientam/<controller:\w+>' =>  'korporativnym_klientam/index',
 
 				'malomu_i_srednemu_biznesu/<alias:\w+>' =>  'malomu_i_srednemu_biznesu/index',
 				'fizicheskim_litzam/<alias:\w+>' =>  'fizicheskim_litzam/index',
 				'partneram/<alias:\w+>' =>  'partneram/index',
-
+*/
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

@@ -55,6 +55,17 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
+				// правила для обработки URL подразделов:
+				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
+				
+				'korporativnym_klientam/<alias:\w+>' =>  'korporativnym_klientam/index',
+
+				'malomu_i_srednemu_biznesu/<alias:\w+>' =>  'malomu_i_srednemu_biznesu/index',
+				
+				'fizicheskim_litzam/<alias:\w+>' =>  'fizicheskim_litzam/index',
+				
+				'partneram/<alias:\w+>' =>  'partneram/index',
+
 				'admin'=>'admin',
 				'admin/<controller:\w+>'=>'admin/<controller>',
 				'admin/<controller:\w+>/<action:\w+>/show/<show:\d+>'=>'admin/<controller>/<action>',
