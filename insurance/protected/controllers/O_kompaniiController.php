@@ -24,8 +24,14 @@ class O_kompaniiController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
+	public function actionIndex($alias)
 	{
+		die('alias='.$alias);
+		if (($model = Product::model()->findByAttributes(array('alias' => $alias))) === null) {
+        	throw new CHttpException(404, 'Not found');
+    	}
+		
+    	$this->render('index', array('model' => $model));
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$about="Контент страницы \"О компании\"";
