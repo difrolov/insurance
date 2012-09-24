@@ -47,11 +47,11 @@ class Data {
 		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
 			$section_data->first_header=$section_data->name;
-		echo "<hr>parent_id = ".$section_data->parent_id."</hr>";
 		// это он - заголовок :)
 		echo "<h1>".$section_data->first_header."</h1>";
 		// если тестируемся:
 		if ($test) {
+			echo "<hr>parent_id = ".$section_data->parent_id."</hr>";
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";

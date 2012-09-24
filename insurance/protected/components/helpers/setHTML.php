@@ -402,7 +402,7 @@ class setHTML{
 	  *
 	  */
 	/*function setPageContent( $this_obj,
-							 $current_page,
+							 $current_page, // current page name
 							 $main_header, // parent section name
 							 $title=false
 							 ){?>
