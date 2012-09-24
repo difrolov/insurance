@@ -9,7 +9,13 @@ $this->breadcrumbs=array(
 );
 ?>
 <h1>О компании</h1>
-<?	//var_dump("<h1>res:</h1><pre>",$res,"</pre>");?>
+<?	
+	echo "title: ".$res->title."<hr>";
+	echo "keywords: ".$res->keywords."<hr>";
+	echo "description: ".$res->description."<hr>";
+	echo "content: ".$res->content."<hr>";
+
+?>
 <table class="inner_layout" cellspacing="0">
   <tr>
     <td>

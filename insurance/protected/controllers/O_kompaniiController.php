@@ -26,24 +26,19 @@ class O_kompaniiController extends Controller
 	 */
 	public function actionIndex($alias=false)
 	{
-		die('alias='.$alias);
-		if (($model = Product::model()->findByAttributes(array('alias' => $alias))) === null) {
-        	throw new CHttpException(404, 'Not found');
-    	}
-		
-    	$this->render('index', array('model' => $model));
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$about="Контент страницы \"О компании\"";
-		$this->render('index', array('res'=>$about));
+		if (!$alias) $alias='o_kompanii';		
+		if (($data = InsurInsuranceObject::model()->findByAttributes(array('alias' => $alias))) === null) {
+			throw new CHttpException(404, 'Not found');
+		}
+    	$this->render('index', array('res' => $data));
 	}
 	/**
 	  *
 	  */
-	public function actionKontakty()
+	/*public function actionKontakty()
 	{	$contacts="Контент страницы \"Контакты\"";
 		$this->render('kontakty', array('res'=>$contacts));
-	}
+	}*/
 	/**
 	 * This is the action to handle external exceptions.
 	 */
