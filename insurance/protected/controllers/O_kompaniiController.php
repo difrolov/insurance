@@ -26,19 +26,9 @@ class O_kompaniiController extends Controller
 	 */
 	public function actionIndex($alias=false)
 	{
-		if (!$alias) $alias='o_kompanii';		
-		if (($data = InsurInsuranceObject::model()->findByAttributes(array('alias' => $alias))) === null) {
-			throw new CHttpException(404, 'Not found');
-		}
+		$data=Data::getDataByAlias('o_kompanii',$alias);
     	$this->render('index', array('res' => $data));
 	}
-	/**
-	  *
-	  */
-	/*public function actionKontakty()
-	{	$contacts="Контент страницы \"Контакты\"";
-		$this->render('kontakty', array('res'=>$contacts));
-	}*/
 	/**
 	 * This is the action to handle external exceptions.
 	 */
