@@ -365,7 +365,7 @@ class CUrlManager extends CApplicationComponent
 				if(is_array($rule))
 					$this->_rules[$i]=$rule=Yii::createComponent($rule);
 				if(($r=$rule->parseUrl($this,$request,$pathInfo,$rawPathInfo))!==false){
-					if (!isset($_GET[$this->routeVar])) {
+					/*if (!isset($_GET[$this->routeVar])) {
 						$rURLs=explode("/",$r);
 						if ($wantedAlias=array_pop($rURLs)) {							
 							$dsn = 'mysql:host=localhost;dbname=insur_db';
@@ -379,7 +379,7 @@ class CUrlManager extends CApplicationComponent
 							$parentURL=implode("/",$rURLs);
 							$_GET[$this->routeVar]=$parentURL; 
 						}
-					}
+					}*/
 					return isset($_GET[$this->routeVar]) ? $_GET[$this->routeVar] : $r;
 				}
 			}
