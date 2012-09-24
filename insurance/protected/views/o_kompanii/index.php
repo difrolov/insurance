@@ -2,20 +2,8 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-
-$this->pageTitle=Yii::app()->name . ' - О компании';
-$this->breadcrumbs=array(
-	'О компании',
-);
-?>
+Data::setMetaData($this,$res,true);?>
 <h1>О компании</h1>
-<?	
-	echo "title: ".$res->title."<hr>";
-	echo "keywords: ".$res->keywords."<hr>";
-	echo "description: ".$res->description."<hr>";
-	echo "content: ".$res->content."<hr>";
-
-?>
 <table class="inner_layout" cellspacing="0">
   <tr>
     <td>

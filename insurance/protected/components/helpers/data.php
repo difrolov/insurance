@@ -19,5 +19,22 @@ class Data {
 		}
 		return $data;	
 	}
+	/*
+	 *	@package		content
+	 *	@subpackage		metadata
+	 */
+	function setMetaData($this_obj, $metadata, $test=false){
+		$this_obj->pageTitle=Yii::app()->name . ' - '.$metadata->title;
+		$this_obj->breadcrumbs=array(
+			$metadata->name,
+		);
+		Yii::app()->clientScript->registerMetaTag($metadata->description, 'description');
+		
+		if ($test) {
+			echo "title: ".$metadata->title."<hr>";
+			echo "keywords: ".$metadata->keywords."<hr>";
+			echo "description: ".$metadata->description."<hr>";
+		}
+	}
 }
 ?>
