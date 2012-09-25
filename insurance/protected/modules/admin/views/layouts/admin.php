@@ -48,7 +48,7 @@
 	<?php endif?>
 	<div class="menu_left">
 		<?php
-print_r(HelperAdmin::menuItem());
+	HelperAdmin::menuItem();
 		$items = array(
 				array('label'=>'Главная', 'url'=>array('/site/index')),
 				array('label'=>'О компании', 'url'=>array('/site/page', 'view'=>'about'), 'items'=>array(
@@ -135,6 +135,7 @@ print_r(HelperAdmin::menuItem());
 				array('label'=>'Задать вопрос', 'url'=>'#'),
 				array('label'=>'Если произошел страховой случай', 'url'=>'#'),
 		);
+
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
 				'id'=>'vert1',
