@@ -92,8 +92,8 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
-	function buildDropDownMenu(){
-		$menuItems=self::getMenuItems();
+	function buildDropDownMenu($submenu=false){
+		$menuItems=self::getMenuItems($submenu);
 		foreach($menuItems as $parent_id=>$parent_data){
 			if ($parent_data['alias']!='site/index') 
 				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);

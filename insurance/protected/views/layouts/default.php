@@ -19,9 +19,11 @@
 		setHTML::buildDropDownMenu();	// выпадающее меню	
 															?>
 	  </div>
-		<div id="main_submenu" align="right">
+		<div id="main_submenu" align="right" style="position:relative;">
 	<?	setHTML::buildMainMenu($this,-2);
-		setHTML::buildDropDownMenu();?>
+	
+		setHTML::buildDropDownMenu(-2);
+												?>
 		</div>
 	<?	setHTML::buildBreadCrumbs();
 		
