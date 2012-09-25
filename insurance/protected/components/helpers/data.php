@@ -51,7 +51,7 @@ class Data {
 		echo "<h1>".$section_data->first_header."</h1>";
 		// если тестируемся:
 		if ($test) {
-			echo "<hr>parent_id = ".$section_data->parent_id."</hr>";
+			echo "parent_id = ".$section_data->parent_id."<hr>";
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";

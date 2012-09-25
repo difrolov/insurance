@@ -3,7 +3,7 @@
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
 
-Data::setMetaData($this,$res,true);?>
+Data::setPageData($this,$res,true);?>
 <h1>Партнёрам</h1>
 <table class="inner_layout" cellspacing="0">
   <tr>

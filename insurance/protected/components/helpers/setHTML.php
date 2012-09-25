@@ -1,6 +1,7 @@
 <?
 class setHTML{
 	static $arrMenuWidget;
+	static $arrMenuWidgetSecond;
 	/**
 	  * @package		HTML
 	  * @subpackage		navigation
@@ -115,7 +116,7 @@ class setHTML{
 			}
 		}	
 		foreach($subMenuItems as $id=>$array):?>
-		<a href="<?php echo Yii::app()->request->baseUrl.'/'.$subMenuItems[$id]['alias']?>"><?
+		<a href="<?php echo Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$subMenuItems[$id]['alias']?>"><?
 			echo $subMenuItems[$id]['text'];?></a>	
 	<?	endforeach;?>
         </div> 
@@ -130,7 +131,7 @@ class setHTML{
   	<!--bottom_menu-->
 	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
-	<?	setHTML::buildMenu($this); echo "\n"?>
+	<?	setHTML::buildMainMenu($this); echo "\n"?>
         </div>
 			<?	if ($tp){?><h3>/bottom_menu</h3><? }?>
   	<!--/bottom_menu-->
@@ -168,43 +169,30 @@ class setHTML{
 	/**
 	  * @package		HTML
 	  * @subpackage		menu
-	  *
+	  * построить меню верхнего уровня
 	  */
-	function buildMainSubmenu($thisObject){?>
-		<div id="main_submenu" align="right">
-<?	$thisObject->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Если произошёл страховой случай', 'url'=>array('/esli_proizoshel_strahovoj_sluchay/'), 'active' => Yii::app()->controller->getId() == 'esli_proizoshel_strahovoj_sluchay'),
-				array('label'=>'Отправить заявку', 'url'=>array('/site/otpravit_zajavku')),
-				array('label'=>'Задать вопрос', 'url'=>array('/site/zadat_vopros')),
-			),
-		));
-	?>          
-       	</div>
-<?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		menu
-	  *
-	  */
-	function buildMenu(
+	function buildMainMenu(
 					$this_object,
-					$arrMenu=false,
 					$submenu=false
 				  ){
 		$mainPageAlias='site/index';
 		$currentController=Yii::app()->controller->getId();
-		if (!self::$arrMenuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
-			$newborn_menu=true;
-			$arrMenu=self::getMenuItems();
+		$menuWidget=($submenu)? self::$arrMenuWidgetSecond:self::$arrMenuWidget;
+		if (!$menuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
+			$newborn_menu=true; 
+			$arrMenu=self::getMenuItems($submenu);
 			foreach($arrMenu as $parent_id=>$parent_data) {
 				$text=$parent_data['text'];
 				$alias=$parent_data['alias'];
 				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
 				if ($alias!=$mainPageAlias)
 					$arr['active']= $currentController == $alias;
-				self::$arrMenuWidget[]=$arr; 
+				$menuWidget[]=$arr; 
 			}
+			if ($submenu)
+				self::$arrMenuWidgetSecond=$menuWidget;
+			else
+				self::$arrMenuWidget=$menuWidget;
 		}
 		if (self::detectOldIE()){ //
 			$URL=explode("/",$_SERVER['REQUEST_URI']);
@@ -213,7 +201,7 @@ class setHTML{
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
 			else $urlAlias='/'.$nURL[1].'/';?>
         <ul<? //id=yw0?>>
-		<?	$menuItems=self::getMenuItems();
+		<?	$menuItems=self::getMenuItems($submenu);
 			$dx=array_shift($menuItems);
 			foreach($menuItems as $parent_id=>$parentData){
 				$alias=$parentData['alias'];
@@ -227,7 +215,7 @@ class setHTML{
 		<?	}?>
         </ul>
 	<?	}else $this_object->widget( 'zii.widgets.CMenu',
-							  array('items'=>self::$arrMenuWidget)
+							  array('items'=>$menuWidget)
 							);
 	}
 	/**
@@ -327,12 +315,13 @@ class setHTML{
 	/**
 	  * @package		HTML
 	  * @subpackage		menu
-	  *
+	  * получить меню верхнего уровня
 	  */
-	function getMenuItems($menuItems=false){
+	function getMenuItems($parent_id_level=false){ 
+		if (!$parent_id_level) $parent_id_level='-1';
 		$model=InsurInsuranceObject::model()->findAll(
 					array('select'=>'id, name, alias',
-							'condition'=>'parent_id = -1 AND status = 1'
+							'condition'=>'parent_id = '.$parent_id_level.' AND status = 1'
 						));
 		for($i=0,$j=count($model);$i<$j;$i++){
 			$menuItems[$model[$i]->id]=array('text'=>$model[$i]->name,
@@ -344,7 +333,7 @@ class setHTML{
 	/**
 	  * @package		HTML
 	  * @subpackage		menu
-	  *
+	  * выпадающее меню, как для mainmenu, submenu
 	  */
 	function getSubMenuItems($parent_id){ 
 		$model=InsurInsuranceObject::model()->findAll(

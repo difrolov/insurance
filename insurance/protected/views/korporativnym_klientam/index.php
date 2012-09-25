@@ -2,8 +2,4 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-setHTML::setPageContent( 
-				$this,
-				'Корпоративным клиентам',
-				'Каталог для корпоративных клиентов'
-			  );?>
+Data::setPageData($this,$res,true);?>
