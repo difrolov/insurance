@@ -5,28 +5,16 @@
 		public static function menuItem(){
 			$sql = 'SELECT DISTINCT `main`.`name` AS first_n
 				     , `second`.`name` AS second_n
-				     , `third`.`name` AS third_n
-				     , `last`.`name` AS last_n
 				     , `main`.`id` AS first_id
 				     , `second`.`id` AS second_id
-				     , `third`.`id` AS third_id
-				     , `last`.`id` AS last_id
 				     , `main`.`parent_id` AS first_pid
 				     , `second`.`parent_id` AS second_pid
-				     , `third`.`parent_id` AS third_pid
-				     , `last`.`parent_id` AS last_pid
 				     , `main`.`alias` AS first_al
 				     , `second`.`alias` AS second_al
-				     , `third`.`alias` AS third_al
-				     , `last`.`alias` AS last_al
 				FROM
 				  insur_insurance_object AS main
 				LEFT JOIN insur_insurance_object AS `second`
 				ON `second`.`parent_id` = `main`.`id`
-				LEFT JOIN insur_insurance_object AS `third`
-				ON `third`.`parent_id` = `second`.`id`
-				LEFT JOIN insur_insurance_object AS `last`
-				ON `last`.`parent_id` = `third`.`id`
 				WHERE
 				  `main`.`parent_id` = -1';
 				$res = Yii::app()->db->createCommand($sql)->queryAll();
@@ -37,22 +25,30 @@
 						$main[] = $val['first_n'];
 					}
 					//второй уровень
-					if(in_array($val['first_n'],$res[$key]) && $res[$key]['second_n'] != null){
-						$sec[$key][$val['first_n']]=$res[$key]['second_n'];
+					if(in_array($val['first_n'],$res[$key]) ){
+						$temp[]=array('label'=>$val['first_n'],'url'=>array('#'),'items'=>array(($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('#')):null)));
+						$sec[$val['first_n']]['items'][]=($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('#')):null);
 					}
-					//третий уровень
+				/* 	//третий уровень
 					if(in_array($val['second_n'],$res[$key]) && $res[$key]['third_n'] != null){
 						$third[$key][$val['second_n']]=$res[$key]['third_n'];
 					}
 					//Четвёртый уровень
 					if(in_array($val['third_n'],$res[$key]) && $res[$key]['last_n'] != null){
 						$last[$key][$val['third_n']]=$res[$key]['last_n'];
+					} */
+				}
+				foreach ($sec as $k=>$v){
+					foreach ($v as $k_s=>$sub){
+						$items[]=array('label'=>$k,'url'=>array('#'),$k_s=> (count($sub)>1?$sub:null));
 					}
+
 				}
 
 
+/* print_r($items);die; */
 
-			print_r($last);
+			return $items;
 
 		}
 
