@@ -21,6 +21,8 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.components.helpers.*',
+		'application.components.admin.*',
+
 
 	),
 
@@ -62,6 +64,7 @@ return array(
 				'fizicheskim_litzam/<alias:\w+>' =>  'fizicheskim_litzam/index',
 				'partneram/<alias:\w+>' =>  'partneram/index',
 				// admin:
+
 				'admin'=>'admin',
 				'admin/<controller:\w+>'=>'admin/<controller>',
 				'admin/<controller:\w+>/<action:\w+>/show/<show:\d+>'=>'admin/<controller>/<action>',
@@ -70,10 +73,16 @@ return array(
 				'admin/<controller:\w+>/<action:\w+>/rid/<rid:\d+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>/run/<run:\w+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
-				// common rules:
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>/n_present/<n_present:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>/y_present/<y_present:\w+>'=>'<controller>/<action>',
+
+
+
+
+
 			),
 		),
 		'authManager'=>array(

@@ -41,8 +41,7 @@ class COutputProcessor extends CFilterWidget
 	 */
 	public function run()
 	{
-		$output=ob_get_clean(); 
-		//var_dump("<h1>output:</h1><pre>",$output,"</pre>"); die();
+		$output=ob_get_clean();
 		$this->processOutput($output);
 	}
 
@@ -60,13 +59,11 @@ class COutputProcessor extends CFilterWidget
 		{
 			$event=new COutputEvent($this,$output);
 			$this->onProcessOutput($event);
-			if(!$event->handled) {
-				echo $output; //die('onProcessOutput');
-			}
+			if(!$event->handled)
+				echo $output;
 		}
-		else {
-			echo $output; //die('!onProcessOutput');
-		}
+		else
+			echo $output;
 	}
 
 	/**
@@ -78,3 +75,4 @@ class COutputProcessor extends CFilterWidget
 		$this->raiseEvent('onProcessOutput',$event);
 	}
 }
+

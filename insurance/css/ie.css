@@ -12,39 +12,6 @@
 ----------------------------------------------------------------------- */
 
 /* ie.css */
-div#bottom_menu ul{
-	margin-left:-4px;
-}
-div#footer{
-	height:auto !important;
-}
-table#hat{
-	border-bottom:solid 8px #00B2DF;
-	height:147px;
-	width:100%
-}
-table#hat td{
-	padding:0px;
-}
-table#main_content{
-	 width:100%;
-}
-table#main_content td{
-	padding:0 20px;
-}
-div#header_top {
-	margin-top:7px;
-}
-div#last_seen div{
-	display:inline !important;
-}
-div#mainmenu ul {
-	margin-left:20px;
-}
-div#mainmenu ul li{
-	margin:0 10px;
-	padding-right:10px !important;
-}
 div#mainmenu ul li div {
 	background:#FFF;
 	border:solid 1px #CCCCCC;
@@ -71,40 +38,29 @@ div#mainmenu ul li div a:hover{
 div#mainmenu ul li:hover div{
 	top:22px;
 }
-.noPadding *{
-	padding:0px !important;
-}
-td#shadowLeft{
-	background:url(../images/ie/body_shadow_left.png) right repeat-y;
-	width:50%;
-}
-td#shadowRight{
-	background:url(../images/ie/body_shadow_right.png) repeat-y;
-	width:50%;
-}
-div#slide_marks 
-	div{
-	background:#999;
-	display:inline;
-	font-size:6px; 
-	height:8px; 
-	margin-right:2px;
-	margin-top:10px; 
-	width:9px; 
-}
-tr#slides 
-	div.solution_content > 
-		img:first-child +div {
-	margin-top:6px;
-}
-tr#slides 
-	div.solution_content > 
-		img:first-child +div span{
-	display:block;
-	color: #00B2DF;
-	line-height:23px;
-}
-tr#slides td, 
-table#tblSlides td{
-	padding:0;
-}
+/*
+
+old:
+
+body {text-align:center;}
+.container {text-align:left;}
+* html .column, * html .span-1, * html .span-2, * html .span-3, * html .span-4, * html .span-5, * html .span-6, * html .span-7, * html .span-8, * html .span-9, * html .span-10, * html .span-11, * html .span-12, * html .span-13, * html .span-14, * html .span-15, * html .span-16, * html .span-17, * html .span-18, * html .span-19, * html .span-20, * html .span-21, * html .span-22, * html .span-23, * html .span-24 {display:inline;overflow-x:hidden;}
+* html legend {margin:0px -8px 16px 0;padding:0;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+html>body p code {*white-space:normal;}
+hr {margin:-8px auto 11px;}
+img {-ms-interpolation-mode:bicubic;}
+.clearfix, .container {display:inline-block;}
+* html .clearfix, * html .container {height:1%;}
+fieldset {padding-top:0;}
+legend {margin-top:-0.2em;margin-bottom:1em;margin-left:-0.5em;}
+textarea {overflow:auto;}
+label {vertical-align:middle;position:relative;top:-0.25em;}
+input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
+input.text:focus, input.title:focus {border-color:#666;}
+input.text, input.title, textarea, select {margin:0.5em 0;}
+input.checkbox, input.radio {position:relative;top:.25em;}
+form.inline div, form.inline p {vertical-align:middle;}
+form.inline input.checkbox, form.inline input.radio, form.inline input.button, form.inline button {margin:0.5em 0;}
+button, input.button {position:relative;top:0.25em;}*/

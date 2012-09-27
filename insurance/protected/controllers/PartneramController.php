@@ -24,10 +24,10 @@ class PartneramController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex($alias=false)
+	public function actionIndex()
 	{
-		$data=Data::getDataByAlias('partneram',$alias);
-    	$this->render('index', array('res' => $data));
+		$partners="Контент страницы \"Партнёрам\"";
+		$this->render('index', array('res'=>$partners));
 	}
 	/**
 	 * This is the action to handle external exceptions.

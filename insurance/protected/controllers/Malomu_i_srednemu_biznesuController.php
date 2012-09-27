@@ -24,10 +24,10 @@ class Malomu_i_srednemu_biznesuController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex($alias=false)
+	public function actionIndex()
 	{
-		$data=Data::getDataByAlias('malomu_i_srednemu_biznesu',$alias);
-    	$this->render('index', array('res' => $data));
+		$smallBusiness="Контент страницы \"Малому и среднему бизнесу\"";
+		$this->render('index', array('res'=>$smallBusiness));		
 	}
 	/**
 	 * This is the action to handle external exceptions.

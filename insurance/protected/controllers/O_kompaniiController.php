@@ -24,10 +24,19 @@ class O_kompaniiController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex($alias=false)
+	public function actionIndex()
 	{
-		$data=Data::getDataByAlias('o_kompanii',$alias);
-    	$this->render('index', array('res' => $data));
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$about="Контент страницы \"О компании\"";
+		$this->render('index', array('res'=>$about));
+	}
+	/**
+	  *
+	  */
+	public function actionKontakty()
+	{	$contacts="Контент страницы \"Контакты\"";
+		$this->render('kontakty', array('res'=>$contacts));
 	}
 	/**
 	 * This is the action to handle external exceptions.

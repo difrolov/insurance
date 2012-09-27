@@ -24,10 +24,10 @@ class Fizicheskim_litzamController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex($alias=false)
+	public function actionIndex()
 	{
-		$data=Data::getDataByAlias('fizicheskim_litzam',$alias);
-    	$this->render('index', array('res' => $data));
+		$privatePersons="Контент страницы \"Физическим лицам\"";
+		$this->render('index', array('res'=>$privatePersons));
 	}
 	/**
 	 * This is the action to handle external exceptions.

@@ -510,9 +510,7 @@ div#slides >
 	display:inline-block;
 }
 div#slides 
-	div.solution_content,
-tr#slides 
-	div.solution_content { /*	for ie	*/
+	div.solution_content{
 	background:url(../images/separator_window_biggest.png) top right no-repeat;
 	border:solid 1px #CCCCCC;
 	display:inline-block;
@@ -524,8 +522,6 @@ tr#slides
 	/*background:#99FF99;*/
 }
 div#slides 
-	div.solutions_all,
-tr#slides 
 	div.solutions_all{
 	background:url(../images/separator_vertical.png) 0 10px no-repeat;
 	height:50px;

@@ -160,7 +160,6 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 		}
 		foreach($properties as $name=>$value)
 			$widget->$name=$value;
-		//var_dump("<h1>widget:</h1><pre>",$widget,"</pre>"); die();
 		return $widget;
 	}
 
@@ -196,4 +195,5 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 		}
 		return $this->_skins[$className][$skinName];
 	}
+
 }

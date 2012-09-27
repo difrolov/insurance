@@ -55,6 +55,7 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
+
 				// правила для обработки URL подразделов:
 				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
 				'korporativnym_klientam/<alias:\w+>' =>  'korporativnym_klientam/index',
@@ -74,8 +75,9 @@ return array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-				//'<controller:\w+>/<action:\w+>/n_present/<n_present:\w+>'=>'<controller>/<action>',
-				//'<controller:\w+>/<action:\w+>/y_present/<y_present:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>/n_present/<n_present:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>/y_present/<y_present:\w+>'=>'<controller>/<action>',
+
 			),
 		),
 		'authManager'=>array(

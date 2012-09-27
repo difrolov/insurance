@@ -146,7 +146,6 @@ abstract class CBaseController extends CComponent
 	{
 		$widget=Yii::app()->getWidgetFactory()->createWidget($this,$className,$properties);
 		$widget->init();
-		//var_dump("<h1>widget:</h1><pre>",$widget,"</pre>"); 
 		return $widget;
 	}
 
@@ -302,3 +301,4 @@ abstract class CBaseController extends CComponent
 		$this->endWidget('CContentDecorator');
 	}
 }
+

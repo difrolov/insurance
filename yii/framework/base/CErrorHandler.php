@@ -1,3 +1,4 @@
+
 <?php
 /**
  * This file contains the error handler application component.
@@ -91,7 +92,8 @@ class CErrorHandler extends CApplicationComponent
 	 * @param CEvent $event the event containing the exception/error information
 	 */
 	public function handle($event)
-	{	// set event as handled to prevent it from being handled by other event handlers
+	{
+		// set event as handled to prevent it from being handled by other event handlers
 		$event->handled=true;
 
 		if($this->discardOutput)
@@ -376,7 +378,7 @@ class CErrorHandler extends CApplicationComponent
 	{
 		$app=Yii::app();
 		if($view==='error')
-		{	
+		{
 			$viewFile=$app->findLocalizedFile($viewPath.DIRECTORY_SEPARATOR."error{$code}.php",$srcLanguage);
 			if(!is_file($viewFile))
 				$viewFile=$app->findLocalizedFile($viewPath.DIRECTORY_SEPARATOR.'error.php',$srcLanguage);
@@ -576,3 +578,4 @@ class CErrorHandler extends CApplicationComponent
 			return $replacement;
 	}
 }
+
