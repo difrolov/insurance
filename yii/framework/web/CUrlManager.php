@@ -367,16 +367,14 @@ class CUrlManager extends CApplicationComponent
 				if(($r=$rule->parseUrl($this,$request,$pathInfo,$rawPathInfo))!==false)
 					return isset($_GET[$this->routeVar]) ? $_GET[$this->routeVar] : $r;
 			}
-			if($this->useStrictParsing) {
-				
+			if($this->useStrictParsing)
 				throw new CHttpException(404,Yii::t('yii','Unable to resolve the request "{route}".',
 					array('{route}'=>$pathInfo)));
-			}else
+			else
 				return $pathInfo;
 		}
-		else if(isset($_GET[$this->routeVar])) {
+		else if(isset($_GET[$this->routeVar]))
 			return $_GET[$this->routeVar];
-		}
 		else if(isset($_POST[$this->routeVar]))
 			return $_POST[$this->routeVar];
 		else
@@ -849,3 +847,4 @@ class CUrlRule extends CBaseUrlRule
 			return false;
 	}
 }
+

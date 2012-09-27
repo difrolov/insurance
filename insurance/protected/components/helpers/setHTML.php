@@ -48,7 +48,7 @@ class setHTML{
   <tr>
     <td id="cellSolutions">
 <?	foreach($solutions as $solution)
-		self::showReadySolutionBlock($solution);?>      
+		self::showReadySolutionBlock($solution);?>
 	</td>
     <td id="cellPrograms">
 <?	//var_dump("<h1>programs:</h1><pre>",$programs,"</pre>");
@@ -61,7 +61,7 @@ class setHTML{
 		<? readyProduct::showProgram($programs[$i+1]);?>
       </div>
 <?		}
-	}?>      
+	}?>
 	</td>
   </tr>
 </table>
@@ -94,7 +94,7 @@ class setHTML{
 	function buildDropDownMenu(){
 		$menuItems=self::getMenuItems();
 		foreach($menuItems as $parent_id=>$parent_data){
-			if ($parent_data['alias']!='site/index') 
+			if ($parent_data['alias']!='site/index')
 				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
 		}
 	}
@@ -113,12 +113,12 @@ class setHTML{
 				$subMenuItems[$i]['text']="Текст меню ".$i;
 				$subMenuItems[$i]['alias']="url_alias";
 			}
-		}	
+		}
 		foreach($subMenuItems as $id=>$array):?>
 		<a href="<?php echo Yii::app()->request->baseUrl.'/'.$subMenuItems[$id]['alias']?>"><?
-			echo $subMenuItems[$id]['text'];?></a>	
+			echo $subMenuItems[$id]['text'];?></a>
 	<?	endforeach;?>
-        </div> 
+        </div>
 <?	}
 	/**
 	  * @package		HTML
@@ -153,7 +153,7 @@ class setHTML{
 			<?	if ($tp){?><h3>/footer_content</h3><? }?>
   	<!--/footer_content-->
   </div>
-<?	}	
+<?	}
 	/**
 	  * @package		HTML
 	  * @subpackage		header
@@ -179,7 +179,7 @@ class setHTML{
 				array('label'=>'Задать вопрос', 'url'=>array('/site/zadat_vopros')),
 			),
 		));
-	?>          
+	?>
        	</div>
 <?	}
 	/**
@@ -203,7 +203,7 @@ class setHTML{
 				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
 				if ($alias!=$mainPageAlias)
 					$arr['active']= $currentController == $alias;
-				self::$arrMenuWidget[]=$arr; 
+				self::$arrMenuWidget[]=$arr;
 			}
 		}
 		if (self::detectOldIE()){ //
@@ -223,7 +223,7 @@ class setHTML{
 			<?	if ( $alias!='/'.$mainPageAlias.'/'
 			         && isset($newborn_menu)
 				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
-            </li>	
+            </li>
 		<?	}?>
         </ul>
 	<?	}else $this_object->widget( 'zii.widgets.CMenu',
@@ -238,26 +238,26 @@ class setHTML{
 	function buildLastArticles(){
 		ob_start();?>
 		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-	
+
 				diam nonumy eirmod tempor invidunt ut labore et dolore magna
-	
+
 				aliquyam erat, sed diam voluptua. At vero eos et accusam et
-	
+
 				justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-	
-				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>        
+
+				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 <?		$articles[]=ob_get_contents();
 		ob_end_clean();
 		ob_start();?>
 		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-	
+
 				diam nonumy eirmod tempor invidunt ut labore et dolore magna
-	
+
 				aliquyam erat, sed diam voluptua. At vero eos et accusam et
-	
+
 				justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-	
-				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>        
+
+				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 <?		$articles[]=ob_get_contents();
 		ob_end_clean();
 		return $articles;
@@ -312,7 +312,7 @@ class setHTML{
 				$img="for_persons";
 				$ready_target="клиентов банка &quot;Открытие&quot;";
 				$all_ready_target="физических лиц";
-			break;			
+			break;
 		}?>
 				<div class="solution_content">
 					<img src="<?=Yii::app()->request->baseUrl?>/images/ready_solutions/<?=$img?>.jpg" width="252" height="143">
@@ -346,7 +346,7 @@ class setHTML{
 	  * @subpackage		menu
 	  *
 	  */
-	function getSubMenuItems($parent_id){ 
+	function getSubMenuItems($parent_id){
 		$model=InsurInsuranceObject::model()->findAll(
 					array('select'=>'id, name, alias',
 							'condition'=>'parent_id = '.$parent_id.' AND status = 1'
@@ -371,7 +371,7 @@ class setHTML{
 			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
 				$old_versions[]=$version[$i];
 			}
-		return (isset($old_versions))? true:false;	
+		return (isset($old_versions))? true:false;
 	}
 	/**
 	  * @package		interface
@@ -401,19 +401,17 @@ class setHTML{
 	  * @subpackage		product
 	  *
 	  */
-	function setPageContent( $this_obj,
-							 $current_page,
-							 $main_header,
+	/*function setPageContent( $this_obj,
+							 $current_page, // current page name
+							 $main_header, // parent section name
 							 $title=false
 							 ){?>
 		<h1><?=$main_header?></h1>
 	<?	$url=explode("/",$_SERVER['REQUEST_URI']);
-		if ( /*isset($_GET['solution'])
-			 || isset($_GET['program'])*/
-			 in_array('Gotovoye_reshenije',$url)
+		if ( in_array('Gotovoye_reshenije',$url)
 			 || in_array('Programa',$url)
 		   ) {
-			
+
 			if (in_array('Gotovoye_reshenije',$url)) {
 				$crumb_chain_text="Готовое решение";
 				$file="readySolution";
@@ -422,18 +420,24 @@ class setHTML{
 				$file="readyProgram";
 			}
 			$product_id=array_pop($url);
+
 			$this_obj->breadcrumbs=array(
-			$current_page=>array('index'),$crumb_chain_text); 
+					$current_page=>array('index'),
+					$crumb_chain_text);
+
 			require_once dirname(__FILE__)."/../../modules/readyProduct/".$file.".php";
-		}else{ 
+		}else{
 			if (!$title) $title=$current_page;
 			$this_obj->pageTitle=Yii::app()->name . ' - '.$title;
+
 			$this_obj->breadcrumbs=array(
 				$current_page,
-			); 
+			);
+
+
 			self::buildCatalogue();
 		}
-	}
+	}*/
 	/**
 	  * @package		content
 	  * @subpackage		product
@@ -445,7 +449,7 @@ class setHTML{
 		}else $solution_name=$params['name'];
 		if (!$params['id']) {
 			$link="#";
-		}else{ 
+		}else{
 			$link=Yii::app()->request->baseUrl."/".Yii::app()->controller->getId()."/Gotovoye_reshenije/".$params['id'];
 		}?>
 	<div class="ready_solution_preview">

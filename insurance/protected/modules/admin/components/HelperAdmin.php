@@ -1,9 +1,54 @@
 <?php
-	class Helper
+	class HelperAdmin
 	{
-		//получить меню из базы
+		//получить многоуровневое меню из базы
 		public static function menuItem(){
-			$obj = InsurInsuranceObject::model()->findAll(array('group'=>'parent_id'));
+			$sql = 'SELECT DISTINCT `main`.`name` AS first_n
+				     , `second`.`name` AS second_n
+				     , `main`.`id` AS first_id
+				     , `second`.`id` AS second_id
+				     , `main`.`parent_id` AS first_pid
+				     , `second`.`parent_id` AS second_pid
+				     , `main`.`alias` AS first_al
+				     , `second`.`alias` AS second_al
+				FROM
+				  insur_insurance_object AS main
+				LEFT JOIN insur_insurance_object AS `second`
+				ON `second`.`parent_id` = `main`.`id`
+				WHERE
+				  `main`.`parent_id` = -1';
+				$res = Yii::app()->db->createCommand($sql)->queryAll();
+				$main = array();
+				foreach ($res as $key=>$val){
+				//первый уровень
+					if(!in_array($val['first_n'],$main)){
+						$main[] = $val['first_n'];
+					}
+					//второй уровень
+					if(in_array($val['first_n'],$res[$key]) ){
+						$temp[]=array('label'=>$val['first_n'],'url'=>array('#'),'items'=>array(($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('#')):null)));
+						$sec[$val['first_n']]['items'][]=($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('#')):null);
+					}
+				/* 	//третий уровень
+					if(in_array($val['second_n'],$res[$key]) && $res[$key]['third_n'] != null){
+						$third[$key][$val['second_n']]=$res[$key]['third_n'];
+					}
+					//Четвёртый уровень
+					if(in_array($val['third_n'],$res[$key]) && $res[$key]['last_n'] != null){
+						$last[$key][$val['third_n']]=$res[$key]['last_n'];
+					} */
+				}
+				foreach ($sec as $k=>$v){
+					foreach ($v as $k_s=>$sub){
+						$items[]=array('label'=>$k,'url'=>array('#'),$k_s=> (count($sub)>1?$sub:null));
+					}
+
+				}
+
+
+/* print_r($items);die; */
+
+			return $items;
 
 		}
 

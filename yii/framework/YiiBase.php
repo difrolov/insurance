@@ -1,3 +1,4 @@
+
 <?php
 /**
  * YiiBase class file.
@@ -393,17 +394,17 @@ class YiiBase
 	public static function autoload($className)
 	{
 		// use include so that the error PHP file may appear
-		if(isset(self::$classMap[$className])){
+		if(isset(self::$classMap[$className]))
 			include(self::$classMap[$className]);
-		}else{ 
-			if(isset(self::$_coreClasses[$className]))
-				include(YII_PATH.self::$_coreClasses[$className]);
-			else{ 
+		else if(isset(self::$_coreClasses[$className]))
+			include(YII_PATH.self::$_coreClasses[$className]);
+		else
+		{
 			// include class file relying on include_path
 			if(strpos($className,'\\')===false)  // class without namespace
-			{	
+			{
 				if(self::$enableIncludePath===false)
-				{	
+				{
 					foreach(self::$_includePaths as $path)
 					{
 						$classFile=$path.DIRECTORY_SEPARATOR.$className.'.php';
@@ -418,12 +419,12 @@ class YiiBase
 							break;
 						}
 					}
-				}else{
-					include($className.'.php');
 				}
+				else
+					include($className.'.php');
 			}
 			else  // class name with namespace in PHP 5.3
-			{	
+			{
 				$namespace=str_replace('\\','.',ltrim($className,'\\'));
 				if(($path=self::getPathOfAlias($namespace))!==false)
 					include($path.'.php');
@@ -431,7 +432,6 @@ class YiiBase
 					return false;
 			}
 			return class_exists($className,false) || interface_exists($className,false);
-		}
 		}
 		return true;
 	}
@@ -854,3 +854,4 @@ class YiiBase
 
 spl_autoload_register(array('YiiBase','autoload'));
 require(YII_PATH.'/base/interfaces.php');
+
