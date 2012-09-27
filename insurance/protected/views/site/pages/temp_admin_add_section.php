@@ -145,13 +145,13 @@ function summarizeTmpl(sbHdrs,force){
 				if (event.srcElement.className.indexOf('Inside')!=-1)
 					placeH="внутренний";
 				else 
-					placeH=(event.srcElement.className.indexOf('Shared')!=-1)? "общий":"без заголовка";
+					placeH=(event.srcElement.className.indexOf('Shared')!=-1)? "общий":"без подзаголовка";
 			}
 		}
 		dHdrsDivs.item(i).style.opacity=(force||event.srcElement==dHdrsDivs.item(i))? 1:0.2;
 	}
 	if (placeH)
-		yourChoice('<br>расположение подзаголовка: '+placeH,'plus');
+		yourChoice(';<br>расположение подзаголовка: '+placeH,'plus');
 }
 function showBlock(tShow,line){
   try{
@@ -183,12 +183,12 @@ function yourChoice(cText,plus){
             <div class="fourColumn" title="Четыре колонки">&nbsp;</div>
         </div>
         <div id="<?="chHeaders"?>" onClick="summarizeTmpl(this);">
-            <div class="hNone4">&nbsp;</div>
-            <div class="fourColumnInside">&nbsp;</div>
-            <div class="fourColumnShared">&nbsp;</div>
+            <div class="hNone4" title="Без подзаголовка">&nbsp;</div>
+            <div class="fourColumnInside" title="Внутренний подзаголовок">&nbsp;</div>
+            <div class="fourColumnShared" title="Общий подзаголовок">&nbsp;</div>
         </div>
     </div>
-    <div id="currentChoice">Вы выбрали: 
+    <div id="currentChoice">Вы выбрали::
     	<span id="your_choice"></span>
         <span id="your_choice2"></span></div>
 </div>
