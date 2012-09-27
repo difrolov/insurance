@@ -4,14 +4,14 @@ var nav=navigator.appName;
 try{	
 	var mMenu=document.getElementById('mainmenu');
 	var ulMenus=document.getElementById('mainmenu').getElementsByTagName('li');
-	var mMenuSecond=document.getElementById('main_submenu');
-	var ulMenusSecond=document.getElementById('main_submenu').getElementsByTagName('li');
+	//var mMenuSecond=document.getElementById('main_submenu');
+	//var ulMenusSecond=document.getElementById('main_submenu').getElementsByTagName('li');
 	
 	var ddMenus=mMenu.getElementsByTagName('div');
-	var ddMenusSecond=mMenuSecond.getElementsByTagName('div');
+	//var ddMenusSecond=mMenuSecond.getElementsByTagName('div');
 	
-	var ulm=new Array(ulMenus,ulMenusSecond);
-	var ddm=new Array(ddMenus,ddMenusSecond);
+	var ulm=new Array(ulMenus/*,ulMenusSecond*/);
+	var ddm=new Array(ddMenus/*,ddMenusSecond*/);
 	
 	for (j=0;j<ddm.length;j++) {
 		for(i=0;i<ddm[j].length;i++){
@@ -43,15 +43,18 @@ var manageDDMenu = function(e) {
 	
 	if ( // li in menu:
 		 ( eventSourceTagName=='li'
-		   && (eventSourceParentParent==mMenu || eventSourceParentParent==mMenuSecond) 
+		   && //(eventSourceParentParent==mMenu || eventSourceParentParent==mMenuSecond) 			
+		   eventSourceParentParent==mMenu
 		 ) 
 		 || // a inside li:
 		 ( eventSourceTagName=='a'
-		   && (eventSourceParentParent.parentNode==mMenu || eventSourceParentParent.parentNode==mMenuSecond)
+		   && //(eventSourceParentParent.parentNode==mMenu || eventSourceParentParent.parentNode==mMenuSecond)
+		   eventSourceParentParent.parentNode==mMenu
 		 ) 
 		 || // drop-down menu:
 		 ( eventSourceTagName=='div'
-		   && (eventSourceParent==mMenu || eventSourceParent==mMenuSecond)
+		   && //(eventSourceParent==mMenu || eventSourceParent==mMenuSecond)
+		   eventSourceParent==mMenu
 		   && eventSource.id.indexOf("ddMenu_")!=-1 )
 	   ) {  
 		// получить объект списка (ul) в меню:
