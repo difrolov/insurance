@@ -1,62 +1,33 @@
 ﻿<?	// add section in backend - temporary file ?>
 <style>
+div#chHeaders{
+<? if(!isset($_GET['test'])){?>	display:none; <? }?>
+}
 div#mng{
 	border:solid 4px #CCCCCC;
 	margin-top:20px;
 	padding-bottom:5px;
 	padding-left:6px;
 }
-div#txtChoice,
-div#txtActions{
-	/*border:solid 1px #FF0000;*/
-	vertical-align:top;
-}
 div#txtChoice div{
-	/*background:#99FF66;*/
 	margin-top:6px;
 }
 div#txtActions >div{
-	/*height:38px;*/
 	line-height:43px;
 }
 div#txtActions >div:first-child{
-	/*background:#FF0;*/
 	padding-top:4px;
 }
-div#txtActions > div:last-child{
-	margin-top:-4px;
-}
 div#txtActions div:last-child,
-div#chHeaders{
-	display:none;
-}
-div#txtActions div{
-	/*background:#CCFF66;*/
-}
 div#txtActions, 
 div#txtChoice,
+div#currentChoice,
 div#txtChoice > div div{
 	display:inline-block;
 }
-div#txtChoice span{
-	margin-right:1px;
-	vertical-align:bottom;
-}
-div#txtChoice >div:first-child span,
-div#chHeaders span{
-	background:#F90;
-	display:inline-block;
-	height:32px;
-}
 div#txtChoice >div div{ /*  */
-	/*background:#00FF00;*/
-	height:32px;
-	width:42px;
-}
-div#txtChoice > div > div span:last-child{
-	margin-right:0 !important;
-}
-div#txtChoice > div > div{
+	height:26px;
+	width:35px;
 	margin:0 0 0 6px;
 }
 div.oneColumn,
@@ -65,22 +36,54 @@ div.threeColumn,
 div.fourColumn,
 div#txtChoice 
 	>div:last-child div {
+	background-image:url(<?php echo Yii::app()->request->baseUrl; ?>/images/admin/add-sectiion.gif);
+	background-repeat:no-repeat;
 	border:solid 3px #999;
+	border-radius:2px;
 	cursor:pointer;
 	padding:2px;
-	position:relative;
 }
-div.oneColumn span{
-	width:41px;
+div.oneColumn{
+	background-position:1px 1px;
 }
-div.twoColumn span{
-	width:18px;
+div.twoColumn{
+	background-position:-37px 1px;
 }
-div.threeColumn span{
-	width:11px;
+div.threeColumn{
+	background-position:-75px 1px;
 }
-div.fourColumn span{
-	width:7px;
+div.fourColumn{
+	background-position:1px -28px;
+}
+div.twoColumnInside{
+	background-position:-37px -28px;
+}
+div.threeColumnInside{
+	background-position:-75px -28px;
+}
+div.threeColumnShared{
+	background-position:1px -57px;
+}
+div.fourColumnInside{
+	background-position:-37px -57px;
+}
+div.fourColumnShared{
+	background-position:-75px -57px;
+}
+div#txtActions > div:last-child{ /*	вверх не переносить, иначе возникнет конфликт отображения блока!*/
+	margin-top:-4px;
+<? if(!isset($_GET['test'])){?>	display:none; <? }?>
+}
+div#currentChoice{
+	background:#CCFFCC;
+	border-radius:2px;
+	display:inline-block;
+	min-height:24px;
+	margin-left:20px;
+	margin-top:8px;
+	opacity:0;
+	padding:6px 10px 6px 8px;
+	vertical-align:top;
 }
 </style>
 <script type="text/javascript">
@@ -95,12 +98,17 @@ function showSubHeadersTbls(par){
 		srce=event.srcElement.parentNode;
 	}
 	if (srce) { //alert(event.srcElement.className);
+		var sHdrs=document.getElementById('chHeaders'); // container
+		var sActs=document.getElementById('txtActions').getElementsByTagName('div').item(1);
+		summarizeTmpl(sHdrs,'force'); 
+		yourChoice('',-1);
+		showBlock('currentChoice','line');
 		var srcePar=par.getElementsByTagName('div');
 		for(i=0;i<srcePar.length;i++){
 			srcePar[i].style.opacity=((srcePar[i]!=srce))? 0.2:1;
 		}
-		var sHdrs=document.getElementById('chHeaders'); // container
-		var sActs=document.getElementById('txtActions').getElementsByTagName('div').item(1);
+		var uChoice;
+		yourChoice('макет: '+srce.title.toLowerCase());
 		if (srce.className!="oneColumn"){
 			sActs.style.display='block';
 			sHdrs.style.display='block';
@@ -108,30 +116,15 @@ function showSubHeadersTbls(par){
 			var curTmpl=false;
 			var spans=false;
 			var hLen=dHdrsDivs.length;
+			var hPlace=new Array('Inside','Shared');
 			for(i=0;i<hLen;i++){
 				curTmpl=dHdrsDivs[i];
 				curTmpl.style.display='inline-block';
 				if ( srce.className=="twoColumn"
 				 	 && i==(hLen-1)
 					) curTmpl.style.display='none';
-				else{
-					curTmpl.className=srce.className;
-					curTmpl.innerHTML=srce.innerHTML;
-					if (spans=curTmpl.getElementsByTagName('span')) {
-						if (i) {
-							for(s=1;s<spans.length;s++) {
-								if (!( i==(hLen-1)
-									   && s==(spans.length-1)
-									 )
-								   ) { 
-								   spans.item(s).style.height='20px';
-								   spans.item(s).style.borderTop='solid 10px red';
-								}
-									//alert('last SPAN');
-							}
-						}
-					}
-				}
+				else
+					curTmpl.className=(i)? srce.className+hPlace[i-1]:srce.className;
 			}
 		}else{
 			sActs.style.display='none';
@@ -142,48 +135,60 @@ function showSubHeadersTbls(par){
 	  alert(e.message);
   }
 }
-function showBlockAdd(tShow){
+function summarizeTmpl(sbHdrs,force){
+	var dHdrsDivs=sbHdrs.getElementsByTagName('div'); // container/div
+	var placeH=false;
+	for(i=0;i<dHdrsDivs.length;i++){
+		if (force||event.srcElement==dHdrsDivs.item(i)){
+			dHdrsDivs.item(i).style.opacity=1;
+			if (event.srcElement==dHdrsDivs.item(i)){
+				if (event.srcElement.className.indexOf('Inside')!=-1)
+					placeH="внутренний";
+				else 
+					placeH=(event.srcElement.className.indexOf('Shared')!=-1)? "общий":"без заголовка";
+			}
+		}
+		dHdrsDivs.item(i).style.opacity=(force||event.srcElement==dHdrsDivs.item(i))? 1:0.2;
+	}
+	if (placeH)
+		yourChoice('<br>расположение подзаголовка: '+placeH,'plus');
+}
+function showBlock(tShow,line){
   try{
-	$('#'+tShow).show('fast');
+	var tObj='#'+tShow;
+	if (line) {
+		$(tObj).animate({opacity:1});
+	}
+	$(tObj).show('fast');
   }catch(e){
 	  alert(e.message);
   }
 }
+function yourChoice(cText,plus){
+	var cID=(plus)? 'your_choice2':'your_choice';
+	document.getElementById(cID).innerHTML=(plus=='-1')? '':cText;
+}
 </script>
-<div align="right"><button onClick="showBlockAdd('mng');">Добавить...</button></div>
+<div align="right"><button onClick="showBlock('mng');">Добавить...</button></div>
 <div id="mng"<? if(!isset($_GET['test'])){?> style="display:<?="none"?>;"<? }?>>
 	<div id="txtActions">
-    	<div>Выберите макет страницы:</div>
-        <div>Выберите тип подзаголовка:</div>
+    	<div>Выберите макет создаваемой страницы:</div>
+        <div>Выберите расположение подзаголовка:</div>
     </div>
     <div id="txtChoice">
     	<div onClick="showSubHeadersTbls(this)">
-            <div class="oneColumn" title="Одна колонка">
-            	<span>&nbsp;</span>
-            </div>
-            <div class="twoColumn" title="Две колонки">
-            	<span>&nbsp;</span>
-            	<span>&nbsp;</span>
-            </div>
-            <div class="threeColumn" title="Три колонки">
-            	<span>&nbsp;</span>
-            	<span>&nbsp;</span>
-            	<span>&nbsp;</span>
-            </div>
-            <div class="fourColumn" title="Четыре колонки">
-            	<span>&nbsp;</span>
-            	<span>&nbsp;</span>
-            	<span>&nbsp;</span>
-            	<span>&nbsp;</span>
-            </div>
+            <div class="oneColumn" title="Одна колонка">&nbsp;</div>
+            <div class="twoColumn" title="Две колонки">&nbsp;</div>
+            <div class="threeColumn" title="Три колонки">&nbsp;</div>
+            <div class="fourColumn" title="Четыре колонки">&nbsp;</div>
         </div>
-        <div id="<?="chHeaders"?>">
-            <div>&nbsp;
-            </div>
-            <div>&nbsp;
-            </div>
-            <div>&nbsp;
-            </div>
+        <div id="<?="chHeaders"?>" onClick="summarizeTmpl(this);">
+            <div class="hNone4">&nbsp;</div>
+            <div class="fourColumnInside">&nbsp;</div>
+            <div class="fourColumnShared">&nbsp;</div>
         </div>
     </div>
+    <div id="currentChoice">Вы выбрали: 
+    	<span id="your_choice"></span>
+        <span id="your_choice2"></span></div>
 </div>
