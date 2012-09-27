@@ -1,0 +1,214 @@
+2012/08/14 22:02:48 [error] [exception.CException] exception 'CException' with message 'Путь CAssetManager.basePath "D:\xampp\htdocs\insur\insurance\assets" задан неверно. Удостоверьтесь, что директория существует и доступна для записи пользователю, под которым запущен веб-сервер.' in D:\xampp\htdocs\insur\yii\framework\web\CAssetManager.php:128
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CAssetManager.php(113): CAssetManager->setBasePath('D:\xampp\htdocs...')
+#1 D:\xampp\htdocs\insur\yii\framework\web\CAssetManager.php(234): CAssetManager->getBasePath()
+#2 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(463): CAssetManager->publish('D:\xampp\htdocs...')
+#3 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(500): CClientScript->getCoreScriptUrl()
+#4 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(316): CClientScript->getPackageBaseUrl('jquery')
+#5 D:\xampp\htdocs\insur\yii\framework\web\CClientScript.php(209): CClientScript->renderCoreScripts()
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(352): CClientScript->render('<!DOCTYPE html ...')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(789): CController->processOutput('<!DOCTYPE html ...')
+#8 D:\xampp\htdocs\insur\insurance\protected\controllers\SiteController.php(72): CController->render('contact', Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionContact()
+#10 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#11 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#12 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('contact')
+#14 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('site/contact')
+#15 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#16 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/insur/insurance/index.php/site/contact
+HTTP_REFERER=http://localhost/insur/insurance/index.php/site/page?view=about
+---
+2012/09/05 00:03:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "users/login".' in D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php:287
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('users/login')
+#1 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/insur/insurance/users/login
+---
+2012/09/05 00:07:09 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Users.Логин".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('??????????')
+#1 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(2158): CActiveRecord->__get('??????????')
+#2 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(1887): CHtml::resolveValue(Object(Users), '??????????')
+#3 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(1217): CHtml::activeInputField('text', Object(Users), '??????????', Array)
+#4 D:\xampp\htdocs\insur\yii\framework\web\widgets\CActiveForm.php(655): CHtml::activeTextField(Object(Users), '??????????', Array)
+#5 D:\xampp\htdocs\insur\insurance\protected\views\user\login.php(13): CActiveForm->textField(Object(Users), '??????????')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(127): require('D:\xampp\htdocs...')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#9 D:\xampp\htdocs\insur\yii\framework\web\CController.php(783): CController->renderPartial('login', Array, true)
+#10 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(40): CController->render('login', Array)
+#11 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#12 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#13 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#14 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#16 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#17 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#18 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/insur/insurance/user/login
+---
+2012/09/05 00:08:13 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Users.rememberMe".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('rememberMe')
+#1 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(2158): CActiveRecord->__get('rememberMe')
+#2 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(1460): CHtml::resolveValue(Object(Users), 'rememberMe')
+#3 D:\xampp\htdocs\insur\yii\framework\web\widgets\CActiveForm.php(745): CHtml::activeCheckBox(Object(Users), 'rememberMe', Array)
+#4 D:\xampp\htdocs\insur\insurance\protected\views\user\login.php(22): CActiveForm->checkBox(Object(Users), 'rememberMe')
+#5 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(127): require('D:\xampp\htdocs...')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(783): CController->renderPartial('login', Array, true)
+#9 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(40): CController->render('login', Array)
+#10 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#11 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#12 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#13 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#15 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#16 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/insur/insurance/user/login
+---
+2012/09/05 00:09:08 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Users.rememberMe".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('rememberMe')
+#1 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(2158): CActiveRecord->__get('rememberMe')
+#2 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(1460): CHtml::resolveValue(Object(Users), 'rememberMe')
+#3 D:\xampp\htdocs\insur\yii\framework\web\widgets\CActiveForm.php(745): CHtml::activeCheckBox(Object(Users), 'rememberMe', Array)
+#4 D:\xampp\htdocs\insur\insurance\protected\views\user\login.php(22): CActiveForm->checkBox(Object(Users), 'rememberMe')
+#5 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(127): require('D:\xampp\htdocs...')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(783): CController->renderPartial('login', Array, true)
+#9 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(40): CController->render('login', Array)
+#10 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#11 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#12 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#13 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#15 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#16 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/insur/insurance/user/login
+---
+2012/09/05 00:09:11 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Users.rememberMe".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('rememberMe')
+#1 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(2158): CActiveRecord->__get('rememberMe')
+#2 D:\xampp\htdocs\insur\yii\framework\web\helpers\CHtml.php(1460): CHtml::resolveValue(Object(Users), 'rememberMe')
+#3 D:\xampp\htdocs\insur\yii\framework\web\widgets\CActiveForm.php(745): CHtml::activeCheckBox(Object(Users), 'rememberMe', Array)
+#4 D:\xampp\htdocs\insur\insurance\protected\views\user\login.php(22): CActiveForm->checkBox(Object(Users), 'rememberMe')
+#5 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(127): require('D:\xampp\htdocs...')
+#6 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#8 D:\xampp\htdocs\insur\yii\framework\web\CController.php(783): CController->renderPartial('login', Array, true)
+#9 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(40): CController->render('login', Array)
+#10 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#11 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#12 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#13 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#15 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#16 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/insur/insurance/user/login
+---
+2012/09/05 00:12:17 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "UserIdentity.login".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 D:\xampp\htdocs\insur\insurance\protected\components\UserIdentity.php(7): CComponent->__get('login')
+#1 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(31): UserIdentity->authenticate()
+#2 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#3 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#7 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#8 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/insur/insurance/user/login
+HTTP_REFERER=http://localhost/insur/insurance/user/login
+---
+2012/09/05 00:20:56 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "CActiveForm.validateOnSubmit".' in D:\xampp\htdocs\insur\yii\framework\base\CComponent.php:174
+Stack trace:
+#0 D:\xampp\htdocs\insur\yii\framework\web\CWidgetFactory.php(162): CComponent->__set('validateOnSubmi...', true)
+#1 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(147): CWidgetFactory->createWidget(Object(UserController), 'CActiveForm', Array)
+#2 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(190): CBaseController->createWidget('CActiveForm', Array)
+#3 D:\xampp\htdocs\insur\insurance\protected\views\user\login.php(8): CBaseController->beginWidget('CActiveForm', Array)
+#4 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(127): require('D:\xampp\htdocs...')
+#5 D:\xampp\htdocs\insur\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#6 D:\xampp\htdocs\insur\yii\framework\web\CController.php(870): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#7 D:\xampp\htdocs\insur\yii\framework\web\CController.php(783): CController->renderPartial('login', Array, true)
+#8 D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php(40): CController->render('login', Array)
+#9 D:\xampp\htdocs\insur\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#10 D:\xampp\htdocs\insur\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#11 D:\xampp\htdocs\insur\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#12 D:\xampp\htdocs\insur\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(283): CController->run('login')
+#14 D:\xampp\htdocs\insur\yii\framework\web\CWebApplication.php(142): CWebApplication->runController('user/login')
+#15 D:\xampp\htdocs\insur\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#16 D:\xampp\htdocs\insur\insurance\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/insur/insurance/user/login
+---
+2012/09/05 00:30:33 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 00:30:38 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 00:33:47 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 00:33:52 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 00:33:55 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 00:34:36 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 00:34:39 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:24:30 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:38:33 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:42:12 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/05 21:42:28 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (47)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/06 00:30:49 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (48)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
+2012/09/06 00:30:52 [warning] [application] Не удалось присвоить небезопасный атрибут "rememberMe" класса "Users".
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (48)
+in D:\xampp\htdocs\insur\insurance\protected\controllers\UserController.php (27)
+in D:\xampp\htdocs\insur\insurance\index.php (13)
