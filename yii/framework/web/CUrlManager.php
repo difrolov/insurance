@@ -797,6 +797,7 @@ class CUrlRule extends CBaseUrlRule
 	 */
 	public function parseUrl($manager,$request,$pathInfo,$rawPathInfo)
 	{
+
 		if($this->verb!==null && !in_array($request->getRequestType(), $this->verb, true))
 			return false;
 
@@ -823,12 +824,14 @@ class CUrlRule extends CBaseUrlRule
 
 		if(preg_match($this->pattern.$case,$pathInfo,$matches))
 		{
+			/* var_dump($this->defaultParams);die; */
 			foreach($this->defaultParams as $name=>$value)
 			{
 				if(!isset($_GET[$name]))
 					$_REQUEST[$name]=$_GET[$name]=$value;
 			}
 			$tr=array();
+
 			foreach($matches as $key=>$value)
 			{
 				if(isset($this->references[$key]))

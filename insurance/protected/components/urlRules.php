@@ -1,12 +1,12 @@
 <?php
-class UrlRules extends CBaseUrlRule
+/* class UrlRules extends CBaseUrlRule
 {
     public $connectionID = 'db';
 
     public function createUrl($manager,$route,$params,$ampersand)
     {
 
-    /* 	parent::createUrl($manager,$route,$params,$ampersand); */
+
     }
 
     public function parseUrl($manager,$request,$pathInfo,$rawPathInfo){
@@ -25,4 +25,4 @@ class UrlRules extends CBaseUrlRule
 
 	}
 
-}
+} */
