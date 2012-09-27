@@ -32,9 +32,14 @@ class ObjectController extends Controller
 				$child_obj['category_id'] = $child->category_id;
 			}
 			//таблица для отображения
-			$gridDataProvider = new CArrayDataProvider(array(
+			/* $gridDataProvider = new CArrayDataProvider(array(
 					$obj,
 					$child_obj
+			)); */
+			$gridDataProvider = new CArrayDataProvider(array(
+					array('id'=>1, 'firstName'=>'Mark', 'lastName'=>'Otto', 'language'=>'CSS'),
+					array('id'=>2, 'firstName'=>'Jacob', 'lastName'=>'Thornton', 'language'=>'JavaScript'),
+					array('id'=>3, 'firstName'=>'Stu', 'lastName'=>'Dent', 'language'=>'HTML'),
 			));
 			$this->render('getobject',array('obj'=>$obj,'child_obj'=>$child_obj,'gridDataProvider'=>$gridDataProvider));
 		}

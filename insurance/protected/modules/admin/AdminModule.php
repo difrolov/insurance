@@ -3,6 +3,7 @@
 class AdminModule extends CWebModule
 {
 	private $_config = array();
+	public $bootstrap;
 	public function init()
 	{
 		$config = require dirname(__FILE__).DIRECTORY_SEPARATOR.'config/main.php';
