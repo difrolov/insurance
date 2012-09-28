@@ -9,7 +9,8 @@ return CMap::mergeArray(
 			),
 			'components'=>array(
 				'bootstrap'=>array(
-					'class'=>'application.ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
+					'class'=>'application.extensions.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
+					'coreCss'=>true,
 				),
 			),
 			'modules'=>array(

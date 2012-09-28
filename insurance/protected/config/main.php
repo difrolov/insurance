@@ -83,10 +83,10 @@ return array(
 				'class'=>'PhpAuthManager',
 				'defaultRoles'=>array('guest'),
 		),
-		 'bootstrap'=>array(
+		'bootstrap'=>array(
 				'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
+				'coreCss'=>false,
 		),
-
 		/* 'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		), */
