@@ -78,7 +78,7 @@ class InsurInsuranceObject extends CActiveRecord
 			'name' => 'Имя',
 			'status' => 'Status',
 			'parent_id' => 'Parent',
-			'action' => 'Action',
+			'alias' => 'адрес',
 			'category_id' => 'Category',
 			'date_changes' => 'Date Changes',
 		);
@@ -88,18 +88,21 @@ class InsurInsuranceObject extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($params = false)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		if($params){
+			$criteria->condition = $params;
+		}
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('status',$this->status);
+		/* $criteria->compare('status',$this->status);*/
 		$criteria->compare('parent_id',$this->parent_id);
-		$criteria->compare('action',$this->action,true);
+		$criteria->compare('alias',$this->alias,true);
 		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('date_changes',$this->date_changes,true);
 

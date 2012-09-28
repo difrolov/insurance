@@ -2,6 +2,8 @@
 
 class ObjectController extends Controller
 {
+	public $layout = "application.modules.admin.views.layouts.admin";
+
 	public function actionIndex()
 	{
 		$this->render('index');
@@ -36,11 +38,9 @@ class ObjectController extends Controller
 					$obj,
 					$child_obj
 			)); */
-			$gridDataProvider = new CArrayDataProvider(array(
-					array('id'=>1, 'firstName'=>'Mark', 'lastName'=>'Otto', 'language'=>'CSS'),
-					array('id'=>2, 'firstName'=>'Jacob', 'lastName'=>'Thornton', 'language'=>'JavaScript'),
-					array('id'=>3, 'firstName'=>'Stu', 'lastName'=>'Dent', 'language'=>'HTML'),
-			));
+			$model = new InsurInsuranceObject();
+			/* var_dump($model->search('id='.$_GET['id'].' OR parent_id='.$_GET['id'])); */
+			$gridDataProvider = $model->search('id='.$_GET['id'].' OR parent_id='.$_GET['id']);
 			$this->render('getobject',array('obj'=>$obj,'child_obj'=>$child_obj,'gridDataProvider'=>$gridDataProvider));
 		}
 	}
