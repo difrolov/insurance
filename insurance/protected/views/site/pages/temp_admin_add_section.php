@@ -354,7 +354,8 @@ function showBlock(tShow,line){
   }
 }
 // разместить и отобразить информацию о выборе юзера:
-function displayUserChoice(pyctosContainer){ document.title="id: "+pyctosContainer.id;
+function displayUserChoice(pyctosContainer){ 
+  try{
 	var userInfo;
 	var sText=new Array( new Array('tmplColSet','количество колонок'),
 						 new Array('chHeaders','расположение подзаголовка'),
@@ -372,8 +373,12 @@ function displayUserChoice(pyctosContainer){ document.title="id: "+pyctosContain
 				}
 			}
 			sBlocks.item(i).innerHTML='&bull; '+sText[i][1]+': '+currentPicTitle;
+			if (sBlocks.item(i+1)) sBlocks.item(i+1).innerHTML='';
 		}
 	}
+  }catch(e){
+	  alert(e.message);
+  }
 }
 function readyToLoadTmpl(){
 	document.getElementById('loadTemplate').style.display="block";
