@@ -145,7 +145,7 @@ function defineTemplateScheme(pyctosContainer){ // pyctosContainer - родит�
 		handlePyctos(srce);
 		// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
 		// указать параметры текущего выбора
-		setCurrentChoiceStatus(currentPyctosContainer);  
+		setCurrentChoiceStatus(currentPyctosContainer);
 	}
   }catch(e){
 	  alert(e.message);
@@ -167,6 +167,8 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 }
 // обработать блоки с пиктограммами:
 function handlePyctos(srce) { // источник события
+	var titleFooterInside="Внутренний псевдофутер";
+	var titleFooterShared="Общий псевдофутер";
 	// блоки "Выберите расположение...":
 	var divsToPick=document.getElementById('txtActions').getElementsByTagName('div');
 	// установить следующий блок для отображения при клике на пиктограмме текущего блока:
@@ -177,7 +179,8 @@ function handlePyctos(srce) { // источник события
 	var divPyctosFooter=document.getElementById('psFooter');
 	// подставить для отображения блоки (текст "Выберите...", пиктограммы схемы) следующего уровня:
 	switch(srce.parentNode.id){
-		case "tmplColSet": // родительским блоком источника события является блок первого уровня
+		// КЛАЦАЛИ ПО ПИКТОГРАММАМ ПЕРВОГО БЛОКА:
+		case "tmplColSet": 
 			// отобразить блоки следующего уровня, назначить класс первой пиктограмме
 			pyctosNextBlock=startHandleBlock(srce,blockTextToShowSubheader,divPyctosSubheader);
 			// сбросить видимость блоков третьего уровня:
@@ -188,14 +191,11 @@ function handlePyctos(srce) { // источник события
 			// 
 			switch(srce.className){ // определим источник события по его классу
 				// блоки первого уровня:
-					// инициализировать значение схемы (tmplScheme[0])
 				case "oneColumn":
-					tmplScheme='100';
 					// сбросить видимость блока второго уровня:
 					blockTextToShowSubheader.style.display=divPyctosSubheader.style.display="none";
 				break;
 				case "twoColumn":	// 2 колонки
-					tmplScheme='2';
 					// назначить класс блоку со 2-й пиктограммой:
 					pyctosNextBlock.item(1).className="twoColumnSubheader";
 					// спрятать последнюю пиктограмму, т.к. для 2-х колонок она не нужна:
@@ -206,10 +206,10 @@ function handlePyctos(srce) { // источник события
 					pyctosNextBlock.item(2).className=srce.className+"Shared";
 					// отобразить последнюю пиктограмму:
 					pyctosNextBlock.item(2).style.display="inline-block";
-					tmplScheme=(srce.className=="threeColumn")? '3':'4';
 				break;
 			}
 		break;
+		// КЛАЦАЛИ ПО ПИКТОГРАММАМ ВТОРОГО БЛОКА:
 		case "chHeaders": // родительским блоком источника события является блок второго уровня
 			// сделать все пиктограммы последнего блока непрозрачными:
 			dropPyctosOpacity(divPyctosFooter);
@@ -221,6 +221,7 @@ function handlePyctos(srce) { // источник события
 					// колич. колонок (3 или 4):
 				if (srce.className.indexOf("three")!=-1) { // 3 колонки
 					pyctosNextBlock.item(2).style.display="none"; // т.к. не нужна
+					pyctosNextBlock.item(1).title=titleFooterShared;
 					switch(srce.className){
 						// pyctosNextBlock.item(0).className уже установлен
 						case "threeColumn":
@@ -229,7 +230,6 @@ function handlePyctos(srce) { // источник события
 						case "threeColumnInside":
 							// сбросить видимость блоков третьего уровня, т.к. для данного варианта псевдофутер не предусмотрен:
 							blockTextToShowFooter.style.display=divPyctosFooter.style.display="none";
-							tmplScheme+="i0";
 						break;
 						case "threeColumnShared":
 							pyctosNextBlock.item(1).className="ThreeSharedShared"; // нет подзаголовка
@@ -244,19 +244,21 @@ function handlePyctos(srce) { // источник события
 							pyctosNextBlock.item(2).style.display="inline-block"; 
 							pyctosNextBlock.item(1).className="FourNoneInside";
 							pyctosNextBlock.item(2).className="FourNoneShared";
+							pyctosNextBlock.item(1).title=titleFooterInside;
+							pyctosNextBlock.item(2).title=titleFooterShared;
 						break;
 						case "fourColumnInside":
+							pyctosNextBlock.item(2).style.display="none";
 							pyctosNextBlock.item(1).className="FourInsideInside";
+							pyctosNextBlock.item(1).title=titleFooterInside;
 						break;
 						case "fourColumnShared":
 							pyctosNextBlock.item(1).className="FourSharedShared";
-							tmplScheme+="";
+							pyctosNextBlock.item(2).style.display="none"; // т.к. не нужна
+							pyctosNextBlock.item(1).title=titleFooterShared;
 						break;
 					}
 				}
-			}else{ // для 2-х колоног
-				tmplScheme+=(srce.className=="twoColumnInside")? "1":"0"; // установить значение подзаголовка
-				tmplScheme+="0"; // псевдофутер отсутствует в любом случае
 			}
 		break;
 	}
@@ -336,8 +338,8 @@ function displayUserChoice(pyctosContainer){
         </div>
         <div id="<?="psFooter"?>">
             <div title="Без псевдофутера">&nbsp;</div>
-        	<div title="Внутренний псевдофутер">&nbsp;</div>
-        	<div title="Общий псевдофутер">&nbsp;</div>
+        	<div>&nbsp;</div>
+        	<div>&nbsp;</div>
         </div>
     </div>
     <div id="currentChoice">Вы выбрали::
@@ -346,3 +348,4 @@ function displayUserChoice(pyctosContainer){
         <span id="selectedFooterPlacement"></span>
     </div>
 </div>
+<div id="cTmpl"></div>
