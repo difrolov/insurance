@@ -158,15 +158,46 @@ function defineTemplateScheme(pyctosContainer){ // pyctosContainer - родит�
 		// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
 		// указать параметры текущего выбора
 		setCurrentChoiceStatus(currentPyctosContainer);
-		var tmplHTML=document.getElementById('tmpl_scheme');
-		tmplHTML.innerHTML='tmpl: '+tmplLevel1;
-		if (tmplLevel2) tmplHTML.innerHTML+=tmplLevel2;
-		if (tmplLevel3) tmplHTML.innerHTML+=tmplLevel3;
+		// проверить - допускает ли текущее состояние макета его загрузку:
+		checkReadyTemplate();
 	}
   }catch(e){
 	  alert(e.message);
   }
 }
+//проверить - допускает ли текущее состояние макета его загрузку
+function checkReadyTemplate(){
+	// родительский блок для всех уровней:
+	var bLevels=document.getElementById('txtChoice').getElementsByTagName('div');
+	for(i=bLevels;i>0;i--) {
+		var cLevel=bLevels.item(i).getElementsByTagName('div');
+		// блоки внутри уровня:
+		var cnt=0;
+		for (j=0;j<cLevel.length;j++) {
+			// посчитать неотмеченные пиктограммы:
+			if (cLevel.item(j).style.opacity==1) cnt++;
+		}
+		if (cnt==cLevel.length){
+			alert('Not ready yet!');
+			return false; // not ready
+		}
+	}
+	var rScheme;
+	var tmplHTML=document.getElementById('tmpl_scheme');
+	tmplHTML.innerHTML='tmpl: '+tmplLevel1;
+	
+	rScheme=tmplLevel1;
+	if (tmplLevel2) {
+		rScheme+=tmplLevel2;
+		tmplHTML.innerHTML+=tmplLevel2;
+	}
+	if (tmplLevel3) {
+		rScheme+=tmplLevel3;
+		tmplHTML.innerHTML+=tmplLevel3;
+	}
+	readyToLoadTmpl();
+	return rScheme;
+} 
 // сделать все пиктограммы непрозрачными
 function dropPyctosOpacity(divPyctos){ 
 	var pyctos=divPyctos.getElementsByTagName('div');
