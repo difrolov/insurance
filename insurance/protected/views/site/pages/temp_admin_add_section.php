@@ -1,5 +1,9 @@
 ﻿<?	// add section in backend - temporary file ?>
 <style>
+button#loadTemplate{
+	display:none;
+	margin:10px 0;
+}
 div#chHeaders,
 div#psFooter{
 <? if(!isset($_GET['test'])){?>	display:none; <? }?>
@@ -26,6 +30,9 @@ div#currentChoice,
 div#txtChoice > div div{
 	display:inline-block;
 }
+div#currentChoice span{
+	display:block;
+}
 div#txtChoice >div div{ /*  */
 	height:26px;
 	width:35px;
@@ -46,22 +53,22 @@ div#txtChoice
 	cursor:pointer;
 	padding:2px;
 }
-div.ThreeNoneShared{
+div.threeNoneShared{
 	background-position:1px -115px;
 }
-div.ThreeSharedShared{
+div.threeSharedShared{
 	background-position:1px -86px;
 }
-div.FourNoneInside{
+div.fourNoneInside{
 	background-position:-37px -115px;
 }
-div.FourNoneShared{
+div.fourNoneShared{
 	background-position:-74px -115px;
 }
-div.FourInsideInside{
+div.fourInsideInside{
 	background-position:-37px -86px;
 }
-div.FourSharedShared{
+div.fourSharedShared{
 	background-position:-75px -86px !important;
 }
 div.oneColumn{
@@ -106,6 +113,7 @@ div#currentChoice{
 	opacity:0;
 	padding:6px 10px 6px 8px;
 	vertical-align:top;
+	width:40%;
 }
 </style>
 <script type="text/javascript">
@@ -116,6 +124,10 @@ tmplScheme=false; // пер. сохранения схемы выбранног�
 	tmplScheme[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
 	Внимание! Тип псевдофутера 1 отсутствует, т.к. не может быть пседвофутера для количества колонок, меньше 3. В этом случае роль псевдофутера может выполнять любой добавляемый модуль.
 */
+// составляющие макета:
+tmplLevel1=false;
+tmplLevel2=false;
+tmplLevel3=false;
 // подготовить схему макета, выбрав пиктограммы для: 
 // * количества колонок
 // * наличия и расположения подзаголовка
@@ -146,6 +158,10 @@ function defineTemplateScheme(pyctosContainer){ // pyctosContainer - родит�
 		// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
 		// указать параметры текущего выбора
 		setCurrentChoiceStatus(currentPyctosContainer);
+		var tmplHTML=document.getElementById('tmpl_scheme');
+		tmplHTML.innerHTML='tmpl: '+tmplLevel1;
+		if (tmplLevel2) tmplHTML.innerHTML+=tmplLevel2;
+		if (tmplLevel3) tmplHTML.innerHTML+=tmplLevel3;
 	}
   }catch(e){
 	  alert(e.message);
@@ -194,20 +210,24 @@ function handlePyctos(srce) { // источник события
 				case "oneColumn":
 					// сбросить видимость блока второго уровня:
 					blockTextToShowSubheader.style.display=divPyctosSubheader.style.display="none";
+					tmplLevel1=1;
 				break;
 				case "twoColumn":	// 2 колонки
 					// назначить класс блоку со 2-й пиктограммой:
 					pyctosNextBlock.item(1).className="twoColumnSubheader";
 					// спрятать последнюю пиктограмму, т.к. для 2-х колонок она не нужна:
 					pyctosNextBlock.item(2).style.display="none";
+					tmplLevel1=2;
 				break;
 				case "threeColumn":case "fourColumn": // 3, 4 колонки
 					pyctosNextBlock.item(1).className=srce.className+"Inside";
 					pyctosNextBlock.item(2).className=srce.className+"Shared";
 					// отобразить последнюю пиктограмму:
 					pyctosNextBlock.item(2).style.display="inline-block";
+					tmplLevel1=(srce.className=="threeColumn")? "3":"4";
 				break;
 			}
+			tmplLevel2=false;
 		break;
 		// КЛАЦАЛИ ПО ПИКТОГРАММАМ ВТОРОГО БЛОКА:
 		case "chHeaders": // родительским блоком источника события является блок второго уровня
@@ -225,14 +245,17 @@ function handlePyctos(srce) { // источник события
 					switch(srce.className){
 						// pyctosNextBlock.item(0).className уже установлен
 						case "threeColumn":
-							pyctosNextBlock.item(1).className="ThreeNoneShared"; // нет подзаголовка
+							pyctosNextBlock.item(1).className="threeNoneShared"; // нет подзаголовка
+							tmplLevel2='0';
 						break;
 						case "threeColumnInside":
 							// сбросить видимость блоков третьего уровня, т.к. для данного варианта псевдофутер не предусмотрен:
 							blockTextToShowFooter.style.display=divPyctosFooter.style.display="none";
+							tmplLevel2='i';
 						break;
 						case "threeColumnShared":
-							pyctosNextBlock.item(1).className="ThreeSharedShared"; // нет подзаголовка
+							pyctosNextBlock.item(1).className="threeSharedShared"; // нет подзаголовка
+							tmplLevel2='s';
 						break;
 					}					
 				}else{ // 4 колонки
@@ -242,23 +265,53 @@ function handlePyctos(srce) { // источник события
 						case "fourColumn":
 							// вернуть видимость последней пиктограмме:
 							pyctosNextBlock.item(2).style.display="inline-block"; 
-							pyctosNextBlock.item(1).className="FourNoneInside";
-							pyctosNextBlock.item(2).className="FourNoneShared";
+							pyctosNextBlock.item(1).className="fourNoneInside";
+							pyctosNextBlock.item(2).className="fourNoneShared";
 							pyctosNextBlock.item(1).title=titleFooterInside;
 							pyctosNextBlock.item(2).title=titleFooterShared;
+							tmplLevel2='0';
 						break;
 						case "fourColumnInside":
 							pyctosNextBlock.item(2).style.display="none";
-							pyctosNextBlock.item(1).className="FourInsideInside";
+							pyctosNextBlock.item(1).className="fourInsideInside";
 							pyctosNextBlock.item(1).title=titleFooterInside;
+							tmplLevel2='i';
 						break;
 						case "fourColumnShared":
-							pyctosNextBlock.item(1).className="FourSharedShared";
+							pyctosNextBlock.item(1).className="fourSharedShared";
 							pyctosNextBlock.item(2).style.display="none"; // т.к. не нужна
 							pyctosNextBlock.item(1).title=titleFooterShared;
+							tmplLevel2='s';
 						break;
 					}
 				}
+			}else{
+				tmplLevel2=(srce.className=="twoColumnSubheader")? '1':'0';
+			}
+			tmplLevel3=false;
+		break;
+		// КЛАЦАЛИ ПО ПИКТОГРАММАМ ТРЕТЬЕГО БЛОКА: 
+		case "psFooter":
+			switch(srce.className){
+				case "threeColumn":
+				case "fourColumn":
+				case "fourColumnInside":
+				case "threeColumnShared":
+				case "fourColumnShared":
+					tmplLevel3='0';
+				break;
+
+				case "threeNoneShared":
+				case "threeSharedShared":
+				case "fourNoneShared":
+				case "fourSharedShared":
+					tmplLevel3='s';
+				break;
+				
+				case "fourNoneInside":
+				case "fourInsideInside":
+					tmplLevel3='i';
+				break;
 			}
 		break;
 	}
@@ -301,20 +354,29 @@ function showBlock(tShow,line){
   }
 }
 // разместить и отобразить информацию о выборе юзера:
-function displayUserChoice(pyctosContainer){
-	switch(pyctosContainer.id){
-		case "tmplColSet":
-		
-		break;
-		case "chHeaders":
-		
-		break;
-		case "psFooter":
-		
-		break;	
+function displayUserChoice(pyctosContainer){ document.title="id: "+pyctosContainer.id;
+	var userInfo;
+	var sText=new Array( new Array('tmplColSet','количество колонок'),
+						 new Array('chHeaders','расположение подзаголовка'),
+						 new Array('psFooter','расположение псевдофутера')
+					   );		
+ 	var sBlocks=document.getElementById('currentChoice').getElementsByTagName('span');
+	var currentPicTitle;
+	for (i=0;i<sText.length;i++){
+		if (pyctosContainer.id==sText[i][0]) {
+			var pBlocks=document.getElementById(pyctosContainer.id).getElementsByTagName('div');
+			for (j=0;j<pBlocks.length;j++){
+				if (pBlocks.item(j).style.opacity==1) {
+					currentPicTitle=pBlocks.item(j).title.toLowerCase();
+					break;
+				}
+			}
+			sBlocks.item(i).innerHTML='&bull; '+sText[i][1]+': '+currentPicTitle;
+		}
 	}
-	//var cID=(plus)? 'selectedSubheaderPlacement':'selectedColumnsSet';
-	//document.getElementById(cID).innerHTML=(plus=='-1')? '':cText;
+}
+function readyToLoadTmpl(){
+	document.getElementById('loadTemplate').style.display="block";
 }
 </script>
 <div align="right"><button onClick="showBlock('mng');">Добавить...</button></div>
@@ -342,10 +404,11 @@ function displayUserChoice(pyctosContainer){
         	<div>&nbsp;</div>
         </div>
     </div>
-    <div id="currentChoice">Вы выбрали::
+    <div id="currentChoice">Вы выбрали следующие параметры макета:
     	<span id="selectedColumnsSet"></span>
         <span id="selectedSubheaderPlacement"></span>
         <span id="selectedFooterPlacement"></span>
     </div>
 </div>
-<div id="cTmpl"></div>
+<div id="tmpl_scheme"></div>
+<button id="loadTemplate">Загрузить макет</button>
