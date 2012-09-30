@@ -124,10 +124,6 @@ tmplScheme=false; // пер. сохранения схемы выбранног�
 	tmplScheme[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
 	Внимание! Тип псевдофутера 1 отсутствует, т.к. не может быть пседвофутера для количества колонок, меньше 3. В этом случае роль псевдофутера может выполнять любой добавляемый модуль.
 */
-// составляющие макета:
-tmplLevel1=false;
-tmplLevel2=false;
-tmplLevel3=false;
 // подготовить схему макета, выбрав пиктограммы для: 
 // * количества колонок
 // * наличия и расположения подзаголовка
@@ -171,44 +167,124 @@ function checkTemplateReady(){
 	// родительский блок для всех уровней:
 	var bLevels=document.getElementById('txtChoice').getElementsByTagName('div');
 	//alert(i); 
-	var testBlock=document.getElementById('test');
-	testBlock.innerHTML='';
 	var levelsArray=getLevelsArray();
 	var dLevel;
 	var opCount=0;
+	var levelStop=false;
+	var selIndex=false;
+	var selElementClassName=false;
 	// будем искать уже выбранные варианты, начиная с самого нижнего блока. Как только найдём первый, значит - можно загружать макет!
+	var testBlock=document.getElementById('test');
+	testBlock.innerHTML='';
 	for (i=levelsArray.length-1;i>=0;i--){
 		dLevel=document.getElementById(levelsArray[i][0]);
-		if (dLevel.style.display=='block'){
+		if ( dLevel.style.display=='block'
+			 || i==0 // самый первый уровень
+		   ){
 			opCount=$(dLevel).find("div[style*='opacity: 0.2']").length;
 			if (opCount>0){
-				//alert('Selected in '+dLevel.id+': '+opCount);
+				// получим уровень блока:
+				levelStop=i+1;
+				// получим класс отмеченной пиктограммы:
+				selElementClassName=$(dLevel).find("div[style*='opacity: 1']")[0].className;
+				tmplScheme=getScheme(selElementClassName);
+				tmplScheme=tmplScheme.toString();
+				switch(levelStop){
+					// уровень 1
+					case "1":
+						tmplScheme+='00';
+					break;
+					// уровень 2
+					case "2":
+						if (selElementClassName.indexOf('Subheader')!=-1)
+							tmplScheme+='1';	
+						else{ // twoColumn, threeColumn, fourColumn
+							if ( selElementClassName.indexOf('Shared')==-1
+							     && selElementClassName.indexOf('Inside')==-1
+							   ) tmplScheme+='0';
+							else
+								tmplScheme+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i'; 
+						}
+						tmplScheme+='0';
+						/*switch(selElementClassName){
+							// 2
+							case "twoColumn":
+								tmplScheme='';	
+							break;
+							case "twoColumnSubheader":
+								tmplScheme='';	
+							break;
+							// 3
+							case "threeColumn":
+								tmplScheme='';	
+							break;
+							case "threeColumnInside":
+								tmplScheme='';	
+							break;
+							case "threeColumnShared":
+								tmplScheme='';	
+							break;
+							// 4
+							case "fourColumn":
+								tmplScheme='';	
+							break;
+							case "fourColumnInside":
+								tmplScheme='';	
+							break;
+							case "fourColumnShared":
+								tmplScheme='';	
+							break;
+						}*/
+						
+					break;
+					// уровень 3
+					case "3":
+						// threeColumn
+						// fourColumn
+						if ( selElementClassName.indexOf('Shared')==-1
+							     && selElementClassName.indexOf('Inside')==-1
+							   ) tmplScheme+='00';
+						else{
+							// threeSharedShared
+							// fourSharedShared
+							if (selElementClassName.indexOf('SharedShared')!=-1)
+								tmplScheme+='ss';
+							else{
+								// fourInsideInside
+								if (selElementClassName.indexOf('InsideInside')!=-1)
+									tmplScheme+='ii';
+								else{
+									// fourColumnInside
+									if (selElementClassName.indexOf('ColumnInside')!=-1)
+										tmplScheme+='i0';
+									else{
+										// threeColumnShared
+										// fourColumnShared
+										if (selElementClassName.indexOf('ColumnShared')!=-1)
+											tmplScheme+='is';
+										// threeNoneShared
+										// fourNoneShared
+										// fourNoneInside
+										else if (selElementClassName.indexOf('None')!=-1) {
+											tmplScheme+='0';
+											tmplScheme+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i';
+										}
+									}
+								}
+							}
+						}
+					break;
+				}
+				testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplScheme: '+tmplScheme;
 				break;
 			}
 		}
 	}
-	var rScheme;
-	var tmplHTML=document.getElementById('tmpl_scheme');
-	tmplHTML.innerHTML='tmpl: '+tmplLevel1;
-	
-	rScheme=tmplLevel1;
-	if (tmplLevel2) {
-		rScheme+=tmplLevel2;
-		tmplHTML.innerHTML+=tmplLevel2;
-	}
-	if (tmplLevel3) {
-		rScheme+=tmplLevel3;
-		tmplHTML.innerHTML+=tmplLevel3;
-	}
-	readyToLoadTmpl();
-	return rScheme;
+	return true;
 } 
 // сделать все пиктограммы непрозрачными
 function dropPyctosOpacity(divPyctos){ 
 	$(divPyctos).find('div').css('opacity','1');
-	//var pyctos=divPyctos.getElementsByTagName('div');
-	//for(i=0;i<pyctos.length;i++)
-		//pyctos.item(i).style.opacity=1;
 }
 // отобразить блоки следующего уровня, назначить класс первой пиктограмме
 function startHandleBlock( srce,blockTextToShow,divPyctos){
@@ -217,6 +293,15 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 	blockTextToShow.style.display=divPyctos.style.display="block";
 	pyctosNextBlock.item(0).className=srce.className;
 	return pyctosNextBlock;			
+}
+//
+function getScheme(pyctClassName){
+	var columns=new Array('two','three','four');
+	for (i=0;i<columns.length;i++){
+		if (pyctClassName.indexOf(columns[i])!=-1){
+			return i+1;
+		}
+	}
 }
 // обработать блоки с пиктограммами:
 function handlePyctos(srce) { // источник события
@@ -247,24 +332,20 @@ function handlePyctos(srce) { // источник события
 				case "oneColumn":
 					// сбросить видимость блока второго уровня:
 					blockTextToShowSubheader.style.display=divPyctosSubheader.style.display="none";
-					tmplLevel1=1;
 				break;
 				case "twoColumn":	// 2 колонки
 					// назначить класс блоку со 2-й пиктограммой:
 					pyctosNextBlock.item(1).className="twoColumnSubheader";
 					// спрятать последнюю пиктограмму, т.к. для 2-х колонок она не нужна:
 					pyctosNextBlock.item(2).style.display="none";
-					tmplLevel1=2;
 				break;
 				case "threeColumn":case "fourColumn": // 3, 4 колонки
 					pyctosNextBlock.item(1).className=srce.className+"Inside";
 					pyctosNextBlock.item(2).className=srce.className+"Shared";
 					// отобразить последнюю пиктограмму:
 					pyctosNextBlock.item(2).style.display="inline-block";
-					tmplLevel1=(srce.className=="threeColumn")? "3":"4";
 				break;
 			}
-			tmplLevel2=false;
 		break;
 		// КЛАЦАЛИ ПО ПИКТОГРАММАМ ВТОРОГО БЛОКА:
 		case "chHeaders": // родительским блоком источника события является блок второго уровня
@@ -283,16 +364,13 @@ function handlePyctos(srce) { // источник события
 						// pyctosNextBlock.item(0).className уже установлен
 						case "threeColumn":
 							pyctosNextBlock.item(1).className="threeNoneShared"; // нет подзаголовка
-							tmplLevel2='0';
 						break;
 						case "threeColumnInside":
 							// сбросить видимость блоков третьего уровня, т.к. для данного варианта псевдофутер не предусмотрен:
 							blockTextToShowFooter.style.display=divPyctosFooter.style.display="none";
-							tmplLevel2='i';
 						break;
 						case "threeColumnShared":
 							pyctosNextBlock.item(1).className="threeSharedShared"; // нет подзаголовка
-							tmplLevel2='s';
 						break;
 					}					
 				}else{ // 4 колонки
@@ -306,49 +384,19 @@ function handlePyctos(srce) { // источник события
 							pyctosNextBlock.item(2).className="fourNoneShared";
 							pyctosNextBlock.item(1).title=titleFooterInside;
 							pyctosNextBlock.item(2).title=titleFooterShared;
-							tmplLevel2='0';
 						break;
 						case "fourColumnInside":
 							pyctosNextBlock.item(2).style.display="none";
 							pyctosNextBlock.item(1).className="fourInsideInside";
 							pyctosNextBlock.item(1).title=titleFooterInside;
-							tmplLevel2='i';
 						break;
 						case "fourColumnShared":
 							pyctosNextBlock.item(1).className="fourSharedShared";
 							pyctosNextBlock.item(2).style.display="none"; // т.к. не нужна
 							pyctosNextBlock.item(1).title=titleFooterShared;
-							tmplLevel2='s';
 						break;
 					}
 				}
-			}else{
-				tmplLevel2=(srce.className=="twoColumnSubheader")? '1':'0';
-			}
-			tmplLevel3=false;
-		break;
-		// КЛАЦАЛИ ПО ПИКТОГРАММАМ ТРЕТЬЕГО БЛОКА: 
-		case "psFooter":
-			switch(srce.className){
-				case "threeColumn":
-				case "fourColumn":
-				case "fourColumnInside":
-				case "threeColumnShared":
-				case "fourColumnShared":
-					tmplLevel3='0';
-				break;
-
-				case "threeNoneShared":
-				case "threeSharedShared":
-				case "fourNoneShared":
-				case "fourSharedShared":
-					tmplLevel3='s';
-				break;
-				
-				case "fourNoneInside":
-				case "fourInsideInside":
-					tmplLevel3='i';
-				break;
 			}
 		break;
 	}
@@ -457,5 +505,5 @@ function readyToLoadTmpl(){
     </div>
 </div>
 <div id="tmpl_scheme"></div>
-<div id="test"></div>
+<div id="test">test block</div>
 <button id="loadTemplate">Загрузить макет</button>
