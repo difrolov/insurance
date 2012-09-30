@@ -191,11 +191,11 @@ function checkTemplateReady(){
 				tmplScheme=tmplScheme.toString();
 				switch(levelStop){
 					// уровень 1
-					case "1":
+					case 1:
 						tmplScheme+='00';
 					break;
 					// уровень 2
-					case "2":
+					case 2:
 						if (selElementClassName.indexOf('Subheader')!=-1)
 							tmplScheme+='1';	
 						else{ // twoColumn, threeColumn, fourColumn
@@ -206,39 +206,9 @@ function checkTemplateReady(){
 								tmplScheme+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i'; 
 						}
 						tmplScheme+='0';
-						/*switch(selElementClassName){
-							// 2
-							case "twoColumn":
-								tmplScheme='';	
-							break;
-							case "twoColumnSubheader":
-								tmplScheme='';	
-							break;
-							// 3
-							case "threeColumn":
-								tmplScheme='';	
-							break;
-							case "threeColumnInside":
-								tmplScheme='';	
-							break;
-							case "threeColumnShared":
-								tmplScheme='';	
-							break;
-							// 4
-							case "fourColumn":
-								tmplScheme='';	
-							break;
-							case "fourColumnInside":
-								tmplScheme='';	
-							break;
-							case "fourColumnShared":
-								tmplScheme='';	
-							break;
-						}*/
-						
 					break;
 					// уровень 3
-					case "3":
+					case 3: 
 						// threeColumn
 						// fourColumn
 						if ( selElementClassName.indexOf('Shared')==-1
@@ -261,11 +231,11 @@ function checkTemplateReady(){
 										// threeColumnShared
 										// fourColumnShared
 										if (selElementClassName.indexOf('ColumnShared')!=-1)
-											tmplScheme+='is';
+											tmplScheme+='s0';
 										// threeNoneShared
 										// fourNoneShared
 										// fourNoneInside
-										else if (selElementClassName.indexOf('None')!=-1) {
+										else if (selElementClassName.indexOf('None')!=-1) { 
 											tmplScheme+='0';
 											tmplScheme+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i';
 										}
@@ -294,11 +264,13 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 	pyctosNextBlock.item(0).className=srce.className;
 	return pyctosNextBlock;			
 }
-//
+// получить начальное значение схемы макета
 function getScheme(pyctClassName){
-	var columns=new Array('two','three','four');
+	var columns=new Array('one','two','three','four');
 	for (i=0;i<columns.length;i++){
-		if (pyctClassName.indexOf(columns[i])!=-1){
+		if ( pyctClassName.indexOf(columns[i])!=-1
+		     && pyctClassName.indexOf(columns[i])==0
+		   ){
 			return i+1;
 		}
 	}
