@@ -176,12 +176,13 @@ function checkTemplateReady(){
 	var levelsArray=getLevelsArray();
 	var dLevel;
 	var opCount=0;
+	// будем искать уже выбранные варианты, начиная с самого нижнего блока. Как только найдём первый, значит - можно загружать макет!
 	for (i=levelsArray.length-1;i>=0;i--){
 		dLevel=document.getElementById(levelsArray[i][0]);
 		if (dLevel.style.display=='block'){
 			opCount=$(dLevel).find("div[style*='opacity: 0.2']").length;
 			if (opCount>0){
-				alert('Selected in '+dLevel.id+': '+opCount);
+				//alert('Selected in '+dLevel.id+': '+opCount);
 				break;
 			}
 		}
@@ -204,9 +205,10 @@ function checkTemplateReady(){
 } 
 // сделать все пиктограммы непрозрачными
 function dropPyctosOpacity(divPyctos){ 
-	var pyctos=divPyctos.getElementsByTagName('div');
-	for(i=0;i<pyctos.length;i++)
-		pyctos.item(i).style.opacity=1;
+	$(divPyctos).find('div').css('opacity','1');
+	//var pyctos=divPyctos.getElementsByTagName('div');
+	//for(i=0;i<pyctos.length;i++)
+		//pyctos.item(i).style.opacity=1;
 }
 // отобразить блоки следующего уровня, назначить класс первой пиктограмме
 function startHandleBlock( srce,blockTextToShow,divPyctos){
@@ -358,9 +360,9 @@ function setCurrentChoiceStatus(event,pyctosContainer){ //alert(pyctosContainer.
 	var pyctosNextBlock=pyctosContainer.getElementsByTagName('div'); // container/div
 	var subHeaderPlacementType=false;
 	var currentPycto,srcElem; //alert(pyctosNextBlock.length);
+	srcElem=(navigator.appName=="Netscape")? event.target:event.srcElement;
 	for(i=0;i<pyctosNextBlock.length;i++){
 		currentPycto=pyctosNextBlock.item(i);		
-		srcElem=(navigator.appName=="Netscape")? event.target:event.srcElement;
 		if (srcElem==currentPycto) { // источник события - текущая пиктограмма 
 			currentPycto.style.opacity=1; // сделать непрозрачной (активной)
 			if (srcElem==currentPycto){ // источник события - текущая пиктограмма
@@ -404,7 +406,7 @@ function displayUserChoice(pyctosContainer){
 	var currentPicTitle;
 	for (i=0;i<sText.length;i++){
 		if (pyctosContainer.id==sText[i][0]) {
-			var pBlocks=document.getElementById(pyctosContainer.id).getElementsByTagName('div');
+			var pBlocks=pyctosContainer.getElementsByTagName('div');
 			for (j=0;j<pBlocks.length;j++){
 				if (pBlocks.item(j).style.opacity==1) {
 					currentPicTitle=pBlocks.item(j).title.toLowerCase();
