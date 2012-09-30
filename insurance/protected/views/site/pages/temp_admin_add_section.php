@@ -132,22 +132,23 @@ tmplLevel3=false;
 // * количества колонок
 // * наличия и расположения подзаголовка
 // * наличия и расположения псевдофутера
-function defineTemplateScheme(pyctosContainer){ // pyctosContainer - родительский блок для текущего набора пиктограмм
+function defineTemplateScheme(event,pyctosContainer){ // pyctosContainer - родительский блок для текущего набора пиктограмм
   try{
 	var srce=false; // инициализируем источник события (пиктограмму)
-	var sClass=event.srcElement.className;
-	var sClassParent= event.srcElement.parentNode.className;
+	var eventObj=(navigator.appName=="Netscape")? event.target:event.srcElement; 
+	var sClass=eventObj.className;
+	var sClassParent= eventObj.parentNode.className;
 	// установить target-элемент DIV:
 	if ( sClass.indexOf('Column')!=-1
 	     || sClass.indexOf('Shared')!=-1
 		 || sClass.indexOf('Inside')!=-1
-	   ) srce=event.srcElement;
+	   ) srce=eventObj;
 	if ( sClassParent.indexOf('Column')!=-1
 	     || sClassParent.indexOf('Shared')!=-1
 		 || sClassParent.indexOf('Inside')!=-1
-	   ) srce=event.srcElement.parentNode;
+	   ) srce=eventObj.parentNode;
 	// источник - одна из пиктограмм схемы:
-	if (srce) { //alert(event.srcElement.className);
+	if (srce) { //alert(eventObj.className);
 		var currentPyctosContainer=srce.parentNode;
 		// показать блок "текущий выбор":
 		if (currentPyctosContainer.id=="tmplColSet") { 
@@ -157,29 +158,32 @@ function defineTemplateScheme(pyctosContainer){ // pyctosContainer - родит�
 		handlePyctos(srce);
 		// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
 		// указать параметры текущего выбора
-		setCurrentChoiceStatus(currentPyctosContainer);
+		setCurrentChoiceStatus(event,currentPyctosContainer);
 		// проверить - допускает ли текущее состояние макета его загрузку:
-		checkReadyTemplate();
+		checkTemplateReady();
 	}
   }catch(e){
 	  alert(e.message);
   }
 }
 //проверить - допускает ли текущее состояние макета его загрузку
-function checkReadyTemplate(){
+function checkTemplateReady(){
 	// родительский блок для всех уровней:
 	var bLevels=document.getElementById('txtChoice').getElementsByTagName('div');
-	for(i=bLevels;i>0;i--) {
-		var cLevel=bLevels.item(i).getElementsByTagName('div');
-		// блоки внутри уровня:
-		var cnt=0;
-		for (j=0;j<cLevel.length;j++) {
-			// посчитать неотмеченные пиктограммы:
-			if (cLevel.item(j).style.opacity==1) cnt++;
-		}
-		if (cnt==cLevel.length){
-			alert('Not ready yet!');
-			return false; // not ready
+	//alert(i); 
+	var testBlock=document.getElementById('test');
+	testBlock.innerHTML='';
+	var levelsArray=getLevelsArray();
+	var dLevel;
+	var opCount=0;
+	for (i=levelsArray.length-1;i>=0;i--){
+		dLevel=document.getElementById(levelsArray[i][0]);
+		if (dLevel.style.display=='block'){
+			opCount=$(dLevel).find("div[style*='opacity: 0.2']").length;
+			if (opCount>0){
+				alert('Selected in '+dLevel.id+': '+opCount);
+				break;
+			}
 		}
 	}
 	var rScheme;
@@ -349,14 +353,14 @@ function handlePyctos(srce) { // источник события
 }
 // сделать полупрозрачными неиспользуемые схемы
 // разместить инйормацию о текущем выборе в блока справа
-function setCurrentChoiceStatus(pyctosContainer){ //alert(pyctosContainer.id);
+function setCurrentChoiceStatus(event,pyctosContainer){ //alert(pyctosContainer.id);
 	// блоки (div) элемента-источника события
 	var pyctosNextBlock=pyctosContainer.getElementsByTagName('div'); // container/div
 	var subHeaderPlacementType=false;
 	var currentPycto,srcElem; //alert(pyctosNextBlock.length);
 	for(i=0;i<pyctosNextBlock.length;i++){
-		currentPycto=pyctosNextBlock.item(i);
-		srcElem=event.srcElement;
+		currentPycto=pyctosNextBlock.item(i);		
+		srcElem=(navigator.appName=="Netscape")? event.target:event.srcElement;
 		if (srcElem==currentPycto) { // источник события - текущая пиктограмма 
 			currentPycto.style.opacity=1; // сделать непрозрачной (активной)
 			if (srcElem==currentPycto){ // источник события - текущая пиктограмма
@@ -384,14 +388,18 @@ function showBlock(tShow,line){
 	  alert(e.message);
   }
 }
+// вернуть массив уровней с пиктограммами:
+function getLevelsArray(){
+	return new Array( new Array('tmplColSet','количество колонок'),
+					  new Array('chHeaders','расположение подзаголовка'),
+					  new Array('psFooter','расположение псевдофутера')
+					);
+} 
 // разместить и отобразить информацию о выборе юзера:
 function displayUserChoice(pyctosContainer){ 
   try{
 	var userInfo;
-	var sText=new Array( new Array('tmplColSet','количество колонок'),
-						 new Array('chHeaders','расположение подзаголовка'),
-						 new Array('psFooter','расположение псевдофутера')
-					   );		
+	var sText=getLevelsArray();
  	var sBlocks=document.getElementById('currentChoice').getElementsByTagName('span');
 	var currentPicTitle;
 	for (i=0;i<sText.length;i++){
@@ -411,8 +419,8 @@ function displayUserChoice(pyctosContainer){
 	  alert(e.message);
   }
 }
+// 
 function readyToLoadTmpl(){
-	document.getElementById('loadTemplate').style.display="block";
 }
 </script>
 <div align="right"><button onClick="showBlock('mng');">Добавить...</button></div>
@@ -422,7 +430,7 @@ function readyToLoadTmpl(){
         <div>Выберите расположение подзаголовка:</div>
         <div>Выберите расположение псевдофутера:</div>
     </div>
-    <div id="txtChoice"onClick="defineTemplateScheme(this);">
+    <div id="txtChoice"onClick="defineTemplateScheme(event,this);">
     	<div id="tmplColSet">
             <div class="oneColumn" title="Одна колонка">&nbsp;</div>
             <div class="twoColumn" title="Две колонки">&nbsp;</div>
@@ -447,4 +455,5 @@ function readyToLoadTmpl(){
     </div>
 </div>
 <div id="tmpl_scheme"></div>
+<div id="test"></div>
 <button id="loadTemplate">Загрузить макет</button>
