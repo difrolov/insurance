@@ -543,11 +543,14 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 <button id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
 <script type="text/javascript">
 //
-function buildBlockUnit(tmpl,blockPrototype){ // только строка
-	var blockData,dWidth,dFloat;
+function buildBlockUnit(tNode,blockPrototypeParams){ // только строка
+	var blockData,dWidth,dFloat,block_type;
 	var dHeight=false;
-	if (blockPrototype) {
-		blockData=blockPrototype.split(":");
+	if ( blockPrototypeParams
+		 && blockPrototypeParams.indexOf(":")!=-1 // '34:left'
+	   ) {
+		var block_type='wrapper';
+		blockData=blockPrototypeParams.split(":");
 		dWidth=blockData[0]+'%';
 		dFloat=blockData[1];
 		dHeight="100%";
@@ -557,56 +560,45 @@ function buildBlockUnit(tmpl,blockPrototype){ // только строка
 	}
 	// создать оболочку для блока с конетнтом (без отступов)
 	var DivWrapper=document.createElement('div');
-	tmpl.appendChild(DivWrapper);
+	// добавить к макету:
+	tNode.appendChild(DivWrapper);
 	DivWrapper.style.width=dWidth; 
 	if (dHeight) DivWrapper.style.height=dHeight;
 	DivWrapper.style.float=dFloat;
 	DivWrapper.style.background='cornsilk';
-	// создать блок для контента (с отступами)
-	var DivStuff=document.createElement('div');
-	DivWrapper.appendChild(DivStuff);
-	DivStuff.className='DivStuff';
-	DivWrapper.style.background='lightcyan';
+	
+	
+	
+	// если не контейнер:
+	if (blockPrototypeParams!="container") {
+		// создать блок для контента (с отступами)
+		var DivStuff=document.createElement('div');
+		DivWrapper.appendChild(DivStuff);
+		DivStuff.className='DivStuff';
+		DivWrapper.style.background='lightcyan';
+	}
 }
 //
-function constructBlocks(tmpl,arrayElement){
-	if (!arrayElement||typeof(arrayElement)!='object'){
-		//if (!arrayElement) tmpl.innerHTML="<div>! arrayElement</div>";
-		buildBlockUnit(tmpl,arrayElement);
-		// создать первый вложенный элемент (без отступов)
-		/*var newDivNoOffcet=document.createElement('div');
-		tmpl.appendChild(newDivNoOffcet);
-		newDivNoOffcet.style.background='yellow';
-		
-		
-		// создать второй элемент (без отступов)
-		var newDivInside=document.createElement('div');
-		newDivNoOffcet.appendChild(newDivInside);
-		var wdth=(!widthArray[i])? '50':widthArray[i];
-		newDivInside.style.width=wdth+"%";
-		if (floatsArray)
-			newDivInside.style.float=floatsArray[i];
-		if (!i){
-			var outerHeight=$(div).innerHeight();
-			newDivInside.style.height=outerHeight-8+'px';
-			alert(newDivInside.style.height);
-		}
-		// создать третий элемент (с отступами, для контента)
-		newDivInsideContent=document.createElement('div');
-		newDivInside.appendChild(newDivInsideContent);
-		newDivInsideContent.style.padding="6px";
-		newDivInsideContent.innerHTML="Содержание колонки "+i+" здесь!";*/
-		
-	}else
+function constructBlocks(tNode,arrayElement){
+	if (!arrayElement||typeof(arrayElement)!='object'){ // '34:left'
+		buildBlockUnit(tNode,arrayElement);
+	}else // если массив, делаем рекурсивный вызов функции: // Array( '66:right' )
 		for (var i=0;i<arrayElement.length;i++)
-			constructBlocks(tmpl,arrayElement[i]);
+			constructBlocks(tNode,arrayElement[i]);
 }
 //
 function createTemplate(params){
+	/*new Array( '34:left' ),
+				  new Array( '66:right',
+								'container',
+									new Array( '50:left' ),
+									new Array( '50:right' ),
+								'footer'
+						   )*/
 	var tmpl=document.getElementById('tmplInner');
 	divsCount=(!params)? 1:params.length;
 	for(i=0;i<divsCount;i++){
-		constructBlocks(tmpl,params)
+		constructBlocks(tmpl,params);
 	}
 }
 // загрузим макет по сформированному шаблону
