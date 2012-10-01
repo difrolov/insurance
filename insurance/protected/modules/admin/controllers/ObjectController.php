@@ -51,7 +51,13 @@ class ObjectController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-
+		if(isset($_POST['InsurArticleContent'])){
+			$model = InsurArticleContent::model()->findByPk($_GET['id']);
+			if(isset($model[0]->content)){
+				$model[0]->content = $_POST['InsurArticleContent']['content'];
+				$model->save();
+			}
+		}
 		if(isset($_GET['id'])){
 			//Достаем контент страницы
 			$content = InsurArticleContent::model()->findAll(array('condition'=>"id=".$_GET['id']));
@@ -60,7 +66,7 @@ class ObjectController extends Controller
 			}
 			//таблица для отображения
 
-			$this->render('edit',array('model'=>$content));
+			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['id']));
 		}
 	}
 
