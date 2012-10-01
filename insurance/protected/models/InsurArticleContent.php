@@ -61,7 +61,7 @@ class InsurArticleContent extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'object' => array(self::BELONGS_TO, 'InsurInsuranceObject', 'object_id'),
-			'insurCoworkers' => array(self::BELONGS_TO, 'InsurCoworkers', 'insur_coworkers_id'),
+			/* 'insurCoworkers' => array(self::BELONGS_TO, 'InsurCoworkers', 'insur_coworkers_id'), */
 		);
 	}
 
