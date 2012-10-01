@@ -118,18 +118,35 @@ div#currentChoice{
 	vertical-align:top;
 	width:40%;
 }
+div#tmplPlace{
+	border:solid 2px #CCCCCC;
+	display:none;
+	height:400px;
+	margin:10px 0;
+	opacity:0;
+	overflow:auto;
+}
+div#tmplPlace > div {
+	padding:4px;
+}
+div#tmplPlace div{
+	border: dashed 2px #999999;
+}
+div#tmplPlace div > div{
+	padding:10px;
+}
 </style>
 <script type="text/javascript">
-tmplScheme=false; // пер. сохранения схемы выбранного шаблона
+tmplSchema=false; // пер. сохранения схемы выбранного шаблона
 /* 	Возможные варианты макета описываются по схеме:
-	tmplScheme[0] 	// колич. колонок: 1,2,3,4
-	tmplScheme[1]	// наличие/тип подзаголовка: 0 (нет), 1 (есть, тип отстуствует (для 2-х колонок)), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку)
-	tmplScheme[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
+	tmplSchema[0] 	// колич. колонок: 1,2,3,4
+	tmplSchema[1]	// наличие/тип подзаголовка: 0 (нет), 1 (есть, тип отстуствует (для 2-х колонок)), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку)
+	tmplSchema[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
 	Внимание! Тип псевдофутера 1 отсутствует, т.к. не может быть пседвофутера для количества колонок, меньше 3. В этом случае роль псевдофутера может выполнять любой добавляемый модуль.
 */
 //проверить - допускает ли текущее состояние макета его загрузку
 function checkTemplateReady(){
-	tmplScheme=0;
+	tmplSchema=0;
 	// родительский блок для всех уровней:
 	var bLevels=document.getElementById('txtChoice').getElementsByTagName('div');
 	//alert(i); 
@@ -166,25 +183,25 @@ function checkTemplateReady(){
 				levelStop=i+1; 
 				// получим класс отмеченной пиктограммы:
 				selElementClassName=$(dLevel).find("div[style*='opacity: 1']")[0].className;
-				tmplScheme=getScheme(selElementClassName);
-				tmplScheme=tmplScheme.toString();
+				tmplSchema=getSchema(selElementClassName);
+				tmplSchema=tmplSchema.toString();
 				switch(levelStop){
 					// уровень 1
 					case 1:
-						tmplScheme+='00';
+						tmplSchema+='00';
 					break;
 					// уровень 2
 					case 2:
 						if (selElementClassName.indexOf('Subheader')!=-1)
-							tmplScheme+='1';	
+							tmplSchema+='1';	
 						else{ // twoColumn, threeColumn, fourColumn
 							if ( selElementClassName.indexOf('Shared')==-1
 							     && selElementClassName.indexOf('Inside')==-1
-							   ) tmplScheme+='0';
+							   ) tmplSchema+='0';
 							else
-								tmplScheme+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i'; 
+								tmplSchema+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i'; 
 						}
-						tmplScheme+='0';
+						tmplSchema+='0';
 					break;
 					// уровень 3
 					case 3: 
@@ -192,31 +209,31 @@ function checkTemplateReady(){
 						// fourColumn
 						if ( selElementClassName.indexOf('Shared')==-1
 							     && selElementClassName.indexOf('Inside')==-1
-							   ) tmplScheme+='00';
+							   ) tmplSchema+='00';
 						else{
 							// threeSharedShared
 							// fourSharedShared
 							if (selElementClassName.indexOf('SharedShared')!=-1)
-								tmplScheme+='ss';
+								tmplSchema+='ss';
 							else{
 								// fourInsideInside
 								if (selElementClassName.indexOf('InsideInside')!=-1)
-									tmplScheme+='ii';
+									tmplSchema+='ii';
 								else{
 									// fourColumnInside
 									if (selElementClassName.indexOf('ColumnInside')!=-1)
-										tmplScheme+='i0';
+										tmplSchema+='i0';
 									else{
 										// threeColumnShared
 										// fourColumnShared
 										if (selElementClassName.indexOf('ColumnShared')!=-1)
-											tmplScheme+='s0';
+											tmplSchema+='s0';
 										// threeNoneShared
 										// fourNoneShared
 										// fourNoneInside
 										else if (selElementClassName.indexOf('None')!=-1) { 
-											tmplScheme+='0';
-											tmplScheme+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i';
+											tmplSchema+='0';
+											tmplSchema+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i';
 										}
 									}
 								}
@@ -224,12 +241,12 @@ function checkTemplateReady(){
 						}
 					break;
 				}
-				testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplScheme: '+tmplScheme;
+				testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplSchema: '+tmplSchema;
 				break;
 			}
 		}
 	}
-	if (tmplScheme!=0) {
+	if (tmplSchema!=0) {
 		$('#loadTemplate').css('display','block'); 
 		$('#loadTemplate').animate({opacity:1});
 		//document.getElementById('loadTemplate').style.display="block";
@@ -248,7 +265,7 @@ function checkTemplateReady(){
 // * количества колонок
 // * наличия и расположения подзаголовка
 // * наличия и расположения псевдофутера
-function defineTemplateScheme(event,pyctosContainer){ // pyctosContainer - родительский блок для текущего набора пиктограмм
+function defineTemplateSchema(event,pyctosContainer){ // pyctosContainer - родительский блок для текущего набора пиктограмм
   try{
 	var srce=false; // инициализируем источник события (пиктограмму)
 	var eventObj=(navigator.appName=="Netscape")? event.target:event.srcElement; 
@@ -320,7 +337,7 @@ function getLevelsArray(){
 					);
 } 
 // получить начальное значение схемы макета
-function getScheme(pyctClassName){
+function getSchema(pyctClassName){
 	var columns=new Array('one','two','three','four');
 	for (i=0;i<columns.length;i++){
 		if ( pyctClassName.indexOf(columns[i])!=-1
@@ -429,7 +446,7 @@ function handlePyctos(srce) { // источник события
 	}
 }
 // сделать полупрозрачными неиспользуемые схемы
-// разместить инйормацию о текущем выборе в блока справа
+// разместить информацию о текущем выборе в блока справа
 function setCurrentChoiceStatus(event,pyctosContainer){ //alert(pyctosContainer.id);
 	// блоки (div) элемента-источника события
 	var pyctosNextBlock=pyctosContainer.getElementsByTagName('div'); // container/div
@@ -481,7 +498,7 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
         <div>Выберите расположение подзаголовка:</div>
         <div>Выберите расположение псевдофутера:</div>
     </div>
-    <div id="txtChoice" onClick="defineTemplateScheme(event,this);">
+    <div id="txtChoice" onClick="defineTemplateSchema(event,this);">
     	<div id="tmplColSet">
             <div class="oneColumn" title="Одна колонка">&nbsp;</div>
             <div class="twoColumn" title="Две колонки">&nbsp;</div>
@@ -505,6 +522,82 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
         <span id="selectedFooterPlacement"></span>
     </div>
 </div>
-<div id="tmpl_scheme"></div>
 <div id="test">test block</div>
-<button id="loadTemplate">Загрузить макет</button>
+<button id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
+<script type="text/javascript">
+//
+function addBlock(div,divsCount){
+	if (!divsCount) divsCount=1;
+	for(i=0;i<divsCount;i++){
+		var newDiv=div.createElement('div');
+	}
+}
+// загрузим макет по сформированному шаблону
+function loadTemplate(){
+  try{
+	//alert(tmplSchema);	
+	var tmpl=document.getElementById('tmplPlace');
+	$('#tmplPlace').css('display','block');
+	var topPos=$('#txtActions').offset().top;
+	$("html, body").animate({scrollTop:topPos},1000,
+		function(){
+		$('#tmplPlace').animate({opacity:1},300);
+	});
+	tmpl.innerHTML="Template starts here!";
+	switch(tmplSchema){
+		// одна колонка
+		case "100":
+			tmpl.innerHTML='<div>100</div>';
+			break;
+		// две колонки
+		case "200":
+			tmpl.innerHTML='<div>200<div style="float:left;width:50%;">Левая колонка</div><div style="float:right;width:50%;">Правая колонка</div></div>';
+			break;
+		case "210":
+			tmpl.innerHTML='<div>210</div>';
+			break;
+		// три колонки
+		case "300":
+			tmpl.innerHTML='<div>300</div>';
+			break;
+		case "30s":
+			tmpl.innerHTML='<div>30s</div>';
+			break;
+		case "3i0":
+			tmpl.innerHTML='<div>3i0</div>';
+			break;
+		case "3s0":
+			tmpl.innerHTML='<div>3s0</div>';
+			break;
+		case "3ss":
+			tmpl.innerHTML='<div>3ss</div>';
+			break;
+		// 4 колонки
+		case "400":
+			tmpl.innerHTML='<div>400</div>';
+			break;
+		case "40i":
+			tmpl.innerHTML='<div>40i</div>';
+			break;
+		case "40s":
+			tmpl.innerHTML='<div>40s</div>';
+			break;
+		case "4i0":
+			tmpl.innerHTML='<div>4i0</div>';
+			break;
+		case "4ii":
+			tmpl.innerHTML='<div>4ii</div>';
+			break;
+		case "4s0":
+			tmpl.innerHTML='<div>4s0</div>';
+			break;
+		case "4ss":
+			tmpl.innerHTML='<div>4ss</div>';
+			break;
+	}
+  }catch(e){
+	  alert(e.message);
+  }
+}
+</script>
+<div id="tmplPlace"></div>
