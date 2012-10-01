@@ -121,19 +121,18 @@ div#currentChoice{
 div#tmplPlace{
 	border:solid 2px #CCCCCC;
 	display:none;
-	height:400px;
-	margin:10px 0;
+	height:404px;
 	opacity:0;
 	overflow:auto;
 }
 div#tmplPlace > div {
 	padding:4px;
 }
-div#tmplPlace div{
+div#tmplPlace div.column{
 	border: dashed 2px #999999;
 }
-div#tmplPlace div > div{
-	padding:10px;
+div#tmplPlace div.column > div{
+	padding:6px;
 }
 </style>
 <script type="text/javascript">
@@ -526,10 +525,43 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 <button id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
 <script type="text/javascript">
 //
-function addBlock(div,divsCount){
-	if (!divsCount) divsCount=1;
+function buildDivs(arrayElement){
+	if(typeof(arrayElement)=='object'){
+		buildDivs(arrayElement);
+	}else{
+		alert('Not object!');
+	}
+}
+//
+function addBlock(params){
+	var tmpl=document.getElementById('tmplPlace');
+	divsCount=(!params)? 1:params.length;
+	
 	for(i=0;i<divsCount;i++){
-		var newDiv=div.createElement('div');
+		
+		/*// создать первый вложенный элемент (без отступов)
+		var newDivNoOffcet=document.createElement('div');
+		tmpl.appendChild(newDivNoOffcet);
+		newDivNoOffcet.style.background='yellow';
+		
+		
+		// создать второй элемент (без отступов)
+		var newDivInside=document.createElement('div');
+		newDivNoOffcet.appendChild(newDivInside);
+		var wdth=(!widthArray[i])? '50':widthArray[i];
+		newDivInside.style.width=wdth+"%";
+		if (floatsArray)
+			newDivInside.style.float=floatsArray[i];
+		if (!i){
+			var outerHeight=$(div).innerHeight();
+			newDivInside.style.height=outerHeight-8+'px';
+			alert(newDivInside.style.height);
+		}
+		// создать третий элемент (с отступами, для контента)
+		newDivInsideContent=document.createElement('div');
+		newDivInside.appendChild(newDivInsideContent);
+		newDivInsideContent.style.padding="6px";
+		newDivInsideContent.innerHTML="Содержание колонки "+i+" здесь!";*/
 	}
 }
 // загрузим макет по сформированному шаблону
@@ -543,58 +575,151 @@ function loadTemplate(){
 		function(){
 		$('#tmplPlace').animate({opacity:1},300);
 	});
-	tmpl.innerHTML="Template starts here!";
 	switch(tmplSchema){
 		// одна колонка
 		case "100":
-			tmpl.innerHTML='<div>100</div>';
 			break;
 		// две колонки
 		case "200":
-			tmpl.innerHTML='<div>200<div style="float:left;width:50%;">Левая колонка</div><div style="float:right;width:50%;">Правая колонка</div></div>';
+			var schema=new Array( new Array( '50:left' ),
+								  new Array( '50:right' )
+								); 
 			break;
 		case "210":
-			tmpl.innerHTML='<div>210</div>';
+			var schema=new Array( new Array( '34:left' ),
+								  new Array( '66:right',
+								  			 	'subheader',
+												'container'
+								  		   )
+								); 
 			break;
 		// три колонки
 		case "300":
-			tmpl.innerHTML='<div>300</div>';
+			var schema=new Array( new Array( '33:left' ),
+								  new Array( '33:left' ),
+								  new Array( '34:right' )
+								); 
 			break;
 		case "30s":
-			tmpl.innerHTML='<div>30s</div>';
+			var schema=new Array( new Array( '34:left' ),
+								  new Array( '66:right',
+								  				'container',
+								  					new Array( '50:left' ),
+								  					new Array( '50:right' ),
+												'footer'
+								  		   )
+								); 
 			break;
 		case "3i0":
-			tmpl.innerHTML='<div>3i0</div>';
+			var schema=new Array( new Array( '25:left' ),
+								  new Array( '50:left',
+								  				'subheader',
+												'container'
+								  		   ),
+								  new Array( '25:right' )
+								); 
 			break;
 		case "3s0":
-			tmpl.innerHTML='<div>3s0</div>';
+			var schema=new Array( new Array( '34:left' ),
+								  new Array( '66:right',
+								  			    'subheader',
+												'container',
+													new Array( '50:left' ),
+								  					new Array( '50:right' )
+													     
+								  		   )
+								); 
 			break;
 		case "3ss":
-			tmpl.innerHTML='<div>3ss</div>';
+			var schema=new Array( new Array( '34:left' ),
+								  new Array( '66:right',
+								  		   	 	'subheader',
+												'container',
+													new Array( '50:left' ),
+								  					new Array( '50:right' ),
+												'footer'														
+										   )
+								); 
 			break;
 		// 4 колонки
 		case "400":
-			tmpl.innerHTML='<div>400</div>';
+			var schema=new Array( new Array( '25:left' ),
+								  new Array( '25:left' ),
+								  new Array( '25:left' ),
+								  new Array( '25:right' )
+								); 
 			break;
 		case "40i":
-			tmpl.innerHTML='<div>40i</div>';
+			var schema=new Array( new Array( '25:left' ),
+								  new Array( '75:right',
+								  				'container',
+								  					new Array( '50:left' ),
+								  					new Array( '50:right' ),
+											 	'footer'
+										   )
+								); 
 			break;
 		case "40s":
-			tmpl.innerHTML='<div>40s</div>';
+			var schema=new Array( new Array( '25:left' ),
+								  new Array( '75:right',
+								  				'container',
+													new Array( '33:left' ),
+								  					new Array( '33:right' ),
+													new Array( '34:right' ),
+											 	'footer'
+										   )
+								); 
 			break;
 		case "4i0":
-			tmpl.innerHTML='<div>4i0</div>';
+			var schema=new Array( new Array( '25:left' ),
+								  new Array( '50:left',
+								  				'subheader',
+												'container',
+													  new Array( '50:left' ),
+													  new Array( '50:right' )
+														 
+								  		   ),
+								  new Array( '25:right' )
+								); 
 			break;
 		case "4ii":
-			tmpl.innerHTML='<div>4ii</div>';
+			var schema=new Array( new Array( '25:left' ),
+								  new Array( '50:left',
+								  				'subheader',
+												'container',
+													  new Array( '50:left' ),
+													  new Array( '50:right' ),
+												'footer'
+														 
+								  		   ),
+								  new Array( '25:right' )
+								); 
 			break;
 		case "4s0":
-			tmpl.innerHTML='<div>4s0</div>';
+			var schema=new Array( new Array('25:left'),
+								  new Array('75:right',
+								  				'subheader',
+												'container',
+													  new Array('33:left'),
+								  					  new Array('33:right'),
+													  new Array('34:right')													
+								  		   )
+								); 
 			break;
 		case "4ss":
-			tmpl.innerHTML='<div>4ss</div>';
+			var schema=new Array( new Array( '25:left' ),
+								  new Array( '75:right',
+								  		   	 	'subheader',
+												'container',
+													  new Array('33:left'),
+													  new Array('33:right'),
+													  new Array('34:right'),
+										       	'footer'														
+										   )
+								); 
 			break;
 	}
+	addBlock(schema);
   }catch(e){
 	  alert(e.message);
   }
