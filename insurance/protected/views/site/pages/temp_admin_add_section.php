@@ -11,11 +11,26 @@ div#chHeaders,
 div#psFooter{
 <? if(!isset($_GET['test'])){?>	display:none; <? }?>
 }
+div.DivStuff{
+	padding:6px;
+}
 div#mng{
 	border:solid 4px #CCCCCC;
 	margin-top:20px;
 	padding-bottom:5px;
 	padding-left:6px;
+}
+div#select_mod > div{
+	background:#CCCCFF;
+	border-radius:4px;
+	cursor:pointer;
+	display:inline-block;
+	margin: 4px 8px 4px 0;
+	padding:6px 8px;
+}
+div#select_mod > div:hover{
+	background:#66C;
+	color:#FFF;
 }
 div#txtChoice div{
 	margin-top:6px;
@@ -121,12 +136,15 @@ div#currentChoice{
 div#tmplPlace{
 	border:solid 2px #CCCCCC;
 	display:none;
-	height:404px;
 	opacity:0;
 	overflow:auto;
 }
-div#tmplPlace > div {
-	padding:4px;
+div#tmplPlace > div{
+	margin:4px;
+}
+div#tmplInner{
+	border:dashed 2px #CCCCCC;
+	height:450px;
 }
 div#tmplPlace div.column{
 	border: dashed 2px #999999;
@@ -525,22 +543,38 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 <button id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
 <script type="text/javascript">
 //
-function buildDivs(arrayElement){
-	if(typeof(arrayElement)=='object'){
-		buildDivs(arrayElement);
+function buildBlockUnit(tmpl,blockPrototype){ // только строка
+	var blockData,dWidth,dFloat;
+	var dHeight=false;
+	if (blockPrototype) {
+		blockData=blockPrototype.split(":");
+		dWidth=blockData[0]+'%';
+		dFloat=blockData[1];
+		dHeight="100%";
 	}else{
-		alert('Not object!');
+		dWidth="100%";
+		dFloat="none";
 	}
+	// создать оболочку для блока с конетнтом (без отступов)
+	var DivWrapper=document.createElement('div');
+	tmpl.appendChild(DivWrapper);
+	DivWrapper.style.width=dWidth; 
+	if (dHeight) DivWrapper.style.height=dHeight;
+	DivWrapper.style.float=dFloat;
+	DivWrapper.style.background='cornsilk';
+	// создать блок для контента (с отступами)
+	var DivStuff=document.createElement('div');
+	DivWrapper.appendChild(DivStuff);
+	DivStuff.className='DivStuff';
+	DivWrapper.style.background='lightcyan';
 }
 //
-function addBlock(params){
-	var tmpl=document.getElementById('tmplPlace');
-	divsCount=(!params)? 1:params.length;
-	
-	for(i=0;i<divsCount;i++){
-		
-		/*// создать первый вложенный элемент (без отступов)
-		var newDivNoOffcet=document.createElement('div');
+function constructBlocks(tmpl,arrayElement){
+	if (!arrayElement||typeof(arrayElement)!='object'){
+		//if (!arrayElement) tmpl.innerHTML="<div>! arrayElement</div>";
+		buildBlockUnit(tmpl,arrayElement);
+		// создать первый вложенный элемент (без отступов)
+		/*var newDivNoOffcet=document.createElement('div');
 		tmpl.appendChild(newDivNoOffcet);
 		newDivNoOffcet.style.background='yellow';
 		
@@ -562,13 +596,23 @@ function addBlock(params){
 		newDivInside.appendChild(newDivInsideContent);
 		newDivInsideContent.style.padding="6px";
 		newDivInsideContent.innerHTML="Содержание колонки "+i+" здесь!";*/
+		
+	}else
+		for (var i=0;i<arrayElement.length;i++)
+			constructBlocks(tmpl,arrayElement[i]);
+}
+//
+function createTemplate(params){
+	var tmpl=document.getElementById('tmplInner');
+	divsCount=(!params)? 1:params.length;
+	for(i=0;i<divsCount;i++){
+		constructBlocks(tmpl,params)
 	}
 }
 // загрузим макет по сформированному шаблону
 function loadTemplate(){
   try{
 	//alert(tmplSchema);	
-	var tmpl=document.getElementById('tmplPlace');
 	$('#tmplPlace').css('display','block');
 	var topPos=$('#txtActions').offset().top;
 	$("html, body").animate({scrollTop:topPos},1000,
@@ -719,10 +763,20 @@ function loadTemplate(){
 								); 
 			break;
 	}
-	addBlock(schema);
+	createTemplate(schema);
   }catch(e){
 	  alert(e.message);
   }
 }
 </script>
-<div id="tmplPlace"></div>
+<div id="<?="tmplPlace"?>">
+	<div>Выберите модули для размещения на странице:</div>
+	<div id="select_mod">
+    	<div>Новости</div>
+        <div>Готовое решение</div>
+        <div>Программа страхования</div>
+        <div>Случайная статья</div>
+        <div>Текст</div>
+    </div>
+	<div id="<?="tmplInner"?>"></div>
+</div>
