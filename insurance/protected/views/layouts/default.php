@@ -14,20 +14,22 @@
 	  </div>
 	  <div id="mainmenu" align="left" style="position:relative;">
 	<?	
-		setHTML::buildMenu($this); // главное меню
+		setHTML::buildMainMenu($this); // главное меню
 
 		setHTML::buildDropDownMenu();	// выпадающее меню	
 															?>
 	  </div>
-	<?	
-		setHTML::buildMainSubmenu($this);
+		<div id="main_submenu" align="right" style="position:relative;">
+	<?	setHTML::buildMainMenu($this,-2);
 	
-		setHTML::buildBreadCrumbs();
+		setHTML::buildDropDownMenu(-2);
+												?>
+		</div>
+	<?	setHTML::buildBreadCrumbs();
 		
 		echo $content;?>
   	</div>
   </div>
-	<? 	
-		setHTML::buildFooterBlock($tp);	?>
+	<?	setHTML::buildFooterBlock($tp);	?>
 </div>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script>

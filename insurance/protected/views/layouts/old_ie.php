@@ -1,4 +1,4 @@
-<? require_once dirname(__FILE__).'/header.php';?>
+<? require_once dirname(__FILE__).'/header.php'; // for fun, yeah...?>
 <body>
 <table id="main_content" cellspacing="0">
   <tr>
@@ -22,7 +22,7 @@
   <tr>
     <td class="noPadding" height="30">
     	<div id="mainmenu" align="left" style="position:relative;">
-<?	setHTML::buildMenu($this); // главное меню?>
+<?	setHTML::buildMainMenu($this); // главное меню?>
 		</div>
 <?	setHTML::buildMainSubmenu($this); ?>        
 </td>

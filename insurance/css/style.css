@@ -394,7 +394,8 @@ div#mainmenu{
 	height:30px;
 	text-align:left;
 }
-div#mainmenu div[id*="ddMenu_"]{ /* drop-down menu	*/
+div#mainmenu div[id*="ddMenu_"],
+div#main_submenu div[id*="ddMenu_"]{ /* drop-down menu	*/
 	background:#FFF;
 	border:solid 1px #CCCCCC;
 	box-shadow:3px 4px 4px #ededed;
@@ -402,6 +403,9 @@ div#mainmenu div[id*="ddMenu_"]{ /* drop-down menu	*/
 	padding:8px;
 	position:absolute;
 	top:-4000px;
+}
+div[id*="ddMenu_"]{
+	z-index:1;
 }
 div[id*="ddMenu_"] a{	/* drop-down menu link	*/
 	display:block;

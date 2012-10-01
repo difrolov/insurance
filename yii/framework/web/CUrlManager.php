@@ -824,7 +824,7 @@ class CUrlRule extends CBaseUrlRule
 
 		if(preg_match($this->pattern.$case,$pathInfo,$matches))
 		{
-			/* var_dump($this->defaultParams);die; */
+
 			foreach($this->defaultParams as $name=>$value)
 			{
 				if(!isset($_GET[$name]))

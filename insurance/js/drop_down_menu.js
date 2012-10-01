@@ -3,14 +3,25 @@
 var nav=navigator.appName;
 try{	
 	var mMenu=document.getElementById('mainmenu');
-	var ddMenus=mMenu.getElementsByTagName('div');
 	var ulMenus=document.getElementById('mainmenu').getElementsByTagName('li');
-	for(i=0;i<ddMenus.length;i++){
-		var li=ulMenus.item(i+1);
-		var pos = jQuery(li).offset().left; 
-		var ddM=ddMenus.item(i); 
-		$(ddM).offset({left:pos+8}); 
+	//var mMenuSecond=document.getElementById('main_submenu');
+	//var ulMenusSecond=document.getElementById('main_submenu').getElementsByTagName('li');
+	
+	var ddMenus=mMenu.getElementsByTagName('div');
+	//var ddMenusSecond=mMenuSecond.getElementsByTagName('div');
+	
+	var ulm=new Array(ulMenus/*,ulMenusSecond*/);
+	var ddm=new Array(ddMenus/*,ddMenusSecond*/);
+	
+	for (j=0;j<ddm.length;j++) {
+		for(i=0;i<ddm[j].length;i++){
+			var li=ulm[j].item(i+1);
+			var pos = jQuery(li).offset().left; 
+			var ddM=ddm[j].item(i); 
+			$(ddM).offset({left:pos+8}); 
+		}
 	}
+	
 }catch(e){
 	alert(e.message);
 }
@@ -18,7 +29,7 @@ var manageDDMenu = function(e) {
   try{
 	// ВНИМАНИЕ! Важно: уровень вложенности элементов внутри блока с выпадающим меню.
 	// устанавливается в начале метода (HTML) и в блоке для события mouseout
-	var testBlock=document.getElementById("AfterMenu");
+	//var testBlock=document.getElementById("AfterMenu");
 	var ULlist=mMenu.getElementsByTagName('ul').item(0).getElementsByTagName('li'); 
 	if (nav=='Netscape') {
 		var eventSource=e.target;
@@ -31,11 +42,20 @@ var manageDDMenu = function(e) {
 	var eventSourceParentParent=eventSourceParent.parentNode; // event source parent parent
 	
 	if ( // li in menu:
-		 ( eventSourceTagName=='li'&&eventSourceParentParent==mMenu ) 
+		 ( eventSourceTagName=='li'
+		   && //(eventSourceParentParent==mMenu || eventSourceParentParent==mMenuSecond) 			
+		   eventSourceParentParent==mMenu
+		 ) 
 		 || // a inside li:
-		 ( eventSourceTagName=='a'&&eventSourceParentParent.parentNode==mMenu ) 
+		 ( eventSourceTagName=='a'
+		   && //(eventSourceParentParent.parentNode==mMenu || eventSourceParentParent.parentNode==mMenuSecond)
+		   eventSourceParentParent.parentNode==mMenu
+		 ) 
 		 || // drop-down menu:
-		 ( eventSourceTagName=='div'&&eventSourceParent==mMenu&&eventSource.id.indexOf("ddMenu_")!=-1 )
+		 ( eventSourceTagName=='div'
+		   && //(eventSourceParent==mMenu || eventSourceParent==mMenuSecond)
+		   eventSourceParent==mMenu
+		   && eventSource.id.indexOf("ddMenu_")!=-1 )
 	   ) {  
 		// получить объект списка (ul) в меню:
 		var UL=mMenu.getElementsByTagName('ul').item(0);

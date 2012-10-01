@@ -44,12 +44,13 @@
 					}
 
 				}
-
-
-/* print_r($items);die; */
-
 			return $items;
 
+		}
+
+		//получаем строку и преобзуем ее в ссылку
+		public static function createUrl($href,$text){
+			return '<a href="'.$href.'">'.$text.'</a>';
 		}
 
 		public static function dateToRender($fromDate)
