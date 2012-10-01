@@ -6,7 +6,7 @@ if (isset($_GET['test'])) {
 		|| $_GET['test']=='0'
 		|| strstr($_GET['test'],'-')
 	  ) $_SESSION['test']=false;
-	else $_SESSION['test']=$_GET['test'];			
+	else $_SESSION['test']=$_GET['test'];
 }
 if (isset($_SESSION['test'])) $test=$_SESSION['test'];
 $tp=false;
@@ -14,7 +14,7 @@ $tp=false;
 if ($oldIE=setHTML::detectOldIE()) {?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <?	require_once dirname(__FILE__)."/old_ie.php";
-}else{?><!DOCTYPE HTML>
+}else{ ?> <!DOCTYPE HTML>
 <?	require_once dirname(__FILE__)."/default.php";
 }?>
 </body>

@@ -57,21 +57,20 @@ return array(
 			'rules'=>array(
 
 				// правила для обработки URL подразделов:
+				// admin:
+				'admin'=>'admin',
+				'admin/<controller:\w+>/<id:\d+>'=>'admin/<controller>',
+                'admin/<controller:\w+>/<action:\w+>/<id:\d+>'=>'admin/<controller>/<action>',
+                'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
 				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
 				'korporativnym_klientam/<alias:\w+>' =>  'korporativnym_klientam/index',
 				'malomu_i_srednemu_biznesu/<alias:\w+>' =>  'malomu_i_srednemu_biznesu/index',
 				'fizicheskim_litzam/<alias:\w+>' =>  'fizicheskim_litzam/index',
 				'partneram/<alias:\w+>' =>  'partneram/index',
-				// admin:
-				'admin'=>'admin',
-				'admin/<controller:\w+>'=>'admin/<controller>',
-				'admin/<controller:\w+>/<action:\w+>/show/<show:\d+>'=>'admin/<controller>/<action>',
-				'admin/<controller:\w+>/<action:\w+>/show/<show:\w+>'=>'admin/<controller>/<action>',
+/* 				'admin/<controller:\w+>/<action:\w+>/show/<show:\w+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>/prid/<prid:\d+>'=>'admin/<controller>/<action>',
 				'admin/<controller:\w+>/<action:\w+>/rid/<rid:\d+>'=>'admin/<controller>/<action>',
-				'admin/<controller:\w+>/<action:\w+>/run/<run:\w+>'=>'admin/<controller>/<action>',
-				'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
-				// common rules:
+				'admin/<controller:\w+>/<action:\w+>/run/<run:\w+>'=>'admin/<controller>/<action>',*/
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
@@ -84,10 +83,10 @@ return array(
 				'class'=>'PhpAuthManager',
 				'defaultRoles'=>array('guest'),
 		),
-		/* 'bootstrap'=>array(
+		'bootstrap'=>array(
 				'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
-		), */
-
+				'coreCss'=>false,
+		),
 		/* 'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		), */
