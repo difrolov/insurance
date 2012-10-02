@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-
+var_dump("<h1>this:</h1><pre>",$this,"</pre>");die();
 Data::setPageData($this,$res,true);?>
 <h1>Партнёрам</h1>
 <table class="inner_layout" cellspacing="0">
