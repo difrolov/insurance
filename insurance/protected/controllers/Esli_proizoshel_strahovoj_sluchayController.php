@@ -24,10 +24,10 @@ class Esli_proizoshel_strahovoj_sluchayController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
+	public function actionIndex($alias=false)
 	{
-		$event="Контент страницы \"Если произошёл страховой случай\"";
-		$this->render('index', array('res'=>$event));
+		$data=Data::getDataByAlias('esli_proizoshel_strahovoj_sluchay',$alias);
+    	$this->render('index', array('res' => $data));
 	}
 	/**
 	 * This is the action to handle external exceptions.
