@@ -583,11 +583,13 @@ function constructBlocks(tNode,arrayElement){
 	if (!arrayElement||typeof(arrayElement)!='object'){ // '34:left'
 		buildBlockUnit(tNode,arrayElement);
 	}else // если массив, делаем рекурсивный вызов функции: // Array( '66:right' )
+			// создать дочерний блок у родительского узла
+			// передать этот блок дальше:
 		for (var i=0;i<arrayElement.length;i++)
 			constructBlocks(tNode,arrayElement[i]);
 }
 //
-function createTemplate(params){
+function createTemplate(params){ // всегда массив или вообще ничего для макета 100
 	/*new Array( '34:left' ),
 				  new Array( '66:right',
 								'container',
@@ -596,9 +598,9 @@ function createTemplate(params){
 								'footer'
 						   )*/
 	var tmpl=document.getElementById('tmplInner');
-	divsCount=(!params)? 1:params.length;
+	divsCount=(!params)? 1:params.length; // количество вложенных массивов
 	for(i=0;i<divsCount;i++){
-		constructBlocks(tmpl,params);
+		constructBlocks(tmpl,params[i]);
 	}
 }
 // загрузим макет по сформированному шаблону
@@ -637,13 +639,14 @@ function loadTemplate(){
 								); 
 			break;
 		case "30s":
-			var schema=new Array( new Array( '34:left' ),
-								  new Array( '66:right',
-								  				'container',
-								  					new Array( '50:left' ),
-								  					new Array( '50:right' ),
-												'footer'
-								  		   )
+			var schema=new Array( '34:left',
+								  '66:right',
+								  new Array(
+										new Array ( '50:left',
+													'50:right'
+												  ),
+										'footer'
+										)
 								); 
 			break;
 		case "3i0":
