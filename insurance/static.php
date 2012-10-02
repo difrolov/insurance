@@ -1,4 +1,8 @@
-<?php /* @var $this Controller */
+<?php 
+
+// собственно, уже и не актуален.
+
+/* @var $this Controller */
 
 		$go=false;
 		$bg=(isset($_GET['bg']))?$_GET['bg'] : null;
