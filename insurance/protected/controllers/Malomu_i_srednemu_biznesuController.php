@@ -26,8 +26,8 @@ class Malomu_i_srednemu_biznesuController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$smallBusiness="Контент страницы \"Малому и среднему бизнесу\"";
-		$this->render('index', array('res'=>$smallBusiness));		
+		$data=Data::getDataByAlias('malomu_i_srednemu_biznesu',$alias);
+    	$this->render('index', array('res' => $data));
 	}
 	/**
 	 * This is the action to handle external exceptions.

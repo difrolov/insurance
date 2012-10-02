@@ -26,8 +26,8 @@ class Esli_proizoshel_strahovoj_sluchayController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$event="Контент страницы \"Если произошёл страховой случай\"";
-		$this->render('index', array('res'=>$event));
+		$data=Data::getDataByAlias('esli_proizoshel_strahovoj_sluchay',$alias);
+    	$this->render('index', array('res' => $data));
 	}
 	/**
 	 * This is the action to handle external exceptions.

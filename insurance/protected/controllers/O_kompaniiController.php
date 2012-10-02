@@ -26,10 +26,8 @@ class O_kompaniiController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$about="Контент страницы \"О компании\"";
-		$this->render('index', array('res'=>$about));
+		$data=Data::getDataByAlias('o_kompanii',$alias);
+    	$this->render('index', array('res' => $data));
 	}
 	/**
 	  *

@@ -26,8 +26,8 @@ class PartneramController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$partners="Контент страницы \"Партнёрам\"";
-		$this->render('index', array('res'=>$partners));
+		$data=Data::getDataByAlias('partneram',$alias);
+    	$this->render('index', array('res' => $data));
 	}
 	/**
 	 * This is the action to handle external exceptions.

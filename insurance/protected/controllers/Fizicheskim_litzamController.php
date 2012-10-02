@@ -26,8 +26,8 @@ class Fizicheskim_litzamController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$privatePersons="Контент страницы \"Физическим лицам\"";
-		$this->render('index', array('res'=>$privatePersons));
+		$data=Data::getDataByAlias('fizicheskim_litzam',$alias);
+    	$this->render('index', array('res' => $data));
 	}
 	/**
 	 * This is the action to handle external exceptions.

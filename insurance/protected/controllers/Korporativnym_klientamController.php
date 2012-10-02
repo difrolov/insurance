@@ -25,8 +25,9 @@ class Korporativnym_klientamController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
-	{	$corporative="Контент страницы \"Корпоративным клиентам\"";
-			$this->render('index', array('res'=>$corporative));
+	{	
+		$data=Data::getDataByAlias('korporativnym_klientam',$alias);
+    	$this->render('index', array('res' => $data));
 	}	
 	public function actionGotovoye_reshenije()
 	{	//$corporative="Контент страницы \"Корпоративным клиентам\"";
