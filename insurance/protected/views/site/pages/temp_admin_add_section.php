@@ -543,11 +543,14 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 <button id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
 <script type="text/javascript">
 //
-function buildBlockUnit(tmpl,blockPrototype){ // только строка
-	var blockData,dWidth,dFloat;
+function buildBlockUnit(tNode,blockPrototypeParams){ // только строка
+	var blockData,dWidth,dFloat,block_type;
 	var dHeight=false;
-	if (blockPrototype) {
-		blockData=blockPrototype.split(":");
+	if ( blockPrototypeParams
+		 && blockPrototypeParams.indexOf(":")!=-1 // '34:left'
+	   ) {
+		var block_type='wrapper';
+		blockData=blockPrototypeParams.split(":");
 		dWidth=blockData[0]+'%';
 		dFloat=blockData[1];
 		dHeight="100%";
@@ -557,56 +560,47 @@ function buildBlockUnit(tmpl,blockPrototype){ // только строка
 	}
 	// создать оболочку для блока с конетнтом (без отступов)
 	var DivWrapper=document.createElement('div');
-	tmpl.appendChild(DivWrapper);
+	// добавить к макету:
+	tNode.appendChild(DivWrapper);
 	DivWrapper.style.width=dWidth; 
 	if (dHeight) DivWrapper.style.height=dHeight;
 	DivWrapper.style.float=dFloat;
 	DivWrapper.style.background='cornsilk';
-	// создать блок для контента (с отступами)
-	var DivStuff=document.createElement('div');
-	DivWrapper.appendChild(DivStuff);
-	DivStuff.className='DivStuff';
-	DivWrapper.style.background='lightcyan';
+	
+	
+	
+	// если не контейнер:
+	if (blockPrototypeParams!="container") {
+		// создать блок для контента (с отступами)
+		var DivStuff=document.createElement('div');
+		DivWrapper.appendChild(DivStuff);
+		DivStuff.className='DivStuff';
+		DivWrapper.style.background='lightcyan';
+	}
 }
 //
-function constructBlocks(tmpl,arrayElement){
-	if (!arrayElement||typeof(arrayElement)!='object'){
-		//if (!arrayElement) tmpl.innerHTML="<div>! arrayElement</div>";
-		buildBlockUnit(tmpl,arrayElement);
-		// создать первый вложенный элемент (без отступов)
-		/*var newDivNoOffcet=document.createElement('div');
-		tmpl.appendChild(newDivNoOffcet);
-		newDivNoOffcet.style.background='yellow';
-		
-		
-		// создать второй элемент (без отступов)
-		var newDivInside=document.createElement('div');
-		newDivNoOffcet.appendChild(newDivInside);
-		var wdth=(!widthArray[i])? '50':widthArray[i];
-		newDivInside.style.width=wdth+"%";
-		if (floatsArray)
-			newDivInside.style.float=floatsArray[i];
-		if (!i){
-			var outerHeight=$(div).innerHeight();
-			newDivInside.style.height=outerHeight-8+'px';
-			alert(newDivInside.style.height);
-		}
-		// создать третий элемент (с отступами, для контента)
-		newDivInsideContent=document.createElement('div');
-		newDivInside.appendChild(newDivInsideContent);
-		newDivInsideContent.style.padding="6px";
-		newDivInsideContent.innerHTML="Содержание колонки "+i+" здесь!";*/
-		
-	}else
+function constructBlocks(tNode,arrayElement){
+	if (!arrayElement||typeof(arrayElement)!='object'){ // '34:left'
+		buildBlockUnit(tNode,arrayElement);
+	}else // если массив, делаем рекурсивный вызов функции: // Array( '66:right' )
+			// создать дочерний блок у родительского узла
+			// передать этот блок дальше:
 		for (var i=0;i<arrayElement.length;i++)
-			constructBlocks(tmpl,arrayElement[i]);
+			constructBlocks(tNode,arrayElement[i]);
 }
 //
-function createTemplate(params){
+function createTemplate(params){ // всегда массив или вообще ничего для макета 100
+	/*new Array( '34:left' ),
+				  new Array( '66:right',
+								'container',
+									new Array( '50:left' ),
+									new Array( '50:right' ),
+								'footer'
+						   )*/
 	var tmpl=document.getElementById('tmplInner');
-	divsCount=(!params)? 1:params.length;
+	divsCount=(!params)? 1:params.length; // количество вложенных массивов
 	for(i=0;i<divsCount;i++){
-		constructBlocks(tmpl,params)
+		constructBlocks(tmpl,params[i]);
 	}
 }
 // загрузим макет по сформированному шаблону
@@ -619,150 +613,8 @@ function loadTemplate(){
 		function(){
 		$('#tmplPlace').animate({opacity:1},300);
 	});
-	switch(tmplSchema){
-		// одна колонка
-		case "100":
-			break;
-		// две колонки
-		case "200":
-			var schema=new Array( new Array( '50:left' ),
-								  new Array( '50:right' )
-								); 
-			break;
-		case "210":
-			var schema=new Array( new Array( '34:left' ),
-								  new Array( '66:right',
-								  			 	'subheader',
-												'container'
-								  		   )
-								); 
-			break;
-		// три колонки
-		case "300":
-			var schema=new Array( new Array( '33:left' ),
-								  new Array( '33:left' ),
-								  new Array( '34:right' )
-								); 
-			break;
-		case "30s":
-			var schema=new Array( new Array( '34:left' ),
-								  new Array( '66:right',
-								  				'container',
-								  					new Array( '50:left' ),
-								  					new Array( '50:right' ),
-												'footer'
-								  		   )
-								); 
-			break;
-		case "3i0":
-			var schema=new Array( new Array( '25:left' ),
-								  new Array( '50:left',
-								  				'subheader',
-												'container'
-								  		   ),
-								  new Array( '25:right' )
-								); 
-			break;
-		case "3s0":
-			var schema=new Array( new Array( '34:left' ),
-								  new Array( '66:right',
-								  			    'subheader',
-												'container',
-													new Array( '50:left' ),
-								  					new Array( '50:right' )
-													     
-								  		   )
-								); 
-			break;
-		case "3ss":
-			var schema=new Array( new Array( '34:left' ),
-								  new Array( '66:right',
-								  		   	 	'subheader',
-												'container',
-													new Array( '50:left' ),
-								  					new Array( '50:right' ),
-												'footer'														
-										   )
-								); 
-			break;
-		// 4 колонки
-		case "400":
-			var schema=new Array( new Array( '25:left' ),
-								  new Array( '25:left' ),
-								  new Array( '25:left' ),
-								  new Array( '25:right' )
-								); 
-			break;
-		case "40i":
-			var schema=new Array( new Array( '25:left' ),
-								  new Array( '75:right',
-								  				'container',
-								  					new Array( '50:left' ),
-								  					new Array( '50:right' ),
-											 	'footer'
-										   )
-								); 
-			break;
-		case "40s":
-			var schema=new Array( new Array( '25:left' ),
-								  new Array( '75:right',
-								  				'container',
-													new Array( '33:left' ),
-								  					new Array( '33:right' ),
-													new Array( '34:right' ),
-											 	'footer'
-										   )
-								); 
-			break;
-		case "4i0":
-			var schema=new Array( new Array( '25:left' ),
-								  new Array( '50:left',
-								  				'subheader',
-												'container',
-													  new Array( '50:left' ),
-													  new Array( '50:right' )
-														 
-								  		   ),
-								  new Array( '25:right' )
-								); 
-			break;
-		case "4ii":
-			var schema=new Array( new Array( '25:left' ),
-								  new Array( '50:left',
-								  				'subheader',
-												'container',
-													  new Array( '50:left' ),
-													  new Array( '50:right' ),
-												'footer'
-														 
-								  		   ),
-								  new Array( '25:right' )
-								); 
-			break;
-		case "4s0":
-			var schema=new Array( new Array('25:left'),
-								  new Array('75:right',
-								  				'subheader',
-												'container',
-													  new Array('33:left'),
-								  					  new Array('33:right'),
-													  new Array('34:right')													
-								  		   )
-								); 
-			break;
-		case "4ss":
-			var schema=new Array( new Array( '25:left' ),
-								  new Array( '75:right',
-								  		   	 	'subheader',
-												'container',
-													  new Array('33:left'),
-													  new Array('33:right'),
-													  new Array('34:right'),
-										       	'footer'														
-										   )
-								); 
-			break;
-	}
+	var colsCount=tmplSchema.indexOf(1);
+	
 	createTemplate(schema);
   }catch(e){
 	  alert(e.message);

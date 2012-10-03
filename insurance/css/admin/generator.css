@@ -1,0 +1,156 @@
+@charset "utf-8";
+/* CSS Document */
+button#loadTemplate{
+	border-radius:6px;
+	display:none;
+	margin:10px 0;
+	opacity:0;
+	padding:8px 12px;
+}
+div#chHeaders,
+div#psFooter{
+display:none;
+}
+div.DivStuff{
+	padding:6px;
+}
+div#mng{
+	border:solid 4px #CCCCCC;
+	margin-top:10px;
+	padding-bottom:5px;
+	padding-left:6px;
+}
+
+div#select_mod > div{
+	background:#CCCCFF;
+	border-radius:4px;
+	cursor:pointer;
+	display:inline-block;
+	margin: 4px 8px 4px 0;
+	padding:6px 8px;
+}
+div#select_mod > div:hover{
+	background:#66C;
+	color:#FFF;
+}
+div#txtChoice div{
+	margin-top:6px;
+}
+div#txtActions >div{
+	line-height:43px;
+}
+div#txtActions >div:first-child{
+	padding-top:4px;
+}
+div#txtActions div:last-child,
+div#txtActions, 
+div#txtChoice,
+div#currentChoice,
+div#txtChoice > div div{
+	display:inline-block;
+}
+div#currentChoice span{
+	display:block;
+}
+div#txtChoice >div div{ /*  */
+	height:26px;
+	width:35px;
+	margin:0 0 0 6px;
+}
+div.oneColumn,
+div.twoColumn,
+div.threeColumn,
+div.fourColumn,
+div#txtChoice
+	>div:first-child +div div,
+div#txtChoice 
+	>div:last-child div {
+	background-image:url(img/add-sectiion.gif);
+	background-repeat:no-repeat;
+	border:solid 3px #999;
+	border-radius:2px;
+	cursor:pointer;
+	padding:2px;
+}
+div.threeNoneShared{
+	background-position:1px -115px;
+}
+div.threeSharedShared{
+	background-position:1px -86px;
+}
+div.fourNoneInside{
+	background-position:-37px -115px;
+}
+div.fourNoneShared{
+	background-position:-74px -115px;
+}
+div.fourInsideInside{
+	background-position:-37px -86px;
+}
+div.fourSharedShared{
+	background-position:-75px -86px !important;
+}
+div.oneColumn{
+	background-position:1px 1px;
+}
+div.twoColumn{
+	background-position:-37px 1px;
+}
+div.threeColumn{
+	background-position:-75px 1px;
+}
+div.fourColumn{
+	background-position:1px -28px;
+}
+div.twoColumnSubheader{
+	background-position:-37px -28px;
+}
+div.threeColumnInside{
+	background-position:-75px -28px;
+}
+div.threeColumnShared{
+	background-position:1px -57px;
+}
+div.fourColumnInside{
+	background-position:-37px -57px;
+}
+div.fourColumnShared{
+	background-position:-75px -57px;
+}
+div#txtActions > div:first-child +div,
+div#txtActions > div:last-child{ /*	вверх не переносить, иначе возникнет конфликт отображения блока!*/
+	margin-top:-4px;
+display:none; 
+}
+div#currentChoice{
+	background:#CCFFCC;
+	border-radius:2px;
+	display:inline-block;
+	min-height:24px;
+	margin-left:20px;
+	margin-top:8px;
+	opacity:0;
+	padding:6px 10px 6px 8px;
+	vertical-align:top;
+	width:40%;
+}
+div#tmplPlace{
+	border:solid 2px #CCCCCC;
+	display:none;
+	opacity:0;
+	overflow:auto;
+}
+div#tmplPlace > div{
+	margin:4px;
+}
+div#tmplInner{
+	border:dashed 2px #CCCCCC;
+	height:450px;
+}
+div#tmplPlace div.column{
+	border: dashed 2px #999999;
+}
+div#tmplPlace div.column > div{
+	padding:6px;
+}
+

@@ -23,8 +23,34 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive-yii.css" media="screen, projection" />
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/less.js" type="text/javascript"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+<?	if (Yii::app()->controller->getId()=='generator'){?>
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
+<? 	}else{?>
+<script>
+$(document).ready(function() {
+	try{
+		var sPlus=$("#main_submenu li")[1];
+  		if(sPlus.className.indexOf('active')!=-1) {
+			var offLeft=$(sPlus).offset().left;
+			var offRight=$(sPlus).offset().right;
+			var goHeight=$(sPlus).css('line-height');
+			var addSubsectionButton=document.createElement('li');
+			document.getElementById('yw2').appendChild(addSubsectionButton);
+			addSubsectionButton.className='active command';
+			$(addSubsectionButton).html('<a href="<?php echo Yii::app()->request->baseUrl; ?>/admin/generator" class="command"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Добавить подраздел</a>');
+			$(addSubsectionButton).css({
+		  		left: offLeft+'px',
+				position: 'absolute',
+		  		top: '32px'
+			});
+		}
+	}catch(e){
+		alert(e.message);
+	}
+})
+</script>
+<?	}?>
 </head>
-
 <body>
 
 
@@ -35,8 +61,8 @@
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(
 		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
-		        array('label'=>'Управление разделами', 'url'=>'#'),
 		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/fileUploader')),
+		        array('label'=>'Управление разделами', 'url'=>'44', 'active'=>true),
 		        array('label'=>'Messages', 'url'=>'#'),
 		    ),
 		)); ?>
