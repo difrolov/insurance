@@ -36,6 +36,7 @@
 		    'items'=>array(
 		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
 		        array('label'=>'Управление разделами', 'url'=>'#'),
+		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/fileUploader')),
 		        array('label'=>'Messages', 'url'=>'#'),
 		    ),
 		)); ?>
