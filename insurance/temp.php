@@ -10,21 +10,21 @@ html, body{
 }
 
 div[footer]{
-	border-top:solid 1px #CCCCCC;
+	border-top:dashed 2px #999;
 }
 
 div.column3center,
 div.column3right,
 div.header3inside,
 div.left3{
-	width:58px;
+	width:212px;/*58	+++*/
 }
 div.column4{
-	width:41px;
+	width:156px;/*41	+++*/
 }
 
 div.column4last{
-	width:42px;
+	width:156px;/*42	+++*/
 }
 
 div.column4,
@@ -32,34 +32,42 @@ div.column3center,
 div.header3inside,
 div.hf4Inside,
 div[class*="left"]{
-	border-right:solid 1px #CCC;
+	border-right:dashed 2px #999;
+}
+
+div.hf4Inside[footer]{
+	margin-right:2px; /*	иначе - непонятный косяк с нижним блоком псевдофутера	*/
+}
+
+div.column4[right]{
+	border-right: none;
 }
 
 div.hColMiddle{
-	height:151px;
+	height:350px;/*151	+++*/
 }
 
 div.hColShort{
-	height:110px;
+	height:268px;/*110	+++*/
 }
 
 div[header]{
-	border-bottom:solid 1px #CCCCCC;
+	border-bottom:dashed 2px #999;
 }
 
 div[header],
 div[footer]{
-	height:32px;
+	height:72px;/*32*/
 }
 
 div.hFull,
 div[left]{
-	height:192px;
+	height:432px;/*192*/
 }
 
 div.first{
-	height:200px;
-	border:solid 2px #CCCCCC;
+	height:440px;/*200	+++*/
+	border:dashed 2px #999;
 	display:inline-block;
 	margin-top:6px;
 	margin-right:6px;
@@ -88,23 +96,23 @@ h4:after{ /* только для тестовой версии */
 }
 
 div.hf3Shared{
-	width:125px;
+	width:434px;/*125	+++*/
 }
 
 div.hf4Shared{
-	width:142px;
+	width:490px;/*142	+++*/
 }
 
 div.hf4Inside,
 div.left2{
-	width:91px;
+	width:322px;/*91	+++*/
 }
 
 hr{ /* только для тестовой версии */
 	border: none;
 	border-bottom:solid 2px #CCC;
 	clear:both;
-	height:10px;
+	height:10px;/**/
 }
 
 div[right], 
@@ -115,12 +123,34 @@ div[footer]{
 }
 
 div.right2{
-	width:92px;
+	width:322px;/*92	+++*/
 }
 </style>
 <script>
-
-function createTemplate(tmplSchema){
+function goTemplate(){
+arrSchema=new Array(  '100',  //0
+					  '200', //1
+					  '210', //4
+					  '300', //2
+					  '3i0', //5
+					  '3s0', //6
+					  '3ss', //7
+					  '30s', //8
+					  '400', //3
+					  '4i0', //9
+					  '4s0', //10
+					  '40i', //13
+					  '40s', //14
+					  '4ii', //11
+					  '4ss' //12
+					);
+	for (a=0;a<arrSchema.length;a++) {
+		//if (a<3) alert(arrSchema[a]);
+		createTemplate(arrSchema[a],true);
+	}
+}
+	
+function createTemplate(tmplSchema,goLoop){
   try{ //alert(tmplSchema);	
   	// получить количество блоков:
 	var colsCountInit=colsCount=parseInt(tmplSchema.substring(0,1));
@@ -370,9 +400,6 @@ function createTemplate(tmplSchema){
 						case '4ss':
 							tmplBlock+=' hColShort';
 							break;
-						case '40i':
-							tmplBlock+=' hf4Inside';
-								break;
 						case '3ss':
 							tmplBlock+=' hf3Shared';
 								break;
@@ -384,6 +411,9 @@ function createTemplate(tmplSchema){
 						case '40i':
 						case '40s':
 							tmplBlock+=' footer';
+								break;
+						case '4ss':
+							tmplBlock+=' right';
 								break;
 					}
 				
@@ -415,7 +445,10 @@ function createTemplate(tmplSchema){
 	}
 	tmplBlock+="</div>";
 	//alert(tmplBlock);
-	document.getElementById('tmplPlace').innerHTML=tmplBlock;
+	if (goLoop)
+		document.getElementById('tmplPlace').innerHTML+='<div>'+tmplSchema+'</div>'+tmplBlock;
+	else
+		document.getElementById('tmplPlace').innerHTML=tmplBlock;
 	//alert(tmplSchema+': '+colsCount+'\n[1]= '+tmplSchema.substring(1,2)+', [2]= '+tmplSchema.substring(2));
   }catch(e){
 	  alert(e.message);
@@ -573,6 +606,7 @@ function createTemplate(tmplSchema){
 </div>
 <?	}?>
 <hr>
+<a href="javascript:goTemplate();">goTemplate</a>
 <input type="text" id="int" size="1" value="30s">
 <a href="javascript:createTemplate(document.getElementById('int').value);">check tmplSchema </a>
 <div id="tmplPlace"></div>

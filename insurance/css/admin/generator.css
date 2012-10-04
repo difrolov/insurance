@@ -154,22 +154,23 @@ div#tmplPlace div.column > div{
 	padding:6px;
 }
 
+/*	СТИЛИ СХЕМЫ МАКТЕТА	*/
 div[footer]{
-	border-top:solid 1px #CCCCCC;
+	border-top:dashed 2px #999;
 }
 
 div.column3center,
 div.column3right,
 div.header3inside,
 div.left3{
-	width:58px;
+	width:212px;/*58	+++*/
 }
 div.column4{
-	width:41px;
+	width:156px;/*41	+++*/
 }
 
 div.column4last{
-	width:42px;
+	width:156px;/*42	+++*/
 }
 
 div.column4,
@@ -177,38 +178,46 @@ div.column3center,
 div.header3inside,
 div.hf4Inside,
 div[class*="left"]{
-	border-right:solid 1px #CCC;
+	border-right:dashed 2px #999;
+}
+
+div.hf4Inside[footer]{
+	margin-right:2px; /*	иначе - непонятный косяк с нижним блоком (псевдофутером) для 4-х колонок	*/
+}
+
+div.column4[right]{
+	border-right: none;
 }
 
 div.hColMiddle{
-	height:151px;
+	height:350px;/*151	+++*/
 }
 
 div.hColShort{
-	height:110px;
+	height:268px;/*110	+++*/
 }
 
 div[header]{
-	border-bottom:solid 1px #CCCCCC;
+	border-bottom:dashed 2px #999;
 }
 
 div[header],
 div[footer]{
-	height:32px;
+	height:72px;/*32*/
 }
 
 div.hFull,
 div[left]{
-	height:192px;
+	height:432px;/*192*/
 }
 
 div.first{
-	height:200px;
-	border:solid 2px #CCCCCC;
+	height:440px;/*200	+++*/
+	border:dashed 2px #999;
 	display:inline-block;
 	margin-top:6px;
 	margin-right:6px;
-	width:200px;
+	width:664px; /*200*/
 }
 
 div.first div { /* ? */
@@ -228,16 +237,16 @@ h4{
 }
 
 div.hf3Shared{
-	width:125px;
+	width:434px;/*125	+++*/
 }
 
 div.hf4Shared{
-	width:142px;
+	width:490px;/*142	+++*/
 }
 
 div.hf4Inside,
 div.left2{
-	width:91px;
+	width:322px;/*91	+++*/
 }
 
 div[right], 
@@ -248,5 +257,5 @@ div[footer]{
 }
 
 div.right2{
-	width:92px;
+	width:322px;/*92	+++*/
 }
