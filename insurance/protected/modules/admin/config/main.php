@@ -1,6 +1,6 @@
 <?php
 return CMap::mergeArray(
-		require('/../config/local.php'),
+		require($_SERVER['DOCUMENT_ROOT'].'/protected/config/local.php'),
 		array(
 			'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 			'defaultController' => 'default',
