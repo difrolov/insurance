@@ -8,20 +8,17 @@
 html, body{
 	height:100%;
 }
-div.borderRight{
-	border-right:solid 1px #CCCCCC;
-}
-div.borderTop,
+
 div[footer]{
 	border-top:solid 1px #CCCCCC;
 }
 
 div.column3center,
 div.column3right,
-div.header3inside{
+div.header3inside,
+div.left3{
 	width:58px;
 }
-
 div.column4{
 	width:41px;
 }
@@ -33,8 +30,9 @@ div.column4last{
 div.column4,
 div.column3center,
 div.header3inside,
+div.hf4Inside,
 div[class*="left"]{
-	border-right:solid 1px #CCCCCC;
+	border-right:solid 1px #CCC;
 }
 
 div.hColMiddle{
@@ -68,24 +66,24 @@ div.first{
 	width:200px;
 }
 
-div.first div {
+div.first div { /* ? */
 	padding:4px;
 }
 
-div.fLeft,
-div[class*="left"]{
+div.fLeft, /* убрать в рабочей версии! */
+div.column4,
+div.column3center,
+div.header3inside,
+div[class*="left"],
+div[header]{
 	float:left;
-}
-
-div.fRight{
-	float:right;
 }
 
 h4{
 	margin:4px 0;
 }
 
-h4:after{
+h4:after{ /* только для тестовой версии */
 	content:":";
 }
 
@@ -93,31 +91,27 @@ div.hf3Shared{
 	width:125px;
 }
 
-div.hf4Inside{
-	width:91px;
-}
-
 div.hf4Shared{
 	width:142px;
 }
 
-hr{
+div.hf4Inside,
+div.left2{
+	width:91px;
+}
+
+hr{ /* только для тестовой версии */
 	border: none;
 	border-bottom:solid 2px #CCC;
 	clear:both;
 	height:10px;
 }
 
-div.left2{
-	width:91px;
-}
-
-div.left3{
-	width:58px;
-}
-
-div.left4{
-	width:41px;
+div[right], 
+div.right2,
+div.column4last,
+div[footer]{
+	float:right;
 }
 
 div.right2{
@@ -235,75 +229,70 @@ function handleTmpl(tmplSchema){
     <h4>200</h4>
     <div class="first">
         <div class="left2" left>left</div>
-        <div class="fRight hFull right2" right>right</div>
+        <div class="hFull right2" right>right</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>210</h4>
     <div class="first">
         <div class="left2" left>left</div>
-        <div class="fRight right2" header>header</div>
-        <div class="fRight hColMiddle right2" right>right</div>
+        <div class="right2" header>header</div>
+        <div class="hColMiddle right2" right>right</div>
     </div>
 </div>
 <hr>
-<!-- 
-	2: 91, header:92
-    3: 58, [header,footer]-inside:59;[header,footer]-shared:125
-    4: 41-41-41-[[header,footer]-inside,right]:92;[[header,footer]-shared]:142
--->
 <div class="fLeft">
     <h4>300</h4>
     <div class="first">
         <div class="left3" left>left</div>
-        <div class="column3center fLeft hFull">center</div>
-        <div class="fLeft hFull column3right" right>right</div>
+        <div class="column3center hFull">center</div>
+        <div class="hFull column3right" right>right</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>3i0</h4>
     <div class="first">
         <div class="left3" left>left</div>
-        <div class="fLeft header3inside" header>header</div>
-        <div class="column3right fRight hFull borderTop" right>right</div>
-        <div class="column3center fRight hColMiddle">inside</div>
+        <div class="header3inside" header>header</div>
+        <div class="column3right hFull" right>right</div>
+        <div class="column3center hColMiddle">inside</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>3s0</h4>
     <div class="first">
         <div class="left3" left>left</div>
-        <div class="fLeft hf3Shared" header>header</div>
-        <div class="column3right fRight hColMiddle" right>right</div>
-        <div class="column3center fRight hColMiddle">inside</div>
+        <div class="hf3Shared" header>header</div>
+        <div class="column3right hColMiddle" right>right</div>
+        <div class="column3center hColMiddle">inside</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>30s</h4>
     <div class="first">
         <div class="left3" left>left</div>
-        <div class="column3center fLeft hColMiddle">inside</div>
-        <div class="column3right fLeft hColMiddle" right>right</div>
-        <div class="fRight hf3Shared" footer>footer</div>
+        <div class="column3center hColMiddle">inside</div>
+        <div class="column3right hColMiddle" right>right</div>
+        <div class="hf3Shared" footer>footer</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>3ss</h4>
     <div class="first">
         <div class="left3" left>left</div>
-        <div class="fLeft hf3Shared" header>header</div>
-        <div class="column3center fLeft hColShort">inside</div>
-        <div class="column3right fLeft hColShort" right>right</div>
-        <div class="fRight hf3Shared" footer>footer</div>
+        <div class="hf3Shared" header>header</div>
+        <div class="column3center hColShort">inside</div>
+        <div class="column3right hColShort" right>right</div>
+        <div class="hf3Shared" footer>footer</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>30s</h4>
     <div class="first">
         <div class="left3" left>left</div>
-        <div class="column3center fLeft hColMiddle">inside</div>
-        <div class="column3right fLeft hColMiddle" right>right</div>
-        <div class="fRight hf3Shared" footer>footer</div>
+        <div class="column3center hColMiddle">inside</div>
+        <div class="column3right hColMiddle" right>right</div>
+        <div class="hf3Shared" footer>footer</div>
     </div>
 </div>
 <hr>
@@ -311,72 +300,72 @@ function handleTmpl(tmplSchema){
 <div class="fLeft">
     <h4>400</h4>
     <div class="first">
-        <div class="left4" left>left</div>
-        <div class="column4 fLeft hFull">insideL</div>
-        <div class="column4 fLeft hFull">insideR</div>
-        <div class="column4 fLeft hFull" right>right</div>
+        <div class="column4" left>left</div>
+        <div class="column4 hFull">insideL</div>
+        <div class="column4 hFull">insideR</div>
+        <div class="column4 hFull" right>right</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>4i0</h4>
     <div class="first">
-        <div class="left4" left>left</div>
-      <div class="fLeft hf4Inside borderRight" header>header</div>
-        <div class="column4last fRight hFull" right>right</div>
-      <div class="column4 fLeft hColMiddle">insideL</div>
-      <div class="column4 fLeft hColMiddle">insideR</div>
+        <div class="column4" left>left</div>
+      <div class="hf4Inside" header>header</div>
+        <div class="column4last hFull" right>right</div>
+      <div class="column4 hColMiddle">insideL</div>
+      <div class="column4 hColMiddle">insideR</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>4s0</h4>
     <div class="first">
-        <div class="left4" left>left</div>
-        <div class="fRight hf4Shared" header>header</div>
-        <div class="column4last fRight hColMiddle" right>right</div>
-        <div class="column4 fLeft hColMiddle">insideL</div>
-        <div class="column4 fRight hColMiddle">insideR</div>
+        <div class="column4" left>left</div>
+        <div class="hf4Shared" header>header</div>
+        <div class="column4last hColMiddle" right>right</div>
+        <div class="column4 hColMiddle">insideL</div>
+        <div class="column4 hColMiddle">insideR</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>4ii</h4>
     <div class="first">
-        <div class="left4" left>left</div>
-      	<div class="fLeft hf4Inside borderRight" header>header</div>
-        <div class="fRight hFull column4last" right>right</div>
-      	<div class="fLeft hColShort column4">insideL</div>
-      	<div class="fLeft hColShort column4">insideR</div>
-        <div class="fRight hf4Inside borderRight" footer>footer</div>
+        <div class="column4" left>left</div>
+      	<div class="hf4Inside" header>header</div>
+        <div class="hFull column4last" right>right</div>
+      	<div class="column4 hColShort">insideL</div>
+      	<div class="column4 hColShort">insideR</div>
+        <div class="hf4Inside" footer>footer</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>4ss</h4>
     <div class="first">
-        <div class="left4" left>left</div>
-        <div class="fRight hf4Shared" header>header</div>
-        <div class="column4 fLeft hColShort">insideL</div>
-        <div class="column4 fLeft hColShort">insideL</div>
-        <div class="column4last fRight hColShort">insideR</div>
-        <div class="fRight hf4Shared" footer>footer</div>
+        <div class="column4" left>left</div>
+        <div class="hf4Shared" header>header</div>
+        <div class="column4 hColShort">insideL</div>
+        <div class="column4 hColShort">insideL</div>
+        <div class="column4last hColShort">insideR</div>
+        <div class="hf4Shared" footer>footer</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>40i</h4>
     <div class="first">
-        <div class="left4" left>left</div>
-        <div class="column4last fRight hFull" right>right</div>
-      	<div class="column4 fLeft hColMiddle">insideL</div>
-      	<div class="column4 fLeft hColMiddle">insideR</div>
-        <div class="fRight hf4Inside borderRight" footer>footer</div>
+        <div class="column4" left>left</div>
+        <div class="column4last hFull" right>right</div>
+      	<div class="column4 hColMiddle">insideL</div>
+      	<div class="column4 hColMiddle">insideR</div>
+        <div class="hf4Inside" footer>footer</div>
     </div>
 </div>
 <div class="fLeft">
     <h4>40s</h4>
     <div class="first">
-        <div class="left4" left>left</div>
-        <div class="column4 fLeft hColMiddle">insideL</div>
-        <div class="column4 fLeft hColMiddle">insideL</div>
-        <div class="column4last fRight hColMiddle">insideR</div>
-        <div class="fRight hf4Shared" footer>footer</div>
+        <div class="column4" left>left</div>
+        <div class="column4 hColMiddle">insideL</div>
+        <div class="column4 hColMiddle">insideL</div>
+        <div class="column4last hColMiddle">insideR</div>
+        <div class="hf4Shared" footer>footer</div>
     </div>
 </div>
 <hr>
