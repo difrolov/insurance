@@ -16,8 +16,10 @@ class AdminModule extends CWebModule
         $this->setImport(array(
         	'admin.models.*',
             'admin.components.*',
+        	'admin.views.*',
+
         ));
-        Yii::app()->setComponents(array('HelperAdmin'=>array('class'=>'application.modules.admin.components.HelperAdmin')));
+
 	}
 
 	public function beforeControllerAction($controller, $action)

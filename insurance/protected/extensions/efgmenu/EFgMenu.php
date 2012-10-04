@@ -11,14 +11,14 @@
  */
 Yii::import('zii.widgets.CMenu');
 class EFgMenu extends CMenu {
-	
+
 	public $bDev = false;
-	
+
 	public $trigger = '';//empty->menubar, string->menu
 	public $menuOptions = array();
 	public $menubarOptions = array();
 	public $activeCssClass = 'ui-state-active';
-	
+
 
 	private $isMenuBar;
 	private $ulSelector = '';
@@ -33,10 +33,10 @@ class EFgMenu extends CMenu {
   }
 */
 	public function init() {
-		
+
 		if (!@$this->htmlOptions['id'])
 			$this->htmlOptions['id'] = $this->getId();
-		
+
 		$this->isMenuBar = !$this->trigger;
 		$this->ulSelector = is_string($this->items) ? $this->items : '#'.$this->htmlOptions['id'];
 
@@ -54,10 +54,10 @@ class EFgMenu extends CMenu {
 			$this->menuOptions = array_merge(array(
 
 			), $this->menuOptions);
-			
+
 		}
-		
-		
+
+
 		parent::init();
 
 
@@ -68,14 +68,14 @@ class EFgMenu extends CMenu {
 		$cs->registerCoreScript('jquery.ui');
 		$cs->registerScriptFile($assetsPath . '/js/fg.menu.nlac.js');
 		$cs->registerScriptFile($assetsPath . '/js/fg.menubar.nlac.js');
-		
-		
+
+
 		$cs->registerCssFile($am->getPublishedUrl(Yii::getPathOfAlias('system.web.js.source')) . '/jui/css/base/jquery-ui.css');
 		$cs->registerCssFile($assetsPath . '/css/fg.menu.nlac.css');
 		$cs->registerCssFile($assetsPath . '/css/fg.menubar.nlac.css');
-		
-		
-		
+
+
+
 		$ul = '$("' . $this->ulSelector . '")';
 		$script = ';(function(){';
 
@@ -84,7 +84,7 @@ class EFgMenu extends CMenu {
 			$script .= $ul . '.menubar(' . CJavaScript::encode($this->menubarOptions) . ',' . CJavaScript::encode($this->menuOptions) . ');';
 
 		} else {
-			
+
 			$script .= '
 var $ul=' . $ul . ',content=$.outerHTML($ul);$ul.remove();
 var menuOptions =' . CJavaScript::encode($this->menuOptions) . ';
@@ -94,7 +94,7 @@ $("' . $this->trigger . '").menu(menuOptions);';
 		}
 
 		$script .= '})();';
-		$cs->registerScript('setupEFgMenu' . $this->getId(), $script, CClientScript::POS_END); 
+		$cs->registerScript('setupEFgMenu' . $this->getId(), $script, CClientScript::POS_END);
 	}
 
 }

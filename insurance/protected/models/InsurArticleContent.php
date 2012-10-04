@@ -26,7 +26,7 @@ class InsurArticleContent extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -61,7 +61,7 @@ class InsurArticleContent extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'object' => array(self::BELONGS_TO, 'InsurInsuranceObject', 'object_id'),
-			'insurCoworkers' => array(self::BELONGS_TO, 'InsurCoworkers', 'insur_coworkers_id'),
+			/* 'insurCoworkers' => array(self::BELONGS_TO, 'InsurCoworkers', 'insur_coworkers_id'), */
 		);
 	}
 
@@ -84,13 +84,15 @@ class InsurArticleContent extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($params = false)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+		if($params){
+			$criteria->condition = $params;
+		}
 		$criteria->compare('id',$this->id);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('created',$this->created,true);

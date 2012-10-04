@@ -16,12 +16,29 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 	<link rel="stylesheet/less" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.less">
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive-yii.css" media="screen, projection" />
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/less.js" type="text/javascript"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+<?	
+// если загрузили раздел добавления подраздела:
+	// 1. приаттачим дополнительную таблицу стилей:
+if (Yii::app()->controller->getId()=='generator'){?>
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
+<?	// 2. приаттачим скрипты генерации макета:    ?>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.js"></script>    
+<? 	
+}else{
+// если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.js"></script>
+<?	
+}?>
 </head>
-
 <body>
-
 
 
 	<div id="header">
@@ -31,7 +48,7 @@
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(
 		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
-		        array('label'=>'Управление разделами', 'url'=>'#'),
+		        array('label'=>'Управление разделами', 'url'=>'44', 'active'=>true),
 		        array('label'=>'Messages', 'url'=>'#'),
 		    ),
 		)); ?>
@@ -46,17 +63,18 @@
 			'links'=>$this->breadcrumbs,
 		)); ?><!-- breadcrumbs -->
 	<?php endif?>
-	<div class="menu_left">
+	<div class="">
 		<?php
 		$items = HelperAdmin::menuItem();
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
-				'id'=>'vert1',
+				'id'=>'horz1',
 				'items'=>$items,
 				'menubarOptions' => array(
-						'direction'=>'vertical'
-				)
-		));
+						'direction'=>'horizontal',
+						'width'=> 70,
+				),
+			));
 
 		?>
 
@@ -68,11 +86,9 @@
 
 	<div class="clear"></div>
 
-	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+	<!-- <div id="footer">
+
+	</div >--><!-- footer -->
 
 </div><!-- page -->
 

@@ -8,7 +8,7 @@
  */
 
 Yii::import('zii.widgets.grid.CGridView');
-Yii::import('bootstrap.widgets.TbDataColumn');
+Yii::import('application.extensions.bootstrap.widgets.TbDataColumn');
 
 /**
  * Bootstrap Zii grid view.
@@ -77,7 +77,7 @@ class TbGridView extends CGridView
 
 		$popover = Yii::app()->bootstrap->popoverSelector;
 		$tooltip = Yii::app()->bootstrap->tooltipSelector;
-		
+
 		$afterAjaxUpdate = "js:function() {
 			jQuery('.popover').remove();
 			jQuery('{$popover}').popover();
@@ -97,7 +97,7 @@ class TbGridView extends CGridView
 		foreach ($this->columns as $i => $column)
 		{
 			if (is_array($column) && !isset($column['class']))
-				$this->columns[$i]['class'] = 'bootstrap.widgets.TbDataColumn';
+				$this->columns[$i]['class'] = 'application.extensions.bootstrap.widgets.TbDataColumn';
 		}
 
 		parent::initColumns();
