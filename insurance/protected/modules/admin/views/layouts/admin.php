@@ -23,33 +23,20 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive-yii.css" media="screen, projection" />
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/less.js" type="text/javascript"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-<?	if (Yii::app()->controller->getId()=='generator'){?>
+<?	
+// если загрузили раздел добавления подраздела:
+	// 1. приаттачим дополнительную таблицу стилей:
+if (Yii::app()->controller->getId()=='generator'){?>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
-<? 	}else{?>
-<script>
-$(document).ready(function() {
-	try{
-		var sPlus=$("#main_submenu li")[1];
-  		if(sPlus.className.indexOf('active')!=-1) {
-			var offLeft=$(sPlus).offset().left;
-			var offRight=$(sPlus).offset().right;
-			var goHeight=$(sPlus).css('line-height');
-			var addSubsectionButton=document.createElement('li');
-			document.getElementById('yw2').appendChild(addSubsectionButton);
-			addSubsectionButton.className='active command';
-			$(addSubsectionButton).html('<a href="<?php echo Yii::app()->request->baseUrl; ?>/admin/generator" class="command"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Добавить подраздел</a>');
-			$(addSubsectionButton).css({
-		  		left: offLeft+'px',
-				position: 'absolute',
-		  		top: '32px'
-			});
-		}
-	}catch(e){
-		alert(e.message);
-	}
-})
-</script>
-<?	}?>
+<?	// 2. приаттачим скрипты генерации макета:    ?>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.js"></script>    
+<? 	
+}else{
+// если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.js"></script>
+<?	
+}?>
 </head>
 <body>
 
