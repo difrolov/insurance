@@ -3,9 +3,7 @@
 
 $this->breadcrumbs=array(
 	$this->module->id,
-);
-	/*?>
-<h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1><? */?>
+);/*?><h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1><? */?>
 <div align="left">
 <h5>Выберите параметры макета создаваемой страницы</h5>
 <div id="mng">
@@ -38,7 +36,7 @@ $this->breadcrumbs=array(
         <span id="selectedFooterPlacement"></span>
     </div>
 </div>
-<div id="test">test block</div>
+<? //<div id="test">test block</div>?>
 <button id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
 <div id="<?="tmplPlace"?>">
 	<div>Выберите модули для размещения на странице:</div>

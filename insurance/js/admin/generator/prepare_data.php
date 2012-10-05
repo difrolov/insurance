@@ -1,3 +1,5 @@
+<?	if (isset($dwshow)){?><script><? }
+ob_start();?>
 // JavaScript Document
 tmplSchema=false; // пер. сохранения схемы выбранного шаблона
 /* 	Возможные варианты макета описываются по схеме:
@@ -21,8 +23,8 @@ function checkTemplateReady(){
 	var selIndex=false;
 	var selElementClassName=false;
 	// будем искать уже выбранные варианты, начиная с самого нижнего блока. Как только найдём первый, значит - можно загружать макет!
-	var testBlock=document.getElementById('test');
-	testBlock.innerHTML='';
+	//var testBlock=document.getElementById('test');
+	//testBlock.innerHTML='';
 	for (i=levelsArray.length-1;i>=0;i--){
 		dLevel=document.getElementById(levelsArray[i][0]);
 		if ( dLevel.style.display=='block'
@@ -103,7 +105,7 @@ function checkTemplateReady(){
 						}
 					break;
 				}
-				testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplSchema: '+tmplSchema;
+				//testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplSchema: '+tmplSchema;
 				break;
 			}
 		}
@@ -352,3 +354,7 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 	pyctosNextBlock.item(0).className=srce.className;
 	return pyctosNextBlock;			
 }
+<? 	$myscript=ob_get_contents();
+ob_get_clean();
+echo $myscript;
+if (isset($dwshow)){?></script><? }?>

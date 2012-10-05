@@ -1,3 +1,5 @@
+<?	if (isset($dwshow)){?><script><? }
+ob_start();?>
 // JavaScript Document
 //
 function createTemplate(tmplSchema,goLoop){
@@ -317,3 +319,8 @@ function loadTemplate(){
 	  alert(e.message);
   }
 }
+<?	
+$myscript=ob_get_contents();
+ob_get_clean();
+echo $myscript;
+if (isset($dwshow)){?></script><? }?>
