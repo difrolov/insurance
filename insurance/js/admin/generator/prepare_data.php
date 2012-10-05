@@ -111,15 +111,14 @@ function checkTemplateReady(){
 		}
 	}
 	if (tmplSchema!=0) {
-		$('#loadTemplate').css('display','block'); 
-		$('#loadTemplate').animate({opacity:1});
-		//document.getElementById('loadTemplate').style.display="block";
+		$('#tmpl_commands').css('display','block'); 
+		$('#tmpl_commands').animate({opacity:1});
 		return true;
 	}else{ 
-		$('#loadTemplate').animate(
+		$('#tmpl_commands').animate(
 			{opacity:0}, 
 			function (){
-				$('#loadTemplate').css('display','none');
+				$('#tmpl_commands').css('display','none');
 			}
 		);
 		return false;
@@ -179,7 +178,8 @@ function displayUserChoice(pyctosContainer){
 					break;
 				}
 			}
-			sBlocks.item(i).innerHTML='&bull; '+sText[i][1]+': '+currentPicTitle;
+			//sText[i][1]
+			sBlocks.item(i).innerHTML='<b>&bull; '+currentPicTitle+'</b>';
 			// спрятать инфо ниже текущего уровня:
 			for (b=i+1;b<(sBlocks.length);b++)
 				sBlocks[b].innerHTML='';

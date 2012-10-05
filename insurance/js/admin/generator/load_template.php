@@ -309,10 +309,17 @@ function loadTemplate(){
   try{
 	//alert(tmplSchema);	
 	$('#tmplPlace').css('display','block');
+	$('#selModules').css('display','block');
 	var topPos=$('#txtActions').offset().top;
-	$("html, body").animate({scrollTop:topPos},1000,
+	$("html, body").animate({scrollTop:topPos},500,
 		function(){
-		$('#tmplPlace').animate({opacity:1},300);
+		$('#tmplPlace').animate({opacity:1},150,
+			function(){
+				$('#selModules').animate({opacity:1},500,
+					function(){
+						
+					});
+			});
 	});
 	createTemplate(tmplSchema);
   }catch(e){

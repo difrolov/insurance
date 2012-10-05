@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 <h5>Выберите параметры макета создаваемой страницы</h5>
 <div id="mng">
 	<div id="txtActions">
-    	<div>Схема макета:</div>
+    	<div>Колонки:</div>
         <div>Подзаголовок:</div>
         <div>Псевдофутер:</div>
     </div>
@@ -37,16 +37,22 @@ $this->breadcrumbs=array(
     </div>
 </div>
 <? //<div id="test">test block</div>?>
-<button id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
-<div id="<?="tmplPlace"?>">
-	<div>Выберите модули для размещения на странице:</div>
-	<div id="select_mod">
-    	<div>Новости</div>
+<div id="<?="tmpl_commands"?>">
+<button class="active" id="<?="loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
+<button class="passive" disabled id="<?="changeTemplate"?>" type="button" onClick="">Изменить макет</button>
+<button class="passive" disabled id="<?="cancelTemplateChanges"?>" type="button" onClick="">Отменить изменения</button>
+</div>
+<div id="<?="selModules"?>">
+	<p>Выберите модули для размещения на странице:</p>
+    <div id="select_mod">
+        <div>Новости</div>
         <div>Готовое решение</div>
         <div>Программа страхования</div>
         <div>Случайная статья</div>
         <div>Текст</div>
     </div>
+</div>
+<div id="<?="tmplPlace"?>">
 	<div id="<?="tmplInner"?>"></div>
 </div>
 </div>

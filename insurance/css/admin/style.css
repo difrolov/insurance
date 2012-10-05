@@ -221,9 +221,8 @@ div#search{
 	border:solid 1px #CCC;
 	margin-top:10px;
 }
-li.active.command{
-}
-li.active.command a.command{
+
+li.command a.command{
 	background:#C3D9FF; 
 	color:#08c;
 }
