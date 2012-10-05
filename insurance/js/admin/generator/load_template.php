@@ -1,3 +1,5 @@
+<?	if (isset($dwshow)){?><script><? }
+ob_start();?>
 // JavaScript Document
 //
 function createTemplate(tmplSchema,goLoop){
@@ -303,17 +305,47 @@ function createTemplate(tmplSchema,goLoop){
   }
 }
 // загрузим макет по сформированному шаблону
-function loadTemplate(){
+function loadTemplate(btn){ 
   try{
-	//alert(tmplSchema);	
-	$('#tmplPlace').css('display','block');
+	// display: block - область макета, кнопки, модули
+	display(['tmplPlace','tmpl_commands','sel_modules']);
 	var topPos=$('#txtActions').offset().top;
-	$("html, body").animate({scrollTop:topPos},1000,
+	$("html, body").animate(
+		{scrollTop:topPos},
+		500,
 		function(){
-		$('#tmplPlace').animate({opacity:1},300);
-	});
+			stateTemplateIsLoaded();
+		}
+	);
 	createTemplate(tmplSchema);
   }catch(e){
 	  alert(e.message);
   }
 }
+// кнопка.click изменить шаблон
+function changeTemplate(btn){ 
+  try{
+	tmplSchemaSaved=tmplSchema; // сохранить выбранную схему
+	// кнопки:
+	setButtonStat([btn.id],'passive'); // пассивна
+	setButtonStat(['btn_cancelTemplateChanges'],'active'); // активна
+	display(['choice_init']); // отобразить блок первоначального выбора
+	makeSolid(['choice_init']); // непрозрачный: блок первоначального выбора
+	makeLiquid(['tmplPlace','sel_modules']); // полупрозрачные: блок макета, модули
+  }catch(e){
+	  alert(e.message);
+  }
+}
+function cancelTemplateChanges(btn){
+  try{
+	tmplSchema=tmplSchemaSaved; // возвернуть!
+	stateTemplateIsLoaded();
+  }catch(e){
+	  alert(e.message);
+  }
+}
+<?	
+$myscript=ob_get_contents();
+ob_get_clean();
+echo $myscript;
+if (isset($dwshow)){?></script><? }?>

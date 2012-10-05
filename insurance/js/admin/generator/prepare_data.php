@@ -1,3 +1,5 @@
+<?	if (isset($dwshow)){?><script><? }
+ob_start();?>
 // JavaScript Document
 tmplSchema=false; // пер. сохранения схемы выбранного шаблона
 /* 	Возможные варианты макета описываются по схеме:
@@ -6,6 +8,7 @@ tmplSchema=false; // пер. сохранения схемы выбранног�
 	tmplSchema[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
 	Внимание! Тип псевдофутера 1 отсутствует, т.к. не может быть пседвофутера для количества колонок, меньше 3. В этом случае роль псевдофутера может выполнять любой добавляемый модуль.
 */
+tmplSchemaSaved=false;
 //проверить - допускает ли текущее состояние макета его загрузку
 function checkTemplateReady(){
 	tmplSchema=0;
@@ -21,8 +24,8 @@ function checkTemplateReady(){
 	var selIndex=false;
 	var selElementClassName=false;
 	// будем искать уже выбранные варианты, начиная с самого нижнего блока. Как только найдём первый, значит - можно загружать макет!
-	var testBlock=document.getElementById('test');
-	testBlock.innerHTML='';
+	//var testBlock=document.getElementById('test');
+	//testBlock.innerHTML='';
 	for (i=levelsArray.length-1;i>=0;i--){
 		dLevel=document.getElementById(levelsArray[i][0]);
 		if ( dLevel.style.display=='block'
@@ -103,23 +106,28 @@ function checkTemplateReady(){
 						}
 					break;
 				}
-				testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplSchema: '+tmplSchema;
+				//testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplSchema: '+tmplSchema;
 				break;
 			}
 		}
 	}
+	// управлять видимостью остальных блоков:
 	if (tmplSchema!=0) {
-		$('#loadTemplate').css('display','block'); 
-		$('#loadTemplate').animate({opacity:1});
-		//document.getElementById('loadTemplate').style.display="block";
+		if($('#sel_modules').css('display')!='block'){
+			display(['tmpl_commands']); // кнопки управления шаблонами
+			makeSolid(['tmpl_commands']);
+		}
+		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
+			setButtonStat(['btn_loadTemplate'],'active');
+		}
 		return true;
-	}else{ 
-		$('#loadTemplate').animate(
-			{opacity:0}, 
-			function (){
-				$('#loadTemplate').css('display','none');
-			}
-		);
+	}else{
+		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
+			setButtonStat(['btn_loadTemplate'],'passive');
+		}else{
+			makeLiquid(['tmpl_commands']); 
+			hide(['tmpl_commands']);
+		}
 		return false;
 	}
 } 
@@ -177,7 +185,8 @@ function displayUserChoice(pyctosContainer){
 					break;
 				}
 			}
-			sBlocks.item(i).innerHTML='&bull; '+sText[i][1]+': '+currentPicTitle;
+			//sText[i][1]
+			sBlocks.item(i).innerHTML='<b>&bull; '+currentPicTitle+'</b>';
 			// спрятать инфо ниже текущего уровня:
 			for (b=i+1;b<(sBlocks.length);b++)
 				sBlocks[b].innerHTML='';
@@ -352,3 +361,7 @@ function startHandleBlock( srce,blockTextToShow,divPyctos){
 	pyctosNextBlock.item(0).className=srce.className;
 	return pyctosNextBlock;			
 }
+<? 	$myscript=ob_get_contents();
+ob_get_clean();
+echo $myscript;
+if (isset($dwshow)){?></script><? }?>

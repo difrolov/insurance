@@ -29,7 +29,12 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 					array('name'=> 'styles',      'items'=> array( 'Styles','Format','Font','FontSize' )),
 					array('name'=> 'colors',      'items'=> array( 'TextColor','BGColor' )),
 					array('name'=> 'tools',       'items'=> array( 'Maximize', 'ShowBlocks','-','About' ))
-	),)
+			),
+			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browse')),
+	),
+
+
+
 ) ); ?>
 
 </form>

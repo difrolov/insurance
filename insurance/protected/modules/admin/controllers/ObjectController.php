@@ -52,9 +52,9 @@ class ObjectController extends Controller
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		if(isset($_POST['InsurArticleContent'])){
-			$model = InsurArticleContent::model()->findByPk($_GET['id']);
-			if(isset($model[0]->content)){
-				$model[0]->content = $_POST['InsurArticleContent']['content'];
+			$model = InsurArticleContent::model()->find(array('condition'=>"id=".$_GET['id']));
+			if(isset($model->content)){
+				$model->content = $_POST['InsurArticleContent']['content'];
 				$model->save();
 			}
 		}

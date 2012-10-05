@@ -29,12 +29,13 @@
 if (Yii::app()->controller->getId()=='generator'){?>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
 <?	// 2. приаттачим скрипты генерации макета:    ?>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.js"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.js"></script>    
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.php"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
 <? 	
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <?	
 }?>
 </head>
@@ -48,6 +49,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(
 		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
+		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/fileUploader')),
 		        array('label'=>'Управление разделами', 'url'=>'44', 'active'=>true),
 		        array('label'=>'Messages', 'url'=>'#'),
 		    ),

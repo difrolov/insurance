@@ -23,11 +23,13 @@
 				//первый уровень
 					if(!in_array($val['first_n'],$main)){
 						$main[] = $val['first_n'];
+						$first_url[$val['first_n']]['url'][] = 'object/getobject/'.$val['first_id'];
 					}
+
 					//второй уровень
 					if(in_array($val['first_n'],$res[$key]) ){
-						$temp[]=array('label'=>$val['first_n'],'url'=>array('#'),'items'=>array(($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('#')):null)));
-						$sec[$val['first_n']]['items'][]=($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('#')):null);
+						$temp[]=array('label'=>$val['first_n'],'url'=>array('object/getobject/'.$val['first_id']),'items'=>array(($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('object/getobject/'.$val['second_id'])):null)));
+						$sec[$val['first_n']]['items'][]=($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('object/getobject/'.$val['second_id'])):null);
 					}
 				/* 	//третий уровень
 					if(in_array($val['second_n'],$res[$key]) && $res[$key]['third_n'] != null){
@@ -38,11 +40,13 @@
 						$last[$key][$val['third_n']]=$res[$key]['last_n'];
 					} */
 				}
+				/* var_dump($first_url); */
 				foreach ($sec as $k=>$v){
 					foreach ($v as $k_s=>$sub){
-						$items[]=array('label'=>$k,'url'=>array('#'),$k_s=> (count($sub)>1?$sub:null));
-					}
 
+
+						$items[]=array('label'=>$k,'url'=>$first_url[$k]['url'],$k_s=> (count($sub)>1?$sub:null));
+					}
 				}
 			return $items;
 
