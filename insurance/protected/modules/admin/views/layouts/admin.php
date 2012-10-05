@@ -34,7 +34,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <? 	
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.js"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <?	
 }?>
 </head>
