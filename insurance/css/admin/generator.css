@@ -224,7 +224,9 @@ div.column4[right]{
 div.hColMiddle{
 	height:350px;/*151	+++*/
 }
-
+div.hColMiddleLong{
+	height:510px;
+}
 div.hColShort{
 	height:268px;/*110	+++*/
 }
@@ -233,18 +235,19 @@ div[header]{
 	border-bottom:dashed 2px #08C;
 }
 
-div[header],
-div[footer]{
+div[header]{
 	height:72px;/*32*/
 }
-
+div[footer]{
+	height:232px;/*32*/
+}
 div.hFull,
 div[left]{
-	height:432px;/*192*/
+	height:592px;/*192*/
 }
 
 div.first{
-	height:440px;/*200	+++*/
+	height:600px;/*200	+++*/
 	border:dashed 2px #08C;
 	display:inline-block;
 	margin-top:6px;

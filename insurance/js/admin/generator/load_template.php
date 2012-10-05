@@ -159,11 +159,13 @@ function createTemplate(tmplSchema,goLoop){
 							tmplBlock+=' hFull';
 								break;
 						case '30s':
-						case '3s0':
 						case '4s0':
 						case '40s':
 						case '40i':
 							tmplBlock+=' hColMiddle';
+								break;						
+						case '3s0':
+							tmplBlock+=' hColMiddleLong';
 								break;						
 						case '3ss':
 						case '4ss':
@@ -212,13 +214,15 @@ function createTemplate(tmplSchema,goLoop){
 								break;
 					}
 					switch(tmplSchema){ // добавить второй класс:
-						case '3i0': 
-						case '3s0': 
 						case '40i':
 						case '40s': 
+							tmplBlock+=' hColMiddle';
+								break;
+						case '3s0': 
+						case '3i0': 
 						case '4i0': 
 						case '4s0': 
-							tmplBlock+=' hColMiddle';
+							tmplBlock+=' hColMiddleLong';
 								break;
 						case '3ss':
 						case '4ii':
@@ -268,9 +272,9 @@ function createTemplate(tmplSchema,goLoop){
 					}
 					switch(tmplSchema){ // добавить второй класс
 						case '4i0':
-						case '4s0':
-							tmplBlock+=' hColMiddle';
-							break;
+						case '4s0': 
+							tmplBlock+=' hColMiddleLong';
+								break;
 						case '4ii':
 						case '4ss':
 							tmplBlock+=' hColShort';
