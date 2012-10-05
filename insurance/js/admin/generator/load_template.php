@@ -305,23 +305,50 @@ function createTemplate(tmplSchema,goLoop){
   }
 }
 // загрузим макет по сформированному шаблону
-function loadTemplate(){
+function loadTemplate(btn){ 
   try{
-	//alert(tmplSchema);	
-	$('#tmplPlace').css('display','block');
-	$('#selModules').css('display','block');
+	// display: block - область макета, кнопки, модули
+	display(['tmplPlace','tmpl_commands','sel_modules']);
 	var topPos=$('#txtActions').offset().top;
-	$("html, body").animate({scrollTop:topPos},500,
+	$("html, body").animate(
+		{scrollTop:topPos},
+		500,
 		function(){
-		$('#tmplPlace').animate({opacity:1},150,
-			function(){
-				$('#selModules').animate({opacity:1},500,
-					function(){
-						
-					});
-			});
-	});
+			// непрзрачне блоки: блок макета, кнопки, модули
+			makeSolid(['tmplPlace','tmpl_commands','sel_modules']);
+			// кнопки:
+			setButtonStat([btn.id,'btn_cancelTemplateChanges'],'passive'); // пассивна
+			setButtonStat(['btn_changeTemplate'],'active'); // активна
+			stateTemplateIsLoaded();
+		}
+	);
 	createTemplate(tmplSchema);
+  }catch(e){
+	  alert(e.message);
+  }
+}
+// кнопка.click изменить шаблон
+function changeTemplate(btn){ 
+  try{
+	tmplSchemaSaved=tmplSchema; // сохранить выбранную схему
+	// кнопки:
+	setButtonStat([btn.id],'passive'); // пассивна
+	setButtonStat(['btn_cancelTemplateChanges'],'active'); // активна
+	display(['choice_init']); // отобразить блок первоначального выбора
+	makeSolid(['choice_init']); // непрозрачный: блок первоначального выбора
+	makeLiquid(['tmplPlace','sel_modules']); // полупрозрачные: блок макета, модули
+  }catch(e){
+	  alert(e.message);
+  }
+}
+function cancelTemplateChanges(btn){
+  try{
+	tmplSchema=tmplSchemaSaved; // возвернуть!
+	// кнопки:
+	setButtonStat([btn.id],'passive'); // пассивна
+	setButtonStat(['btn_changeTemplate'],'active'); // активна
+	hide(['choice_init']); // отобразить блок первоначального выбора
+	makeSolid(['tmplPlace','sel_modules']); // непрозрачный: блок макета, модули
   }catch(e){
 	  alert(e.message);
   }

@@ -8,6 +8,7 @@ tmplSchema=false; // пер. сохранения схемы выбранног�
 	tmplSchema[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
 	Внимание! Тип псевдофутера 1 отсутствует, т.к. не может быть пседвофутера для количества колонок, меньше 3. В этом случае роль псевдофутера может выполнять любой добавляемый модуль.
 */
+tmplSchemaSaved=false;
 //проверить - допускает ли текущее состояние макета его загрузку
 function checkTemplateReady(){
 	tmplSchema=0;
@@ -110,17 +111,23 @@ function checkTemplateReady(){
 			}
 		}
 	}
+	// управлять видимостью остальных блоков:
 	if (tmplSchema!=0) {
-		$('#tmpl_commands').css('display','block'); 
-		$('#tmpl_commands').animate({opacity:1});
+		if($('#sel_modules').css('display')!='block'){
+			display(['tmpl_commands']); // кнопки управления шаблонами
+			makeSolid(['tmpl_commands']);
+		}
+		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
+			setButtonStat(['btn_loadTemplate'],'active');
+		}
 		return true;
-	}else{ 
-		$('#tmpl_commands').animate(
-			{opacity:0}, 
-			function (){
-				$('#tmpl_commands').css('display','none');
-			}
-		);
+	}else{
+		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
+			setButtonStat(['btn_loadTemplate'],'passive');
+		}else{
+			makeLiquid(['tmpl_commands']); 
+			hide(['tmpl_commands']);
+		}
 		return false;
 	}
 } 

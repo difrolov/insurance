@@ -128,12 +128,12 @@ div#currentChoice{
 	vertical-align:top;
 	width:45%;
 }
-div#selModules{
+div#sel_modules{
 	display:none;
 	opacity:0;
 	padding:4px;
 }
-div#selModules p{
+div#sel_modules p{
 	margin-bottom:2px;
 	margin-left:8px;
 }
