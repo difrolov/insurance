@@ -49,9 +49,9 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(
 		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
-		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/fileUploader')),
+		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/browser')),
 		        array('label'=>'Управление разделами', 'url'=>'44', 'active'=>true),
-		        array('label'=>'Messages', 'url'=>'#'),
+		        array('label'=>'Управление баннерами', 'url'=>'#'),
 		    ),
 		)); ?>
 	</div>

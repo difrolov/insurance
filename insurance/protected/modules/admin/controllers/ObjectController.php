@@ -69,6 +69,19 @@ class ObjectController extends Controller
 			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['id']));
 		}
 	}
+	//удаляем раздел
+	public function actionDelete(){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		if(isset($_POST['InsurArticleContent'])){
+			$model = InsurInsuranceObject::model()->find(array('condition'=>"id=".$_GET['id']));
+			if(isset($model->content)){
+				$model->status = 0;
+				$model->save();
+			}
+		}
+	}
 
 
 }
