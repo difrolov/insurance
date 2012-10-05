@@ -8,7 +8,8 @@ div.DivStuff{
 	padding:6px;
 }
 div#mng{
-	border:solid 4px #CCCCCC;
+	border:solid 4px #C3D9FF;
+	border-radius:5px;
 	margin-top:10px;
 	padding-bottom:5px;
 	padding-left:6px;
@@ -61,7 +62,7 @@ div#txtChoice
 	>div:last-child div {
 	background-image:url(img/add-sectiion.gif);
 	background-repeat:no-repeat;
-	border:solid 3px #999;
+	border:solid 3px #C3D9FF;
 	border-radius:2px;
 	cursor:pointer;
 	padding:2px;
@@ -148,12 +149,13 @@ div#tmpl_commands{
 	opacity:0;
 }
 div#tmpl_commands button{
-	border:solid 3px #CCC;
+	border:solid 3px #08C;/*CCC*/
 	border-radius:5px;
 	margin:10px 4px 10px 0;
 	padding:4px 18px;
 }
 div#tmpl_commands button.active{
+	background:#CEEFFF;
 	color:#08c;
 }
 div#tmpl_commands button.passive{
@@ -165,6 +167,7 @@ div#tmpl_commands button:hover{
 }
 div#tmplPlace{
 	border:solid 2px #08C;/*CCCCCC*/
+	border-radius:5px;
 	display:none;
 	opacity:0;
 	overflow:auto;
@@ -173,11 +176,11 @@ div#tmplPlace > div{
 	margin:4px;
 }
 div#tmplInner{
-	border:dashed 2px #CCCCCC;
+	border:dashed 2px #08C;
 	height:450px;
 }
 div#tmplPlace div.column{
-	border: dashed 2px #999999;
+	border: dashed 2px #08C;
 }
 div#tmplPlace div.column > div{
 	padding:6px;
@@ -185,7 +188,7 @@ div#tmplPlace div.column > div{
 
 /*	СТИЛИ СХЕМЫ МАКТЕТА	*/
 div[footer]{
-	border-top:dashed 2px #999;
+	border-top:dashed 2px #08C;
 }
 
 div.column3center,
@@ -207,7 +210,7 @@ div.column3center,
 div.header3inside,
 div.hf4Inside,
 div[class*="left"]{
-	border-right:dashed 2px #999;
+	border-right:dashed 2px #08C;
 }
 
 div.hf4Inside[footer]{
@@ -227,7 +230,7 @@ div.hColShort{
 }
 
 div[header]{
-	border-bottom:dashed 2px #999;
+	border-bottom:dashed 2px #08C;
 }
 
 div[header],
@@ -242,7 +245,7 @@ div[left]{
 
 div.first{
 	height:440px;/*200	+++*/
-	border:dashed 2px #999;
+	border:dashed 2px #08C;
 	display:inline-block;
 	margin-top:6px;
 	margin-right:6px;
@@ -287,4 +290,7 @@ div[footer]{
 
 div.right2{
 	width:322px;/*92	+++*/
+}
+width100{
+	width:100%;
 }

@@ -2,6 +2,29 @@
 ob_start();?>
 // JavaScript Document
 //
+function cancelTemplateChanges(btn){
+  try{
+	tmplSchema=tmplSchemaSaved; // возвернуть!
+	stateTemplateIsLoaded();
+  }catch(e){
+	  alert(e.message);
+  }
+}
+// кнопка.click изменить шаблон
+function changeTemplate(btn){ 
+  try{
+	tmplSchemaSaved=tmplSchema; // сохранить выбранную схему
+	// кнопки:
+	setButtonStat([btn.id],'passive'); // пассивна
+	setButtonStat(['btn_cancelTemplateChanges'],'active'); // активна
+	display(['choice_init']); // отобразить блок первоначального выбора
+	makeSolid(['choice_init']); // непрозрачный: блок первоначального выбора
+	makeLiquid(['tmplPlace','sel_modules']); // полупрозрачные: блок макета, модули
+  }catch(e){
+	  alert(e.message);
+  }
+}
+//
 function createTemplate(tmplSchema,goLoop){
   try{ //alert(tmplSchema);	
   	// получить количество блоков:
@@ -10,7 +33,7 @@ function createTemplate(tmplSchema,goLoop){
 	var tmplValue3=tmplSchema.substring(2);
 	if (tmplValue2!='0') colsCount+=1;
 	if (tmplValue3!='0') colsCount+=1;
-	var tmplBlock='<div class="first">';
+	var tmplBlock='<div class="first" onClick="selectColumn(event,this);">';
 	for (i=0;i<colsCount;i++){
 		tmplBlock+='	<div';
 		if (i==0) { // первая итерация:
@@ -293,7 +316,7 @@ function createTemplate(tmplSchema,goLoop){
 				break;
 			}
 		}
-		tmplBlock+=">block</div>";
+		tmplBlock+=">&nbsp;</div>";
 	}
 	tmplBlock+="</div>";
 	if (goLoop)
@@ -318,28 +341,12 @@ function loadTemplate(btn){
 		}
 	);
 	createTemplate(tmplSchema);
-  }catch(e){
-	  alert(e.message);
-  }
-}
-// кнопка.click изменить шаблон
-function changeTemplate(btn){ 
-  try{
-	tmplSchemaSaved=tmplSchema; // сохранить выбранную схему
-	// кнопки:
-	setButtonStat([btn.id],'passive'); // пассивна
-	setButtonStat(['btn_cancelTemplateChanges'],'active'); // активна
-	display(['choice_init']); // отобразить блок первоначального выбора
-	makeSolid(['choice_init']); // непрозрачный: блок первоначального выбора
-	makeLiquid(['tmplPlace','sel_modules']); // полупрозрачные: блок макета, модули
-  }catch(e){
-	  alert(e.message);
-  }
-}
-function cancelTemplateChanges(btn){
-  try{
-	tmplSchema=tmplSchemaSaved; // возвернуть!
-	stateTemplateIsLoaded();
+	var headerBlock=$("div[header='']")[0];
+	if (headerBlock){
+		var pWidth=$(headerBlock).width()-10;
+		//alert(pWidth);
+		headerBlock.innerHTML='<div>Текст подзаголовка:</div><input type="text" style="width:'+pWidth+'px; padding:4px;">'
+	}
   }catch(e){
 	  alert(e.message);
   }

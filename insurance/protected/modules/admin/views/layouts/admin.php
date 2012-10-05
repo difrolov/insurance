@@ -28,11 +28,12 @@
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
-<?	// 2. приаттачим скрипты генерации макета:    ?>
+<?	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.php"></script>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
-<? 	
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php"></script>
+	<? 	
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
