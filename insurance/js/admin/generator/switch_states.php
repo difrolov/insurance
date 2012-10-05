@@ -1,23 +1,29 @@
 ﻿<?	if (isset($dwshow)){?><script><? }
 ob_start();?>
-// состояния блоков:
+/*// состояния блоков:
 // Default
 function stateDefault(){
 	display(['choice_init']); // блок с пиктограммами отображён
-	makeLiquid(['tmpl_commands','sel_modules'],0);// кнопки и модули прозрачены
+	makeLiquid(['tmpl_commands','sel_modules'],0);// кнопки и модули прозрачны
 	hide(['tmpl_commands','sel_modules']);// кнопки и модули скрыты
-	makeSolid(['choice_init']);
+	makeSolid(['choice_init']); //непрозрачен
 }
 // макет готов к загрузке
 function stateTemplateIsReady(){
 	stateDefault();// блок с пиктограммами отображён
 	showButtons();// кнопки отображены
-}
+}*/
 // макет загружен
 function stateTemplateIsLoaded(){
-	makeLiquid(['choice_init'],0);
-	hide(['choice_init']); // блок с пиктограммами скрыт
-	//showButtons(); // кнопки отображены
+  try{
+	// кнопки:
+	setButtonStat(['btn_cancelTemplateChanges','btn_loadTemplate'],'passive'); // пассивна
+	setButtonStat(['btn_changeTemplate'],'active'); // активна
+	hide(['choice_init']); // отобразить блок первоначального выбора
+	makeSolid(['tmplPlace','tmpl_commands','sel_modules']); // непрозрачный: блок макета, модули
+  }catch(e){
+	  alert(e.message);
+  }	
 }
 
 ///////////////////////////////////////////////////////////

@@ -314,11 +314,6 @@ function loadTemplate(btn){
 		{scrollTop:topPos},
 		500,
 		function(){
-			// непрзрачне блоки: блок макета, кнопки, модули
-			makeSolid(['tmplPlace','tmpl_commands','sel_modules']);
-			// кнопки:
-			setButtonStat([btn.id,'btn_cancelTemplateChanges'],'passive'); // пассивна
-			setButtonStat(['btn_changeTemplate'],'active'); // активна
 			stateTemplateIsLoaded();
 		}
 	);
@@ -344,11 +339,7 @@ function changeTemplate(btn){
 function cancelTemplateChanges(btn){
   try{
 	tmplSchema=tmplSchemaSaved; // возвернуть!
-	// кнопки:
-	setButtonStat([btn.id],'passive'); // пассивна
-	setButtonStat(['btn_changeTemplate'],'active'); // активна
-	hide(['choice_init']); // отобразить блок первоначального выбора
-	makeSolid(['tmplPlace','sel_modules']); // непрозрачный: блок макета, модули
+	stateTemplateIsLoaded();
   }catch(e){
 	  alert(e.message);
   }
