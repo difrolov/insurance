@@ -7,6 +7,9 @@ display:none;
 div.DivStuff{
 	padding:6px;
 }
+img[title*="Переместить"]{
+	cursor:pointer;
+}
 div#mng{
 	border:solid 4px #C3D9FF;
 	border-radius:5px;

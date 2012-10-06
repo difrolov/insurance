@@ -1,4 +1,5 @@
-﻿<?	if (isset($dwshow)){?><script><? }
+﻿<?	
+if (isset($dwshow)){?><script><? }
 ob_start();?>
 tBlock=false; // здесь будет сохраняться активный блок (объект)ж
 function addModuleIntoBlock(event,divBlock){
@@ -17,23 +18,26 @@ function addModuleIntoBlock(event,divBlock){
 		newModule.appendChild(content);
 		newModule.appendChild(remove);
 		
-		arrows.innerHTML='*<br>*';
+		arrows.innerHTML='<div><img src="<?=$_GET['base_url']?>/images/admin/arrowUp.png" border="0" title="Переместить выше" onClick="moveModule(\'up\');"></div><div><img src="<?=$_GET['base_url']?>/images/admin/arrowDown.png" border="0" title="Переместить ниже" onClick="moveModule(\'down\');"></div>';
 		content.innerHTML=srcEl.innerHTML;
-		remove.innerHTML='<a href="#" onClick="removeModule(this);return false;">del</a>';
+		remove.innerHTML='<a href="#" onClick="removeModule(this);return false;"><img src="<?=$_GET['base_url']?>/images/trash.gif" border="0" title="Удалить модуль из колонки"></a>';
 		
 		$(arrows).css({
-			display:'inline-block'
+			height:'44px',
+			marginLeft:'-2px',
+			marginTop:'-2px',
+			padding:'0',
+			position:'absolute',
 		});
 		$(content).css({
-			position:'absolute',
-			left:'20px',
-			right:'20px',
-			top:'8px'
+			color:'#FFF',
+			lineHeight:'16px',
+			marginLeft:'18px',
 		});
 		$(remove).css({
 			position:'absolute',
-			right:'4px',
-			top:'0'
+			right:'1px',
+			top:'2px'
 		});
 		
 		var sBg=$(srcEl).css('background-color');
@@ -41,8 +45,8 @@ function addModuleIntoBlock(event,divBlock){
 			backgroundColor:sBg,
 			borderRadius:'8px',
 			color:'#FFF',
-			margin: '0 10px 4px 10px',
-			padding: '10px',
+			margin:'0 10px 4px 10px',
+			minHeight:'32px',
 			position: 'relative'
 		});
 	}
