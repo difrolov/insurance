@@ -124,7 +124,7 @@ function createTemplate(tmplSchema,goLoop){
 					
 					switch(tmplSchema){ // назначаем первый класс:
 						case '210':
-							tmplBlock+='hColMiddle';
+							tmplBlock+='hColMiddleLong';
 								break;
 						case '300':
 						case '3i0':

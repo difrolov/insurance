@@ -7,9 +7,7 @@ display:none;
 div.DivStuff{
 	padding:6px;
 }
-img[title*="Переместить"]{
-	cursor:pointer;
-}
+
 div#mng{
 	border:solid 4px #C3D9FF;
 	border-radius:5px;
@@ -299,4 +297,39 @@ div.right2{
 }
 width100{
 	width:100%;
+}
+/*	Стили для модулей, размещаемых внутри колонок макета	*/
+
+img[src*="images/admin/arrow"]{
+	cursor:pointer;
+}
+
+div.innerModule{
+	background-color:#F90;
+	border-radius:8px;
+	box-shadow: 2px 2px 6px 1px #999;
+	color:#FFF;
+	margin:0 10px 6px 10px;
+	min-height:38px;
+	position:relative;
+}
+
+div.mod_content{
+	color:#FFF;
+	line-height:16px;
+	margin-left:18px;
+}
+
+div.mod_move{
+	height:44px;
+	margin-left:-4px;
+	margin-top:-2px;
+	padding:0;
+	position:absolute;
+}
+
+div.mod_trash{
+	position:absolute;
+	right:1px;
+	top:2px;
 }
