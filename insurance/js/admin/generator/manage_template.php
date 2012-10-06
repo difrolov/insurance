@@ -39,7 +39,7 @@ function addModuleIntoBlock(event,divBlock){
 			right:'1px',
 			top:'2px'
 		});
-		
+		$(srcEl).attr('class','innerModule');
 		var sBg=$(srcEl).css('background-color');
 		$(newModule).css({
 			backgroundColor:sBg,
@@ -50,6 +50,13 @@ function addModuleIntoBlock(event,divBlock){
 			position: 'relative'
 		});
 	}
+	
+	if ($(srcEl.parentNode).find('div[class="innerModule"]').length>1){
+		alert('More than 1');
+	}
+	
+	else alert('No another ones...');
+	
   }catch(e){
 	  alert(e.message);
   }	
