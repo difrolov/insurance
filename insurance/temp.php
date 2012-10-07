@@ -4,6 +4,15 @@
 <title>My Web Application</title>
 <meta charset="utf-8">
 <meta name="language" content="ru">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="language" content="en" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+
+	<!-- blueprint CSS framework -->
+
+<title>My Web Application - Generator</title>
+	<link rel="stylesheet" type="text/css" href="/insur/insurance/css/admin/generator.css" />
 <style>
 html, body{
 	height:100%;
@@ -124,6 +133,9 @@ div[footer]{
 
 div.right2{
 	width:322px;/*92	+++*/
+}
+.invis{
+	
 }
 </style>
 <script>
@@ -454,6 +466,13 @@ function createTemplate(tmplSchema,goLoop){
 	  alert(e.message);
   }
 }
+function goFade(){
+  try{
+	$('#go_fade').fadeIn(2000);
+  }catch(e){
+	  alert(e.message);
+  }
+}
 </script>
 </head>
 <body>
@@ -605,6 +624,8 @@ function createTemplate(tmplSchema,goLoop){
     </div>
 </div>
 <?	}?>
+<div id="go_fade" class="invis">Here is content to be faded!</div>
+<a href="#" onClick="goFade(); return false;">Go fade!</a>
 <hr>
 <a href="javascript:goTemplate();">goTemplate</a>
 <input type="text" id="int" size="1" value="30s">

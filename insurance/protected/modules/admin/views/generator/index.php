@@ -40,7 +40,7 @@ $this->breadcrumbs=array(
 	</div>
 <? //<div id="test">test block</div>?>
 <div id="<?="tmpl_commands"?>">
-    <button class="active" id="<?="btn_loadTemplate"?>" type="button" onClick="loadTemplate(this);">Загрузить макет</button>
+    <button class="active" id="<?="btn_loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
     <button class="passive" disabled id="<?="btn_changeTemplate"?>" type="button" onClick="changeTemplate(this);">Изменить макет</button>
     <button class="passive" disabled id="<?="btn_cancelTemplateChanges"?>" type="button" onClick="cancelTemplateChanges(this);">Отменить изменения</button>
 </div>

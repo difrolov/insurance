@@ -113,10 +113,11 @@ function checkTemplateReady(){
 	}
 	// управлять видимостью остальных блоков:
 	if (tmplSchema!=0) {
-		if($('#sel_modules').css('display')!='block'){
+		$("#tmpl_commands").fadeIn(1000);
+		/*if($('#sel_modules').css('display')!='block'){
 			display(['tmpl_commands']); // кнопки управления шаблонами
 			makeSolid(['tmpl_commands']);
-		}
+		}*/
 		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
 			setButtonStat(['btn_loadTemplate'],'active');
 		}
@@ -125,8 +126,9 @@ function checkTemplateReady(){
 		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
 			setButtonStat(['btn_loadTemplate'],'passive');
 		}else{
-			makeLiquid(['tmpl_commands']); 
-			hide(['tmpl_commands']);
+			$("#tmpl_commands").fadeOut(1000);
+			//makeLiquid(['tmpl_commands']); 
+			//hide(['tmpl_commands']);
 		}
 		return false;
 	}
