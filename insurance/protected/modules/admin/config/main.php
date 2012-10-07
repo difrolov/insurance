@@ -1,6 +1,6 @@
-<?php
+<?php	
 return CMap::mergeArray(
-		require('/../config/local.php'),
+		require(Yii::getPathOfAlias('webroot').'/protected/config/local.php'),
 		array(
 			'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 			'defaultController' => 'default',

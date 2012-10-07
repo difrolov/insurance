@@ -30,7 +30,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 					array('name'=> 'colors',      'items'=> array( 'TextColor','BGColor' )),
 					array('name'=> 'tools',       'items'=> array( 'Maximize', 'ShowBlocks','-','About' ))
 			),
-			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browse')),
+			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browser')),
 	),
 
 

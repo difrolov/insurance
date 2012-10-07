@@ -7,8 +7,10 @@ display:none;
 div.DivStuff{
 	padding:6px;
 }
+
 div#mng{
-	border:solid 4px #CCCCCC;
+	border:solid 4px #C3D9FF;
+	border-radius:5px;
 	margin-top:10px;
 	padding-bottom:5px;
 	padding-left:6px;
@@ -61,7 +63,7 @@ div#txtChoice
 	>div:last-child div {
 	background-image:url(img/add-sectiion.gif);
 	background-repeat:no-repeat;
-	border:solid 3px #999;
+	border:solid 3px #C3D9FF;
 	border-radius:2px;
 	cursor:pointer;
 	padding:2px;
@@ -148,12 +150,13 @@ div#tmpl_commands{
 	opacity:0;
 }
 div#tmpl_commands button{
-	border:solid 3px #CCC;
+	border:solid 3px #08C;/*CCC*/
 	border-radius:5px;
 	margin:10px 4px 10px 0;
 	padding:4px 18px;
 }
 div#tmpl_commands button.active{
+	background:#CEEFFF;
 	color:#08c;
 }
 div#tmpl_commands button.passive{
@@ -165,6 +168,7 @@ div#tmpl_commands button:hover{
 }
 div#tmplPlace{
 	border:solid 2px #08C;/*CCCCCC*/
+	border-radius:5px;
 	display:none;
 	opacity:0;
 	overflow:auto;
@@ -173,11 +177,11 @@ div#tmplPlace > div{
 	margin:4px;
 }
 div#tmplInner{
-	border:dashed 2px #CCCCCC;
+	border:dashed 2px #08C;
 	height:450px;
 }
 div#tmplPlace div.column{
-	border: dashed 2px #999999;
+	border: dashed 2px #08C;
 }
 div#tmplPlace div.column > div{
 	padding:6px;
@@ -185,7 +189,7 @@ div#tmplPlace div.column > div{
 
 /*	СТИЛИ СХЕМЫ МАКТЕТА	*/
 div[footer]{
-	border-top:dashed 2px #999;
+	border-top:dashed 2px #08C;
 }
 
 div.column3center,
@@ -207,7 +211,7 @@ div.column3center,
 div.header3inside,
 div.hf4Inside,
 div[class*="left"]{
-	border-right:dashed 2px #999;
+	border-right:dashed 2px #08C;
 }
 
 div.hf4Inside[footer]{
@@ -221,28 +225,31 @@ div.column4[right]{
 div.hColMiddle{
 	height:350px;/*151	+++*/
 }
-
+div.hColMiddleLong{
+	height:510px;
+}
 div.hColShort{
 	height:268px;/*110	+++*/
 }
 
 div[header]{
-	border-bottom:dashed 2px #999;
+	border-bottom:dashed 2px #08C;
 }
 
-div[header],
-div[footer]{
+div[header]{
 	height:72px;/*32*/
 }
-
+div[footer]{
+	height:232px;/*32*/
+}
 div.hFull,
 div[left]{
-	height:432px;/*192*/
+	height:592px;/*192*/
 }
 
 div.first{
-	height:440px;/*200	+++*/
-	border:dashed 2px #999;
+	height:600px;/*200	+++*/
+	border:dashed 2px #08C;
 	display:inline-block;
 	margin-top:6px;
 	margin-right:6px;
@@ -287,4 +294,42 @@ div[footer]{
 
 div.right2{
 	width:322px;/*92	+++*/
+}
+width100{
+	width:100%;
+}
+/*	Стили для модулей, размещаемых внутри колонок макета	*/
+
+img[src*="images/admin/arrow"]{
+	cursor:pointer;
+}
+
+div.innerModule{
+	background-color:#F90;
+	border-radius:8px;
+	box-shadow: 2px 2px 6px 1px #999;
+	color:#FFF;
+	margin:0 10px 6px 10px;
+	min-height:38px;
+	position:relative;
+}
+
+div.mod_content{
+	color:#FFF;
+	line-height:16px;
+	margin-left:18px;
+}
+
+div.mod_move{
+	height:44px;
+	margin-left:-4px;
+	margin-top:-2px;
+	padding:0;
+	position:absolute;
+}
+
+div.mod_trash{
+	position:absolute;
+	right:1px;
+	top:2px;
 }
