@@ -135,12 +135,12 @@ div#sel_modules{
 	/*opacity:0;*/
 	padding:4px;
 }
-div#sel_modules p{
-	color: #006394;
-	font-size: 1.35em;
-	line-height: 32px;
-	margin-bottom: 2px;
-	margin-left: 8px;
+div#sel_modules li{
+	color:#006394;
+	font-size:1.2em;
+	line-height:20px;
+	margin-bottom:2px;
+	margin-left:8px;
 }
 .selStrong{
 	background:#08C;
@@ -179,6 +179,7 @@ div#tmplPlace{
 div#tmplPlace > div{
 	margin:4px;
 }
+
 div#tmplInner{
 	border:dashed 2px #08C;
 	height:450px;
@@ -304,12 +305,12 @@ width100{
 /*	Стили для модулей, размещаемых внутри колонок макета	*/
 
 div.innerModule{
-	background-color:#F90;
-	border-radius:8px;
+	background-color: #F90;
+	border-radius: 8px 8px 8px 8px;
 	box-shadow: 2px 2px 6px 1px #999;
-	color:#FFF;
-	margin:0 13px 6px 10px;
-	min-height:38px;
+	color: white;
+	margin: 0 13px 6px 10px;
+	min-height: 38px;
 	position:relative;
 }
 
@@ -317,10 +318,11 @@ div.mod_content{
 	color:#FFF;
 	line-height:16px;
 	margin-left:2px;
+	margin-right:14px;
 }
 
 div.mod_trash{
+	bottom:2px;
 	position:absolute;
-	right:1px;
-	top:2px;
+	right:0;
 }

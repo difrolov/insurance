@@ -20,9 +20,10 @@ function addModuleIntoBlock(event,divBlock){
 			class:'innerModule',
 			title:'Можно перемещать вверх-вниз...'
 		});
-		$(content).attr('class','mod_content');
-		$(remove).attr('class','mod_trash');
-		$(remove).css('cursor','pointer');
+		$(newModule).css('cursor','move');
+			$(content).attr('class','mod_content');
+			$(remove).attr('class','mod_trash');
+			$(remove).css('cursor','pointer');
 	}
   }catch(e){
 	  alert(e.message);
@@ -42,7 +43,6 @@ function selectColumn(event,divBlock){
 			tBlock=srcEl;
 			$(srcEl).css({
 				backgroundColor:'#CEEFFF',
-				cursor:'move'
 			});
 		}
 	}
