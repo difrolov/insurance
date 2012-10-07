@@ -2,31 +2,8 @@
 ob_start();?>
 // JavaScript Document
 //
-function cancelTemplateChanges(btn){
-  try{
-	tmplSchema=tmplSchemaSaved; // возвернуть!
-	stateTemplateIsLoaded();
-  }catch(e){
-	  alert(e.message);
-  }
-}
-// кнопка.click изменить шаблон
-function changeTemplate(btn){ 
-  try{
-	tmplSchemaSaved=tmplSchema; // сохранить выбранную схему
-	// кнопки:
-	setButtonStat([btn.id],'passive'); // пассивна
-	setButtonStat(['btn_cancelTemplateChanges'],'active'); // активна
-	display(['choice_init']); // отобразить блок первоначального выбора
-	makeSolid(['choice_init']); // непрозрачный: блок первоначального выбора
-	makeLiquid(['tmplPlace','sel_modules']); // полупрозрачные: блок макета, модули
-  }catch(e){
-	  alert(e.message);
-  }
-}
-//
 function createTemplate(tmplSchema,goLoop){
-  try{ //alert(tmplSchema);	
+  try{ 
   	// получить количество блоков:
 	var colsCountInit=colsCount=parseInt(tmplSchema.substring(0,1));
 	var tmplValue2=tmplSchema.substring(1,2);
@@ -323,7 +300,7 @@ function createTemplate(tmplSchema,goLoop){
 		tmplBlock+=">&nbsp;</div>";
 	}
 	tmplBlock+="</div>";
-	if (goLoop)
+	if (goLoop) // чиста для теста, если хотим вывести все возможные блоки
 		document.getElementById('tmplPlace').innerHTML+='<div>'+tmplSchema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
@@ -332,23 +309,19 @@ function createTemplate(tmplSchema,goLoop){
   }
 }
 // загрузим макет по сформированному шаблону
-function loadTemplate(btn){ 
-  try{
-	// display: block - область макета, кнопки, модули
-	display(['tmplPlace','tmpl_commands','sel_modules']);
+function loadTemplate(){ 
+  try{	
 	var topPos=$('#txtActions').offset().top;
 	$("html, body").animate(
 		{scrollTop:topPos},
 		500,
 		function(){
 			stateTemplateIsLoaded();
-		}
-	);
+	});
 	createTemplate(tmplSchema);
 	var headerBlock=$("div[header='']")[0];
 	if (headerBlock){
 		var pWidth=$(headerBlock).width()-10;
-		//alert(pWidth);
 		headerBlock.innerHTML='<div>Текст подзаголовка:</div><input type="text" style="width:'+pWidth+'px; padding:4px;">'
 	}
   }catch(e){
