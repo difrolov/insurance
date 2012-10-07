@@ -16,8 +16,8 @@ function changeTemplate(btn){
 	// кнопки:
 	setButtonStat([btn.id],'passive'); // пассивна
 	setButtonStat(['btn_cancelTemplateChanges'],'active'); // активна
-	$('#choice_init').fadeIn(150);
-	$('#tmplPlace').fadeTo(150,0.2);
+	$('#choice_init').fadeIn(300);
+	$('#tmplPlace').fadeTo(500,0.2);
 	$('#sel_modules').fadeOut(450);
   }catch(e){
 	  alert(e.message);
@@ -33,7 +33,7 @@ function stateTemplateIsLoaded(){
 					// кнопки:
 					setButtonStat(['btn_cancelTemplateChanges','btn_loadTemplate'],'passive'); // пассивна
 					setButtonStat(['btn_changeTemplate'],'active'); // активна
-					$("#sel_modules").fadeIn(250,
+					$("#sel_modules").fadeIn(450,
 						function(){
 							$("#tmplPlace").fadeTo(300,1);
 					});
@@ -47,7 +47,7 @@ function stateTemplateIsLoaded(){
 function setButtonStat(btns_ids,state){ 
 	for (i=0;i<btns_ids.length;i++) {
 		if (state=='active'){
-			$('#'+btns_ids[i]).fadeTo(150,1,
+			$('#'+btns_ids[i]).fadeTo(300,1,
 				function(){
 					$(this).attr({
 						class: 'active',
@@ -55,7 +55,7 @@ function setButtonStat(btns_ids,state){
 					});
 			});
 		}else{
-			$('#'+btns_ids[i]).fadeTo(150,0.4,
+			$('#'+btns_ids[i]).fadeTo(300,0.4,
 				function(){
 					$(this).attr({
 						class: 'passive',

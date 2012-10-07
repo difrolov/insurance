@@ -45,7 +45,7 @@ $this->breadcrumbs=array(
     <button class="passive" disabled id="<?="btn_cancelTemplateChanges"?>" type="button" onClick="cancelTemplateChanges(this);">Отменить изменения</button>
 </div>
 <div id="<?="sel_modules"?>">
-	<p>Щёлкните нужный блок и модули для размещения в нём:</p>
+	<p>Щёлкните нужную колонку; щёлкните модули для размещения в нём:</p>
     <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
         <div>Новости</div>
         <div>Готовое решение</div>

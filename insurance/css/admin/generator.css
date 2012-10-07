@@ -136,8 +136,11 @@ div#sel_modules{
 	padding:4px;
 }
 div#sel_modules p{
-	margin-bottom:2px;
-	margin-left:8px;
+	color: #006394;
+	font-size: 1.35em;
+	line-height: 32px;
+	margin-bottom: 2px;
+	margin-left: 8px;
 }
 .selStrong{
 	background:#08C;
