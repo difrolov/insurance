@@ -1,28 +1,3 @@
-<script>
-$(document).ready(function() {
-  try{
-	$('#save_tmpl_block').click(
-		function(){
-			var srcEl=(event.target)? event.target:event.srcElement;
-				if ( srcEl.tagName.toLowerCase()=="input"
-					 && srcEl.type=="radio"
-				   ){
-					$('label span').removeAttr('class');
-					$('label span b').css('color','');
-					$(srcEl.parentNode).attr('class','selLabel'); 
-					$(srcEl.parentNode).find('b').css('color','#FFF');
-				}
-		});
-	$('#pick_out_section').click(
-		function(){
-			$('#save_tmpl_block').fadeToggle(1500);
-		}
-	);
-  }catch(e){
-	  alert(e.message);
-  }
-});
-</script>
 <?php
 
 /* @var $this DefaultController */
@@ -124,4 +99,8 @@ $this->breadcrumbs=array(
         <hr>
         <button id="save_page">Сохранить страницу</button>
     </div>
+</div>
+<div id="make_text" title="Заголовок окна" style="position:fixed; top:15%; left:15%; background:#FFF; border:solid 6px #999; border-radius:4px; box-shadow:#C3D9FF 0px 0px 2px 6px; display:<?="none"?>;">
+	<div style="position:absolute; right:10px; top:10px;"><a href="javascript:return false;" id="wclose">Закрыть</a></div>
+	TEXT TO EDIT
 </div>

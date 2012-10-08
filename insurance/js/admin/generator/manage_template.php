@@ -42,12 +42,6 @@ function addModuleIntoBlock(event,divBlock){
   }	
 }
 //
-function addTextContent(){
-}
-//
-function PickOutTextContent(){
-}
-//
 function removeModule(objSrc){
 	$(objSrc.parentNode.parentNode).remove();
 }
