@@ -68,7 +68,11 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<?php endif?>
 	<div class="">
 		<?php
-		$items = HelperAdmin::menuItem();
+		if (!$items=HelperAdmin::$arrMenuItems){
+			//echo "<div>No HelperAdmin::arrMenuItems</div>";
+			$items=HelperAdmin::menuItem();
+		}
+		//$items = HelperAdmin::menuItem();
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
 				'id'=>'horz1',
