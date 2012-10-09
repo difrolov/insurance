@@ -6,7 +6,7 @@ class DefaultController extends Controller
 
 	public function actionIndex(){
 
-		if(!Yii::app()->user->checkAccess('admin')){
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		$this->render('index');
@@ -27,6 +27,9 @@ class DefaultController extends Controller
 	}
 
 	public function actionBrowser() {
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
 	    $this->render('browser');
 	}
 
