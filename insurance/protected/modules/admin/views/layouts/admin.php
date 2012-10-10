@@ -33,7 +33,12 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
+
+
+
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/customize_page.js"></script>
 	<?
+
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
@@ -68,7 +73,11 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<?php endif?>
 	<div class="">
 		<?php
-		$items = HelperAdmin::menuItem();
+		if (!$items=HelperAdmin::$arrMenuItems){
+			//echo "<div>No HelperAdmin::arrMenuItems</div>";
+			$items=HelperAdmin::menuItem();
+		}
+		//$items = HelperAdmin::menuItem();
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
 				'id'=>'horz1',

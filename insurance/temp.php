@@ -475,6 +475,18 @@ function goFade(){
 }
 </script>
 </head>
+<?
+class myClass{
+	static $myArr;
+	static function myFunc(){
+		self::$myArr="My arr is here!";
+	}
+}
+$myClass=new myClass();
+$myClass->myFunc(); 
+echo "myArr: ".myClass::$myArr;
+die();
+?>
 <body>
 <?	$tp=false;
 	if ($tp){?>

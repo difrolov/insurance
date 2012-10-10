@@ -8,7 +8,7 @@
        array('name'=>'id', 'header'=>'#','type'=>'html'),
         array('name'=>'name', 'header'=>'Наименование','type'=>'raw', 'value'=>'HelperAdmin::createInput($data->name,"name",$data->id,"banner.update_field")'),
         array('name'=>'src', 'type'=>'raw',  'header'=>'Изображение', 'value'=>'HelperAdmin::selectBanner($data->src,$data->id)'),
-        array('name'=>'link','type'=>'raw','header'=>'Ссылка', 'value'=>'HelperAdmin::createSelect($data->name,"name",$data->id,"banner.update_field")'),
+        array('name'=>'link','type'=>'raw','header'=>'Ссылка', 'value'=>'HelperAdmin::createBannerlink($data->name,"name",$data->id,"banner.update_field")'),
     	array('name'=>'date_edit', 'header'=>'Дата изменения'),
         array(
             'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
@@ -35,64 +35,35 @@
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
-    <h4>Modal header</h4>
+    <h4>Выберите раздел</h4>
 </div>
 
 <div class="modal-body">
-    <p>One fine body...</p>
+    <?php
+    if (!$items=HelperAdmin::$arrMenuItems){
+    	//echo "<div>No HelperAdmin::arrMenuItems</div>";
+    	$items=HelperAdmin::menuItem();
+    }
+    //$items = HelperAdmin::menuItem();
+    $this->widget('ext.efgmenu.EFgMenu',array(
+    		'bDev'=>true,
+    		'id'=>'vert',
+    		'items'=>$items,
+    		'menubarOptions' => array(
+    				'direction'=>'vertical',
+    				'width'=> 70,
+    		),
+    ));
+    ?>
 </div>
 
 <div class="modal-footer">
-    <?php $this->widget('bootstrap.widgets.TbButton', array(
-        'type'=>'primary',
-        'label'=>'Save changes',
-        'url'=>'#',
-        'htmlOptions'=>array('data-dismiss'=>'modal'),
-    )); ?>
-    <?php $this->widget('bootstrap.widgets.TbButton', array(
-        'label'=>'Close',
-        'url'=>'#',
-        'htmlOptions'=>array('data-dismiss'=>'modal'),
-    )); ?>
-</div>
+
 
 <?php $this->endWidget(); ?>
 
 <?php $cs = Yii::app()->getClientScript();
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.jeditable.mini.js');
 ?>
-<?php $cs->registerScript('inline', "
-function setInlineEdit() {
-  $('.inlineEdit').each(function(){
-    var params = {field: $(this).attr('field')};
-    var type = $(this).attr('type');
-    var s = '', c = '';
-    if(type=='textarea' ) {
-       s = 'OK';
-       c = 'Cancel';
-    }
-    $(this).editable('/backend/item/field', {
-        placeholder : '---',
-        indicator : 'Сохраняем...',
-        tooltip   : 'Кликните, чтобы редактировать',
-        type     : type,
-        rows: 3,
-        cols: 30,
-        submit   : s,
-        cancel   : c,
-        width: '100px',
-        submitdata : params,
-        callback  : function(value, settings) {
-             $.fn.yiiGridView.update('modelGrid',{data:{ }});
-          }
-     });
-  });
-}
 
-$(function(){
-   setInlineEdit();
-});
-
-");
-?>
 
