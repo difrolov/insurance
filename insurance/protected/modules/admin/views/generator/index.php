@@ -68,8 +68,7 @@ $this->breadcrumbs=array(
         	<input type="radio" name="menu" id="none" value="radio"><b>Без родительского раздела</b>
           </span>
         </label>
-        <? 		
-		if (!$items=HelperAdmin::$arrMenuItems){
+     <?	if (!$items=HelperAdmin::$arrMenuItems){
 			//echo "<h1>No HelperAdmin::arrMenuItems</h1>";
 			$items=HelperAdmin::menuItem();
 		}

@@ -69,11 +69,9 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<?php endif?>
 	<div class="">
 		<?php
-		if (!$items=HelperAdmin::$arrMenuItems){
-			//echo "<div>No HelperAdmin::arrMenuItems</div>";
-			$items=HelperAdmin::menuItem();
-		}
-		//$items = HelperAdmin::menuItem();
+		
+		HelperAdmin::menuItem();
+		$items=HelperAdmin::$arrMenuItems;
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
 				'id'=>'horz1',
@@ -82,9 +80,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 						'direction'=>'horizontal',
 						'width'=> 70,
 				),
-			));
-
-		?>
+			));?>
 
 
 	</div>
