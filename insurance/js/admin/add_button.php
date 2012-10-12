@@ -13,7 +13,7 @@ $(document).ready(function() {
 		var offRight=$(sPlus).offset().right;
 		var goHeight=$(sPlus).css('line-height');
 		var addSubsectionButton=document.createElement('li');
-		document.getElementById('yw2').appendChild(addSubsectionButton);
+		document.getElementById('main_submenu').getElementsByTagName('ul')[0].appendChild(addSubsectionButton);
 		addSubsectionButton.className='active command';
 		$(addSubsectionButton).html('<a href="<? echo $url;?>/admin/generator" class="command"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Добавить подраздел</a>');
 		$(addSubsectionButton).css({

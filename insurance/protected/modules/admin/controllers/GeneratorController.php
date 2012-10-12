@@ -69,6 +69,4 @@ class GeneratorController extends Controller
 			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['id']));
 		}
 	}
-
-
 }

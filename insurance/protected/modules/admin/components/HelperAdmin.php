@@ -1,6 +1,28 @@
 <?php
 	class HelperAdmin
 	{
+		static $arrMenuItems;
+		static $MainMenu;
+		static $SubMenu;
+		/**
+		  * Получить массивы для списков: основные разделы, подразделы
+		  * @package content
+		  * @subpackage HTML
+		  */		
+		function makeArrayForSelect($items,$level=false){
+			for ($i=0,$j=count($items);$i<$j;$i++) {
+				$aURL=explode("/",$items[$i]['url'][0]);
+				$section_id=array_pop($aURL);	
+				if ($level)
+					self::$SubMenu[$level][$section_id]=$items[$i]['label'];
+				else{
+					self::$MainMenu[$section_id]=$items[$i]['label'];
+				}
+				if (isset($items[$i]['items']))
+					self::makeArrayForSelect($items[$i]['items'],$section_id);
+			}
+		}
+
 		//получить многоуровневое меню из базы
 		public static function menuItem(){
 			$sql = 'SELECT DISTINCT `main`.`name` AS first_n
@@ -47,8 +69,12 @@
 
 						$items[]=array('label'=>$k,'url'=>$first_url[$k]['url'],$k_s=> (count($sub)>1?$sub:null));
 					}
-				}
-			return $items;
+				}	
+			
+			self::$arrMenuItems=$items;
+			//var_dump("<h1>arrMenuItems:</h1><pre>",self::$arrMenuItems,"</pre>");die();
+			//return $items;
+			return self::$arrMenuItems;
 
 		}
 

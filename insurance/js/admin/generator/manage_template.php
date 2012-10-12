@@ -20,14 +20,28 @@ function addModuleIntoBlock(event,divBlock){
 			class:'innerModule',
 			title:'Можно перемещать вверх-вниз...'
 		});
-		$(content).attr('class','mod_content');
-		$(remove).attr('class','mod_trash');
-		$(remove).css('cursor','pointer');
+		if ($(srcEl).attr('class')=='mod_type_text'){
+			var cPadding=parseInt($(newModule).css('padding-top').replace("px", ""));
+			$(newModule).css({
+					background:'#FFF',
+					border:'solid 2px #F90',
+					padding:(cPadding-2)+'px'
+			});
+			$(content).css('color','#08C');
+			$(content).html('<b>Текст</b>: <a href="javascript:addTextContent();" title="Добавить произвольный текст">добавьте произвольное содержание</a> или <a href="javascript:PickOutTextContent();" title="Выбрать из имеющихся статей">выберите  имеющуюся статью</a>.');
+		}
+		$(newModule).css('cursor','move');
+			$(content).attr('class','mod_content');
+			$(remove).attr('class','mod_trash');
+			$(remove).css('cursor','pointer');
+		
+		$('#pick_out_section').fadeIn(2000);	
 	}
   }catch(e){
 	  alert(e.message);
   }	
 }
+//
 function removeModule(objSrc){
 	$(objSrc.parentNode.parentNode).remove();
 }
@@ -42,7 +56,6 @@ function selectColumn(event,divBlock){
 			tBlock=srcEl;
 			$(srcEl).css({
 				backgroundColor:'#CEEFFF',
-				cursor:'move'
 			});
 		}
 	}
