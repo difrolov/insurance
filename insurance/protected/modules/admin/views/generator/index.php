@@ -113,7 +113,7 @@ $this->breadcrumbs=array(
 $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
-    'height'=>'400px',
+    'height'=>'240px',
     'width'=>'100%',
     'toolbarSet'=>'Basic',          # EXISTING(!) Toolbar (see: ckeditor.js)
     'ckeditor'=>Yii::app()->basePath.'/../ckeditor/ckeditor.php',
