@@ -8,11 +8,11 @@
 		  * Получить массивы для списков: основные разделы, подразделы
 		  * @package content
 		  * @subpackage HTML
-		  */		
+		  */
 		function makeArrayForSelect($items,$level=false){
 			for ($i=0,$j=count($items);$i<$j;$i++) {
 				$aURL=explode("/",$items[$i]['url'][0]);
-				$section_id=array_pop($aURL);	
+				$section_id=array_pop($aURL);
 				if ($level)
 					self::$SubMenu[$level][$section_id]=$items[$i]['label'];
 				else{
@@ -69,8 +69,8 @@
 
 						$items[]=array('label'=>$k,'url'=>$first_url[$k]['url'],$k_s=> (count($sub)>1?$sub:null));
 					}
-				}	
-			
+				}
+
 			self::$arrMenuItems=$items;
 			//var_dump("<h1>arrMenuItems:</h1><pre>",self::$arrMenuItems,"</pre>");die();
 			//return $items;
@@ -81,6 +81,43 @@
 		//получаем строку и преобзуем ее в ссылку
 		public static function createUrl($href,$text){
 			return '<a href="'.$href.'">'.$text.'</a>';
+		}
+		//получаем строку и преобзуем ее в input
+		public static function createInput($val,$field_name,$id,$js_function_name){
+			return '<input type="text" value="'.$val.'" name="banner" onchange="'.$js_function_name.'(\''.$field_name.'\',$(this).val(),'.$id.')" />';
+		}
+		//получаем селект для картинки
+		//парсим директорию с баннерами
+		public static function selectBanner($sel_img,$id){
+			$path = Yii::getPathOfAlias('webroot') . '/upload/img/banner';
+			if (is_dir($path)){
+				$dir = opendir($path);
+			}
+			else{
+				return false;
+			}
+			while ($file = readdir($dir)){
+				if ($file != "." && $file != ".." && (stristr($file,'.jpg') || stristr($file,'.png') || stristr($file,'.gif'))){
+					$str[] = $file;
+				}
+			}
+			$sel="";
+			if(count($str) > 0){
+				$sel .= '<img id="banner_'.$id.'" alt="" src="/insur/insurance/'.$sel_img.'">'.
+						'<br/><br/><select name="banner"'.
+						'onchange="banner.update_field(\'src\',\'upload/img/banner/\'+$(this).val(),'.$id.')">';
+				foreach($str as $val){
+					$sel .='<option onmouseover="$(\'#banner_'.$id.'\').attr(\'src\',\'/insur/insurance/upload/img/banner/'.$val.'\')"'.
+							'value="'.$val.'" '.($val==substr($sel_img,18)?"selected":"").'>'.
+							'/upload/img/banner'.$val.'</option>';
+				}
+				$sel .='</select>';
+				return $sel;
+			}
+		}
+		//выводим селект
+		public static function createBannerlink($val,$field_name,$id,$js_function_name){
+			return '<a data-toggle="modal" href="#" data-target="#myModal">'.$val.'</a>';
 		}
 
 		public static function dateToRender($fromDate)

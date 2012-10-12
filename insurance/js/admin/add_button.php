@@ -1,13 +1,13 @@
-﻿<?	$url=$_GET['base_url']; 
+﻿<?	$url=$_GET['base_url'];
 if (isset($dwshow)){?><script><? }
 
 ob_start();?>
 
-$(document).ready(function() { 
+$(document).ready(function() {
 	try{
 		var sPlus=$("#main_submenu li")[2];
 		var offLeft=$(sPlus).offset().left;
-		// offLeft: желательно в дальнейшем: 
+		// offLeft: желательно в дальнейшем:
 		// 1. перерасчитать отступ слева в %%
 		// 2. добавить вызов функции при изменении размеров окна, чтобы смещалось за основным меню.
 		var offRight=$(sPlus).offset().right;
@@ -17,7 +17,7 @@ $(document).ready(function() {
 		addSubsectionButton.className='active command';
 		$(addSubsectionButton).html('<a href="<? echo $url;?>/admin/generator" class="command"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Добавить подраздел</a>');
 		$(addSubsectionButton).css({
-			left: offLeft+'px', 
+			left: offLeft+'px',
 			position: 'absolute',
 			top: '32px'
 		});
@@ -25,7 +25,7 @@ $(document).ready(function() {
 		alert(e.message);
 	}
 })
-<?	
+<?
 $myscript=ob_get_contents();
 ob_get_clean();
 echo $myscript;
