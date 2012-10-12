@@ -71,7 +71,6 @@ $this->breadcrumbs=array(
         <?
 			//echo "<h1>No HelperAdmin::arrMenuItems</h1>";
 			$items=HelperAdmin::menuItem();
-		}
 		HelperAdmin::makeArrayForSelect($items);
 		$MainSections=HelperAdmin::$MainMenu;
 		$SubSections=HelperAdmin::$SubMenu;
