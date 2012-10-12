@@ -24,7 +24,7 @@
 		}
 
 		//получить многоуровневое меню из базы
-		public static function menuItem(){
+		public static function menuItem($system = false){
 			$sql = 'SELECT DISTINCT `main`.`name` AS first_n
 				     , `second`.`name` AS second_n
 				     , `main`.`id` AS first_id
@@ -41,41 +41,47 @@
 				  `main`.`parent_id` = -1';
 				$res = Yii::app()->db->createCommand($sql)->queryAll();
 				$main = array();
-				foreach ($res as $key=>$val){
-				//первый уровень
-					if(!in_array($val['first_n'],$main)){
-						$main[] = $val['first_n'];
-						$first_url[$val['first_n']]['url'][] = 'object/getobject/'.$val['first_id'];
+				if(!$system){
+					foreach ($res as $key=>$val){
+					//первый уровень
+						if(!in_array($val['first_n'],$main)){
+							$main[] = $val['first_n'];
+							$first_url[$val['first_n']]['url'][] = 'object/getobject/'.$val['first_id'];
+						}
+						//второй уровень
+						if(in_array($val['first_n'],$res[$key]) ){
+							$temp[]=array('label'=>$val['first_n'],'url'=>array('object/getobject/'.$val['first_id']),'items'=>array(($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('object/getobject/'.$val['second_id'])):null)));
+							$sec[$val['first_n']]['items'][]=($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('object/getobject/'.$val['second_id'])):null);
+						}
 					}
-
-					//второй уровень
-					if(in_array($val['first_n'],$res[$key]) ){
-						$temp[]=array('label'=>$val['first_n'],'url'=>array('object/getobject/'.$val['first_id']),'items'=>array(($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('object/getobject/'.$val['second_id'])):null)));
-						$sec[$val['first_n']]['items'][]=($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>array('object/getobject/'.$val['second_id'])):null);
+					foreach ($sec as $k=>$v){
+						foreach ($v as $k_s=>$sub){
+							$items[]=array('label'=>$k,'url'=>$first_url[$k]['url'],$k_s=> (count($sub)>1?$sub:null));
+						}
 					}
-				/* 	//третий уровень
-					if(in_array($val['second_n'],$res[$key]) && $res[$key]['third_n'] != null){
-						$third[$key][$val['second_n']]=$res[$key]['third_n'];
+					self::$arrMenuItems=$items;
+					return self::$arrMenuItems;
+				}else{
+					foreach ($res as $key=>$val){
+						//первый уровень
+						if(!in_array($val['first_n'],$main)){
+							$main[] = $val['first_n'];
+							$first_url[$val['first_n']]['url'][] = '#';
+							$first_link[$val['first_n']]['linkOptions']=array('onclick'=>'console.info(1); return false;');
+						}
+						//второй уровень
+						if(in_array($val['first_n'],$res[$key]) ){
+							$temp[]=array('label'=>$val['first_n'],'url'=>'#','linkOptions'=>array('onclick'=>'console.info(1); return false;'),'items'=>array(($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>'#','linkOptions'=>array('onclick'=>'console.info(3); return false;')):null)));
+							$sec[$val['first_n']]['items'][]=($res[$key]['second_n']?array('label'=>$res[$key]['second_n'],'url'=>'#','linkOptions'=>array('onclick'=>'console.info(2); return false;')):null);
+						}
 					}
-					//Четвёртый уровень
-					if(in_array($val['third_n'],$res[$key]) && $res[$key]['last_n'] != null){
-						$last[$key][$val['third_n']]=$res[$key]['last_n'];
-					} */
+					foreach ($sec as $k=>$v){
+						foreach ($v as $k_s=>$sub){
+							$items[]=array('label'=>$k,'url'=>$first_url[$k]['url'],'linkOptions'=>$first_link[$k]['linkOptions'],$k_s=> (count($sub)>1?$sub:null));
+						}
+					}
+					return $items;
 				}
-				/* var_dump($first_url); */
-				foreach ($sec as $k=>$v){
-					foreach ($v as $k_s=>$sub){
-
-
-						$items[]=array('label'=>$k,'url'=>$first_url[$k]['url'],$k_s=> (count($sub)>1?$sub:null));
-					}
-				}
-
-			self::$arrMenuItems=$items;
-			//var_dump("<h1>arrMenuItems:</h1><pre>",self::$arrMenuItems,"</pre>");die();
-			//return $items;
-			return self::$arrMenuItems;
-
 		}
 
 		//получаем строку и преобзуем ее в ссылку
@@ -103,7 +109,7 @@
 			}
 			$sel="";
 			if(count($str) > 0){
-				$sel .= '<img id="banner_'.$id.'" alt="" src="/insur/insurance/'.$sel_img.'">'.
+				$sel .= '<img class="banner" id="banner_'.$id.'" alt="" src="/insur/insurance/'.$sel_img.'">'.
 						'<br/><br/><select name="banner"'.
 						'onchange="banner.update_field(\'src\',\'upload/img/banner/\'+$(this).val(),'.$id.')">';
 				foreach($str as $val){

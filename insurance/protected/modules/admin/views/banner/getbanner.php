@@ -40,11 +40,7 @@
 
 <div class="modal-body">
     <?php
-    if (!$items=HelperAdmin::$arrMenuItems){
-    	//echo "<div>No HelperAdmin::arrMenuItems</div>";
-    	$items=HelperAdmin::menuItem();
-    }
-    //$items = HelperAdmin::menuItem();
+    $items=HelperAdmin::menuItem(true);
     $this->widget('ext.efgmenu.EFgMenu',array(
     		'bDev'=>true,
     		'id'=>'vert',
@@ -52,16 +48,16 @@
     		'menubarOptions' => array(
     				'direction'=>'vertical',
     				'width'=> 70,
+
     		),
+    		'menuOptions' => array(
+    				'flyOut'=>true
+    		)
     ));
     ?>
 </div>
-
 <div class="modal-footer">
-
-
 <?php $this->endWidget(); ?>
-
 <?php $cs = Yii::app()->getClientScript();
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.jeditable.mini.js');
 ?>
