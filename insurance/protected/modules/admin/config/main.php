@@ -1,4 +1,5 @@
-<?php	
+<?php
+//наследуем от локального конфига
 return CMap::mergeArray(
 		require(Yii::getPathOfAlias('webroot').'/protected/config/local.php'),
 		array(
