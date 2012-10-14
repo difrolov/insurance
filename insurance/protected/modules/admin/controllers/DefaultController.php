@@ -2,7 +2,7 @@
 
 class DefaultController extends Controller
 {
-	public $layout = "application.modules.admin.views.layouts.admin";
+	public $layout = "application.modules.admin.views.layouts.banner";
 
 	public function actionIndex(){
 

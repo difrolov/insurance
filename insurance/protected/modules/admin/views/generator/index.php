@@ -101,7 +101,12 @@ $this->breadcrumbs=array(
     </div>
 </div>
 
-	<?php $this->beginWidget('application.extensions.bootstrap.widgets.TbModal', array('id'=>'myModal','options'=>array('width'=>'800px',))); ?>
+	<?php $this->beginWidget('application.extensions.bootstrap.widgets.TbModal',
+			array('id'=>'myModal',
+					'options'=>array(
+							'width'=>'800px',
+							'fade'=>false,
+							))); ?>
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
@@ -120,9 +125,10 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
                                     # Path to ckeditor.php
     'ckBasePath'=>Yii::app()->baseUrl.'/ckeditor/',
                                     # Relative Path to the Editor (from Web-Root)
-    'css' => Yii::app()->baseUrl.'/css/index.css',
+    /* 'css' => Yii::app()->baseUrl.'/css/index.css', */
                                     # Additional Parameters
 	'config' =>
+
 			array('toolbar'=>array(
 			array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
 			array( 'Image', 'Link', 'Unlink', 'Anchor' ),
@@ -141,6 +147,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 					array('name'=> 'tools',       'items'=> array( 'Maximize', 'ShowBlocks','-','About' ))
 			),
 			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browser')),
+
 	),
 
 
