@@ -46,8 +46,6 @@ if (Yii::app()->controller->getId()=='generator'){?>
 }?>
 </head>
 <body>
-
-
 	<div id="header">
 		<div id="main_submenu">
 		<?php $this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
