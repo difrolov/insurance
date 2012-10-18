@@ -162,5 +162,6 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 <script type="text/javascript">
 function submit_editor_form(){
 	console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
+	$("a.close").click();
 }
 </script>
