@@ -20,7 +20,6 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
-
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
@@ -46,6 +45,8 @@ if (Yii::app()->controller->getId()=='generator'){?>
 }?>
 </head>
 <body>
+
+
 	<div id="header">
 		<div id="main_submenu">
 		<?php $this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
@@ -54,7 +55,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		    'items'=>array(
 		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
 		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/browser')),
-		        array('label'=>'Управление разделами', 'url'=>Yii::app()->createUrl('admin/object/getobject/44'), 'active'=>true),
+		        array('label'=>'Управление разделами', 'url'=>'44', 'active'=>true),
 		        array('label'=>'Управление баннерами', 'url'=>Yii::app()->createUrl('admin/banner/getbanner')),
 		    ),
 		)); ?>
@@ -71,9 +72,11 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<?php endif?>
 	<div class="">
 		<?php
-		
-		HelperAdmin::menuItem();
-		$items=HelperAdmin::$arrMenuItems;
+		if (!$items=HelperAdmin::$arrMenuItems){
+			//echo "<div>No HelperAdmin::arrMenuItems</div>";
+			$items=HelperAdmin::menuItem();
+		}
+		//$items = HelperAdmin::menuItem();
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
 				'id'=>'horz1',
@@ -82,11 +85,13 @@ if (Yii::app()->controller->getId()=='generator'){?>
 						'direction'=>'horizontal',
 						'width'=> 70,
 				),
-			));?>
+			));
+
+		?>
 
 
 	</div>
-	<div class="content_right">
+	<div class="content_banner">
 	<?php echo $content; ?>
 	</div>
 

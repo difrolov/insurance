@@ -122,8 +122,9 @@
 			}
 		}
 		//выводим селект
-		public static function createBannerlink($val,$field_name,$id,$js_function_name){
-			return '<a data-toggle="modal" href="#" data-target="#myModal">'.$val.'</a>';
+		public static function createBannerlink($val,$field_name,$id){
+			return '<a data-toggle="modal" href="#" data-target="#myModal"'.
+			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">'.$val.'</a>';
 		}
 
 		public static function dateToRender($fromDate)
