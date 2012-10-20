@@ -108,10 +108,8 @@ $this->breadcrumbs=array(
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
-    <h4>Текстовый редактор</h4>
 </div>
-
-<div class="modal-body">
+<div class="modal-body" data-tools="editor">
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/') ?>">
     <?php
 $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
@@ -129,37 +127,50 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 	'config' =>
 
 			array('toolbar'=>array(
-			array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
-			array( 'Image', 'Link', 'Unlink', 'Anchor' ),
-			array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' )),
-			array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
-			array('name'=> 'editing',     'items'=> array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
-			array('name'=> 'forms',       'items'=> array( 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' )),
+			
+				array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
+				array('name'=> 'paragraph',   'items'=> array( 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' )),
+				array('name'=> 'editing',     'items'=> array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
+			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' )),
+			//array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
+			//array('name'=> 'forms',       'items'=> array( 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' )),
 
-			array('name'=> 'basicstyles', 'items'=> array( 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' )),
-			array('name'=> 'paragraph',   'items'=> array( 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' )),
-			array('name'=> 'links',       'items'=> array( 'Link','Unlink','Anchor' )),
-			array('name'=> 'insert',      'items'=> array( 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' )),
+			//array('name'=> 'basicstyles', 'items'=> array( 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' )),
+			//array('name'=> 'links',       'items'=> array( 'Link','Unlink','Anchor' )),
+			//array('name'=> 'insert',      'items'=> array( 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' )),
 
-			array('name'=> 'styles',      'items'=> array( 'Styles','Format','Font','FontSize' )),
-			array('name'=> 'colors',      'items'=> array( 'TextColor','BGColor' )),
-			array('name'=> 'tools',       'items'=> array( 'Maximize', 'ShowBlocks','-','About' ))
+			array('name'=> 'styles', 'items'=> array( 'Styles','Format','Font','FontSize' )),
+			array('Image', 'Link', 'Unlink', 'Anchor' ),
+			array('name'=> 'colors', 'items'=> array( 'TextColor','BGColor' )),
+			array('name'=> 'tools', 'items'=> array( 'Maximize', 'ShowBlocks','-','About' ))
 			),
 			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browser')),
 
 	),
-
-
-
 ) ); ?>
-<input type="submit" name="submit" onclick="submit_editor_form();return false;" >
+<div style="position:relative;">
+	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="javascript:void();">Загрузить статью...</a></div>
+<input type="submit" name="submit" onclick="submit_editor_form();return false;" value="Сохранить">
+</div>
 </form>
 </div>
 <div class="modal-footer">
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
+
+/*$(document).ready(function(){
+});*/
+
 function submit_editor_form(){
-	console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
-	$("a.close").click();
+  try{	
+	//var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
+	var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].length);
+	alert(eText);
+	/*$("button#saveModuleText").click( function(){
+		alert('THE TEXT IS: eText');
+	});*/
+  }catch(e){
+	  alert();
+  }
 }
 </script>

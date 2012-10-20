@@ -1,5 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
+div.content_right 
+	div#myModal.modal.fade.in
+		div.modal-body{
+	max-height:460px !important;
+}
 div#chHeaders,
 div#psFooter{
 display:none;
