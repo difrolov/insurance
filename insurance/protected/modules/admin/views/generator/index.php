@@ -1,3 +1,17 @@
+<style>
+div#upload_article_window{
+	background:#FFFFCC; 
+	border:solid 2px #CCC; 
+	display:<?="none"?>; 
+	height: 248px;
+	left:10px; 
+	padding:4px; 
+	position:absolute; 
+	top:-262px;
+	width:75%; 
+	z-index:1; 
+}
+</style>
 <?php
 
 /* @var $this DefaultController */
@@ -109,7 +123,8 @@ $this->breadcrumbs=array(
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
 </div>
-<div class="modal-body" data-tools="editor">
+<div class="modal-body">
+
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/') ?>">
     <?php
 $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
@@ -148,7 +163,32 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 
 	),
 ) ); ?>
-<div style="position:relative;">
+<div style="position:relative;">    
+    <div id="upload_article_window">
+    	<img id="close_upartwin" onClick="parentNode.style.display='none';" style="position:absolute;right:-25px;top:-2px;" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gtk-cancel.png" width="22" height="22">
+    	<div style="overflow:auto; height:240px;">
+  <?
+  	$articlesMain=HelperAdmin::getAllArticlesList('main');
+	$articlesChild=HelperAdmin::getAllArticlesList();
+	//var_dump("<h1>articles:</h1><pre>",$articles,"</pre>");
+  
+  ?>
+    <table width="100%" cellspacing="0" cellpadding="0" id="artMain">
+      <tr>
+        <td>id</td>
+        <td>Название</td>
+        <td>Статус</td>
+      </tr>
+<?	for($i=0,$j=count($articlesMain);$i<$j;$i++){?>      
+      <tr>
+        <td align="right"><?=$articlesMain[$i]['id']?></td>
+        <td nowrap><?=$articlesMain[$i]['name']?></td>
+        <td><?=$articlesMain[$i]['status']?></td>
+      </tr>
+<?	}?>      
+    </table>
+  	  </div>
+    </div>
 	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="javascript:void();">Загрузить статью...</a></div>
 <input type="submit" name="submit" onclick="submit_editor_form();return false;" value="Сохранить">
 </div>
@@ -158,13 +198,16 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
 
-/*$(document).ready(function(){
-});*/
+$(document).ready(function(){
+	$('#upload_article').click( function(){
+		$('div#upload_article_window').fadeToggle(150);
+	});
+	
+});
 
 function submit_editor_form(){
   try{	
-	//var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
-	var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].length);
+	var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
 	alert(eText);
 	/*$("button#saveModuleText").click( function(){
 		alert('THE TEXT IS: eText');

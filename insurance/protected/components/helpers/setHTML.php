@@ -2,11 +2,11 @@
 class setHTML{
 	static $arrMenuWidget;
 	static $arrMenuWidgetSecond;
-	/**
-	  * @package		HTML
-	  * @subpackage		navigation
-	  *
-	  */
+/**
+ * @package HTML
+ * @subpackage navigation
+ *
+ */
 	function buildBreadCrumbs(){?>
     		<div id="breadcrumbs" align="left">
 <?php
@@ -19,11 +19,10 @@ class setHTML{
 <?	}?>
 		</div>
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		product
-	  *
-	  */
+/**
+ * @package HTML
+ * @subpackage product
+ */
 	function buildCatalogue($consumer_type=false){
 	// получить тип субъекта:
 	$current_controller=Yii::app()->controller->getId();
@@ -67,11 +66,11 @@ class setHTML{
   </tr>
 </table>
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		contacts
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		contacts
+ *
+ */
 	function buildContactsAndSearchBlock(){?>
     		<div id="call_us" align="right">
           	<div align="center">
@@ -87,11 +86,11 @@ class setHTML{
 			</div>
           </div>
 <? 	}
-	/**
-	  * @package		HTML
-	  * @subpackage		menu
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		menu
+ *
+ */
 	function buildDropDownMenu($submenu=false){
 		$menuItems=self::getMenuItems($submenu);
 		foreach($menuItems as $parent_id=>$parent_data){
@@ -99,11 +98,11 @@ class setHTML{
 				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
 		}
 	}
-	/**
-	  * @package		HTML
-	  * @subpackage		menu
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		menu
+ *
+ */
 	function buildDropDownSubMenu($parent_alias='',$parent_id=false){?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }?>>
 	<?	$subMenuItems=self::getSubMenuItems($parent_id);
@@ -121,11 +120,11 @@ class setHTML{
 	<?	endforeach;?>
         </div> 
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		footer
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		footer
+ *
+ */
 	function buildFooterBlock($tp=false){?>
 			<div align="left" id="footer">
   	<!--bottom_menu-->
@@ -154,23 +153,23 @@ class setHTML{
 			<?	if ($tp){?><h3>/footer_content</h3><? }?>
   	<!--/footer_content-->
   </div>
-<?	}	
-	/**
-	  * @package		HTML
-	  * @subpackage		header
-	  *
-	  */
+<?	}
+/**
+ * @package		HTML
+ * @subpackage		header
+ *
+ */
 	function buildHeaderRoof(){?>
 		<div id="header_top">
             <div style="float:left;"><a href="http://www.open.ru"><span class="txtLightBlue">www.open</span>.ru</a></div>
             <div style="float:right;"><a href="map.php" class="txtLightBlue">карта сайта</a></div>
           </div>
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		menu
-	  * построить меню верхнего уровня
-	  */
+/**
+ * @package		HTML
+ * @subpackage		menu
+ * построить меню верхнего уровня
+ */
 	function buildMainMenu(
 					$this_object,
 					$submenu=false
@@ -218,11 +217,11 @@ class setHTML{
 							  array('items'=>$menuWidget)
 							);
 	}
-	/**
-	  * @package		HTML
-	  * @subpackage		logo
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		logo
+ *
+ */
 	function buildLastArticles(){
 		ob_start();?>
 		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
@@ -250,40 +249,40 @@ class setHTML{
 		ob_end_clean();
 		return $articles;
 	}
-	/**
-	  * @package		HTML
-	  * @subpackage		data
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		data
+ *
+ */
 	function buildLastNews(){?>
 					<div class="txtHeader3 txtLightBlue">новости</div>
 					<p id="issue_date">31.08.2012</p>
 					<p>В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
 					<p id="all_news"><a href="#">все новости...</a></p>
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		logo
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		logo
+ *
+ */
 	function buildLogosBlock(){?>
 				<div id="logo" align="left">
                     <a href="/insur/insurance/site/index"><img alt="Открытие Страхование" title="На главную" src="/insur/insurance/images/logos.gif" width="435" height="97" border="0"></a>
                 </div>
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		navigation
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		navigation
+ *
+ */
 	function buildPointersNext($direction){?>
 		<a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_<?=$direction?>.png" width="9" height="18" border="0">
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		logo
-	  *
-	  */
+/**
+ * @package		HTML
+ * @subpackage		logo
+ *
+ */
 	function buildReadySolutionsBlock($consumer_type){
 		switch($consumer_type){
 			case "corporative":
@@ -312,11 +311,11 @@ class setHTML{
 					echo $all_ready_target;
 					?></div>
 <?	}
-	/**
-	  * @package		HTML
-	  * @subpackage		menu
-	  * получить меню верхнего уровня
-	  */
+/**
+ * @package		HTML
+ * @subpackage		menu
+ * получить меню верхнего уровня
+ */
 	function getMenuItems($parent_id_level=false){ 
 		if (!$parent_id_level) $parent_id_level='-1';
 		$model=InsurInsuranceObject::model()->findAll(
@@ -330,11 +329,11 @@ class setHTML{
 		}
 		return $menuItems;
 	}
-	/**
-	  * @package		HTML
-	  * @subpackage		menu
-	  * выпадающее меню, как для mainmenu, submenu
-	  */
+/**
+ * @package		HTML
+ * @subpackage		menu
+ * выпадающее меню, как для mainmenu, submenu
+ */
 	function getSubMenuItems($parent_id){ 
 		$model=InsurInsuranceObject::model()->findAll(
 					array('select'=>'id, name, alias',
@@ -349,11 +348,11 @@ class setHTML{
 		}
 		return $subMenuItems;
 	}
-	/**
-	  * @package		interface
-	  * @subpackage		browser
-	  *
-	  */
+/**
+ * @package		interface
+ * @subpackage		browser
+ *
+ */
 	function detectOldIE($version=array(6,7,8)){
 		$usAg=$_SERVER['HTTP_USER_AGENT'];
 		for($i=0,$j=count($version);$i<$j;$i++)
@@ -362,19 +361,19 @@ class setHTML{
 			}
 		return (isset($old_versions))? true:false;	
 	}
-	/**
-	  * @package		interface
-	  * @subpackage		buttons
-	  *
-	  */
+/**
+ * @package		interface
+ * @subpackage		buttons
+ *
+ */
 	function setButtonPrint(){?>
     <button onClick="window.print();">Печать страницы</button>
 <?	}
-	/**
-	  * @package		content
-	  * @subpackage		news
-	  *
-	  */
+/**
+ * @package		content
+ * @subpackage		news
+ *
+ */
 	function showNews($src=false,$content=false){
 		if (!$content) {
 			$content="Итак, здесь у нас превью новости. Новость такая новость.
@@ -385,11 +384,11 @@ class setHTML{
     </div>
     <br>
 <?	}
-	/**
-	  * @package		content
-	  * @subpackage		product
-	  *
-	  */
+/**
+ * @package		content
+ * @subpackage		product
+ *
+ */
 	/*function setPageContent( $this_obj,
 							 $current_page, // current page name
 							 $main_header, // parent section name
@@ -426,12 +425,11 @@ class setHTML{
 			
 			self::buildCatalogue();
 		}
-	}*/
-	/**
-	  * @package		content
-	  * @subpackage		product
-	  *
-	  */
+	}*//**
+ * @package		content
+ * @subpackage		product
+ *
+ */
 	function showReadySolutionBlock($params=NULL){
 		if (!$params['name']) {
 			$solution_name="Готовое решение (наименование)";
