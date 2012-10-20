@@ -20,10 +20,10 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive-yii.css" media="screen, projection" />
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/less.js" type="text/javascript"></script>
+
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-<?	
+<?
 // если загрузили раздел добавления подраздела:
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
@@ -33,17 +33,19 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
+
+
+
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/customize_page.js"></script>
-	<? 	
+	<?
+
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
-<?	
+<?
 }?>
 </head>
 <body>
-
-
 	<div id="header">
 		<div id="main_submenu">
 		<?php $this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
@@ -52,8 +54,8 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		    'items'=>array(
 		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
 		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/browser')),
-		        array('label'=>'Управление разделами', 'url'=>'44', 'active'=>true),
-		        array('label'=>'Управление баннерами', 'url'=>'#'),
+		        array('label'=>'Управление разделами', 'url'=>Yii::app()->createUrl('admin/object/getobject/44'), 'active'=>true),
+		        array('label'=>'Управление баннерами', 'url'=>Yii::app()->createUrl('admin/banner/getbanner')),
 		    ),
 		)); ?>
 	</div>

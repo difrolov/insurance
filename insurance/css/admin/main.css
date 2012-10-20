@@ -32,6 +32,12 @@ body
     display: inline-block;
 	width: 680px;
 }
+.content_banner
+{
+    padding: 0 20px;
+    display: inline-block;
+	width: 940px;
+}
 
 #sidebar
 {
@@ -237,4 +243,11 @@ div.search-form
 .operations li a:hover
 {
 	background: #80CFFF;
+}
+img.banner{
+	height: 100px;
+}
+div.modal-section{
+	text-align:left;
+	padding-left:30px;
 }

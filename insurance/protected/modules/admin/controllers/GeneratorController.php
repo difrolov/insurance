@@ -4,9 +4,13 @@ class GeneratorController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
 
-	public function actionIndex()
-	{
-		$this->render('index');
+	public function actionIndex(){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+
+		$model = new InsurArticleContent;
+		$this->render('index',array('model'=>$model));
 	}
 
 	public function actionGetObject(){

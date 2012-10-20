@@ -1,4 +1,4 @@
-﻿<?	
+﻿<?
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 tBlock=false; // здесь будет сохраняться активный блок (объект)
@@ -28,25 +28,25 @@ function addModuleIntoBlock(event,divBlock){
 					padding:(cPadding-2)+'px'
 			});
 			$(content).css('color','#08C');
-			$(content).html('<b>Текст</b>: <a href="javascript:addTextContent();" title="Добавить произвольный текст">добавьте произвольное содержание</a> или <a href="javascript:PickOutTextContent();" title="Выбрать из имеющихся статей">выберите  имеющуюся статью</a>.');
+			$(content).html('<b>Текст</b>: <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или <a href="javascript:PickOutTextContent();" title="Выбрать из имеющихся статей">выберите  имеющуюся статью</a>.');
 		}
 		$(newModule).css('cursor','move');
 			$(content).attr('class','mod_content');
 			$(remove).attr('class','mod_trash');
 			$(remove).css('cursor','pointer');
-		
-		$('#pick_out_section').fadeIn(2000);	
+
+		$('#pick_out_section').fadeIn(2000);
 	}
   }catch(e){
 	  alert(e.message);
-  }	
+  }
 }
 //
 function removeModule(objSrc){
 	$(objSrc.parentNode.parentNode).remove();
 }
 //
-function selectColumn(event,divBlock){ 
+function selectColumn(event,divBlock){
   try{
 	var srcEl=(event.target)? event.target:event.srcElement;
 	if (srcEl.parentNode==divBlock) {

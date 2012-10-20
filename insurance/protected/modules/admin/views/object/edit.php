@@ -1,6 +1,7 @@
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/'.$id_content) ?>">
 <?php
 $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
+	'id'=> 'editor',
     'model'=>$model[0],                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
     'height'=>'400px',
@@ -36,5 +37,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 
 
 ) ); ?>
+<div style="display: none">
 
+</div>
 </form>

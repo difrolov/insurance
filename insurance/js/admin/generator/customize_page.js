@@ -9,7 +9,7 @@ $(document).ready(function() {
 				   ){
 					$('label span').removeAttr('class');
 					$('label span b').css('color','');
-					$(srcEl.parentNode).attr('class','selLabel'); 
+					$(srcEl.parentNode).attr('class','selLabel');
 					$(srcEl.parentNode).find('b').css('color','#FFF');
 				}
 		});
@@ -32,7 +32,7 @@ function addTextContent(){
 	$('#make_text').css({
 				background:'#FFF',
 				height:($(window).height()/100*70)+'px',
-				position:'fixed', 
+				position:'fixed',
 				width:($(window).width()/100*70)+'px'
 			}).fadeIn(300,
 				function(){
@@ -45,4 +45,5 @@ function addTextContent(){
 //
 function PickOutTextContent(){
 }
+
 //
