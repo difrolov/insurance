@@ -8,8 +8,21 @@ div#upload_article_window{
 	padding:4px; 
 	position:absolute; 
 	top:-262px;
-	width:75%; 
+	width:93%; 
 	z-index:1; 
+}
+table#tblArticles tr td:first-child{
+	text-align:right;
+}
+table#tblArticles tr td:last-child{
+	text-align:center;
+}
+table#tblArticles tbody tr:first-child td:first-child{
+	text-align:left;
+}
+
+tr.bold >td {
+	font-weight:bold;
 }
 </style>
 <?php
@@ -167,23 +180,20 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
     <div id="upload_article_window">
     	<img id="close_upartwin" onClick="parentNode.style.display='none';" style="position:absolute;right:-25px;top:-2px;" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gtk-cancel.png" width="22" height="22">
     	<div style="overflow:auto; height:240px;">
-  <?
-  	$articlesMain=HelperAdmin::getAllArticlesList('main');
-	$articlesChild=HelperAdmin::getAllArticlesList();
-	//var_dump("<h1>articles:</h1><pre>",$articles,"</pre>");
-  
-  ?>
-    <table width="100%" cellspacing="0" cellpadding="0" id="artMain">
-      <tr>
+  <?	$articles=HelperAdmin::getAllArticlesList(false); ?>
+    <table width="100%" cellspacing="0" cellpadding="0" id="tblArticles">
+      <tr bgcolor="#CCCCCC" class="bold">
         <td>id</td>
         <td>Название</td>
+        <td>Родитель</td>
         <td>Статус</td>
       </tr>
-<?	for($i=0,$j=count($articlesMain);$i<$j;$i++){?>      
-      <tr>
-        <td align="right"><?=$articlesMain[$i]['id']?></td>
-        <td nowrap><?=$articlesMain[$i]['name']?></td>
-        <td><?=$articlesMain[$i]['status']?></td>
+<?	for($i=0,$j=count($articles);$i<$j;$i++){?>      
+      <tr<? if(!$articles[$i]['parent']){?> class="bold"<? }?>>
+        <td><?=($i+1)?></td>
+        <td nowrap><?=$articles[$i]['name']?></td>
+        <td><?=$articles[$i]['parent']?></td>
+        <td><?=$articles[$i]['status']?></td>
       </tr>
 <?	}?>      
     </table>

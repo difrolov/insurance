@@ -27,9 +27,17 @@
 			$sql='
 			SELECT id,
 				   name,
-				   `status`,
-				   parent_id';
-			$sql.= ($art_level=='main')? 
+				   `status`,';
+			if ($art_level===false)
+				$sql.=' 
+    if (parent_id<0,null,
+        (SELECT name FROM insur_insurance_object  
+        WHERE id = i2.parent_id)
+    ) AS parent 
+    FROM insur_insurance_object as i2
+ORDER BY name,parent'; 
+			else
+				$sql.='parent_id'.($art_level=='main')? 
 			' 
     FROM insur_insurance_object 
 WHERE parent_id < 0
