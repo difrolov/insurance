@@ -29,15 +29,15 @@ function addModuleIntoBlock(event,divBlock){
 			});
 			$(content).css('color','#08C');
 			$(content).append(' <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
-			$('#tblArticles').css('width','auto');
+			var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
+			var aTableBar=$('table#tblArticles tbody tr:first-child');
 			$('<a>',{
 					text:"выберите из имеющихся статей",
 					title:"Выбрать из имеющихся статей",
-					click:function(){
+					click:	function(){
 						
-						var aTable=$('div#upload_article_window');
-						
-						var aParent=this.parentNode.parentNode.parentNode;
+						$('#tblArticles').css('width','auto');
+						var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
 						
 						$(aTable).css({
 							display:'inline-block',
@@ -55,21 +55,16 @@ function addModuleIntoBlock(event,divBlock){
 							top: pDivTop+10+'px',
 							left: pLeft+5+'px'
 						});
-						$('table#tblArticles tbody tr:first-child')
+						/*$(aTableBar)
 							.mouseover()
-							.css('cursor','move')/*
+							.css('cursor','move')
 							.mousedown( 
 								function(){
 									$(aTable).draggable();
-						});
-						$(aParent)
-							.click( 
-								function(){
-									$(aTable).draggable(false);
-									$(this).removeClass('ui-draggable-dragging');
-						})*/;
+							});*/
 					}
 			}).appendTo(content);
+			$(aTableBar).mouseout();
 		}
 		$(newModule).css('cursor','move');
 

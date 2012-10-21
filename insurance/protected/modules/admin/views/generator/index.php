@@ -52,7 +52,7 @@ div[data-test="template"]:hover{
 	opacity:1;
 }
 </style>
-<?	if ($_GET['test']){?>
+<?	if (isset($_GET['test'])){?>
 <script>
 $(document).ready(	function(){
 		$('div[data-test="template"]').mousedown().draggable().resizable().museup().draggable(false);
@@ -256,7 +256,7 @@ $(document).ready(function(){
 
 function submit_editor_form(){
   try{	
-	var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
+	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
 	alert(eText);
 	/*$("button#saveModuleText").click( function(){
 		alert('THE TEXT IS: eText');
