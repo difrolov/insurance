@@ -28,12 +28,56 @@ function addModuleIntoBlock(event,divBlock){
 					padding:(cPadding-2)+'px'
 			});
 			$(content).css('color','#08C');
-			$(content).html('<b>Текст</b>: <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или <a href="javascript:PickOutTextContent();" title="Выбрать из имеющихся статей">выберите  имеющуюся статью</a>.');
+			$(content).append(' <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
+			$('#tblArticles').css('width','auto');
+			$('<a>',{
+					text:"выберите из имеющихся статей",
+					title:"Выбрать из имеющихся статей",
+					click:function(){
+						
+						var aTable=$('div#upload_article_window');
+						
+						var aParent=this.parentNode.parentNode.parentNode;
+						
+						$(aTable).css({
+							display:'inline-block',
+							width:'auto'
+						});
+						
+						var pDivTop=$(aParent).offset().top;
+						
+						$(aTable)
+							.show()
+							.appendTo('body');
+						var tWidth=$(aTable).width();
+						var pLeft=($(document).width()-tWidth)/2;
+						$(aTable).css({
+							top: pDivTop+10+'px',
+							left: pLeft+5+'px'
+						});
+						$('table#tblArticles tbody tr:first-child')
+							.mouseover()
+							.css('cursor','move')/*
+							.mousedown( 
+								function(){
+									$(aTable).draggable();
+						});
+						$(aParent)
+							.click( 
+								function(){
+									$(aTable).draggable(false);
+									$(this).removeClass('ui-draggable-dragging');
+						})*/;
+					}
+			}).appendTo(content);
 		}
 		$(newModule).css('cursor','move');
+
 			$(content).attr('class','mod_content');
-			$(remove).attr('class','mod_trash');
-			$(remove).css('cursor','pointer');
+			$(remove).attr({
+				class:'mod_trash',
+				cursor:'pointer'
+			});
 
 		$('#pick_out_section').fadeIn(2000);
 	}

@@ -1,7 +1,8 @@
 <style>
 div#upload_article_window{
-	background:#FFFFCC; 
+	background:#FFF; 
 	border:solid 2px #CCC; 
+	box-shadow: 0 0 30px 0 #666;
 	display:<?="none"?>; 
 	height: 248px;
 	left:10px; 
@@ -10,6 +11,18 @@ div#upload_article_window{
 	top:-262px;
 	width:93%; 
 	z-index:1; 
+}
+table#tblArticles {
+	border:solid 1px #CCC;
+}
+table#tblArticles tr td{
+	border-bottom:dashed 1px #CCC;
+}
+table#tblArticles tbody tr:first-child td{
+	border-bottom-style:solid;
+}
+table#tblArticles tbody tr:last-child td{
+	border-bottom:none;
 }
 table#tblArticles tr td:first-child{
 	text-align:right;
@@ -24,9 +37,35 @@ table#tblArticles tbody tr:first-child td:first-child{
 tr.bold >td {
 	font-weight:bold;
 }
+div[data-test="template"]{
+	background:#FFFFCC;
+	border:solid 2px #FFCC66;
+	left:0;
+	opacity:0.3;
+	padding:10px;
+	position:absolute;
+	text-align:left;
+	top:20px;
+	max-width:40%;
+}
+div[data-test="template"]:hover{
+	opacity:1;
+}
 </style>
+<?	if ($_GET['test']){?>
+<script>
+$(document).ready(	function(){
+		$('div[data-test="template"]').mousedown().draggable().resizable().museup().draggable(false);
+	
+	});
+</script>
+<div data-test="template">
+	<h4>Текущие данные создаваемого подраздела:</h4>
+    <h5>Схема макета:</h5>
+    <div id="tmpl-shema"></div>
+</div>
 <?php
-
+	}
 /* @var $this DefaultController */
 
 $this->breadcrumbs=array(
@@ -185,7 +224,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
       <tr bgcolor="#CCCCCC" class="bold">
         <td>id</td>
         <td>Название</td>
-        <td>Родитель</td>
+        <td>Родительский раздел</td>
         <td>Статус</td>
       </tr>
 <?	for($i=0,$j=count($articles);$i<$j;$i++){?>      

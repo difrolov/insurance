@@ -43,7 +43,15 @@ function addTextContent(){
   }
 }
 //
-function PickOutTextContent(){
+function PickOutTextContent(obj){
+  try{
+	alert($(obj).html()); 
+	//var aTable=$('div#upload_article_window');
+	//$(aTable).show();
+	//$(obj.parentNode.parentNode).append(aTable);
+  }catch(e){
+	alert(e.message);
+  }
 }
 
 //
