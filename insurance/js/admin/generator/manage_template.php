@@ -8,13 +8,16 @@ function addModuleIntoBlock(event,divBlock){
 	if ( srcEl.parentNode==divBlock
 		 && tBlock
 	   ) {
-		var newModule=document.createElement(srcEl.tagName);
+		var newModule=document.createElement(srcEl.tagName); // добавленный в колонку модуль
 		tBlock.appendChild(newModule);
 		var content=document.createElement('div');
 		var remove=document.createElement('div');
 		newModule.appendChild(content);
 		newModule.appendChild(remove);
 		content.innerHTML=srcEl.innerHTML;
+		// скопировать атрибут типа модуля:
+		$(content).attr('data-module-type',$(srcEl).attr('data-module-type'));
+		
 		remove.innerHTML='<a href="#" onClick="removeModule(this);return false;"><img src="<?=$_GET['base_url']?>/images/trash.gif" border="0" title="Удалить модуль из колонки"></a>';
 		$(newModule).attr({
 			class:'innerModule',
@@ -41,6 +44,7 @@ function addModuleIntoBlock(event,divBlock){
 
 		$('#pick_out_section').fadeIn(2000);
 	}
+	test_checkModules();
   }catch(e){
 	  alert(e.message);
   }
@@ -49,18 +53,20 @@ function addModuleIntoBlock(event,divBlock){
 function removeModule(objSrc){
 	$(objSrc.parentNode.parentNode).remove();
 }
-//
+// выделить фоном активную колонку:
 function selectColumn(event,divBlock){
   try{
 	var srcEl=(event.target)? event.target:event.srcElement;
 	if (srcEl.parentNode==divBlock) {
 		if (!$(srcEl).find('input').length) {
-			$(divBlock).children('div').css('background-color','#FFF');
+			$(divBlock).children('div')
+				.css('background-color','#FFF')
+				.removeAttr('data-column_stat');
 			$(srcEl).sortable();
 			tBlock=srcEl;
 			$(srcEl).css({
 				backgroundColor:'#CEEFFF',
-			});
+			}).attr('data-column_stat','active'); // reserved
 		}
 	}
   }catch(e){

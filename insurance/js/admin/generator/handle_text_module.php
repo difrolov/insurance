@@ -4,7 +4,10 @@ ob_start();?>
 $(document).ready(function(){
   try{
 <?	if (isset($_GET['test'])){?>
-	$('div[data-test="template"]').mousedown().draggable().resizable().museup().draggable(false);
+	$('div[data-test="template"]')
+		.mousedown()
+		.draggable()
+		.resizable();
 <?	}?>	
 	$('#upload_article').click( function(){
 	$('div#upload_article_window')

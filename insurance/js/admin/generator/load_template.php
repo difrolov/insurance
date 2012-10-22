@@ -305,6 +305,10 @@ function createTemplate(){
 		document.getElementById('tmplPlace').innerHTML+='<div>'+tmplSchema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
+	
+	// прописать количество блоков макета в тестовом блоке:
+	test_addBlocks();
+	
   }catch(e){
 	  alert(e.message);
   }

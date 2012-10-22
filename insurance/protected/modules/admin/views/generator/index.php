@@ -36,6 +36,28 @@
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
+      <blockquote>
+        <p>отобразить блоки следующего уровня, назначить класс первой пиктограмме:<br>
+          <strong>startHandleBlock(srce,blockTextToShowSubheader,divPyctosSubheader);</strong></p>
+      </blockquote>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>prepare_data.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>сделать все пиктограммы блоков 2 и 3 непрозрачными:<br>
+          <strong>dropPyctosOpacity(divPyctosFooter);</strong> </p>
+      </blockquote>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>prepare_data.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
       <p>установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере;<br>
         указать параметры текущего выбора:<br>
         <strong>setCurrentChoiceStatus(event,currentPyctosContainer); </strong></p>
@@ -80,7 +102,30 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td>...</td>
+    <td>выделить цветом активную колонку:<br>
+    <strong>selectColumn(event,this);</strong></td>
+    <td>Колонки макета</td>
+    <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>добавить модуль в активную колонку:<br>
+    <strong>addModuleIntoBlock(event,this);</strong></td>
+    <td>Кнопка модуля</td>
+    <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p><strong>?</strong> добавить ссылки (команды добавления текста/статьи) в текстовый модуль:<br>
+        <strong>addTextModuleComLinks(content);</strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
@@ -139,10 +184,13 @@ div[data-test="template"]:hover{
 }
 </style>
 <?	if (isset($_GET['test'])){?>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/test.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <div data-test="template">
 	<h4>Текущие данные создаваемого подраздела:</h4>
     <h5>Схема макета:  <span id="tmpl-shema"></span></h5>
-  
+  	<h5>Блоки/модули:</h5>
+    	<div id="tmpl-blocks"></div>
+      
 </div>
 <?php
 	}
@@ -197,10 +245,10 @@ $this->breadcrumbs=array(
         <li>Щёлкните модули для размещения в ней.</li>
       </ol>
         <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
-            <div>Новости</div>
-            <div>Готовое решение</div>
-            <div>Программа страхования</div>
-            <div>Случайная статья</div>
+            <div data-module-type="Новости">Новости</div>
+            <div data-module-type="Готовое решение">Готовое решение</div>
+            <div data-module-type="Программа страхования">Программа страхования</div>
+            <div data-module-type="Случайная статья">Случайная статья</div>
             <div class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
         </div>
     </div>
