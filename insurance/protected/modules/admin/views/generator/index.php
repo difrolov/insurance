@@ -3,14 +3,10 @@ div#upload_article_window{
 	background:#FFF; 
 	border:solid 2px #CCC; 
 	box-shadow: 0 0 30px 0 #666;
-	display:<?="none"?>; 
-	height: 248px;
-	left:10px; 
 	padding:4px; 
 	position:absolute; 
-	top:-262px;
-	width:93%; 
 	z-index:1; 
+	display:<?="none"?>; 
 }
 table#tblArticles {
 	border:solid 1px #CCC;
@@ -53,12 +49,6 @@ div[data-test="template"]:hover{
 }
 </style>
 <?	if (isset($_GET['test'])){?>
-<script>
-$(document).ready(	function(){
-		$('div[data-test="template"]').mousedown().draggable().resizable().museup().draggable(false);
-	
-	});
-</script>
 <div data-test="template">
 	<h4>Текущие данные создаваемого подраздела:</h4>
     <h5>Схема макета:</h5>
@@ -179,7 +169,8 @@ $this->breadcrumbs=array(
 
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/') ?>">
     <?php
-$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
+$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+			  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
     'height'=>'240px',
@@ -196,8 +187,12 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 			array('toolbar'=>array(
 			
 				array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
-				array('name'=> 'paragraph',   'items'=> array( 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' )),
-				array('name'=> 'editing',     'items'=> array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
+				array('name'=> 'paragraph',   
+					  'items'=> 
+					  		array( 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' )),
+				array('name'=> 'editing',     
+					  'items'=> 
+					  		array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
 			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' )),
 			//array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
 			//array('name'=> 'forms',       'items'=> array( 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' )),
@@ -206,21 +201,27 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 			//array('name'=> 'links',       'items'=> array( 'Link','Unlink','Anchor' )),
 			//array('name'=> 'insert',      'items'=> array( 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' )),
 
-			array('name'=> 'styles', 'items'=> array( 'Styles','Format','Font','FontSize' )),
-			array('Image', 'Link', 'Unlink', 'Anchor' ),
-			array('name'=> 'colors', 'items'=> array( 'TextColor','BGColor' )),
-			array('name'=> 'tools', 'items'=> array( 'Maximize', 'ShowBlocks','-','About' ))
+				array('name'=> 'styles', 
+				  	  'items'=> 
+							array( 'Styles','Format','Font','FontSize' )),
+							array('Image', 'Link', 'Unlink', 'Anchor' ),
+							array('name'=> 'colors', 
+								  'items'=> 
+									array( 'TextColor','BGColor' )),
+									array('name'=> 'tools', 
+										  'items'=> 
+												array( 'Maximize', 'ShowBlocks','-','About' ))
 			),
 			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browser')),
 
 	),
 ) ); ?>
-<div style="position:relative;">    
+<div style="position:relative;" data-target="load_in_editor">    
     <div id="upload_article_window">
     	<img id="close_upartwin" onClick="parentNode.style.display='none';" style="position:absolute;right:-25px;top:-2px;" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gtk-cancel.png" width="22" height="22">
-    	<div style="overflow:auto; height:240px;">
+    	<div style="overflow:auto; height:100%;">
   <?	$articles=HelperAdmin::getAllArticlesList(false); ?>
-    <table width="100%" cellspacing="0" cellpadding="0" id="tblArticles">
+    <table width="100%" height="100%" cellspacing="0" cellpadding="0" id="tblArticles">
       <tr bgcolor="#CCCCCC" class="bold">
         <td>id</td>
         <td>Название</td>
@@ -243,26 +244,4 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 </div>
 </form>
 </div>
-<div class="modal-footer">
 <?php $this->endWidget(); ?>
-<script type="text/javascript">
-
-$(document).ready(function(){
-	$('#upload_article').click( function(){
-		$('div#upload_article_window').fadeToggle(150);
-	});
-	
-});
-
-function submit_editor_form(){
-  try{	
-	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
-	alert(eText);
-	/*$("button#saveModuleText").click( function(){
-		alert('THE TEXT IS: eText');
-	});*/
-  }catch(e){
-	  alert();
-  }
-}
-</script>

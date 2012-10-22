@@ -29,42 +29,8 @@ function addModuleIntoBlock(event,divBlock){
 			});
 			$(content).css('color','#08C');
 			$(content).append(' <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
-			var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
-			var aTableBar=$('table#tblArticles tbody tr:first-child');
-			$('<a>',{
-					text:"выберите из имеющихся статей",
-					title:"Выбрать из имеющихся статей",
-					click:	function(){
-						
-						$('#tblArticles').css('width','auto');
-						var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
-						
-						$(aTable).css({
-							display:'inline-block',
-							width:'auto'
-						});
-						
-						var pDivTop=$(aParent).offset().top;
-						
-						$(aTable)
-							.show()
-							.appendTo('body');
-						var tWidth=$(aTable).width();
-						var pLeft=($(document).width()-tWidth)/2;
-						$(aTable).css({
-							top: pDivTop+10+'px',
-							left: pLeft+5+'px'
-						});
-						/*$(aTableBar)
-							.mouseover()
-							.css('cursor','move')
-							.mousedown( 
-								function(){
-									$(aTable).draggable();
-							});*/
-					}
-			}).appendTo(content);
-			$(aTableBar).mouseout();
+			
+			addTextModuleComLinks(content);
 		}
 		$(newModule).css('cursor','move');
 
