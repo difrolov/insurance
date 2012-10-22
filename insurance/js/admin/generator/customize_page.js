@@ -26,32 +26,3 @@ $(document).ready(function() {
 	  alert(e.message);
   }
 });
-//
-function addTextContent(){
-  try{ //alert('addTextContent');
-	$('#make_text').css({
-				background:'#FFF',
-				height:($(window).height()/100*70)+'px',
-				position:'fixed',
-				width:($(window).width()/100*70)+'px'
-			}).fadeIn(300,
-				function(){
-					$(this).draggable().resizable();
-			});
-  }catch(e){
-	  alert(e.message);
-  }
-}
-//
-function PickOutTextContent(obj){
-  try{
-	alert($(obj).html()); 
-	//var aTable=$('div#upload_article_window');
-	//$(aTable).show();
-	//$(obj.parentNode.parentNode).append(aTable);
-  }catch(e){
-	alert(e.message);
-  }
-}
-
-//

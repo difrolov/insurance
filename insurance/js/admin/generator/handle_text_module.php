@@ -24,6 +24,7 @@ $(document).ready(function(){
 });
 //
 function addTextModuleComLinks(content){
+	$(content).append(' <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
 	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
 	var aTableBar=$('table#tblArticles tbody tr:first-child');
 	$('<a>',{
@@ -63,7 +64,7 @@ function addTextModuleComLinks(content){
 	$(aTableBar).mouseout();
 }
 //
-function submit_editor_form(){
+function getDataFromCKeditor(){
   try{	
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
 	alert(eText);
@@ -74,6 +75,34 @@ function submit_editor_form(){
 	  alert();
   }
 }
+//
+function PickOutTextContent(obj){
+  try{
+	alert($(obj).html()); 
+	//var aTable=$('div#upload_article_window');
+	//$(aTable).show();
+	//$(obj.parentNode.parentNode).append(aTable);
+  }catch(e){
+	alert(e.message);
+  }
+}
+/*//
+function addTextContent(){
+  try{ //alert('addTextContent');
+	$('#make_text').css({
+				background:'#FFF',
+				height:($(window).height()/100*70)+'px',
+				position:'fixed',
+				width:($(window).width()/100*70)+'px'
+			}).fadeIn(300,
+				function(){
+					$(this).draggable().resizable();
+			});
+  }catch(e){
+	  alert(e.message);
+  }
+}*/
+
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
 echo $myscript;

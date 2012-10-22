@@ -2,7 +2,7 @@
 ob_start();?>
 // JavaScript Document
 //
-function createTemplate(tmplSchema,goLoop){
+function createTemplate(){
   try{ 
   	// получить количество блоков:
 	var colsCountInit=colsCount=parseInt(tmplSchema.substring(0,1));
@@ -300,6 +300,7 @@ function createTemplate(tmplSchema,goLoop){
 		tmplBlock+=">&nbsp;</div>";
 	}
 	tmplBlock+="</div>";
+	var goLoop=false;
 	if (goLoop) // чиста для теста, если хотим вывести все возможные блоки
 		document.getElementById('tmplPlace').innerHTML+='<div>'+tmplSchema+'</div>'+tmplBlock;
 	else
@@ -315,10 +316,10 @@ function loadTemplate(){
 	$("html, body").animate(
 		{scrollTop:topPos},
 		500,
-		function(){
-			stateTemplateIsLoaded();
-	});
-	createTemplate(tmplSchema);
+		function(){stateTemplateIsLoaded()}
+	);
+	//
+	createTemplate();
 	var headerBlock=$("div[header='']")[0];
 	if (headerBlock){
 		var pWidth=$(headerBlock).width()-10;

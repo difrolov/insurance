@@ -106,13 +106,15 @@ function checkTemplateReady(){
 						}
 					break;
 				}
-				//testBlock.innerHTML='level: '+levelStop+', className: '+selElementClassName+', tmplSchema: '+tmplSchema;
+				var tSchm=false;
+				if (tSchm=document.getElementById('tmpl-shema'))
+					tSchm.innerHTML=(tmplSchema)? tmplSchema:'Не создана';
 				break;
 			}
 		}
 	}
 	// управлять видимостью остальных блоков:
-	if (tmplSchema!=0) {
+	if (tmplSchema!=0) { 
 		$("#tmpl_commands").fadeIn(1000);
 		/*if($('#sel_modules').css('display')!='block'){
 			display(['tmpl_commands']); // кнопки управления шаблонами

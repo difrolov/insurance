@@ -239,6 +239,9 @@ div#tmplPlace div.column{
 div#tmplPlace div.column > div{
 	padding:6px;
 }
+.txtRed{
+	color:#F00;
+}
 
 /*	СТИЛИ СХЕМЫ МАКТЕТА	*/
 div[footer]{

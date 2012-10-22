@@ -28,8 +28,7 @@ function addModuleIntoBlock(event,divBlock){
 					padding:(cPadding-2)+'px'
 			});
 			$(content).css('color','#08C');
-			$(content).append(' <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
-			
+			// добавить ссылки (команды добавления текста/статьи) в текстовый модуль:
 			addTextModuleComLinks(content);
 		}
 		$(newModule).css('cursor','move');

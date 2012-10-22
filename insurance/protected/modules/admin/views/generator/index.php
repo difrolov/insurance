@@ -1,3 +1,117 @@
+<? 	if (isset($_GET['show_seq'])){
+	// hidden: ?>
+<h4>Последовательность вызова клиентских скриптов:</h4>
+    <table width="100%" border="1" cellspacing="0" cellpadding="8">
+  <tr bgcolor="#FFCCFF">
+    <td><h4>#</h4></td>
+    <td><h4>Function</h4></td>
+    <td><h4>event source</h4></td>
+    <td><h4>Файл</h4></td>
+  </tr>
+  <tr valign="top">
+    <td>&nbsp;</td>
+    <td><p>Подготовить схему макета:<br>
+	<strong>defineTemplateSchema(event,this); </strong></p></td>
+    <td>Пиктораммы схем макета</td>
+    <td>prepare_data.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>показать блок "текущий выбор":<br>
+        <strong>showBlock('currentChoice','line'); </strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>prepare_data.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера:<br>
+        <strong>handlePyctos(srce); </strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>prepare_data.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере;<br>
+        указать параметры текущего выбора:<br>
+        <strong>setCurrentChoiceStatus(event,currentPyctosContainer); </strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>prepare_data.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>проверить &#8212; допускает ли текущее состояние макета его загрузку;<br>
+        если да, <span class="txtRed">назначить схему для макета</span> :<br>
+        <strong>checkTemplateReady();</strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>prepare_data.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><p>Загрузить макет по сформированному шаблону:<strong><br>
+    loadTemplate();</strong></p></td>
+    <td>Кнопка <q><strong>Загрузить макет</strong></q></td>
+    <td>load_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>назначить параметры отображения задействованным элементам:<br>
+        <strong>stateTemplateIsLoaded()</strong>;</p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>switch_states.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>собрать блочную структуру макета по выбранной ранее схеме:<br>
+        <strong>createTemplate(tmplSchema);</strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>load_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+	<hr size="4" color="#0000FF">
+<? }?>
 <style>
 div#upload_article_window{
 	background:#FFF; 
@@ -240,7 +354,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
   	  </div>
     </div>
 	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="javascript:void();">Загрузить статью...</a></div>
-<input type="submit" name="submit" onclick="submit_editor_form();return false;" value="Сохранить">
+<input type="submit" name="submit" onclick="getDataFromCKeditor();return false;" value="Сохранить">
 </div>
 </form>
 </div>
