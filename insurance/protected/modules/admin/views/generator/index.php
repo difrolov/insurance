@@ -80,31 +80,7 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td>...</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
@@ -165,8 +141,8 @@ div[data-test="template"]:hover{
 <?	if (isset($_GET['test'])){?>
 <div data-test="template">
 	<h4>Текущие данные создаваемого подраздела:</h4>
-    <h5>Схема макета:</h5>
-    <div id="tmpl-shema"></div>
+    <h5>Схема макета:  <span id="tmpl-shema"></span></h5>
+  
 </div>
 <?php
 	}
