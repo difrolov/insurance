@@ -8,10 +8,10 @@ function test_addBlocks(){
 	alert($('div#tmplPlace div > div').size());
 	$('div#tmplPlace > div > div').each(
 		function(){
-			if ($(this).attr('header'))
+			if ($(this).attr('data-block-type="header"'))
 				dIndex='header';
 			else {
-				if ($(this).attr('footer'))
+				if ($(this).attr('data-block-type="footer"'))
 					dIndex='footer';			
 				else
 					dIndex=$(this.parentNode).index(this);

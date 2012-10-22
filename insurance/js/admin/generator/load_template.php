@@ -16,10 +16,10 @@ function createTemplate(){
 		if (i==0) { // первая итерация:
 			if (colsCountInit!=1) {
 				tmplBlock+=' class="';
-				tmplBlock+=(colsCountInit==4)? 'column4':'left'+colsCountInit;
+				tmplBlock+=(colsCountInit==4)? 'column4':'data-block-type="left"'+colsCountInit;
 				tmplBlock+='"';
 			}
-			tmplBlock+=' left';	
+			tmplBlock+=' data-block-type="left"';	
 		}else{ // разобраться с остальными колонками:
 			tmplBlock+=' class="';
 			switch(i){
@@ -81,17 +81,17 @@ function createTemplate(){
 						case '4ii':
 						case '4s0':
 						case '4ss':
-							tmplBlock+=' header';
+							tmplBlock+=' data-block-type="header"';
 								break;
 						case '300':
 						case '400':
-							tmplBlock+=' left';
+							tmplBlock+=' data-block-type="left"';
 								break;
 						case '200':
 						case '40i':
 						case '4ii':
 						case '4ss':
-							tmplBlock+=' right';
+							tmplBlock+=' data-block-type="right"';
 								break;
 					}
 				
@@ -159,7 +159,7 @@ function createTemplate(){
 						case '3s0':
 						case '4ii':
 						case '4s0':
-							tmplBlock+=' right';
+							tmplBlock+=' data-block-type="right"';
 								break;
 					}
 				
@@ -215,11 +215,11 @@ function createTemplate(){
 					switch(tmplSchema){ // добавить атрибут для CSS:
 						
 						case '30s':
-							tmplBlock+=' footer';
+							tmplBlock+=' data-block-type="footer"';
 								break;
 						case '400':
 						case '3ss':
-							tmplBlock+=' right';
+							tmplBlock+=' data-block-type="right"';
 								break;
 					}
 				
@@ -266,10 +266,10 @@ function createTemplate(){
 						case '3ss':
 						case '40i':
 						case '40s':
-							tmplBlock+=' footer';
+							tmplBlock+=' data-block-type="footer"';
 								break;
 						case '4ss':
-							tmplBlock+=' right';
+							tmplBlock+=' data-block-type="right"';
 								break;
 					}
 				
@@ -290,7 +290,7 @@ function createTemplate(){
 					switch(tmplSchema){ // добавить атрибут для CSS:
 						case '4ss':
 						case '4ii':
-							tmplBlock+=' footer';
+							tmplBlock+=' data-block-type="footer"';
 								break;
 					}
 				
