@@ -16,7 +16,7 @@ function createTemplate(){
 		if (i==0) { // первая итерация:
 			if (colsCountInit!=1) {
 				tmplBlock+=' class="';
-				tmplBlock+=(colsCountInit==4)? 'column4':'data-block-type="left"'+colsCountInit;
+				tmplBlock+=(colsCountInit==4)? 'column4':'left'+colsCountInit;
 				tmplBlock+='"';
 			}
 			tmplBlock+=' data-block-type="left"';	
@@ -324,7 +324,7 @@ function loadTemplate(){
 	);
 	//
 	createTemplate();
-	var headerBlock=$("div[header='']")[0];
+	var headerBlock=$("div[data-block-type='header']")[0];
 	if (headerBlock){
 		var pWidth=$(headerBlock).width()-10;
 		headerBlock.innerHTML='<div>Текст подзаголовка:</div><input type="text" style="width:'+pWidth+'px; padding:4px;">'

@@ -172,15 +172,21 @@ div[data-test="template"]{
 	background:#FFFFCC;
 	border:solid 2px #FFCC66;
 	left:0;
+	max-width:40%;
 	opacity:0.3;
 	padding:10px;
 	position:absolute;
 	text-align:left;
 	top:20px;
-	max-width:40%;
+	z-index:1;
 }
 div[data-test="template"]:hover{
 	opacity:1;
+}
+div[data-test="template"] 
+	div#tmpl-blocks
+		> div > div {
+	margin-left:20px;
 }
 </style>
 <?	if (isset($_GET['test'])){?>
@@ -249,7 +255,7 @@ $this->breadcrumbs=array(
             <div data-module-type="Готовое решение">Готовое решение</div>
             <div data-module-type="Программа страхования">Программа страхования</div>
             <div data-module-type="Случайная статья">Случайная статья</div>
-            <div class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
+            <div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
         </div>
     </div>
     <div id="<?="tmplPlace"?>">
