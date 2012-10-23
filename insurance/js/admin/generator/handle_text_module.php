@@ -25,20 +25,24 @@ $(document).ready(function(){
 	$('td[data-article-id]').mouseover( function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
+	// загрузить текст статьи в редактор, либо указать её id в случае, если хотим оставить её без изменений
+	$('td[data-article-id]').dblclick(function(e) {
+		        
+    });
   }catch(e){
 	alert(e.message);
   }
 });
 //
 function addTextModuleComLinks(content){
-	$(content).append(' <a data-toggle="modal" href="#" data-target="#myModal" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
+	$(content).append(' <a data-toggle="modal" data-target="#myModal" href="#" onClick="window.textTarget=\'editor\';" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
 	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
 	var aTableBar=$('table#tblArticles tbody tr:first-child');
 	$('<a>',{
 			text:"выберите из имеющихся статей",
 			title:"Выбрать из имеющихся статей",
 			click:	function(){
-				
+				window.textTarget='ready';
 				$('#tblArticles').css('width','auto');
 				var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
 				
@@ -82,12 +86,16 @@ function getDataFromCKeditor(){
 	  alert();
   }
 }
+// вернуть путь отправки Ajax-запроса
+function getLoadAjaxPath(artID){
+	return "<?=$base_url?>/admin/Ajax/?article_id="+artID+"&do=preview"
+}
 //
 function articlePreview(artID,eSrc){
   try{
 	//alert(artID+' '+eSrc.tagName);
 	// GET
-	var goUrl="<?=$base_url?>/admin/Ajax/?article_id="+artID+"&do=preview";
+	var goUrl=getLoadAjaxPath(artID);
 <?	$t=false; 	
 	if ($t){?>
 	window.open(goUrl,'ajax');
@@ -96,6 +104,7 @@ function articlePreview(artID,eSrc){
 		type: "GET",
 		url: goUrl,
 		success: function(msg){
+		  if (eSrc)	{ // если с предпросмотром
 			var aPrev=$('div#article_preview_text');
 			//alert(msg);
 			var pleft=$(eSrc).offset().left;
@@ -107,7 +116,10 @@ function articlePreview(artID,eSrc){
 				top:ptop+16+'px',
 				zIndex:2000
 			}).draggable();
-			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\')">Вставить</button></div></div>');
+			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\');">Вставить</button></div></div>');
+		  }else{ // если без предпросмотра - сразу вставляем текст в поле редактора
+			  addArtText('html',msg);
+		  }
 		}
 	 });
 	return false;
@@ -116,9 +128,32 @@ function articlePreview(artID,eSrc){
   }
 }
 //
-function addArtText(artBox){
+function addArtText(artBox,htmlContent){
+	// получили либо html, либо содержащий его контейнер
+	if (!htmlContent) htmlContent=$('#'+artBox).html();	
+	
 	//$('#'+artBox).html()
-	alert(CKEDITOR.instances['InsurArticleContent[content]']);
+	if(textTarget=='ready'){
+	
+		
+		
+	}else if(textTarget=='editor'){
+		/*// вставить текст в поле редактора
+		var goUrl=getLoadAjaxPath(artID);
+	<?	$t=false; 	
+		if ($t){?>
+		window.open(goUrl,'ajax');
+	<?	}?>
+		jQuery.ajax({
+			type: "GET",
+			url: goUrl,
+			success: function(msg){*/
+			// закрыть окна предпросмотра текста и таблицы статей:
+		CKEDITOR.instances['InsurArticleContent[content]'].setData(htmlContent);
+		$('div#upload_article_window').hide(); // art table
+		$('div#article_preview_text').hide();
+		//});
+	}
 	//alert(document.getElementById('myModal').style.display);
 }
 //
@@ -132,22 +167,14 @@ function PickOutTextContent(obj){
 	alert(e.message);
   }
 }
-/*//
-function addTextContent(){
+//
+function addArticle(artID){
   try{ //alert('addTextContent');
-	$('#make_text').css({
-				background:'#FFF',
-				height:($(window).height()/100*70)+'px',
-				position:'fixed',
-				width:($(window).width()/100*70)+'px'
-			}).fadeIn(300,
-				function(){
-					$(this).draggable().resizable();
-			});
+	articlePreview(artID);
   }catch(e){
 	  alert(e.message);
   }
-}*/
+}
 
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
