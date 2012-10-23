@@ -79,6 +79,25 @@ function getDataFromCKeditor(){
   }
 }
 //
+function articlePreview(artID){
+	//alert(artID);
+	// GET
+	var goUrl="<?=Yii::app()->request->baseUrl?>/modules/admin/controllers/AjaxController.php?article_id="+artID+"&action=preview";
+<?	$t=true; 	
+	if (isset($t)){?>
+	window.open(goUrl,'ajax');
+<?	}?>
+	jQuery.ajax({
+		type: "GET",
+		url: goUrl,
+		success: function(msg){
+			$('#BLOCK_INFO').fadeIn(500);
+			$('#BLOCK_TEXT').html(msg);
+		}
+	 });
+	return false;
+}
+//
 function PickOutTextContent(obj){
   try{
 	alert($(obj).html()); 

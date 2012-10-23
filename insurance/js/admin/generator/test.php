@@ -1,7 +1,28 @@
 <?
 if (isset($dwshow)){?><script><? }
 ob_start();?>
-// JavaScript Document
+$(document).ready(	function(e) {
+	var tInfoBlock=$('div[data-test="template"]');
+	var aManage=$('#test_block_appearance');
+    $(aManage).click( function(){
+		if ($(this).text()=='свернуть') {
+			$(tInfoBlock).animate({
+				height:'40px'
+			},500,function(){$(aManage).text('развернуть')});
+		}
+		else{
+			$(tInfoBlock).animate({
+				height:'400px'
+			},500,function(){$(aManage).text('свернуть')});
+		}
+	});
+});
+//
+function saveSubHeader(iValue){
+	//alert(iValue);
+	$('div[data-test="template"] div#tmpl-blocks div:contains("Block header")')
+		.append('<div>Текст подзаголовка:<br>'+iValue+'</div>');
+}
 // прописать количество блоков макета в тестовом блоке:
 function test_addBlocks(){
 	var dIndex;

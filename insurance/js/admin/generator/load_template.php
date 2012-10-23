@@ -327,7 +327,7 @@ function loadTemplate(){
 	var headerBlock=$("div[data-block-type='header']")[0];
 	if (headerBlock){
 		var pWidth=$(headerBlock).width()-10;
-		headerBlock.innerHTML='<div>Текст подзаголовка:</div><input type="text" style="width:'+pWidth+'px; padding:4px;">'
+		headerBlock.innerHTML='<div>Текст подзаголовка:</div><input type="text" style="width:'+pWidth+'px; padding:4px;" onblur="saveSubHeader(this.value);">'
 	}
   }catch(e){
 	  alert(e.message);

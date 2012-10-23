@@ -174,10 +174,12 @@ div[data-test="template"]{
 	left:0;
 	max-width:40%;
 	opacity:0.3;
+	overflow:hidden;
 	padding:10px;
-	position:absolute;
+	position:fixed;
 	text-align:left;
 	top:20px;
+	width:260px;
 	z-index:1;
 }
 div[data-test="template"]:hover{
@@ -188,10 +190,23 @@ div[data-test="template"]
 		> div > div {
 	margin-left:20px;
 }
+div#test_block_appearance{
+	position:absolute;
+	right:4px;
+	top:2px;
+}
+td[data-article-id]{
+	cursor:default;
+}
+td[data-article-id]:hover{
+	background:#08C;
+	color:#FFF;
+}
 </style>
 <?	if (isset($_GET['test'])){?>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/test.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <div data-test="template">
+	<div id="test_block_appearance" class="link">свернуть</div>
 	<h4>Текущие данные создаваемого подраздела:</h4>
     <h5>Схема макета:  <span id="tmpl-shema"></span></h5>
   	<h5>Блоки/модули:</h5>
@@ -369,13 +384,15 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
       <tr bgcolor="#CCCCCC" class="bold">
         <td>id</td>
         <td>Название</td>
+        <td>&nbsp;</td>
         <td>Родительский раздел</td>
         <td>Статус</td>
       </tr>
 <?	for($i=0,$j=count($articles);$i<$j;$i++){?>      
       <tr<? if(!$articles[$i]['parent']){?> class="bold"<? }?>>
         <td><?=($i+1)?></td>
-        <td nowrap><?=$articles[$i]['name']?></td>
+        <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
+        <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
         <td><?=$articles[$i]['parent']?></td>
         <td><?=$articles[$i]['status']?></td>
       </tr>
