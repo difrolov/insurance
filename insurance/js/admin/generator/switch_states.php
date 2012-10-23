@@ -1,5 +1,12 @@
 ﻿<?	if (isset($dwshow)){?><script><? }
 ob_start();?>
+$(document).ready(	function() {
+    $('.wclose').click(
+		function(){
+			$(this.parentNode).hide(150);
+		}
+	);
+});
 //
 function cancelTemplateChanges(btn){
   try{

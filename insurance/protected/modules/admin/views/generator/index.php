@@ -134,6 +134,26 @@
 	<hr size="4" color="#0000FF">
 <? }?>
 <style>
+div#article_preview_text{
+	display:<?="none"?>;
+	max-height:35%;
+	padding-right:24px;
+	position:fixed;
+	right:5%;
+	z-index:2;
+}
+div#article_preview_text div#wrp{
+	border:solid 1px #FFCC00;
+	box-shadow: 0 0 20px 0 #666;
+}
+div#article_preview_text
+	div#prev_content{
+	background:#FFF;
+	max-height:330px;
+	overflow:auto;
+	padding:8px;
+	text-align:left;
+}
 div#upload_article_window{
 	background:#FFF; 
 	border:solid 2px #CCC; 
@@ -202,6 +222,18 @@ td[data-article-id]:hover{
 	background:#08C;
 	color:#FFF;
 }
+.wclose{
+	background:url(<?php echo Yii::app()->request->baseUrl; ?>/images/gtk-cancel.png);
+	cursor:pointer;
+	height:22px;
+	position:absolute;
+	right:-25px;
+	top:-2px;
+	width:22px; 
+}
+.wclose.inside{
+	right:0;
+}
 </style>
 <?	if (isset($_GET['test'])){?>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/test.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
@@ -220,6 +252,8 @@ td[data-article-id]:hover{
 $this->breadcrumbs=array(
 	$this->module->id,
 );/*?><h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1><? */?>
+<div id="article_preview_text">
+</div>
 <div align="left">
 	<div id="choice_init">
         <h5>Выберите параметры макета создаваемой страницы</h5>
@@ -377,7 +411,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 ) ); ?>
 <div style="position:relative;" data-target="load_in_editor">    
     <div id="upload_article_window">
-    	<img id="close_upartwin" onClick="parentNode.style.display='none';" style="position:absolute;right:-25px;top:-2px;" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gtk-cancel.png" width="22" height="22">
+    	<span class="wclose" id="close_upartwin"></span>
     	<div style="overflow:auto; height:100%;">
   <?	$articles=HelperAdmin::getAllArticlesList(false); ?>
     <table width="100%" height="100%" cellspacing="0" cellpadding="0" id="tblArticles">
@@ -392,7 +426,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
       <tr<? if(!$articles[$i]['parent']){?> class="bold"<? }?>>
         <td><?=($i+1)?></td>
         <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
-        <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
+        <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
         <td><?=$articles[$i]['parent']?></td>
         <td><?=$articles[$i]['status']?></td>
       </tr>

@@ -1,4 +1,5 @@
 ﻿<?
+$base_url=$_GET['base_url'];
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 $(document).ready(function(){
@@ -20,6 +21,9 @@ $(document).ready(function(){
 			width:'93%'  
 		})
 		.fadeIn(150);
+	});
+	$('td[data-article-id]').mouseover( function(){
+		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
   }catch(e){
 	alert(e.message);
@@ -79,23 +83,43 @@ function getDataFromCKeditor(){
   }
 }
 //
-function articlePreview(artID){
-	//alert(artID);
+function articlePreview(artID,eSrc){
+  try{
+	//alert(artID+' '+eSrc.tagName);
 	// GET
-	var goUrl="<?=Yii::app()->request->baseUrl?>/modules/admin/controllers/AjaxController.php?article_id="+artID+"&action=preview";
-<?	$t=true; 	
-	if (isset($t)){?>
+	var goUrl="<?=$base_url?>/admin/Ajax/?article_id="+artID+"&do=preview";
+<?	$t=false; 	
+	if ($t){?>
 	window.open(goUrl,'ajax');
 <?	}?>
 	jQuery.ajax({
 		type: "GET",
 		url: goUrl,
 		success: function(msg){
-			$('#BLOCK_INFO').fadeIn(500);
-			$('#BLOCK_TEXT').html(msg);
+			var aPrev=$('div#article_preview_text');
+			//alert(msg);
+			var pleft=$(eSrc).offset().left;
+			var ptop=$(eSrc).offset().top;
+			$(aPrev).css({
+				cursor:'move',
+				display:'inline-block',
+				left:pleft+16+'px',
+				top:ptop+16+'px',
+				zIndex:2000
+			}).draggable();
+			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\')">Вставить</button></div></div>');
 		}
 	 });
 	return false;
+  }catch(e){
+	  alert(e.message);
+  }
+}
+//
+function addArtText(artBox){
+	//$('#'+artBox).html()
+	alert(CKEDITOR.instances['InsurArticleContent[content]']);
+	//alert(document.getElementById('myModal').style.display);
 }
 //
 function PickOutTextContent(obj){
