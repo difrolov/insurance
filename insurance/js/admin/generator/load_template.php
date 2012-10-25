@@ -2,12 +2,12 @@
 ob_start();?>
 // JavaScript Document
 //
-function createTemplate(){
+function createLayout(){
   try{ 
   	// получить количество блоков:
-	var colsCountInit=colsCount=parseInt(tmplSchema.substring(0,1));
-	var tmplValue2=tmplSchema.substring(1,2);
-	var tmplValue3=tmplSchema.substring(2);
+	var colsCountInit=colsCount=parseInt(Layout.Schema.substring(0,1));
+	var tmplValue2=Layout.Schema.substring(1,2);
+	var tmplValue3=Layout.Schema.substring(2);
 	if (tmplValue2!='0') colsCount+=1;
 	if (tmplValue3!='0') colsCount+=1;
 	var tmplBlock='<div class="first" onClick="selectColumn(event,this);">';
@@ -26,7 +26,7 @@ function createTemplate(){
 				
 				case 1: // 2-й блок
 					
-					switch(tmplSchema){ // назначаем первый класс:
+					switch(Layout.Schema){ // назначаем первый класс:
 						case '3i0':
 							tmplBlock+='header3inside';
 								break;
@@ -58,7 +58,7 @@ function createTemplate(){
 							tmplBlock+='column4last';
 								break;
 					}
-					switch(tmplSchema){	// добавляем второй класс:
+					switch(Layout.Schema){	// добавляем второй класс:
 						case '200':
 						case '300':
 						case '400':
@@ -72,7 +72,7 @@ function createTemplate(){
 					}
 					
 					tmplBlock+='"'; // дописываем закрывающую кавычку классов
-					switch(tmplSchema){ // добавить атрибут блока для идентификации CSS:
+					switch(Layout.Schema){ // добавить атрибут блока для идентификации CSS:
 						case '210':
 						case '3i0':
 						case '3s0':
@@ -99,7 +99,7 @@ function createTemplate(){
 					
 				case 2: // 3-й блок
 					
-					switch(tmplSchema){ // назначаем первый класс:
+					switch(Layout.Schema){ // назначаем первый класс:
 						case '210':
 							tmplBlock+='hColMiddleLong';
 								break;
@@ -124,7 +124,7 @@ function createTemplate(){
 							tmplBlock+='column4last';
 								break;
 					}
-					switch(tmplSchema){ // добавляем второй класс:
+					switch(Layout.Schema){ // добавляем второй класс:
 						case '210':
 							tmplBlock+=' right2';
 								break;
@@ -151,7 +151,7 @@ function createTemplate(){
 					}
 					
 					tmplBlock+='"'; // дописываем закрывающую кавычку классов
-					switch(tmplSchema){ // добавляем атрибут для CSS:
+					switch(Layout.Schema){ // добавляем атрибут для CSS:
 						case '210':
 						case '300':
 						case '3i0':
@@ -167,7 +167,7 @@ function createTemplate(){
 				
 				case 3: // 4-й блок
 					
-					switch(tmplSchema){ // назначить первый класс:
+					switch(Layout.Schema){ // назначить первый класс:
 						case '3i0':
 						case '3s0':
 							tmplBlock+='column3center';
@@ -190,7 +190,7 @@ function createTemplate(){
 							tmplBlock+=' column3right';
 								break;
 					}
-					switch(tmplSchema){ // добавить второй класс:
+					switch(Layout.Schema){ // добавить второй класс:
 						case '40i':
 						case '40s': 
 							tmplBlock+=' hColMiddle';
@@ -212,7 +212,7 @@ function createTemplate(){
 					}
 					
 					tmplBlock+='"'; // дописываем закрывающую кавычку классов
-					switch(tmplSchema){ // добавить атрибут для CSS:
+					switch(Layout.Schema){ // добавить атрибут для CSS:
 						
 						case '30s':
 							tmplBlock+=' data-block-type="footer"';
@@ -227,7 +227,7 @@ function createTemplate(){
 				
 				case 4: // 5-й блок
 					
-					switch(tmplSchema){ // назначить первый класс
+					switch(Layout.Schema){ // назначить первый класс
 						case '4i0':
 						case '4ii':
 						case '4ss':
@@ -247,7 +247,7 @@ function createTemplate(){
 							tmplBlock+='hf3Shared';
 								break;
 					}
-					switch(tmplSchema){ // добавить второй класс
+					switch(Layout.Schema){ // добавить второй класс
 						case '4i0':
 						case '4s0': 
 							tmplBlock+=' hColMiddleLong';
@@ -262,7 +262,7 @@ function createTemplate(){
 					}
 
 					tmplBlock+='"'; // дописываем закрывающую кавычку классов
-					switch(tmplSchema){ // добавить атрибут для CSS:
+					switch(Layout.Schema){ // добавить атрибут для CSS:
 						case '3ss':
 						case '40i':
 						case '40s':
@@ -277,7 +277,7 @@ function createTemplate(){
 				
 				case 5: // 6-й блок
 				
-					switch(tmplSchema){ // назначаем первый класс: 
+					switch(Layout.Schema){ // назначаем первый класс: 
 						case '4ss':
 							tmplBlock+='hf4Shared';
 								break;
@@ -287,7 +287,7 @@ function createTemplate(){
 					}
 
 					tmplBlock+='"'; // дописываем закрывающую кавычку классов
-					switch(tmplSchema){ // добавить атрибут для CSS:
+					switch(Layout.Schema){ // добавить атрибут для CSS:
 						case '4ss':
 						case '4ii':
 							tmplBlock+=' data-block-type="footer"';
@@ -302,7 +302,7 @@ function createTemplate(){
 	tmplBlock+="</div>";
 	var goLoop=false;
 	if (goLoop) // чиста для теста, если хотим вывести все возможные блоки
-		document.getElementById('tmplPlace').innerHTML+='<div>'+tmplSchema+'</div>'+tmplBlock;
+		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
 	
@@ -314,16 +314,16 @@ function createTemplate(){
   }
 }
 // загрузим макет по сформированному шаблону
-function loadTemplate(){ 
+function loadLayout(){ 
   try{	
 	var topPos=$('#txtActions').offset().top;
 	$("html, body").animate(
 		{scrollTop:topPos},
 		500,
-		function(){stateTemplateIsLoaded()}
+		function(){stateLayoutIsLoaded()}
 	);
 	//
-	createTemplate();
+	createLayout();
 	var headerBlock=$("div[data-block-type='header']")[0];
 	if (headerBlock){
 		var pWidth=$(headerBlock).width()-10;

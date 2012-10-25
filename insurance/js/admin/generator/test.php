@@ -20,8 +20,10 @@ $(document).ready(	function(e) {
 //
 function saveSubHeader(iValue){
 	//alert(iValue);
+	var subHeaderContent='<div>Текст подзаголовка:<br>'+iValue+'</div>';
 	$('div[data-test="template"] div#tmpl-blocks div:contains("Block header")')
-		.append('<div>Текст подзаголовка:<br>'+iValue+'</div>');
+		.append(subHeaderContent);
+	dataToSend['blocks']['subheader']=iValue;
 }
 // прописать количество блоков макета в тестовом блоке:
 function test_addBlocks(){
@@ -39,6 +41,7 @@ function test_addBlocks(){
 					dIndex=blockNumber;
 			}
 			$('#tmpl-blocks').append('<div>Block '+dIndex+'</div>');
+			dataToSend['blocks'][dIndex]='';
 		}
 	);
 }
@@ -57,6 +60,7 @@ function test_checkModules(){
 					.children('div[data-module-type]:first')
 					.attr('data-module-type');
 				var tHTML=$(testTmplBlocks[i]).html()+'<div>'+modTypeData+'</div>';
+				dataToSend['blocks'][i]=modTypeData;
 				$(testTmplBlocks[i]).html(tHTML);
 				return false;
 			}

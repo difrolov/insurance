@@ -2,17 +2,49 @@
 ob_start();?>
 // JavaScript Document
 textTarget=false; // будет определять, куда вставлять текст - в редактор или в модуль
-tmplSchema=false; // пер. сохранения схемы выбранного шаблона
 /* 	Возможные варианты макета описываются по схеме:
-	tmplSchema[0] 	// колич. колонок: 1,2,3,4
-	tmplSchema[1]	// наличие/тип подзаголовка: 0 (нет), 1 (есть, тип отстуствует (для 2-х колонок)), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку)
-	tmplSchema[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
+	Layout.Schema[0] 	// колич. колонок: 1,2,3,4
+	Layout.Schema[1]	// наличие/тип подзаголовка: 0 (нет), 1 (есть, тип отстуствует (для 2-х колонок)), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку)
+	Layout.Schema[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
 	Внимание! Тип псевдофутера 1 отсутствует, т.к. не может быть пседвофутера для количества колонок, меньше 3. В этом случае роль псевдофутера может выполнять любой добавляемый модуль.
 */
-tmplSchemaSaved=false;
+
+jQuery(	function(){
+		initialiteLayout(); // инициализировать (и РЕинициализировать макет)
+	});
+// инициализировать объект сохранения данных макета
+function initialiteLayout(){
+  try{	
+	delete Layout;
+	Layout=new Object();
+  }catch(e){
+	alert(e.message);
+  }
+}
+//
+function walkThroughLayout(Layout,act){
+	for(var prop in Layout){
+		// Layout 		- объект
+		// prop		- свойство объекта
+		// Layout[ob] 	- значение свойства (литерал) объекта		
+		var val=Layout[prop];
+		if (typeof(val)=='object'){
+			//toPlace.innerHTML+='<div class="rd">'+ob;
+			walkThroughLayout(val);
+			//toPlace.innerHTML+='</div>';
+		}else{
+			delete prop;
+			//Layout[prop]=null;
+			alert(prop+':'+val); 
+			//var nclass=ins? 'rd2':'rd';
+			//toPlace.innerHTML+='<div><div class="'+nclass+'"><div>'+currentObj+'</div></div></div>';
+		}
+	}
+}
+
 //проверить - допускает ли текущее состояние макета его загрузку
-function checkTemplateReady(){
-	tmplSchema=0;
+function checkLayoutReady(){
+	Layout.Schema=0;
 	// родительский блок для всех уровней:
 	var bLevels=document.getElementById('txtChoice').getElementsByTagName('div');
 	//alert(i); 
@@ -49,25 +81,25 @@ function checkTemplateReady(){
 				levelStop=i+1; 
 				// получим класс отмеченной пиктограммы:
 				selElementClassName=$(dLevel).find("div[style*='opacity: 1']")[0].className;
-				tmplSchema=getSchema(selElementClassName);
-				tmplSchema=tmplSchema.toString();
+				Layout.Schema=getSchema(selElementClassName);
+				Layout.Schema=Layout.Schema.toString();
 				switch(levelStop){
 					// уровень 1
 					case 1:
-						tmplSchema+='00';
+						Layout.Schema+='00';
 					break;
 					// уровень 2
 					case 2:
 						if (selElementClassName.indexOf('Subheader')!=-1)
-							tmplSchema+='1';	
+							Layout.Schema+='1';	
 						else{ // twoColumn, threeColumn, fourColumn
 							if ( selElementClassName.indexOf('Shared')==-1
 							     && selElementClassName.indexOf('Inside')==-1
-							   ) tmplSchema+='0';
+							   ) Layout.Schema+='0';
 							else
-								tmplSchema+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i'; 
+								Layout.Schema+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i'; 
 						}
-						tmplSchema+='0';
+						Layout.Schema+='0';
 					break;
 					// уровень 3
 					case 3: 
@@ -75,31 +107,31 @@ function checkTemplateReady(){
 						// fourColumn
 						if ( selElementClassName.indexOf('Shared')==-1
 							     && selElementClassName.indexOf('Inside')==-1
-							   ) tmplSchema+='00';
+							   ) Layout.Schema+='00';
 						else{
 							// threeSharedShared
 							// fourSharedShared
 							if (selElementClassName.indexOf('SharedShared')!=-1)
-								tmplSchema+='ss';
+								Layout.Schema+='ss';
 							else{
 								// fourInsideInside
 								if (selElementClassName.indexOf('InsideInside')!=-1)
-									tmplSchema+='ii';
+									Layout.Schema+='ii';
 								else{
 									// fourColumnInside
 									if (selElementClassName.indexOf('ColumnInside')!=-1)
-										tmplSchema+='i0';
+										Layout.Schema+='i0';
 									else{
 										// threeColumnShared
 										// fourColumnShared
 										if (selElementClassName.indexOf('ColumnShared')!=-1)
-											tmplSchema+='s0';
+											Layout.Schema+='s0';
 										// threeNoneShared
 										// fourNoneShared
 										// fourNoneInside
 										else if (selElementClassName.indexOf('None')!=-1) { 
-											tmplSchema+='0';
-											tmplSchema+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i';
+											Layout.Schema+='0';
+											Layout.Schema+=(selElementClassName.indexOf('Shared')!=-1)? 's':'i';
 										}
 									}
 								}
@@ -109,25 +141,25 @@ function checkTemplateReady(){
 				}
 				var tSchm=false;
 				if (tSchm=document.getElementById('tmpl-shema'))
-					tSchm.innerHTML=(tmplSchema)? tmplSchema:'Не создана';
+					tSchm.innerHTML=(Layout.Schema)? Layout.Schema:'Не создана';
 				break;
 			}
 		}
 	}
 	// управлять видимостью остальных блоков:
-	if (tmplSchema!=0) { 
+	if (Layout.Schema!=0) { 
 		$("#tmpl_commands").fadeIn(1000);
 		/*if($('#sel_modules').css('display')!='block'){
 			display(['tmpl_commands']); // кнопки управления шаблонами
 			makeSolid(['tmpl_commands']);
 		}*/
-		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
-			setButtonStat(['btn_loadTemplate'],'active');
+		if ($('#btn_cancelLayoutChanges').attr('class')=='active') {
+			setButtonStat(['btn_loadLayout'],'active');
 		}
 		return true;
 	}else{
-		if ($('#btn_cancelTemplateChanges').attr('class')=='active') {
-			setButtonStat(['btn_loadTemplate'],'passive');
+		if ($('#btn_cancelLayoutChanges').attr('class')=='active') {
+			setButtonStat(['btn_loadLayout'],'passive');
 		}else{
 			$("#tmpl_commands").fadeOut(1000);
 			//makeLiquid(['tmpl_commands']); 
@@ -140,7 +172,7 @@ function checkTemplateReady(){
 // * количества колонок
 // * наличия и расположения подзаголовка
 // * наличия и расположения псевдофутера
-function defineTemplateSchema(event,pyctosContainer){ // pyctosContainer - родительский блок для текущего набора пиктограмм
+function defineLayoutSchema(event,pyctosContainer){ // pyctosContainer - родительский блок для текущего набора пиктограмм
   try{
 	var srce=false; // инициализируем источник события (пиктограмму)
 	var eventObj=(navigator.appName=="Netscape")? event.target:event.srcElement; 
@@ -168,7 +200,7 @@ function defineTemplateSchema(event,pyctosContainer){ // pyctosContainer - ро�
 		// указать параметры текущего выбора
 		setCurrentChoiceStatus(event,currentPyctosContainer);
 		// проверить - допускает ли текущее состояние макета его загрузку:
-		checkTemplateReady();
+		checkLayoutReady();
 	}
   }catch(e){
 	  alert(e.message);

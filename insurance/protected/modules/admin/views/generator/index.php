@@ -11,7 +11,7 @@
   <tr valign="top">
     <td>&nbsp;</td>
     <td><p>Подготовить схему макета:<br>
-	<strong>defineTemplateSchema(event,this); </strong></p></td>
+	<strong>defineLayoutSchema(event,this); </strong></p></td>
     <td>Пиктораммы схем макета</td>
     <td>prepare_data.php</td>
   </tr>
@@ -70,7 +70,7 @@
     <td><blockquote>
       <p>проверить &#8212; допускает ли текущее состояние макета его загрузку;<br>
         если да, <span class="txtRed">назначить схему для макета</span> :<br>
-        <strong>checkTemplateReady();</strong></p>
+        <strong>checkLayoutReady();</strong></p>
     </blockquote></td>
     <td>&nbsp;</td>
     <td>prepare_data.php</td>
@@ -78,7 +78,7 @@
   <tr>
     <td>&nbsp;</td>
     <td><p>Загрузить макет по сформированному шаблону:<strong><br>
-    loadTemplate();</strong></p></td>
+    loadLayout();</strong></p></td>
     <td>Кнопка <q><strong>Загрузить макет</strong></q></td>
     <td>load_template.php</td>
   </tr>
@@ -86,7 +86,7 @@
     <td>&nbsp;</td>
     <td><blockquote>
       <p>назначить параметры отображения задействованным элементам:<br>
-        <strong>stateTemplateIsLoaded()</strong>;</p>
+        <strong>stateLayoutIsLoaded()</strong>;</p>
     </blockquote></td>
     <td>&nbsp;</td>
     <td>switch_states.php</td>
@@ -95,7 +95,7 @@
     <td>&nbsp;</td>
     <td><blockquote>
       <p>собрать блочную структуру макета по выбранной ранее схеме:<br>
-        <strong>createTemplate(tmplSchema);</strong></p>
+        <strong>createLayout(Layout.Schema);</strong></p>
     </blockquote></td>
     <td>&nbsp;</td>
     <td>load_template.php</td>
@@ -263,7 +263,7 @@ $this->breadcrumbs=array(
                 <div>Подзаголовок:</div>
                 <div>Псевдофутер:</div>
             </div>
-            <div id="txtChoice" onClick="defineTemplateSchema(event,this);">
+            <div id="txtChoice" onClick="defineLayoutSchema(event,this);">
                 <div id="tmplColSet">
                     <div class="oneColumn" title="Одна колонка">&nbsp;</div>
                     <div class="twoColumn" title="Две колонки">&nbsp;</div>
@@ -290,9 +290,9 @@ $this->breadcrumbs=array(
 	</div>
 <? //<div id="test">test block</div>?>
     <div id="<?="tmpl_commands"?>">
-        <button class="active" id="<?="btn_loadTemplate"?>" type="button" onClick="loadTemplate();">Загрузить макет</button>
-        <button class="passive" disabled id="<?="btn_changeTemplate"?>" type="button" onClick="changeTemplate(this);">Изменить макет</button>
-        <button class="passive" disabled id="<?="btn_cancelTemplateChanges"?>" type="button" onClick="cancelTemplateChanges(this);">Отменить изменения</button>
+        <button class="active" id="<?="btn_loadLayout"?>" type="button" onClick="loadLayout();">Загрузить макет</button>
+        <button class="passive" disabled id="<?="btn_changeLayout"?>" type="button" onClick="changeLayout(this);">Изменить макет</button>
+        <button class="passive" disabled id="<?="btn_cancelLayoutChanges"?>" type="button" onClick="cancelLayoutChanges(this);">Отменить изменения</button>
     </div>
     <div id="<?="sel_modules"?>">
       <ol>
@@ -386,7 +386,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 				array('name'=> 'editing',     
 					  'items'=> 
 					  		array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
-			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' )),
+			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Layouts' )),
 			//array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
 			//array('name'=> 'forms',       'items'=> array( 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' )),
 

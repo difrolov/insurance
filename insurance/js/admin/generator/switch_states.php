@@ -8,21 +8,25 @@ $(document).ready(	function() {
 	);
 });
 //
-function cancelTemplateChanges(btn){
+function cancelLayoutChanges(btn){
   try{
-	tmplSchema=tmplSchemaSaved; // возвернуть!
-	stateTemplateIsLoaded();
+	Layout.Schema=savedLayout.Schema; // возвернуть!
+	 
+	stateLayoutIsLoaded();
   }catch(e){
 	  alert(e.message);
   }
 }
 // кнопка.click изменить макет
-function changeTemplate(btn){ 
+function changeLayout(btn){ 
   try{
-	tmplSchemaSaved=tmplSchema; // сохранить выбранную схему
+	savedLayout={ // сохранить выбранную схему
+		Schema:Layout.Schema
+	}
+	initialiteLayout(); // создать макет заново
 	// кнопки:
 	setButtonStat([btn.id],'passive'); // пассивна
-	setButtonStat(['btn_cancelTemplateChanges'],'active'); // активна
+	setButtonStat(['btn_cancelLayoutChanges'],'active'); // активна
 	$('#choice_init').fadeIn(300);
 	$('#tmplPlace').fadeTo(500,0.2);
 	$('#sel_modules').fadeOut(450);
@@ -31,15 +35,15 @@ function changeTemplate(btn){
   }
 }
 // макет загружен
-function stateTemplateIsLoaded(){ 
+function stateLayoutIsLoaded(){ 
   try{
 	$("#choice_init").fadeOut(200,
 		function(){
 			$("#tmpl_commands").fadeIn(500,
 				function(){
 					// кнопки:
-					setButtonStat(['btn_cancelTemplateChanges','btn_loadTemplate'],'passive'); // пассивна
-					setButtonStat(['btn_changeTemplate'],'active'); // активна
+					setButtonStat(['btn_cancelLayoutChanges','btn_loadLayout'],'passive'); // пассивна
+					setButtonStat(['btn_changeLayout'],'active'); // активна
 					$("#sel_modules").fadeIn(450,
 						function(){
 							$("#tmplPlace").fadeTo(300,1);
