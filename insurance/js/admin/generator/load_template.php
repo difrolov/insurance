@@ -3,23 +3,150 @@ ob_start();?>
 // JavaScript Document
 //
 function createLayout(){
-  try{ 
+  try{ 	
   	// получить количество блоков:
 	var colsCountInit=colsCount=parseInt(Layout.Schema.substring(0,1));
 	var tmplValue2=Layout.Schema.substring(1,2);
 	var tmplValue3=Layout.Schema.substring(2);
 	if (tmplValue2!='0') colsCount+=1;
 	if (tmplValue3!='0') colsCount+=1;
+	
+	switch(colsCount){
+		case 1:
+			Layout.blocks={
+				1:{}
+			};
+		break;
+		case 2:
+			Layout.blocks={
+				1:{},
+				2:{}
+			};
+		break
+		case 3:
+			switch(Layout.Schema){
+				case '210':
+					Layout.blocks={
+						1:{},
+						2:{
+							header:true
+						},
+						3:{}
+					};
+				break;
+				case '300':
+					Layout.blocks={
+						1:{},
+						2:{},
+						3:{}
+					};
+				break;
+			}
+		break;
+		case 4:
+			switch(Layout.Schema){
+				case '3i0': case '3s0':
+					Layout.blocks={
+						1:{},
+						2:{
+							header:true
+						},
+						3:{},
+						4:{}
+					};
+				break;
+				case '30s':
+					Layout.blocks={
+						1:{},
+						2:{},
+						3:{},
+						4:{
+							footer:true
+						}
+					};
+				break;
+				case '400':
+					Layout.blocks={
+						1:{},
+						2:{},
+						3:{},
+						4:{}
+					};
+				break;
+			}
+		break;
+		case 5:
+			switch(Layout.Schema){
+				case '3ss':
+					Layout.blocks={
+						1:{},
+						2:{
+							header:true
+						},
+						3:{},
+						4:{},
+						5:{
+							footer:true
+						}
+					};
+				break;
+			}
+			switch(Layout.Schema){
+				case '4i0':case '4s0':
+					Layout.blocks={
+						1:{},
+						2:{
+							header:true
+						},
+						3:{},
+						4:{},
+						5:{}
+					};
+				break;
+			}
+			switch(Layout.Schema){
+				case '40i':case '40s':
+					Layout.blocks={
+						1:{},
+						2:{},
+						3:{},
+						4:{},
+						5:{
+							footer:true
+						}
+					};
+				break;
+			}
+		break;
+		case 6:
+			Layout.blocks={
+				1:{},
+				2:{
+					header:true
+				},
+				3:{},
+				4:{},
+				5:{},
+				6:{
+					footer:true
+				}
+			};
+		break;
+	}
+	// 	построить схему блоков для визуализации:
 	var tmplBlock='<div class="first" onClick="selectColumn(event,this);">';
 	for (i=0;i<colsCount;i++){
+		
 		tmplBlock+='	<div';
+		
 		if (i==0) { // первая итерация:
 			if (colsCountInit!=1) {
 				tmplBlock+=' class="';
-				tmplBlock+=(colsCountInit==4)? 'column4':'left'+colsCountInit;
-				tmplBlock+='"';
+				var lClass=(colsCountInit==4)? 'column4':'left'+colsCountInit;				
+				tmplBlock+=lClass+'"';
 			}
 			tmplBlock+=' data-block-type="left"';	
+		
 		}else{ // разобраться с остальными колонками:
 			tmplBlock+=' class="';
 			switch(i){
@@ -305,7 +432,6 @@ function createLayout(){
 		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
-	
 	// прописать количество блоков макета в тестовом блоке:
 	test_addBlocks();
 	

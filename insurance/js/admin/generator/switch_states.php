@@ -7,11 +7,10 @@ $(document).ready(	function() {
 		}
 	);
 });
-//
+// отменить изменение макета:
 function cancelLayoutChanges(btn){
   try{
 	Layout.Schema=savedLayout.Schema; // возвернуть!
-	 
 	stateLayoutIsLoaded();
   }catch(e){
 	  alert(e.message);

@@ -23,27 +23,19 @@ function saveSubHeader(iValue){
 	var subHeaderContent='<div>Текст подзаголовка:<br>'+iValue+'</div>';
 	$('div[data-test="template"] div#tmpl-blocks div:contains("Block header")')
 		.append(subHeaderContent);
-	dataToSend['blocks']['subheader']=iValue;
+	Layout.blocks.header=iValue;
 }
 // прописать количество блоков макета в тестовом блоке:
 function test_addBlocks(){
-	var dIndex;
-	var blockNumber=0;
-	$('div#tmplPlace > div > div').each(
-		function(){
-			blockNumber++;
-			if ($(this).attr('data-block-type')=="header")
-				dIndex='header';
-			else {
-				if ($(this).attr('data-block-type')=="footer")
-					dIndex='footer';			
-				else
-					dIndex=blockNumber;
-			}
-			$('#tmpl-blocks').append('<div>Block '+dIndex+'</div>');
-			dataToSend['blocks'][dIndex]='';
-		}
-	);
+	$('#tmpl-blocks').html('&nbsp;');
+	var b;
+	for(var block in Layout.blocks){
+		if (Layout.blocks[block].header)
+			b="Header";
+		else
+			b=(Layout.blocks[block].footer)? "Footer":"Block "+block;
+		$('#tmpl-blocks').append('<div>'+b+'</div>');
+	}
 }
 // распарсить макет:
 function test_checkModules(){
@@ -60,7 +52,8 @@ function test_checkModules(){
 					.children('div[data-module-type]:first')
 					.attr('data-module-type');
 				var tHTML=$(testTmplBlocks[i]).html()+'<div>'+modTypeData+'</div>';
-				dataToSend['blocks'][i]=modTypeData;
+				Layout.blocks[i]=modTypeData;
+				//dataToSend['blocks'][i]=modTypeData;
 				$(testTmplBlocks[i]).html(tHTML);
 				return false;
 			}

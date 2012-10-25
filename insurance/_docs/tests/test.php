@@ -10,8 +10,20 @@ try{
 	// test=function() {alert('Hello!')} 
 	//test(); //Hello!
 	//test_link(); //Hello!
-	
-	var test={ prop: 'sometext' } //Создаем объект со свойством prop
+	Layout={
+		1:'first',
+		2:'second',
+		0:'zero',
+		'1-2-3':'digits',
+		myInsideObjs:{
+			first:'No one...'
+		}
+	}
+	Layout.myInsideObjs['dataBlockType']='Coming soon!';
+	alert(Layout[1]+', '+Layout[2]+', '+Layout[0]+', '+Layout['1-2-3']+'\n'+Layout.myInsideObjs.first+', '+Layout.myInsideObjs['dataBlockType']);
+	//delete Layout;
+	//alert(Layout[1]+', '+Layout[2]+', '+Layout[0]);
+	/*var test={ prop: 'sometext' } //Создаем объект со свойством prop
 	test_link=test; //Создаем еще одну ссылку на этот объект
 
 	//alert(test.prop); //sometext
@@ -23,8 +35,8 @@ try{
 	//alert(test.prop); //newtext
 	//alert(test_link.prop); //newtext
 
-/*Можно было бы сказать, что свойство изменилось и там и тут - но это не так.
-Объект-то один. Так что свойство изменилось в нем один раз, а ссылки просто продолжают указывать туда, куда и указывают. */
+	//Можно было бы сказать, что свойство изменилось и там и тут - но это не так.
+	//Объект-то один. Так что свойство изменилось в нем один раз, а ссылки просто продолжают указывать туда, куда и указывают. 
 
 //Добавляем новое свойство и удаляем старое
 	test.new_prop='hello';
@@ -37,11 +49,11 @@ try{
 //Удаляем ссылку
 	delete test;
 
-/*В этом месте скрипт выкинет ошибку, потому что test уже не существует, и test.new_prop не существует тем более */
+	//В этом месте скрипт выкинет ошибку, потому что test уже не существует, и test.new_prop не существует тем более 
 	alert('alert 3\ntest.new_prop: '+test.new_prop); 
 
-/* а вот тут все в порядке, ведь мы удалили не сам объект, а лишь ссылку на него. Теперь на наш объект указывает единственная ссылка test_link */
-	alert('alert 4\ntest_link.new_prop: '+test_link.new_prop); //hello
+	//а вот тут все в порядке, ведь мы удалили не сам объект, а лишь ссылку на него. Теперь на наш объект указывает единственная ссылка test_link */
+	//alert('alert 4\ntest_link.new_prop: '+test_link.new_prop); //hello*/
 }catch(e){
 	alert(e.message);
 }

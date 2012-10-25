@@ -95,7 +95,7 @@
     <td>&nbsp;</td>
     <td><blockquote>
       <p>собрать блочную структуру макета по выбранной ранее схеме:<br>
-        <strong>createLayout(Layout.Schema);</strong></p>
+        <strong>createLayout();</strong></p>
     </blockquote></td>
     <td>&nbsp;</td>
     <td>load_template.php</td>
