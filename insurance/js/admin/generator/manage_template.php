@@ -8,19 +8,23 @@ function addModuleIntoBlock(event,divBlock){
 	if ( srcEl.parentNode==divBlock
 		 && tBlock // активный блок (гл. пер.) установлен (в selectColumn())
 	   ) {
-		// получим индекс активного блока:
+		var dataModuleType=$(srcEl).attr('data-module-type');
+		// получим индекс активной колонки и элемента объекта (блока):
 		var cIndex=$(tBlock.parentNode).children('div').index(tBlock);
-		// alert($(srcEl).attr('data-module-type'));
 		var bi=0;
 		// block - имя элемента
 		// Layout.blocks[block] - значение элемента
 		for(var block in Layout.blocks){
+			if (bi==cIndex){
+				if (Layout.blocks[block]!='')
+					Layout.blocks[block]+='|';
+				Layout.blocks[block]+=dataModuleType;
+				//alert('block: '+block+', Layout.blocks[block]: '+Layout.blocks[block]);
+			}
 			bi++;
-			//if (bi==cIndex){
-			alert('bi: '+bi+', block: '+block+', Layout.blocks[block]: '+Layout.blocks[block]);
-			//}
 		}
-
+		// добавить данные в тестовый блок:
+		test_setModuleToTestBlock(cIndex,dataModuleType);
 		
 		var newModule=document.createElement(srcEl.tagName); // добавленный в колонку модуль
 		tBlock.appendChild(newModule); 
@@ -30,7 +34,7 @@ function addModuleIntoBlock(event,divBlock){
 		newModule.appendChild(remove);
 		content.innerHTML=srcEl.innerHTML;
 		// скопировать атрибут типа модуля:
-		$(content).attr('data-module-type',$(srcEl).attr('data-module-type'));
+		$(content).attr('data-module-type',dataModuleType);
 		
 		remove.innerHTML='<a href="#" onClick="removeModule(this);return false;"><img src="<?=$_GET['base_url']?>/images/trash.gif" border="0" title="Удалить модуль из колонки"></a>';
 		$(newModule).attr({
@@ -58,7 +62,6 @@ function addModuleIntoBlock(event,divBlock){
 
 		$('#pick_out_section').fadeIn(2000);
 	}
-	test_checkModules();
   }catch(e){
 	  alert(e.message);
   }

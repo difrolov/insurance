@@ -441,6 +441,12 @@ function loadLayout(){
 	  alert(e.message);
   }
 }
+// сохранить подзаголовок
+function saveSubHeader(iValue){
+	//alert(iValue);
+	Layout.blocks[2]+=':'+iValue;
+	test_setSubHeader(iValue);
+}
 <?	
 $myscript=ob_get_contents();
 ob_get_clean();

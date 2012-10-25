@@ -17,14 +17,6 @@ $(document).ready(	function(e) {
 		}
 	});
 });
-//
-function saveSubHeader(iValue){
-	//alert(iValue);
-	var subHeaderContent='<div>Текст подзаголовка:<br>'+iValue+'</div>';
-	$('div[data-test="template"] div#tmpl-blocks div:contains("Block header")')
-		.append(subHeaderContent);
-	Layout.blocks.header=iValue;
-}
 // прописать количество блоков макета в тестовом блоке:
 function test_addBlocks(){
 	$('#tmpl-blocks').html('&nbsp;');
@@ -37,30 +29,17 @@ function test_addBlocks(){
 		else
 			b=(block=='footer')? "Footer":"Block "+block;
 		if (b)
-			$('#tmpl-blocks').append('<div>'+b+'</div>');
+			$('#tmpl-blocks').append('<div data-test=""><dfn>'+b+'</dfn></div>');
 	}
 }
-// распарсить макет:
-function test_checkModules(){
-	// 
-	
-	var testTmplBlocks=$('#tmpl-blocks > div');
-	var columns=$('div#tmplPlace > div:first-child > div');
-	var i=0;
-	var wrp=$(columns).each(
-		function() {
-			if ($(this).attr('data-column_stat')=="active"){
-				var modTypeData=$(this)
-					.children('div')
-					.last('div')
-					.children('div[data-module-type]:first')
-					.attr('data-module-type');
-				var tHTML=$(testTmplBlocks[i]).html()+'<div>'+modTypeData+'</div>';
-				$(testTmplBlocks[i]).html(tHTML);
-				return false;
-			}
-		i++;
-	});
+// добавить в тестовый блок в качестве иллюстрации:
+function test_setModuleToTestBlock(cIndex,dataModuleType){
+	var pBlock=$('#tmpl-blocks > div');
+	$(pBlock[cIndex]).append('<div>'+dataModuleType+'</div>');
+}
+function test_setSubHeader(iValue){
+	var h=$('div#tmpl-blocks dfn:contains("Header")')[0];
+	$(h).after('<div><q>'+iValue+'</q></div>');
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
