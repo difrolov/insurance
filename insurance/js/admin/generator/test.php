@@ -29,8 +29,10 @@ function saveSubHeader(iValue){
 function test_addBlocks(){
 	$('#tmpl-blocks').html('&nbsp;');
 	var b=false;
+	// block - имя элемента
+	// Layout.blocks[block] - значение элемента
 	for(var block in Layout.blocks){
-		if (Layout.blocks[block].header)
+		if (Layout.blocks[block]=='header')
 			b="Header";
 		else
 			b=(block=='footer')? "Footer":"Block "+block;
@@ -41,14 +43,6 @@ function test_addBlocks(){
 // распарсить макет:
 function test_checkModules(){
 	// 
-	/*for(var block in Layout.blocks){
-		if (Layout.blocks[block].header)
-			b="Header";
-		else
-			b=(block=='footer')? "Footer":"Block "+block;
-		if (b)
-			$('#tmpl-blocks').append('<div>'+b+'</div>');
-	}*/
 	
 	var testTmplBlocks=$('#tmpl-blocks > div');
 	var columns=$('div#tmplPlace > div:first-child > div');
@@ -62,8 +56,6 @@ function test_checkModules(){
 					.children('div[data-module-type]:first')
 					.attr('data-module-type');
 				var tHTML=$(testTmplBlocks[i]).html()+'<div>'+modTypeData+'</div>';
-				Layout.blocks[i]=modTypeData;
-				//dataToSend['blocks'][i]=modTypeData;
 				$(testTmplBlocks[i]).html(tHTML);
 				return false;
 			}

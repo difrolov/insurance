@@ -10,7 +10,17 @@ function addModuleIntoBlock(event,divBlock){
 	   ) {
 		// получим индекс активного блока:
 		var cIndex=$(tBlock.parentNode).children('div').index(tBlock);
-		alert(cIndex);
+		// alert($(srcEl).attr('data-module-type'));
+		var bi=0;
+		// block - имя элемента
+		// Layout.blocks[block] - значение элемента
+		for(var block in Layout.blocks){
+			bi++;
+			//if (bi==cIndex){
+			alert('bi: '+bi+', block: '+block+', Layout.blocks[block]: '+Layout.blocks[block]);
+			//}
+		}
+
 		
 		var newModule=document.createElement(srcEl.tagName); // добавленный в колонку модуль
 		tBlock.appendChild(newModule); 
