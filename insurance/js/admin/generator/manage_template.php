@@ -6,10 +6,14 @@ function addModuleIntoBlock(event,divBlock){
   try{
 	var srcEl=(event.target)? event.target:event.srcElement;
 	if ( srcEl.parentNode==divBlock
-		 && tBlock
+		 && tBlock // активный блок (гл. пер.) установлен (в selectColumn())
 	   ) {
+		// получим индекс активного блока:
+		var cIndex=$(tBlock.parentNode).children('div').index(tBlock);
+		alert(cIndex);
+		
 		var newModule=document.createElement(srcEl.tagName); // добавленный в колонку модуль
-		tBlock.appendChild(newModule);
+		tBlock.appendChild(newModule); 
 		var content=document.createElement('div');
 		var remove=document.createElement('div');
 		newModule.appendChild(content);

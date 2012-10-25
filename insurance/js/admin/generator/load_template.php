@@ -60,9 +60,7 @@ function createLayout(){
 						1:{},
 						2:{},
 						3:{},
-						4:{
-							footer:true
-						}
+						footer:{}
 					};
 				break;
 				case '400':
@@ -85,9 +83,7 @@ function createLayout(){
 						},
 						3:{},
 						4:{},
-						5:{
-							footer:true
-						}
+						footer:{}
 					};
 				break;
 			}
@@ -111,9 +107,7 @@ function createLayout(){
 						2:{},
 						3:{},
 						4:{},
-						5:{
-							footer:true
-						}
+						footer:{}
 					};
 				break;
 			}
@@ -127,9 +121,7 @@ function createLayout(){
 				3:{},
 				4:{},
 				5:{},
-				6:{
-					footer:true
-				}
+				footer:{}
 			};
 		break;
 	}

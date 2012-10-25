@@ -28,18 +28,28 @@ function saveSubHeader(iValue){
 // прописать количество блоков макета в тестовом блоке:
 function test_addBlocks(){
 	$('#tmpl-blocks').html('&nbsp;');
-	var b;
+	var b=false;
 	for(var block in Layout.blocks){
 		if (Layout.blocks[block].header)
 			b="Header";
 		else
-			b=(Layout.blocks[block].footer)? "Footer":"Block "+block;
-		$('#tmpl-blocks').append('<div>'+b+'</div>');
+			b=(block=='footer')? "Footer":"Block "+block;
+		if (b)
+			$('#tmpl-blocks').append('<div>'+b+'</div>');
 	}
 }
 // распарсить макет:
 function test_checkModules(){
 	// 
+	/*for(var block in Layout.blocks){
+		if (Layout.blocks[block].header)
+			b="Header";
+		else
+			b=(block=='footer')? "Footer":"Block "+block;
+		if (b)
+			$('#tmpl-blocks').append('<div>'+b+'</div>');
+	}*/
+	
 	var testTmplBlocks=$('#tmpl-blocks > div');
 	var columns=$('div#tmplPlace > div:first-child > div');
 	var i=0;
