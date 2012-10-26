@@ -25,7 +25,6 @@ function addModuleIntoBlock(event,divBlock){
 		}
 		// добавить данные в тестовый блок:
 		test_setModuleToTestBlock(cIndex,dataModuleType);
-		
 		var newModule=document.createElement(srcEl.tagName); // добавленный в колонку модуль
 		tBlock.appendChild(newModule); 
 		var content=document.createElement('div');

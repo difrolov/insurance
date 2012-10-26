@@ -25,22 +25,6 @@ $(document).ready(function(){
 	$('td[data-article-id]').mouseover( function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
-<?	$click=false;
-	if ($click):?>	
-	// идентифицировать ТЕКСТОВЫЙ модуль при клике добавления текста:
-	$('div[data-module-type="Текст"] a').click( 
-		function(){ alert('data-module-type');
-			// получить индекс активного блока среди ТЕКСТОВЫХ блоков колонки:
-			var curTxtActiveIndex=$(this/*		
-							ссылка,
-		    */.parentNode/*	блок текста,
-			*/.parentNode/*	модуль,
-			*/.parentNode/* колонка,
-			*/).find('div[data-module-type="Текст"]').index(this.parentNode.parentNode);
-			alert(curTxtActiveIndex);
-			//Layout.activeTextBlock=
-	});
-<?	endif;?>	
 	// загрузить текст статьи в редактор, либо указать её id в случае, если хотим оставить её без изменений
 	$('td[data-article-id]').dblclick(function(e) {
 		// textTarget:
@@ -71,8 +55,8 @@ function addArticle(artID){
 }
 //
 function addTextModuleComLinks(content){
-	/*$(content).append(' <a data-toggle="modal" data-target="#myModal" href="#" onClick="window.textTarget=\'editor\';" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');*/
 	$(content).append(': ');
+	// command 1: add text through editor
 	$('<a>',{
 		text:"добавьте произвольное содержание",
 		title:"Добавить произвольный текст",
@@ -90,11 +74,13 @@ function addTextModuleComLinks(content){
 	
 	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
 	var aTableBar=$('table#tblArticles tbody tr:first-child');
+	// command 1: add text as an existing article (editing is disabled)
 	$('<a>',{
 		text:"выберите из имеющихся статей",
 		title:"Выбрать из имеющихся статей",
 		click:	function(){
 			window.textTarget='ready';
+			identifyTextBlock(this);
 			$('#tblArticles').css('width','auto');
 			var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
 			
@@ -137,7 +123,7 @@ function articlePreview(artID,eSrc){
 	window.open(goUrl,'ajax');
 <?	}?>
 	jQuery.ajax({
-		type: "GET",
+		type: "POST",
 		url: goUrl,
 		success: function(msg){
 		  if (eSrc)	{ // если с предпросмотром
@@ -211,7 +197,7 @@ function getLoadAjaxPath(artID){
 // идентифицировать текстовый модуль
 // колонку запоминать не надо, т.к. блок будет идентифицирован по индексу среди ВСЕХ блоков во всех колонках
 function identifyTextBlock(obj){
-	Layout.blocks.activeModuleTxtIndex=$('div#tmplPlace div[data-module-type]').index($(obj.parentNode));
+	Layout.blocks.activeModuleTxtIndex=$('div#tmplPlace div[data-module-type]').index($(obj.parentNode)); //alert(Layout.blocks.activeModuleTxtIndex);
 }
 //
 function PickOutTextContent(obj){
