@@ -195,9 +195,12 @@ function getLoadAjaxPath(artID){
 	return "<?=$base_url?>/admin/Ajax/?article_id="+artID+"&do=preview"
 }
 // идентифицировать текстовый модуль
-// колонку запоминать не надо, т.к. блок будет идентифицирован по индексу среди ВСЕХ блоков во всех колонках
+// идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи
 function identifyTextBlock(obj){
-	Layout.blocks.activeModuleTxtIndex=$('div#tmplPlace div[data-module-type]').index($(obj.parentNode)); //alert(Layout.blocks.activeModuleTxtIndex);
+	var curModule=obj.parentNode.parentNode; // модуль
+	var curColumn=curModule.parentNode;	// колонка
+	Layout.blocks.moduleClickedBlockIndex=$('div#tmplPlace > div > div').index(curColumn)+1; // № блока
+	Layout.blocks.moduleClickedLocalIndex=$(curColumn).children('div').index(curModule); // индекс модуля
 }
 //
 function PickOutTextContent(obj){
