@@ -3,9 +3,9 @@ class AjaxController extends Controller
 {
 	function __construct(){
 		if ( isset($_GET['do'])
-			 && $_GET['do']=='preview'
+			 && $_POST['do']=='preview'
 		   )
-		if ($article_id=$_GET['article_id']) {
+		if ($article_id=$_POST['article_id']) {
 			echo $this->makeArtPreview($article_id);
 			exit;
 		}

@@ -79,7 +79,7 @@ function addTextModuleComLinks(content){
 		href:"#",
 		click: function(){
 				window.textTarget='editor';
-				identifyTextBlock(this);
+				// identifyTextBlock(this);
 			},
 	}).attr({
 		'data-toggle':'modal',
@@ -95,6 +95,8 @@ function addTextModuleComLinks(content){
 		title:"Выбрать из имеющихся статей",
 		click:	function(){
 			window.textTarget='ready';
+			// identifyTextBlock(this);
+			
 			$('#tblArticles').css('width','auto');
 			var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
 			
@@ -130,14 +132,14 @@ function addTextModuleComLinks(content){
 function articlePreview(artID,eSrc){
   try{
 	//alert(artID+' '+eSrc.tagName);
-	// GET
+	// POST
 	var goUrl=getLoadAjaxPath(artID);
 <?	$t=false; 	
 	if ($t){?>
 	window.open(goUrl,'ajax');
 <?	}?>
 	jQuery.ajax({
-		type: "GET",
+		type: "POST",
 		url: goUrl,
 		success: function(msg){
 		  if (eSrc)	{ // если с предпросмотром
@@ -211,7 +213,15 @@ function getLoadAjaxPath(artID){
 // идентифицировать текстовый модуль
 // колонку запоминать не надо, т.к. блок будет идентифицирован по индексу среди ВСЕХ блоков во всех колонках
 function identifyTextBlock(obj){
-	Layout.blocks.activeModuleTxtIndex=$('div#tmplPlace div[data-module-type]').index($(obj.parentNode));
+  try(	
+	var curModule=obj.parentNode.parentNode; // модуль
+	var curColumn=curModule.parentNode;	// колонка
+	Layout.blocks.moduleClickedBlockIndex=$(curColumn.parentNode).index(curColumn);
+	Layout.blocks.moduleClickedLocalIndex=$(curColumn).index($(obj.parentNode.parentNode));
+	alert('moduleClickedBlockIndex: '+moduleClickedBlockIndex+'\nmoduleClickedLocalIndex: '+moduleClickedLocalIndex);
+  }catch(e){
+	  alert(e.message);
+  }
 }
 //
 function PickOutTextContent(obj){
