@@ -11,9 +11,9 @@ class AjaxController extends Controller
 		}
 	}
 
-	function makeArtPreview($article_id){
-		if(!is_null($article_id)){
-			$model = InsurArticleContent::model()->find(array('condition'=>"id=".$article_id));
+	function actionMakeArtPreview(){
+		if(isset($_POST['article_id'])){
+			$model = InsurArticleContent::model()->find(array('condition'=>"id=".$_POST['article_id']));
 		}
 		return $model->content;
 		/* $sql='
