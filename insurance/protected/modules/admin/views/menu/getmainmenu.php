@@ -1,0 +1,45 @@
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/editMenu.js"></script>
+
+<div class="mainmenu_button">
+	<p>
+<?php
+foreach($menu as $item){
+	$this->widget('bootstrap.widgets.TbButton', array(
+	    'label'=>$item->name,
+	    'type'=>'', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	    'size'=>'small', // null, 'large', 'small' or 'mini'
+	    'htmlOptions'=>array('onclick'=>'_editMenu.MainMenuButton(this)'),
+));
+}
+?>
+	</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
