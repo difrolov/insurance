@@ -127,7 +127,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 	'config' =>
 
 			array('toolbar'=>array(
-			
+
 				array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
 				array('name'=> 'paragraph',   'items'=> array( 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' )),
 				array('name'=> 'editing',     'items'=> array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
@@ -162,7 +162,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
 });*/
 
 function submit_editor_form(){
-  try{	
+  try{
 	//var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
 	var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].length);
 	alert(eText);
