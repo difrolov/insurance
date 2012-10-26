@@ -9,16 +9,16 @@ $(document).ready(function(){
 		.mousedown()
 		.draggable()
 		.resizable();
-<?	}?>	
+<?	}?>
 	$('#upload_article').click( function(){
 	$('div#upload_article_window')
 		.appendTo($('div[data-target="load_in_editor"]'))
 		.css({
-			display:'block', 
+			display:'block',
 			height:'248px',
-			left:'10px', 
+			left:'10px',
 			top:'-262px',
-			width:'93%'  
+			width:'93%'
 		})
 		.fadeIn(150);
 	});
@@ -26,12 +26,12 @@ $(document).ready(function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
 <?	$click=false;
-	if ($click):?>	
+	if ($click):?>
 	// идентифицировать ТЕКСТОВЫЙ модуль при клике добавления текста:
-	$('div[data-module-type="Текст"] a').click( 
+	$('div[data-module-type="Текст"] a').click(
 		function(){ alert('data-module-type');
 			// получить индекс активного блока среди ТЕКСТОВЫХ блоков колонки:
-			var curTxtActiveIndex=$(this/*		
+			var curTxtActiveIndex=$(this/*
 							ссылка,
 		    */.parentNode/*	блок текста,
 			*/.parentNode/*	модуль,
@@ -40,7 +40,7 @@ $(document).ready(function(){
 			alert(curTxtActiveIndex);
 			//Layout.activeTextBlock=
 	});
-<?	endif;?>	
+<?	endif;?>
 	// загрузить текст статьи в редактор, либо указать её id в случае, если хотим оставить её без изменений
 	$('td[data-article-id]').dblclick(function(e) {
 		// textTarget:
@@ -48,14 +48,14 @@ $(document).ready(function(){
 		// editor - произвольный текст через редактор (даже если добавляли туда уже существующую)
 		if (window.textTarget=='ready'){ // будем добавлять id статьи в объект Layout
 			// получить идентификатор модуля-источника события:
-			
-		
+
+
 		}else if (window.textTarget=='editor'){ // будем добавлять ТЕКСТ статьи в поле редактора
-		
-		
-		
+
+
+
 		}
-		alert('textTarget: '+window.textTarget);        
+		alert('textTarget: '+window.textTarget);
     });
   }catch(e){
 	alert(e.message);
@@ -85,9 +85,9 @@ function addTextModuleComLinks(content){
 		'data-toggle':'modal',
 		'data-target':'#myModal'
 	}).appendTo(content);
-	
+
 	$(content).append(' или ');
-	
+
 	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
 	var aTableBar=$('table#tblArticles tbody tr:first-child');
 	$('<a>',{
@@ -97,14 +97,14 @@ function addTextModuleComLinks(content){
 			window.textTarget='ready';
 			$('#tblArticles').css('width','auto');
 			var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
-			
+
 			$(aTable).css({
 				display:'inline-block',
 				width:'auto'
 			});
-			
+
 			var pDivTop=$(aParent).offset().top;
-			
+
 			$(aTable)
 				.show()
 				.appendTo('body');
@@ -118,7 +118,7 @@ function addTextModuleComLinks(content){
 			/*$(aTableBar)
 				.mouseover()
 				.css('cursor','move')
-				.mousedown( 
+				.mousedown(
 					function(){
 						$(aTable).draggable();
 				});*/
@@ -132,12 +132,12 @@ function articlePreview(artID,eSrc){
 	//alert(artID+' '+eSrc.tagName);
 	// GET
 	var goUrl=getLoadAjaxPath(artID);
-<?	$t=false; 	
+<?	$t=false;
 	if ($t){?>
 	window.open(goUrl,'ajax');
 <?	}?>
 	jQuery.ajax({
-		type: "GET",
+		type: "POST",
 		url: goUrl,
 		success: function(msg){
 		  if (eSrc)	{ // если с предпросмотром
@@ -166,17 +166,17 @@ function articlePreview(artID,eSrc){
 //
 function addArtText(artBox,htmlContent){
 	// получили либо html, либо содержащий его контейнер
-	if (!htmlContent) htmlContent=$('#'+artBox).html();	
-	
+	if (!htmlContent) htmlContent=$('#'+artBox).html();
+
 	//$('#'+artBox).html()
 	if(textTarget=='ready'){
-	
-		
-		
+
+
+
 	}else if(textTarget=='editor'){
 		/*// вставить текст в поле редактора
 		var goUrl=getLoadAjaxPath(artID);
-	<?	$t=false; 	
+	<?	$t=false;
 		if ($t){?>
 		window.open(goUrl,'ajax');
 	<?	}?>
@@ -194,7 +194,7 @@ function addArtText(artBox,htmlContent){
 }
 //
 function getDataFromCKeditor(){
-  try{	
+  try{
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
 	alert(eText);
 	/*$("button#saveModuleText").click( function(){
@@ -206,7 +206,7 @@ function getDataFromCKeditor(){
 }
 // вернуть путь отправки Ajax-запроса
 function getLoadAjaxPath(artID){
-	return "<?=$base_url?>/admin/Ajax/?article_id="+artID+"&do=preview"
+	return "<?=$base_url?>/admin/ajax/makeartpreview?article_id="+artID+"&do=preview"
 }
 // идентифицировать текстовый модуль
 // колонку запоминать не надо, т.к. блок будет идентифицирован по индексу среди ВСЕХ блоков во всех колонках
@@ -216,7 +216,7 @@ function identifyTextBlock(obj){
 //
 function PickOutTextContent(obj){
   try{
-	alert($(obj).html()); 
+	alert($(obj).html());
 	//var aTable=$('div#upload_article_window');
 	//$(aTable).show();
 	//$(obj.parentNode.parentNode).append(aTable);

@@ -1,7 +1,7 @@
 <?php
 class AjaxController extends Controller
 {
-	function __construct(){
+	/* function __construct(){
 		if ( isset($_GET['do'])
 			 && $_GET['do']=='preview'
 		   )
@@ -9,13 +9,13 @@ class AjaxController extends Controller
 			echo $this->makeArtPreview($article_id);
 			exit;
 		}
-	}
+	} */
 
 	function actionMakeArtPreview(){
 		if(isset($_POST['article_id'])){
 			$model = InsurArticleContent::model()->find(array('condition'=>"id=".$_POST['article_id']));
 		}
-		return $model->content;
+		echo $model->content;
 		/* $sql='
 			SELECT ....';
 			//return Yii::app()->db->createCommand($sql)->queryAll();
