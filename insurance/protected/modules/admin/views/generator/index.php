@@ -419,15 +419,13 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
         <td>id</td>
         <td>Название</td>
         <td>&nbsp;</td>
-        <td>Родительский раздел</td>
         <td>Статус</td>
       </tr>
 <?	for($i=0,$j=count($articles);$i<$j;$i++){?>      
-      <tr<? if(!$articles[$i]['parent']){?> class="bold"<? }?>>
+      <tr>
         <td><?=($i+1)?></td>
         <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
         <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
-        <td><?=$articles[$i]['parent']?></td>
         <td><?=$articles[$i]['status']?></td>
       </tr>
 <?	}?>      

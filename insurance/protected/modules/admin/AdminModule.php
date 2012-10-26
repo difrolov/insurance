@@ -1,5 +1,4 @@
-<?php
-
+<?php	
 class AdminModule extends CWebModule
 {
 	private $_config = array();
