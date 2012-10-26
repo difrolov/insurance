@@ -25,70 +25,106 @@ $(document).ready(function(){
 	$('td[data-article-id]').mouseover( function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
+<?	$click=false;
+	if ($click):?>	
+	// идентифицировать ТЕКСТОВЫЙ модуль при клике добавления текста:
+	$('div[data-module-type="Текст"] a').click( 
+		function(){ alert('data-module-type');
+			// получить индекс активного блока среди ТЕКСТОВЫХ блоков колонки:
+			var curTxtActiveIndex=$(this/*		
+							ссылка,
+		    */.parentNode/*	блок текста,
+			*/.parentNode/*	модуль,
+			*/.parentNode/* колонка,
+			*/).find('div[data-module-type="Текст"]').index(this.parentNode.parentNode);
+			alert(curTxtActiveIndex);
+			//Layout.activeTextBlock=
+	});
+<?	endif;?>	
 	// загрузить текст статьи в редактор, либо указать её id в случае, если хотим оставить её без изменений
 	$('td[data-article-id]').dblclick(function(e) {
-		        
+		// textTarget:
+		// ready - намеревались вставить существующую статью;
+		// editor - произвольный текст через редактор (даже если добавляли туда уже существующую)
+		if (window.textTarget=='ready'){ // будем добавлять id статьи в объект Layout
+			// получить идентификатор модуля-источника события:
+			
+		
+		}else if (window.textTarget=='editor'){ // будем добавлять ТЕКСТ статьи в поле редактора
+		
+		
+		
+		}
+		alert('textTarget: '+window.textTarget);        
     });
   }catch(e){
 	alert(e.message);
   }
 });
 //
+function addArticle(artID){
+  try{ //alert('addTextContent');
+	articlePreview(artID);
+  }catch(e){
+	  alert(e.message);
+  }
+}
+//
 function addTextModuleComLinks(content){
-	$(content).append(' <a data-toggle="modal" data-target="#myModal" href="#" onClick="window.textTarget=\'editor\';" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');
+	/*$(content).append(' <a data-toggle="modal" data-target="#myModal" href="#" onClick="window.textTarget=\'editor\';" title="Добавить произвольный текст">добавьте произвольное содержание</a> или ');*/
+	$(content).append(': ');
+	$('<a>',{
+		text:"добавьте произвольное содержание",
+		title:"Добавить произвольный текст",
+		href:"#",
+		click: function(){
+				window.textTarget='editor';
+				identifyTextBlock(this);
+			},
+	}).attr({
+		'data-toggle':'modal',
+		'data-target':'#myModal'
+	}).appendTo(content);
+	
+	$(content).append(' или ');
+	
 	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
 	var aTableBar=$('table#tblArticles tbody tr:first-child');
 	$('<a>',{
-			text:"выберите из имеющихся статей",
-			title:"Выбрать из имеющихся статей",
-			click:	function(){
-				window.textTarget='ready';
-				$('#tblArticles').css('width','auto');
-				var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
-				
-				$(aTable).css({
-					display:'inline-block',
-					width:'auto'
-				});
-				
-				var pDivTop=$(aParent).offset().top;
-				
-				$(aTable)
-					.show()
-					.appendTo('body');
-				var tWidth=$(aTable).width();
-				var pLeft=($(document).width()-tWidth)/2;
-				$(aTable).css({
-					top: pDivTop+10+'px',
-					left: pLeft+5+'px',
-					bottom:'0'
-				}).resizable();
-				/*$(aTableBar)
-					.mouseover()
-					.css('cursor','move')
-					.mousedown( 
-						function(){
-							$(aTable).draggable();
-					});*/
-			}
+		text:"выберите из имеющихся статей",
+		title:"Выбрать из имеющихся статей",
+		click:	function(){
+			window.textTarget='ready';
+			$('#tblArticles').css('width','auto');
+			var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
+			
+			$(aTable).css({
+				display:'inline-block',
+				width:'auto'
+			});
+			
+			var pDivTop=$(aParent).offset().top;
+			
+			$(aTable)
+				.show()
+				.appendTo('body');
+			var tWidth=$(aTable).width();
+			var pLeft=($(document).width()-tWidth)/2;
+			$(aTable).css({
+				top: pDivTop+10+'px',
+				left: pLeft+5+'px',
+				bottom:'0'
+			}).resizable();
+			/*$(aTableBar)
+				.mouseover()
+				.css('cursor','move')
+				.mousedown( 
+					function(){
+						$(aTable).draggable();
+				});*/
+		}
 	}).appendTo(content);
 	$(aTableBar).mouseout();
-}
-//
-function getDataFromCKeditor(){
-  try{	
-	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
-	alert(eText);
-	/*$("button#saveModuleText").click( function(){
-		alert('THE TEXT IS: eText');
-	});*/
-  }catch(e){
-	  alert();
-  }
-}
-// вернуть путь отправки Ajax-запроса
-function getLoadAjaxPath(artID){
-	return "<?=$base_url?>/admin/Ajax/?article_id="+artID+"&do=preview"
 }
 //
 function articlePreview(artID,eSrc){
@@ -157,6 +193,27 @@ function addArtText(artBox,htmlContent){
 	//alert(document.getElementById('myModal').style.display);
 }
 //
+function getDataFromCKeditor(){
+  try{	
+	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
+	alert(eText);
+	/*$("button#saveModuleText").click( function(){
+		alert('THE TEXT IS: eText');
+	});*/
+  }catch(e){
+	  alert();
+  }
+}
+// вернуть путь отправки Ajax-запроса
+function getLoadAjaxPath(artID){
+	return "<?=$base_url?>/admin/Ajax/?article_id="+artID+"&do=preview"
+}
+// идентифицировать текстовый модуль
+// колонку запоминать не надо, т.к. блок будет идентифицирован по индексу среди ВСЕХ блоков во всех колонках
+function identifyTextBlock(obj){
+	Layout.blocks.activeModuleTxtIndex=$('div#tmplPlace div[data-module-type]').index($(obj.parentNode));
+}
+//
 function PickOutTextContent(obj){
   try{
 	alert($(obj).html()); 
@@ -165,14 +222,6 @@ function PickOutTextContent(obj){
 	//$(obj.parentNode.parentNode).append(aTable);
   }catch(e){
 	alert(e.message);
-  }
-}
-//
-function addArticle(artID){
-  try{ //alert('addTextContent');
-	articlePreview(artID);
-  }catch(e){
-	  alert(e.message);
   }
 }
 

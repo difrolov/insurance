@@ -251,3 +251,11 @@ div.modal-section{
 	text-align:left;
 	padding-left:30px;
 }
+div.mainmenu_button{
+	width:100%;
+	margin: 25px 5px 25px 5px;
+}
+.btn-small{
+	margin: 5px;
+
+}

@@ -378,7 +378,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 	'config' =>
 
 			array('toolbar'=>array(
-			
+
 				array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
 				array('name'=> 'paragraph',   
 					  'items'=> 

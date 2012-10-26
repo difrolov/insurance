@@ -6,7 +6,7 @@
 	 **/
 	elFinder = function(el, o) {
 		var self = this, id;
-		
+
 		this.log = function(m) {
 			window.console && window.console.log && window.console.log(m);
 		}
@@ -14,12 +14,12 @@
 		 * Object. File manager configuration
 		 **/
 		this.options = $.extend({}, this.options, o||{});
-		
+
 		if (!this.options.url) {
 			alert('Invalid configuration! You have to set URL option.');
 			return;
 		}
-		
+
 		/**
 		 * String. element id, create random if not set;
 		 **/
@@ -29,7 +29,7 @@
 		} else {
 			// this.id = 'el-finder-'+Math.random().toString().substring(2);
 		}
-		
+
 		/**
 		 * String. Version number;
 		 **/
@@ -151,7 +151,7 @@
 		this.lockShortcuts = function(l) {
 			this.eventsManager.lock = !!l;
 		}
-		
+
 		/**
 		 * Set file manager view type (list|icons)
 		 *
@@ -163,13 +163,13 @@
 				this.cookie(this.vCookie, v);
 			}
 		}
-		
+
 		/**
 		 * make ajax request, show message on error, call callback on success
 		 *
 		 * @param  Object.  data for ajax request
-		 * @param  Function  
-		 * @param  Object   overrwrite some options 
+		 * @param  Function
+		 * @param  Object   overrwrite some options
 		 */
 		this.ajax = function(data, callback, options) {
 
@@ -204,12 +204,12 @@
 
 					delete data;
 				}
-				
+
 			}
 			opts.lock && this.lock(true);
 			$.ajax(opts);
 		}
-		
+
 		/**
 		 * Load generated thumbnails in background
 		 *
@@ -222,13 +222,13 @@
 							self.cdc[i].tmb = data.images[i];
 							$('div[key="'+i+'"]>p', self.view.cwd).css('background', ' url("'+data.images[i]+'") 0 0 no-repeat');
 						}
-						
+
 					}
 					data.tmb && self.tmb();
 				}
 			}, {lock : false, silent : true});
 		}
-		
+
 		/**
 		 * Return folders in places IDs
 		 *
@@ -245,7 +245,7 @@
 			}
 			return pl;
 		}
-		
+
 		/**
 		 * Add new folder to places
 		 *
@@ -260,7 +260,7 @@
 				return true;
 			}
 		}
-		
+
 		/**
 		 * Remove folder from places
 		 *
@@ -274,7 +274,7 @@
 				return true;
 			}
 		}
-		
+
 		/**
 		 * Save new places data in cookie
 		 *
@@ -283,7 +283,7 @@
 		this.savePlaces = function(p) {
 			this.cookie(this.pCookie, p.join(':'));
 		}
-		
+
 		/**
 		 * Update file manager content
 		 *
@@ -292,7 +292,7 @@
 		this.reload = function(data) {
 			var i;
 			this.cwd = data.cwd;
-			
+
 			this.cdc = {};
 			for (i=0; i<data.cdc.length ; i++) {
 				if (data.cdc[i].hash && data.cdc[i].name) {
@@ -307,7 +307,7 @@
 			}
 
 			this.updateCwd();
-			
+
 			/* tell connector to generate thumbnails */
 			if (data.tmb && !self.locked && self.options.view == 'icons') {
 				self.tmb();
@@ -325,7 +325,7 @@
 				this.iID = setInterval(function() {	!self.locked && self.ui.exec('reload'); }, this.options.autoReload*60000);
 			}
 		}
-		
+
 		/**
 		 * Redraw current directory
 		 *
@@ -338,7 +338,7 @@
 			this.view.tree.find('a[key="'+this.cwd.hash+'"]').trigger('select');
 			this.lockShortcuts();
 		}
-		
+
 		/**
 		 * Execute after files was dropped onto folder
 		 *
@@ -354,7 +354,7 @@
 			ui.helper.find('div:not(.noaccess):has(>label):not(:has(em[class="readonly"],em[class=""]))').each(function() {
 				ids.push($(this).hide().attr('key'));
 			});
-		
+
 			if (!ui.helper.find('div:has(>label):visible').length) {
 				ui.helper.hide();
 			}
@@ -368,11 +368,11 @@
 				$(this).removeClass('el-finder-droppable');
 			}
 		}
-		
+
 		/**
 		 * Return selected files data
 		 *
-		 * @param  Number  if set, returns only element with this index or empty object 
+		 * @param  Number  if set, returns only element with this index or empty object
 		 * @return Array|Object
 		 */
 		this.getSelected = function(ndx) {
@@ -385,7 +385,7 @@
 			}
 			return s;
 		}
-		
+
 		this.select = function(el, reset) {
 			reset && $('.ui-selected', self.view.cwd).removeClass('ui-selected');
 			el.addClass('ui-selected');
@@ -463,21 +463,21 @@
 				names : [],
 				cut   : cut||0
 			};
-			
+
 			for (i=0; i<files.length; i++) {
-				id = files[i]; 
+				id = files[i];
 				f = this.cdc[id];
 				if (f && f.read && f.type != 'link') {
 					this.buffer.files.push(f.hash);
 					this.buffer.names.push(f.name);
 				}
 			}
-			
+
 			if (!this.buffer.files.length) {
 				this.buffer = {};
 			}
 		}
-		
+
 		/**
 		 * Return true if file name is acceptable
 		 *
@@ -490,7 +490,7 @@
 			}
 			return n.match(/^[^\\\/\<\>:]+$/);
 		}
-		
+
 		/**
 		 * Return true if file with this name exists
 		 *
@@ -505,7 +505,7 @@
 			}
 			return false;
 		}
-		
+
 		/**
 		 * Return name for new file/folder
 		 *
@@ -551,7 +551,7 @@
 			w && self.view.win.width(w);
 			h && self.view.nav.add(self.view.cwd).height(h);
 		}
-		
+
 		/**
 		 * Resize file manager in dialog window while it resize
 		 *
@@ -565,40 +565,40 @@
 		}
 
 		/* here we init file manager */
-		
+
 		this.setView(this.cookie(this.vCookie));
 		resize(self.options.width, self.options.height);
-		
+
 		/* dialog or docked mode */
 		if (this.options.dialog || this.options.docked) {
 			this.options.dialog = $.extend({width : 570, dialogClass : '', minWidth : 480, minHeight: 330}, this.options.dialog || {});
-			this.options.dialog.open = function() {  
+			this.options.dialog.open = function() {
 				setTimeout(function() {
 					$('<input type="text" value="f"/>').appendTo(self.view.win).focus().select().remove()
 				}, 200)
-				
+
 			}
 			this.options.dialog.dialogClass += 'el-finder-dialog';
 			this.options.dialog.resize = dialogResize;
 			if (this.options.docked) {
 				/* docked mode - create dialog and store size */
 				this.options.dialog.close = function() { self.dock(); };
-				
+
 				this.view.win.data('size', {width : this.view.win.width(), height : this.view.nav.height()});
 			} else {
-				this.options.dialog.close = function() { 
+				this.options.dialog.close = function() {
 					self.destroy();
 				}
 				this.dialog = $('<div/>').append(this.view.win).dialog(this.options.dialog);
 			}
 		}
 
-		this.ajax({ 
-			cmd    : 'open', 
-			target : this.lastDir()||'', 
-			init   : true, 
-			tree   : true 
-			}, 
+		this.ajax({
+			cmd    : 'open',
+			target : this.lastDir()||'',
+			init   : true,
+			tree   : true
+			},
 			function(data) {
 				if (data.cwd) {
 					self.eventsManager.init();
@@ -613,15 +613,15 @@
 					});
 					self.ui.init(data.disabled);
 				}
-				
+
 		}, {force : true});
-			
-		
+
+
 		this.open = function() {
 			this.dialog ? this.dialog.dialog('open') : this.view.win.show();
 			this.eventsManager.lock = false;
 		}
-		
+
 		this.close = function() {
 			this.quickLook.hide();
 			if (this.options.docked && this.view.win.attr('undocked')) {
@@ -631,7 +631,7 @@
 			}
 			this.eventsManager.lock = true;
 		}
-		
+
 		this.destroy = function() {
 
 			this.eventsManager.lock = true;
@@ -645,7 +645,7 @@
 			}
 			this.ui.menu.remove();
 		}
-		
+
 		this.dock = function() {
 			if (this.options.docked && this.view.win.attr('undocked')) {
 				this.quickLook.hide();
@@ -656,16 +656,16 @@
 				this.dialog = null;
 			}
 		}
-		
+
 		this.undock = function() {
 			if (this.options.docked && !this.view.win.attr('undocked')) {
 				this.quickLook.hide();
 				this.dialog = $('<div/>').append(this.view.win.css('width', '100%').attr('undocked', true).show()).dialog(this.options.dialog);
 				dialogResize();
-			} 
+			}
 		}
 	}
-	
+
 	/**
 	 * Translate message into selected language
 	 *
@@ -675,7 +675,7 @@
 	elFinder.prototype.i18n = function(m) {
 		return this.options.i18n[this.options.lang] && this.options.i18n[this.options.lang][m] ? this.options.i18n[this.options.lang][m] :  m;
 	}
-	
+
 	/**
 	 * Default config
 	 *
@@ -745,43 +745,43 @@
 		selectMultiple : false
 	}
 
-	
+
 	$.fn.elfinder = function(o) {
-		
+
 		return this.each(function() {
-			
+
 			var cmd = typeof(o) == 'string' ? o : '';
 			if (!this.elfinder) {
 				this.elfinder = new elFinder(this, typeof(o) == 'object' ? o : {})
 			}
-			
+
 			switch(cmd) {
 				case 'close':
 				case 'hide':
 					this.elfinder.close();
 					break;
-					
+
 				case 'open':
 				case 'show':
 					this.elfinder.open();
 					break;
-				
+
 				case 'dock':
 					this.elfinder.dock();
 					break;
-					
+
 				case 'undock':
 					this.elfinder.undock();
 					break;
-					
+
 				case'destroy':
 					this.elfinder.destroy();
 					break;
 			}
-			
+
 		})
 	}
-	
+
 })(jQuery);
 (function($) {
 elFinder.prototype.view = function(fm, el) {
@@ -799,58 +799,58 @@ elFinder.prototype.view = function(fm, el) {
 		'application/postscript'        : 'Postscript document',
 		'application/octet-stream'      : 'Application',
 		'application/vnd.ms-office'     : 'Microsoft Office document',
-		'application/vnd.ms-word'       : 'Microsoft Word document',  
+		'application/vnd.ms-word'       : 'Microsoft Word document',
 	    'application/vnd.ms-excel'      : 'Microsoft Excel document',
 		'application/vnd.ms-powerpoint' : 'Microsoft Powerpoint presentation',
 		'application/pdf'               : 'Portable Document Format (PDF)',
 		'application/vnd.oasis.opendocument.text' : 'Open Office document',
 		'application/x-shockwave-flash' : 'Flash application',
-		'application/xml'               : 'XML document', 
+		'application/xml'               : 'XML document',
 		'application/x-bittorrent'      : 'Bittorrent file',
 		'application/x-7z-compressed'   : '7z archive',
-		'application/x-tar'             : 'TAR archive', 
-	    'application/x-gzip'            : 'GZIP archive', 
-	    'application/x-bzip2'           : 'BZIP archive', 
-	    'application/zip'               : 'ZIP archive',  
+		'application/x-tar'             : 'TAR archive',
+	    'application/x-gzip'            : 'GZIP archive',
+	    'application/x-bzip2'           : 'BZIP archive',
+	    'application/zip'               : 'ZIP archive',
 	    'application/x-rar'             : 'RAR archive',
 		'application/javascript'        : 'Javascript application',
 		'text/plain'                    : 'Plain text',
 	    'text/x-php'                    : 'PHP source',
-		'text/html'                     : 'HTML document', 
+		'text/html'                     : 'HTML document',
 		'text/javascript'               : 'Javascript source',
-		'text/css'                      : 'CSS style sheet',  
+		'text/css'                      : 'CSS style sheet',
 	    'text/rtf'                      : 'Rich Text Format (RTF)',
 		'text/rtfd'                     : 'RTF with attachments (RTFD)',
-		'text/x-c'                      : 'C source', 
-		'text/x-c++'                    : 'C++ source', 
+		'text/x-c'                      : 'C source',
+		'text/x-c++'                    : 'C++ source',
 		'text/x-shellscript'            : 'Unix shell script',
 	    'text/x-python'                 : 'Python source',
 		'text/x-java'                   : 'Java source',
 		'text/x-ruby'                   : 'Ruby source',
 		'text/x-perl'                   : 'Perl script',
-	    'text/xml'                      : 'XML document', 
+	    'text/xml'                      : 'XML document',
 		'image/x-ms-bmp'                : 'BMP image',
-	    'image/jpeg'                    : 'JPEG image',   
-	    'image/gif'                     : 'GIF Image',    
+	    'image/jpeg'                    : 'JPEG image',
+	    'image/gif'                     : 'GIF Image',
 	    'image/png'                     : 'PNG image',
 		'image/x-targa'                 : 'TGA image',
-	    'image/tiff'                    : 'TIFF image',   
+	    'image/tiff'                    : 'TIFF image',
 	    'image/vnd.adobe.photoshop'     : 'Adobe Photoshop image',
-		'audio/mpeg'                    : 'MPEG audio',  
+		'audio/mpeg'                    : 'MPEG audio',
 		'audio/midi'                    : 'MIDI audio',
 		'audio/ogg'                     : 'Ogg Vorbis audio',
 		'audio/mp4'                     : 'MP4 audio',
 		'audio/wav'                     : 'WAV audio',
 		'video/x-dv'                    : 'DV video',
 		'video/mp4'                     : 'MP4 video',
-		'video/mpeg'                    : 'MPEG video',  
+		'video/mpeg'                    : 'MPEG video',
 		'video/x-msvideo'               : 'AVI video',
 		'video/quicktime'               : 'Quicktime video',
-		'video/x-ms-wmv'                : 'WM video',   
+		'video/x-ms-wmv'                : 'WM video',
 		'video/x-flv'                   : 'Flash video',
 		'video/x-matroska'              : 'Matroska video'
 	}
-	
+
 	this.tlb = $('<ul />');
 
 	this.nav = $('<div class="el-finder-nav"/>').resizable({handles : 'e', autoHide : true, minWidth : 200, maxWidth: 500});
@@ -887,14 +887,14 @@ elFinder.prototype.view = function(fm, el) {
 		this.win.toggleClass('el-finder-disabled', show);
 		this.spn.toggle(show);
 	}
-	
+
 	/*
 	 * Display ajax error
 	*/
 	this.fatal = function(t) {
 		self.error(t.status != '404' ? 'Invalid backend configuration' : 'Unable to connect to backend')
 	}
-	
+
 	/*
 	 * Render error
 	*/
@@ -903,7 +903,7 @@ elFinder.prototype.view = function(fm, el) {
 		this.err.show().children('strong').html(this.fm.i18n(err)+'!'+this.formatErrorData(data));
 		setTimeout(function() { self.err.fadeOut('slow'); }, 4000);
 	}
-	
+
 	/*
 	 * Render navigation panel with dirs tree
 	*/
@@ -911,9 +911,9 @@ elFinder.prototype.view = function(fm, el) {
 		var d = tree.dirs.length ? traverse(tree.dirs) : '',
 			li = '<li><a href="#" class="el-finder-tree-root" key="'+tree.hash+'"><div'+(d ? ' class="collapsed expanded"' : '')+'/>'+tree.name+'</a>'+d+'</li>';
 		this.tree.html(li);
-		
+
 		this.fm.options.places && this.renderPlaces();
-		
+
 		function traverse(tree) {
 			var i, hash, c, html = '<ul style="display:none">';
 			for (i=0; i < tree.length; i++) {
@@ -927,8 +927,8 @@ elFinder.prototype.view = function(fm, el) {
 					c = 'dropbox';
 				} else if (!tree[i].write) {
 					c = 'readonly';
-				} 
-				
+				}
+
 				html += '<li><a href="#" class="'+c+'" key="'+tree[i].hash+'"><div'+(tree[i].dirs.length ? ' class="collapsed"' : '')+'/>'+tree[i].name+'</a>';
 
 				if (tree[i].dirs.length) {
@@ -939,13 +939,13 @@ elFinder.prototype.view = function(fm, el) {
 			return html +'</ul>';
 		}
 	}
-	
+
 	/*
 	 * Render places
 	*/
 	this.renderPlaces = function() {
-		var i, c, 
-			pl = this.fm.getPlaces(),	
+		var i, c,
+			pl = this.fm.getPlaces(),
 			ul = this.plc.show().find('ul').empty().hide();
 		$('div:first', this.plc).removeClass('collapsed expanded');
 
@@ -955,7 +955,7 @@ elFinder.prototype.view = function(fm, el) {
 					_b = self.tree.find('a[key="'+b+'"]').text()||'';
 				return _a.localeCompare(_b);
 			});
-			
+
 			for (i=0; i < pl.length; i++) {
 				if ((c = this.tree.find('a[key="'+pl[i]+'"]:not(.dropbox)').parent()) && c.length) {
 					ul.append(c.clone().children('ul').remove().end().find('div').removeClass('collapsed expanded').end());
@@ -966,13 +966,13 @@ elFinder.prototype.view = function(fm, el) {
 			ul.children().length && $('div:first', this.plc).addClass('collapsed');
 		}
 	}
-	
+
 	/*
 	 * Render current directory
 	*/
 	this.renderCwd = function() {
 		this.cwd.empty();
-		
+
 		var num  = 0, size = 0, html = '';
 		for (var hash in this.fm.cdc) {
 			num++;
@@ -986,7 +986,7 @@ elFinder.prototype.view = function(fm, el) {
 		} else {
 			this.cwd.append('<table><tr><th colspan="2">'+this.fm.i18n('Name')+'</th><th>'+this.fm.i18n('Permissions')+'</th><th>'+this.fm.i18n('Modified')+'</th><th class="size">'+this.fm.i18n('Size')+'</th><th>'+this.fm.i18n('Kind')+'</th></tr>'+html+'</table>');
 		}
-		
+
 		this.pth.text(fm.cwd.rel);
 		this.nfo.text(fm.i18n('items')+': '+num+', '+this.formatSize(size));
 		this.sel.empty();
@@ -1038,7 +1038,7 @@ elFinder.prototype.view = function(fm, el) {
 	*/
 	this.selectedInfo = function() {
 		var i, s = 0, sel;
-		
+
 		if (self.fm.selected.length) {
 			sel = this.fm.getSelected();
 			for (i=0; i<sel.length; i++) {
@@ -1119,31 +1119,31 @@ elFinder.prototype.view = function(fm, el) {
 		rm && p.push(self.fm.i18n('remove'));
 		return p.join('/');
 	}
-	
+
 	/*
 	 * Return kind of file
 	*/
 	this.mime2kind = function(mime) {
 		return this.fm.i18n(this.kinds[mime]||'unknown');
 	}
-	
+
 }
 
 })(jQuery);
 /**
- * @class elFinder user Interface. 
+ * @class elFinder user Interface.
  * @author dio dio@std42.ru
  **/
 (function($) {
 elFinder.prototype.ui = function(fm) {
-	
+
 	var self        = this;
 	this.fm         = fm;
 	this.cmd        = {};
 	this.buttons    = {};
 	this.menu       = $('<div class="el-finder-contextmenu" />').appendTo(document.body).hide();
 	this.dockButton = $('<div class="el-finder-dock-button" title="'+self.fm.i18n('Dock/undock filemanager window')+'" />');
-	
+
 	this.exec = function(cmd, arg) {
 		if (this.cmd[cmd]) {
 			if (cmd != 'open' && !this.cmd[cmd].isAllowed()) {
@@ -1157,7 +1157,7 @@ elFinder.prototype.ui = function(fm) {
 			}
 		}
 	}
-	
+
 	this.cmdName = function(cmd) {
 		if (this.cmd[cmd] && this.cmd[cmd].name) {
 			return cmd == 'archive' && this.fm.params.archives.length == 1
@@ -1166,23 +1166,23 @@ elFinder.prototype.ui = function(fm) {
 		}
 		return cmd;
 	}
-	
+
 	this.isCmdAllowed = function(cmd) {
 		return self.cmd[cmd] && self.cmd[cmd].isAllowed();
 	}
-	
+
 	this.execIfAllowed = function(cmd) {
 		this.isCmdAllowed(cmd) && this.exec(cmd);
 	}
-	
+
 	this.includeInCm = function(cmd, t) {
 		return this.isCmdAllowed(cmd) && this.cmd[cmd].cm(t);
 	}
-	
+
 	this.showMenu = function(e) {
 		var t, win, size, id = '';
 		this.hideMenu();
-		
+
 		if (!self.fm.selected.length) {
 			t = 'cwd';
 		} else if (self.fm.selected.length == 1) {
@@ -1190,9 +1190,9 @@ elFinder.prototype.ui = function(fm) {
 		} else {
 			t = 'group';
 		}
-		
+
 		menu(t);
-		
+
 		win = $(window);
 		size = {
 	    	height : win.height(),
@@ -1208,7 +1208,7 @@ elFinder.prototype.ui = function(fm) {
 			.show()
 			.find('div[name]')
 			.hover(
-				function() { 
+				function() {
 					var t = $(this), s = t.children('div'), w;
 					t.addClass('hover');
 					if (s.length) {
@@ -1218,7 +1218,7 @@ elFinder.prototype.ui = function(fm) {
 						}
 						s.show();
 					}
-				}, 
+				},
 				function() { $(this).removeClass('hover').children('div').hide(); }
 			).click(function(e) {
 				e.stopPropagation();
@@ -1248,19 +1248,19 @@ elFinder.prototype.ui = function(fm) {
 				}
 			};
 		}
-	
+
 	}
-	
+
 	this.hideMenu = function() {
 		this.menu.hide().empty();
 	}
-	
+
 	this.update = function() {
 		for (var i in this.buttons) {
 			this.buttons[i].toggleClass('disabled', !this.cmd[i].isAllowed());
 		}
 	}
-	
+
 	this.init = function(disabled) {
 		var i, j, n, c=false, zindex = 2, z, t = this.fm.options.toolbar;
 		/* disable select command if there is no callback for it */
@@ -1290,7 +1290,7 @@ elFinder.prototype.ui = function(fm) {
 					this.buttons[n] = $('<li class="'+n+'" title="'+this.cmdName(n)+'" name="'+n+'" />')
 						.appendTo(this.fm.view.tlb)
 						.click(function(e) { e.stopPropagation(); })
-						.bind('click', (function(ui){ return function() {  
+						.bind('click', (function(ui){ return function() {
 								!$(this).hasClass('disabled') && ui.exec($(this).attr('name'));
 							} })(this)
 						).hover(
@@ -1303,29 +1303,29 @@ elFinder.prototype.ui = function(fm) {
 		this.update();
 		/* set z-index for context menu */
 		this.menu.css('z-index', this.fm.zIndex);
-		
+
 		if (this.fm.options.docked) {
 			this.dockButton.hover(
 				function() { $(this).addClass('el-finder-dock-button-hover')},
 				function() { $(this).removeClass('el-finder-dock-button-hover')}
-			).click(function() { 
+			).click(function() {
 				self.fm.view.win.attr('undocked') ? self.fm.dock() : self.fm.undock();
 				$(this).trigger('mouseout');
 			}).prependTo(this.fm.view.tlb);
 		}
-		
+
 	}
 
 }
 
 /**
- * @class elFinder user Interface Command. 
+ * @class elFinder user Interface Command.
  * @author dio dio@std42.ru
  **/
 elFinder.prototype.ui.prototype.command = function(fm) {  }
 
 /**
- * Return true if command can be applied now 
+ * Return true if command can be applied now
  * @return Boolean
  **/
 elFinder.prototype.ui.prototype.command.prototype.isAllowed = function() {
@@ -1351,7 +1351,7 @@ elFinder.prototype.ui.prototype.command.prototype.argc = function(t) {
 
 
 elFinder.prototype.ui.prototype.commands = {
-	
+
 	/**
 	 * @class Go into previous folder
 	 * @param Object  elFinder
@@ -1360,7 +1360,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self = this;
 		this.name = 'Back';
 		this.fm = fm;
-		
+
 		this.exec = function() {
 			if (this.fm.history.length) {
 				this.fm.ajax({ cmd : 'open', target : this.fm.history.pop()	}, function(data) {
@@ -1368,13 +1368,13 @@ elFinder.prototype.ui.prototype.commands = {
 				});
 			}
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.history.length
 		}
-		
+
 	},
-	
+
 	/**
 	 * @class Reload current directory and navigation panel
 	 * @param Object  elFinder
@@ -1383,18 +1383,18 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Reload';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			this.fm.ajax({ cmd : 'open', target : this.fm.cwd.hash, tree : true }, function(data) {
 				self.fm.reload(data);
 			});
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Open file/folder
 	 * @param Object  elFinder
@@ -1403,7 +1403,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Open';
 		this.fm   = fm;
-		
+
 		/**
 		 * Open file/folder
 		 * @param String  file/folder id (only from click on nav tree)
@@ -1421,7 +1421,7 @@ elFinder.prototype.ui.prototype.commands = {
 			}
 
 			if (!t.hash) {
-				return; 
+				return;
 			}
 			if (!t.read) {
 				return this.fm.view.error('Access denied');
@@ -1434,14 +1434,14 @@ elFinder.prototype.ui.prototype.commands = {
 			} else {
 				openFile(t);
 			}
-			
+
 			function openDir(id) {
 				self.fm.history.push(self.fm.cwd.hash);
 				self.fm.ajax({ cmd : 'open', target : id }, function(data) {
 					self.fm.reload(data);
 				});
 			}
-			
+
 			function openFile(f) {
 				var s, ws = '';
 				if (f.dim) {
@@ -1451,17 +1451,17 @@ elFinder.prototype.ui.prototype.commands = {
 				window.open(f.url||self.fm.options.url+'?cmd=open&current='+(f.parent||self.fm.cwd.hash)+'&target='+(f.link||f.hash), false, 'top=50,left=50,'+ws+'scrollbars=yes,resizable=yes');
 			}
 		}
-	
+
 		this.isAllowed = function() {
 			return this.fm.selected.length == 1 && this.fm.getSelected(0).read;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'file';
 		}
-		
+
 	},
-	
+
 	/**
 	 * @class. Return file url
 	 * @param Object  elFinder
@@ -1469,13 +1469,13 @@ elFinder.prototype.ui.prototype.commands = {
 	select : function(fm) {
 		this.name = 'Select file';
 		this.fm   = fm;
-				
+
 		if (fm.options.selectMultiple) {
             this.exec = function() {
 
                 var selected = $(fm.getSelected()).map(function() {
-                    return fm.options.cutURL == 'root' ? this.url.substr(fm.params.url.length) : this.url.replace(new RegExp('^('+fm.options.cutURL+')'), ''); 
-                });  
+                    return fm.options.cutURL == 'root' ? this.url.substr(fm.params.url.length) : this.url.replace(new RegExp('^('+fm.options.cutURL+')'), '');
+                });
 
                 fm.options.editorCallback(selected);
 
@@ -1485,7 +1485,7 @@ elFinder.prototype.ui.prototype.commands = {
                 }
             }
         } else {
-            this.exec = function() { 
+            this.exec = function() {
                 var f = this.fm.getSelected(0);
 
                 if (!f.url) {
@@ -1498,20 +1498,20 @@ elFinder.prototype.ui.prototype.commands = {
                     this.fm.close();
                     this.fm.destroy();
                 }
-				
+
             }
         }
 
         this.isAllowed = function() {
             return ((this.fm.options.selectMultiple && this.fm.selected.length >= 1) || this.fm.selected.length == 1) && !/(symlink\-broken|directory)/.test(this.fm.getSelected(0).mime);
         }
-		
+
 		this.cm = function(t) {
 			return t != 'cwd';
 			// return t == 'file';
 		}
 	},
-	
+
 	/**
 	 * @class. Open/close quickLook window
 	 * @param Object  elFinder
@@ -1520,20 +1520,20 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Preview with Quick Look';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			self.fm.quickLook.toggle();
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.selected.length == 1;
 		}
-		
+
 		this.cm = function() {
 			return true;
 		}
 	},
-	
+
 	/**
 	 * @class Display files/folders info in dialog window
 	 * @param Object  elFinder
@@ -1542,7 +1542,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Get info';
 		this.fm   = fm;
-		
+
 		/**
 		 * Open dialog windows for each selected file/folder or for current folder
 		 **/
@@ -1558,11 +1558,11 @@ elFinder.prototype.ui.prototype.commands = {
 					info(this);
 				});
 			}
-			
+
 			function info(f) {
-				var p = ['50%', '50%'], x, y, d, 
+				var p = ['50%', '50%'], x, y, d,
 					tb = '<table cellspacing="0"><tr><td>'+self.fm.i18n('Name')+'</td><td>'+f.name+'</td></tr><tr><td>'+self.fm.i18n('Kind')+'</td><td>'+self.fm.view.mime2kind(f.link ? 'symlink' : f.mime)+'</td></tr><tr><td>'+self.fm.i18n('Size')+'</td><td>'+self.fm.view.formatSize(f.size)+'</td></tr><tr><td>'+self.fm.i18n('Modified')+'</td><td>'+self.fm.view.formatDate(f.date)+'</td></tr><tr><td>'+self.fm.i18n('Permissions')+'</td><td>'+self.fm.view.formatPermissions(f.read, f.write, f.rm)+'</td></tr>';
-				
+
 				if (f.link) {
 					tb += '<tr><td>'+self.fm.i18n('Link to')+'</td><td>'+f.linkTo+'</td></tr>';
 				}
@@ -1596,12 +1596,12 @@ elFinder.prototype.ui.prototype.commands = {
 				});
 			}
 		}
-	
+
 		this.cm = function(t) {
 			return true;
 		}
 	},
-	
+
 	/**
 	 * @class Rename file/folder
 	 * @param Object elFinder
@@ -1610,10 +1610,10 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Rename';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			var s = this.fm.getSelected(), el, c, input, f, n;
-			
+
 			if (s.length == 1) {
 				f  = s[0];
 				el = this.fm.view.cwd.find('[key="'+f.hash+'"]');
@@ -1643,9 +1643,9 @@ elFinder.prototype.ui.prototype.commands = {
 				c.html(n);
 				self.fm.lockShortcuts();
 			}
-			
+
 			function rename() {
-				
+
 				if (!self.fm.locked) {
 					var err, name = input.val();
 					if (f.name == input.val()) {
@@ -1657,26 +1657,26 @@ elFinder.prototype.ui.prototype.commands = {
 					} else if (self.fm.fileExists(name)) {
 						err = 'File or folder with the same name already exists';
 					}
-					
+
 					if (err) {
 						self.fm.view.error(err);
 						el.addClass('ui-selected');
 						self.fm.lockShortcuts(true);
 						return input.select().focus();
 					}
-					
+
 					self.fm.ajax({cmd : 'rename', current : self.fm.cwd.hash, target : f.hash, name : name}, function(data) {
 						if (data.error) {
 							restore();
 						} else {
 							f.mime == 'directory' && self.fm.removePlace(f.hash) && self.fm.addPlace(data.target);
-							self.fm.reload(data); 
+							self.fm.reload(data);
 						}
 					}, { force : true });
 				}
 			}
 		}
-		
+
 		/**
 		 * Return true if only one file selected and has write perms and current dir has write perms
 		 * @return Boolean
@@ -1689,7 +1689,7 @@ elFinder.prototype.ui.prototype.commands = {
 			return t == 'file';
 		}
 	},
-	
+
 	/**
 	 * @class Copy file/folder to "clipboard"
 	 * @param Object elFinder
@@ -1697,11 +1697,11 @@ elFinder.prototype.ui.prototype.commands = {
 	copy : function(fm) {
 		this.name = 'Copy';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			this.fm.setBuffer(this.fm.selected);
 		}
-		
+
 		this.isAllowed = function() {
 			if (this.fm.selected.length) {
 				var s = this.fm.getSelected(), l = s.length;
@@ -1713,12 +1713,12 @@ elFinder.prototype.ui.prototype.commands = {
 			}
 			return false;
 		}
-		
+
 		this.cm = function(t) {
 			return t != 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Cut file/folder to "clipboard"
 	 * @param Object elFinder
@@ -1726,11 +1726,11 @@ elFinder.prototype.ui.prototype.commands = {
 	cut : function(fm) {
 		this.name = 'Cut';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			this.fm.setBuffer(this.fm.selected, 1);
 		}
-		
+
 		this.isAllowed = function() {
 			if (this.fm.selected.length) {
 				var s = this.fm.getSelected(), l = s.length;
@@ -1742,12 +1742,12 @@ elFinder.prototype.ui.prototype.commands = {
 			}
 			return false;
 		}
-		
+
 		this.cm = function(t) {
 			return t != 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Paste file/folder from "clipboard"
 	 * @param Object elFinder
@@ -1756,10 +1756,10 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Paste';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			var i, d, f, r, msg = '';
-			
+
 			if (!this.fm.buffer.dst) {
 				this.fm.buffer.dst = this.fm.cwd.hash;
 			}
@@ -1786,16 +1786,16 @@ elFinder.prototype.ui.prototype.commands = {
 				data.cdc && self.fm.reload(data);
 			}, {force : true});
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.buffer.files;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Remove files/folders
 	 * @param Object elFinder
@@ -1804,7 +1804,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Remove';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			var i, ids = [], s =this.fm.getSelected();
 			for (var i=0; i < s.length; i++) {
@@ -1823,8 +1823,8 @@ elFinder.prototype.ui.prototype.commands = {
 						close       : function() { self.fm.lockShortcuts(); },
 						buttons     : {
 							Cancel : function() { $(this).dialog('close'); },
-							Ok     : function() { 
-								$(this).dialog('close'); 
+							Ok     : function() {
+								$(this).dialog('close');
 								var o = { cmd : 'rm', current : self.fm.cwd.hash };
 								if (self.fm.jquery > 132) {
 									o.targets = ids;
@@ -1837,7 +1837,7 @@ elFinder.prototype.ui.prototype.commands = {
 					});
 			}
 		}
-		
+
 		this.isAllowed = function(f) {
 			if (this.fm.selected.length) {
 				var s = this.fm.getSelected(), l = s.length;
@@ -1849,12 +1849,12 @@ elFinder.prototype.ui.prototype.commands = {
 			}
 			return false;
 		}
-		
+
 		this.cm = function(t) {
 			return t != 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Create new folder
 	 * @param Object  elFinder
@@ -1863,14 +1863,14 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'New folder';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			self.fm.unselectAll();
 			var n     = this.fm.uniqueName('untitled folder');
 				input = $('<input type="text"/>').val(n);
 				prev  = this.fm.view.cwd.find('.directory:last');
 				f     = {name : n, hash : '', mime :'directory', read : true, write : true, date : '', size : 0},
-				el    = this.fm.options.view == 'list' 
+				el    = this.fm.options.view == 'list'
 						? $(this.fm.view.renderRow(f)).children('td').eq(1).empty().append(input).end().end()
 						: $(this.fm.view.renderIcon(f)).children('label').empty().append(input).end()
 			el.addClass('directory ui-selected');
@@ -1911,7 +1911,7 @@ elFinder.prototype.ui.prototype.commands = {
 						el.addClass('ui-selected');
 						return input.select().focus();
 					}
-					
+
 					self.fm.ajax({cmd : 'mkdir', current : self.fm.cwd.hash, name : name}, function(data) {
 						if (data.error) {
 							el.addClass('ui-selected');
@@ -1922,16 +1922,16 @@ elFinder.prototype.ui.prototype.commands = {
 				}
 			}
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.cwd.write;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Create new text file
 	 * @param Object  elFinder
@@ -1940,18 +1940,18 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'New text file';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			self.fm.unselectAll();
 			var n     = this.fm.uniqueName('untitled file', '.txt'),
-				input = $('<input type="text"/>').val(n), 
+				input = $('<input type="text"/>').val(n),
 				f     = {name : n, hash : '', mime :'text/plain', read : true, write : true, date : '', size : 0},
-				el    = this.fm.options.view == 'list' 
+				el    = this.fm.options.view == 'list'
 					? $(this.fm.view.renderRow(f)).children('td').eq(1).empty().append(input).end().end()
 					: $(this.fm.view.renderIcon(f)).children('label').empty().append(input).end();
-					
+
 			el.addClass('text ui-selected').appendTo(this.fm.options.view == 'list' ? self.fm.view.cwd.children('table') : self.fm.view.cwd);
-			
+
 			input.select().focus()
 				.bind('change blur', mkfile)
 				.click(function(e) { e.stopPropagation(); })
@@ -1965,7 +1965,7 @@ elFinder.prototype.ui.prototype.commands = {
 					}
 				});
 			self.fm.lockShortcuts(true);
-			
+
 			function mkfile() {
 				if (!self.fm.locked) {
 					var err, name = input.val();
@@ -1989,18 +1989,18 @@ elFinder.prototype.ui.prototype.commands = {
 					}, {force : true });
 				}
 			}
-			
+
 		}
-		
+
 		this.isAllowed = function(f) {
 			return this.fm.cwd.write;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Upload files
 	 * @param Object  elFinder
@@ -2009,7 +2009,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Upload files';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 
 			var id = 'el-finder-io-'+(new Date().getTime()),
@@ -2031,7 +2031,7 @@ elFinder.prototype.ui.prototype.commands = {
 				}
 
 				f = $(f+'</form>');
-				
+
 				d.append(f.append(e.hide()).prepend(m).append(b)).dialog({
 						dialogClass : 'el-finder-dialog',
 						title       : self.fm.i18n('Upload files'),
@@ -2073,16 +2073,16 @@ elFinder.prototype.ui.prototype.commands = {
 					io  = $io[0],
 					cnt = 50,
 					doc, html, data;
-					
+
 				$io.css({ position: 'absolute', top: '-1000px', left: '-1000px' })
 				.appendTo('body').bind('load', function() {
 					$io.unbind('load');
 					result();
 				});
-				
+
 				self.fm.lock(true);
 				f.submit();
-				
+
 				function result() {
 					try {
 						doc = io.contentWindow ? io.contentWindow.document : io.contentDocument ? io.contentDocument : io.document;
@@ -2107,7 +2107,7 @@ elFinder.prototype.ui.prototype.commands = {
 						} else {
 							data = { error : 'Unable to parse server response' };
 						}
-						
+
 					} catch(e) {
 						data = { error : 'Unable to parse server response' };
 					}
@@ -2116,25 +2116,25 @@ elFinder.prototype.ui.prototype.commands = {
 					data.cwd && self.fm.reload(data);
 					data.tmb && self.fm.tmb();
 				}
-				
+
 				function complite() {
 					self.fm.lock();
 					$io.remove();
 				}
-					
+
 			}
 
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.cwd.write;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Make file/folder copy
 	 * @param Object  elFinder
@@ -2143,7 +2143,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Duplicate';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			this.fm.ajax({
 				cmd     : 'duplicate',
@@ -2154,16 +2154,16 @@ elFinder.prototype.ui.prototype.commands = {
 				self.fm.reload(data);
 			});
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.cwd.write && this.fm.selected.length == 1 && this.fm.getSelected()[0].read;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'file';
 		}
 	},
-	
+
 	/**
 	 * @class Edit text file
 	 * @param Object  elFinder
@@ -2172,7 +2172,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Edit text file';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			var f = this.fm.getSelected(0);
 			this.fm.lockShortcuts(true);
@@ -2220,7 +2220,7 @@ elFinder.prototype.ui.prototype.commands = {
 										self.fm.cdc[data.target.hash] = data.target;
 										self.fm.view.updateFile(data.target);
 										self.fm.selectById(data.target.hash);
-										
+
 									}
 								}, {type : 'POST'});
 							}
@@ -2228,19 +2228,19 @@ elFinder.prototype.ui.prototype.commands = {
 					});
 			});
 		}
-		
+
 		this.isAllowed = function() {
 			if (self.fm.selected.length == 1) {
 				var f = this.fm.getSelected()[0];
 				return f.write && f.read && (f.mime.indexOf('text') == 0 || f.mime == 'application/x-empty' || f.mime == 'application/xml');
 			}
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'file';
 		}
 	},
-	
+
 	/**
 	 * @class Create archive
 	 * @param Object  elFinder
@@ -2249,7 +2249,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Create archive';
 		this.fm   = fm;
-		
+
 		this.exec = function(t) {
 			var o = {
 				cmd     : 'archive',
@@ -2262,10 +2262,10 @@ elFinder.prototype.ui.prototype.commands = {
 			} else {
 				o['targets[]'] = self.fm.selected;
 			}
-			
+
 			this.fm.ajax(o, function(data) { self.fm.reload(data); });
 		}
-		
+
 		this.isAllowed = function() {
 			if (this.fm.cwd.write && this.fm.selected.length) {
 				var s = this.fm.getSelected(), l = s.length;
@@ -2277,11 +2277,11 @@ elFinder.prototype.ui.prototype.commands = {
 			}
 			return false;
 		}
-		
+
 		this.cm = function(t) {
 			return t != 'cwd';
 		}
-		
+
 		this.argc = function() {
 			var i, v = [];
 			for (i=0; i < self.fm.params.archives.length; i++) {
@@ -2294,7 +2294,7 @@ elFinder.prototype.ui.prototype.commands = {
 			return v;
 		}
 	},
-	
+
 	/**
 	 * @class Extract files from archive
 	 * @param Object  elFinder
@@ -2303,7 +2303,7 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Uncompress archive';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			this.fm.ajax({
 				cmd     : 'extract',
@@ -2313,18 +2313,18 @@ elFinder.prototype.ui.prototype.commands = {
 				self.fm.reload(data);
 			})
 		}
-		
+
 		this.isAllowed = function() {
 			var extract = this.fm.params.extract,
 				cnt = extract && extract.length;
 			return this.fm.cwd.write && this.fm.selected.length == 1 && this.fm.getSelected(0).read && cnt && $.inArray(this.fm.getSelected(0).mime, extract) != -1;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'file';
 		}
 	},
-	
+
 	/**
 	 * @class Resize image
 	 * @param Object  elFinder
@@ -2333,12 +2333,12 @@ elFinder.prototype.ui.prototype.commands = {
 		var self  = this;
 		this.name = 'Resize image';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			var s = this.fm.getSelected();
 			if (s[0] && s[0].write && s[0].dim) {
-				var size = s[0].dim.split('x'), 
-					w  = parseInt(size[0]), 
+				var size = s[0].dim.split('x'),
+					w  = parseInt(size[0]),
 					h  = parseInt(size[1]), rel = w/h
 					iw = $('<input type="text" size="9" value="'+w+'" name="width"/>'),
 					ih = $('<input type="text" size="9" value="'+h+'" name="height"/>'),
@@ -2372,12 +2372,12 @@ elFinder.prototype.ui.prototype.commands = {
 						}
 					}
 				});
-			} 
-			
+			}
+
 			function calc() {
 				var _w = parseInt(iw.val()) || 0,
 					_h = parseInt(ih.val()) || 0;
-					
+
 				if (_w<=0 || _h<=0) {
 					_w = w;
 					_h = h;
@@ -2389,18 +2389,18 @@ elFinder.prototype.ui.prototype.commands = {
 				iw.val(_w);
 				ih.val(_h);
 			}
-			
+
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.selected.length == 1 && this.fm.cdc[this.fm.selected[0]].write && this.fm.cdc[this.fm.selected[0]].read && this.fm.cdc[this.fm.selected[0]].resize;
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'file';
 		}
 	},
-	
+
 	/**
 	 * @class Switch elFinder into icon view
 	 * @param Object  elFinder
@@ -2408,7 +2408,7 @@ elFinder.prototype.ui.prototype.commands = {
 	icons : function(fm) {
 		this.name = 'View as icons';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			this.fm.view.win.addClass('el-finder-disabled');
 			this.fm.setView('icons');
@@ -2416,16 +2416,16 @@ elFinder.prototype.ui.prototype.commands = {
 			this.fm.view.win.removeClass('el-finder-disabled');
 			$('div.image', this.fm.view.cwd).length && this.fm.tmb();
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.options.view != 'icons';
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'cwd';
 		}
 	},
-	
+
 	/**
 	 * @class Switch elFinder into list view
 	 * @param Object  elFinder
@@ -2433,30 +2433,30 @@ elFinder.prototype.ui.prototype.commands = {
 	list : function(fm) {
 		this.name = 'View as list';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
 			this.fm.view.win.addClass('el-finder-disabled');
 			this.fm.setView('list');
 			this.fm.updateCwd();
 			this.fm.view.win.removeClass('el-finder-disabled');
 		}
-		
+
 		this.isAllowed = function() {
 			return this.fm.options.view != 'list';
 		}
-		
+
 		this.cm = function(t) {
 			return t == 'cwd';
 		}
 	},
-	
+
 	help : function(fm) {
 		this.name = 'Help';
 		this.fm   = fm;
-		
+
 		this.exec = function() {
-			var h, ht = this.fm.i18n('helpText'), a, s, tabs; 
-			
+			var h, ht = this.fm.i18n('helpText'), a, s, tabs;
+
 			h = '<div class="el-finder-logo"/><strong>'+this.fm.i18n('elFinder: Web file manager')+'</strong><br/>'+this.fm.i18n('Version')+': '+this.fm.version+'<br/>'
 				+'jQuery/jQueryUI: '+$().jquery+'/'+$.ui.version+'<br clear="all"/>'
 				+'<p><strong><a href="http://elrte.org/'+this.fm.options.lang+'/elfinder" target="_blank">'+this.fm.i18n('Donate to support project development')+'</a></strong></p>'
@@ -2497,17 +2497,17 @@ elFinder.prototype.ui.prototype.commands = {
 				+'<p>'+this.fm.i18n('Copyright: <a href="http://www.std42.ru" target="_blank">Studio 42 LTD</a>')+'</p>'
 				+'<p>'+this.fm.i18n('License: BSD License')+'</p>'
 				+'<p>'+this.fm.i18n('Web site: <a href="http://elrte.org/elfinder/" target="_blank">elrte.org/elfinder</a>')+'</p>';
-			
+
 			s = '<div class="el-finder-logo"/><strong><a href="http://www.eldorado-cms.ru" target="_blank">ELDORADO.CMS</a></strong><br/>'
 				+this.fm.i18n('Simple and usefull Content Management System')
 				+'<hr/>'
 				+ this.fm.i18n('Support project development and we will place here info about you');
-			
+
 			tabs = '<ul><li><a href="#el-finder-help-h">'+this.fm.i18n('Help')+'</a></li><li><a href="#el-finder-help-a">'+this.fm.i18n('Authors')+'</a><li><a href="#el-finder-help-sp">'+this.fm.i18n('Sponsors')+'</a></li></ul>'
 					+'<div id="el-finder-help-h"><p>'+h+'</p></div>'
 					+'<div id="el-finder-help-a"><p>'+a+'</p></div>'
 					+'<div id="el-finder-help-sp"><p>'+s+'</p></div>';
-			
+
 			var d = $('<div/>').html(tabs).dialog({
 				width       : 617,
 				title       : this.fm.i18n('Help'),
@@ -2542,7 +2542,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 	this.ico    = $('<p/>');
 	this.info   = $('<label/>');
 	this.media  = $('<div class="el-finder-ql-media"/>').hide()
-	
+
 	this.name = $('<span class="el-finder-ql-name"/>')
 	this.kind = $('<span class="el-finder-ql-kind"/>')
 	this.size = $('<span class="el-finder-ql-size"/>')
@@ -2575,8 +2575,8 @@ elFinder.prototype.quickLook = function(fm, el) {
 								h = t.height(),
 								_w = self.win.width(),
 								_h = self.win.css('height') == 'auto' ? 350 : self.win.height()-self.content.height()-self.th,
-								r = w>_w || h>_h 
-									? Math.min(Math.min(_w, w)/w, Math.min(_h, h)/h) 
+								r = w>_w || h>_h
+									? Math.min(Math.min(_w, w)/w, Math.min(_h, h)/h)
 									: Math.min(Math.max(_w, w)/w, Math.max(_h, h)/h);
 							t.css({
 								width : Math.round(t.width()*r),
@@ -2593,7 +2593,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 				}
 			}
 		});
-	
+
 	this.th = parseInt(this.win.children(':first').css('height'))||18;
 	/* All browsers do it, but some is shy to says about it. baka da ne! */
 	this.mimes = {
@@ -2608,7 +2608,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 			this.mimes[t] = navigator.mimeTypes[i].suffixes;
 		}
 	}
-	
+
 	if (($.browser.safari && navigator.platform.indexOf('Mac') != -1) || $.browser.msie) {
 		/* not booletproof, but better then nothing */
 		this.mimes['application/pdf'] = 'pdf';
@@ -2623,17 +2623,17 @@ elFinder.prototype.quickLook = function(fm, el) {
 			}
 		}
 	}
-	
+
 	if (this.mimes['image/x-bmp']) {
 		this.mimes['image/x-ms-bmp'] = 'bmp';
 	}
-	
+
 	if ($.browser.msie && !this.mimes['application/x-shockwave-flash']) {
 		this.mimes['application/x-shockwave-flash'] = 'swf';
 	}
-	
+
 	// self.fm.log(this.mimes)
-	
+
 	/**
 	 * Open quickLook window
 	 **/
@@ -2643,7 +2643,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 			var id = self.fm.selected[0],
 			 	el = self.fm.view.cwd.find('[key="'+id+'"]'),
 				o  = el.offset();
-				
+
 			self.fm.lockShortcuts(true);
 			this.win.css({
 				width    : el.width()-20,
@@ -2657,13 +2657,13 @@ elFinder.prototype.quickLook = function(fm, el) {
 				opacity  : 1,
 				top      : Math.round($(window).height()/5),
 				left     : $(window).width()/2-210
-			}, 450, function() { 
+			}, 450, function() {
 				self.win.css({height: 'auto'});
 				self.fm.lockShortcuts();
 			});
 		}
 	}
-	
+
 	/**
 	 * Close quickLook window
 	 **/
@@ -2691,7 +2691,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 			}
 		}
 	}
-	
+
 	/**
 	 * Open/close quickLook window
 	 **/
@@ -2702,7 +2702,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 			this.show();
 		}
 	}
-	
+
 	/**
 	 * Update quickLook window content if only one file selected,
 	 * otherwise close window
@@ -2714,7 +2714,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 			update();
 		}
 	}
-	
+
 	/**
 	 * Return height of this.media block
 	 * @return Number
@@ -2722,7 +2722,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 	this.mediaHeight = function() {
 		return this.win.is(':animated') || this.win.css('height') == 'auto' ? 315 : this.win.height()-this.content.height()-this.th;
 	}
-	
+
 	/**
 	 * Clean quickLook window DOM elements
 	 **/
@@ -2734,7 +2734,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 		self.add.hide().empty();
 		self._hash = '';
 	}
-	
+
 	/**
 	 * Update quickLook window content
 	 **/
@@ -2746,7 +2746,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 		self.title.text(f.name);
 		self.win.addClass(self.fm.view.mime2class(f.mime));
 		self.name.text(f.name);
-		self.kind.text(self.fm.view.mime2kind(f.link ? 'symlink' : f.mime)); 
+		self.kind.text(self.fm.view.mime2kind(f.link ? 'symlink' : f.mime));
 		self.size.text(self.fm.view.formatSize(f.size));
 		self.date.text(self.fm.i18n('Modified')+': '+self.fm.view.formatDate(f.date));
 		f.dim && self.add.append('<span>'+f.dim+' px</span>').show();
@@ -2762,7 +2762,7 @@ elFinder.prototype.quickLook = function(fm, el) {
 		} else {
 			self.url.hide();
 		}
-		
+
 		self.win.css({
 			width  : '420px',
 			height : 'auto'
@@ -2772,32 +2772,32 @@ elFinder.prototype.quickLook = function(fm, el) {
 }
 
 elFinder.prototype.quickLook.prototype.plugins = {
-	
+
 	image : new function() {
 
 		this.test = function(mime, mimes) {
 			return mime.match(/^image\//);
 		}
-		
+
 		this.show = function(ql, f) {
 			var url, t;
 
 			if (ql.mimes[f.mime] && f.hash == ql._hash) {
 				$('<img/>').hide().appendTo(ql.media.show()).attr('src', f.url+($.browser.msie || $.browser.opera ? '?'+Math.random() : '')).load(function() {
 					t = $(this).unbind('load');
-					if (f.hash == ql._hash) { 
+					if (f.hash == ql._hash) {
 						ql.win.is(':animated') ? setTimeout(function() { preview(t); }, 330) : preview(t);
-					} 
+					}
 				});
 			}
-			
+
 			function preview(img) {
 				var w = img.width(),
 					h = img.height(),
 					a = ql.win.is(':animated'),
-					_w = a ? 420 : ql.win.width(), 
+					_w = a ? 420 : ql.win.width(),
 					_h = a || ql.win.css('height') == 'auto' ? 315 : ql.win.height()-ql.content.height()-ql.th,
-					r = w>_w || h>_h 
+					r = w>_w || h>_h
 						? Math.min(Math.min(_w, w)/w, Math.min(_h, h)/h)
 						: Math.min(Math.max(_w, w)/w, Math.max(_h, h)/h);
 
@@ -2809,20 +2809,20 @@ elFinder.prototype.quickLook.prototype.plugins = {
 				}).show().animate({
 					width  : Math.round(r*w),
 					height : Math.round(r*h)
-				}, 450, function() { 
-					ql.fm.lockShortcuts(); 
+				}, 450, function() {
+					ql.fm.lockShortcuts();
 				});
 			}
 		}
-		
+
 	},
-	
+
 	text : new function() {
 
 		this.test = function(mime, mimes) {
 			return (mime.indexOf('text') == 0 && mime.indexOf('rtf') == -1) || mime.match(/application\/(xml|javascript|json)/);
 		}
-		
+
 		this.show = function(ql, f) {
 			if (f.hash == ql._hash) {
 				ql.ico.hide();
@@ -2830,19 +2830,19 @@ elFinder.prototype.quickLook.prototype.plugins = {
 			}
 		}
 	},
-	
+
 	swf : new function() {
-		
+
 		this.test = function(mime, mimes) {
 			return mime == 'application/x-shockwave-flash' && mimes[mime];
 		}
-		
+
 		this.show = function(ql, f) {
 			if (f.hash == ql._hash) {
 				ql.ico.hide();
 				// ql.media.append('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="quality" value="high" /><param name="movie" value="'+url+'" /><embed pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="'+url+'" type="application/x-shockwave-flash" style="width:100%;height:'+ql.mediaHeight()+'px"></embed></object>')
 					// .slideDown(400);
-				var e = ql.media.append('<embed pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="'+f.url+'" style="width:100%;height:'+ql.mediaHeight()+'px" type="application/x-shockwave-flash" />'); 
+				var e = ql.media.append('<embed pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="'+f.url+'" style="width:100%;height:'+ql.mediaHeight()+'px" type="application/x-shockwave-flash" />');
 				if (ql.win.is(':animated')) {
 					e.slideDown(450)
 				} else {
@@ -2851,13 +2851,13 @@ elFinder.prototype.quickLook.prototype.plugins = {
 			}
 		}
 	},
-	
+
 	audio : new function() {
-		
+
 		this.test = function(mime, mimes) {
 			return mime.indexOf('audio') == 0 && mimes[mime];
 		}
-		
+
 		this.show = function(ql, f) {
 			if (f.hash == ql._hash) {
 				ql.ico.hide();
@@ -2866,28 +2866,28 @@ elFinder.prototype.quickLook.prototype.plugins = {
 			}
 		}
 	},
-	
+
 	video : new function() {
-		
+
 		this.test = function(mime, mimes) {
 			return mime.indexOf('video') == 0 && mimes[mime];
 		}
-		
+
 		this.show = function(ql, f) {
 			if (f.hash == ql._hash) {
 				ql.ico.hide();
 				ql.media.append('<embed src="'+f.url+'" style="width:100%;height:'+ql.mediaHeight()+'px" />').show();
 			}
 		}
-		
+
 	},
-	
+
 	pdf : new function() {
-		
+
 		this.test = function(mime, mimes) {
 			return mime == 'application/pdf' && mimes[mime];
 		}
-		
+
 		this.show = function(ql, f) {
 			if (f.hash == ql._hash) {
 				ql.ico.hide();
@@ -2895,7 +2895,7 @@ elFinder.prototype.quickLook.prototype.plugins = {
 			}
 		}
 	}
-	
+
 }
 
 
@@ -2920,9 +2920,9 @@ elFinder.prototype.eventsManager = function(fm, el) {
 	 **/
 	this.init = function() {
 		var self = this, ignore = false;
-		
+
 		self.lock = false;
-		
+
 		this.cwd
 			.bind('click', function(e) {
 				var t = $(e.target);
@@ -2950,7 +2950,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 				if ($.browser.mozilla) {
 					ignore = true;
 				}
-				
+
 
 				if (t.hasClass('el-finder-cwd')) {
 					self.fm.unselectAll();
@@ -2965,11 +2965,11 @@ elFinder.prototype.eventsManager = function(fm, el) {
 				delay  : 300,
 				stop   : function() { self.fm.updateSelect(); self.fm.log('mouseup') }
 			});
-			
-		$(document).bind('click', function(e) { 
-			!ignore && self.fm.ui.hideMenu(); 
+
+		$(document).bind('click', function(e) {
+			!ignore && self.fm.ui.hideMenu();
 			ignore = false
-			$('input', self.cwd).trigger('change'); 
+			$('input', self.cwd).trigger('change');
 
 			if (!$(e.target).is('input,textarea,select')) {
 				$('input,textarea').blur();
@@ -2987,7 +2987,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 			self.tree.find('a').removeClass('selected');
 			$(e.target).addClass('selected').parents('li:has(ul)').children('ul').show().prev().children('div').addClass('expanded');
 		});
-		
+
 		/* make places droppable */
 		if (this.fm.options.places) {
 
@@ -2995,7 +2995,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 				e.preventDefault();
 				var t = $(e.target),
 					h = t.attr('key'), ul;
-				
+
 				if (h) {
 					h != self.fm.cwd.hash && self.ui.exec('open', e.target)
 				} else if (e.target.nodeName == 'A' || e.target.nodeName == 'DIV') {
@@ -3006,7 +3006,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 					}
 				}
 			});
-			
+
 			this.fm.view.plc.droppable({
 				accept    : '(div,tr).directory',
 				tolerance : 'pointer',
@@ -3035,12 +3035,12 @@ elFinder.prototype.eventsManager = function(fm, el) {
 				}
 			});
 		}
-		
+
 		/* bind shortcuts */
-		
+
 		$(document).bind($.browser.mozilla || $.browser.opera ? 'keypress' : 'keydown', function(e) {
 			var meta = e.ctrlKey||e.metaKey;
-			
+
 			if (self.lock) {
 				return;
 			}
@@ -3069,7 +3069,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 					break;
 			}
 		});
-		
+
 
 		$(document).bind($.browser.opera ? 'keypress' : 'keydown', function(e) {
 
@@ -3083,15 +3083,15 @@ elFinder.prototype.eventsManager = function(fm, el) {
 					e.stopPropagation();
 					self.fm.quickLook.toggle();
 					break;
-				/* Esc */	
+				/* Esc */
 				case 27:
 					self.fm.quickLook.hide();
 					break;
 			}
 		});
-		
+
 		if (!this.fm.options.disableShortcuts) {
-			
+
 			$(document).bind('keydown', function(e) {
 				var meta = e.ctrlKey||e.metaKey;
 
@@ -3104,9 +3104,9 @@ elFinder.prototype.eventsManager = function(fm, el) {
 						if (meta && self.ui.isCmdAllowed('rm')) {
 							e.preventDefault();
 							self.ui.exec('rm');
-						} 
+						}
 						break;
-					/* Enter - exec "select" command if enabled, otherwise exec "open" */	
+					/* Enter - exec "select" command if enabled, otherwise exec "open" */
 					case 13:
 						if (self.ui.isCmdAllowed('select')) {
 							return self.ui.exec('select');
@@ -3128,7 +3128,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 					case 67:
 						meta && self.ui.execIfAllowed('copy');
 						break;
-					/* Ctrl+I - get info */	
+					/* Ctrl+I - get info */
 					case 73:
 						if (meta) {
 							e.preventDefault();
@@ -3144,7 +3144,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 						break;
 					/* Ctrl+U - upload files */
 					case 85:
-					
+
 						if (meta) {
 							e.preventDefault();
 							self.ui.execIfAllowed('upload');
@@ -3158,19 +3158,19 @@ elFinder.prototype.eventsManager = function(fm, el) {
 					case 88:
 						meta && self.ui.execIfAllowed('cut');
 						break;
-						
+
 					case 113:
 						self.ui.execIfAllowed('rename');
 						break;
-						
+
 				}
 
 			});
-			
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * Update navigation droppable/draggable
 	 *
@@ -3195,7 +3195,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 				}
 			}
 		});
-		
+
 		$('a:not(.noaccess,.readonly)', this.tree).droppable({
 			tolerance : 'pointer',
 			accept : 'div[key],tr[key]',
@@ -3205,7 +3205,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 		});
 		this.fm.options.places && this.updatePlaces();
 	}
-	
+
 	/**
 	 * Update places draggable
 	 *
@@ -3223,12 +3223,12 @@ elFinder.prototype.eventsManager = function(fm, el) {
 			}
 		});
 	}
-	
+
 	/**
 	 * Update folders droppable & files/folders draggable
 	 **/
 	this.updateCwd = function() {
-		
+
 		$('[key]', this.cwd)
 			.bind('dblclick', function(e) {
 				self.fm.select($(this), true);
@@ -3266,7 +3266,7 @@ elFinder.prototype.eventsManager = function(fm, el) {
 				out       : function() { $(this).removeClass('el-finder-droppable'); },
 				drop      : function(e, ui) { $(this).removeClass('el-finder-droppable'); self.fm.drop(e, ui, $(this).attr('key')); }
 			});
-			
+
 		if ($.browser.msie) {
 			$('*', this.cwd).attr('unselectable', 'on')
 				.filter('[key]')
@@ -3275,20 +3275,20 @@ elFinder.prototype.eventsManager = function(fm, el) {
 		}
 
 	}
-	
+
 	/**
-	 * Move selection in current dir 
+	 * Move selection in current dir
 	 *
 	 * @param Boolean  move forward?
 	 * @param Boolean  clear current selection?
 	 **/
 	function moveSelection(forward, reset) {
 		var p, _p, cur;
-		
+
 		if (!$('[key]', self.cwd).length) {
 			return;
 		}
-		
+
 		if (self.fm.selected.length == 0) {
 			p = $('[key]:'+(forward ? 'first' : 'last'), self.cwd);
 			self.fm.select(p);
@@ -3328,12 +3328,12 @@ elFinder.prototype.eventsManager = function(fm, el) {
 						}
 					}
 				}
-			} 
+			}
 		}
 		self.pointer = p.attr('key');
 		self.fm.checkSelectedPos(forward);
 	}
-	
+
 }
 
 })(jQuery);
