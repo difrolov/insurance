@@ -1,4 +1,5 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/editMenu.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/object.js"></script>
 
 <div class="mainmenu_button">
 	<p>

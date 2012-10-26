@@ -22,8 +22,16 @@
 					self::makeArrayForSelect($items[$i]['items'],$section_id);
 			}
 		}
-
-		function getAllArticlesList($art_level='child'){
+/**
+ *
+ *
+ *	Получить список всех статей
+ */		
+		function getAllArticlesList(){
+			return Yii::app()->db->createCommand("SELECT * FROM insur_article_content WHERE `status` > 0 ")->queryAll();
+		}
+		// отличный метод, который пока не используется, т.к. выяснилось, что нужен не он, а другой...
+		function getAllSections($art_level='child'){
 			$sql='
 			SELECT id,
 				   name,
