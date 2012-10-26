@@ -440,4 +440,3 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 </form>
 </div>
 <?php $this->endWidget(); ?>
->>>>>>> origin/AdminLocal
