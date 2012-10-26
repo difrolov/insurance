@@ -440,24 +440,3 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 </form>
 </div>
 <?php $this->endWidget(); ?>
-<<<<<<< HEAD
-<script type="text/javascript">
-
-/*$(document).ready(function(){
-});*/
-
-function submit_editor_form(){
-  try{
-	//var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
-	var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].length);
-	alert(eText);
-	/*$("button#saveModuleText").click( function(){
-		alert('THE TEXT IS: eText');
-	});*/
-  }catch(e){
-	  alert();
-  }
-}
-</script>
-=======
->>>>>>> origin/AdminLocal
