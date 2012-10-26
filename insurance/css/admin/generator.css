@@ -239,9 +239,12 @@ div#tmplPlace div.column{
 div#tmplPlace div.column > div{
 	padding:6px;
 }
+.txtRed{
+	color:#F00;
+}
 
 /*	СТИЛИ СХЕМЫ МАКТЕТА	*/
-div[footer]{
+div[data-block-type="footer"]{
 	border-top:dashed 2px #08C;
 }
 
@@ -267,11 +270,11 @@ div[class*="left"]{
 	border-right:dashed 2px #08C;
 }
 
-div.hf4Inside[footer]{
+div.hf4Inside[data-block-type="footer"]{
 	margin-right:2px; /*	иначе - непонятный косяк с нижним блоком (псевдофутером) для 4-х колонок	*/
 }
 
-div.column4[right]{
+div.column4[data-block-type="right"]{
 	border-right: none;
 }
 
@@ -285,18 +288,18 @@ div.hColShort{
 	height:268px;/*110	+++*/
 }
 
-div[header]{
+div[data-block-type="header"]{
 	border-bottom:dashed 2px #08C;
 }
 
-div[header]{
+div[data-block-type="header"]{
 	height:72px;/*32*/
 }
-div[footer]{
+div[data-block-type="footer"]{
 	height:232px;/*32*/
 }
 div.hFull,
-div[left]{
+div[data-block-type="left"]{
 	height:592px;/*192*/
 }
 
@@ -317,7 +320,7 @@ div.column4,
 div.column3center,
 div.header3inside,
 div[class*="left"],
-div[header]{
+div[data-block-type="header"]{
 	float:left;
 }
 
@@ -339,10 +342,10 @@ div.left2{
 	width:322px;/*91	+++*/
 }
 
-div[right], 
+div[data-block-type="right"], 
 div.right2,
 div.column4last,
-div[footer]{
+div[data-block-type="footer"]{
 	float:right;
 }
 
