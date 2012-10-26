@@ -33,11 +33,13 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
-
-
-
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/handle_text_module.php?base_url=<?
+	echo Yii::app()->request->baseUrl;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/customize_page.js"></script>
-	<?
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/data_ready_to_send.php?base_url=<?
+	echo Yii::app()->request->baseUrl;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>	<?
 
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>

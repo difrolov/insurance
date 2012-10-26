@@ -51,7 +51,7 @@ dd { margin-left: 0px; padding-left: 1em; }
 .redefinitions { font-size: 8pt; padding-left: 0em; margin-left: 2em; }
 .package {  }
 .package-title { font-weight: bold; font-size: 14pt; border-bottom: 1px solid black }
-.package-details { font-size: 85%; }
+.package-details { font-size: 120%; }
 .sub-package { font-weight: bold; font-size: 120% }
 .tutorial { border-width: thin; border-color: #0066ff }
 .tutorial-nav-box { width: 100%; border: 1px solid #AAAAAA; background: #EEEEEE url(bg_left.png) repeat; }

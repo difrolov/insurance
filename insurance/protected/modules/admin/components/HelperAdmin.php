@@ -4,11 +4,11 @@
 		static $arrMenuItems;
 		static $MainMenu;
 		static $SubMenu;
-		/**
-		  * Получить массивы для списков: основные разделы, подразделы
-		  * @package content
-		  * @subpackage HTML
-		  */
+/**
+  * Получить массивы для списков: основные разделы, подразделы
+  * @package content
+  * @subpackage HTML
+  */
 		function makeArrayForSelect($items,$level=false){
 			for ($i=0,$j=count($items);$i<$j;$i++) {
 				$aURL=explode("/",$items[$i]['url'][0]);
@@ -21,6 +21,35 @@
 				if (isset($items[$i]['items']))
 					self::makeArrayForSelect($items[$i]['items'],$section_id);
 			}
+		}
+
+		function getAllArticlesList($art_level='child'){
+			$sql='
+			SELECT id,
+				   name,
+				   `status`,';
+			if ($art_level===false)
+				$sql.=' 
+    if (parent_id<0,null,
+        (SELECT name FROM insur_insurance_object  
+        WHERE id = i2.parent_id)
+    ) AS parent 
+    FROM insur_insurance_object as i2
+ORDER BY name,parent'; 
+			else
+				$sql.='parent_id'.($art_level=='main')? 
+			' 
+    FROM insur_insurance_object 
+WHERE parent_id < 0
+ORDER BY parent_id DESC':
+			',
+    (   SELECT name FROM insur_insurance_object  
+        WHERE id = i2.parent_id
+    ) AS parent_name 
+    FROM insur_insurance_object as i2
+WHERE parent_id >= 0
+ORDER BY name, parent_name';
+			return Yii::app()->db->createCommand($sql)->queryAll();
 		}
 
 		//получить многоуровневое меню из базы
