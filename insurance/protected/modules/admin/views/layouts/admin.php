@@ -30,9 +30,13 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
 <?	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.php"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php?base_url=<?
+	echo Yii::app()->request->baseUrl;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php?base_url=<?
+	echo Yii::app()->request->baseUrl;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/handle_text_module.php?base_url=<?
 	echo Yii::app()->request->baseUrl;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>

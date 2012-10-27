@@ -1,4 +1,6 @@
-<?	if (isset($dwshow)){?><script><? }
+<?	$url=$_GET['base_url'];
+	$test=$_GET['test'];
+if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
 //
@@ -414,9 +416,10 @@ function createLayout(){
 		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
-	// прописать количество блоков макета в тестовом блоке:
-	test_addBlocks();
-	
+<?	if (isset($test)){?>		
+		// прописать количество блоков макета в тестовом блоке:
+		test_addBlocks();
+<?	}?>	
   }catch(e){
 	  alert(e.message);
   }
@@ -445,7 +448,9 @@ function loadLayout(){
 function saveSubHeader(iValue){
 	//alert(iValue);
 	Layout.blocks[2]+=':'+iValue;
+<?	if (isset($test)){?>		
 	test_setSubHeader(iValue);
+<?	}?>	
 }
 <?	
 $myscript=ob_get_contents();

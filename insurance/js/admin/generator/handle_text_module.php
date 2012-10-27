@@ -15,12 +15,16 @@ $(document).ready(function(){
 		.appendTo($('div[data-target="load_in_editor"]'))
 		.css({
 			display:'block',
-			height:'248px',
-			left:'10px',
-			top:'-262px',
-			width:'93%'
+			maxHeight:'500px',
+			left:this.offset().left+'px',
+			top:this.offset().top+30+'px',
+			//width:'93%'
 		})
 		.fadeIn(150);
+	});
+	$('div.innerModule').click(
+		function(){
+			alert($(this).find('a').size());
 	});
 	$('td[data-article-id]').mouseover( function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
@@ -63,7 +67,7 @@ function addTextModuleComLinks(content){
 		href:"#",
 		click: function(){
 				window.textTarget='editor';
-				// identifyTextBlock(this);
+				identifyTextBlock(this);
 			},
 	}).attr({
 		'data-toggle':'modal',
@@ -73,45 +77,23 @@ function addTextModuleComLinks(content){
 	$(content).append(' или ');
 
 	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
-	var aTableBar=$('table#tblArticles tbody tr:first-child');
 	// command 1: add text as an existing article (editing is disabled)
 	$('<a>',{
 		text:"выберите из имеющихся статей",
 		title:"Выбрать из имеющихся статей",
 		click:	function(){
 			window.textTarget='ready';
-			identifyTextBlock(this);
-			
+			identifyTextBlock(this);			
 			$('#tblArticles').css('width','auto');
 			var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
-
 			$(aTable).css({
 				display:'inline-block',
-				width:'auto'
-			});
-
-			var pDivTop=$(aParent).offset().top;
-
-			$(aTable)
-				.show()
-				.appendTo('body');
-			var tWidth=$(aTable).width();
-			var pLeft=($(document).width()-tWidth)/2;
-			$(aTable).css({
-				top: pDivTop+10+'px',
-				left: pLeft+5+'px',
-				bottom:'0'
-			}).resizable();
-			/*$(aTableBar)
-				.mouseover()
-				.css('cursor','move')
-				.mousedown(
-					function(){
-						$(aTable).draggable();
-				});*/
+				top: $(this).offset().top+20+'px'
+			}).show()
+			.appendTo('body')
+			.resizable();
 		}
 	}).appendTo(content);
-	$(aTableBar).mouseout();
 }
 //
 function articlePreview(artID,eSrc){

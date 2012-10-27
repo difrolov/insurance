@@ -1,4 +1,5 @@
-﻿<?
+﻿<?	$url=$_GET['base_url'];
+	$test=$_GET['test'];
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 tBlock=false; // здесь будет сохраняться активный блок (объект)
@@ -23,23 +24,36 @@ function addModuleIntoBlock(event,divBlock){
 			}
 			bi++;
 		}
+<?	if (isset($test)){?>		
 		// добавить данные в тестовый блок:
 		test_setModuleToTestBlock(cIndex,dataModuleType);
-		var newModule=document.createElement(srcEl.tagName); // добавленный в колонку модуль
-		tBlock.appendChild(newModule); 
-		var content=document.createElement('div');
-		var remove=document.createElement('div');
-		newModule.appendChild(content);
-		newModule.appendChild(remove);
-		content.innerHTML=srcEl.innerHTML;
-		// скопировать атрибут типа модуля:
-		$(content).attr('data-module-type',dataModuleType);
-		
-		remove.innerHTML='<a href="#" onClick="removeModule(this);return false;"><img src="<?=$_GET['base_url']?>/images/trash.gif" border="0" title="Удалить модуль из колонки"></a>';
-		$(newModule).attr({
+<?	}?>		
+		var newModule=$('<div>').appendTo(tBlock).attr({
 			class:'innerModule',
-			title:'Можно перемещать вверх-вниз...'
-		});
+			title:'Можно перемещать вверх-вниз...',
+		}).css('cursor','move')
+		  .append($('<div>').attr({
+				class:'mod_trash'
+			}).css('cursor','pointer')
+			  .append(
+				$('<a>',{
+					href:'#',
+					click:function(){
+						removeModule(this);
+						return false;
+					}
+				}).append(
+					$('<img>',{
+						src:"<?=$_GET['base_url']?>/images/trash.gif",
+						title:"Удалить модуль из колонки"
+					}).css('border','0'))));
+		
+		var content=$('<div>').appendTo(newModule)
+							  .html($(srcEl).html())
+							  .attr({
+								  'data-module-type':dataModuleType,
+								  class:'mod_content'
+								});
 		if ($(srcEl).attr('class')=='mod_type_text'){
 			var cPadding=parseInt($(newModule).css('padding-top').replace("px", ""));
 			$(newModule).css({
@@ -51,14 +65,6 @@ function addModuleIntoBlock(event,divBlock){
 			// добавить ссылки (команды добавления текста/статьи) в текстовый модуль:
 			addTextModuleComLinks(content);
 		}
-		$(newModule).css('cursor','move');
-
-			$(content).attr('class','mod_content');
-			$(remove).attr({
-				class:'mod_trash',
-				cursor:'pointer'
-			});
-
 		$('#pick_out_section').fadeIn(2000);
 	}
   }catch(e){
