@@ -49,7 +49,7 @@ function addModuleIntoBlock(event,divBlock){
 					}).css('border','0'))));
 		
 		var content=$('<div>').appendTo(newModule)
-							  .html($(srcEl).html())
+							  .text($(srcEl).text())
 							  .attr({
 								  'data-module-type':dataModuleType,
 								  class:'mod_content'

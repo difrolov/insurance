@@ -10,25 +10,13 @@ $(document).ready(function(){
 		.draggable()
 		.resizable();
 <?	}?>
-	$('#upload_article').click( function(){
-	$('div#upload_article_window')
-		.appendTo($('div[data-target="load_in_editor"]'))
-		.css({
-			display:'block',
-			maxHeight:'500px',
-			left:this.offset().left+'px',
-			top:this.offset().top+30+'px',
-			//width:'93%'
-		})
-		.fadeIn(150);
-	});
-	$('div.innerModule').click(
-		function(){
-			alert($(this).find('a').size());
-	});
 	$('td[data-article-id]').mouseover( function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
+	$('#upload_article').click( function(){
+		showArticlesTable(this);
+	});
+
 	// загрузить текст статьи в редактор, либо указать её id в случае, если хотим оставить её без изменений
 	$('td[data-article-id]').dblclick(function(e) {
 		// textTarget:
@@ -177,6 +165,18 @@ function identifyTextBlock(obj){
 	Layout.blocks.moduleClickedLocalIndex=$(curColumn).children('div').index(curModule); // индекс модуля
 	Layout.blocks.moduleClickedLocalIndex=$(curColumn).index($(obj.parentNode.parentNode));
 	//alert('moduleClickedBlockIndex: '+moduleClickedBlockIndex+'\nmoduleClickedLocalIndex: '+moduleClickedLocalIndex);
+}
+//
+function showArticlesTable(obj){
+	$('div#upload_article_window')
+		.appendTo($('div[data-target="load_in_editor"]'))
+		.css({
+			display:'block',
+			maxHeight:'500px',
+			left:obj.offset().left+'px',
+			top:obj.offset().top+30+'px',
+			//width:'93%'
+		}) .fadeIn(150);
 }
 //
 function PickOutTextContent(obj){
