@@ -31,6 +31,7 @@ class ObjectController extends Controller
 
 	//отображаем статьи
 	public function actionUpdate(){
+
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
@@ -43,7 +44,7 @@ class ObjectController extends Controller
 			//таблица для отображения
 			$model = new InsurArticleContent();
 			$gridDataProvider = $model->search('object_id='.$_GET['id']);
-			$this->render('update',array('gridDataProvider'=>$gridDataProvider));
+			$this->render('update',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
 		}
 	}
 
@@ -74,12 +75,29 @@ class ObjectController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		if(isset($_POST['InsurArticleContent'])){
+		if(isset($_GET['id'])){
 			$model = InsurInsuranceObject::model()->find(array('condition'=>"id=".$_GET['id']));
 			if(isset($model->content)){
 				$model->status = 0;
 				$model->save();
 			}
+		}
+
+	}
+	public function actionSetContent(){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		if (isset($_POST['InsurArticleContent'])){
+			$model = new InsurArticleContent;
+			$model->content = $_POST['InsurArticleContent']['content'];
+			$model->created = date("Y-m-d h:i:s");
+			$model->status = 1;
+			$model->name = @$_POST['name_content'];
+			$model->insur_coworkers_id = Yii::app()->user->id;
+			$model->object_id = @$_POST['object_id'];
+			$model->save();
+			$this->redirect('Update/'.$_POST['object_id']);
 		}
 	}
 
