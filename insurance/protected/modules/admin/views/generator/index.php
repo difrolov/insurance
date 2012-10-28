@@ -160,7 +160,7 @@ div#upload_article_window{
 	box-shadow: 0 0 30px 0 #666;
 	padding:4px; 
 	position:absolute; 
-	z-index:1; 
+	z-index:3000; 
 	display:<?="none"?>; 
 }
 table#tblArticles {

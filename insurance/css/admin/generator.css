@@ -134,7 +134,7 @@ div.fourColumnShared{
 div#txtActions > div:first-child +div,
 div#txtActions > div:last-child{ /*	вверх не переносить, иначе возникнет конфликт отображения блока!*/
 	margin-top:-4px;
-display:none; 
+	display:none; 
 }
 div#currentChoice{
 	background:#CEEFFF;

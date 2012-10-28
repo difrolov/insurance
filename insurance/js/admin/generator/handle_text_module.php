@@ -48,6 +48,7 @@ function addArticle(artID){
 //
 function addTextModuleComLinks(content){
 	$(content).append(': ');
+	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
 	// command 1: add text through editor
 	$('<a>',{
 		text:"добавьте произвольное содержание",
@@ -56,6 +57,14 @@ function addTextModuleComLinks(content){
 		click: function(){
 				window.textTarget='editor';
 				identifyTextBlock(this);
+				$(aTable).appendTo($('a#upload_article').parent())
+				.css({
+					maxHeight:'500px',
+					// отсчитывается от родительского блока ссылки:
+					top:'initial',
+					left:'2px', 
+					bottom:'36px'
+				});
 			},
 	}).attr({
 		'data-toggle':'modal',
@@ -64,7 +73,6 @@ function addTextModuleComLinks(content){
 
 	$(content).append(' или ');
 
-	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
 	// command 1: add text as an existing article (editing is disabled)
 	$('<a>',{
 		text:"выберите из имеющихся статей",
@@ -73,9 +81,9 @@ function addTextModuleComLinks(content){
 			window.textTarget='ready';
 			identifyTextBlock(this);			
 			$('#tblArticles').css('width','auto');
-			var aParent=this.parentNode.parentNode.parentNode; // контейнер макета
 			$(aTable).css({
 				display:'inline-block',
+				left:$(this).offset().left+$(this).width()+'px',
 				top: $(this).offset().top+20+'px'
 			}).show()
 			.appendTo('body')
@@ -166,25 +174,16 @@ function identifyTextBlock(obj){
 	Layout.blocks.moduleClickedLocalIndex=$(curColumn).index($(obj.parentNode.parentNode));
 	//alert('moduleClickedBlockIndex: '+moduleClickedBlockIndex+'\nmoduleClickedLocalIndex: '+moduleClickedLocalIndex);
 }
-//
-function showArticlesTable(obj){
-	$('div#upload_article_window')
-		.appendTo($('div[data-target="load_in_editor"]'))
-		.css({
-			display:'block',
-			maxHeight:'500px',
-			left:obj.offset().left+'px',
-			top:obj.offset().top+30+'px',
-			//width:'93%'
-		}) .fadeIn(150);
+// отобразить таблицу выбора статей
+function showArticlesTable(){
+	$('div#upload_article_window').css({
+			display:'inline-block',
+		}).fadeIn(150);
 }
 //
 function PickOutTextContent(obj){
   try{
 	alert($(obj).html());
-	//var aTable=$('div#upload_article_window');
-	//$(aTable).show();
-	//$(obj.parentNode.parentNode).append(aTable);
   }catch(e){
 	alert(e.message);
   }
