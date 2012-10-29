@@ -59,14 +59,26 @@ function addArticleIdOrTextToModule(artID,text){
 function addArticleTextToEditor(artBox,artID){
 	//alert();
 	// получили либо html, либо содержащий его контейнер
-	if (artBox) {
-		htmlContent=$('#'+artBox).html();
-		CKEDITOR.instances['InsurArticleContent[content]'].setData(htmlContent);
-	}
+	if (artBox) 
+		addTextIntoEditor($('#'+artBox).html());
 	else if (artID) getArticleTextFromDB(false,artID);
-	//htmlContent=getArticleTextFromDB(artID);
 	// закрыть окна предпросмотра текста и таблицы статей:
 	hideArticlesStuff(true); // окно редактора оставляем открытым
+}
+// добавить либо текст, либо ID статьи
+function addArtText( artBox, // id поля с текстом предпросматриваемой статьи
+					 artID // id предпросматриваемой статьи
+				   ){ //alert(window.textTarget);
+	// распарсить блок с модулем, распарсить модуль и модифицировать значение текстового блока
+	if(window.textTarget=='ready'){ // добавляли ID существующей статьи
+		addArticleIdOrTextToModule(artID);	
+	}else if(window.textTarget=='editor'){
+		addArticleTextToEditor(artBox);
+	} //alert(document.getElementById('myModal').style.display);
+}
+// добавить текст в поле редактора
+function addTextIntoEditor(content){
+	CKEDITOR.instances['InsurArticleContent[content]'].setData(content);
 }
 // добавить ссылки (команды) добавления текста (собственно текст или id статьи)
 function addTextModuleComLinks(content){
@@ -114,6 +126,63 @@ function addTextModuleComLinks(content){
 		}
 	}).appendTo(content);
 }
+// получить текст статьи из БД ajax'ом
+function getArticleTextFromDB(fieldToPlace,artID){
+	// POST
+	var goUrl=getLoadAjaxPath();
+	var uData="article_id="+artID+"&do=preview";
+<?	$t=false;
+	if ($t){?>
+	window.open(goUrl+'/?'+uData,'ajax');
+<?	}?>
+	$(fieldToPlace).val('...получение текста статьи...');
+	var amessage=false
+	$.ajax({
+		type:"POST",
+		url:goUrl,
+		data:uData,
+		success: function(msg){
+			if (fieldToPlace)
+				$('div#'+fieldToPlace).html(msg);
+			else
+				addTextIntoEditor(msg);
+		}
+	});
+}
+// получить № блока
+function getBlockNumber(curColumn){
+	return $('div#tmplPlace > div > div').index(curColumn)+1;
+}
+//
+function getDataFromCKeditor(){
+  try{
+	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
+	//alert(eText);
+	// добавить к текстовому модулю текст статьи
+	addArticleIdOrTextToModule(false,eText);
+  }catch(e){
+	  alert(e.message);
+  }
+}
+// вернуть путь отправки Ajax-запроса
+function getLoadAjaxPath(){
+	return "<?=$base_url?>/admin/ajax/makeartpreview";
+}
+// получить индекс модуля
+function getModuleIndex(curColumn,curModule){
+	return $(curColumn).children('div').index(curModule);
+}
+// спрятать окна предпросмотра, таблицы готовых статей и редактора:
+function hideArticlesStuff(keep_editor_open){
+	$('div#upload_article_window').hide(); // art table
+	$('div#article_preview_text').hide();
+	if (!keep_editor_open) $('a.close[data-dismiss="modal"]').trigger('click');
+}
+// идентифицировать текстовый модуль
+// идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи
+function identifyTextBlock(obj){
+	storeLayoutBlockData(obj.parentNode.parentNode);
+}
 // загрузить статью в область редактора - с предпросмотром или без
 // ТОЛЬКО В РЕДАКТОРЕ!
 function manageArticleText( artID,
@@ -145,74 +214,6 @@ function manageArticleText( artID,
   }catch(e){
 	  alert(e.message);
   }
-}
-// добавить либо текст, либо ID статьи
-function addArtText( artBox, // id поля с текстом предпросматриваемой статьи
-					 artID // id предпросматриваемой статьи
-				   ){ //alert(window.textTarget);
-	// распарсить блок с модулем, распарсить модуль и модифицировать значение текстового блока
-	if(window.textTarget=='ready'){ // добавляли ID существующей статьи
-		addArticleIdOrTextToModule(artID);	
-	}else if(window.textTarget=='editor'){
-		addArticleTextToEditor(artBox);
-	} //alert(document.getElementById('myModal').style.display);
-}
-// получить текст статьи из БД ajax'ом
-function getArticleTextFromDB(fieldToPlace,artID){
-	// POST
-	var goUrl=getLoadAjaxPath();
-	var uData="article_id="+artID+"&do=preview";
-<?	$t=false;
-	if ($t){?>
-	window.open(goUrl+'/?'+uData,'ajax');
-<?	}?>
-	$(fieldToPlace).val('...получение текста статьи...');
-	var amessage=false
-	$.ajax({
-		type:"POST",
-		url:goUrl,
-		data:uData,
-		success: function(msg){
-			if (fieldToPlace)
-				$('div#'+fieldToPlace).html(msg);
-			else
-				CKEDITOR.instances['InsurArticleContent[content]'].setData(msg);
-		}
-	});
-}
-//
-function getDataFromCKeditor(){
-  try{
-	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
-	//alert(eText);
-	// добавить к текстовому модулю текст статьи
-	addArticleIdOrTextToModule(false,eText);
-  }catch(e){
-	  alert(e.message);
-  }
-}
-// вернуть путь отправки Ajax-запроса
-function getLoadAjaxPath(){
-	return "<?=$base_url?>/admin/ajax/makeartpreview";
-}
-// спрятать окна предпросмотра, таблицы готовых статей и редактора:
-function hideArticlesStuff(keep_editor_open){
-	$('div#upload_article_window').hide(); // art table
-	$('div#article_preview_text').hide();
-	if (!keep_editor_open) $('a.close[data-dismiss="modal"]').trigger('click');
-}
-// идентифицировать текстовый модуль
-// идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи
-function identifyTextBlock(obj){
-	storeLayoutBlockData(obj.parentNode.parentNode);
-}
-// получить № блока
-function getBlockNumber(curColumn){
-	return $('div#tmplPlace > div > div').index(curColumn)+1;
-}
-// получить индекс модуля
-function getModuleIndex(curColumn,curModule){
-	return $(curColumn).children('div').index(curModule);
 }
 // добавить в текстовый модуль идентификатор типа контента (id статьи/текст):
 function setTextContentIdentifier(artID){
