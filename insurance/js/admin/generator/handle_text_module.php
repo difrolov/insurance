@@ -39,7 +39,8 @@ $(document).ready(function(){
 // модифицировать текстовый модуль - добавить либо id, либо текст статьи
 function addArticleIdOrText(artID,text){
   try{ 	
-	alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+	var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
 	// распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
 	// добавить служебный разделитель после "Текст" и идентификатор типа контента как id статьи, если получили artID:
@@ -49,33 +50,6 @@ function addArticleIdOrText(artID,text){
 	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
-	
-	
-	
-	
-	
-	
-	
-	// получить блок макета:
-	//var LayoutTextBlock=Layout.blocks[Layout.blocks.moduleClickedBlockNumber];
-	// получить модуль блока:
-	//var LayoutTextModuleContent=LayoutTextBlock[Layout.blocks.moduleClickedLocalIndex];
-	
-	// artID: 		2
-	// Block # 		1	//	Layout.blocks.moduleClickedBlockNumber
-		// готовое решение
-		// текст
-		// случайная статья
-	// mod Index	0	//	Layout.blocks.moduleClickedLocalIndex
-	
-	// добавить служебный разделитель после "Текст" и идентификатор типа контента как id статьи, если получили artID:
-	//LayoutTextModuleContent="Текст"+setTextContentIdentifier(artID);
-	//if (!artID) // если ID статьи не передавали, стало быть, она новая; добавим её текст:
-		//LayoutTextModuleContent+=text;
-<?	if (isset($_GET['test'])){?>
-	//alert('LayoutTextModuleContent= '+LayoutTextModuleContent);
-	//test_parseLayout();
-<?	}?>
 	// закрыть таблицу с готовыми статьями и область предпросмотра статьи:
 	hideArticlesStuff();
   }catch(e){
@@ -128,7 +102,7 @@ function addTextModuleComLinks(content){
 		}
 	}).appendTo(content);
 }
-// загрузить статью в область предпросмотра
+// загрузить статью в область предпросмотра или непосредственно в текстовый модуль
 function manageArticleText(artID,eSrc){
   try{
 	// POST
@@ -159,8 +133,8 @@ function manageArticleText(artID,eSrc){
 					zIndex:3001
 				}).draggable();
 			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\','+msg+','+artID+');">Вставить</button></div></div>');
-		  }else{ // если без предпросмотра - сразу вставляем текст в поле редактора
-			  addArticleIdOrText(artID,msg);
+		  }else{ // если БЕЗ предпросмотра, дважды клацали по названию статьи:
+			  addArticleIdOrText(artID,msg);// добавить текст непосредственно в текстовый модуль
 		  }
 		}
 	 });
@@ -203,10 +177,11 @@ function getDataFromCKeditor(){
 function getLoadAjaxPath(){
 	return "<?=$base_url?>/admin/ajax/makeartpreview";
 }
-// спрятать окна предпросмотра и таблицы готовых статей:
+// спрятать окна предпросмотра, таблицы готовых статей и редактора:
 function hideArticlesStuff(){
 	$('div#upload_article_window').hide(); // art table
 	$('div#article_preview_text').hide();
+	$('a.close[data-dismiss="modal"]').trigger('click');
 }
 // идентифицировать текстовый модуль
 // идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи

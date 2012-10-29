@@ -36,16 +36,13 @@ function test_parseLayout(obj){
 				pContent+='			<div class="padding10 borderRadius bgLightGrey">';
 			if (ob.indexOf('moduleClicked')==-1){ 
 				var arrObj;
-				if (ob!="Schema")
-					alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
-				
+				//if (ob!="Schema") alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
 				if (currentObj.indexOf("|")!=-1)
 					var	arrObj=currentObj.split("|");
 				else arrObj=new Array(currentObj);
 				
 				for(i=0;i<arrObj.length;i++)
 					pContent+='			<div>'+arrObj[i]+'</div>';
-				
 			}else{
 				pContent+='			<div style="background:#CEEFFF; padding:10px; margin:-10px;">'+ob+': '+currentObj+'</div>';
 			}
