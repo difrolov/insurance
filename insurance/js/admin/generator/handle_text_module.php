@@ -30,7 +30,7 @@ $(document).ready(function(){
 			// получить текст статьи (ajax), загрузить в модуль и Layout:
 			manageArticleText(article_id);
 		}
-		alert('textTarget: '+window.textTarget);
+		//alert('textTarget: '+window.textTarget);
     });
   }catch(e){
 	alert(e.message);
@@ -170,7 +170,7 @@ function getDataFromCKeditor(){
 	// добавить к текстовому модулю текст статьи
 	addArticleIdOrText(false,eText);
   }catch(e){
-	  alert();
+	  alert(e.message);
   }
 }
 // вернуть путь отправки Ajax-запроса

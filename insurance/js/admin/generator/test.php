@@ -24,23 +24,30 @@ function test_parseLayout(obj,ins){
 	// Layout.blocks[block] - значение элемента
 	// obj 		- объект
 	// ob		- свойство объекта
-	// obj[ob] 	- значение свойства (литерал) объекта
+	// currentObj[ob] 	- значение свойства (литерал) объекта
 	var toPlace=document.getElementById('obj_place');
 	toPlace.innerHTML='';
 	for(var ob in obj){
 		var currentObj=obj[ob];
 		if (typeof(currentObj)=='object'){
 			toPlace.innerHTML+='<div>Блок '+ob+':</div>';
-				test_parseLayout(currentObj,true);
+			test_parseLayout(currentObj,true);
 			//toPlace.innerHTML+='</div>';
-		}else{ 
+		}else if (ob.indexOf('moduleClicked')==-1){ 
 			var nclass=ins? 'rd2':'rd';
 			var pContent='<div>';
 			pContent+='		<div class="padding10 borderRadius marginBottom4">Блок '+ob+':';
 			pContent+='			<div class="padding10 borderRadius bgLightGrey">';
-			var arrObj=currentObj.split("|");
+			//var arrObj;
+			alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
+			
+			//if (currentObj.indexOf("|")!=-1)
+			var	arrObj=currentObj.split("|");
+			//else arrObj=new Array(currentObj);
+			
 			for(i=0;i<arrObj.length;i++)
 				pContent+='			<div>'+arrObj[i]+'</div>';
+			
 			pContent+='			</div>';
 			pContent+='		</div>';
 			pContent+='</div>';
