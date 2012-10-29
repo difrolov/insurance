@@ -447,7 +447,8 @@ function loadLayout(){
 // сохранить подзаголовок
 function saveSubHeader(iValue){
 	//alert(iValue);
-	Layout.blocks[2]+=':'+iValue;
+	Layout.blocks[2]='header';
+	if (iValue!=" ") Layout.blocks[2]+=':'+iValue;
 <?	if (isset($test)){?>		
 	test_setSubHeader(iValue);
 <?	}?>	

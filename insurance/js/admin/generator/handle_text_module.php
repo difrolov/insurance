@@ -22,14 +22,13 @@ $(document).ready(function(){
 		// textTarget:
 		// ready - намеревались вставить существующую статью;
 		// editor - произвольный текст через редактор (даже если добавляли туда уже существующую)
+		var article_id=$(this).attr('data-article-id');
 		if (window.textTarget=='ready'){ // будем добавлять id статьи в объект Layout
-			// получить идентификатор модуля-источника события:
-
-
-		}else if (window.textTarget=='editor'){ // будем добавлять ТЕКСТ статьи в поле редактора
-
-
-
+			// добавить id статьи в Layout и тестовый блок:
+			addArticleIdOrText(article_id);
+		}else if (window.textTarget=='editor'){ // будем добавлять ТЕКСТ статьи в модуль
+			// получить текст статьи (ajax), загрузить в модуль и Layout:
+			manageArticleText(article_id);
 		}
 		alert('textTarget: '+window.textTarget);
     });
@@ -37,15 +36,30 @@ $(document).ready(function(){
 	alert(e.message);
   }
 });
-//
-function addArticle(artID){
-  try{ //alert('addTextContent');
-	articlePreview(artID);
+// модифицировать текстовый модуль - добавить либо id, либо текст статьи
+function addArticleIdOrText(artID,text){
+  try{ 	
+    var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
+	alert('artBox: '+artBox+'\nhtmlContent: '+htmlContent+'\nartID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+	// получить текстовый блок в виде массива:
+	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
+	// добавить id статьи:
+	arrBlockContentArray[ModuleIndex]+=setTextContentIdentifier(artID);
+	if (!artID) // если ID статьи не передавали, стало быть, она новая; добавим её текст:
+		arrBlockContentArray[ModuleIndex]+=text;
+	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
+							arrBlockContentArray // распарсенный и обработанный массив текстового блока
+						  );
+	// закрыть таблицу с готовыми статьями и область предпросмотра статьи:
+	hideArticlesStuff();
+<?	if (isset($_GET['test'])){?>
+		test_parseLayout();
+<?	}?>	
   }catch(e){
 	  alert(e.message);
   }
 }
-//
+// добавить ссылки (команды) добавления текста (собственно текст или id статьи)
 function addTextModuleComLinks(content){
 	$(content).append(': ');
 	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
@@ -91,8 +105,8 @@ function addTextModuleComLinks(content){
 		}
 	}).appendTo(content);
 }
-//
-function articlePreview(artID,eSrc){
+// загрузить статью в область предпросмотра
+function manageArticleText(artID,eSrc){
   try{
 	// POST
 	var goUrl=getLoadAjaxPath();
@@ -121,9 +135,9 @@ function articlePreview(artID,eSrc){
 					top:ptop-88+'px',
 					zIndex:3001
 				}).draggable();
-			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\',false,'+artID+');">Вставить</button></div></div>');
+			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\','+msg+','+artID+');">Вставить</button></div></div>');
 		  }else{ // если без предпросмотра - сразу вставляем текст в поле редактора
-			  addArtText('html',msg);
+			  addArticleIdOrText(artID,msg);
 		  }
 		}
 	 });
@@ -134,18 +148,17 @@ function articlePreview(artID,eSrc){
 }
 // добавить либо текст, либо ID статьи
 function addArtText(artBox,htmlContent,artID){
-	// получили либо html, либо содержащий его контейнер
-	if (!htmlContent&&htmlContent!==false) 
-		htmlContent=$('#'+artBox).html();
+	// распарсить блок с модулем, распарсить модуль и модифицировать значение текстового блока
 	if(textTarget=='ready'){ // добавляли ID существующей статьи
-		alert('artBox: '+artBox+'\nhtmlContent: '+htmlContent+'\nartID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockIndex+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
-		
-
+		addArticleIdOrText(artID);
 	}else if(textTarget=='editor'){
-			// закрыть окна предпросмотра текста и таблицы статей:
+		// получили либо html, либо содержащий его контейнер
+		if (!htmlContent) 
+			htmlContent=$('#'+artBox).html();
+			
 		CKEDITOR.instances['InsurArticleContent[content]'].setData(htmlContent);
-		$('div#upload_article_window').hide(); // art table
-		$('div#article_preview_text').hide();
+		// закрыть окна предпросмотра текста и таблицы статей:
+		hideArticlesStuff();
 	}
 	//alert(document.getElementById('myModal').style.display);
 }
@@ -153,10 +166,9 @@ function addArtText(artBox,htmlContent,artID){
 function getDataFromCKeditor(){
   try{
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
-	alert(eText);
-	/*$("button#saveModuleText").click( function(){
-		alert('THE TEXT IS: eText');
-	});*/
+	//alert(eText);
+	// добавить к текстовому модулю текст статьи
+	addArticleIdOrText(false,eText);
   }catch(e){
 	  alert();
   }
@@ -164,6 +176,11 @@ function getDataFromCKeditor(){
 // вернуть путь отправки Ajax-запроса
 function getLoadAjaxPath(){
 	return "<?=$base_url?>/admin/ajax/makeartpreview";
+}
+// спрятать окна предпросмотра и таблицы готовых статей:
+function hideArticlesStuff(){
+	$('div#upload_article_window').hide(); // art table
+	$('div#article_preview_text').hide();
 }
 // идентифицировать текстовый модуль
 // идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи
@@ -179,7 +196,7 @@ function showArticlesTable(){
 // сохранить в Layout номер блока и индекс модуля
 function storeLayoutBlockData(curModule){
 	var curColumn=curModule.parentNode;	// колонка
-	Layout.blocks.moduleClickedBlockIndex=getBlockNumber(curColumn); // № блока
+	Layout.blocks.moduleClickedBlockNumber=getBlockNumber(curColumn); // № блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
 }
 // получить № блока
@@ -190,7 +207,12 @@ function getBlockNumber(curColumn){
 function getModuleIndex(curColumn,curModule){
 	return $(curColumn).children('div').index(curModule);
 }
-
+// добавить в текстовый модуль идентификатор типа контента (id статьи/текст):
+function setTextContentIdentifier(artID){
+	var ctype=" :: ";
+	if (artID) ctype+="article id: "+artID;
+	return ctype;
+}
 //
 /*function PickOutTextContent(obj){
   try{

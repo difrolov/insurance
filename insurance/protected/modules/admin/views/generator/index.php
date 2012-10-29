@@ -8,6 +8,29 @@
     <td><h4>event source</h4></td>
     <td><h4>Файл</h4></td>
   </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>преобразовать контент блока (Layout.blocks) в массив:<br>
+    <strong>splitBlockContent(blockNumer);</strong></td>
+    <td>&nbsp;</td>
+    <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>преобразовать контент блока в строку и сохранить в Layout:<br>
+    <strong>saveBlockContentString(blockNumer,tBlock);</strong></td>
+    <td>&nbsp;</td>
+    <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="top">
+    <td colspan="4" style="line-height:1px; padding:0;" bgcolor="#CCCCCC">&nbsp;</td>
+    </tr>
   <tr valign="top">
     <td>&nbsp;</td>
     <td><p>Подготовить схему макета:<br>
@@ -109,10 +132,19 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td>добавить модуль в активную колонку:<br>
-    <strong>addModuleIntoBlock(event,this);</strong></td>
+    <td><p>добавить модуль в активную колонку:<br>
+    <strong>addModuleIntoBlock(event,this);</strong></p></td>
     <td>Кнопка модуля</td>
     <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>добавить модуль в тестовый блок:<br>
+        <strong>test_addModuleToTestBlock(cIndex,dataModuleType);</strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>test.php</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -122,6 +154,13 @@
     </blockquote></td>
     <td>&nbsp;</td>
     <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>загрузить предпросмотр статьи:<br>
+    <strong>manageArticleText();</strong></td>
+    <td>Ссылка (картинка) <strong>Предпросмотр статьи</strong></td>
+    <td>handle_text_module.php</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -446,7 +485,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
       <tr>
         <td><?=($i+1)?></td>
         <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
-        <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
+        <td><a class="view" rel="tooltip" href="#" onClick="return manageArticleText(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
         <td><?=$articles[$i]['status']?></td>
       </tr>
 <?	}?>      

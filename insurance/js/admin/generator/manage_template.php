@@ -26,7 +26,7 @@ function addModuleIntoBlock(event,divBlock){
 		}
 <?	if (isset($test)){?>		
 		// добавить данные в тестовый блок:
-		test_setModuleToTestBlock(cIndex,dataModuleType);
+		test_addModuleToTestBlock(cIndex,dataModuleType);
 <?	}?>		
 		var newModule=$('<div>').appendTo(tBlock).attr({
 			class:'innerModule',
@@ -71,11 +71,33 @@ function addModuleIntoBlock(event,divBlock){
 	  alert(e.message);
   }
 }
+// преобразовать контент блока в массив:
+function splitBlockContent(blockNumer){
+	// attention! blockNumer may be as "footer" as number
+	return Layout.blocks[blockNumer].split("|");
+}
+// преобразовать контент блока в строку и сохранить в Layout:
+function saveBlockContentString(blockNumer,tBlockArray){
+	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
+	Layout.blocks[blockNumer]=tBlockStr;
+	//alert(Layout.blocks[blockNumer]);
+}
 // удалить модуль из колонки визуально и из набора Layout "физически"
 function removeModule(objSrc){ // ссылка
-	$(objSrc.parentNode.parentNode).remove(); // модуль (class="innerModule")
+  try{
+	var Mod=objSrc.parentNode.parentNode; // модуль (class="innerModule")
+	var Block=Mod.parentNode; // блок
 	// найти в активной колонке блок, распарсить его модули и удалить нужный:
-	
+	var blockNumer=getBlockNumber(Block); // № блока
+	var modIndex=getModuleIndex(Block,Mod); // индекс модуля
+	//alert('Удаляем модуль index '+modIndex+'\n---------------\nТекущий набор:\n'+Layout.blocks[blockNumer]);
+	$(Mod).remove(); // удаляем модуль из колонки
+	var tBlockArray=splitBlockContent(blockNumer); // преобразуем в массив
+	tBlockArray.splice(modIndex,1); // удаляем из блока текущий модуль
+	saveBlockContentString(blockNumer,tBlockArray); // преобразуем в строку, сохраняем изменённый состав блока
+  }catch(e){
+	alert(e.message);
+  }
 }
 // выделить фоном активную колонку:
 function selectColumn(event,divBlock){
