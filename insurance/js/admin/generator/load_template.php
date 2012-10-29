@@ -418,7 +418,8 @@ function createLayout(){
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
 <?	if (isset($test)){?>		
 		// прописать количество блоков макета в тестовом блоке:
-		test_addBlocks();
+		//test_addBlocks();
+		test_parseLayout();
 <?	}?>	
   }catch(e){
 	  alert(e.message);
@@ -450,7 +451,7 @@ function saveSubHeader(iValue){
 	Layout.blocks[2]='header';
 	if (iValue!=" ") Layout.blocks[2]+=':'+iValue;
 <?	if (isset($test)){?>		
-	test_setSubHeader(iValue);
+	test_parseLayout();
 <?	}?>	
 }
 <?	

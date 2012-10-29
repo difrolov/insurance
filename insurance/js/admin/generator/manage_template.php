@@ -26,7 +26,8 @@ function addModuleIntoBlock(event,divBlock){
 		}
 <?	if (isset($test)){?>		
 		// добавить данные в тестовый блок:
-		test_addModuleToTestBlock(cIndex,dataModuleType);
+		//test_addModuleToTestBlock(cIndex,dataModuleType);
+		test_parseLayout();
 <?	}?>		
 		var newModule=$('<div>').appendTo(tBlock).attr({
 			class:'innerModule',
@@ -80,6 +81,9 @@ function splitBlockContent(blockNumer){
 function saveBlockContentString(blockNumer,tBlockArray){
 	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
 	Layout.blocks[blockNumer]=tBlockStr;
+<?	if (isset($_GET['test'])){?>
+		test_parseLayout();
+<?	}?>		
 	//alert(Layout.blocks[blockNumer]);
 }
 // удалить модуль из колонки визуально и из набора Layout "физически"

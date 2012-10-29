@@ -140,8 +140,8 @@
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
-      <p>добавить модуль в тестовый блок:<br>
-        <strong>test_addModuleToTestBlock(cIndex,dataModuleType);</strong></p>
+      <p>распарсить Layout и отобразить в тестовом блоке:<br>
+        <strong>test_parseLayout();</strong></p>
     </blockquote></td>
     <td>&nbsp;</td>
     <td>test.php</td>
@@ -301,9 +301,8 @@ td[data-article-id]:hover{
 	<div id="test_block_appearance" class="link">свернуть</div>
 	<h4>Текущие данные создаваемого подраздела:</h4>
     <h5>Схема макета:  <span id="tmpl-shema"></span></h5>
-  	<h5>Блоки/модули:</h5>
-    	<div id="tmpl-blocks"></div>
-      
+  	<h5 class="margin0">Блоки/модули:</h5>
+    <div id='obj_place'></div>
 </div>
 <?php
 	}

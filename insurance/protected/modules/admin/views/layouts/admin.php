@@ -20,7 +20,9 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
-
+<?	if (isset($_GET['test'])):?>    
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/test.css" media="screen, projection" />
+<?	endif;?>    
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?

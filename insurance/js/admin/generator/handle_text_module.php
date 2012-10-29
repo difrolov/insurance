@@ -40,7 +40,7 @@ $(document).ready(function(){
 function addArticleIdOrText(artID,text){
   try{ 	
     var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
-	alert('artBox: '+artBox+'\nhtmlContent: '+htmlContent+'\nartID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
 	// получить текстовый блок в виде массива:
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
 	// добавить id статьи:
@@ -52,9 +52,6 @@ function addArticleIdOrText(artID,text){
 						  );
 	// закрыть таблицу с готовыми статьями и область предпросмотра статьи:
 	hideArticlesStuff();
-<?	if (isset($_GET['test'])){?>
-		test_parseLayout();
-<?	}?>	
   }catch(e){
 	  alert(e.message);
   }
@@ -147,7 +144,10 @@ function manageArticleText(artID,eSrc){
   }
 }
 // добавить либо текст, либо ID статьи
-function addArtText(artBox,htmlContent,artID){
+function addArtText( artBox, // id поля с текстом предпросматриваемой статьи
+					 htmlContent, // текст предпросматриваемой статьи
+					 artID // id предпросматриваемой статьи
+				   ){
 	// распарсить блок с модулем, распарсить модуль и модифицировать значение текстового блока
 	if(textTarget=='ready'){ // добавляли ID существующей статьи
 		addArticleIdOrText(artID);
@@ -213,15 +213,6 @@ function setTextContentIdentifier(artID){
 	if (artID) ctype+="article id: "+artID;
 	return ctype;
 }
-//
-/*function PickOutTextContent(obj){
-  try{
-	alert($(obj).html());
-  }catch(e){
-	alert(e.message);
-  }
-}*/
-
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
 echo $myscript;
