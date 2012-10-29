@@ -1,7 +1,7 @@
 <? 	if (isset($_GET['show_seq'])){
 	// hidden: ?>
 <h4>Последовательность вызова клиентских скриптов:</h4>
-    <table width="100%" border="1" cellspacing="0" cellpadding="8">
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
   <tr bgcolor="#FFCCFF">
     <td><h4>#</h4></td>
     <td><h4>Function</h4></td>
@@ -125,9 +125,31 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
+    <td><a id="storeLayoutBlockData"></a>сохранить в Layout индекс  модуля и номер его родительского блока (колонки):<br>
+    <strong> storeLayoutBlockData(curModule);</strong></td>
     <td>&nbsp;</td>
+    <td>handle_text_module.php</td>
+  </tr>
+  <tr>
     <td>&nbsp;</td>
+    <td><p>сохранить в Layout индекс текстового модуля и номер его родительского блока (колонки):<br>
+    <strong>identifyTextBlock(obj);</strong></p>
+      <blockquote>
+        <p><strong> <a href="#storeLayoutBlockData">storeLayoutBlockData(curModule)</a>;</strong></p>
+    </blockquote></td>
+    <td><p>Ссылки внутри добавленного блока:</p>
+      <ul>
+        <li>&quot;Добавьте произвольное содержание&quot;</li>
+        <li> &quot;Выберите из иеющихся статей&quot;</li>
+      </ul>    </td>
+    <td>handle_text_module.php</td>
+  </tr>
+  <tr>
     <td>&nbsp;</td>
+    <td>удалить модуль из колонки и из Layout:<br>
+    <strong>removeModule(objSrc);</strong></td>
+    <td>&quot;Удалить модуль из колонки&quot;</td>
+    <td>manage_template.php</td>
   </tr>
 </table>
 
@@ -139,7 +161,6 @@ div#article_preview_text{
 	max-height:35%;
 	padding-right:24px;
 	position:fixed;
-	right:5%;
 	z-index:2;
 }
 div#article_preview_text div#wrp{

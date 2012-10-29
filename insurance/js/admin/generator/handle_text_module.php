@@ -94,7 +94,6 @@ function addTextModuleComLinks(content){
 //
 function articlePreview(artID,eSrc){
   try{
-	//alert(artID+' '+eSrc.tagName);
 	// POST
 	var goUrl=getLoadAjaxPath();
 	var uData="article_id="+artID+"&do=preview";
@@ -110,16 +109,19 @@ function articlePreview(artID,eSrc){
 		  if (eSrc)	{ // если с предпросмотром
 			var aPrev=$('div#article_preview_text');
 			//alert(msg);
-			var pleft=$(eSrc).offset().left;
-			var ptop=$(eSrc).offset().top;
-			$(aPrev).css({
-				cursor:'move',
-				display:'inline-block',
-				left:pleft+16+'px',
-				top:ptop+16+'px',
-				zIndex:2000
-			}).draggable();
-			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\');">Вставить</button></div></div>');
+			var pTD=$(eSrc).parent();
+			var pleft=$(pTD).offset().left;
+			var ptop=$(pTD).offset().top;
+			$(aPrev).appendTo($('body'))
+				.css({
+					cursor:'move',
+					display:'inline-block',
+					left:pleft+25+'px',
+					position:'fixed',
+					top:ptop-88+'px',
+					zIndex:3001
+				}).draggable();
+			$(aPrev).html('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content">'+msg+'</div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArtText(\'prev_content\',false,'+artID+');">Вставить</button></div></div>');
 		  }else{ // если без предпросмотра - сразу вставляем текст в поле редактора
 			  addArtText('html',msg);
 		  }
@@ -130,15 +132,14 @@ function articlePreview(artID,eSrc){
 	  alert(e.message);
   }
 }
-//
-function addArtText(artBox,htmlContent){
+// добавить либо текст, либо ID статьи
+function addArtText(artBox,htmlContent,artID){
 	// получили либо html, либо содержащий его контейнер
-	if (!htmlContent) htmlContent=$('#'+artBox).html();
-
-	//$('#'+artBox).html()
-	if(textTarget=='ready'){
-
-
+	if (!htmlContent&&htmlContent!==false) 
+		htmlContent=$('#'+artBox).html();
+	if(textTarget=='ready'){ // добавляли ID существующей статьи
+		alert('artBox: '+artBox+'\nhtmlContent: '+htmlContent+'\nartID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockIndex+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+		
 
 	}else if(textTarget=='editor'){
 			// закрыть окна предпросмотра текста и таблицы статей:
@@ -167,12 +168,7 @@ function getLoadAjaxPath(){
 // идентифицировать текстовый модуль
 // идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи
 function identifyTextBlock(obj){
-	var curModule=obj.parentNode.parentNode; // модуль
-	var curColumn=curModule.parentNode;	// колонка
-	Layout.blocks.moduleClickedBlockIndex=$('div#tmplPlace > div > div').index(curColumn)+1; // № блока
-	Layout.blocks.moduleClickedLocalIndex=$(curColumn).children('div').index(curModule); // индекс модуля
-	Layout.blocks.moduleClickedLocalIndex=$(curColumn).index($(obj.parentNode.parentNode));
-	//alert('moduleClickedBlockIndex: '+moduleClickedBlockIndex+'\nmoduleClickedLocalIndex: '+moduleClickedLocalIndex);
+	storeLayoutBlockData(obj.parentNode.parentNode);
 }
 // отобразить таблицу выбора статей
 function showArticlesTable(){
@@ -180,14 +176,29 @@ function showArticlesTable(){
 			display:'inline-block',
 		}).fadeIn(150);
 }
+// сохранить в Layout номер блока и индекс модуля
+function storeLayoutBlockData(curModule){
+	var curColumn=curModule.parentNode;	// колонка
+	Layout.blocks.moduleClickedBlockIndex=getBlockNumber(curColumn); // № блока
+	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
+}
+// получить № блока
+function getBlockNumber(curColumn){
+	return $('div#tmplPlace > div > div').index(curColumn)+1;
+}
+// получить индекс модуля
+function getModuleIndex(curColumn,curModule){
+	return $(curColumn).children('div').index(curModule);
+}
+
 //
-function PickOutTextContent(obj){
+/*function PickOutTextContent(obj){
   try{
 	alert($(obj).html());
   }catch(e){
 	alert(e.message);
   }
-}
+}*/
 
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

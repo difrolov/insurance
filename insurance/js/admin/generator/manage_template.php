@@ -71,9 +71,11 @@ function addModuleIntoBlock(event,divBlock){
 	  alert(e.message);
   }
 }
-//
-function removeModule(objSrc){
-	$(objSrc.parentNode.parentNode).remove();
+// удалить модуль из колонки визуально и из набора Layout "физически"
+function removeModule(objSrc){ // ссылка
+	$(objSrc.parentNode.parentNode).remove(); // модуль (class="innerModule")
+	// найти в активной колонке блок, распарсить его модули и удалить нужный:
+	
 }
 // выделить фоном активную колонку:
 function selectColumn(event,divBlock){
