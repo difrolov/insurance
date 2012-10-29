@@ -18,10 +18,8 @@ $(document).ready(	function(e) {
 	});
 });
 // распарсить и отобразить объект макета:
-function test_parseLayout(obj,ins){
+function test_parseLayout(obj){
 	if (!obj) obj=Layout;
-	// block - имя элемента
-	// Layout.blocks[block] - значение элемента
 	// obj 		- объект
 	// ob		- свойство объекта
 	// currentObj[ob] 	- значение свойства (литерал) объекта
@@ -32,22 +30,25 @@ function test_parseLayout(obj,ins){
 		if (typeof(currentObj)=='object'){
 			toPlace.innerHTML+='<div>Блок '+ob+':</div>';
 			test_parseLayout(currentObj,true);
-			//toPlace.innerHTML+='</div>';
-		}else if (ob.indexOf('moduleClicked')==-1){ 
-			var nclass=ins? 'rd2':'rd';
-			var pContent='<div>';
-			pContent+='		<div class="padding10 borderRadius marginBottom4">Блок '+ob+':';
-			pContent+='			<div class="padding10 borderRadius bgLightGrey">';
-			//var arrObj;
-			alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
-			
-			//if (currentObj.indexOf("|")!=-1)
-			var	arrObj=currentObj.split("|");
-			//else arrObj=new Array(currentObj);
-			
-			for(i=0;i<arrObj.length;i++)
-				pContent+='			<div>'+arrObj[i]+'</div>';
-			
+		}else{ 
+				var pContent='<div>';
+				pContent+='		<div class="padding10 borderRadius marginBottom4">Блок '+ob+':';
+				pContent+='			<div class="padding10 borderRadius bgLightGrey">';
+			if (ob.indexOf('moduleClicked')==-1){ 
+				var arrObj;
+				if (ob!="Schema")
+					alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
+				
+				if (currentObj.indexOf("|")!=-1)
+					var	arrObj=currentObj.split("|");
+				else arrObj=new Array(currentObj);
+				
+				for(i=0;i<arrObj.length;i++)
+					pContent+='			<div>'+arrObj[i]+'</div>';
+				
+			}else{
+				pContent+='			<div style="background:#CEEFFF; padding:10px; margin:-10px;">'+ob+': '+currentObj+'</div>';
+			}
 			pContent+='			</div>';
 			pContent+='		</div>';
 			pContent+='</div>';
