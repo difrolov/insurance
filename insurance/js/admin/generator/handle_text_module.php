@@ -43,6 +43,7 @@ function addArticleIdOrTextToModule(artID,text){
 	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
+	addTextIntoEditor(''); // очистить поле редактора
 	// закрыть таблицу с готовыми статьями и область предпросмотра статьи:
 	hideArticlesStuff();
   }catch(e){
@@ -52,9 +53,14 @@ function addArticleIdOrTextToModule(artID,text){
 // добавить текст полученной ajax'ом статьи в поле редактора
 function addArticleTextToEditor(artBox,artID){
 	//alert();
-	// получили либо html, либо содержащий его контейнер
-	if (artBox) 
-		addTextIntoEditor($('#'+artBox).html());
+	if (artBox) { // получим html контейнера:
+		//alert('artBox: '+artBox);	
+		if(window.textTarget=='ready') // добавляли ID существующей статьи
+			addArticleIdOrTextToModule(artID);	
+		else
+			addTextIntoEditor($('#'+artBox).html());
+	}
+	// загрузим статью ajax'ом, после чего добавим её в поле редактора:
 	else if (artID) getArticleTextFromDB(false,artID);
 	// закрыть окна предпросмотра текста и таблицы статей:
 	hideArticlesStuff(true); // окно редактора оставляем открытым
@@ -138,10 +144,13 @@ function getArticleTextFromDB(fieldToPlace,artID){
 		url:goUrl,
 		data:uData,
 		success: function(msg){
-			if (fieldToPlace)
+			//alert(msg);
+			if (fieldToPlace){
+				//alert('fieldToPlace');
 				$('div#'+fieldToPlace).html(msg);
-			else
+			}else{	//alert('NO fieldToPlace!');
 				addTextIntoEditor(msg);
+			}
 		}
 	});
 }

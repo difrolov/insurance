@@ -164,6 +164,42 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
+    <td>добавить текст полученной ajax'ом статьи в поле редактора:<br>
+    <strong>function addArticleTextToEditor(artBox,artID);</strong></td>
+    <td>Кнопка <strong>Вставить</strong> в окне предпросмотра статьи.</td>
+    <td>handle_text_module.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>находит элемент &quot;поле редактора&quot; и размещает в нём текст:<br>
+        <strong>addTextIntoEditor($('#'+artBox).html());</strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+      ИЛИ
+      <blockquote style="margin-top:0; padding-top:0;">
+        загружает статью из БД и размещает в поле редактора:<br>
+        <strong>getArticleTextFromDB(fieldToPlace,artID);</strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>свернуть окна предпросмотра статьи и таблицы выбора статей:<br>
+        <strong>hideArticlesStuff(true);</strong></p>
+    </blockquote></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
     <td><a id="storeLayoutBlockData"></a>сохранить в Layout индекс  модуля и номер его родительского блока (колонки):<br>
     <strong> storeLayoutBlockData(curModule);</strong></td>
     <td>&nbsp;</td>
