@@ -86,6 +86,7 @@ function addTextModuleComLinks(content){
 		click: function(){
 				window.textTarget='editor';
 				identifyTextBlock(this);
+				$('#tblArticles').parent('div').css('overflow-x','hidden');
 				$(aTable).appendTo($('a#upload_article').parent())
 				.css({
 					maxHeight:'500px',
@@ -109,9 +110,10 @@ function addTextModuleComLinks(content){
 		click:	function(){
 			window.textTarget='ready';
 			identifyTextBlock(this);			
-			$('#tblArticles').css('width','auto');
+			$('#tblArticles').css('width','auto').parent('div').css('overflow-x','hidden');
 			$(aTable).css({
 				display:'inline-block',
+				bottom:'auto',
 				left:$(this).offset().left+$(this).width()+'px',
 				top: $(this).offset().top+20+'px'
 			}).show()
@@ -190,6 +192,7 @@ function manageArticleText( artID,
 		var pTD=$(eSrc).parent();
 		var pleft=$(pTD).offset().left;
 		var ptop=$(pTD).offset().top;
+		$('div#doEdit').remove();
 		$(aPrev).appendTo($('body'))
 			.css({
 				cursor:'move',
@@ -199,7 +202,7 @@ function manageArticleText( artID,
 				top:ptop-88+'px',
 				zIndex:3001
 			}).draggable()
-			.append('<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content"></div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button></div></div>');
+			.append('<div id="doEdit"><span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content"></div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button></div></div></div>');
 		getArticleTextFromDB('prev_content',artID);
 	  }else{ // если БЕЗ предпросмотра, дважды клацали по названию статьи:
 		addArticleTextToEditor(false,artID);// добавить текст непосредственно в окно редактора

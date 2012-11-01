@@ -390,7 +390,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
     	<span class="wclose" id="close_upartwin"></span>
     	<div style="overflow:auto; height:100%;">
   <?	$articles=HelperAdmin::getAllArticlesList(false); ?>
-    <table width="100%" height="100%" cellspacing="0" cellpadding="0" id="tblArticles">
+    <table width="100%" cellspacing="0" cellpadding="0" id="tblArticles">
       <tr bgcolor="#CCCCCC" class="bold">
         <td>id</td>
         <td>Название</td>
