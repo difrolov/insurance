@@ -4,12 +4,6 @@ if (isset($dwshow)){?><script><? }
 ob_start();?>
 $(document).ready(function(){
   try{
-<?	if (isset($_GET['test'])){?>
-	$('div[data-test="template"]')
-		.mousedown()
-		.draggable()
-		.resizable();
-<?	}?>
 	$('td[data-article-id]').mouseover( function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
@@ -55,7 +49,7 @@ function addArticleIdOrTextToModule(artID,text){
 	  alert(e.message);
   }
 }
-// добавить текст полученной ajax'ом статьи в поле редактора:
+// добавить текст полученной ajax'ом статьи в поле редактора
 function addArticleTextToEditor(artBox,artID){
 	//alert();
 	// получили либо html, либо содержащий его контейнер
@@ -153,7 +147,7 @@ function getArticleTextFromDB(fieldToPlace,artID){
 function getBlockNumber(curColumn){
 	return $('div#tmplPlace > div > div').index(curColumn)+1;
 }
-//
+// забрать из поля редактора и разместить в блоке Layout'а и тестовом модуле
 function getDataFromCKeditor(){
   try{
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
@@ -172,7 +166,7 @@ function getLoadAjaxPath(){
 function getModuleIndex(curColumn,curModule){
 	return $(curColumn).children('div').index(curModule);
 }
-// спрятать окна предпросмотра, таблицы готовых статей и редактора:
+// спрятать окна предпросмотра, таблицы готовых статей и редактора
 function hideArticlesStuff(keep_editor_open){
 	$('div#upload_article_window').hide(); // art table
 	$('div#article_preview_text').hide();
@@ -215,7 +209,7 @@ function manageArticleText( artID,
 	  alert(e.message);
   }
 }
-// добавить в текстовый модуль идентификатор типа контента (id статьи/текст):
+// добавить в текстовый модуль идентификатор типа контента (id статьи/текст)
 function setTextContentIdentifier(artID){
 	var ctype=" :: ";
 	if (artID) ctype+="article id: "+artID;

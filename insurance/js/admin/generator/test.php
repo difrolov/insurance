@@ -4,15 +4,17 @@ ob_start();?>
 $(document).ready(	function(e) {
 	var tInfoBlock=$('div[data-test="template"]');
 	var aManage=$('#test_block_appearance');
+	//$(tInfoBlock).mousedown().resizable();
+	//.draggable()
     $(aManage).click( function(){
 		if ($(this).text()=='свернуть') {
 			$(tInfoBlock).animate({
-				height:'40px'
+				height:'68px'
 			},500,function(){$(aManage).text('развернуть')});
 		}
 		else{
 			$(tInfoBlock).animate({
-				height:'400px'
+				height:'100%'
 			},500,function(){$(aManage).text('свернуть')});
 		}
 	});
