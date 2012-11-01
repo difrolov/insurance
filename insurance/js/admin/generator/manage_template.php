@@ -73,20 +73,30 @@ function addModuleIntoBlock(event,divBlock){
   }
 }
 // перестроить последовательность модулей после их пересортировки:
-function rearrangeModulesOrder(column){
-	var modContent;
+function rearrangeModulesOrder(column,itemIndexStart,itemIndexStop){
+	var modContent,tText;	
+	var blockNumber=($(column).attr('data-block-type')=="footer")? 'footer':getBlockNumber(column);
+	// получить все модули в колонке:
 	$(column).find('div[data-module-type]').each(
 		function(i){
+			// проверить, не является ли модуль текстовым; получить добавленный контент
+			if ( i==itemIndexStop
+				 && $(this).attr('data-module-type')=='Текст'
+			   ){
+				var modContentArray=splitBlockContent(blockNumber);
+				tText=modContentArray[itemIndexStart];
+				//alert(itemIndexStart+' :: '+itemIndexStop+'\nmodule content from block: '+blockNumber+': '+tText);
+			}else
+				tText=$(this).text();
 			if (i) {
 				modContent+="|";
-				modContent+=$(this).text();
+				modContent+=tText;
 			}else
-				modContent=$(this).text();
+				modContent=tText;
 	}); 
-	var blockIndex=($(column).attr('data-block-type')=="footer")? 'footer':getBlockNumber(column);
-	Layout.blocks[blockIndex]=modContent;
+	Layout.blocks[blockNumber]=modContent;
 <?	if (isset($_GET['test'])):?>    
-	//alert('blockIndex: '+blockIndex+'\nBlock content: '+Layout.blocks[blockIndex]);
+	//alert('blockNumber: '+blockNumber+'\nBlock content: '+Layout.blocks[blockNumber]);
 	test_parseLayout();
 <?	endif;?>	
 }
@@ -96,30 +106,30 @@ function removeModule(objSrc){ // ссылка
 	var Mod=objSrc.parentNode.parentNode; // модуль (class="innerModule")
 	var Block=Mod.parentNode; // блок
 	// найти в активной колонке блок, распарсить его модули и удалить нужный:
-	var blockNumer=getBlockNumber(Block); // № блока
+	var blockNumber=getBlockNumber(Block); // № блока
 	var modIndex=getModuleIndex(Block,Mod); // индекс модуля
-	//alert('Удаляем модуль index '+modIndex+'\n---------------\nТекущий набор:\n'+Layout.blocks[blockNumer]);
+	//alert('Удаляем модуль index '+modIndex+'\n---------------\nТекущий набор:\n'+Layout.blocks[blockNumber]);
 	$(Mod).remove(); // удаляем модуль из колонки
-	var tBlockArray=splitBlockContent(blockNumer); // преобразуем в массив
+	var tBlockArray=splitBlockContent(blockNumber); // преобразуем в массив
 	tBlockArray.splice(modIndex,1); // удаляем из блока текущий модуль
-	saveBlockContentString(blockNumer,tBlockArray); // преобразуем в строку, сохраняем изменённый состав блока
+	saveBlockContentString(blockNumber,tBlockArray); // преобразуем в строку, сохраняем изменённый состав блока
   }catch(e){
 	alert(e.message);
   }
 }
 // преобразовать контент блока в массив:
-function splitBlockContent(blockNumer){
-	// attention! blockNumer may be as "footer" as number
-	return Layout.blocks[blockNumer].split("|");
+function splitBlockContent(blockNumber){
+	// attention! blockNumber may be as "footer" as number
+	return Layout.blocks[blockNumber].split("|");
 }
 // преобразовать контент блока в строку и сохранить в Layout:
-function saveBlockContentString(blockNumer,tBlockArray){
+function saveBlockContentString(blockNumber,tBlockArray){
 	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
-	Layout.blocks[blockNumer]=tBlockStr;
+	Layout.blocks[blockNumber]=tBlockStr;
 <?	if (isset($_GET['test'])){?>
 		test_parseLayout();
 <?	}?>		
-	//alert(Layout.blocks[blockNumer]);
+	//alert(Layout.blocks[blockNumber]);
 }
 // выделить фоном активную колонку:
 function selectColumn(event,divBlock){
@@ -131,8 +141,12 @@ function selectColumn(event,divBlock){
 				.css('background-color','#FFF')
 				.removeAttr('data-column_stat');
 			$(srcEl).sortable({
+					start: function (event,ui){
+						//alert();
+						itemIndexStart=ui.item.index();
+					},
 					stop: function(event,ui){
-						rearrangeModulesOrder(this);
+						rearrangeModulesOrder(this,itemIndexStart,ui.item.index());
 					}
 				});
 			tBlock=srcEl;

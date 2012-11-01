@@ -37,7 +37,7 @@ function addArticleIdOrTextToModule(artID,text){
 	// распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
 	// добавить служебный разделитель после "Текст" и идентификатор типа контента как id статьи, если получили artID:
-	arrBlockContentArray[ModuleIndex]="Текст"+setTextContentIdentifier(artID);
+	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
 	if (!artID) // если ID статьи не передавали, стало быть, она новая; добавим её текст:
 		arrBlockContentArray[ModuleIndex]+=text;
 	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
@@ -176,6 +176,10 @@ function getLoadAjaxPath(){
 // получить индекс модуля
 function getModuleIndex(curColumn,curModule){
 	return $(curColumn).children('div').index(curModule);
+}
+// получить начало текстового блока:
+function getTextStart(artID){
+	return "Текст"+setTextContentIdentifier(artID);
 }
 // спрятать окна предпросмотра, таблицы готовых статей и редактора
 function hideArticlesStuff(keep_editor_open){

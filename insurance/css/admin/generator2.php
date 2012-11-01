@@ -62,7 +62,7 @@ div[data-test="template"]{
 	border:solid 2px #FFCC66;
 	left:0;	top:0; bottom:0;
 	max-width:40%;
-	opacity:0.3;
+	opacity:0.7;
 	overflow-x:hidden;
 	padding:10px;
 	position:fixed;
