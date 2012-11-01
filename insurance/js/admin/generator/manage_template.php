@@ -2,13 +2,6 @@
 	$test=$_GET['test'];
 if (isset($dwshow)){?><script><? }
 ob_start();?>
-/*$( function(){
-	alert('ready!');
-	$('.innerModule').bind('drag',function( event ){
-			alert($(this).text());
-			//
-		});
-})*/
 tBlock=false; // здесь будет сохраняться активный блок (объект)
 // добавить модуль в активную колонку:
 function addModuleIntoBlock(event,divBlock){
