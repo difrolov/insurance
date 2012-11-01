@@ -171,6 +171,17 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
+    <td><blockquote>
+      <p>получить № блока:<br>
+        <span class="txtRed">Layout.blocks.moduleClickedBlockNumber</span>=<strong>getBlockNumber(curColumn);</strong></p>
+      <p>получить индекс модуля:<br>
+        <span class="txtRed">Layout.blocks.moduleClickedLocalIndex</span>=<strong>getModuleIndex(curColumn,curModule);</strong></p>
+    </blockquote>    </td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
     <td><p>сохранить в Layout индекс текстового модуля и номер его родительского блока (колонки):<br>
     <strong>identifyTextBlock(obj);</strong></p>
       <blockquote>
@@ -188,6 +199,13 @@
     <td>удалить модуль из колонки и из Layout:<br>
     <strong>removeModule(objSrc);</strong></td>
     <td>&quot;Удалить модуль из колонки&quot;</td>
+    <td>manage_template.php</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><p>перестроить последовательность модулей в Layout:<br>
+        <strong>rearrangeModulesOrder(column);</strong> </p></td>
+    <td>Ручная сортировка порядка модулей в колонке</td>
     <td>manage_template.php</td>
   </tr>
 </table>

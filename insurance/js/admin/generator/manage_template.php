@@ -2,7 +2,15 @@
 	$test=$_GET['test'];
 if (isset($dwshow)){?><script><? }
 ob_start();?>
+/*$( function(){
+	alert('ready!');
+	$('.innerModule').bind('drag',function( event ){
+			alert($(this).text());
+			//
+		});
+})*/
 tBlock=false; // здесь будет сохраняться активный блок (объект)
+// добавить модуль в активную колонку:
 function addModuleIntoBlock(event,divBlock){
   try{
 	var srcEl=(event.target)? event.target:event.srcElement;
@@ -26,7 +34,6 @@ function addModuleIntoBlock(event,divBlock){
 		}
 <?	if (isset($test)){?>		
 		// добавить данные в тестовый блок:
-		//test_addModuleToTestBlock(cIndex,dataModuleType);
 		test_parseLayout();
 <?	}?>		
 		var newModule=$('<div>').appendTo(tBlock).attr({
@@ -72,19 +79,23 @@ function addModuleIntoBlock(event,divBlock){
 	  alert(e.message);
   }
 }
-// преобразовать контент блока в массив:
-function splitBlockContent(blockNumer){
-	// attention! blockNumer may be as "footer" as number
-	return Layout.blocks[blockNumer].split("|");
-}
-// преобразовать контент блока в строку и сохранить в Layout:
-function saveBlockContentString(blockNumer,tBlockArray){
-	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
-	Layout.blocks[blockNumer]=tBlockStr;
-<?	if (isset($_GET['test'])){?>
-		test_parseLayout();
-<?	}?>		
-	//alert(Layout.blocks[blockNumer]);
+// перестроить последовательность модулей после их пересортировки:
+function rearrangeModulesOrder(column){
+	var modContent;
+	$(column).find('div[data-module-type]').each(
+		function(i){
+			if (i) {
+				modContent+="|";
+				modContent+=$(this).text();
+			}else
+				modContent=$(this).text();
+	}); 
+	var blockIndex=($(column).attr('data-block-type')=="footer")? 'footer':getBlockNumber(column);
+	Layout.blocks[blockIndex]=modContent;
+<?	if (isset($_GET['test'])):?>    
+	//alert('blockIndex: '+blockIndex+'\nBlock content: '+Layout.blocks[blockIndex]);
+	test_parseLayout();
+<?	endif;?>	
 }
 // удалить модуль из колонки визуально и из набора Layout "физически"
 function removeModule(objSrc){ // ссылка
@@ -103,6 +114,20 @@ function removeModule(objSrc){ // ссылка
 	alert(e.message);
   }
 }
+// преобразовать контент блока в массив:
+function splitBlockContent(blockNumer){
+	// attention! blockNumer may be as "footer" as number
+	return Layout.blocks[blockNumer].split("|");
+}
+// преобразовать контент блока в строку и сохранить в Layout:
+function saveBlockContentString(blockNumer,tBlockArray){
+	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
+	Layout.blocks[blockNumer]=tBlockStr;
+<?	if (isset($_GET['test'])){?>
+		test_parseLayout();
+<?	}?>		
+	//alert(Layout.blocks[blockNumer]);
+}
 // выделить фоном активную колонку:
 function selectColumn(event,divBlock){
   try{
@@ -112,7 +137,11 @@ function selectColumn(event,divBlock){
 			$(divBlock).children('div')
 				.css('background-color','#FFF')
 				.removeAttr('data-column_stat');
-			$(srcEl).sortable();
+			$(srcEl).sortable({
+					stop: function(event,ui){
+						rearrangeModulesOrder(this);
+					}
+				});
 			tBlock=srcEl;
 			$(srcEl).css({
 				backgroundColor:'#CEEFFF',
