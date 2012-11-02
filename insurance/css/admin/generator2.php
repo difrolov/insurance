@@ -22,6 +22,16 @@ div#article_preview_text
 	padding:8px;
 	text-align:left;
 }
+div.modal-header{
+	border-bottom:none;
+}
+div#prev_header{
+	background: lightYellow;
+	border-bottom:solid 2px #FC0;
+	font-weight:700;
+	padding: 8px;
+	text-align:left;
+}
 div#upload_article_window{
 	background:#FFF; 
 	border:solid 2px #CCC; 
@@ -30,6 +40,20 @@ div#upload_article_window{
 	position:absolute; 
 	z-index:3000; 
 	display:<?="none"?>; 
+}
+table#new_art_header{
+	width:98%;
+	margin: -15px auto -2px auto;
+}
+table#new_art_header input[type="text"]{
+	padding:2px 4px;
+	width:100%;
+}
+table#new_art_header td{
+	padding:0;
+}
+table#new_art_header tr td:first-child{
+	padding-right:4px;
 }
 table#tblArticles {
 	border:solid 1px #CCC;

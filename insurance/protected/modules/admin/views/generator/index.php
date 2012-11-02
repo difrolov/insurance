@@ -232,6 +232,13 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
+    <td>добавить в модуль текст новой статьи или id уже существующей:<br>
+    <strong>addArticleIdOrTextToModule(false,eText);</strong></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
     <td>удалить модуль из колонки и из Layout:<br>
     <strong>removeModule(objSrc);</strong></td>
     <td>&quot;Удалить модуль из колонки&quot;</td>
@@ -373,8 +380,13 @@ $this->breadcrumbs=array(
 <div class="modal-body">
 
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/') ?>">
-    <?php
-$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+	<table id="new_art_header" cellspacing="0">
+      <tr>
+        <td nowrap>Заголовок статьи: </td>
+        <td width="100%"><input placeholder="Укажите заголовок статьи" name="article_header" id="article_header" type="text"></td>
+      </tr>
+    </table>
+<?php	$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 			  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model

@@ -31,15 +31,17 @@ $(document).ready(function(){
   }
 });
 // модифицировать текстовый модуль - добавить либо id, либо текст статьи
-function addArticleIdOrTextToModule(artID,text){
+function addArticleIdOrTextToModule(artID,text,header){
   try{ //alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
 	var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
 	// распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
 	// добавить служебный разделитель после "Текст" и идентификатор типа контента как id статьи, если получили artID:
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
-	if (!artID) // если ID статьи не передавали, стало быть, она новая; добавим её текст:
-		arrBlockContentArray[ModuleIndex]+=text;
+	if (!artID) { // если ID статьи не передавали, стало быть, она новая; добавим её текст:
+		arrBlockContentArray[ModuleIndex]+=header+'^'+text;
+		
+	}
 	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
@@ -57,8 +59,8 @@ function addArticleTextToEditor(artBox,artID){
 		//alert('artBox: '+artBox);	
 		if(window.textTarget=='ready') // добавляли ID существующей статьи
 			addArticleIdOrTextToModule(artID);	
-		else
-			addTextIntoEditor($('#'+artBox).html());
+		else // если уже размещали заголовок и текст статьи в области предпросмотра, выставим флаг:
+			addTextIntoEditor('preview');
 	}
 	// загрузим статью ajax'ом, после чего добавим её в поле редактора:
 	else if (artID) getArticleTextFromDB(false,artID);
@@ -78,7 +80,18 @@ function addArtText( artBox, // id поля с текстом предпросм
 }
 // добавить текст в поле редактора
 function addTextIntoEditor(content){
-	CKEDITOR.instances['InsurArticleContent[content]'].setData(content);
+	var aHeader,aText;
+	if (content=='preview'){ //
+		aHeader=$('#prev_header').html();
+		aText=$('#prev_content').html();
+	}
+	else{
+		var splittedContent=splitArtContent(content);
+		aHeader=splittedContent[0];
+		aText=splittedContent[1];
+	}
+	$('input#article_header').val(aHeader);
+	CKEDITOR.instances['InsurArticleContent[content]'].setData(aText);
 }
 // добавить ссылки (команды) добавления текста (собственно текст или id статьи)
 function addTextModuleComLinks(content){
@@ -144,11 +157,11 @@ function getArticleTextFromDB(fieldToPlace,artID){
 		url:goUrl,
 		data:uData,
 		success: function(msg){
-			//alert(msg);
 			if (fieldToPlace){
-				//alert('fieldToPlace');
-				$('div#'+fieldToPlace).html(msg);
-			}else{	//alert('NO fieldToPlace!');
+				var content=splitArtContent(msg);
+				$('div#prev_header').html(content[0]);
+				$('div#'+fieldToPlace).html(content[1]);
+			}else{	
 				addTextIntoEditor(msg);
 			}
 		}
@@ -162,9 +175,10 @@ function getBlockNumber(curColumn){
 function getDataFromCKeditor(){
   try{
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
+	var eHeader=$('input#article_header').val();
 	//alert(eText);
 	// добавить к текстовому модулю текст статьи
-	addArticleIdOrTextToModule(false,eText);
+	addArticleIdOrTextToModule(false,eText,eHeader);
   }catch(e){
 	  alert(e.message);
   }
@@ -215,7 +229,7 @@ function manageArticleText( artID,
 				top:ptop-88+'px',
 				zIndex:3001
 			}).draggable()
-			.append('<div id="doEdit"><span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_content"></div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button></div></div></div>');
+			.append('<div id="doEdit"><span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_header" title="Заголовок статьи"></div><div title="Текст статьи" id="prev_content"></div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button></div></div></div>');
 		getArticleTextFromDB('prev_content',artID);
 	  }else{ // если БЕЗ предпросмотра, дважды клацали по названию статьи:
 		addArticleTextToEditor(false,artID);// добавить текст непосредственно в окно редактора
@@ -236,6 +250,10 @@ function showArticlesTable(){
 	$('div#upload_article_window').css({
 			display:'inline-block',
 		}).fadeIn(150);
+}
+// разбить полученный контент статьи на заголовок и текст
+function splitArtContent(content){
+	return content.split("^");
 }
 // сохранить в Layout номер блока и индекс модуля
 function storeLayoutBlockData(curModule){
