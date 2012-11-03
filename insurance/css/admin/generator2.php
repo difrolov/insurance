@@ -25,6 +25,10 @@ div#article_preview_text
 div.modal-header{
 	border-bottom:none;
 }
+div#prev_header,div#wrp{
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;	
+}
 div#prev_header{
 	background: lightYellow;
 	border-bottom:solid 2px #FC0;

@@ -38,10 +38,24 @@ function addArticleIdOrTextToModule(artID,text,header){
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
 	// добавить служебный разделитель после "Текст" и идентификатор типа контента как id статьи, если получили artID:
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
+	// получить целевую колонку:
+	var tBlock=$('div#tmplPlace div[data-block-type]')[Layout.blocks.moduleClickedBlockNumber-1];
+	alert($(tBlock).html());
+	// получить модуль:
+	var txtModule=$(tBlock).children('div.innerModule')[Layout.blocks.moduleClickedLocalIndex];
+	var txtModuleText=$(txtModule).children('div[data-module-type="Текст"]').text();
+	// получить вложенный модель с контентом:
+	alert(txtModuleText);
+	//alert($(tModuleText).parent().html());
 	if (!artID) { // если ID статьи не передавали, стало быть, она новая; добавим её текст:
 		arrBlockContentArray[ModuleIndex]+=header+'^'+text;
 		
 	}
+	// изменить содержание текстового модуля в колонке:
+	
+	//	Layout.blocks.moduleClickedBlockNumber; // № блока
+	//	Layout.blocks.moduleClickedLocalIndex; // индекс модуля
+
 	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
