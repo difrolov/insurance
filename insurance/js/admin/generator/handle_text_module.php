@@ -40,22 +40,44 @@ function addArticleIdOrTextToModule(artID,text,header){
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
 	// получить целевую колонку:
 	var tBlock=$('div#tmplPlace div[data-block-type]')[Layout.blocks.moduleClickedBlockNumber-1];
-	alert($(tBlock).html());
 	// получить модуль:
 	var txtModule=$(tBlock).children('div.innerModule')[Layout.blocks.moduleClickedLocalIndex];
-	var txtModuleText=$(txtModule).children('div[data-module-type="Текст"]').text();
-	// получить вложенный модель с контентом:
-	alert(txtModuleText);
-	//alert($(tModuleText).parent().html());
+	// получить блок модуля с текстом:
+	var txtModuleInner=$(txtModule).children('div[data-module-type="Текст"]');
+
+	var bg,preHeader,headerClicked;
 	if (!artID) { // если ID статьи не передавали, стало быть, она новая; добавим её текст:
 		arrBlockContentArray[ModuleIndex]+=header+'^'+text;
-		
+		preHeader='Новая статья';
+		bg='yellow';
+	}else{
+		preHeader='Статья id '+artID;
+		bg='#EEE';
 	}
+	$(txtModule).css('background-color',bg);
+	var artHeader='';
+	if (!header){
+		if (!(artHeader=$('div#prev_header').text())){
+			alert('Заголовок не найден...');
+		}else
+			headerClicked='get';
+	}else{
+		artHeader=header;
+		headerClicked=true;
+		// спрятать блок с кнопкой "Вставить", т.к. вставлять ничего не надо. 
+		// Не нравится добавленный текст? - удаляйте модуль и добавляйте новый!
+		$('div#btn_wrapper').hide();
+	}
+	$(txtModuleInner).html(preHeader+':&nbsp;');
+	$('<a>',{
+		href:"javascript:void()",
+		click: function(){
+			manageArticleText(artID,this,headerClicked);
+			return false;
+		}
+	}).text(artHeader)
+	.appendTo($(txtModuleInner));
 	// изменить содержание текстового модуля в колонке:
-	
-	//	Layout.blocks.moduleClickedBlockNumber; // № блока
-	//	Layout.blocks.moduleClickedLocalIndex; // индекс модуля
-
 	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
@@ -155,6 +177,10 @@ function addTextModuleComLinks(content){
 		}
 	}).appendTo(content);
 }
+// создать окно предпросмотра
+function createPreviewWindow(artID,sdisplay){
+	return '<div id="doEdit"><span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_header" title="Заголовок статьи"></div><div title="Текст статьи" id="prev_content"></div><div id="btn_wrapper"'+sdisplay+'><button id="btn_add_prev_conetent" type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button></div></div></div>';
+}
 // получить текст статьи из БД ajax'ом
 function getArticleTextFromDB(fieldToPlace,artID){
 	// POST
@@ -223,28 +249,39 @@ function identifyTextBlock(obj){
 // загрузить статью в область редактора - с предпросмотром или без
 // ТОЛЬКО В РЕДАКТОРЕ!
 function manageArticleText( artID,
-							eSrc // только, если клацали по кнопке в области предпросмотра
+							eSrc, // только, если клацали по кнопке в области предпросмотра
+							art_header_clicked // если клацали по заголовку добавленной статьи
 						  ){
   try{
 	// POST
 	  if (eSrc)	{ // если с предпросмотром, клацали по кнопке в его окне		
-		var aPrev=$('div#article_preview_text');
+		var aPrev=$('div#article_preview_text'); // alert('aPrev 1: '+$(aPrev).html());
+		var pTD,sdisplay='';
 		//alert(msg);
-		var pTD=$(eSrc).parent();
+		if (art_header_clicked) {
+			pTD=$(eSrc);
+			sdisplay=' style="display:none;"';
+		}else{
+			pTD=$(eSrc).parent();
+		}
+		if (art_header_clicked!==true) {
+			$(aPrev).appendTo($('body'));
+			$('div#doEdit').remove();
+			getArticleTextFromDB('prev_content',artID);
+			$(aPrev).append( createPreviewWindow(artID,sdisplay) );
+		} 
 		var pleft=$(pTD).offset().left;
 		var ptop=$(pTD).offset().top;
-		$('div#doEdit').remove();
-		$(aPrev).appendTo($('body'))
-			.css({
-				cursor:'move',
-				display:'inline-block',
-				left:pleft+25+'px',
-				position:'fixed',
-				top:ptop-88+'px',
-				zIndex:3001
-			}).draggable()
-			.append('<div id="doEdit"><span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_header" title="Заголовок статьи"></div><div title="Текст статьи" id="prev_content"></div><div style="padding-right:8px;text-align:right;background:#EEE;padding:4px;"><button type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button></div></div></div>');
-		getArticleTextFromDB('prev_content',artID);
+		
+		$(aPrev).css({
+					cursor:'move',
+					display:'inline-block',
+					left:pleft+25+'px',
+					position:'fixed',
+					top:ptop-88+'px',
+					zIndex:3001
+				}).draggable();
+		
 	  }else{ // если БЕЗ предпросмотра, дважды клацали по названию статьи:
 		addArticleTextToEditor(false,artID);// добавить текст непосредственно в окно редактора
 	  }

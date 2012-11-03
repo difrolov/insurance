@@ -73,7 +73,33 @@ function addModuleIntoBlock(event,divBlock){
   }
 }
 // перестроить последовательность модулей после их пересортировки:
-function rearrangeModulesOrder(column,itemIndexStart,itemIndexStop){C}
+function rearrangeModulesOrder(column,itemIndexStart,itemIndexStop){
+	var modContent,tText;	
+	var blockNumber=($(column).attr('data-block-type')=="footer")? 'footer':getBlockNumber(column);
+	// получить все модули в колонке:
+	$(column).find('div[data-module-type]').each(
+		function(i){
+			// проверить, не является ли модуль текстовым; получить добавленный контент
+			if ( i==itemIndexStop
+				 && $(this).attr('data-module-type')=='Текст'
+			   ){
+				var modContentArray=splitBlockContent(blockNumber);
+				tText=modContentArray[itemIndexStart];
+				//alert(itemIndexStart+' :: '+itemIndexStop+'\nmodule content from block: '+blockNumber+': '+tText);
+			}else
+				tText=$(this).text();
+			if (i) {
+				modContent+="|";
+				modContent+=tText;
+			}else
+				modContent=tText;
+	}); 
+	Layout.blocks[blockNumber]=modContent;
+<?	if (isset($_GET['test'])):?>    
+	//alert('blockNumber: '+blockNumber+'\nBlock content: '+Layout.blocks[blockNumber]);
+	test_parseLayout();
+<?	endif;?>	
+}
 // удалить модуль из колонки визуально и из набора Layout "физически"
 function removeModule(objSrc){ // ссылка
   try{
@@ -86,6 +112,7 @@ function removeModule(objSrc){ // ссылка
 	$(Mod).remove(); // удаляем модуль из колонки
 	var tBlockArray=splitBlockContent(blockNumber); // преобразуем в массив
 	tBlockArray.splice(modIndex,1); // удаляем из блока текущий модуль
+	$('div#article_preview_text').hide(); // скрыть окно статического предпросмотра статьи (если есть)
 	saveBlockContentString(blockNumber,tBlockArray); // преобразуем в строку, сохраняем изменённый состав блока
   }catch(e){
 	alert(e.message);

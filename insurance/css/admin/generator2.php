@@ -2,7 +2,6 @@
 <style>
 @charset "utf-8";
 /* CSS Document */
-
 div#article_preview_text{
 	display:<?="none"?>;
 	max-height:35%;
@@ -21,6 +20,12 @@ div#article_preview_text
 	overflow:auto;
 	padding:8px;
 	text-align:left;
+}
+div#btn_wrapper{
+	background:#EEE;
+	padding:4px;	
+	padding-right:8px;
+	text-align:right;
 }
 div.modal-header{
 	border-bottom:none;
