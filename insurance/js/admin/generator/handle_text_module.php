@@ -73,12 +73,14 @@ function addArticleIdOrTextToModule(artID,text,header){
 	}
 	$(txtModuleInner).html(preHeader+':&nbsp;');
 	$('<a>',{
-		href:"javascript:void()",
+		href:"#", // передаётся в качестве аргумента "this" в manageArticleText();
 		click: function(){
+			// alert('onClick:\nartID: '+artID+'\nthis: '+this+'\nheaderClicked: '+headerClicked);
 			manageArticleText(artID,this,headerClicked);
 			return false;
 		}
 	}).text(artHeader)
+	.attr('data-link-type','show')
 	.appendTo($(txtModuleInner));
 	// изменить содержание текстового модуля в колонке:
 	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
@@ -95,6 +97,7 @@ function addArticleIdOrTextToModule(artID,text,header){
 function addArticleTextToEditor(artBox,artID){
 	//alert();
 	if (artBox) { // получим html контейнера:
+		
 		//alert('artBox: '+artBox);	
 		if(window.textTarget=='ready') // добавляли ID существующей статьи
 			addArticleIdOrTextToModule(artID);	
@@ -123,8 +126,7 @@ function addTextIntoEditor(content){
 	if (content=='preview'){ //
 		aHeader=$('#prev_header').html();
 		aText=$('#prev_content').html();
-	}
-	else{
+	}else{
 		var splittedContent=splitArtContent(content);
 		aHeader=splittedContent[0];
 		aText=splittedContent[1];
@@ -135,24 +137,14 @@ function addTextIntoEditor(content){
 // добавить ссылки (команды) добавления текста (собственно текст или id статьи)
 function addTextModuleComLinks(content){
 	$(content).append(': ');
-	var aTable=$('div#upload_article_window'); // контейнер таблицы со статьями
+	var aTable=getPreviewWindow(); // контейнер таблицы со статьями
 	// command 1: add text through editor
 	$('<a>',{
 		text:"добавьте произвольное содержание",
 		title:"Добавить произвольный текст",
 		href:"#",
 		click: function(){
-				window.textTarget='editor';
-				identifyTextBlock(this);
-				$('#tblArticles').parent('div').css('overflow-x','hidden');
-				$(aTable).appendTo($('a#upload_article').parent())
-				.css({
-					maxHeight:'500px',
-					// отсчитывается от родительского блока ссылки:
-					top:'initial',
-					left:'2px', 
-					bottom:'36px'
-				});
+			showEditor(this);
 			},
 	}).attr({
 		'data-toggle':'modal',
@@ -181,8 +173,21 @@ function addTextModuleComLinks(content){
 	}).appendTo(content);
 }
 // создать окно предпросмотра
-function createPreviewWindow(artID,sdisplay){
-	return '<div id="doEdit"><span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span><div id="wrp"><div id="prev_header" title="Заголовок статьи"></div><div title="Текст статьи" id="prev_content"></div><div id="btn_wrapper"'+sdisplay+'><button id="btn_add_prev_conetent" type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button></div></div></div>';
+function createPreviewWindow( artID,
+							  art_header_clicked // get - при клике по заголовку текстового
+							){	
+	var prevArea='	<div id="doEdit">';
+	prevArea+='		<span class="wclose inside" onclick="parentNode.style.display=\'none\';" id="close_artprevwin"></span>';
+	prevArea+='		<div id="wrp">';
+	prevArea+='			<div id="prev_header" title="Заголовок статьи"></div>';
+	prevArea+='			<div title="Текст статьи" id="prev_content"></div>';
+	prevArea+='			<div id="btn_wrapper">';
+	if (!art_header_clicked)
+		prevArea+='				<button id="btn_add_prev_content" type="button" onClick="addArticleTextToEditor(\'prev_content\','+artID+');">Вставить</button>';
+	prevArea+='			</div>';
+	prevArea+='		</div>';
+	prevArea+='	</div>';
+	return prevArea;
 }
 // получить текст статьи из БД ajax'ом
 function getArticleTextFromDB(fieldToPlace,artID){
@@ -234,6 +239,10 @@ function getLoadAjaxPath(){
 function getModuleIndex(curColumn,curModule){
 	return $(curColumn).children('div').index(curModule);
 }
+// получить окно предпросмотра текста
+function getPreviewWindow(){
+	return $('div#upload_article_window');
+}
 // получить начало текстового блока:
 function getTextStart(artID){
 	var ret="Текст";
@@ -242,44 +251,55 @@ function getTextStart(artID){
 		ret+=setTextContentIdentifier(artID);
 	return ret;
 }
+// получить и распарсить на заголовок и текст контент текстового модуля ИЗ БЛОКА
+// к этому моменту должна быть выполнена функция identifyTextBlock(src); src - ссылка-источник события. Элементы определяются по её parentNode.parentNode
+function getTextModuleContentParsedFromLayout(){
+	// получить контент заголовка и текста:
+	var blockModules=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
+	var mText=blockModules[Layout.blocks.moduleClickedLocalIndex]; // заголовок и текст модуля
+	var mtSeparator=mText.indexOf("^"); // разделитель заголовка и текста
+	$('#prev_header').html(mText.substring(getTextStart().length,mtSeparator));
+	$('#prev_content').html(mText.substr(mtSeparator+1));
+	return true;
+}
 // спрятать окна предпросмотра, таблицы готовых статей и редактора
 function hideArticlesStuff(keep_editor_open){
 	$('div#upload_article_window').hide(); // art table
 	$('div#article_preview_text').hide();
-	if (!keep_editor_open) $('a.close[data-dismiss="modal"]').trigger('click');
+	if (!keep_editor_open) 
+		$('a.close[data-dismiss="modal"]').trigger('click');
 }
 // идентифицировать текстовый модуль
 // идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи
-function identifyTextBlock(obj){
+function identifyTextBlock(obj){ // alert(obj.parentNode.innerHTML);
 	storeLayoutBlockData(obj.parentNode.parentNode);
 }
 // загрузить статью в область редактора - с предпросмотром или без
 // ТОЛЬКО В РЕДАКТОРЕ!
 function manageArticleText( artID,
-							eSrc, // только, если клацали по кнопке в области предпросмотра
-							art_header_clicked // если клацали по заголовку добавленной статьи
-						  ){
+							eSrc, // только, если клацали по кнопке в области предпросмотра или по ссылке в текстовом модуле
+							art_header_clicked // если клацали по заголовку добавленной статьи:
+							// true для новой статьи, get - для существующей
+						  ){	
   try{
 	// POST
 	  if (eSrc)	{ // если с предпросмотром, клацали по кнопке в его окне		
 		var aPrev=$('div#article_preview_text'); // alert('aPrev 1: '+$(aPrev).html());
-		var pTD,sdisplay='';
-		//alert(msg);
-		if (art_header_clicked) {
-			pTD=$(eSrc);
-			sdisplay=' style="display:none;"';
-		}else{
-			pTD=$(eSrc).parent();
-		}
-		if (art_header_clicked!==true) {
-			$(aPrev).appendTo($('body'));
-			$('div#doEdit').remove();
-			getArticleTextFromDB('prev_content',artID);
-			$(aPrev).append( createPreviewWindow(artID,sdisplay) );
-		} 
+		var pTD=(art_header_clicked)? $(eSrc):$(eSrc).parent();
 		var pleft=$(pTD).offset().left;
 		var ptop=$(pTD).offset().top;
-		
+		if (art_header_clicked!==true) { //alert(art_header_clicked);
+			getArticleTextFromDB('prev_content',artID);
+			$('div#doEdit').remove();
+			//
+			$(aPrev).appendTo($('body'));
+			$(aPrev).append( 
+						createPreviewWindow( artID,
+											 art_header_clicked // get - при клике по заголовку текстового блока с добавленным id готовой статьи
+										   ));
+		}else
+			showPreviewToEdit(eSrc);
+		//alert('artID: '+artID+', eSrc: '+eSrc+', art_header_clicked: '+art_header_clicked);
 		$(aPrev).css({
 					cursor:'move',
 					display:'inline-block',
@@ -309,6 +329,44 @@ function showArticlesTable(){
 			display:'inline-block',
 		}).fadeIn(150);
 }
+// загрузить редактор
+function showEditor(src){ //alert('showEditor');
+	window.textTarget='editor';
+	identifyTextBlock(src);
+	$('#tblArticles').parent('div').css('overflow-x','hidden');
+	$(getPreviewWindow()).appendTo($('a#upload_article').parent())
+	.css({
+		maxHeight:'500px',
+		// отсчитывается от родительского блока ссылки:
+		top:'initial',
+		left:'2px', 
+		bottom:'36px'
+	});
+}
+// снова показать окно предпросмотра с возможностью редактирования ранее добавленного текста
+// вызывается кликом по заголовку текстового блока
+function showPreviewToEdit(eSrc){ //alert('showPreviewToEdit');
+	$('#btn_add_prev_content').remove();
+	var editButton=$('<button>',{
+		type:'button',
+		id:'btn_edit_text',
+		'data-toggle':'modal', 
+		'data-target':'#myModal',
+		click:function(){
+			$('div#doEdit').hide();
+			showEditor(eSrc);
+			// в showEditor() -> identifyTextBlock() определяется текущий блок и модуль			
+			getTextModuleContentParsedFromLayout(); // извлечь заголовок и текст модуля из Layout
+			addTextIntoEditor('preview');
+		}
+	}).text('Редактировать');
+	$('div#doEdit').removeAttr('style');
+	$('#btn_wrapper').css({
+		backgroundColor:'#EEE',
+		display:'block',
+		textAlign:'right'
+	}).html(editButton);
+}
 // разбить полученный контент статьи на заголовок и текст
 function splitArtContent(content){
 	return content.split("^");
@@ -318,6 +376,7 @@ function storeLayoutBlockData(curModule){
 	var curColumn=curModule.parentNode;	// колонка
 	Layout.blocks.moduleClickedBlockNumber=getBlockNumber(curColumn); // № блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
+	//alert(Layout.blocks.moduleClickedBlockNumber+', '+Layout.blocks.moduleClickedLocalIndex);
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

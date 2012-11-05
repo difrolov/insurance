@@ -156,7 +156,8 @@ h3{
     <td>&nbsp;</td>
     <td>загрузить предпросмотр статьи:<br>
     <strong>manageArticleText();</strong></td>
-    <td>Ссылка (картинка) <strong>Предпросмотр статьи</strong></td>
+    <td><p>1. Ссылка (картинка) <strong>Предпросмотр статьи</strong></p>
+    <p>2. Ссылка в текстовом модуле после добавления текста или готовой статьи.</p></td>
     <td>handle_text_module.php</td>
   </tr>
   <tr>
@@ -189,6 +190,13 @@ h3{
         <strong>hideArticlesStuff(1);</strong></p>
     </blockquote></td>
     </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>сгенерировать окно предпросмотра текста:<br>
+    <strong>    createPreviewWindow(2);</strong></td>
+    <td>Щелчок по теме статьи, ранее добавленной в модуль.</td>
+    <td>handle_text_module.php</td>
+  </tr>
   <tr>
     <td>&nbsp;</td>
     <td><a name="storeLayoutBlockData"></a>сохранить в Layout индекс  модуля и номер его родительского блока (колонки):<br>
