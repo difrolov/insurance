@@ -73,30 +73,112 @@ function addModuleIntoBlock(event,divBlock){
   }
 }
 // перестроить последовательность модулей после их пересортировки:
-function rearrangeModulesOrder(column,itemIndexStart,itemIndexStop){
-	var modContent,tText;	
+// см. схему в сайт.xlsx!Пересортировка модулей
+function rearrangeModulesOrder( column,			// колонка, содержащая сотрируемый модуль
+								itemIndexStart, // индекс модуля перед сортировкой
+								itemIndexStop	// индекс модуля после сортировки
+							  ){
+	
+	
+	//var modContent,tText;
+	//var mTest='';
+	
+	
 	var blockNumber=($(column).attr('data-block-type')=="footer")? 'footer':getBlockNumber(column);
-	// получить все модули в колонке:
-	$(column).find('div[data-module-type]').each(
+
+	var iStartIterator,iStop;
+	if (itemIndexStart>itemIndexStop){
+		iStartIterator=itemIndexStop;
+		iStop=itemIndexStart;
+	}else{
+		iStartIterator=itemIndexStart;
+		iStop=itemIndexStop;
+	} //alert('before:\nitemIndexStart: '+itemIndexStart+'\nitemIndexStop: '+itemIndexStop+'\n-----------\niStartIterator: '+iStartIterator+'\niStop: '+iStop);
+	// распарсить контент блока на массив:
+	var modContentArray=splitBlockContent(blockNumber);
+	var tIndex;
+	// получить все модули с контентом (текст и прочие) в колонке:
+	$(column).find('div[data-module-type]').each( // только содержащие контент
+		// перенести контент текущего модуля в блок
 		function(i){
-			// проверить, не является ли модуль текстовым; получить добавленный контент
-			if ( i==itemIndexStop
-				 && $(this).attr('data-module-type')=='Текст'
-			   ){
+		  if (i>=iStartIterator) {
+			
+			//test:
+			var from='\nЗАМЕНИТЬ\n'+modContentArray[i]+'\nНА:\n';			
+			
+			// модуль - текстовый:
+			//if ($(this).attr('data-module-type')=='Текст') {
+			// текущий модуль - это тот, который перемещали:
+			if (i==itemIndexStop){
+				// взять контент из модуля с позицией ДО перемещения и заменить им элемент массива с новым индексом для послудующего преобразования в контент блока:
+				modContentArray[i]=modContentArray[itemIndexStart];
+			}else{
+				// в зависимости от того, куда перемещали модуль (вверх или вниз), будем корректировать индексы остальных модулей:
+				tIndex=(itemIndexStart>itemIndexStop)? i-1:i+1;
+				modContentArray[i]=modContentArray[tIndex];
+			}
+			//}else{
+				// заменить контент модуля БЛОКА текстом текущего модуля КОЛОНКИ:
+				//modContentArray[i]=$(this).text();
+			//}
+			
+			alert('i = '+i+'\nТип модуля: '+$(this).attr('data-module-type')+'\nКонтент перемещаемого модуля: \n'+modContentArray[i]+'\nmodContentArray: \n'+modContentArray+from+modContentArray[i]);
+			if (i==iStop){
+				//alert('after:\ni: '+i+'\niStop: '+iStop);
+				Layout.blocks[blockNumber]=modContentArray.join("|");
+				//alert(Layout.blocks[blockNumber]);
+				return false;
+			}
+		}
+			/*// проверить, не является ли модуль текстовым; получить добавленный контент
+			if ($(this).attr('data-module-type')=='Текст') {
+				
+				
+				
+				// индекс ТЕКУЩЕГО модуля (в данной итерации) в колонке после сортировки:
+				var currentModuleIndex=$(column).index(this.parent);
+				var tInfo='\n\ni= '+i+'\nitemIndexStop= '+itemIndexStop+'\nitemIndexStart= '+itemIndexStart;
 				var modContentArray=splitBlockContent(blockNumber);
-				tText=modContentArray[itemIndexStart];
-				//alert(itemIndexStart+' :: '+itemIndexStop+'\nmodule content from block: '+blockNumber+': '+tText);
+				// подставить "Текст":
+				if( ( //индекс ТЕКУЩЕГО модуля не совпадает с индексом ОТСОРТИРОВАННОГО модуля:
+					  currentModuleIndex!=itemIndexStop	
+					  && i==currentModuleIndex
+					)
+					// ИЛИ
+					// контент БЛОКА (Layout) не содержит " :: "
+					|| modContentArray[itemIndexStart].indexOf(setTextContentIdentifier())==-1
+				  ) {
+					// если текущий текстовый блок содержит суффикс, являющийся флагом добавления новой или существующей статьи, заберём этот контент:
+					tText=getTextStart(null); // вернёт "Текст"
+					alert('Должен быть просто "Текст":\n'+tText+tInfo);
+				}else{ // подставить контент блока:
+					tText=modContentArray[itemIndexStart]; // вернёт контент текстового БЛОКА В Layout
+					//alert('Должен быть контент текстового БЛОКА В Layout:\n'+tText+tInfo);
+				}//alert('modContentArray: \n----------------- \n' + modContentArray + '\n \n \nsetTextContentIdentifier: \n-----------------\n' + setTextContentIdentifier() + '\n\n\ntText:\n-----------------\n' + tText);
+			
+			
+			
+			
+			
 			}else
 				tText=$(this).text();
+			
 			if (i) {
+				//--------------
+				mTest+="\n";
+				mTest+=tText;
+				//--------------
 				modContent+="|";
 				modContent+=tText;
-			}else
+			}else{
+				mTest=tText;
+				//--------------
 				modContent=tText;
+			}	// alert(itemIndexStart+' :: '+itemIndexStop+'\ntText:\n'+tText+'\nmodContent:\n'+'\n'+mTest);*/
 	}); 
-	Layout.blocks[blockNumber]=modContent;
+	//Layout.blocks[blockNumber]=modContent;
 <?	if (isset($_GET['test'])):?>    
-	//alert('blockNumber: '+blockNumber+'\nBlock content: '+Layout.blocks[blockNumber]);
+	//alert('Контент БЛОКА:\n-----------------\n'+mTest+'\n==================\n'+modContent);
 	test_parseLayout();
 <?	endif;?>	
 }
@@ -135,6 +217,7 @@ function saveBlockContentString(blockNumber,tBlockArray){
 // выделить фоном активную колонку:
 function selectColumn(event,divBlock){
   try{
+	// колонка, по которой кликали:
 	var srcEl=(event.target)? event.target:event.srcElement;
 	if (srcEl.parentNode==divBlock) {
 		if (!$(srcEl).find('input').length) {
@@ -147,6 +230,8 @@ function selectColumn(event,divBlock){
 						itemIndexStart=ui.item.index();
 					},
 					stop: function(event,ui){
+						var blockNumber=($(this).attr('data-block-type')=="footer")? 'footer':getBlockNumber(this);
+						alert('modContentArray BEFORE:\n'+splitBlockContent(blockNumber));
 						rearrangeModulesOrder(this,itemIndexStart,ui.item.index());
 					}
 				});

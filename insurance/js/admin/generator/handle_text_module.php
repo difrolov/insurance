@@ -233,7 +233,11 @@ function getModuleIndex(curColumn,curModule){
 }
 // получить начало текстового блока:
 function getTextStart(artID){
-	return "Текст"+setTextContentIdentifier(artID);
+	var ret="Текст";
+	// если метод вызывали НЕ при пересортировке модулей:
+	if (artID!==null)
+		ret+=setTextContentIdentifier(artID);
+	return ret;
 }
 // спрятать окна предпросмотра, таблицы готовых статей и редактора
 function hideArticlesStuff(keep_editor_open){
