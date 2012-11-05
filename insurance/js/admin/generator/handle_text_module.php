@@ -77,6 +77,8 @@ function addArticleIdOrTextToModule(artID,text,header){
 		click: function(){
 			// alert('onClick:\nartID: '+artID+'\nthis: '+this+'\nheaderClicked: '+headerClicked);
 			manageArticleText(artID,this,headerClicked);
+			identifyTextBlock(this); // назначить активный блок и модуль
+			getTextModuleContentParsedFromLayout(); // извлечь заголовок и текст модуля из Layout и разместить их в области предпросмотра
 			return false;
 		}
 	}).text(artHeader)
@@ -355,8 +357,6 @@ function showPreviewToEdit(eSrc){ //alert('showPreviewToEdit');
 		click:function(){
 			$('div#doEdit').hide();
 			showEditor(eSrc);
-			// в showEditor() -> identifyTextBlock() определяется текущий блок и модуль			
-			getTextModuleContentParsedFromLayout(); // извлечь заголовок и текст модуля из Layout
 			addTextIntoEditor('preview');
 		}
 	}).text('Редактировать');
