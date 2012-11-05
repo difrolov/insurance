@@ -52,9 +52,12 @@ function addArticleIdOrTextToModule(artID,text,header){
 		bg='yellow';
 	}else{
 		preHeader='Статья id '+artID;
-		bg='#EEE';
+		bg='greenYellow';
 	}
-	$(txtModule).css('background-color',bg);
+	$(txtModule).css({
+		backgroundColor:bg,
+		border:'none'
+	});
 	var artHeader='';
 	if (!header){
 		if (!(artHeader=$('div#prev_header').text())){

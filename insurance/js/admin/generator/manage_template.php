@@ -92,15 +92,13 @@ function rearrangeModulesOrder( column,			// колонка, содержаща�
 	var tIndex;
 	var newModArray=new Array();
 	// пересортировать остальные модули (переместить контент с учётом изменившихся индексов):
-	for( i=0; 	// 0+1 =1
-		 i<modContentArray.length;				//		4
-		 i++
-	   ){
+	for( i=0;i<modContentArray.length;i++){
 		if (i<iStartIterator||i>iStop){
 			newModArray[i]=modContentArray[i];
 		}else{
 			tIndex=(itemIndexStart>itemIndexStop)? i-1:i+1;
-			newModArray[i]=modContentArray[tIndex];
+			if (modContentArray[tIndex])
+				newModArray[i]=modContentArray[tIndex];
 		}
 	}
 	// взять контент модуля из начальной позиции (в блоке) и переместить в конечную позицию 
