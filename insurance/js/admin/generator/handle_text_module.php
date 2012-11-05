@@ -19,7 +19,7 @@ $(document).ready(function(){
 		var article_id=$(this).attr('data-article-id');
 		if (window.textTarget=='ready'){ // будем добавлять id статьи в объект Layout
 			// добавить id статьи в Layout и тестовый блок:
-			addArticleIdOrTextToModule(article_id);
+			addArticleIdOrTextToModule(article_id,false,$(this).text());
 		}else if (window.textTarget=='editor'){ // будем добавлять ТЕКСТ статьи в модуль
 			// получить текст статьи (ajax), загрузить в модуль и Layout:
 			manageArticleText(article_id);
@@ -32,10 +32,12 @@ $(document).ready(function(){
 });
 // модифицировать текстовый модуль - добавить либо id, либо текст статьи
 function addArticleIdOrTextToModule(artID,text,header){
-  try{ //alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+  try{ 	//alert();
+  		//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
 	var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
 	// распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
+	//alert('block: '+Layout.blocks.moduleClickedBlockNumber+', module: '+Layout.blocks.moduleClickedLocalIndex);
 	// добавить служебный разделитель после "Текст" и идентификатор типа контента как id статьи, если получили artID:
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
 	// получить целевую колонку:
@@ -44,7 +46,6 @@ function addArticleIdOrTextToModule(artID,text,header){
 	var txtModule=$(tBlock).children('div.innerModule')[Layout.blocks.moduleClickedLocalIndex];
 	// получить блок модуля с текстом:
 	var txtModuleInner=$(txtModule).children('div[data-module-type="Текст"]');
-
 	var bg,preHeader,headerClicked;
 	if (!artID) { // если ID статьи не передавали, стало быть, она новая; добавим её текст:
 		arrBlockContentArray[ModuleIndex]+=header+'^'+text;
@@ -58,7 +59,7 @@ function addArticleIdOrTextToModule(artID,text,header){
 		backgroundColor:bg,
 		border:'none'
 	});
-	var artHeader='';
+	var artHeader=''; //alert(63);
 	if (!header){
 		if (!(artHeader=$('div#prev_header').text())){
 			alert('Заголовок не найден...');
@@ -71,6 +72,7 @@ function addArticleIdOrTextToModule(artID,text,header){
 		// Не нравится добавленный текст? - удаляйте модуль и добавляйте новый!
 		$('div#btn_wrapper').hide();
 	}
+	//alert('artHeader = '+artHeader+'\nheader = '+header);
 	$(txtModuleInner).html(preHeader+':&nbsp;');
 	$('<a>',{
 		href:"#", // передаётся в качестве аргумента "this" в manageArticleText();
