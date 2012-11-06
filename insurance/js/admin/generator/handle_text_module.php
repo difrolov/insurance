@@ -32,19 +32,16 @@ $(document).ready(function(){
 });
 // модифицировать текстовый модуль - добавить либо id, либо текст статьи
 function addArticleIdOrTextToModule(artID,text,header){
-  try{ 	//alert();
-  		//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+  try{ 	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
 	var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
 	// распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
-	//alert('block: '+Layout.blocks.moduleClickedBlockNumber+', module: '+Layout.blocks.moduleClickedLocalIndex);
-	// добавить служебный разделитель после "Текст" и идентификатор типа контента как id статьи, если получили artID:
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
 	// получить целевую колонку:
 	var tBlock=$('div#tmplPlace div[data-block-type]')[Layout.blocks.moduleClickedBlockNumber-1];
 	// получить модуль:
 	var txtModule=$(tBlock).children('div.innerModule')[Layout.blocks.moduleClickedLocalIndex];
-	// получить блок модуля с текстом:
+	// получить ВНУТРЕННИЙ блок модуля с текстом:
 	var txtModuleInner=$(txtModule).children('div[data-module-type="Текст"]');
 	var bg,preHeader,headerClicked;
 	if (!artID) { // если ID статьи не передавали, стало быть, она новая; добавим её текст:
@@ -79,7 +76,8 @@ function addArticleIdOrTextToModule(artID,text,header){
 		click: function(){
 			// alert('onClick:\nartID: '+artID+'\nthis: '+this+'\nheaderClicked: '+headerClicked);
 			manageArticleText(artID,this,headerClicked);
-			identifyTextBlock(this); // назначить активный блок и модуль
+			storeLayoutBlockData(this);
+			//identifyTextBlock(this); // назначить активный блок и модуль
 			getTextModuleContentParsedFromLayout(); // извлечь заголовок и текст модуля из Layout и разместить их в области предпросмотра
 			return false;
 		}
@@ -163,7 +161,8 @@ function addTextModuleComLinks(content){
 		title:"Выбрать из имеющихся статей",
 		click:	function(){
 			window.textTarget='ready';
-			identifyTextBlock(this);			
+			storeLayoutBlockData(this);
+			//identifyTextBlock(this);			
 			$('#tblArticles').css('width','auto').parent('div').css('overflow-x','hidden');
 			$(aTable).css({
 				display:'inline-block',
@@ -256,7 +255,7 @@ function getTextStart(artID){
 	return ret;
 }
 // получить и распарсить на заголовок и текст контент текстового модуля ИЗ БЛОКА
-// к этому моменту должна быть выполнена функция identifyTextBlock(src); src - ссылка-источник события. Элементы определяются по её parentNode.parentNode
+// к этому моменту должна быть выполнена функция storeLayoutBlockData/identifyTextBlock(src); src - ссылка-источник события. Элементы определяются по её parentNode.parentNode
 function getTextModuleContentParsedFromLayout(){
 	// получить контент заголовка и текста:
 	var blockModules=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
@@ -336,7 +335,8 @@ function showArticlesTable(){
 // загрузить редактор
 function showEditor(src){ //alert('showEditor');
 	window.textTarget='editor';
-	identifyTextBlock(src);
+	storeLayoutBlockData(src);
+	//identifyTextBlock(src);
 	$('#tblArticles').parent('div').css('overflow-x','hidden');
 	$(getPreviewWindow()).appendTo($('a#upload_article').parent())
 	.css({
@@ -374,7 +374,8 @@ function splitArtContent(content){
 	return content.split("^");
 }
 // сохранить в Layout номер блока и индекс модуля
-function storeLayoutBlockData(curModule){
+function storeLayoutBlockData(obj){
+	var curModule=obj.parentNode.parentNode;
 	var curColumn=curModule.parentNode;	// колонка
 	Layout.blocks.moduleClickedBlockNumber=getBlockNumber(curColumn); // № блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля

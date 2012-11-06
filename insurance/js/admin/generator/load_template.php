@@ -194,16 +194,19 @@ function createLayout(){
 						case '4ss':
 							tmplBlock+=' data-block-type="header"';
 								break;
-						case '300':
-						case '400':
-							tmplBlock+=' data-block-type="left"';
-								break;
 						case '200':
 						case '40i':
 						case '4ii':
 						case '4ss':
 							tmplBlock+=' data-block-type="right"';
 								break;
+						case '300':
+						case '30s':
+						case '400':
+						case '40i':
+						case '40s':	
+							tmplBlock+=' data-block-type="common"';
+								break;	
 					}
 				
 				break;
@@ -272,6 +275,12 @@ function createLayout(){
 						case '4s0':
 							tmplBlock+=' data-block-type="right"';
 								break;
+						case '3ss':
+						case '400':	
+						case '40s':
+						case '4ss':
+							tmplBlock+=' data-block-type="common"';
+								break;
 					}
 				
 				break;
@@ -332,6 +341,15 @@ function createLayout(){
 						case '3ss':
 							tmplBlock+=' data-block-type="right"';
 								break;
+						case '3i0':
+						case '3s0':	
+						case '40i':
+						case '4i0':
+						case '4s0':
+						case '4ii':
+						case '4ss':
+							tmplBlock+=' data-block-type="common"';
+								break;
 					}
 				
 				break;
@@ -381,6 +399,11 @@ function createLayout(){
 								break;
 						case '4ss':
 							tmplBlock+=' data-block-type="right"';
+								break;
+						case '4i0':	
+						case '4s0':
+						case '4ii':
+							tmplBlock+=' data-block-type="common"';
 								break;
 					}
 				
