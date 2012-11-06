@@ -14,47 +14,53 @@ h3{
 .txtRed{
 	color:#F00;
 }
+tr.main td {
+	background:#CCFFCC;
+}
+ol, ul{
+	padding-left:24px;
+}
 </style>
 </head>
 <body>
 <h3>Последовательность вызова клиентских скриптов:</h3>
-    <table width="90%" border="1" cellpadding="8" cellspacing="0">
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
   <tr bgcolor="#FFCCFF">
-    <td><h4>#</h4></td>
+    <td><h4><strong>$_GET</strong></h4></td>
     <td><h4>Function</h4></td>
     <td><h4>event source</h4></td>
     <td><h4>Файл</h4></td>
-  </tr>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td><a name="splitBlockContent"></a>преобразовать контент блока (Layout.blocks) в массив:<br>
     <strong>splitBlockContent(1);</strong></td>
     <td>&nbsp;</td>
     <td>manage_template.php</td>
-  </tr>
+    </tr>
   <tr>
-    <td>&nbsp;</td>
+    <td>test140</td>
     <td>преобразовать контент блока в строку и сохранить в Layout:<br>
     <strong>saveBlockContentString(2);</strong></td>
     <td>&nbsp;</td>
     <td>manage_template.php</td>
-  </tr>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-  </tr>
+    </tr>
   <tr valign="top">
     <td colspan="4" style="line-height:1px; padding:0;" bgcolor="#CCCCCC">&nbsp;</td>
     </tr>
-  <tr valign="top">
+  <tr valign="top" class="main">
     <td>&nbsp;</td>
     <td><p>Подготовить схему макета:<br>
 	<strong>defineLayoutSchema(2); </strong></p></td>
     <td rowspan="7">Пиктораммы схем макета</td>
     <td rowspan="7">prepare_data.php</td>
-  </tr>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
@@ -103,13 +109,13 @@ h3{
         <strong>checkLayoutReady();</strong></p>
     </blockquote></td>
     </tr>
-  <tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td><p>Загрузить макет по сформированному шаблону:<strong><br>
     loadLayout();</strong></p></td>
     <td rowspan="3">Кнопка <q><strong>Загрузить макет</strong></q></td>
     <td rowspan="3">load_template.php</td>
-  </tr>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
@@ -124,14 +130,14 @@ h3{
         <strong>createLayout();</strong></p>
     </blockquote></td>
     </tr>
-  <tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td>выделить цветом активную колонку:<br>
     <strong>selectColumn(2);</strong></td>
     <td>Колонки макета</td>
     <td>manage_template.php</td>
-  </tr>
-  <tr>
+    </tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td><p>добавить модуль в активную колонку:<br>
     <strong>addModuleIntoBlock(2);</strong></p></td>
@@ -152,21 +158,21 @@ h3{
         <strong>addTextModuleComLinks(1);</strong></p>
     </blockquote></td>
     </tr>
-  <tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td>загрузить предпросмотр статьи:<br>
     <strong>manageArticleText();</strong></td>
     <td><p>1. Ссылка (картинка) <strong>Предпросмотр статьи</strong></p>
     <p>2. Ссылка в текстовом модуле после добавления текста или готовой статьи.</p></td>
     <td>handle_text_module.php</td>
-  </tr>
-  <tr>
+    </tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td>добавить текст полученной ajax'ом статьи в поле редактора:<br>
     <strong>function addArticleTextToEditor(2);</strong></td>
     <td rowspan="4">Кнопка <strong>Вставить</strong> в окне предпросмотра статьи.</td>
     <td rowspan="4">handle_text_module.php</td>
-  </tr>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
@@ -190,20 +196,20 @@ h3{
         <strong>hideArticlesStuff(1);</strong></p>
     </blockquote></td>
     </tr>
-  <tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td>сгенерировать окно предпросмотра текста:<br>
     <strong>    createPreviewWindow(2);</strong></td>
     <td>Щелчок по теме статьи, ранее добавленной в модуль.</td>
     <td>handle_text_module.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
+    </tr>
+  <tr class="main">
+    <td>test387</td>
     <td><a name="storeLayoutBlockData"></a>сохранить в Layout индекс  модуля и номер его родительского блока (колонки):<br>
     <strong> storeLayoutBlockData(1);</strong></td>
     <td rowspan="2">&nbsp;</td>
     <td rowspan="2">handle_text_module.php</td>
-  </tr>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
@@ -213,21 +219,21 @@ h3{
         <span class="txtRed">Layout.blocks.moduleClickedLocalIndex</span>=<strong>getModuleIndex(2);</strong></p>
     </blockquote>    </td>
     </tr>
-  <tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td><a id="setTextContentIdentifier"></a>получить суффикс начала строки текстового модуля:<br>
     <strong>setTextContentIdentifier(1);</strong></td>
     <td><p>&nbsp;</p></td>
     <td>handle_text_module.php</td>
-  </tr>
-  <tr>
+    </tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td>получить начало строки текстового модуля (может быть просто &quot;Текст&quot;:<br>
     <strong>getTextStart(1);</strong></td>
     <td>&nbsp;</td>
     <td>handle_text_module.php</td>
-  </tr>
-  <tr>
+    </tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td><p>сохранить в Layout индекс текстового модуля и номер его родительского блока (колонки):<br>
     <strong>identifyTextBlock(1);</strong></p></td>
@@ -235,7 +241,9 @@ h3{
       <ul>
         <li>&quot;Добавьте произвольное содержание&quot;</li>
         <li> &quot;Выберите из имеющихся статей&quot;</li>
-    </ul></td>
+    </ul>
+    <hr>
+    +</td>
     <td rowspan="2">handle_text_module.php</td>
     </tr>
   <tr>
@@ -244,32 +252,56 @@ h3{
       <p><strong><a href="#storeLayoutBlockData">storeLayoutBlockData(curModule)</a>;</strong></p>
     </blockquote></td>
     </tr>
-  <tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td>добавить в модуль текст новой статьи или id уже существующей:<br>
     <strong>addArticleIdOrTextToModule(2);</strong></td>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
+    <td>handle_text_module.php</td>
+    </tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td>удалить модуль из колонки и из Layout:<br>
     <strong>removeModule(1);</strong></td>
     <td>&quot;Удалить модуль из колонки&quot;</td>
     <td>manage_template.php</td>
-  </tr>
-  <tr>
+    </tr>
+  <tr class="main">
     <td>&nbsp;</td>
     <td><p>перестроить последовательность модулей в Layout:<br>
         <strong>rearrangeModulesOrder(1);</strong> </p></td>
     <td rowspan="2">Ручная сортировка порядка модулей в колонке</td>
     <td rowspan="2">manage_template.php</td>
-  </tr>
+    </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
       <p><a href="#splitBlockContent"><strong>splitBlockContent(blockNumber);</strong></a></p>
     </blockquote></td>
+    </tr>
+  <tr class="main">
+    <td>&nbsp;</td>
+    <td>загрузить окно редактора:<br>
+    <strong>showEditor();</strong></td>
+    <td><ol>
+      <li>Ссылка <strong>Добавьте произвольное содержание</strong>.</li>
+      <li>Кнопка <strong>Редактировать</strong> (предпросмотр текста новой статьи после её добавления)</li>
+    </ol>    </td>
+    <td>handle_text_module.php</td>
+    </tr>
+  <tr class="main">
+    <td>&nbsp;</td>
+    <td>забрать заголовок и текст новой статьи из поля редактора и разместить в блоке Layout'а и тестовом модуле:<br>
+    <strong>getDataFromCKeditor();</strong></td>
+    <td>Кнопка <strong>Сохранить</strong> в окне редактора.</td>
+    <td>handle_text_module.php</td>
+    </tr>
+  <tr class="main">
+    <td>test268</td>
+    <td>получить и распарсить на заголовок и текст контент текстового модуля ИЗ <strong>Layout</strong> и вставить их в заголовок и область текста области предпросмотра:<br>
+    <strong>getTextModuleContentParsedFromLayout();</strong></td>
+    <td>Ссылка [<strong>Заголовок статьи</strong>] в текстовом модуле после добавления туда текста.</td>
+    <td>&nbsp;</td>
     </tr>
 </table>
 
