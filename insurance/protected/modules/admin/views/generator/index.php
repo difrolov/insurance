@@ -62,8 +62,13 @@ $this->breadcrumbs=array(
         <li>Щёлкните модули для размещения в ней.</li>
       </ol>
         <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
-        <?php foreach($model_modules as $key_mod=>$val_mod){ ?>
-            <div onclick="_generator_modules.getModule(<?php echo $model_modules[$key_mod]['id']; ?>)" data-module-type="<?php echo $model_modules[$key_mod]['name']; ?>"><?php echo $model_modules[$key_mod]['name']; ?></div>
+        <?php foreach($model_modules as $key_mod=>$val_mod):?>
+            <div onclick="_generator_modules.getModule(<?php 
+				
+				echo $model_modules[$key_mod]['id']; 
+				
+				?>)" data-module-type="<?php echo $model_modules[$key_mod]['name']; ?>"><?php echo $model_modules[$key_mod]['name']; ?></div>
+        <?php endforeach; ?>
             <!--<div data-module-type="Новости">Новости</div>
             <div data-module-type="Готовое решение">Готовое решение</div>
             <div data-module-type="Программа страхования">Программа страхования</div>
