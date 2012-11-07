@@ -1,250 +1,11 @@
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/generator_modules.js"></script>
-<? 	if (isset($_GET['show_seq'])){
-	// hidden: ?>
-<h4>Последовательность вызова клиентских скриптов:</h4>
-    <table width="100%" border="1" cellspacing="0" cellpadding="8">
-  <tr bgcolor="#FFCCFF">
-    <td><h4>#</h4></td>
-    <td><h4>Function</h4></td>
-    <td><h4>event source</h4></td>
-    <td><h4>Файл</h4></td>
-  </tr>
-  <tr valign="top">
-    <td>&nbsp;</td>
-    <td><p>Подготовить схему макета:<br>
-	<strong>defineLayoutSchema(event,this); </strong></p></td>
-    <td>Пиктораммы схем макета</td>
-    <td>prepare_data.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>показать блок "текущий выбор":<br>
-        <strong>showBlock('currentChoice','line'); </strong></p>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>prepare_data.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера:<br>
-        <strong>handlePyctos(srce); </strong></p>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>prepare_data.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <blockquote>
-        <p>отобразить блоки следующего уровня, назначить класс первой пиктограмме:<br>
-          <strong>startHandleBlock(srce,blockTextToShowSubheader,divPyctosSubheader);</strong></p>
-      </blockquote>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>prepare_data.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <blockquote>
-        <p>сделать все пиктограммы блоков 2 и 3 непрозрачными:<br>
-          <strong>dropPyctosOpacity(divPyctosFooter);</strong> </p>
-      </blockquote>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>prepare_data.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере;<br>
-        указать параметры текущего выбора:<br>
-        <strong>setCurrentChoiceStatus(event,currentPyctosContainer); </strong></p>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>prepare_data.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>проверить &#8212; допускает ли текущее состояние макета его загрузку;<br>
-        если да, <span class="txtRed">назначить схему для макета</span> :<br>
-        <strong>checkLayoutReady();</strong></p>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>prepare_data.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><p>Загрузить макет по сформированному шаблону:<strong><br>
-    loadLayout();</strong></p></td>
-    <td>Кнопка <q><strong>Загрузить макет</strong></q></td>
-    <td>load_template.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>назначить параметры отображения задействованным элементам:<br>
-        <strong>stateLayoutIsLoaded()</strong>;</p>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>switch_states.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>собрать блочную структуру макета по выбранной ранее схеме:<br>
-        <strong>createLayout();</strong></p>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>load_template.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>выделить цветом активную колонку:<br>
-    <strong>selectColumn(event,this);</strong></td>
-    <td>Колонки макета</td>
-    <td>manage_template.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>добавить модуль в активную колонку:<br>
-    <strong>addModuleIntoBlock(event,this);</strong></td>
-    <td>Кнопка модуля</td>
-    <td>manage_template.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p><strong>?</strong> добавить ссылки (команды добавления текста/статьи) в текстовый модуль:<br>
-        <strong>addTextModuleComLinks(content);</strong></p>
-    </blockquote></td>
-    <td>&nbsp;</td>
-    <td>manage_template.php</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-
-	<hr size="4" color="#0000FF">
-<? }?>
-<style>
-div#article_preview_text{
-	display:<?="none"?>;
-	max-height:35%;
-	padding-right:24px;
-	position:fixed;
-	right:5%;
-	z-index:2;
-}
-div#article_preview_text div#wrp{
-	border:solid 1px #FFCC00;
-	box-shadow: 0 0 20px 0 #666;
-}
-div#article_preview_text
-	div#prev_content{
-	background:#FFF;
-	max-height:330px;
-	overflow:auto;
-	padding:8px;
-	text-align:left;
-}
-div#upload_article_window{
-	background:#FFF;
-	border:solid 2px #CCC;
-	box-shadow: 0 0 30px 0 #666;
-	padding:4px;
-	position:absolute;
-	z-index:1;
-	display:<?="none"?>;
-}
-table#tblArticles {
-	border:solid 1px #CCC;
-}
-table#tblArticles tr td{
-	border-bottom:dashed 1px #CCC;
-}
-table#tblArticles tbody tr:first-child td{
-	border-bottom-style:solid;
-}
-table#tblArticles tbody tr:last-child td{
-	border-bottom:none;
-}
-table#tblArticles tr td:first-child{
-	text-align:right;
-}
-table#tblArticles tr td:last-child{
-	text-align:center;
-}
-table#tblArticles tbody tr:first-child td:first-child{
-	text-align:left;
-}
-
-tr.bold >td {
-	font-weight:bold;
-}
-div[data-test="template"]{
-	background:#FFFFCC;
-	border:solid 2px #FFCC66;
-	left:0;
-	max-width:40%;
-	opacity:0.3;
-	overflow:hidden;
-	padding:10px;
-	position:fixed;
-	text-align:left;
-	top:20px;
-	width:260px;
-	z-index:1;
-}
-div[data-test="template"]:hover{
-	opacity:1;
-}
-div[data-test="template"]
-	div#tmpl-blocks
-		> div > div {
-	margin-left:20px;
-}
-div#test_block_appearance{
-	position:absolute;
-	right:4px;
-	top:2px;
-}
-td[data-article-id]{
-	cursor:default;
-}
-td[data-article-id]:hover{
-	background:#08C;
-	color:#FFF;
-}
-.wclose{
-	background:url(<?php echo Yii::app()->request->baseUrl; ?>/images/gtk-cancel.png);
-	cursor:pointer;
-	height:22px;
-	position:absolute;
-	right:-25px;
-	top:-2px;
-	width:22px;
-}
-.wclose.inside{
-	right:0;
-}
-</style>
 <?	if (isset($_GET['test'])){?>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/test.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <div data-test="template">
 	<div id="test_block_appearance" class="link">свернуть</div>
 	<h4>Текущие данные создаваемого подраздела:</h4>
     <h5>Схема макета:  <span id="tmpl-shema"></span></h5>
-  	<h5>Блоки/модули:</h5>
-    	<div id="tmpl-blocks"></div>
-
+  	<h5 class="margin0">Блоки/модули:</h5>
+    <div id='obj_place'></div>
 </div>
 <?php
 	}
@@ -303,7 +64,10 @@ $this->breadcrumbs=array(
         <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
         <?php foreach($model_modules as $key_mod=>$val_mod){ ?>
             <div onclick="_generator_modules.getModule(<?php echo $model_modules[$key_mod]['id']; ?>)" data-module-type="<?php echo $model_modules[$key_mod]['name']; ?>"><?php echo $model_modules[$key_mod]['name']; ?></div>
-        <?php } ?>
+            <!--<div data-module-type="Новости">Новости</div>
+            <div data-module-type="Готовое решение">Готовое решение</div>
+            <div data-module-type="Программа страхования">Программа страхования</div>
+            <div data-module-type="Случайная статья">Случайная статья</div>-->
         	<div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
         </div>
     </div>
@@ -361,8 +125,13 @@ $this->breadcrumbs=array(
 <div class="modal-body">
 
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/') ?>">
-    <?php
-$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+	<table id="new_art_header" cellspacing="0">
+      <tr>
+        <td nowrap>Заголовок статьи: </td>
+        <td width="100%"><input placeholder="Укажите заголовок статьи" name="article_header" id="article_header" type="text"></td>
+      </tr>
+    </table>
+<?php	$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 			  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
@@ -386,14 +155,6 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 				array('name'=> 'editing',
 					  'items'=>
 					  		array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
-			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Layouts' )),
-			//array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
-			//array('name'=> 'forms',       'items'=> array( 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' )),
-
-			//array('name'=> 'basicstyles', 'items'=> array( 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' )),
-			//array('name'=> 'links',       'items'=> array( 'Link','Unlink','Anchor' )),
-			//array('name'=> 'insert',      'items'=> array( 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' )),
-
 				array('name'=> 'styles',
 				  	  'items'=>
 							array( 'Styles','Format','Font','FontSize' )),
@@ -414,7 +175,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
     	<span class="wclose" id="close_upartwin"></span>
     	<div style="overflow:auto; height:100%;">
   <?	$articles=HelperAdmin::getAllArticlesList(false); ?>
-    <table width="100%" height="100%" cellspacing="0" cellpadding="0" id="tblArticles">
+    <table width="100%" cellspacing="0" cellpadding="0" id="tblArticles">
       <tr bgcolor="#CCCCCC" class="bold">
         <td>id</td>
         <td>Название</td>
@@ -425,14 +186,14 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
       <tr>
         <td><?=($i+1)?></td>
         <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
-        <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
+        <td><a class="view" rel="tooltip" href="#" onClick="return manageArticleText(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
         <td><?=$articles[$i]['status']?></td>
       </tr>
 <?	}?>
     </table>
   	  </div>
     </div>
-	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="javascript:void();">Загрузить статью...</a></div>
+	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="#">Загрузить статью...</a></div>
 <input type="submit" name="submit" onclick="getDataFromCKeditor();return false;" value="Сохранить">
 </div>
 </form>
