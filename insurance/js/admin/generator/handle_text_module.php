@@ -8,7 +8,7 @@ $(document).ready(function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
 	$('#upload_article').click( function(){
-		showArticlesTable(this);
+		return showArticlesTable(this);
 	});
 
 	// загрузить текст статьи в редактор, либо указать её id в случае, если хотим оставить её без изменений
@@ -32,13 +32,16 @@ $(document).ready(function(){
 });
 // модифицировать текстовый модуль - добавить либо id, либо текст статьи
 function addArticleIdOrTextToModule(artID,text,header){
-  try{ 	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+  try{ 	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.activeBlockIdentifier+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
 	var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
-	// распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
-	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
+	/** 	
+	  * распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
+	  * извлечь контент блока из Layout
+	*/
+	var arrBlockContentArray=splitBlockContent(Layout.blocks.activeBlockIdentifier);
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
 	// получить целевую колонку:
-	var tBlock=$('div#tmplPlace div[data-block-type]')[Layout.blocks.moduleClickedBlockNumber-1];
+	var tBlock=getTargetColumn();	
 	// получить модуль:
 	var txtModule=$(tBlock).children('div.innerModule')[Layout.blocks.moduleClickedLocalIndex];
 	// получить ВНУТРЕННИЙ блок модуля с текстом:
@@ -84,7 +87,7 @@ function addArticleIdOrTextToModule(artID,text,header){
 	.attr('data-link-type','show')
 	.appendTo($(txtModuleInner));
 	// изменить содержание текстового модуля в колонке:
-	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
+	saveBlockContentString( Layout.blocks.activeBlockIdentifier, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
 	addTextIntoEditor(''); // очистить поле редактора
@@ -110,7 +113,7 @@ function addArticleTextToEditor(artBox,artID){
 	// закрыть окна предпросмотра текста и таблицы статей:
 	hideArticlesStuff(true); // окно редактора оставляем открытым
 }
-// добавить либо текст, либо ID статьи
+/*// добавить либо текст, либо ID статьи
 function addArtText( artBox, // id поля с текстом предпросматриваемой статьи
 					 artID // id предпросматриваемой статьи
 				   ){ //alert(window.textTarget);
@@ -120,7 +123,7 @@ function addArtText( artBox, // id поля с текстом предпросм
 	}else if(window.textTarget=='editor'){
 		addArticleTextToEditor(artBox);
 	} //alert(document.getElementById('myModal').style.display);
-}
+}*/
 // добавить текст в поле редактора
 function addTextIntoEditor(content){
 	var aHeader,aText;
@@ -207,6 +210,7 @@ function getArticleTextFromDB(fieldToPlace,artID){
 		data:uData,
 		success: function(msg){
 			if (fieldToPlace){
+				// разбивает полученный из БД контент статьи на заголовок и текст:
 				var content=splitArtContent(msg);
 				$('div#prev_header').html(content[0]);
 				$('div#'+fieldToPlace).html(content[1]);
@@ -216,9 +220,10 @@ function getArticleTextFromDB(fieldToPlace,artID){
 		}
 	});
 }
-// получить № блока
+// получить идентификатор (№/footer) активного блока
 function getBlockNumber(curColumn){
-	return $('div#tmplPlace > div > div').index(curColumn)+1;
+	var blockNum=($(curColumn).attr('data-block-type')=="footer")? 'footer':$('div#tmplPlace > div > div').index(curColumn)+1;
+	return blockNum;
 }
 // забрать из поля редактора и разместить в блоке Layout'а и тестовом модуле
 function getDataFromCKeditor(){
@@ -256,7 +261,7 @@ function getTextStart(artID){
 // к этому моменту должна быть выполнена функция storeLayoutBlockData(src); src - ссылка-источник события. Элементы определяются по её parentNode.parentNode
 function getTextModuleContentParsedFromLayout(){
 	// получить контент заголовка и текста:
-	var blockModules=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
+	var blockModules=splitBlockContent(Layout.blocks.activeBlockIdentifier);
 	var mText=blockModules[Layout.blocks.moduleClickedLocalIndex]; // заголовок и текст модуля
 	var mtSeparator=mText.indexOf("^"); // разделитель заголовка и текста
 	$('#prev_header').html(mText.substring(getTextStart().length,mtSeparator));
@@ -321,9 +326,20 @@ function setTextContentIdentifier(artID){
 }
 // отобразить таблицу выбора статей
 function showArticlesTable(){
+/*	initial state:
+	----------------------------
+	background: white;
+	border: solid 2px #CCC;
+	box-shadow: 0 0 30px 0 #666;
+	padding: 4px;
+	position: absolute;
+	z-index: 3000;
+	display: none;
+*/
 	$('div#upload_article_window').css({
 			display:'inline-block',
 		}).fadeIn(150);
+	return false; // cancel href="#"
 }
 // загрузить редактор
 function showEditor(src){ //alert('showEditor');
@@ -369,9 +385,9 @@ function splitArtContent(content){
 function storeLayoutBlockData(obj){
 	var curModule=obj.parentNode.parentNode;
 	var curColumn=curModule.parentNode;	// колонка
-	Layout.blocks.moduleClickedBlockNumber=getBlockNumber(curColumn); // № блока
+	Layout.blocks.activeBlockIdentifier=getBlockNumber(curColumn); // идентификатор (№/footer) активного  блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
-	//alert(Layout.blocks.moduleClickedBlockNumber+', '+Layout.blocks.moduleClickedLocalIndex);
+	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

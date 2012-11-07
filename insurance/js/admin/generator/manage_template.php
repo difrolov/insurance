@@ -72,6 +72,10 @@ function addModuleIntoBlock(event,divBlock){
 	  alert(e.message);
   }
 }
+// получить целевую колонку по идентификатору активного блока в Layout:
+function getTargetColumn(){
+	return (Layout.blocks.activeBlockIdentifier=='footer')? $('div#tmplPlace div[data-block-type="footer"]'):$('div#tmplPlace div[data-block-type]')[Layout.blocks.activeBlockIdentifier-1];
+}
 // перестроить последовательность модулей после их пересортировки:
 // см. схему в сайт.xlsx!Пересортировка модулей
 function rearrangeModulesOrder( column,			// колонка, содержащая сотрируемый модуль
@@ -114,7 +118,7 @@ function removeModule(objSrc){ // ссылка
 	var Mod=objSrc.parentNode.parentNode; // модуль (class="innerModule")
 	var Block=Mod.parentNode; // блок
 	// найти в активной колонке блок, распарсить его модули и удалить нужный:
-	var blockNumber=getBlockNumber(Block); // № блока
+	var blockNumber=getBlockNumber(Block); // идентификатор (№/footer) активного блока
 	var modIndex=getModuleIndex(Block,Mod); // индекс модуля
 	//alert('Удаляем модуль index '+modIndex+'\n---------------\nТекущий набор:\n'+Layout.blocks[blockNumber]);
 	$(Mod).remove(); // удаляем модуль из колонки

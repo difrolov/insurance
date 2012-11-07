@@ -153,14 +153,6 @@ $this->breadcrumbs=array(
 				array('name'=> 'editing',     
 					  'items'=> 
 					  		array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
-			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Layouts' )),
-			//array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
-			//array('name'=> 'forms',       'items'=> array( 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' )),
-
-			//array('name'=> 'basicstyles', 'items'=> array( 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' )),
-			//array('name'=> 'links',       'items'=> array( 'Link','Unlink','Anchor' )),
-			//array('name'=> 'insert',      'items'=> array( 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' )),
-
 				array('name'=> 'styles', 
 				  	  'items'=> 
 							array( 'Styles','Format','Font','FontSize' )),
@@ -199,7 +191,7 @@ $this->breadcrumbs=array(
     </table>
   	  </div>
     </div>
-	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="javascript:void();">Загрузить статью...</a></div>
+	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="#">Загрузить статью...</a></div>
 <input type="submit" name="submit" onclick="getDataFromCKeditor();return false;" value="Сохранить">
 </div>
 </form>

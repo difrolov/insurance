@@ -154,10 +154,24 @@ ol, ul{
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
-      <p><strong>?</strong> добавить ссылки (команды добавления текста/статьи) в текстовый модуль:<br>
+      <p><strong><a id="addTextModuleComLinks"></a>?</strong> добавить ссылки (команды добавления текста/статьи) в текстовый модуль:<br>
         <strong>addTextModuleComLinks(1);</strong></p>
     </blockquote></td>
     </tr>
+  <tr class="main">
+    <td>&nbsp;</td>
+    <td>отобразить таблицу выбора статей:<br>
+    <strong>showArticlesTable(1);</strong></td>
+    <td><strong>Click</strong> по ссылке &quot;Загрузить статью...&quot; (#upload_article)</td>
+    <td>handle_text_module.php</td>
+  </tr>
+  <tr class="main">
+    <td>&nbsp;</td>
+    <td>получить окно предпросмотра текста в виде объекта:<br>
+    <strong>getPreviewWindow();</strong></td>
+    <td><strong><a href="#addTextModuleComLinks">addTextModuleComLinks(1);</a></strong></td>
+    <td>handle_text_module.php</td>
+  </tr>
   <tr class="main">
     <td>&nbsp;</td>
     <td>загрузить предпросмотр статьи:<br>
@@ -168,10 +182,10 @@ ol, ul{
     </tr>
   <tr class="main">
     <td>&nbsp;</td>
-    <td>добавить текст полученной ajax'ом статьи в поле редактора:<br>
-    <strong>function addArticleTextToEditor(2);</strong></td>
-    <td rowspan="4">Кнопка <strong>Вставить</strong> в окне предпросмотра статьи.</td>
-    <td rowspan="4">handle_text_module.php</td>
+    <td><a id="addArticleTextToEditor"></a>добавить текст полученной ajax'ом статьи в поле редактора:<br>
+    <strong>addArticleTextToEditor(2);</strong></td>
+    <td rowspan="6">Кнопка <strong>Вставить</strong> в окне предпросмотра статьи.</td>
+    <td rowspan="6">handle_text_module.php</td>
     </tr>
   <tr>
     <td>&nbsp;</td>
@@ -182,6 +196,15 @@ ol, ul{
     </tr>
   <tr>
     <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>разбить полученный контент статьи на заголовок и текст:<br>
+          <strong>splitArtContent(content);</strong></p>
+      </blockquote>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
     <td>
       ИЛИ
       <blockquote style="margin-top:0; padding-top:0;">
@@ -189,6 +212,15 @@ ol, ul{
         <strong>getArticleTextFromDB(2);</strong></p>
     </blockquote></td>
     </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>разбивает полученный из БД контент статьи на заголовок и текст:<br>
+          <strong>splitArtContent(msg);</strong></p>
+      </blockquote>
+    </blockquote></td>
+  </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
@@ -219,8 +251,8 @@ ol, ul{
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
-      <p>получить № блока:<br>
-        <span class="txtRed">Layout.blocks.moduleClickedBlockNumber</span>=<strong>getBlockNumber(1);</strong></p>
+      <p>получить идентификатор (№/footer) активного блока:<br>
+        <span class="txtRed">Layout.blocks.activeBlockIdentifier</span>=<strong>getBlockNumber(1);</strong></p>
       <p>получить индекс модуля:<br>
         <span class="txtRed">Layout.blocks.moduleClickedLocalIndex</span>=<strong>getModuleIndex(2);</strong></p>
     </blockquote>    </td>
@@ -243,8 +275,36 @@ ol, ul{
     <td>&nbsp;</td>
     <td>добавить в модуль текст новой статьи или id уже существующей:<br>
     <strong>addArticleIdOrTextToModule(2);</strong></td>
+    <td rowspan="4"><ul>
+      <li><strong>DblClick</strong> по заголовку готовой статьи;</li>
+      <li><a href="#addArticleTextToEditor"><strong>addArticleTextToEditor(2);</strong></a></li>
+      <!--<li><strong>addArtText(3);</strong></li>-->
+      <li><a href="#getDataFromCKeditor"><strong>getDataFromCKeditor();</strong></a>    </li>
+    </ul></td>
+    <td rowspan="4">handle_text_module.php</td>
+    </tr>
+  <tr>
     <td>&nbsp;</td>
-    <td>handle_text_module.php</td>
+    <td><blockquote>
+      <p>получить начало текстового блока:<br>
+        <strong>getTextStar(1);</strong></p>
+    </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>добавить в текстовый модуль идентификатор типа контента (id статьи/текст):<br>
+          <strong>setTextContentIdentifier(1);</strong></p>
+      </blockquote>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>извлечь целевую колонку (находит также по идентификатору &quot;footer&quot;):<br>
+        <strong>getTargetColumn();</strong></p>
+    </blockquote></td>
     </tr>
   <tr class="main">
     <td>&nbsp;</td>
@@ -278,7 +338,7 @@ ol, ul{
     </tr>
   <tr class="main">
     <td>&nbsp;</td>
-    <td>забрать заголовок и текст новой статьи из поля редактора и разместить в блоке Layout'а и тестовом модуле:<br>
+    <td><a id="getDataFromCKeditor"></a>забрать заголовок и текст новой статьи из поля редактора и разместить в блоке Layout'а и тестовом модуле:<br>
     <strong>getDataFromCKeditor();</strong></td>
     <td>Кнопка <strong>Сохранить</strong> в окне редактора.</td>
     <td>handle_text_module.php</td>
