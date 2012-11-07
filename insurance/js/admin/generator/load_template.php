@@ -1,4 +1,6 @@
-<?	if (isset($dwshow)){?><script><? }
+<?	$url=$_GET['base_url'];
+	$test=$_GET['test'];
+if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
 //
@@ -192,16 +194,19 @@ function createLayout(){
 						case '4ss':
 							tmplBlock+=' data-block-type="header"';
 								break;
-						case '300':
-						case '400':
-							tmplBlock+=' data-block-type="left"';
-								break;
 						case '200':
 						case '40i':
 						case '4ii':
 						case '4ss':
 							tmplBlock+=' data-block-type="right"';
 								break;
+						case '300':
+						case '30s':
+						case '400':
+						case '40i':
+						case '40s':	
+							tmplBlock+=' data-block-type="common"';
+								break;	
 					}
 				
 				break;
@@ -270,6 +275,12 @@ function createLayout(){
 						case '4s0':
 							tmplBlock+=' data-block-type="right"';
 								break;
+						case '3ss':
+						case '400':	
+						case '40s':
+						case '4ss':
+							tmplBlock+=' data-block-type="common"';
+								break;
 					}
 				
 				break;
@@ -330,6 +341,15 @@ function createLayout(){
 						case '3ss':
 							tmplBlock+=' data-block-type="right"';
 								break;
+						case '3i0':
+						case '3s0':	
+						case '40i':
+						case '4i0':
+						case '4s0':
+						case '4ii':
+						case '4ss':
+							tmplBlock+=' data-block-type="common"';
+								break;
 					}
 				
 				break;
@@ -380,6 +400,11 @@ function createLayout(){
 						case '4ss':
 							tmplBlock+=' data-block-type="right"';
 								break;
+						case '4i0':	
+						case '4s0':
+						case '4ii':
+							tmplBlock+=' data-block-type="common"';
+								break;
 					}
 				
 				break;
@@ -414,9 +439,11 @@ function createLayout(){
 		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
-	// прописать количество блоков макета в тестовом блоке:
-	test_addBlocks();
-	
+<?	if (isset($test)){?>		
+		// прописать количество блоков макета в тестовом блоке:
+		//test_addBlocks();
+		test_parseLayout();
+<?	}?>	
   }catch(e){
 	  alert(e.message);
   }
@@ -444,8 +471,11 @@ function loadLayout(){
 // сохранить подзаголовок
 function saveSubHeader(iValue){
 	//alert(iValue);
-	Layout.blocks[2]+=':'+iValue;
-	test_setSubHeader(iValue);
+	Layout.blocks[2]='header';
+	if (iValue!=" ") Layout.blocks[2]+=':'+iValue;
+<?	if (isset($test)){?>		
+	test_parseLayout();
+<?	}?>	
 }
 <?	
 $myscript=ob_get_contents();
