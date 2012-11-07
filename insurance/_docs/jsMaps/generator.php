@@ -207,7 +207,13 @@ ol, ul{
     <td>test387</td>
     <td><a name="storeLayoutBlockData"></a>сохранить в Layout индекс  модуля и номер его родительского блока (колонки):<br>
     <strong> storeLayoutBlockData(1);</strong></td>
-    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2"><p>Ссылки внутри добавленного блока:</p>
+      <ul>
+        <li>&quot;Добавьте произвольное содержание&quot;</li>
+        <li> &quot;Выберите из имеющихся статей&quot;</li>
+      </ul>
+      <hr>
++</td>
     <td rowspan="2">handle_text_module.php</td>
     </tr>
   <tr>
@@ -232,25 +238,6 @@ ol, ul{
     <strong>getTextStart(1);</strong></td>
     <td>&nbsp;</td>
     <td>handle_text_module.php</td>
-    </tr>
-  <tr class="main">
-    <td>&nbsp;</td>
-    <td><p>сохранить в Layout индекс текстового модуля и номер его родительского блока (колонки):<br>
-    <strong>identifyTextBlock(1);</strong></p></td>
-    <td rowspan="2"><p>Ссылки внутри добавленного блока:</p>
-      <ul>
-        <li>&quot;Добавьте произвольное содержание&quot;</li>
-        <li> &quot;Выберите из имеющихся статей&quot;</li>
-    </ul>
-    <hr>
-    +</td>
-    <td rowspan="2">handle_text_module.php</td>
-    </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p><strong><a href="#storeLayoutBlockData">storeLayoutBlockData(curModule)</a>;</strong></p>
-    </blockquote></td>
     </tr>
   <tr class="main">
     <td>&nbsp;</td>
