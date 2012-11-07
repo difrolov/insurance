@@ -10,7 +10,12 @@ class GeneratorController extends Controller
 		}
 
 		$model = new InsurArticleContent;
-		$this->render('index',array('model'=>$model));
+		$sql = "SELECT o.`name`,o.`status`,o.`parent_id`,o.`alias`,m.id
+				FROM insur_modules as m
+				LEFT JOIN insur_insurance_object as o ON o.`id`=m.`object_id`
+				WHERE o.`status`= 1";
+		$model_modules = Yii::app()->db->createCommand($sql)->queryAll();
+		$this->render('index',array('model'=>$model,'model_modules'=>$model_modules));
 	}
 
 	public function actionGetObject(){

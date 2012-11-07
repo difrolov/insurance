@@ -26,7 +26,7 @@
  *
  *
  *	Получить список всех статей
- */		
+ */
 		function getAllArticlesList(){
 			return Yii::app()->db->createCommand("SELECT * FROM insur_article_content WHERE `status` > 0 ")->queryAll();
 		}
@@ -37,23 +37,23 @@
 				   name,
 				   `status`,';
 			if ($art_level===false)
-				$sql.=' 
+				$sql.='
     if (parent_id<0,null,
-        (SELECT name FROM insur_insurance_object  
+        (SELECT name FROM insur_insurance_object
         WHERE id = i2.parent_id)
-    ) AS parent 
+    ) AS parent
     FROM insur_insurance_object as i2
-ORDER BY name,parent'; 
+ORDER BY name,parent';
 			else
-				$sql.='parent_id'.($art_level=='main')? 
-			' 
-    FROM insur_insurance_object 
+				$sql.='parent_id'.($art_level=='main')?
+			'
+    FROM insur_insurance_object
 WHERE parent_id < 0
 ORDER BY parent_id DESC':
 			',
-    (   SELECT name FROM insur_insurance_object  
+    (   SELECT name FROM insur_insurance_object
         WHERE id = i2.parent_id
-    ) AS parent_name 
+    ) AS parent_name
     FROM insur_insurance_object as i2
 WHERE parent_id >= 0
 ORDER BY name, parent_name';
