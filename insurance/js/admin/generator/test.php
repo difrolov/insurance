@@ -38,8 +38,10 @@ function test_parseLayout(obj){
 				pContent+='			<div class="padding10 borderRadius bgLightGrey">';
 			if (ob.indexOf('moduleClicked')==-1){ 
 				var arrObj;
-				if (ob!="Schema") alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
-				if (currentObj.indexOf("|")!=-1)
+				//if (ob!="Schema") alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
+				if ( typeof currentObj == 'string'
+					 && currentObj.indexOf("|")!=-1
+				   )
 					var	arrObj=currentObj.split("|");
 				else arrObj=new Array(currentObj);
 				
