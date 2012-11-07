@@ -77,7 +77,6 @@ function addArticleIdOrTextToModule(artID,text,header){
 			// alert('onClick:\nartID: '+artID+'\nthis: '+this+'\nheaderClicked: '+headerClicked);
 			manageArticleText(artID,this,headerClicked);
 			storeLayoutBlockData(this);
-			//identifyTextBlock(this); // назначить активный блок и модуль
 			getTextModuleContentParsedFromLayout(); // извлечь заголовок и текст модуля из Layout и разместить их в области предпросмотра
 			return false;
 		}
@@ -162,7 +161,6 @@ function addTextModuleComLinks(content){
 		click:	function(){
 			window.textTarget='ready';
 			storeLayoutBlockData(this);
-			//identifyTextBlock(this);			
 			$('#tblArticles').css('width','auto').parent('div').css('overflow-x','hidden');
 			$(aTable).css({
 				display:'inline-block',
@@ -255,7 +253,7 @@ function getTextStart(artID){
 	return ret;
 }
 // получить и распарсить на заголовок и текст контент текстового модуля ИЗ БЛОКА
-// к этому моменту должна быть выполнена функция storeLayoutBlockData/identifyTextBlock(src); src - ссылка-источник события. Элементы определяются по её parentNode.parentNode
+// к этому моменту должна быть выполнена функция storeLayoutBlockData(src); src - ссылка-источник события. Элементы определяются по её parentNode.parentNode
 function getTextModuleContentParsedFromLayout(){
 	// получить контент заголовка и текста:
 	var blockModules=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
@@ -271,11 +269,6 @@ function hideArticlesStuff(keep_editor_open){
 	$('div#article_preview_text').hide();
 	if (!keep_editor_open) 
 		$('a.close[data-dismiss="modal"]').trigger('click');
-}
-// идентифицировать текстовый модуль
-// идентифицировать колонку, чтобы найти сначала блок, а затем модуль для добавления текста или id статьи
-function identifyTextBlock(obj){ // alert(obj.parentNode.innerHTML);
-	storeLayoutBlockData(obj.parentNode.parentNode);
 }
 // загрузить статью в область редактора - с предпросмотром или без
 // ТОЛЬКО В РЕДАКТОРЕ!
@@ -336,7 +329,6 @@ function showArticlesTable(){
 function showEditor(src){ //alert('showEditor');
 	window.textTarget='editor';
 	storeLayoutBlockData(src);
-	//identifyTextBlock(src);
 	$('#tblArticles').parent('div').css('overflow-x','hidden');
 	$(getPreviewWindow()).appendTo($('a#upload_article').parent())
 	.css({
