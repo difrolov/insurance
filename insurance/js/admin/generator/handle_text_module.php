@@ -8,7 +8,7 @@ $(document).ready(function(){
 		this.title="Щёлкните дважды, чтобы добавить текст статьи";
 	});
 	$('#upload_article').click( function(){
-		showArticlesTable(this);
+		return showArticlesTable(this);
 	});
 
 	// загрузить текст статьи в редактор, либо указать её id в случае, если хотим оставить её без изменений
@@ -113,7 +113,7 @@ function addArticleTextToEditor(artBox,artID){
 	// закрыть окна предпросмотра текста и таблицы статей:
 	hideArticlesStuff(true); // окно редактора оставляем открытым
 }
-// добавить либо текст, либо ID статьи
+/*// добавить либо текст, либо ID статьи
 function addArtText( artBox, // id поля с текстом предпросматриваемой статьи
 					 artID // id предпросматриваемой статьи
 				   ){ //alert(window.textTarget);
@@ -123,7 +123,7 @@ function addArtText( artBox, // id поля с текстом предпросм
 	}else if(window.textTarget=='editor'){
 		addArticleTextToEditor(artBox);
 	} //alert(document.getElementById('myModal').style.display);
-}
+}*/
 // добавить текст в поле редактора
 function addTextIntoEditor(content){
 	var aHeader,aText;
@@ -326,9 +326,20 @@ function setTextContentIdentifier(artID){
 }
 // отобразить таблицу выбора статей
 function showArticlesTable(){
+/*	initial state:
+	----------------------------
+	background: white;
+	border: solid 2px #CCC;
+	box-shadow: 0 0 30px 0 #666;
+	padding: 4px;
+	position: absolute;
+	z-index: 3000;
+	display: none;
+*/
 	$('div#upload_article_window').css({
 			display:'inline-block',
 		}).fadeIn(150);
+	return false; // cancel href="#"
 }
 // загрузить редактор
 function showEditor(src){ //alert('showEditor');

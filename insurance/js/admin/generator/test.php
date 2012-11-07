@@ -31,14 +31,14 @@ function test_parseLayout(obj){
 		var currentObj=obj[ob];
 		if (typeof(currentObj)=='object'){
 			toPlace.innerHTML+='<div>Блок '+ob+':</div>';
-			test_parseLayout(currentObj,true);
+			test_parseLayout(currentObj);
 		}else{ 
 				var pContent='<div>';
 				pContent+='		<div class="padding10 borderRadius marginBottom4">Блок '+ob+':';
 				pContent+='			<div class="padding10 borderRadius bgLightGrey">';
 			if (ob.indexOf('moduleClicked')==-1){ 
 				var arrObj;
-				//if (ob!="Schema") alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
+				if (ob!="Schema") alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
 				if (currentObj.indexOf("|")!=-1)
 					var	arrObj=currentObj.split("|");
 				else arrObj=new Array(currentObj);
