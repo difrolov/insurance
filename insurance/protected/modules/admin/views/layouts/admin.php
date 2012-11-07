@@ -54,7 +54,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		    'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(
-		        array('label'=>'Управление меню', 'url'=>'#', 'active'=>true),
+		        array('label'=>'Управление меню', 'url'=>Yii::app()->createUrl('admin/menu/getmainmenu'), 'active'=>true),
 		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/browser')),
 		        array('label'=>'Управление разделами', 'url'=>Yii::app()->createUrl('admin/object/getobject/44'), 'active'=>true),
 		        array('label'=>'Управление баннерами', 'url'=>Yii::app()->createUrl('admin/banner/getbanner')),
@@ -73,7 +73,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<?php endif?>
 	<div class="">
 		<?php
-		
+
 		HelperAdmin::menuItem();
 		$items=HelperAdmin::$arrMenuItems;
 		$this->widget('ext.efgmenu.EFgMenu',array(

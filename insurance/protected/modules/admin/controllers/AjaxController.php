@@ -9,4 +9,38 @@ class AjaxController extends Controller
 		}
 		exit;
 	}
+	function actionAdminMenuEdit(){
+		if(isset($_POST['id'])){
+			$model = InsurInsuranceObject::model()->findAll(array('condition'=>'parent_id = '.$_POST['id']));
+			$parent = InsurInsuranceObject::model()->findAll(array('condition'=>'parent_id = -1'));
+			for	($i=0; $i<count($parent); $i++){
+				$arr_par[$parent[$i]->id] = $parent[$i]->name;
+			}
+			if(count($model)>0){
+				for	($i=0; $i<count($model); $i++){
+					$arr[$i]['name'] = $model[$i]->name;
+					$arr[$i]['id'] = $model[$i]->id;
+					$arr[$i]['status'] = $model[$i]->status;
+					$arr[$i]['alias'] = $model[$i]->alias;
+					$arr[$i]['date_changes'] = $model[$i]->date_changes;
+					$arr[$i]['parent_id'] = $arr_par[$model[$i]->parent_id];
+				}
+				echo json_encode($arr);
+			}
+		}
+	}
+	//достаем из базы модули для генератора страниц
+	public function actionGetModule(){
+		if(isset($_POST['id_module'])){
+			$sql = "SELECT o.`name`,o.`status`,o.`parent_id`,o.`alias`
+					FROM insur_modules as m
+					LEFT JOIN insur_insurance_object as o ON o.`id`=m.`object_id`
+					WHERE m.id=".$_POST['id_module'];
+			$res = Yii::app()->db->createCommand($sql)->queryAll();
+			var_dump($res);exit;
+			if(count($module)>0){
+
+			}
+		}
+	}
 }

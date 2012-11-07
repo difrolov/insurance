@@ -9,14 +9,15 @@ foreach($menu as $item){
 	    'label'=>$item->name,
 	    'type'=>'', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	    'size'=>'small', // null, 'large', 'small' or 'mini'
-	    'htmlOptions'=>array('onclick'=>'_editMenu.MainMenuButton(this)'),
+	    'htmlOptions'=>array('onclick'=>'_editMenu.MainMenuButton($(this))','data-item'=>$item->id),
 ));
 }
 ?>
 	</p>
 </div>
-
-
+<br class="clear">
+<div class=table_menu>
+</div>
 
 
 
