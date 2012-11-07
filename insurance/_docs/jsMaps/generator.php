@@ -170,8 +170,8 @@ ol, ul{
     <td>&nbsp;</td>
     <td>добавить текст полученной ajax'ом статьи в поле редактора:<br>
     <strong>function addArticleTextToEditor(2);</strong></td>
-    <td rowspan="4">Кнопка <strong>Вставить</strong> в окне предпросмотра статьи.</td>
-    <td rowspan="4">handle_text_module.php</td>
+    <td rowspan="6">Кнопка <strong>Вставить</strong> в окне предпросмотра статьи.</td>
+    <td rowspan="6">handle_text_module.php</td>
     </tr>
   <tr>
     <td>&nbsp;</td>
@@ -182,6 +182,15 @@ ol, ul{
     </tr>
   <tr>
     <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>разбить полученный контент статьи на заголовок и текст:<br>
+          <strong>splitArtContent(content);</strong></p>
+      </blockquote>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
     <td>
       ИЛИ
       <blockquote style="margin-top:0; padding-top:0;">
@@ -189,6 +198,15 @@ ol, ul{
         <strong>getArticleTextFromDB(2);</strong></p>
     </blockquote></td>
     </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>разбивает полученный из БД контент статьи на заголовок и текст:<br>
+          <strong>splitArtContent(msg);</strong></p>
+      </blockquote>
+    </blockquote></td>
+  </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
@@ -219,8 +237,8 @@ ol, ul{
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
-      <p>получить № блока:<br>
-        <span class="txtRed">Layout.blocks.moduleClickedBlockNumber</span>=<strong>getBlockNumber(1);</strong></p>
+      <p>получить идентификатор (№/footer) активного блока:<br>
+        <span class="txtRed">Layout.blocks.activeBlockIdentifier</span>=<strong>getBlockNumber(1);</strong></p>
       <p>получить индекс модуля:<br>
         <span class="txtRed">Layout.blocks.moduleClickedLocalIndex</span>=<strong>getModuleIndex(2);</strong></p>
     </blockquote>    </td>

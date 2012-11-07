@@ -32,13 +32,16 @@ $(document).ready(function(){
 });
 // модифицировать текстовый модуль - добавить либо id, либо текст статьи
 function addArticleIdOrTextToModule(artID,text,header){
-  try{ 	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.moduleClickedBlockNumber+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+  try{ 	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.activeBlockIdentifier+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
 	var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
-	// распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
-	var arrBlockContentArray=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
+	/** 	
+	  * распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
+	  * извлечь контент блока из Layout
+	*/
+	var arrBlockContentArray=splitBlockContent(Layout.blocks.activeBlockIdentifier);
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
 	// получить целевую колонку:
-	var tBlock=$('div#tmplPlace div[data-block-type]')[Layout.blocks.moduleClickedBlockNumber-1];
+	var tBlock=getTargetColumn();	
 	// получить модуль:
 	var txtModule=$(tBlock).children('div.innerModule')[Layout.blocks.moduleClickedLocalIndex];
 	// получить ВНУТРЕННИЙ блок модуля с текстом:
@@ -84,7 +87,7 @@ function addArticleIdOrTextToModule(artID,text,header){
 	.attr('data-link-type','show')
 	.appendTo($(txtModuleInner));
 	// изменить содержание текстового модуля в колонке:
-	saveBlockContentString( Layout.blocks.moduleClickedBlockNumber, // # родительского блока ссылки добавления готовой статьи
+	saveBlockContentString( Layout.blocks.activeBlockIdentifier, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
 	addTextIntoEditor(''); // очистить поле редактора
@@ -207,6 +210,7 @@ function getArticleTextFromDB(fieldToPlace,artID){
 		data:uData,
 		success: function(msg){
 			if (fieldToPlace){
+				// разбивает полученный из БД контент статьи на заголовок и текст:
 				var content=splitArtContent(msg);
 				$('div#prev_header').html(content[0]);
 				$('div#'+fieldToPlace).html(content[1]);
@@ -216,9 +220,10 @@ function getArticleTextFromDB(fieldToPlace,artID){
 		}
 	});
 }
-// получить № блока
+// получить идентификатор (№/footer) активного блока
 function getBlockNumber(curColumn){
-	return $('div#tmplPlace > div > div').index(curColumn)+1;
+	var blockNum=($(curColumn).attr('data-block-type')=="footer")? 'footer':$('div#tmplPlace > div > div').index(curColumn)+1;
+	return blockNum;
 }
 // забрать из поля редактора и разместить в блоке Layout'а и тестовом модуле
 function getDataFromCKeditor(){
@@ -256,7 +261,7 @@ function getTextStart(artID){
 // к этому моменту должна быть выполнена функция storeLayoutBlockData(src); src - ссылка-источник события. Элементы определяются по её parentNode.parentNode
 function getTextModuleContentParsedFromLayout(){
 	// получить контент заголовка и текста:
-	var blockModules=splitBlockContent(Layout.blocks.moduleClickedBlockNumber);
+	var blockModules=splitBlockContent(Layout.blocks.activeBlockIdentifier);
 	var mText=blockModules[Layout.blocks.moduleClickedLocalIndex]; // заголовок и текст модуля
 	var mtSeparator=mText.indexOf("^"); // разделитель заголовка и текста
 	$('#prev_header').html(mText.substring(getTextStart().length,mtSeparator));
@@ -369,9 +374,9 @@ function splitArtContent(content){
 function storeLayoutBlockData(obj){
 	var curModule=obj.parentNode.parentNode;
 	var curColumn=curModule.parentNode;	// колонка
-	Layout.blocks.moduleClickedBlockNumber=getBlockNumber(curColumn); // № блока
+	Layout.blocks.activeBlockIdentifier=getBlockNumber(curColumn); // идентификатор (№/footer) активного  блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
-	//alert(Layout.blocks.moduleClickedBlockNumber+', '+Layout.blocks.moduleClickedLocalIndex);
+	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

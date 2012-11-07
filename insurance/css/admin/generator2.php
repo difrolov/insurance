@@ -27,6 +27,9 @@ div#btn_wrapper{
 	padding-right:8px;
 	text-align:right;
 }
+a[data-link-type="show"]{
+	display:block;
+}
 div.modal-header{
 	border-bottom:none;
 }
