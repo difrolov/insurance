@@ -1,3 +1,4 @@
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/generator_modules.js"></script>
 <? 	if (isset($_GET['show_seq'])){
 	// hidden: ?>
 <h4>Последовательность вызова клиентских скриптов:</h4>
@@ -155,13 +156,13 @@ div#article_preview_text
 	text-align:left;
 }
 div#upload_article_window{
-	background:#FFF; 
-	border:solid 2px #CCC; 
+	background:#FFF;
+	border:solid 2px #CCC;
 	box-shadow: 0 0 30px 0 #666;
-	padding:4px; 
-	position:absolute; 
-	z-index:1; 
-	display:<?="none"?>; 
+	padding:4px;
+	position:absolute;
+	z-index:1;
+	display:<?="none"?>;
 }
 table#tblArticles {
 	border:solid 1px #CCC;
@@ -205,7 +206,7 @@ div[data-test="template"]{
 div[data-test="template"]:hover{
 	opacity:1;
 }
-div[data-test="template"] 
+div[data-test="template"]
 	div#tmpl-blocks
 		> div > div {
 	margin-left:20px;
@@ -229,7 +230,7 @@ td[data-article-id]:hover{
 	position:absolute;
 	right:-25px;
 	top:-2px;
-	width:22px; 
+	width:22px;
 }
 .wclose.inside{
 	right:0;
@@ -243,7 +244,7 @@ td[data-article-id]:hover{
     <h5>Схема макета:  <span id="tmpl-shema"></span></h5>
   	<h5>Блоки/модули:</h5>
     	<div id="tmpl-blocks"></div>
-      
+
 </div>
 <?php
 	}
@@ -300,11 +301,10 @@ $this->breadcrumbs=array(
         <li>Щёлкните модули для размещения в ней.</li>
       </ol>
         <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
-            <div data-module-type="Новости">Новости</div>
-            <div data-module-type="Готовое решение">Готовое решение</div>
-            <div data-module-type="Программа страхования">Программа страхования</div>
-            <div data-module-type="Случайная статья">Случайная статья</div>
-            <div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
+        <?php foreach($model_modules as $key_mod=>$val_mod){ ?>
+            <div onclick="_generator_modules.getModule(<?php echo $model_modules[$key_mod]['id']; ?>)" data-module-type="<?php echo $model_modules[$key_mod]['name']; ?>"><?php echo $model_modules[$key_mod]['name']; ?></div>
+        <?php } ?>
+        	<div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
         </div>
     </div>
     <div id="<?="tmplPlace"?>">
@@ -380,11 +380,11 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 			array('toolbar'=>array(
 
 				array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
-				array('name'=> 'paragraph',   
-					  'items'=> 
+				array('name'=> 'paragraph',
+					  'items'=>
 					  		array( 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' )),
-				array('name'=> 'editing',     
-					  'items'=> 
+				array('name'=> 'editing',
+					  'items'=>
 					  		array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
 			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Layouts' )),
 			//array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
@@ -394,22 +394,22 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 			//array('name'=> 'links',       'items'=> array( 'Link','Unlink','Anchor' )),
 			//array('name'=> 'insert',      'items'=> array( 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' )),
 
-				array('name'=> 'styles', 
-				  	  'items'=> 
+				array('name'=> 'styles',
+				  	  'items'=>
 							array( 'Styles','Format','Font','FontSize' )),
 							array('Image', 'Link', 'Unlink', 'Anchor' ),
-							array('name'=> 'colors', 
-								  'items'=> 
+							array('name'=> 'colors',
+								  'items'=>
 									array( 'TextColor','BGColor' )),
-									array('name'=> 'tools', 
-										  'items'=> 
+									array('name'=> 'tools',
+										  'items'=>
 												array( 'Maximize', 'ShowBlocks','-','About' ))
 			),
 			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browser')),
 
 	),
 ) ); ?>
-<div style="position:relative;" data-target="load_in_editor">    
+<div style="position:relative;" data-target="load_in_editor">
     <div id="upload_article_window">
     	<span class="wclose" id="close_upartwin"></span>
     	<div style="overflow:auto; height:100%;">
@@ -421,14 +421,14 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
         <td>&nbsp;</td>
         <td>Статус</td>
       </tr>
-<?	for($i=0,$j=count($articles);$i<$j;$i++){?>      
+<?	for($i=0,$j=count($articles);$i<$j;$i++){?>
       <tr>
         <td><?=($i+1)?></td>
         <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
         <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
         <td><?=$articles[$i]['status']?></td>
       </tr>
-<?	}?>      
+<?	}?>
     </table>
   	  </div>
     </div>
