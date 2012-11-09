@@ -13,7 +13,7 @@
 
 $this->breadcrumbs=array(
 	$this->module->id,
-);/*?><h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1><? */?>
+);?>
 <div id="article_preview_text">
 </div>
 <div align="left">
