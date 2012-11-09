@@ -38,7 +38,7 @@ class GeneratorController extends Controller
 		}
 	}
 
-	//отображаем статьи
+	//
 	public function actionUpdate(){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
@@ -60,22 +60,24 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		if(isset($_POST['InsurArticleContent'])){
-			$model = InsurArticleContent::model()->findByPk($_GET['id']);
-			if(isset($model[0]->content)){
-				$model[0]->content = $_POST['InsurArticleContent']['content'];
-				$model->save();
-			}
-		}
+		die('Edit mode');
+		
 		if(isset($_GET['id'])){
-			//Достаем контент страницы
+			/*//Достаем контент страницы
 			$content = InsurArticleContent::model()->findAll(array('condition'=>"id=".$_GET['id']));
 			if(!$content){
 				$this->redirect('index');
 			}
 			//таблица для отображения
 
-			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['id']));
+			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['id']));*/
 		}
+	}
+	
+	public function actionSave(){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		die('Save mode');
 	}
 }

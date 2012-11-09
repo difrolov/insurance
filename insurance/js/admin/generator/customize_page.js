@@ -15,9 +15,12 @@ $(document).ready(function() {
 		});
 	$('#pick_out_section').click(
 		function(){
-			$('#save_tmpl_block').fadeToggle(1500);
-		}
-	);
+			var lnk=this;
+			$('#save_tmpl_block').fadeToggle(50,
+					function(){
+						$('body').animate({scrollTop:$(lnk).offset().top},500);
+				})
+		});
 	$('#wclose').click(
 			function(){
 				$(this.parentNode.parentNode).fadeOut(1000);

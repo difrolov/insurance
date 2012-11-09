@@ -18,6 +18,7 @@ $this->breadcrumbs=array(
 <div id="article_preview_text">
 </div>
 <div align="left">
+<form style="margin:0;" name="content_save" method="post" action="<?php echo Yii::app()->createUrl('admin/generator/save/') ?>">
 	<div id="choice_init">
         <h5>Выберите параметры макета создаваемой страницы</h5>
         <div id="mng">
@@ -108,8 +109,29 @@ $this->breadcrumbs=array(
 		<?	}?>
 	<?	}?>
         <hr>
-        <button id="save_page">Сохранить страницу</button>
-    </div>
+        Укажите алиас (подстроку адреса) подраздела: <input name="alias" type="text" id="alias" required>
+        <hr>
+	<div id="metadata">
+        <h4>Укажите метаданные страницы (важно для поисковой оптимизации):</h4>
+	  <div>
+        <h5>Заголовок страницы (title):</h5>
+        <input name="title" type="text" id="title" required>
+        </div>
+        
+      <div>
+        <h5>Ключевые слова (keywords):</h5>
+        <textarea name="keywords" id="keywords"></textarea>
+        </div>
+        
+      <div>
+        <h5>Описание страницы (description):</h5>
+        <textarea name="description" id="description"></textarea>
+      </div>
+	</div>
+        <hr>
+        <button id="save_page" type="submit">Сохранить страницу</button>
+	</div>
+</form>    
 </div>
 
 	<?php $this->beginWidget('application.extensions.bootstrap.widgets.TbModal',
