@@ -362,7 +362,7 @@ $this->breadcrumbs=array(
 
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/') ?>">
     <?php
-$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
 			  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
