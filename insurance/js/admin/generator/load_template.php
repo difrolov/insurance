@@ -3,7 +3,6 @@
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
-//
 function createLayout(){
   try{ 	
   	// получить количество блоков:
