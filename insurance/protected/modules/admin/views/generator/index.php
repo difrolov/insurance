@@ -136,7 +136,7 @@ $this->breadcrumbs=array(
         <td width="100%"><input placeholder="Укажите заголовок статьи" name="article_header" id="article_header" type="text"></td>
       </tr>
     </table>
-<?php	$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+<?php	$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
   array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
