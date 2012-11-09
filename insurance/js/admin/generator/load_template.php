@@ -1,5 +1,5 @@
 <?	$url=$_GET['base_url'];
-	$test=$_GET['test'];
+	$test=(isset($_GET['test']))? $_GET['test']:false;
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
@@ -438,7 +438,7 @@ function createLayout(){
 		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
-<?	if (isset($test)){?>		
+<?	if ($test){?>		
 		// прописать количество блоков макета в тестовом блоке:
 		//test_addBlocks();
 		test_parseLayout();
@@ -472,7 +472,7 @@ function saveSubHeader(iValue){
 	//alert(iValue);
 	Layout.blocks[2]='header';
 	if (iValue!=" ") Layout.blocks[2]+=':'+iValue;
-<?	if (isset($test)){?>		
+<?	if ($test){?>		
 	test_parseLayout();
 <?	}?>	
 }
