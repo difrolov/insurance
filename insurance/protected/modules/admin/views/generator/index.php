@@ -1,4 +1,5 @@
-<?	if (isset($_GET['test'])){?>
+<?	// если в тестовом режиме:
+	if (isset($_GET['test'])){?>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/test.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <div data-test="template">
 	<div id="test_block_appearance" class="link">свернуть</div>
