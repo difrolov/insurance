@@ -286,18 +286,20 @@ function manageArticleText( artID,
 	// POST
 	  if (eSrc)	{ // если с предпросмотром, клацали по кнопке в его окне		
 		var aPrev=$('div#article_preview_text'); // alert('aPrev 1: '+$(aPrev).html());
-		var pTD=(art_header_clicked)? $(eSrc):$(eSrc).parent();
-		var pleft=$(pTD).offset().left;
-		var ptop=$(pTD).offset().top;
-		if (art_header_clicked!==true) { //alert(art_header_clicked);
-			getArticleTextFromDB('prev_content',artID);
-			$('div#doEdit').remove();
+		if (!$(aPrev).find('div#doEdit').size()){ 
 			//
 			$(aPrev).appendTo($('body'));
 			$(aPrev).append( 
 						createPreviewWindow( artID,
 											 art_header_clicked // get - при клике по заголовку текстового блока с добавленным id готовой статьи
 										   ));
+		}//else alert('doEdit: '+$(aPrev).find('div#doEdit').size());
+		var pTD=(art_header_clicked)? $(eSrc):$(eSrc).parent();
+		var pleft=$(pTD).offset().left;
+		var ptop=$(pTD).offset().top;
+		if (art_header_clicked!==true) { //alert(art_header_clicked);
+			getArticleTextFromDB('prev_content',artID);
+			$('div#doEdit').remove();
 		}else
 			showPreviewToEdit(eSrc);
 		//alert('artID: '+artID+', eSrc: '+eSrc+', art_header_clicked: '+art_header_clicked);
