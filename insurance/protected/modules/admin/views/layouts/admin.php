@@ -1,4 +1,5 @@
-<?php /* @var $this Controller */ ?>
+<?php /* @var $this Controller */ 
+	$url=Yii::app()->request->baseUrl;?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -6,44 +7,52 @@
 	<meta name="language" content="en" />
 
 	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/style.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/style.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/print.css" media="print" />
 	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-	<link rel="stylesheet/less" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.less">
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
-
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/banner.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/form.css" />
+	<link rel="stylesheet/less" type="text/css" href="<?php echo $url; ?>/css/styles.less">
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap-responsive.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
+<?	if (isset($_GET['test'])):?>    
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/test.css" media="screen, projection" />
+<?	endif;?>    
+	<script src="<?php echo $url; ?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
 // если загрузили раздел добавления подраздела:
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
-<?	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.php"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/handle_text_module.php?base_url=<?
-	echo Yii::app()->request->baseUrl;
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/generator.css" />
+<?	
+	require_once Yii::getPathOfAlias('webroot')."/css/admin/generator2.php";
+	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
+	<script src="<?php echo $url; ?>/js/admin/generator/prepare_data.php"></script>
+	<script src="<?php echo $url; ?>/js/admin/generator/load_template.php?base_url=<?
+	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/customize_page.js"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/data_ready_to_send.php?base_url=<?
-	echo Yii::app()->request->baseUrl;
+    <script src="<?php echo $url; ?>/js/admin/generator/switch_states.php"></script>
+    <script src="<?php echo $url; ?>/js/admin/generator/manage_template.php?base_url=<?
+	echo $url;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
+    <script src="<?php echo $url; ?>/js/admin/generator/handle_text_module.php?base_url=<?
+	echo $url;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
+    <script src="<?php echo $url; ?>/js/admin/generator/customize_page.js"></script>
+    <script src="<?php echo $url; ?>/js/admin/generator/data_ready_to_send.php?base_url=<?
+	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>	<?
 
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
+	<script src="<?php echo $url; ?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
 <?
 }?>
 </head>

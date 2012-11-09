@@ -41,7 +41,6 @@ function walkThroughLayout(Layout,act){
 		}
 	}
 }
-
 //проверить - допускает ли текущее состояние макета его загрузку
 function checkLayoutReady(){
 	Layout.Schema=0;

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<? 	if (isset($_GET['test'])){?>
+=======
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/generator_modules.js"></script>
 <? 	if (isset($_GET['show_seq'])){
 	// hidden: ?>
 <h4>Последовательность вызова клиентских скриптов:</h4>
@@ -155,13 +159,13 @@ div#article_preview_text
 	text-align:left;
 }
 div#upload_article_window{
-	background:#FFF; 
-	border:solid 2px #CCC; 
+	background:#FFF;
+	border:solid 2px #CCC;
 	box-shadow: 0 0 30px 0 #666;
-	padding:4px; 
-	position:absolute; 
-	z-index:1; 
-	display:<?="none"?>; 
+	padding:4px;
+	position:absolute;
+	z-index:1;
+	display:<?="none"?>;
 }
 table#tblArticles {
 	border:solid 1px #CCC;
@@ -205,7 +209,7 @@ div[data-test="template"]{
 div[data-test="template"]:hover{
 	opacity:1;
 }
-div[data-test="template"] 
+div[data-test="template"]
 	div#tmpl-blocks
 		> div > div {
 	margin-left:20px;
@@ -229,21 +233,27 @@ td[data-article-id]:hover{
 	position:absolute;
 	right:-25px;
 	top:-2px;
-	width:22px; 
+	width:22px;
 }
 .wclose.inside{
 	right:0;
 }
 </style>
 <?	if (isset($_GET['test'])){?>
+>>>>>>> 25213054ae05b7797af8fdd0a5b3957896a9a4c3
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/test.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <div data-test="template">
 	<div id="test_block_appearance" class="link">свернуть</div>
 	<h4>Текущие данные создаваемого подраздела:</h4>
     <h5>Схема макета:  <span id="tmpl-shema"></span></h5>
+<<<<<<< HEAD
+  	<h5 class="margin0">Блоки/модули:</h5>
+    <div id='obj_place'></div>
+=======
   	<h5>Блоки/модули:</h5>
     	<div id="tmpl-blocks"></div>
-      
+
+>>>>>>> 25213054ae05b7797af8fdd0a5b3957896a9a4c3
 </div>
 <?php
 	}
@@ -300,11 +310,10 @@ $this->breadcrumbs=array(
         <li>Щёлкните модули для размещения в ней.</li>
       </ol>
         <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
-            <div data-module-type="Новости">Новости</div>
-            <div data-module-type="Готовое решение">Готовое решение</div>
-            <div data-module-type="Программа страхования">Программа страхования</div>
-            <div data-module-type="Случайная статья">Случайная статья</div>
-            <div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
+        <?php foreach($model_modules as $key_mod=>$val_mod){ ?>
+            <div onclick="_generator_modules.getModule(<?php echo $model_modules[$key_mod]['id']; ?>)" data-module-type="<?php echo $model_modules[$key_mod]['name']; ?>"><?php echo $model_modules[$key_mod]['name']; ?></div>
+        <?php } ?>
+        	<div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
         </div>
     </div>
     <div id="<?="tmplPlace"?>">
@@ -361,8 +370,13 @@ $this->breadcrumbs=array(
 <div class="modal-body">
 
 <form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/edit/') ?>">
-    <?php
-$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+	<table id="new_art_header" cellspacing="0">
+      <tr>
+        <td nowrap>Заголовок статьи: </td>
+        <td width="100%"><input placeholder="Укажите заголовок статьи" name="article_header" id="article_header" type="text"></td>
+      </tr>
+    </table>
+<?php	$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 			  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
@@ -380,12 +394,16 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 			array('toolbar'=>array(
 
 				array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
-				array('name'=> 'paragraph',   
-					  'items'=> 
+				array('name'=> 'paragraph',
+					  'items'=>
 					  		array( 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' )),
-				array('name'=> 'editing',     
-					  'items'=> 
+				array('name'=> 'editing',
+					  'items'=>
 					  		array( 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' )),
+<<<<<<< HEAD
+				array('name'=> 'styles', 
+				  	  'items'=> 
+=======
 			//array('name'=> 'document',    'items'=> array( 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Layouts' )),
 			//array('name'=> 'clipboard',   'items'=> array( 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' )),
 			//array('name'=> 'forms',       'items'=> array( 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' )),
@@ -394,73 +412,48 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 			//array('name'=> 'links',       'items'=> array( 'Link','Unlink','Anchor' )),
 			//array('name'=> 'insert',      'items'=> array( 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' )),
 
-				array('name'=> 'styles', 
-				  	  'items'=> 
+				array('name'=> 'styles',
+				  	  'items'=>
+>>>>>>> 25213054ae05b7797af8fdd0a5b3957896a9a4c3
 							array( 'Styles','Format','Font','FontSize' )),
 							array('Image', 'Link', 'Unlink', 'Anchor' ),
-							array('name'=> 'colors', 
-								  'items'=> 
+							array('name'=> 'colors',
+								  'items'=>
 									array( 'TextColor','BGColor' )),
-									array('name'=> 'tools', 
-										  'items'=> 
+									array('name'=> 'tools',
+										  'items'=>
 												array( 'Maximize', 'ShowBlocks','-','About' ))
 			),
 			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browser')),
 
 	),
 ) ); ?>
-<div style="position:relative;" data-target="load_in_editor">    
+<div style="position:relative;" data-target="load_in_editor">
     <div id="upload_article_window">
     	<span class="wclose" id="close_upartwin"></span>
     	<div style="overflow:auto; height:100%;">
   <?	$articles=HelperAdmin::getAllArticlesList(false); ?>
-    <table width="100%" height="100%" cellspacing="0" cellpadding="0" id="tblArticles">
+    <table width="100%" cellspacing="0" cellpadding="0" id="tblArticles">
       <tr bgcolor="#CCCCCC" class="bold">
         <td>id</td>
         <td>Название</td>
         <td>&nbsp;</td>
-        <td>Родительский раздел</td>
         <td>Статус</td>
       </tr>
-<?	for($i=0,$j=count($articles);$i<$j;$i++){?>      
-      <tr<? if(!$articles[$i]['parent']){?> class="bold"<? }?>>
+<?	for($i=0,$j=count($articles);$i<$j;$i++){?>
+      <tr>
         <td><?=($i+1)?></td>
         <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
-        <td><a class="view" rel="tooltip" href="#" onClick="return articlePreview(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
-        <td><?=$articles[$i]['parent']?></td>
+        <td><a class="view" rel="tooltip" href="#" onClick="return manageArticleText(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
         <td><?=$articles[$i]['status']?></td>
       </tr>
-<?	}?>      
+<?	}?>
     </table>
   	  </div>
     </div>
-	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="javascript:void();">Загрузить статью...</a></div>
+	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="#">Загрузить статью...</a></div>
 <input type="submit" name="submit" onclick="getDataFromCKeditor();return false;" value="Сохранить">
 </div>
 </form>
 </div>
 <?php $this->endWidget(); ?>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<script type="text/javascript">
-
-/*$(document).ready(function(){
-});*/
-
-function submit_editor_form(){
-  try{
-	//var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].getData());
-	var eText=console.info(CKEDITOR.instances['InsurArticleContent[content]'].length);
-	alert(eText);
-	/*$("button#saveModuleText").click( function(){
-		alert('THE TEXT IS: eText');
-	});*/
-  }catch(e){
-	  alert();
-  }
-}
-</script>
-=======
->>>>>>> origin/AdminLocal
->>>>>>> a803ab0c13360dca0b5627d165b5b860e91d63c2

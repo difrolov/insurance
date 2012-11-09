@@ -1,7 +1,9 @@
-﻿<?
+﻿<?	$url=$_GET['base_url'];
+	$test=$_GET['test'];
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 tBlock=false; // здесь будет сохраняться активный блок (объект)
+// добавить модуль в активную колонку:
 function addModuleIntoBlock(event,divBlock){
   try{
 	var srcEl=(event.target)? event.target:event.srcElement;
@@ -23,23 +25,36 @@ function addModuleIntoBlock(event,divBlock){
 			}
 			bi++;
 		}
+<?	if (isset($test)){?>		
 		// добавить данные в тестовый блок:
-		test_setModuleToTestBlock(cIndex,dataModuleType);
-		var newModule=document.createElement(srcEl.tagName); // добавленный в колонку модуль
-		tBlock.appendChild(newModule); 
-		var content=document.createElement('div');
-		var remove=document.createElement('div');
-		newModule.appendChild(content);
-		newModule.appendChild(remove);
-		content.innerHTML=srcEl.innerHTML;
-		// скопировать атрибут типа модуля:
-		$(content).attr('data-module-type',dataModuleType);
-		
-		remove.innerHTML='<a href="#" onClick="removeModule(this);return false;"><img src="<?=$_GET['base_url']?>/images/trash.gif" border="0" title="Удалить модуль из колонки"></a>';
-		$(newModule).attr({
+		test_parseLayout();
+<?	}?>		
+		var newModule=$('<div>').appendTo(tBlock).attr({
 			class:'innerModule',
-			title:'Можно перемещать вверх-вниз...'
-		});
+			title:'Можно перемещать вверх-вниз...',
+		}).css('cursor','move')
+		  .append($('<div>').attr({
+				class:'mod_trash'
+			}).css('cursor','pointer')
+			  .append(
+				$('<a>',{
+					href:'#',
+					click:function(){
+						removeModule(this);
+						return false;
+					}
+				}).append(
+					$('<img>',{
+						src:"<?=$_GET['base_url']?>/images/trash.gif",
+						title:"Удалить модуль из колонки"
+					}).css('border','0'))));
+		
+		var content=$('<div>').appendTo(newModule)
+							  .text($(srcEl).text())
+							  .attr({
+								  'data-module-type':dataModuleType,
+								  class:'mod_content'
+								});
 		if ($(srcEl).attr('class')=='mod_type_text'){
 			var cPadding=parseInt($(newModule).css('padding-top').replace("px", ""));
 			$(newModule).css({
@@ -51,34 +66,102 @@ function addModuleIntoBlock(event,divBlock){
 			// добавить ссылки (команды добавления текста/статьи) в текстовый модуль:
 			addTextModuleComLinks(content);
 		}
-		$(newModule).css('cursor','move');
-
-			$(content).attr('class','mod_content');
-			$(remove).attr({
-				class:'mod_trash',
-				cursor:'pointer'
-			});
-
 		$('#pick_out_section').fadeIn(2000);
 	}
   }catch(e){
 	  alert(e.message);
   }
 }
-//
-function removeModule(objSrc){
-	$(objSrc.parentNode.parentNode).remove();
+// получить целевую колонку по идентификатору активного блока в Layout:
+function getTargetColumn(){
+	return (Layout.blocks.activeBlockIdentifier=='footer')? $('div#tmplPlace div[data-block-type="footer"]'):$('div#tmplPlace div[data-block-type]')[Layout.blocks.activeBlockIdentifier-1];
+}
+// перестроить последовательность модулей после их пересортировки:
+// см. схему в сайт.xlsx!Пересортировка модулей
+function rearrangeModulesOrder( column,			// колонка, содержащая сотрируемый модуль
+								itemIndexStart, // индекс модуля перед сортировкой
+								itemIndexStop	// индекс модуля после сортировки
+							  ){
+	var blockNumber=($(column).attr('data-block-type')=="footer")? 'footer':getBlockNumber(column);
+	var iStartIterator,iStop;
+	if (itemIndexStart>itemIndexStop){
+		iStartIterator=itemIndexStop;
+		iStop=itemIndexStart;
+	}else{
+		iStartIterator=itemIndexStart;
+		iStop=itemIndexStop;
+	}
+	// распарсить контент блока на массив:
+	var modContentArray=splitBlockContent(blockNumber);
+	var tIndex;
+	var newModArray=new Array();
+	// пересортировать остальные модули (переместить контент с учётом изменившихся индексов):
+	for( i=0;i<modContentArray.length;i++){
+		if (i<iStartIterator||i>iStop){
+			newModArray[i]=modContentArray[i];
+		}else{
+			tIndex=(itemIndexStart>itemIndexStop)? i-1:i+1;
+			if (modContentArray[tIndex])
+				newModArray[i]=modContentArray[tIndex];
+		}
+	}
+	// взять контент модуля из начальной позиции (в блоке) и переместить в конечную позицию 
+	newModArray[itemIndexStop]=modContentArray[itemIndexStart];
+	Layout.blocks[blockNumber]=newModArray.join("|");
+<?	if (isset($_GET['test'])):?>    
+	test_parseLayout();
+<?	endif;?>	
+}
+// удалить модуль из колонки визуально и из набора Layout "физически"
+function removeModule(objSrc){ // ссылка
+  try{
+	var Mod=objSrc.parentNode.parentNode; // модуль (class="innerModule")
+	var Block=Mod.parentNode; // блок
+	// найти в активной колонке блок, распарсить его модули и удалить нужный:
+	var blockNumber=getBlockNumber(Block); // идентификатор (№/footer) активного блока
+	var modIndex=getModuleIndex(Block,Mod); // индекс модуля
+	//alert('Удаляем модуль index '+modIndex+'\n---------------\nТекущий набор:\n'+Layout.blocks[blockNumber]);
+	$(Mod).remove(); // удаляем модуль из колонки
+	var tBlockArray=splitBlockContent(blockNumber); // преобразуем в массив
+	tBlockArray.splice(modIndex,1); // удаляем из блока текущий модуль
+	$('div#article_preview_text').hide(); // скрыть окно статического предпросмотра статьи (если есть)
+	saveBlockContentString(blockNumber,tBlockArray); // преобразуем в строку, сохраняем изменённый состав блока
+  }catch(e){
+	alert(e.message);
+  }
+}
+// преобразовать контент блока в массив:
+function splitBlockContent(blockNumber){
+	// attention! blockNumber may be as "footer" as number
+	return Layout.blocks[blockNumber].split("|");
+}
+// преобразовать контент блока в строку и сохранить в Layout:
+function saveBlockContentString(blockNumber,tBlockArray){
+	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
+	Layout.blocks[blockNumber]=tBlockStr;
+<?	if (isset($_GET['test'])){?>
+		test_parseLayout();
+<?	}?>		
+	//alert(Layout.blocks[blockNumber]);
 }
 // выделить фоном активную колонку:
 function selectColumn(event,divBlock){
   try{
+	// колонка, по которой кликали:
 	var srcEl=(event.target)? event.target:event.srcElement;
 	if (srcEl.parentNode==divBlock) {
 		if (!$(srcEl).find('input').length) {
 			$(divBlock).children('div')
 				.css('background-color','#FFF')
 				.removeAttr('data-column_stat');
-			$(srcEl).sortable();
+			$(srcEl).sortable({
+					start: function (event,ui){
+						itemIndexStart=ui.item.index();
+					},
+					stop: function(event,ui){
+						rearrangeModulesOrder(this,itemIndexStart,ui.item.index());
+					}
+				});
 			tBlock=srcEl;
 			$(srcEl).css({
 				backgroundColor:'#CEEFFF',
