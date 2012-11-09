@@ -70,10 +70,6 @@ $this->breadcrumbs=array(
 				
 				?>)" data-module-type="<?php echo $model_modules[$key_mod]['name']; ?>"><?php echo $model_modules[$key_mod]['name']; ?></div>
         <?php endforeach; ?>
-            <!--<div data-module-type="Новости">Новости</div>
-            <div data-module-type="Готовое решение">Готовое решение</div>
-            <div data-module-type="Программа страхования">Программа страхования</div>
-            <div data-module-type="Случайная статья">Случайная статья</div>-->
         	<div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
         </div>
     </div>
@@ -87,9 +83,7 @@ $this->breadcrumbs=array(
         	<input type="radio" name="menu" id="none" value="radio"><b>Без родительского раздела</b>
           </span>
         </label>
-        <?
-			//echo "<h1>No HelperAdmin::arrMenuItems</h1>";
-			$items=HelperAdmin::menuItem();
+	<?	$items=HelperAdmin::menuItem();
 		HelperAdmin::makeArrayForSelect($items);
 		$MainSections=HelperAdmin::$MainMenu;
 		$SubSections=HelperAdmin::$SubMenu;
@@ -137,7 +131,7 @@ $this->breadcrumbs=array(
         <td width="100%"><input placeholder="Укажите заголовок статьи" name="article_header" id="article_header" type="text"></td>
       </tr>
     </table>
-<?php	$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+<?php	$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
 			  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model

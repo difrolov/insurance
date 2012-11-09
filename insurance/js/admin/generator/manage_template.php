@@ -1,5 +1,5 @@
 ﻿<?	$url=$_GET['base_url'];
-	$test=$_GET['test'];
+	$test=(isset($_GET['test']))? $_GET['test']:false;
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 tBlock=false; // здесь будет сохраняться активный блок (объект)
@@ -25,7 +25,7 @@ function addModuleIntoBlock(event,divBlock){
 			}
 			bi++;
 		}
-<?	if (isset($test)){?>		
+<?	if ($test){?>		
 		// добавить данные в тестовый блок:
 		test_parseLayout();
 <?	}?>		
