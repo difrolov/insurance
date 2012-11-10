@@ -63,14 +63,7 @@ class GeneratorController extends Controller
 		die('Edit mode');
 		
 		if(isset($_GET['id'])){
-			/*//Достаем контент страницы
-			$content = InsurArticleContent::model()->findAll(array('condition'=>"id=".$_GET['id']));
-			if(!$content){
-				$this->redirect('index');
-			}
-			//таблица для отображения
-
-			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['id']));*/
+		
 		}
 	}
 	
@@ -78,6 +71,34 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		die('Save mode');
+		/*
+		action: /insur/insurance/admin/generator/save
+		JSON:
+		{
+			"Schema":"4ss",
+			
+			"blocks":{
+				"1":"Новость|Текст :: Статеюшка такая!^<p>\n\tGринцип нарушен, что человек, попадающий в другую эпоху, другое время, все равно остается самим собой. Но мне кажется этот прием работает на то, чтобы доказать то, что мы обычно любим говорить, вот если бы я был бы тогда, я бы сделал...</p>\n|Новость",
+				"2":"header:Подзаголовок такой подзаголовок!",
+				"3":"Готовое решение 1",
+				"4":"Готовое решение 1",
+				"5":"Готовое решение 2",
+				"footer":"Готовое решение 2|Текст",
+				"activeBlockIdentifier":1,
+				"moduleClickedLocalIndex":1
+			},
+			
+			"parent":"4",
+			
+			"alias":"myarticle",
+			
+			"title":"Про всякие дела",
+			
+			"keywords":"статья мессага",
+			
+			"description":"Описание будет позже. Обязательно!"
+		}
+		*/
+		echo json_encode(array( "result"=>"Подраздел создан!"));
 	}
 }

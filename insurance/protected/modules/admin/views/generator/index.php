@@ -18,7 +18,7 @@ $this->breadcrumbs=array(
 <div id="article_preview_text">
 </div>
 <div align="left">
-<form style="margin:0;" name="content_save" method="post" action="<?php echo Yii::app()->createUrl('admin/generator/save/') ?>">
+<form style="margin:0;" name="content_save" id="content_save" method="post" action="<?php echo Yii::app()->createUrl('admin/generator/save/') ?>">
 	<div id="choice_init">
         <h5>Выберите параметры макета создаваемой страницы</h5>
         <div id="mng">
@@ -79,9 +79,10 @@ $this->breadcrumbs=array(
     </div>
     <h5 id="pick_out_section" class="link" style="display:<?="none"?>;">Выберите родительский раздел для создаваемой страницы</h5>
   	<div id="<?="save_tmpl_block"?>">
+    	<div id="sections_radios">
         <label>
           <span>
-        	<input type="radio" name="menu" id="none" value="radio"><b>Без родительского раздела</b>
+        	<input type="radio" name="menu" id="none" value="radio"><b id="no_parent">Без родительского раздела</b>
           </span>
         </label>
 	<?	$items=HelperAdmin::menuItem();
@@ -108,6 +109,7 @@ $this->breadcrumbs=array(
         </div>
 		<?	}?>
 	<?	}?>
+    	</div>
         <hr>
         Укажите алиас (подстроку адреса) подраздела: <input name="alias" type="text" id="alias" required>
         <hr>
@@ -119,7 +121,7 @@ $this->breadcrumbs=array(
         </div>
         
       <div>
-        <h5>Ключевые слова (keywords):</h5>
+        <h5>Ключевые слова (keywords, через пробел):</h5>
         <textarea name="keywords" id="keywords"></textarea>
         </div>
         
@@ -129,7 +131,7 @@ $this->breadcrumbs=array(
       </div>
 	</div>
         <hr>
-        <button id="save_page" type="submit">Сохранить страницу</button>
+        <button id="save_page" type="button">Сохранить страницу</button>
 	</div>
 </form>    
 </div>
