@@ -14,6 +14,7 @@ if (!$post=$_POST) {
 				"moduleClickedLocalIndex"=>'1'
 			),
 			"parent"=>"4",
+			"name"=>"Экстремальное страхование",
 			"alias"=>"myarticle",
 			"title"=>"Про всякие дела",
 			"keywords"=>"статья мессага",
@@ -71,12 +72,41 @@ foreach($post as $key=>$val){
 	}
 	$post[$key]=$val;
 }	
+// модифицируем массив данных:
+$parent_id=$post['parent'];
+$name=$post['name'];
+$alias=$post['alias'];
+$title=$post['title'];
+$keywords=$post['keywords'];
+$description=$post['description'];
+// удаляем элементы массива, которые не должны быть записаны в insur_insurance_object.content  
 unset($post["blocks"]["activeBlockIdentifier"]);
 unset($post["blocks"]["moduleClickedLocalIndex"]);
+unset($post["parent"]);
+unset($post["name"]);
+unset($post["alias"]);
+unset($post["title"]);
+unset($post["keywords"]);
+unset($post["description"]);
+
 $Layout=serialize($post);
 if ($localdata){
 	echo "<h4>Сериализованный массив:</h4>";	
 	var_dump("<pre>",$post,"</pre>");
+	echo "<hr>Данные для записи остальных полей:
+	<br>
+	parent_id: $parent_id
+	<br>
+	name: $name
+	<br>
+	alias: $alias
+	<br>
+	title: $title
+	<br>
+	keywords: $keywords
+	<br>
+	description: $description";
+	
 }else{
 	$jenc=json_encode(array("result"=>"Подраздел создан!"));				
 	echo $jenc;

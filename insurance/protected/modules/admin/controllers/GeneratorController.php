@@ -74,22 +74,22 @@ class GeneratorController extends Controller
 		
 		$localdata=false;
 		
-		// если в режиме тестирования:
+		// если в режиме тестирования, т.е., данные извлекаются НЕ из запроса:
 		if (!$post=$_POST) {
 			$localdata=true;
 			$post=TestGenerator::$test_post;
 		}
-			
-		$dText="Текст :: ";
-		$artId="article id: ";
-		$dTextArtId=$dText.$artId;
+		// начало записи в текстовом модуле:	
+		$dText="Текст :: "; // общее
+		$artId="article id: "; // дописать подстроку для добавленной существующей статьи
+		$dTextArtId=$dText.$artId; // вся подстрока для добавленной существующей статьи
 		foreach($post as $key=>$val){
 			if ($key=="blocks"){ // если блоки с модулями
 				
 				foreach($val as $block => $data){ // перебрать каждый блок
 					$arrMods=explode("|",$data); // получить массив модулей
-					if ( strstr($data,$dText) // если в наборе модулей есть текст новой статьи
-						 && !strstr($data,$dTextArtId)
+					if ( strstr($data,$dText) // если в наборе модулей есть начало для текстового блока
+						 && !strstr($data,$dTextArtId) // и нет записи о добавл
 					   ){ 
 						for($i=0;$i<count($arrMods);$i++){
 							// повторить условие поиска текста для текущего модуля:
@@ -135,9 +135,49 @@ class GeneratorController extends Controller
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$val);
 			$post[$key]=$val;
 		}	
+		// модифицируем массив данных:
+		$parent_id=$post['parent'];
+		$name=$post['name'];
+		$alias=$post['alias'];
+		$title=$post['title'];
+		$keywords=$post['keywords'];
+		$description=$post['description'];
+		// удаляем элементы массива, которые не должны быть записаны в insur_insurance_object.content  
 		unset($post["blocks"]["activeBlockIdentifier"]);
 		unset($post["blocks"]["moduleClickedLocalIndex"]);
-		$Layout=serialize($post);
+		unset($post["parent"]);
+		unset($post["name"]);
+		unset($post["alias"]);
+		unset($post["title"]);
+		unset($post["keywords"]);
+		unset($post["description"]);
+		
+		/************************************/
+
+		// 3. Сохранить подраздел
+		/************************************/
+		
+		/************************************
+		
+		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА....
+
+		insur_insurance_object.parent_id: $parent_id
+
+		insur_insurance_object.name: $name
+
+		insur_insurance_object.alias: $alias
+
+		insur_insurance_object.title: $title
+
+		insur_insurance_object.keywords: $keywords
+
+		insur_insurance_object.description: $description";
+
+		insur_insurance_object.content: serialize($post);
+		
+		************************************/
+		
+		
 		if ($localdata){
 			TestGenerator::testCodeOutput3($post);
 		}else{
@@ -162,6 +202,7 @@ class TestGenerator{
 						"moduleClickedLocalIndex"=>'1'
 					),
 					"parent"=>"4",
+					"name"=>"Экстремальное страхование",
 					"alias"=>"myarticle",
 					"title"=>"Про всякие дела",
 					"keywords"=>"статья мессага",

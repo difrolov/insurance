@@ -111,6 +111,9 @@ $this->breadcrumbs=array(
 	<?	}?>
     	</div>
         <hr>
+        Укажите название подраздела (текст меню): <input name="name" type="text" id="name" required>
+        <hr>
+        <hr>
         Укажите алиас (подстроку адреса) подраздела: <input name="alias" type="text" id="alias" required>
         <hr>
 	<div id="metadata">

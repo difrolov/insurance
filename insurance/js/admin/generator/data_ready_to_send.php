@@ -13,6 +13,13 @@ $(function(){
 			errPlace=$('#pick_out_section');
 			errCount++;
 		}
+		if (!$('#name').val()){
+			errMess[errCount]='Вы не название подраздела.';
+			if (!errPlace) 
+				errPlace=$('#name');
+			reqS[errCount]='name';
+			errCount++;
+		}
 		if (!$('#alias').val()){
 			errMess[errCount]='Вы не указали алиас создаваемого подраздела.';
 			if (!errPlace) 
@@ -42,6 +49,7 @@ $(function(){
 			return false;
 		}else{
 			Layout.parent=$(radioChecked[0]).val();
+			Layout.name=$('#name').val();
 			Layout.alias=$('#alias').val();
 			Layout.title=$('#title').val();
 			Layout.keywords=$('#keywords').val();
@@ -65,12 +73,6 @@ $(function(){
 	  alert(e.message);
   }
 });
-/*function clearDataToSendArray(){
-//	window.dataToSend=new Array();
-//	dataToSend['schema']='';
-//	dataToSend['blocks']='';
-//	dataToSend['parent_section']='';
-}*/
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
 echo $myscript;
