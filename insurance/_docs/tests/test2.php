@@ -83,3 +83,15 @@ if ($localdata){
 }
 	//var_dump("<h1>jenc:</h1><pre>",$jenc,"</pre>");
 ?>
+<div id="res_root"></div>
+    <script type="text/javascript">
+      (function() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.async = true;
+        script.src = "https://goresponsa.com/widgets/509eb759021e9b02000006aa.js";
+        var other = document.getElementsByTagName('script')[0];
+        other.parentNode.insertBefore(script, other);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the Q&A powered by Responsa.</noscript>
