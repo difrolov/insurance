@@ -12,9 +12,14 @@ display:none;
 div.DivStuff{
 	padding:6px;
 }
+img.helpHint{
+	margin-bottom:4px;
+}
 div#metadata textarea,
-div#metadata input[type="text"]{
-	padding:6px;
+div#metadata input[type="text"],
+div#subsection_ids input[type="text"]{
+	display:block;
+	padding:2px 6px;
 	width:50%;
 }
 div#mng{

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="CAccessControlFilter.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902000000" remote="129969263400000000" />
+<file name="CAuthAssignment.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902010000" remote="129969263400000000" />
+<file name="CAuthItem.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902700000" remote="129969263400000000" />
+<file name="CAuthManager.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902710000" remote="129969263400000000" />
+<file name="CBaseUserIdentity.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902720000" remote="129969263400000000" />
+<file name="CDbAuthManager.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902730000" remote="129969263400000000" />
+<file name="CPhpAuthManager.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902740000" remote="129969263400000000" />
+<file name="CUserIdentity.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902750000" remote="129969263400000000" />
+<file name="CWebUser.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902750000" remote="129969263400000000" />
+<file name="schema-mssql.sql" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902760000" remote="129969263400000000" />
+<file name="schema-mysql.sql" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902760000" remote="129969263400000000" />
+<file name="schema-oci.sql" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902770000" remote="129969263400000000" />
+<file name="schema-pgsql.sql" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902770000" remote="129969263400000000" />
+<file name="schema-sqlite.sql" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513902780000" remote="129969263400000000" />
+</dwsync>

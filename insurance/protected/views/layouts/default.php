@@ -4,9 +4,7 @@
   <div align="left" class="container" id="page">
     <div id="fit_height">
 	  <div id="header">
-	<?	
-		setHTML::buildHeaderRoof();
-
+	<?	// /components/helpers
 		setHTML::buildLogosBlock();
 
 		setHTML::buildContactsAndSearchBlock();

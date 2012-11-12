@@ -111,12 +111,14 @@ $this->breadcrumbs=array(
 	<?	}?>
     	</div>
         <hr>
-        Укажите название подраздела (текст в меню): 
-        <input name="name" type="text" id="name" required>
+    <div id="subsection_ids">
+        Укажите название подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Текст в меню для загрузки данного подраздела">
+<input name="name" type="text" id="name" required>
         <hr>
-        Укажите алиас (уникальная подстрока в адресе страницы) подраздела: 
+        Укажите алиас подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Уникальная подстрока в адресе страницы с данным подразделом"> 
         <input name="alias" type="text" id="alias" required>
         <hr>
+    </div>
 	<div id="metadata">
         <h4>Укажите метаданные страницы (важно для поисковой оптимизации):</h4>
 	  <div>

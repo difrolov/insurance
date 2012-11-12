@@ -203,6 +203,9 @@ div#content_from_right{
 	a{
 	font-size:1.1em;
 }
+.helpHint{
+	cursor:default;
+}
 img[align="left"]{
 	margin-left:0;
 	margin-right:8px;
@@ -316,7 +319,7 @@ div#last_seen >
 	margin-right:0;
 }
 div#logo{
-	padding-top:29px;
+	padding-top:66px;
 	float:left;
 }
 div#main_submenu{

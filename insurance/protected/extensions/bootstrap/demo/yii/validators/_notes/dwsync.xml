@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="CBooleanValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894750000" remote="129969257400000000" />
+<file name="CCaptchaValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894750000" remote="129969257400000000" />
+<file name="CCompareValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894760000" remote="129969257400000000" />
+<file name="CDateValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894760000" remote="129969257400000000" />
+<file name="CDefaultValueValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894760000" remote="129969257400000000" />
+<file name="CEmailValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894770000" remote="129969257400000000" />
+<file name="CExistValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894800000" remote="129969257400000000" />
+<file name="CFileValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894800000" remote="129969257400000000" />
+<file name="CFilterValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894810000" remote="129969257400000000" />
+<file name="CInlineValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894810000" remote="129969257400000000" />
+<file name="CNumberValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894820000" remote="129969257400000000" />
+<file name="CRangeValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894820000" remote="129969257400000000" />
+<file name="CRegularExpressionValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894830000" remote="129969257400000000" />
+<file name="CRequiredValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894830000" remote="129969257400000000" />
+<file name="CSafeValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894840000" remote="129969257400000000" />
+<file name="CStringValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894840000" remote="129969257400000000" />
+<file name="CTypeValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894860000" remote="129969257400000000" />
+<file name="CUniqueValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894860000" remote="129969257400000000" />
+<file name="CUnsafeValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894870000" remote="129969257400000000" />
+<file name="CUrlValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894880000" remote="129969257400000000" />
+<file name="CValidator.php" server="178.210.67.85/insur.nichost.ru/docs/" local="129938513894880000" remote="129969257400000000" />
+</dwsync>
