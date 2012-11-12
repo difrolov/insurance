@@ -111,10 +111,11 @@ $this->breadcrumbs=array(
 	<?	}?>
     	</div>
         <hr>
-        Укажите название подраздела (текст меню): <input name="name" type="text" id="name" required>
+        Укажите название подраздела (текст в меню): 
+        <input name="name" type="text" id="name" required>
         <hr>
-        <hr>
-        Укажите алиас (подстроку адреса) подраздела: <input name="alias" type="text" id="alias" required>
+        Укажите алиас (уникальная подстрока в адресе страницы) подраздела: 
+        <input name="alias" type="text" id="alias" required>
         <hr>
 	<div id="metadata">
         <h4>Укажите метаданные страницы (важно для поисковой оптимизации):</h4>

@@ -14,7 +14,7 @@ $(function(){
 			errCount++;
 		}
 		if (!$('#name').val()){
-			errMess[errCount]='Вы не название подраздела.';
+			errMess[errCount]='Вы не указали название подраздела.';
 			if (!errPlace) 
 				errPlace=$('#name');
 			reqS[errCount]='name';
