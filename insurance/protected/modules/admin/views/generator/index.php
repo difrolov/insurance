@@ -18,6 +18,7 @@ $this->breadcrumbs=array(
 <div id="article_preview_text">
 </div>
 <div align="left">
+<form style="margin:0;" name="content_save" id="content_save" method="post" action="<?php echo Yii::app()->createUrl('admin/generator/save/') ?>">
 	<div id="choice_init">
         <h5>Выберите параметры макета создаваемой страницы</h5>
         <div id="mng">
@@ -78,9 +79,10 @@ $this->breadcrumbs=array(
     </div>
     <h5 id="pick_out_section" class="link" style="display:<?="none"?>;">Выберите родительский раздел для создаваемой страницы</h5>
   	<div id="<?="save_tmpl_block"?>">
+    	<div id="sections_radios">
         <label>
           <span>
-        	<input type="radio" name="menu" id="none" value="radio"><b>Без родительского раздела</b>
+        	<input type="radio" name="menu" id="none" value="radio"><b id="no_parent">Без родительского раздела</b>
           </span>
         </label>
 	<?	$items=HelperAdmin::menuItem();
@@ -107,9 +109,35 @@ $this->breadcrumbs=array(
         </div>
 		<?	}?>
 	<?	}?>
+    	</div>
         <hr>
-        <button id="save_page">Сохранить страницу</button>
-    </div>
+        Укажите название подраздела (текст в меню): 
+        <input name="name" type="text" id="name" required>
+        <hr>
+        Укажите алиас (уникальная подстрока в адресе страницы) подраздела: 
+        <input name="alias" type="text" id="alias" required>
+        <hr>
+	<div id="metadata">
+        <h4>Укажите метаданные страницы (важно для поисковой оптимизации):</h4>
+	  <div>
+        <h5>Заголовок страницы (title):</h5>
+        <input name="title" type="text" id="title" required>
+        </div>
+        
+      <div>
+        <h5>Ключевые слова (keywords, через пробел):</h5>
+        <textarea name="keywords" id="keywords"></textarea>
+        </div>
+        
+      <div>
+        <h5>Описание страницы (description):</h5>
+        <textarea name="description" id="description"></textarea>
+      </div>
+	</div>
+        <hr>
+        <button id="save_page" type="button">Сохранить страницу</button>
+	</div>
+</form>    
 </div>
 
 	<?php $this->beginWidget('application.extensions.bootstrap.widgets.TbModal',

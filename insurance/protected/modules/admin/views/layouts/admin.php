@@ -7,52 +7,52 @@
 	<meta name="language" content="en" />
 
 	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/style.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/style.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/print.css" media="print" />
 	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/ie.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/form.css" />
-	<link rel="stylesheet/less" type="text/css" href="<?php echo $url; ?>/css/styles.less">
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap-responsive.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/form.css" />
+	<link rel="stylesheet/less" type="text/css" href="<?=$url?>/css/styles.less">
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap-responsive.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
 <?	if (isset($_GET['test'])):?>    
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/test.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/test.css" media="screen, projection" />
 <?	endif;?>    
-	<script src="<?php echo $url; ?>/js/admin/banner.js"></script>
+	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
 // если загрузили раздел добавления подраздела:
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/generator.css" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/generator.css" />
 <?	
 	require_once Yii::getPathOfAlias('webroot')."/css/admin/generator2.php";
 	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
-	<script src="<?php echo $url; ?>/js/admin/generator/prepare_data.php"></script>
-	<script src="<?php echo $url; ?>/js/admin/generator/load_template.php?base_url=<?
+	<script src="<?=$url?>/js/admin/generator/prepare_data.php"></script>
+	<script src="<?=$url?>/js/admin/generator/load_template.php?base_url=<?
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
-    <script src="<?php echo $url; ?>/js/admin/generator/switch_states.php"></script>
-    <script src="<?php echo $url; ?>/js/admin/generator/manage_template.php?base_url=<?
+    <script src="<?=$url?>/js/admin/generator/switch_states.php"></script>
+    <script src="<?=$url?>/js/admin/generator/manage_template.php?base_url=<?
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
-    <script src="<?php echo $url; ?>/js/admin/generator/handle_text_module.php?base_url=<?
+    <script src="<?=$url?>/js/admin/generator/handle_text_module.php?base_url=<?
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
-    <script src="<?php echo $url; ?>/js/admin/generator/customize_page.js"></script>
-    <script src="<?php echo $url; ?>/js/admin/generator/data_ready_to_send.php?base_url=<?
+    <script src="<?=$url?>/js/admin/generator/customize_page.js"></script>
+    <script src="<?=$url?>/js/admin/generator/data_ready_to_send.php?base_url=<?
 	echo $url;
-	if (isset($_GET['test'])){?>&test=1<? }?>"></script>	<?
-
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
+<?
 }else{
 // если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
-	<script src="<?php echo $url; ?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
+	<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
 <?
 }?>
 </head>

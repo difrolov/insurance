@@ -12,7 +12,11 @@ display:none;
 div.DivStuff{
 	padding:6px;
 }
-
+div#metadata textarea,
+div#metadata input[type="text"]{
+	padding:6px;
+	width:50%;
+}
 div#mng{
 	border:solid 4px #C3D9FF;
 	border-radius:5px;

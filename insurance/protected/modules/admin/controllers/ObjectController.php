@@ -1,11 +1,11 @@
 <?php
-
 class ObjectController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
 
 	public function actionIndex()
-	{
+	{	
+
 		$this->render('index');
 	}
 
@@ -31,7 +31,7 @@ class ObjectController extends Controller
 
 	//отображаем статьи
 	public function actionUpdate(){
-
+		
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
