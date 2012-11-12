@@ -16,10 +16,13 @@ a:hover{
 }
 body, 
 html{
-	background:#FFF; 
+	background-color:#FFF; 
 	height:100%;
 	margin:0;
 	text-align:center;
+}
+body{
+	background:#666;
 }
 body > 
 	div:first-child{
@@ -28,6 +31,10 @@ body >
 div#fit_height { /* fit_height*/
 	padding-bottom:140px;
 	/*background:#FFFF00;*/
+}
+div#all_phones{
+	/*background: url(../images/contacts-mock.gif) no-repeat;*/
+	margin-top:14px;
 }
 .bold{
 	font-weight:bold;
@@ -51,7 +58,6 @@ div#breadcrumbs{
 	[disabled]margin-bottom:8px;
 }
 div#call_us{
-	padding-top:31px;
 	font-size:24px;
 }
 div#call_us 
@@ -75,8 +81,18 @@ div#call_us >
 }
 div#call_us 
 	div#free_line {
-	font-size:0.95em;
-	letter-spacing:0.01em;
+	font-size:1.2em;
+	letter-spacing:-0.1em;
+}
+div#free_line_always{ /*круглосуточно*/
+	font-size: 0.65em !important;
+	letter-spacing: -0.1em;
+	margin-top: -4px;
+	text-align: right;
+}
+div#free_line_local{ /*+7 (495) 649-71-71*/
+	font-size:0.8em !important;
+	text-align:right;
 }
 div#call_us > 
 	div:first-child div{
@@ -120,6 +136,33 @@ td#cellPrograms >
 .clear{
 	clear:both;
 }
+div#cmd_micro,
+div#cmd_micro div{
+	height:17px;
+}
+div#cmd_micro{
+	background: url(../images/cmd_micro.gif) no-repeat;
+	height:17px;
+	margin-bottom: 9px;
+	margin-left: 81px;
+	width:79px;
+}
+div#cmd_micro div{
+	/*background:#FFFF00;*/
+	cursor:pointer;
+	display:inline-block;
+}
+div#cmd_micro div[data-home]{
+	width:19px;
+}
+div#cmd_micro div[data-map]{
+	margin:0 2px 0 6px;
+	width:26px;
+}
+div#cmd_micro div[data-search]{
+	width:18px;
+}
+
 div.company_news{
 	
 }
@@ -319,7 +362,7 @@ div#last_seen >
 	margin-right:0;
 }
 div#logo{
-	padding-top:66px;
+	padding-top:28px;
 	float:left;
 }
 div#main_submenu{
@@ -349,7 +392,8 @@ div#main_submenu
 	margin-top:0;
 }
 div#page{
-	box-shadow:0 0 40px 10px #ccc;
+	background:#FFF;
+	box-shadow:0 0 40px 10px #333;
 	margin-bottom:-136px;	
 	min-height:100%;
 	padding:0 20px;

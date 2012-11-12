@@ -73,10 +73,15 @@ class setHTML{
  */
 	function buildContactsAndSearchBlock(){?>
     		<div id="call_us" align="right">
-          	<div align="center">
+          	<div align="center" id="all_phones">
+              <div id="cmd_micro">
+              	<div data-home="home" title="На главную" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/'">&nbsp;</div>
+                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/map.php"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/map.php'">&nbsp;</a></div>
+                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/search.php'">&nbsp;</div>
+              </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
-			  <div class="txtLightBlue">круглосуточно</div>
-                <div align="center">+7 (495) 649-71-71</div>
+			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>
+                <div id="free_line_local" align="center">+7 495 649 71 71</div>
 			</div>
           </div>
 <? 	}
@@ -252,8 +257,8 @@ class setHTML{
 				<div id="logo" align="left">
                     <a href="/insur/insurance/site/index"><?
     	if (isset($test_logo)){
-			?><img src="../../../images/logo.jpg" width="377" height="76"><? 
-		}else{?><img alt="Открытие Страхование" title="На главную" src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo.jpg" width="377" height="76" border="0"><? }?></a>
+			?><img src="../../../images/logo.gif" width="372" height="80"><? 
+		}else{?><img alt="Открытие Страхование" title="На главную" src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo.gif" width="372" height="80" border="0"><? }?></a>
                 </div>
 <?	}
 /**
