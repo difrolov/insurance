@@ -61,36 +61,36 @@ class GeneratorController extends Controller
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		die('Edit mode');
-		
+
 		if(isset($_GET['id'])){
-		
+
 		}
 	}
-	
+
 	public function actionSave(){ // см. _docs\tests\test2.php
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		
+
 		$localdata=false;
-		
+
 		// если в режиме тестирования, т.е., данные извлекаются НЕ из запроса:
 		if (!$post=$_POST) {
 			$localdata=true;
 			$post=TestGenerator::$test_post;
 		}
-		// начало записи в текстовом модуле:	
+		// начало записи в текстовом модуле:
 		$dText="Текст :: "; // общее
 		$artId="article id: "; // дописать подстроку для добавленной существующей статьи
 		$dTextArtId=$dText.$artId; // вся подстрока для добавленной существующей статьи
 		foreach($post as $key=>$val){
 			if ($key=="blocks"){ // если блоки с модулями
-				
+
 				foreach($val as $block => $data){ // перебрать каждый блок
 					$arrMods=explode("|",$data); // получить массив модулей
 					if ( strstr($data,$dText) // если в наборе модулей есть начало для текстового блока
 						 && !strstr($data,$dTextArtId) // и нет записи о добавл
-					   ){ 
+					   ){
 						for($i=0;$i<count($arrMods);$i++){
 							// повторить условие поиска текста для текущего модуля:
 							if ( strstr($arrMods[$i],$dText) // текст новой статьи
@@ -109,32 +109,41 @@ class GeneratorController extends Controller
 									/************************************
 										Заголовок статьи: $header (см. выше)
 										Текст статьи: $text (см. выше)
-										
+
 										ПРОЦЕДУРА СОХРАНЕНИЯ....
-									
+
 									************************************/
+									$model_content = new InsurArticleContent;
+									$model_content->content = $text;
+									$model_content->name = $header;
+									$model_content->status = 1;
+									$model_content->created = date("Y-m-d H:i:s");
+									$model_content->object_id = $post['parent'];
+									$model->save();
+
 
 									// 2. получить id сохранённой статьи
 									/************************************
-									
+
 										ПРОЦЕДУРА ПОЛУЧЕНИЯ id....
 										на выходе получаем $article_id
 									************************************/
-									
+									$article_id = $model->id;
+
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:
 									// "Текст :: article id: [id_статьи]";
 									$arrMods[$i]=$dTextArtId.$article_id;
-								}							
+								}
 							}
 						}
 					}
-					if (!strstr($data,"header:"))	
+					if (!strstr($data,"header:"))
 						$val[$block]=$arrMods; // обратно в строку
 				}
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$val);
 			$post[$key]=$val;
-		}	
+		}
 		// модифицируем массив данных:
 		$parent_id=$post['parent'];
 		$name=$post['name'];
@@ -142,7 +151,7 @@ class GeneratorController extends Controller
 		$title=$post['title'];
 		$keywords=$post['keywords'];
 		$description=$post['description'];
-		// удаляем элементы массива, которые не должны быть записаны в insur_insurance_object.content  
+		// удаляем элементы массива, которые не должны быть записаны в insur_insurance_object.content
 		unset($post["blocks"]["activeBlockIdentifier"]);
 		unset($post["blocks"]["moduleClickedLocalIndex"]);
 		unset($post["parent"]);
@@ -151,14 +160,14 @@ class GeneratorController extends Controller
 		unset($post["title"]);
 		unset($post["keywords"]);
 		unset($post["description"]);
-		
+
 		/************************************/
 
 		// 3. Сохранить подраздел
 		/************************************/
-		
+
 		/************************************
-		
+
 		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА....
 
 		insur_insurance_object.parent_id: $parent_id
@@ -174,14 +183,24 @@ class GeneratorController extends Controller
 		insur_insurance_object.description: $description";
 
 		insur_insurance_object.content: serialize($post);
-		
+
 		************************************/
-		
-		
+		$model_obj = new InsurInsuranceObject;
+		$model_obj->parent_id = $parent_id;
+		$model_obj->name = $name;
+		$model_obj->status = 1;
+		$model_obj->alias = $alias;
+		$model_obj->date_changes = date("Y-m-d H:i:s");
+		$model_obj->keywords = $keywords;
+		$model_obj->description = $description;
+		$model_obj->content = serialize($post);
+		$model_obj->save();
+
+
 		if ($localdata){
 			TestGenerator::testCodeOutput3($post);
 		}else{
-			$jenc=json_encode(array("result"=>"Подраздел создан!"));				
+			$jenc=json_encode(array("result"=>"Подраздел создан!"));
 			echo $jenc;
 		}
 	}
@@ -190,7 +209,7 @@ class GeneratorController extends Controller
 //*********************************************************************************
 // для тестирования:
 class TestGenerator{
-	public $test_post=array("Schema"=>"4ss",		
+	public $test_post=array("Schema"=>"4ss",
 					"blocks"=>array(
 						"1"=>"Новость|Текст :: Статеюшка такая!^<p>\n\tПринцип нарушен, что человек, попадающий в другую эпоху, другое время, все равно остается самим собой. Но мне кажется этот прием работает на то, чтобы доказать то, что мы обычно любим говорить, вот если бы я был бы тогда, я бы сделал...</p>\n|Новость",
 						"2"=>"header:Подзаголовок такой подзаголовок!",
@@ -224,7 +243,7 @@ class TestGenerator{
 		echo "<div><div>$key: $val</div></div>";
 	}
 	function testCodeOutput3($post){
-		echo "<h4>Сериализованный массив:</h4>";	
+		echo "<h4>Сериализованный массив:</h4>";
 		var_dump("<pre>",$post,"</pre>");
 	}
 }
