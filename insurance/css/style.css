@@ -30,8 +30,6 @@ body >
 }
 div#fit_height { /* fit_height*/
 	padding-bottom:140px;
-div#all_phones{
-	margin-top:14px;
 }
 div#all_phones{
 	margin-top:14px;
@@ -378,8 +376,6 @@ div#main_submenu
 	margin:0 32px;
 }
 div#main_submenu 
-	ul li a{ 
-	color:#FFF;	
 	ul li a{ 
 	color:#FFF;	
 }
