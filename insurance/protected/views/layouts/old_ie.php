@@ -4,7 +4,6 @@
   <tr>
     <td id="shadowLeft" rowspan="4" valign="top">&nbsp;</td>
     <td width="918" height="190" valign="top">
-	<?	setHTML::buildHeaderRoof();?>    	
         <table class="noPadding" id="hat" cellspacing="0">
           <tr>
             <td>

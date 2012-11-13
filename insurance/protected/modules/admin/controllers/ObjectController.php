@@ -35,6 +35,7 @@ class ObjectController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
+		$model = new InsurArticleContent();
 		if(isset($_GET['id'])){
 			//Достаем контент страницы
 			$content = InsurArticleContent::model()->findAll(array('condition'=>"object_id=".$_GET['id']));
@@ -42,9 +43,10 @@ class ObjectController extends Controller
 				$this->redirect('index');
 			}
 			//таблица для отображения
-			$model = new InsurArticleContent();
 			$gridDataProvider = $model->search('object_id='.$_GET['id']);
 			$this->render('update',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
+		}else{
+			$this->render('update',array('model'=>$model));
 		}
 	}
 

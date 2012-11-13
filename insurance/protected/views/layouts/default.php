@@ -2,11 +2,9 @@
 <body>
 <div align="center">
   <div align="left" class="container" id="page">
-    <div id="fit_height">
+    <div id="fit_height"<? if(isset($_GET['test_bg'])){?> style="background:url(<?=Yii::app()->request->getBaseUrl(true)?>/_docs/sources/BODY.gif) -20px 0 no-repeat;"<? }?>>
 	  <div id="header">
-	<?	
-		setHTML::buildHeaderRoof();
-
+	<?	// /components/helpers
 		setHTML::buildLogosBlock();
 
 		setHTML::buildContactsAndSearchBlock();
@@ -19,13 +17,15 @@
 		setHTML::buildDropDownMenu();	// выпадающее меню	
 															?>
 	  </div>
+    <?	/**/?> 
 		<div id="main_submenu" align="right" style="position:relative;">
 	<?	setHTML::buildMainMenu($this,-2);
 	
 		setHTML::buildDropDownMenu(-2);
 												?>
 		</div>
-	<?	setHTML::buildBreadCrumbs();
+	<?	
+		setHTML::buildBreadCrumbs();
 		
 		echo $content;?>
   	</div>

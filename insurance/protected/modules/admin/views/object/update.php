@@ -1,5 +1,7 @@
 <div>Статьи</div>
-<?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
+<?php
+if (isset($gridDataProvider)){
+ $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider,
     'template'=>"{items}",
@@ -23,7 +25,8 @@
         		),
         ),
     ),
-)); ?>
+));
+} ?>
 <br class="clear">
 <?php $this->widget('bootstrap.widgets.TbButton', array(
 	    'label'=>"Добавить статью",
@@ -54,7 +57,7 @@
 </div>
 
     <?php
-$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
+$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
 			  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
@@ -92,7 +95,7 @@ $this->widget('application.extensions.TheCKEditor.theCKEditorWidget',
 	),
 ) ); ?>
 
-<input type="hidden" name="object_id" value="<?php echo $_GET['id']; ?> ">
+<input type="hidden" name="object_id" value="<?php echo @$_GET['id']; ?> ">
 <div class="modal-footer">
 <input type="submit" name="submit" onclick="" value="Сохранить">
 </div>

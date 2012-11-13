@@ -34,6 +34,10 @@ div#fit_height { /* fit_height*/
 div#all_phones{
 	margin-top:14px;
 }
+div#all_phones{
+	/*background: url(../images/contacts-mock.gif) no-repeat;*/
+	margin-top:14px;
+}
 .bold{
 	font-weight:bold;
 }
@@ -158,6 +162,7 @@ div#cmd_micro div[data-map]{
 div#cmd_micro div[data-search]{
 	width:18px;
 }
+
 
 div.company_news{
 	
@@ -361,6 +366,8 @@ div#logo{
 }
 div#main_submenu{
 	background:#06AEDD;
+	/*
+	margin-top:-4px;*/
 }
 div#main_submenu 
 	ul{
@@ -377,6 +384,8 @@ div#main_submenu
 	margin:0 32px;
 }
 div#main_submenu 
+	ul li a{ 
+	color:#FFF;	
 	ul li a{ 
 	color:#FFF;	
 }
@@ -459,6 +468,8 @@ div[id*="ddMenu_"] a:hover{
 div#mainmenu 
 	ul{
 	margin:5px 0 8px 0;
+	height:58px;*/
+	margin:5px 0 8px 0;
 	margin-left:-10px;
 }
 div#mainmenu 
@@ -475,6 +486,7 @@ div#bottom_menu
 div#mainmenu 
 	ul li{
 	padding-right:15px;
+	/*text-transform:uppercase;*/
 }
 div#mainmenu ul >
 	li:first-child{

@@ -14,7 +14,7 @@
 
 $this->breadcrumbs=array(
 	$this->module->id,
-);/*?><h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1><? */?>
+);?>
 <div id="article_preview_text">
 </div>
 <div align="left">
@@ -65,10 +65,10 @@ $this->breadcrumbs=array(
       </ol>
         <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
         <?php foreach($model_modules as $key_mod=>$val_mod):?>
-            <div onclick="_generator_modules.getModule(<?php 
-				
-				echo $model_modules[$key_mod]['id']; 
-				
+            <div onclick="_generator_modules.getModule(<?php
+
+				echo $model_modules[$key_mod]['id'];
+
 				?>)" data-module-type="<?php echo $model_modules[$key_mod]['name']; ?>"><?php echo $model_modules[$key_mod]['name']; ?></div>
         <?php endforeach; ?>
         	<div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
@@ -111,12 +111,14 @@ $this->breadcrumbs=array(
 	<?	}?>
     	</div>
         <hr>
-        Укажите название подраздела (текст в меню): 
-        <input name="name" type="text" id="name" required>
+    <div id="subsection_ids">
+        Укажите название подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Текст в меню для загрузки данного подраздела">
+<input name="name" type="text" id="name" required>
         <hr>
-        Укажите алиас (уникальная подстрока в адресе страницы) подраздела: 
+        Укажите алиас подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Уникальная подстрока в адресе страницы с данным подразделом"> 
         <input name="alias" type="text" id="alias" required>
         <hr>
+    </div>
 	<div id="metadata">
         <h4>Укажите метаданные страницы (важно для поисковой оптимизации):</h4>
 	  <div>
@@ -160,7 +162,7 @@ $this->breadcrumbs=array(
       </tr>
     </table>
 <?php	$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
-			  array(
+  array(
     'model'=>$model,                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model
     'height'=>'240px',

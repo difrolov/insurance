@@ -73,16 +73,15 @@ class setHTML{
  */
 	function buildContactsAndSearchBlock(){?>
     		<div id="call_us" align="right">
-          	<div align="center">
+          	<div align="center" id="all_phones">
+              <div id="cmd_micro">
+              	<div data-home="home" title="На главную" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/'">&nbsp;</div>
+                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/map.php"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/map.php'">&nbsp;</a></div>
+                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/search.php'">&nbsp;</div>
+              </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
-			  <div class="txtLightBlue">круглосуточно</div>
-                <div align="center">+7 (495) 649-71-71</div>
-              	<div id="search">
-                	<form>
-                		<input name="search" type="text">
-                    	<input type="image" src="<?=Yii::app()->request->baseUrl?>/images/search_button.png">
-                    </form>
-                </div>
+			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>
+                <div id="free_line_local" align="center">+7 495 649 71 71</div>
 			</div>
           </div>
 <? 	}
@@ -153,17 +152,6 @@ class setHTML{
 			<?	if ($tp){?><h3>/footer_content</h3><? }?>
   	<!--/footer_content-->
   </div>
-<?	}
-/**
- * @package		HTML
- * @subpackage		header
- *
- */
-	function buildHeaderRoof(){?>
-		<div id="header_top">
-            <div style="float:left;"><a href="http://www.open.ru"><span class="txtLightBlue">www.open</span>.ru</a></div>
-            <div style="float:right;"><a href="map.php" class="txtLightBlue">карта сайта</a></div>
-          </div>
 <?	}
 /**
  * @package		HTML
@@ -267,7 +255,10 @@ class setHTML{
  */
 	function buildLogosBlock(){?>
 				<div id="logo" align="left">
-                    <a href="/insur/insurance/site/index"><img alt="Открытие Страхование" title="На главную" src="/insur/insurance/images/logos.gif" width="435" height="97" border="0"></a>
+                    <a href="/insur/insurance/site/index"><?
+    	if (isset($test_logo)){
+			?><img src="../../../images/logo.gif" width="372" height="80"><? 
+		}else{?><img alt="Открытие Страхование" title="На главную" src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo.gif" width="372" height="80" border="0"><? }?></a>
                 </div>
 <?	}
 /**
@@ -301,8 +292,10 @@ class setHTML{
 				$all_ready_target="физических лиц";
 			break;			
 		}?>
-				<div class="solution_content">
-					<img src="<?=Yii::app()->request->baseUrl?>/images/ready_solutions/<?=$img?>.jpg" width="252" height="143">
+				<div class="solution_content"><?
+    	if (isset($test_logo)){
+			?><img src="../../../images/ready_solutions/for_business.jpg" width="248" height="143"><? 
+		}else{?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/ready_solutions/<?=$img?>.jpg" width="252" height="143"><? }?>
 					<div>готовые решения для
 						<span><?=$ready_target?></span>
 					</div>
@@ -310,6 +303,18 @@ class setHTML{
 				<div class="solutions_all">Все решения для<br><?
 					echo $all_ready_target;
 					?></div>
+<?	}
+/**
+ *
+ *
+ */
+	function buildSearchForm(){?>
+              	<div id="search">
+                	<form>
+                		<input name="search" type="text">
+                    	<input type="image" src="<?=Yii::app()->request->baseUrl?>/images/search_button.png">
+                    </form>
+                </div>
 <?	}
 /**
  * @package		HTML
@@ -380,7 +385,7 @@ class setHTML{
 			<p>А в последствии, между прочим, новости будут гороздо новостней, чем сейчас.</p>";
 		}?>
 	<div class="company_news"><img align="left" name="placeholder" src="<?=$src?>" width="48" height="64" alt="" style="background-color: #99FFCC" /><?=$content?>
-    	<div align="right"><a href="#">Подробности <? echo "&gt;&gt;&gt;";?></a></div>
+    	<div align="right"><?='<a href="#">'?>Подробности<?='&gt;&gt;&gt;</a>'?></div>
     </div>
     <br>
 <?	}
@@ -401,7 +406,7 @@ class setHTML{
 	<div class="ready_solution_preview">
     	<div><img align="left" name="placeholder" src="<?=$params['icon_src']?>" width="64" height="64" alt="" style="background-color: #ededed" />
 		</div>
-		<div><a href="<?=$link?>"><?=$solution_name?></a></div>
+		<div><?='<a href="'.$link.'">'.$solution_name.'</a>'?></div>
     </div>
     <div class="clear">&nbsp;</div>
 <?	}
