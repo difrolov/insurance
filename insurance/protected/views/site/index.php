@@ -1,16 +1,18 @@
 <? $tp=false;
 ?><!-- slide_marks -->
-<?	// режим тестирования и загружена "Главная" стрю:
+<?	/*// режим тестирования и загружена "Главная" стрю:
 		if ($tp){?><h3>slide_marks</h3><? }?>
 		<div align="left" id="slide_marks">
 <?	for($i=0;$i<8;$i++):?>
 			<div>&nbsp;</div>
 <?		endfor;?>
 		</div>
-<?		if ($tp){?><h3>/slide_marks</h3><? }?>
+<?		*/
+	if ($tp){?><h3>/slide_marks</h3><? }?>
 		<!-- /slide_marks -->
 		<!-- tblSlides -->
-<?		if ($tp){?><h3>tblSlides</h3><? }?>
+<?		if ($tp){?><h3>tblSlides</h3><? }
+			if (isset($old)):?>
 			<table width="100%" cellspacing="0" cellpadding="0" id="tblSlides">
 			  <tr valign="top">
 				<td class="slidesPointer"><a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_left.png" width="9" height="18" border="0"></a></td>
@@ -51,7 +53,31 @@
 				<td class="slidesPointer"><a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_right.png" width="9" height="18" border="0"></a></td>
 			  </tr>
 			</table>
-	<?php
+	<?php	else:?>
+    	<div align="center" id="slides">
+        	<div id="slide-first">
+            	<div></div>
+            	<div>
+                	<div>Добровольное мед. страхование</div>
+                    <div>для корпоративных клиентов</div>
+                </div>
+            </div>
+            <div id="slide-middle">
+            	<div></div>
+            	<div>
+                	<div>Финансовые риски</div>
+                    <div>малому и среднему бизнесу</div>
+                </div>
+            </div>
+            <div id="slide-last">
+            	<div></div>
+            	<div>
+                	<div>Страхование квартиры</div>
+                    <div>Для физических лиц</div>
+                </div>
+            </div>
+        </div>
+	<?		endif;
 		if ($tp){?><h3>/tblSlides</h3><? }?>
 		<!-- /tblSlides -->
 			<div id="content_from_left" align="left">

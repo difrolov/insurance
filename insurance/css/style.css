@@ -16,13 +16,10 @@ a:hover{
 }
 body, 
 html{
-	background-color:#FFF; 
+	background-color:#666; 
 	height:100%;
 	margin:0;
 	text-align:center;
-}
-body{
-	background:#666;
 }
 body > 
 	div:first-child{
@@ -426,8 +423,11 @@ div#main_submenu
 		a{
 	color:#FFF;
 }
-div#mainmenu{
+div#mainmenu,
+div#slides{
 	background: #EDEEF0;
+}
+div#mainmenu{
 	border-top: solid 1px #FFF;
 	height: 31px;
 	text-align: left;
@@ -498,7 +498,7 @@ div#bottom_menu
 	border-right:none;
 }
 ul[id^="yw"] li{ /*верхнее главное меню*/
-	background:#EDEEF0;
+	
 }
 #main_submenu ul[id^="yw"] li{/*верхнее главное подменю*/
 	background:#06AEDD;
@@ -545,11 +545,59 @@ div#slide_marks
 	width:9px; 
 }
 div#slides{
-	height:250px;
-	margin-bottom:12px;
+	margin:10px -20px;
+	/*min-height:203px;*/
+	padding-bottom:15px;
+}
+div#slides div[id^="slide"]{
+	display:inline-block;
+	margin-bottom:17px;
+	margin-top:20px;
+}
+div#slides div[id^="slide"] 
+	> div:first-child{
+	background-repeat:no-repeat;
+	background:#FFFF00;
+	height:203px;
+	margin-bottom:17px;
+	overflow:hidden;
+	width:296px; 
+}
+div#slides div[id^="slide"] 
+	> div:last-child{
+	background: #F0F;
+	background:url(../images/separator_vertical_small-middle.png) no-repeat;
+	height:31px;
+	padding-bottom:9px;
+	padding-top:16px;
+}
+div#slides div[id^="slide"] 
+	> div:last-child
+		> div:first-child{
+	margin-bottom:3px;
+	padding-left: 21px;
 	text-align:left;
 }
-div#slides > 
+div#slides div[id^="slide"] 
+	> div:last-child
+		> div:last-child{
+	text-align:right;
+}
+div#slides div#slide-first > div:first-child{
+	background:url(../images/slides/1.jpg);
+}
+div#slides div#slide-middle > div:first-child{
+	background:url(../images/slides/2.jpg);
+}
+div#slides div#slide-middle > div:first-child,
+div#slides div#slide-middle > div:first-child ~div{
+	margin-left:21px;
+	margin-right:21px;	
+}
+div#slides div#slide-last > div:first-child{
+	background:url(../images/slides/3.jpg);
+}
+/*div#slides > 
 	div:first-child, 
 div#slides > 
 	div:first-child +div, 
@@ -597,7 +645,7 @@ td.slidesPointer{
 table#tblSlidesLastSeen 
 	td.slidesPointer{
 	padding-top:0;
-}
+}*/
 .txtHeader2, 
 .txtHeader3{
 	text-transform:uppercase;
