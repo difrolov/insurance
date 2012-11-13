@@ -30,12 +30,14 @@ body >
 }
 div#fit_height { /* fit_height*/
 	padding-bottom:140px;
+<<<<<<< HEAD
 }
 div#all_phones{
 	margin-top:14px;
+=======
+>>>>>>> master
 }
 div#all_phones{
-	/*background: url(../images/contacts-mock.gif) no-repeat;*/
 	margin-top:14px;
 }
 .bold{
@@ -43,7 +45,6 @@ div#all_phones{
 }
 #bottom_menu{
 	line-height:30px;
-	/*background:#009900;*/
 }
 div#bottom_menu 
 	ul{
@@ -103,7 +104,6 @@ div#call_us >
 	div:first-child > 
 		div:first-child +div +div{
 	font-size:0.90em;
-	/*background:#FFFF00;*/
 }
 div#call_us_free{
 	display:inline-block; 
@@ -149,10 +149,6 @@ div#cmd_micro{
 	width:79px;
 }
 div#cmd_micro div{
-<<<<<<< HEAD
-=======
-	/*background:#FFFF00;*/
->>>>>>> master
 	cursor:pointer;
 	display:inline-block;
 }
@@ -166,6 +162,7 @@ div#cmd_micro div[data-map]{
 div#cmd_micro div[data-search]{
 	width:18px;
 }
+
 
 div.company_news{
 	
@@ -370,12 +367,9 @@ div#logo{
 div#main_submenu{
 	background:#06AEDD;
 <<<<<<< HEAD
-=======
 	/*
-	height:38px;
-	line-height:38px;
-	padding-bottom:2px;
 	margin-top:-4px;*/
+=======
 >>>>>>> master
 }
 div#main_submenu 
@@ -385,24 +379,16 @@ div#main_submenu
 }
 div#main_submenu 
 	ul li{
-<<<<<<< HEAD
-=======
-	/*background:#FFF;
-	border:solid 1px #999;*/
->>>>>>> master
 	display:inline;
 	font-size:0.9em;
 	letter-spacing:-0.1em;
 	line-height:27px;
 	list-style: none; 
 	margin:0 32px;
-<<<<<<< HEAD
-=======
-	/*padding:8px 30px;
-	text-align:right;*/
->>>>>>> master
 }
 div#main_submenu 
+	ul li a{ 
+	color:#FFF;	
 	ul li a{ 
 	color:#FFF;	
 }
@@ -485,9 +471,9 @@ div[id*="ddMenu_"] a:hover{
 div#mainmenu 
 	ul{
 <<<<<<< HEAD
-=======
-	/*background:url(../_docs/sources/menu.gif) no-repeat;
+	margin:5px 0 8px 0;
 	height:58px;*/
+=======
 >>>>>>> master
 	margin:5px 0 8px 0;
 	margin-left:-10px;
@@ -506,10 +492,6 @@ div#bottom_menu
 div#mainmenu 
 	ul li{
 	padding-right:15px;
-<<<<<<< HEAD
-=======
-	/*text-transform:uppercase;*/
->>>>>>> master
 }
 div#mainmenu ul >
 	li:first-child{
