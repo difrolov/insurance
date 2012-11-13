@@ -59,6 +59,7 @@ div#breadcrumbs{
 }
 div#call_us{
 	font-size:24px;
+	margin-right:26px;
 }
 div#call_us 
 	input[type="text"]{
@@ -231,9 +232,7 @@ div#content_from_right{
 	 width:25%;
 }
 #header{
-	height:190px;
-	padding-top:8px;
-	border-bottom: solid 8px #00B2DF;
+	height:128px;
 }
 #header_top{
 	height:27px; 
@@ -362,31 +361,39 @@ div#last_seen >
 	margin-right:0;
 }
 div#logo{
+	margin-left:24px;
 	padding-top:28px;
 	float:left;
 }
 div#main_submenu{
-	background:#D3D5D9;
+	background:#06AEDD;
+	/*
 	height:38px;
 	line-height:38px;
 	padding-bottom:2px;
+	margin-top:-4px;*/
 }
 div#main_submenu 
 	ul{
 	display:inline-block;
-	margin:0px 20px;
+	margin:0;
 }
 div#main_submenu 
 	ul li{
-	background:#FFF;
-	border:solid 1px #999;
+	/*background:#FFF;
+	border:solid 1px #999;*/
 	display:inline;
-	font-size:0.7em;
+	font-size:0.9em;
+	letter-spacing:-0.1em;
 	line-height:27px;
 	list-style: none; 
-	margin-left:5px;
-	padding:8px 30px;
-	text-align:right;
+	margin:0 32px;
+	/*padding:8px 30px;
+	text-align:right;*/
+}
+div#main_submenu 
+	ul li a{ 
+	color:#FFF;	
 }
 .noTopMargin{
 	margin-top:0;
@@ -438,8 +445,11 @@ div#main_submenu
 	color:#FFF;
 }
 div#mainmenu{
-	height:30px;
-	text-align:left;
+	background: #EDEEF0;
+	border-top: solid 1px #FFF;
+	height: 31px;
+	text-align: left;
+	padding-top: 0px;
 }
 div#mainmenu div[id*="ddMenu_"],
 div#main_submenu div[id*="ddMenu_"]{ /* drop-down menu	*/
@@ -466,7 +476,9 @@ div[id*="ddMenu_"] a:hover{
 }
 div#mainmenu 
 	ul{
-	margin:10px 0 8px 0;
+	/*background:url(../_docs/sources/menu.gif) no-repeat;
+	height:58px;*/
+	margin:5px 0 8px 0;
 	margin-left:-10px;
 }
 div#mainmenu 
@@ -477,16 +489,18 @@ div#bottom_menu
 	display:inline;
 	list-style: none;
 	margin-left:-4px; 
-	padding:8px 10px;
+	padding:5px 5px 9px 13px;
 	text-align:left;
 }
 div#mainmenu 
 	ul li{
-	text-transform:uppercase;
+	padding-right:15px;
+	/*text-transform:uppercase;*/
 }
 div#mainmenu ul >
 	li:first-child{
 	margin-left:-30px;
+	padding-left:24px;
 }
 div#mainmenu 
 	ul >
@@ -495,7 +509,7 @@ div#mainmenu
 }
 div#mainmenu 
 	ul a{
-	font-size:0.7em;
+	font-size:1.02em;
 }
 div#mainmenu 
 	ul > 
@@ -505,12 +519,23 @@ div#bottom_menu
 		li:last-child{
 	border-right:none;
 }
+ul[id^="yw"] li{ /*верхнее главное меню*/
+	background:#EDEEF0;
+}
+#main_submenu ul[id^="yw"] li{/*верхнее главное подменю*/
+	background:#06AEDD;
+}
 li.active{
-	background:#4D4D4F;
+	background:#06AEDD !important;/*4D4D4F*/
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+ul[id^="yw"] li a{
+	color:#06AEDD;
 }
 li.active 
 	a{
-	color:#dedede;
+	color:#FFF !important;/*dedede*/
 }
 div#our_museum{
 	margin-top:10px;
