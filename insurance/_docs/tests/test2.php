@@ -1,4 +1,5 @@
 ﻿<?
+/*	*/
 $localdata=false;
 if (!$post=$_POST) {
 	$localdata=true;
