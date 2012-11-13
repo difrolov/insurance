@@ -30,10 +30,8 @@ body >
 }
 div#fit_height { /* fit_height*/
 	padding-bottom:140px;
-	/*background:#FFFF00;*/
 }
 div#all_phones{
-	/*background: url(../images/contacts-mock.gif) no-repeat;*/
 	margin-top:14px;
 }
 .bold{
@@ -41,7 +39,6 @@ div#all_phones{
 }
 #bottom_menu{
 	line-height:30px;
-	/*background:#009900;*/
 }
 div#bottom_menu 
 	ul{
@@ -68,13 +65,11 @@ div#call_us
 	height:25px;
 	padding-left:4px;
 	width:150px;
-	/*background:#99FF99;*/
 }
 div#call_us 
 	input[type="image"]{
 	float:left;
 	margin:6px;
-	/*background:#FF0;*/
 }
 div#call_us > 
 	div:first-child{
@@ -103,7 +98,6 @@ div#call_us >
 	div:first-child > 
 		div:first-child +div +div{
 	font-size:0.90em;
-	/*background:#FFFF00;*/
 }
 div#call_us_free{
 	display:inline-block; 
@@ -149,7 +143,6 @@ div#cmd_micro{
 	width:79px;
 }
 div#cmd_micro div{
-	/*background:#FFFF00;*/
 	cursor:pointer;
 	display:inline-block;
 }
@@ -220,7 +213,6 @@ div#content_from_right{
 	height:110px;
 	width:980px;
 	padding-bottom:10px;
-	/*background:#CCFFCC;*/
 }
 #footer_content 
 	div[class="floatLeft"]:before{
@@ -367,11 +359,6 @@ div#logo{
 }
 div#main_submenu{
 	background:#06AEDD;
-	/*
-	height:38px;
-	line-height:38px;
-	padding-bottom:2px;
-	margin-top:-4px;*/
 }
 div#main_submenu 
 	ul{
@@ -380,16 +367,12 @@ div#main_submenu
 }
 div#main_submenu 
 	ul li{
-	/*background:#FFF;
-	border:solid 1px #999;*/
 	display:inline;
 	font-size:0.9em;
 	letter-spacing:-0.1em;
 	line-height:27px;
 	list-style: none; 
 	margin:0 32px;
-	/*padding:8px 30px;
-	text-align:right;*/
 }
 div#main_submenu 
 	ul li a{ 
@@ -405,7 +388,6 @@ div#page{
 	min-height:100%;
 	padding:0 20px;
 	width:980px;
-	/*background:#FFFF00;*/
 }
 div.ready_solutions_preview{
 	margin-bottom:10px;
@@ -426,7 +408,6 @@ div.ready_solutions_preview >
 	div:first-child +div{
 	float:left;
 	width:120px;
-	/*background:#00CCFF;*/
 }
 div.ready_solutions_preview{
 }
@@ -456,7 +437,6 @@ div#main_submenu div[id*="ddMenu_"]{ /* drop-down menu	*/
 	background:#FFF;
 	border:solid 1px #CCCCCC;
 	box-shadow:3px 4px 4px #ededed;
-	/*display:none;*/
 	padding:8px;
 	position:absolute;
 	top:-4000px;
@@ -476,8 +456,6 @@ div[id*="ddMenu_"] a:hover{
 }
 div#mainmenu 
 	ul{
-	/*background:url(../_docs/sources/menu.gif) no-repeat;
-	height:58px;*/
 	margin:5px 0 8px 0;
 	margin-left:-10px;
 }
@@ -495,7 +473,6 @@ div#bottom_menu
 div#mainmenu 
 	ul li{
 	padding-right:15px;
-	/*text-transform:uppercase;*/
 }
 div#mainmenu ul >
 	li:first-child{
@@ -570,8 +547,6 @@ div#slides{
 	height:250px;
 	margin-bottom:12px;
 	text-align:left;
-	/*padding-left:10px;
-	background:#FFCCCC;*/
 }
 div#slides > 
 	div:first-child, 
@@ -591,7 +566,6 @@ div#slides
 	margin:0 10px;
 	padding:20px 23px 0 20px;
 	text-transform:uppercase;
-	/*background:#99FF99;*/
 }
 div#slides 
 	div.solutions_all{
@@ -600,7 +574,6 @@ div#slides
 	margin-left:34px;
 	padding:7px 10px;
 	text-align:left;
-	/*background:#FFFF99;*/
 }
 div#slides 
 	div.solution_content > 
