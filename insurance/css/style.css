@@ -35,11 +35,27 @@ div#all_phones{
 	font-weight:bold;
 }
 #bottom_menu{
-	line-height:30px;
+	line-height:32px;
 }
 div#bottom_menu 
 	ul{
 	margin-left:-40px;
+}
+div#bottom_menu li{
+	background:url(../images/separator_bottom_menu.gif) right bottom no-repeat;
+	padding: 5px 26px 7px 19px;
+}
+div#bottom_menu li.active{
+	background:#4D4D4F;
+	margin-left:-5px;
+	padding-left:25px;
+	padding-right:25px;
+}
+div#bottom_menu ul li.active:first-child{
+	margin-left:initial;
+}
+div#bottom_menu ul li:last-child{
+	background-image:none;
 }
 div#bottom_menu 
 	ul a{
@@ -461,15 +477,18 @@ div#mainmenu
 	margin-left:-10px;
 }
 div#mainmenu 
-	ul li, 
-div#bottom_menu 
 	ul li{
 	border-right:solid 1px #ccc;
-	display:inline;
-	list-style: none;
 	margin-left:-4px; 
 	padding:5px 5px 9px 13px;
 	text-align:left;
+}
+div#mainmenu 
+	ul li, 
+div#bottom_menu 
+	ul li{
+	display:inline;
+	list-style: none;
 }
 div#mainmenu 
 	ul li{
@@ -504,11 +523,17 @@ ul[id^="yw"] li{ /*верхнее главное меню*/
 	background:#06AEDD;
 }
 li.active{
-	background:#06AEDD !important;/*4D4D4F*/
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
-ul[id^="yw"] li a{
+div#mainmenu 
+	ul li.active{
+	background:#06AEDD !important;/*4D4D4F*/
+}
+ul[id^="yw"] li a,
+div[id^="slide"]
+	> div:last-child
+		> div:first-child a{
 	color:#06AEDD;
 }
 li.active 
@@ -581,6 +606,8 @@ div#slides div[id^="slide"]
 div#slides div[id^="slide"] 
 	> div:last-child
 		> div:last-child{
+	font-size: 0.8em;
+	letter-spacing: -0.1em;
 	text-align:right;
 }
 div#slides div#slide-first > div:first-child{

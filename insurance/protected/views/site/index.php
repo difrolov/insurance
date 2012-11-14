@@ -58,21 +58,21 @@
         	<div id="slide-first">
             	<div></div>
             	<div>
-                	<div>Добровольное мед. страхование</div>
+                	<div><a href="#">Добровольное мед. страхование</a></div>
                     <div>для корпоративных клиентов</div>
                 </div>
             </div>
             <div id="slide-middle">
             	<div></div>
             	<div>
-                	<div>Финансовые риски</div>
+                	<div><a href="#">Финансовые риски</a></div>
                     <div>малому и среднему бизнесу</div>
                 </div>
             </div>
             <div id="slide-last">
             	<div></div>
             	<div>
-                	<div>Страхование квартиры</div>
+                	<div><a href="#">Страхование квартиры</a></div>
                     <div>Для физических лиц</div>
                 </div>
             </div>
