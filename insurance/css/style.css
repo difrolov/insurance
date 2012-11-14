@@ -299,10 +299,12 @@ div#inner_content{
 	vertical-align:top;
 }
 div#inner_left_menu{
+	border-left:solid 10px #FFF;
+	box-shadow: -4px 0px 10px #DDD inset;
 	display:inline-block;
-	/*background:#FF9;*/ 
-	margin-left:-10px;
-	padding-left:25px;
+	/*background:#FF9; 
+	margin-left:-10px;*/
+	padding-left:15px;
 	padding-top:20px;
 	vertical-align:top;  
 	width:200px;
@@ -500,7 +502,8 @@ div#main_submenu
 	color:#FFF;
 }
 div#mainmenu,
-div#slides{
+div#slides,
+div#inner_left_menu{
 	background: #EDEEF0;
 }
 div#mainmenu{
