@@ -71,12 +71,22 @@ class Data {
 		FROM insur_insurance_object AS i2
 		WHERE name
 		IN (  '".implode("','",$arrItems)."'
-			)")->queryAll();?>
+			)")->queryAll();
+			//var_dump("<pre>",$_GET,"</pre>");?>
 	<div id="inner_left_menu">
 	<?	$cnt=0;		
 		for($i=0,$j=count($arrItems);$i<$j;$i++){?>
-        <div>
-	<?		if ($arrItems[$i]==$items_data[$cnt]['name']){?>
+        <div<?
+			
+			if ( isset($_GET['alias'])
+				 && $items_data[$cnt]['alias']
+				 && $arrItems[$i]==$items_data[$cnt]['name']
+			   ) : 	if ($_GET['alias']==$items_data[$cnt]['alias']):
+						?> class="active"<? 
+					endif;
+			endif;?>><?		
+			
+			if ($arrItems[$i]==$items_data[$cnt]['name']){?>
             	<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<?
                 echo $items_data[$cnt]['parent'];
 				if ($items_data[$cnt]['parent']!=$items_data[$cnt]['alias']){

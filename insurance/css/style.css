@@ -64,7 +64,7 @@ div#bottom_menu
 div#breadcrumbs{
 	font-size:0.8em;
 	line-height:28px;
-	margin-left:8px;
+	margin-left:25px;
 	[disabled]margin-bottom:8px;
 }
 div#call_us{
@@ -295,7 +295,7 @@ div#inner_content{
 	margin-left:30px; 
 	margin-right:-10px; 
 	max-width:720px; 
-	background:#CFC; 
+	/*background:#CFC; */
 	vertical-align:top;
 }
 div#inner_left_menu{
@@ -311,6 +311,17 @@ div#inner_left_menu
 	> div{
 	line-height:27px;
 }
+div#inner_left_menu div{
+	
+}
+div#inner_left_menu div.active{
+	margin-left:-16px;
+	padding-left:16px
+}
+div#inner_left_menu div.active a{
+	color:#FFF;
+}
+
 table.inner_layout{
 	width:100%;
 	border-spacing:0;
@@ -576,7 +587,8 @@ li.active{
 	border-top-right-radius: 5px;
 }
 div#mainmenu 
-	ul li.active{
+	ul li.active,
+div.active{
 	background:#06AEDD !important;/*4D4D4F*/
 }
 ul[id^="yw"] li a,
