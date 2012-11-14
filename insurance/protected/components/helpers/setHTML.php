@@ -136,18 +136,23 @@ class setHTML{
   	<!--footer_content-->
 	<?	if ($tp){?><h3>footer_content</h3><? }?>
     	<div id="footer_content">
-        	<div align="left" class="floatLeft">
-            	<div style="display:inline-block">
-                	<div>&copy; &quot;ОТКРЫТИЕ СТРАХОВАНИЕ&quot; 2012</div>
-                    <div>Все права защищены.</div>
-                    <div>Адрес: Москва, рядом с Кремлём.</div>
-                </div>
-                <div id="call_us_free" align="center">
-                	<div>8 800 200 71 00</div>
-					<div>круглосуточно</div>
+                <div id="footer_inside_left">
+                	<div><a href="<?=Yii::app()->request->getBaseUrl(true)?>">www.open.ru</a></div>
+					<div class="tiny_info">Финансовая корпорация &quot;Открытие&quot;</div>
 				</div>
-            </div>
-            <div class="floatRight">&nbsp;</div>
+            	
+                <div id="footer_inside_center">
+                	<div id="fcompany">&copy; &quot;ОТКРЫТИЕ СТРАХОВАНИЕ&quot; 2012</div>
+                    <div id="faddress">Адрес: 23007, Москва, ул. 4-я Магистральная, д. 11, стр. 2</div>
+                    <div id="fcopy" class="tiny_info">&copy; &quot;Открытие страхование&quot; 2012</div>
+                </div>
+            	
+                <div id="footer_inside_right">
+            		<div align="right">8 800 200 71 00</div>
+					<div class="tiny_info" id="overnight_calling" align="right">круглосуточно</div>
+            
+		</div>
+        	
         </div>
 			<?	if ($tp){?><h3>/footer_content</h3><? }?>
   	<!--/footer_content-->

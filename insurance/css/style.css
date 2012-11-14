@@ -42,8 +42,8 @@ div#bottom_menu
 	margin-left:-40px;
 }
 div#bottom_menu li{
-	background:url(../images/separator_bottom_menu.gif) right bottom no-repeat;
-	padding: 5px 26px 7px 19px;
+	background:url(../images/separator_bottom_menu.gif) right 6px no-repeat;
+	padding: 5px 25px 7px 19px;
 }
 div#bottom_menu li.active{
 	background:#4D4D4F;
@@ -224,18 +224,46 @@ div#content_from_right{
 	float:right;
 }
 #footer{
-	height:110px;
-	width:980px;
-	padding-bottom:10px;
+	background:#FFF;
+	height: 140px;
+	padding:0 20px 10px 20px;
+	width: 980px;
+}
+#footer_content div#faddress{
+	font-size:0.8em;
+	margin:10px 0;
+}
+#footer_content
+	> div{
+	display:inline-block;
+	vertical-align:top;
 }
 #footer_content 
-	div[class="floatLeft"]:before{
-	 width:75%;
-}
-#footer_content 
-	div[class="floatRight"]:before{
-	 content:"e-mail: info@otkritie.ru";
+	div#footer_inside_left{
+	 float:left;
+	 text-align:left;
 	 width:25%;
+}
+#footer_content 
+	div#footer_inside_center{
+	 float:left;
+	 text-align:center;
+	 width:50%;
+}
+#footer_content 
+	div#footer_inside_right{
+	 font-size:0.75em;
+	 float:right;
+	 text-align:right;
+	 width:25%;
+}
+#footer_content 
+	div#footer_inside_right:after{
+	 content:"e-mail: info@otkritie.ru";
+}
+#footer_content div#overnight_calling{
+	margin-bottom:6px;
+	margin-top:0;
 }
 #header{
 	height:128px;
@@ -398,7 +426,7 @@ div#main_submenu
 div#page{
 	background:#FFF;
 	box-shadow:0 0 40px 10px #333;
-	margin-bottom:-136px;	
+	margin-bottom:-136px;/**/	
 	min-height:100%;
 	padding:0 20px;
 	width:980px;
@@ -533,8 +561,12 @@ div#mainmenu
 ul[id^="yw"] li a,
 div[id^="slide"]
 	> div:last-child
-		> div:first-child a{
+		> div:first-child a,
+div#bottom_menu a:hover{
 	color:#06AEDD;
+}
+div#bottom_menu a{
+	color:#4C4C4E;
 }
 li.active 
 	a{
@@ -624,55 +656,9 @@ div#slides div#slide-middle > div:first-child ~div{
 div#slides div#slide-last > div:first-child{
 	background:url(../images/slides/3.jpg);
 }
-/*div#slides > 
-	div:first-child, 
-div#slides > 
-	div:first-child +div, 
-div#slides > 
-	div:first-child +div +div{
-	display:inline-block;
+.tiny_info{
+	font-size:0.7em;
 }
-div#slides 
-	div.solution_content{
-	background:url(../images/separator_window_biggest.png) top right no-repeat;
-	border:solid 1px #CCCCCC;
-	display:inline-block;
-	font-size:0.8em;
-	height:195px;
-	margin:0 10px;
-	padding:20px 23px 0 20px;
-	text-transform:uppercase;
-}
-div#slides 
-	div.solutions_all{
-	background:url(../images/separator_vertical.png) 0 10px no-repeat;
-	height:50px;
-	margin-left:34px;
-	padding:7px 10px;
-	text-align:left;
-}
-div#slides 
-	div.solution_content > 
-		img:first-child +div {
-	margin-top:6px;
-}
-div#slides 
-	div.solution_content > 
-		img:first-child +div span{
-	display:block;
-	color: #00B2DF;
-	line-height:23px;
-}
-table#tblSlides{
-	margin-bottom:26px;
-}
-td.slidesPointer{
-	padding-top:62px;
-}
-table#tblSlidesLastSeen 
-	td.slidesPointer{
-	padding-top:0;
-}*/
 .txtHeader2, 
 .txtHeader3{
 	text-transform:uppercase;
