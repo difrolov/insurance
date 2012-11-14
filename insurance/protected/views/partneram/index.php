@@ -2,8 +2,10 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-var_dump("<h1>this:</h1><pre>",$this,"</pre>");die();
-Data::setPageData($this,$res,true);?>
+
+//var_dump("<h1>this:</h1><pre>",$this,"</pre>");die();
+
+if (isset($_GET['static'])){?>
 <h1>Партнёрам</h1>
 <table class="inner_layout" cellspacing="0">
   <tr>
@@ -66,4 +68,6 @@ Data::setPageData($this,$res,true);?>
 	readyProduct::showReadySolution();?>
     </td>
   </tr>
-</table>
+</table><?
+}else
+	Data::setPageData($this,$res,true);

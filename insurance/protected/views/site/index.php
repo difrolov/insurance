@@ -1,59 +1,8 @@
-<? $tp=false;
-?><!-- slide_marks -->
-<?	/*// режим тестирования и загружена "Главная" стрю:
-		if ($tp){?><h3>slide_marks</h3><? }?>
-		<div align="left" id="slide_marks">
-<?	for($i=0;$i<8;$i++):?>
-			<div>&nbsp;</div>
-<?		endfor;?>
-		</div>
-<?		*/
-	if ($tp){?><h3>/slide_marks</h3><? }?>
+<? if(isset($_GET['stop']))die("index by default"); $tp=false;?><!-- slide_marks -->
+<?	if ($tp){?><h3>/slide_marks</h3><? }?>
 		<!-- /slide_marks -->
 		<!-- tblSlides -->
-<?		if ($tp){?><h3>tblSlides</h3><? }
-			if (isset($old)):?>
-			<table width="100%" cellspacing="0" cellpadding="0" id="tblSlides">
-			  <tr valign="top">
-				<td class="slidesPointer"><a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_left.png" width="9" height="18" border="0"></a></td>
-				<td width="100%">
-			<div align="left" id="slides">
-			  <div>
-				<div class="solution_content">
-					<img src="<?=Yii::app()->request->baseUrl?>/images/ready_solutions/for_companies.jpg" width="252" height="143">
-					<div>готовые решения для
-						<span>производственных компаний</span>
-					</div>
-				</div>
-					<div class="solutions_all">Все решения для<br>
-					корпоративных клиентов</div>
-			  </div>
-			  <div>
-				<div class="solution_content">
-					<img src="<?=Yii::app()->request->baseUrl?>/images/ready_solutions/for_business.jpg" width="248" height="143">
-					<div>готовые решения для
-						<span>малого и среднего бизнеса</span>
-					</div>
-				</div>
-					<div class="solutions_all">Все решения для<br>
-					малого и среднего бизнеса</div>
-			  </div>
-			  <div>
-				<div class="solution_content">
-					<img src="<?=Yii::app()->request->baseUrl?>/images/ready_solutions/for_persons.jpg" width="249" height="143">
-					<div>готовые решения для
-						<span>клиентов банка открытие</span>
-					</div>
-				</div>
-					<div class="solutions_all">Все решения для<br>
-					физических лиц</div>
-				</div>
-			</div>
-				</td>
-				<td class="slidesPointer"><a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_right.png" width="9" height="18" border="0"></a></td>
-			  </tr>
-			</table>
-	<?php	else:?>
+<?		if ($tp){?><h3>tblSlides</h3><? }?>
     	<div align="center" id="slides">
         	<div id="slide-first">
             	<div></div>
@@ -77,8 +26,7 @@
                 </div>
             </div>
         </div>
-	<?		endif;
-		if ($tp){?><h3>/tblSlides</h3><? }?>
+	<?	if ($tp){?><h3>/tblSlides</h3><? }?>
 		<!-- /tblSlides -->
 			<div id="content_from_left" align="left">
 			  <div class="txtHeader2 txtLightBlue bold">О компании</div>

@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-
+if (isset($_GET['static'])){
 $this->pageTitle=Yii::app()->name . ' - О компании';
 $this->breadcrumbs=array(
 	'О компании',
@@ -72,6 +72,9 @@ $this->breadcrumbs=array(
 	readyProduct::showReadySolution();?>
     </td>
   </tr>
-</table>
+</table><?
+}else
+	Data::setPageData($this,$res,true);
+	
 
 
