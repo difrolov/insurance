@@ -516,8 +516,9 @@ div#mainmenu div[id*="ddMenu_"],
 div#main_submenu div[id*="ddMenu_"]{ /* drop-down menu	*/
 	background:#FFF;
 	border:solid 1px #CCCCCC;
-	box-shadow:3px 4px 4px #ededed;
-	padding:8px;
+	box-shadow:3px 4px 10px #333;
+	opacity:0.9;
+	padding:13px 14px 17px;
 	position:absolute;
 	top:-4000px;
 }
@@ -526,12 +527,19 @@ div[id*="ddMenu_"]{
 }
 div[id*="ddMenu_"] a{	/* drop-down menu link	*/
 	display:block;
-	padding:4px;
+	font-size:11px;
+	line-height:19px;
+	opacity:0.8;
+	/*padding:4px;*/
 	white-space:nowrap;
 }
 div[id*="ddMenu_"] a:hover{
 	background:#27BCE4;
 	color:#FFF;
+	margin-left:-14px;
+	margin-right:-14px;
+	padding-left:14px;
+	padding-right:14px;
 	text-decoration:none;
 }
 div#mainmenu 
@@ -599,7 +607,8 @@ div[id^="slide"]
 	> div:last-child
 		> div:first-child a,
 div#bottom_menu a:hover,
-div#inner_left_menu a{
+div#inner_left_menu a,
+div[id*="ddMenu_"] a{
 	color:#06AEDD;
 }
 div#bottom_menu a{

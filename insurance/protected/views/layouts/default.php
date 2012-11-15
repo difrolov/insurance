@@ -11,9 +11,9 @@
 															?>      
 	  </div>
 	  <div id="mainmenu" align="left" style="position:relative;">
-	<?	
+	<?	// главное меню:
 		setHTML::buildMainMenu($this); // главное меню
-
+		// выпадающее меню:
 		setHTML::buildDropDownMenu();	// выпадающее меню	
 															?>
 	  </div>

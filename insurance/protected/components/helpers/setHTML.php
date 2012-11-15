@@ -186,6 +186,7 @@ class setHTML{
 			else
 				self::$arrMenuWidget=$menuWidget;
 		}
+		// старый IE
 		if (self::detectOldIE()){ //
 			$URL=explode("/",$_SERVER['REQUEST_URI']);
 			$nURL=array_reverse($URL);
