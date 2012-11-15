@@ -1,4 +1,6 @@
-<? if(isset($_GET['stop']))die("index by default"); $tp=false;?><!-- slide_marks -->
+<? if(isset($_GET['stop']))die("index by default"); $tp=false;?>
+
+<!-- slide_marks -->
 <?	if ($tp){?><h3>/slide_marks</h3><? }?>
 		<!-- /slide_marks -->
 		<!-- tblSlides -->
@@ -26,28 +28,65 @@
                 </div>
             </div>
         </div>
-	<?	if ($tp){?><h3>/tblSlides</h3><? }?>
+        
+<div id="content_from_left" align="left">
+  <div class="txtHeader2 txtLightBlue bold" style="text-transform:none; padding-top:10px;">Почему &laquo;Открытие&raquo;?</div>
+  <!--<p>Сайт предназначен для:</p>-->
+  <ol class="insideDiv">
+    <li>Комплексные финансовые решения для наших клиентов.
+    <p>Страховая компания входит в состав Международной Финансовой Корпорации &laquo;Открытие&raquo;.</p></li>
+    <li>Высочайший уровень обслуживания.
+    <p>Компания награждена премией &laquo;Золотая саламандра&raquo; за отличный клиентский сервис.</p>
+    
+    </li>
+    <li><p>Надёжность. 20 лет на рынке страховых услуг.</p></li>
+    <li>Только опытные и профессиональные сотрудники.
+    <p>Собственный центр профессиональной подготовки.</p>
+    
+    </li>
+    	<p>Гибкие тарифы.</p>
+    <li>
+		<p>Широкая агентская сеть.</p>
+    </li>
+    
+    <li><p>Круглосуточная поддержка клиентов.</p></li>
+  </ol>
+</div>
+
+
+<div id="content_from_right"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/pix/old_cars.gif" width="296" height="284">
+    <div align="left" id="last_news">
+        <div class="txtHeader3 txtLightBlue">новости</div>
+        <p id="issue_date">31.08.2012</p>
+        <p style="text-align:justify;">В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
+        <p id="all_news"><a href="#">все новости...</a></p>
+    </div>
+    
+</div>
+<div id="mod_insur_species">
+	<h2 class="txtLightBlue">Виды страхования</h2>
+	<div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/car.png" width="77" height="49">
+    <a href="#" class="txtLightBlue">Автострахование</a></div>
+    <div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/health.png" width="54" height="47">
+    <a href="#" class="txtLightBlue">Здоровье</a></div>
+    <div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/home.png" width="67" height="50">
+    <a href="#" class="txtLightBlue">Имущество</a></div>
+    <div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/travel.png" width="63" height="52">
+    <a href="#" class="txtLightBlue">Путешествия</a></div>
+</div>        
+        
+<?	if ($tp){?><h3>/tblSlides</h3><? }?>
 		<!-- /tblSlides -->
-			<div id="content_from_left" align="left">
-			  <div class="txtHeader2 txtLightBlue bold">О компании</div>
-			  <p>Сайт предназначен для:</p>
-			  <ul class="insideDiv">
-				<li>Повышения узнаваемости бренда Компании;</li>
-				<li>Повышения имиджа ОАО «Открытие Страхования»;</li>
-				<li>Создать образ высокопрофессиональной, надежной компании с успешным опытом работы на рынке.</li>
-				<li>Повышения уровня лояльности и доверия клиентов.</li>
-				<li>Привлечения новых клиентов (представители крупного, среднего и малого бизнеса, физические лица);</li>
-				<li>Увеличения количества партнеров по бизнесу (мед.учреждения, автосервисы и пр.);</li>
-			  </ul>
-			</div>
-			<div id="content_from_right" align="center">
+			<!--<div id="content_from_right" align="center">
 			  <img src="<?=Yii::app()->request->baseUrl?>/images/pix/museum.jpg" width="180" height="233">
 			  <div id="our_museum" class="txtHeader2">Наш музей</div>
 			</div>
-			<div class="clear"></div>
+			<div class="clear"></div>-->
 			<div id="news_block">
-	<?	if ($tp){?><h3>last_articles</h3><? }?>
-				<div align="left" id="last_articles">
+	<?	if ($tp){?><h3>last_articles</h3><? }
+		$last_arts=false;
+		if ($last_arts){?>
+				<!--<div align="left" id="last_articles">
 				  <div>
 					<div class="txtHeader2 txtLightBlue">последние статьи</div>
 					<div id="last_articles_previews">
@@ -71,18 +110,16 @@
 				sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
 					</div>
 				  </div>
-				</div>
-	<?	if ($tp){?><h3>/last_articles</h3><? }?>
-			  <div align="left" id="last_news">
-					<div class="txtHeader3 txtLightBlue">новости</div>
-				<p id="issue_date">31.08.2012</p>
-				<p>В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
-					<p id="all_news"><a href="#">все новости...</a></p>
-			  </div>
+				</div>-->
+	<?	}
+		if ($tp){?><h3>/last_articles</h3><? }?>
+			  
 			</div>
 			<div class="clear"></div>
-	<?	if ($tp){?><h3>last_seen</h3><? }?>
-			<div id="last_seen">
+	<?	if ($tp){?><h3>last_seen</h3><? }
+		$seen=false;
+		if ($seen){?>
+			<!--<div id="last_seen">
 				<span id="last_seen_header" class="txtHeader2 txtLightBlue">
 					вы недавно смотрели
 				</span>
@@ -120,5 +157,10 @@
 						</td>
 					</tr>
 				</table>
-			</div>
-	<?	if ($tp){?><h3>/last_seen</h3><? }?>
+			</div>-->
+	<?	}else{
+		
+		?>
+	
+	<? 	} 
+		if ($tp){?><h3>/last_seen</h3><? }?>

@@ -126,6 +126,8 @@ class setHTML{
  */
 	function buildFooterBlock($tp=false){?>
 			<div align="left" id="footer">
+            <hr noshade size="1" style="margin-bottom:0; margin-left:-20px; margin-right:-20px;">
+            <hr noshade size="1" style="margin:-4px -20px -8px -20px;">
   	<!--bottom_menu-->
 	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
@@ -261,7 +263,7 @@ class setHTML{
  */
 	function buildLogosBlock(){?>
 				<div id="logo" align="left">
-                    <a href="/insur/insurance/site/index"><?
+                    <a href="<?=Yii::app()->request->getBaseUrl(true)?>"><?
     	if (isset($test_logo)){
 			?><img src="../../../images/logo.gif" width="372" height="80"><? 
 		}else{?><img alt="Открытие Страхование" title="На главную" src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo.gif" width="372" height="80" border="0"><? }?></a>
@@ -345,20 +347,63 @@ class setHTML{
  * @subpackage		menu
  * выпадающее меню, как для mainmenu, submenu
  */
-	function getSubMenuItems($parent_id){ 
-		$model=InsurInsuranceObject::model()->findAll(
-					array('select'=>'id, name, alias',
-							'condition'=>'parent_id = '.$parent_id.' AND status = 1'
-						));
-		$subMenuItems=array();
-		for($i=0,$j=count($model);$i<$j;$i++){
-			$subMenuItems[$model[$i]->name]=array(
-									'text'=>$model[$i]->name,
-									'alias'=>$model[$i]->alias
-								);
+	function getSubMenuItems($parent_id,$parent=false){ 
+		static $cnt=0;
+		static $subMenuItems=array();
+		
+		$submenus=self::getSubmenuQuery($parent_id);
+		//$subMenuItems=array(); //echo "<pre>".$query."</pre>";
+		for($i=0,$j=count($submenus);$i<$j;$i++){
+			
+			if (!$parent){
+				$subMenuItems[$submenus[$i]['name']]=array(
+										'text'=>$submenus[$i]['name'],
+										'alias'=>$submenus[$i]['alias'],
+									);
+				$cnt++;
+
+			}else{
+			
+				if ($childs=(int)$submenus[$i]['child_count']){
+					
+					if (isset($_GET['getsubmenu'])) echo "\n---------------\nHAS childs!\n\t\t";
+					
+					$subMenuItems[$parent][$submenus[$i]['name']]=self::getSubMenuItems($submenus[$i]['id'],$submenus[$i]['id']);
+					/*$subMenuItems[11]['Вакансии']=array(
+										'text'=>$submenus[$i]['name'],
+										'alias'=>$submenus[$i]['alias'],
+									);*/
+				}
+			}
 		}
-		return $subMenuItems;
+		
+		if ($cnt>=$j) {
+			if (isset($_GET['getsubmenu'])) {
+				var_dump("<h1>subMenuItems:</h1><pre>",$subMenuItems,"</pre>");
+				die("\ncnt=$cnt, i=$i");
+			}
+			return $subMenuItems; 
+		}
 	}
+	function getSubmenuQuery($parent_id){
+		$query="SELECT id, name, alias, (
+					SELECT COUNT(*) FROM insur_insurance_object
+					WHERE parent_id = t.id
+				) as child_count
+			FROM insur_insurance_object AS t
+			WHERE parent_id = ".$parent_id." AND `status` = 1";
+		return Yii::app()->db->createCommand($query)->queryAll();
+	}
+	
+	/*function createSubMenuItems($submenus){
+		if ($submenus['child_count'])
+			createSubMenuItems($submenus);
+		else
+			return array( 'text'=>$submenus['name'],
+						  'alias'=>$submenus['alias']
+						);
+	}*/
+
 /**
  * @package		interface
  * @subpackage		browser

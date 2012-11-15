@@ -198,16 +198,22 @@ div#content
 	h2.txtLightBlue{
 	font-size:1.2em;
 }
+
 div#content_from_right{
+	display:inline-block;
 	padding-top:16px;
+	vertical-align:top;
+	width:296px; 
 }
 div#content_from_left{
 	display:inline-block;
-	padding-left:20px; 
+	margin-left:25px;
+	padding-bottom:160px;
+	padding-right:18px;
 	vertical-align:top;
-	width:680px;
+	width:616px;
 }
-div#content_from_right{
+/*div#content_from_right{
 	width:230px;
 }
 div#content_from_right{
@@ -216,7 +222,7 @@ div#content_from_right{
 	background-repeat:no-repeat;
 	display:inline-block;
 	padding-top:23px;
-}
+}*/
 .floatLeft{
 	float:left;
 }
@@ -295,17 +301,16 @@ div#inner_content{
 	margin-left:30px; 
 	margin-right:-10px; 
 	max-width:720px; 
-	/*background:#CFC; */
+
 	vertical-align:top;
 }
 div#inner_left_menu{
 	border-left:solid 10px #FFF;
 	box-shadow: -4px 0px 10px #DDD inset;
 	display:inline-block;
-	/*background:#FF9; 
-	margin-left:-10px;*/
+	padding-top:6px;
+	padding-bottom:10px;
 	padding-left:15px;
-	padding-top:20px;
 	vertical-align:top;  
 	width:200px;
 }
@@ -376,15 +381,14 @@ div#last_articles >
 	div:first-child{
 	padding:20px;
 }
-div#last_articles, 
-div#content_from_right{
+div#last_articles{
 	background-color:#EAEBEC;
 }
 div#last_news{
 	display:inline-block;
 	padding-left:20px;
 	padding-top:49px;
-	width:210px;
+	/*width:210px;*/
 }
 div#last_news p#issue_date{
 	margin-bottom:-12px;
@@ -453,6 +457,30 @@ div#main_submenu
 div#main_submenu 
 	ul li a{ 
 	color:#FFF;	
+}
+div#mod_insur_species{
+	float:left;
+	height:120px;  
+	margin-bottom:20px;
+	margin-left:25px; 
+	margin-top:-120px;  
+	/*width:600px;*/
+}
+div#mod_insur_species h2{
+	font-size: 1.4em;
+	font-weight: 300;
+	margin-bottom: 14px;
+	margin-top: 10px;
+}
+div#mod_insur_species > div{
+	display:inline-block;
+	height:90px;
+	text-align:center;
+	width:150px;
+}
+div#mod_insur_species > div >a{
+	display:block;
+	margin-top: 10px;
 }
 .noTopMargin{
 	margin-top:0;
@@ -651,6 +679,7 @@ div#slides{
 	margin:10px -20px;
 	/*min-height:203px;*/
 	padding-bottom:15px;
+	padding-left: 6px;
 }
 div#slides div[id^="slide"]{
 	display:inline-block;
@@ -696,8 +725,8 @@ div#slides div#slide-middle > div:first-child{
 }
 div#slides div#slide-middle > div:first-child,
 div#slides div#slide-middle > div:first-child ~div{
-	margin-left:21px;
-	margin-right:21px;	
+	margin-left:19px;
+	margin-right:18px;	
 }
 div#slides div#slide-last > div:first-child{
 	background:url(../images/slides/3.jpg);
