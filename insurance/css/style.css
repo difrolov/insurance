@@ -64,7 +64,8 @@ div#bottom_menu
 div#breadcrumbs{
 	font-size:0.8em;
 	line-height:28px;
-	margin-left:25px;
+	margin-left: 274px;
+	padding-top: 10px;
 	[disabled]margin-bottom:8px;
 }
 div#call_us{
@@ -308,6 +309,7 @@ div#inner_left_menu{
 	border-left:solid 10px #FFF;
 	box-shadow: -4px 0px 10px #DDD inset;
 	display:inline-block;
+	margin-top: -20px;
 	padding-top:6px;
 	padding-bottom:10px;
 	padding-left:15px;

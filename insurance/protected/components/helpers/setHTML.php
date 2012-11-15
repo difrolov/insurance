@@ -102,10 +102,19 @@ class setHTML{
  * @subpackage		menu
  *
  */
-	function buildDropDownSubMenu($parent_alias='',$parent_id=false){?>
-        <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }?>>
+	function buildDropDownSubMenu($parent_alias='',$parent_id=false){
+		$test=(isset($_GET['test']))? true:false;?>
+        <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0"<? }?>>
 	<?	$subMenuItems=self::getSubMenuItems($parent_id);
-		//var_dump("<h1>subMenuItems:</h1><pre>",$subMenuItems,"</pre>"); //die();
+		if($test){
+			var_dump("<h4>subMenuItems:</h4><pre>",$subMenuItems,"</pre>"); die("</div>
+        </div>
+    </div>
+ </div>
+</div>
+</body>
+</html> ");
+		}
 		if (!isset($subMenuItems)){
 			$j=rand(1,8);
 			for ($i=0;$i<$j;$i++) {
@@ -347,44 +356,36 @@ class setHTML{
  * @subpackage		menu
  * выпадающее меню, как для mainmenu, submenu
  */
-	function getSubMenuItems($parent_id,$parent=false){ 
-		static $cnt=0;
-		static $subMenuItems=array();
+	function getSubMenuItems( $parent_id, // нужен для формирования запроса к БД
+							  $parent=false,
+							  $subMenuItems=false
+							){ 
 		
+		static $subMenuItems=array();		
 		$submenus=self::getSubmenuQuery($parent_id);
-		//$subMenuItems=array(); //echo "<pre>".$query."</pre>";
-		for($i=0,$j=count($submenus);$i<$j;$i++){
-			
-			if (!$parent){
-				$subMenuItems[$submenus[$i]['name']]=array(
-										'text'=>$submenus[$i]['name'],
-										'alias'=>$submenus[$i]['alias'],
-									);
-				$cnt++;
-
+		var_dump("<br>SUBMENUS:<br><pre>",$submenus,"</pre>");
+		foreach($submenus as $submenu_data_array){
+			if (!$parent)
+				$subMenuItems[$submenu_data_array['alias']]=$submenu_data_array['name'];
+			if ((int)$submenu_data_array['child_count']){
+				$subMenuItems[$submenu_data_array['id']]=array('parent_alias'=>$submenu_data_array['alias']);
+				self::getSubMenuItems( // для передачи запросу id раздела
+									   // в качестве родительского:
+									   $submenu_data_array['id'],  
+									   $submenu_data_array['alias'], // parent alias
+									   $subMenuItems
+									 );			
 			}else{
-			
-				if ($childs=(int)$submenus[$i]['child_count']){
-					
-					if (isset($_GET['getsubmenu'])) echo "\n---------------\nHAS childs!\n\t\t";
-					
-					$subMenuItems[$parent][$submenus[$i]['name']]=self::getSubMenuItems($submenus[$i]['id'],$submenus[$i]['id']);
-					/*$subMenuItems[11]['Вакансии']=array(
-										'text'=>$submenus[$i]['name'],
-										'alias'=>$submenus[$i]['alias'],
-									);*/
+				if ($parent){ // alias
+					$subMenuItems[$parent_id][$submenu_data_array['alias']]=$submenu_data_array['name'];  
 				}
 			}
-		}
-		
-		if ($cnt>=$j) {
-			if (isset($_GET['getsubmenu'])) {
-				var_dump("<h1>subMenuItems:</h1><pre>",$subMenuItems,"</pre>");
-				die("\ncnt=$cnt, i=$i");
-			}
-			return $subMenuItems; 
-		}
+		}	
+		return $subMenuItems; 
 	}
+/**
+  *
+  */	
 	function getSubmenuQuery($parent_id){
 		$query="SELECT id, name, alias, (
 					SELECT COUNT(*) FROM insur_insurance_object
@@ -392,6 +393,7 @@ class setHTML{
 				) as child_count
 			FROM insur_insurance_object AS t
 			WHERE parent_id = ".$parent_id." AND `status` = 1";
+		if (isset($_GET['test'])) echo "<pre>".$query."</pre>";
 		return Yii::app()->db->createCommand($query)->queryAll();
 	}
 	
