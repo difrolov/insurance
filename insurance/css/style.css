@@ -7,6 +7,12 @@
 p{	
 	font-size:14px;
 }
+p#all_news{
+	border-bottom: dotted 1px;
+	font-size: 0.6em;
+	letter-spacing: -0.01em;
+	margin-top: -12px;
+}
 a {
 	text-decoration:none;
 }
@@ -36,6 +42,9 @@ div#all_phones{
 }
 .bold{
 	font-weight:bold;
+}
+div#bottom_insur{
+	margin-top:16px;
 }
 #bottom_menu{
 	line-height:32px;
@@ -200,22 +209,35 @@ div#content >
 }
 div#content
 	h2.txtLightBlue{
-	font-size:1.2em;
+	font-size:1.35em;
 }
-
 div#content_from_right{
 	display:inline-block;
-	padding-top:16px;
+	padding-top:10px;
 	vertical-align:top;
+}
+div#content_from_right,
+div#last_news{
 	width:296px; 
 }
 div#content_from_left{
 	display:inline-block;
 	margin-left:25px;
-	padding-bottom:160px;
+	/*padding-bottom:160px;*/
 	padding-right:18px;
 	vertical-align:top;
 	width:616px;
+}
+div#content_from_left ol{
+	margin-left: -15px;
+	margin-top: 17px;
+}
+div#content_from_left li{
+	line-height:16px;
+}
+div#content_from_left li p{
+	margin-left:-4px;
+	margin-bottom:-2px;
 }
 /*div#content_from_right{
 	width:230px;
@@ -391,12 +413,17 @@ div#last_articles{
 }
 div#last_news{
 	display:inline-block;
+	margin-top:0;
 	padding-left:20px;
-	padding-top:49px;
-	/*width:210px;*/
+	vertical-align:top;
+	/*padding-top:49px;
+	width:210px;*/
 }
-div#last_news p#issue_date{
-	margin-bottom:-12px;
+div#issue_date{
+	clear: both;
+	font-size: 10.5px;
+	position: absolute;
+	top: 46px;
 }
 div#last_news p#all_news{
 	/*margin-top:-12px;
@@ -463,19 +490,20 @@ div#main_submenu
 	ul li a{ 
 	color:#FFF;	
 }
-div#mod_insur_species{
-	float:left;
-	height:120px;  
+div#mod_insur_species{ 
+	display:inline-block;
+	/*height:120px;*/  
 	margin-bottom:20px;
 	margin-left:25px; 
-	margin-top:-120px;  
-	/*width:600px;*/
+	vertical-align:top;
+	/*margin-top:-120px;  
+	width:600px;*/
 }
 div#mod_insur_species h2{
 	font-size: 1.4em;
 	font-weight: 300;
 	margin-bottom: 14px;
-	margin-top: 10px;
+	margin-top: -2px;
 }
 div#mod_insur_species > div{
 	display:inline-block;
@@ -485,7 +513,8 @@ div#mod_insur_species > div{
 }
 div#mod_insur_species > div >a{
 	display:block;
-	margin-top: 10px;
+	font-size: 18px;
+	margin-top: 6px;
 }
 .noTopMargin{
 	margin-top:0;
@@ -575,6 +604,9 @@ div[id*="ddMenu_"] a:hover{
 	padding-right:14px;
 	text-decoration:none;
 }
+div[id*="ddMenu_"] blockquote{
+	margin:0 0 0 10px;
+}
 div#mainmenu 
 	ul{
 	margin:5px 0 8px 0;
@@ -635,6 +667,13 @@ div#mainmenu
 div.active{
 	background:#06AEDD !important;/*4D4D4F*/
 }
+
+#new_preview{ 
+	text-align: justify;
+	clear: both;
+	margin-top: 46px;
+	font-size: 11px;
+}
 ul[id^="yw"] li a,
 div[id^="slide"]
 	> div:last-child
@@ -682,8 +721,9 @@ div#slide_marks
 }
 div#slides{
 	margin:10px -20px;
-	/*min-height:203px;*/
-	padding-bottom:15px;
+	margin-top:-2px;
+	/*min-height:203px;
+	padding-bottom:15px;*/
 	padding-left: 6px;
 }
 div#slides div[id^="slide"]{
@@ -736,6 +776,11 @@ div#slides div#slide-middle > div:first-child ~div{
 div#slides div#slide-last > div:first-child{
 	background:url(../images/slides/3.jpg);
 }
+#textLastNew{
+	display:inline-block;
+	margin-bottom: 0;
+	margin-top:4px; 
+} 
 .tiny_info{
 	font-size:0.7em;
 }
@@ -758,4 +803,21 @@ ul.insideDiv{
 }
 .txtInpact{
 	letter-spacing:-0.1em;
+}
+#why_open{
+	font-size: 24px;
+	margin-left: -2px;
+	text-transform:none;
+}
+/*	ТЕСТОВЫЕ СТИЛИ	*/
+.testBlock{
+	background:#FF9;
+	border:solid 2px #FFCC00;
+	border-radius:6px;
+	margin-bottom:4px;
+	padding:10px;
+}
+.testScroll{
+	max-height:700px;
+	overflow:auto;
 }

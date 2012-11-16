@@ -30,7 +30,7 @@
         </div>
         
 <div id="content_from_left" align="left">
-  <div class="txtHeader2 txtLightBlue bold" style="text-transform:none; padding-top:10px;">Почему &laquo;Открытие&raquo;?</div>
+  <div id="why_open" class="txtLightBlue">Почему &laquo;Открытие&raquo;?</div>
   <!--<p>Сайт предназначен для:</p>-->
   <ol class="insideDiv">
     <li>
@@ -47,8 +47,8 @@
     <li>
     	<p>Только опытные и профессиональные сотрудники.<p>
     	<p>Собственный центр профессиональной подготовки.</p>
-    </li>
     	<p>Гибкие тарифы.</p>
+    </li>
     <li>
 		<p>Широкая агентская сеть.</p>
     </li>
@@ -59,16 +59,9 @@
 
 
 <div id="content_from_right"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/pix/old_cars.gif" width="296" height="284">
-    <div align="left" id="last_news">
-        <div class="clear">Новости</div>
-        <p class="txtLightBlue txtInpact floatLeft" style="margin-top:4px; display:inline-block;">Последняя новость</p>
-        <p class="floatRight txtLightBlue" id="all_news" style="margin-top:4px; border-bottom:dotted 1px"><a href="#" style="text-decoration:none;">все новости...</a></p>
-        <p id="issue_date" class="clear">31.08.2012</p>
-        <p style="text-align:justify;">В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
-    </div>
-    
 </div>
-<div id="mod_insur_species">
+<div id="bottom_insur">
+	<div id="mod_insur_species">
 	<h2 class="txtLightBlue">Виды страхования</h2>
 	<div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/car.png" width="77" height="49">
     <a href="#" class="txtLightBlue">Автострахование</a></div>
@@ -79,7 +72,15 @@
     <div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/travel.png" width="63" height="52">
     <a href="#" class="txtLightBlue">Путешествия</a></div>
 </div>        
-        
+	<div align="left" id="last_news" style="position:relative;">
+        <div class="clear">Новости</div>
+        <p class="txtLightBlue txtInpact floatLeft" id="textLastNew">Последняя новость</p>
+        <p class="floatRight txtLightBlue" id="all_news" style="margin-top:4px; border-bottom:dotted 1px"><a href="#" style="text-decoration:none;">все новости</a></p>
+        <div id="issue_date">31.08.2012</div>
+        <p id="new_preview"><!--В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.-->
+        мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок</p>
+    </div>        
+</div>
 <?	if ($tp){?><h3>/tblSlides</h3><? }?>
 		<!-- /tblSlides -->
 			<!--<div id="content_from_right" align="center">
