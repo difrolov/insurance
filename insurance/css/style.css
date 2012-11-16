@@ -4,6 +4,9 @@
 	font-family:Georgia, "Times New Roman", Times, serif;
 	color:#666;
 }
+p{	
+	font-size:14px;
+}
 a {
 	text-decoration:none;
 }
@@ -43,7 +46,7 @@ div#bottom_menu
 }
 div#bottom_menu li{
 	background:url(../images/separator_bottom_menu.gif) right 6px no-repeat;
-	padding: 5px 25px 7px 19px;
+	padding: 5px 25px 7px 18px;
 }
 div#bottom_menu li.active{
 	background:#4D4D4F;
@@ -396,8 +399,8 @@ div#last_news p#issue_date{
 	margin-bottom:-12px;
 }
 div#last_news p#all_news{
-	margin-top:-12px;
-	text-align:right;
+	/*margin-top:-12px;
+	text-align:right;*/
 }
 div#last_news > 
 	div:first-child[class*="txtHeader"]{
@@ -752,4 +755,7 @@ div#slides div#slide-last > div:first-child{
 }
 ul.insideDiv{
 	margin-left:-20px;
+}
+.txtInpact{
+	letter-spacing:-0.1em;
 }

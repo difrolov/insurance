@@ -360,27 +360,64 @@ class setHTML{
 							  $parent=false,
 							  $subMenuItems=false
 							){ 
-		
-		static $subMenuItems=array();		
-		$submenus=self::getSubmenuQuery($parent_id);
-		var_dump("<br>SUBMENUS:<br><pre>",$submenus,"</pre>");
-		foreach($submenus as $submenu_data_array){
-			if (!$parent)
-				$subMenuItems[$submenu_data_array['alias']]=$submenu_data_array['name'];
-			if ((int)$submenu_data_array['child_count']){
-				$subMenuItems[$submenu_data_array['id']]=array('parent_alias'=>$submenu_data_array['alias']);
-				self::getSubMenuItems( // для передачи запросу id раздела
-									   // в качестве родительского:
-									   $submenu_data_array['id'],  
-									   $submenu_data_array['alias'], // parent alias
-									   $subMenuItems
-									 );			
-			}else{
-				if ($parent){ // alias
-					$subMenuItems[$parent_id][$submenu_data_array['alias']]=$submenu_data_array['name'];  
+		$old=false;
+		if($old){
+			
+			static $cnt=0;
+			static $subMenuItems=array();
+			
+			$submenus=self::getSubmenuQuery($parent_id);
+
+			for($i=0,$j=count($submenus);$i<$j;$i++){
+				
+				if (!$parent){
+					$subMenuItems[$submenus[$i]['name']]=array(
+											'text'=>$submenus[$i]['name'],
+											'alias'=>$submenus[$i]['alias'],
+										);
+					$cnt++;
+	
+				}else{
+				
+					if ($childs=(int)$submenus[$i]['child_count']){
+						
+						if (isset($_GET['getsubmenu'])) echo "\n---------------\nHAS childs!\n\t\t";
+						
+						$subMenuItems[$parent][$submenus[$i]['name']]=self::getSubMenuItems($submenus[$i]['id'],$submenus[$i]['id']);
+											}
 				}
 			}
-		}	
+			
+			if ($cnt>=$j) {
+				if (isset($_GET['getsubmenu'])) {
+					var_dump("<h1>subMenuItems:</h1><pre>",$subMenuItems,"</pre>");
+					die("\ncnt=$cnt, i=$i");
+				}
+			}
+		
+		
+		}else{
+			static $subMenuItems=array();		
+			$submenus=self::getSubmenuQuery($parent_id);
+			var_dump("<br>SUBMENUS:<br><pre>",$submenus,"</pre>");
+			foreach($submenus as $submenu_data_array){
+				if (!$parent)
+					$subMenuItems[$submenu_data_array['alias']]=$submenu_data_array['name'];
+				if ((int)$submenu_data_array['child_count']){
+					$subMenuItems[$submenu_data_array['id']]=array('parent_alias'=>$submenu_data_array['alias']);
+					self::getSubMenuItems( // для передачи запросу id раздела
+										   // в качестве родительского:
+										   $submenu_data_array['id'],  
+										   $submenu_data_array['alias'], // parent alias
+										   $subMenuItems
+										 );			
+				}else{
+					if ($parent){ // alias
+						$subMenuItems[$parent_id][$submenu_data_array['alias']]=$submenu_data_array['name'];  
+					}
+				}
+			}	
+		}
 		return $subMenuItems; 
 	}
 /**

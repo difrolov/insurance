@@ -33,16 +33,20 @@
   <div class="txtHeader2 txtLightBlue bold" style="text-transform:none; padding-top:10px;">Почему &laquo;Открытие&raquo;?</div>
   <!--<p>Сайт предназначен для:</p>-->
   <ol class="insideDiv">
-    <li>Комплексные финансовые решения для наших клиентов.
-    <p>Страховая компания входит в состав Международной Финансовой Корпорации &laquo;Открытие&raquo;.</p></li>
-    <li>Высочайший уровень обслуживания.
-    <p>Компания награждена премией &laquo;Золотая саламандра&raquo; за отличный клиентский сервис.</p>
+    <li>
+    	<p>Комплексные финансовые решения для наших клиентов.</p>
+    	<p>Страховая компания входит в состав Международной Финансовой Корпорации &laquo;Открытие&raquo;.</p></li>
+    <li>
+    	<p>Высочайший уровень обслуживания.</p>
+    	<p>Компания награждена премией &laquo;Золотая саламандра&raquo; за отличный клиентский сервис.</p>
     
     </li>
-    <li><p>Надёжность. 20 лет на рынке страховых услуг.</p></li>
-    <li>Только опытные и профессиональные сотрудники.
-    <p>Собственный центр профессиональной подготовки.</p>
-    
+    <li>
+    	<p>Надёжность. 20 лет на рынке страховых услуг.</p>
+    </li>
+    <li>
+    	<p>Только опытные и профессиональные сотрудники.<p>
+    	<p>Собственный центр профессиональной подготовки.</p>
     </li>
     	<p>Гибкие тарифы.</p>
     <li>
@@ -56,10 +60,11 @@
 
 <div id="content_from_right"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/pix/old_cars.gif" width="296" height="284">
     <div align="left" id="last_news">
-        <div class="txtHeader3 txtLightBlue">новости</div>
-        <p id="issue_date">31.08.2012</p>
+        <div class="clear">Новости</div>
+        <p class="txtLightBlue txtInpact floatLeft" style="margin-top:4px; display:inline-block;">Последняя новость</p>
+        <p class="floatRight txtLightBlue" id="all_news" style="margin-top:4px; border-bottom:dotted 1px"><a href="#" style="text-decoration:none;">все новости...</a></p>
+        <p id="issue_date" class="clear">31.08.2012</p>
         <p style="text-align:justify;">В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.</p>
-        <p id="all_news"><a href="#">все новости...</a></p>
     </div>
     
 </div>
