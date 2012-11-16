@@ -30,6 +30,14 @@ class O_kompaniiController extends Controller
     	$this->render('index', array('res' => $data));
 	}
 	/**
+	 * Для подразделов, вложенных в главный раздел и в подраздел
+	 */
+	public function actionSubsection($subsection=false)
+	{
+		$data=Data::getDataByAlias('o_kompanii',$subsection);
+    	$this->render('index', array('res' => $data));
+	}
+	/**
 	  *
 	  */
 	public function actionKontakty()

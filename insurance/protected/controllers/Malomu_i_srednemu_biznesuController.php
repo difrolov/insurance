@@ -30,6 +30,14 @@ class Malomu_i_srednemu_biznesuController extends Controller
     	$this->render('index', array('res' => $data));
 	}
 	/**
+	 * Для подразделов, вложенных в главный раздел и в подраздел
+	 */
+	public function actionSubsection($subsection=false)
+	{
+		$data=Data::getDataByAlias('malomu_i_srednemu_biznesu',$subsection);
+    	$this->render('index', array('res' => $data));
+	}
+	/**
 	 * This is the action to handle external exceptions.
 	 */
 	public function actionError()

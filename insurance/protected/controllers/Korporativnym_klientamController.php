@@ -29,6 +29,15 @@ class Korporativnym_klientamController extends Controller
 		$data=Data::getDataByAlias('korporativnym_klientam',$alias);
     	$this->render('index', array('res' => $data));
 	}
+	/**
+	 * Для подразделов, вложенных в главный раздел и в подраздел
+	 */
+	public function actionSubsection($subsection=false)
+	{
+		$data=Data::getDataByAlias('korporativnym_klientam',$subsection);
+    	$this->render('index', array('res' => $data));
+	}
+
 	public function actionGotovoye_reshenije()
 	{	//$corporative="Контент страницы \"Корпоративным клиентам\"";
 		$this->actionIndex();

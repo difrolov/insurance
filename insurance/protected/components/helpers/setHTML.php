@@ -339,7 +339,9 @@ class setHTML{
 				}elseif ($alias!="parent_alias"){
 				  	if ($next_parent) { // предыдущий уровень внутри главного меню
 					  ?><blockquote><? // сформировать отступ
-					}?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent.'/'.$alias;?>"><?=$link_text?></a><?	
+					}?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent;
+					if ($next_parent) echo '/'.$subMenuItems['parent_alias'];
+					echo '/'.$alias;?>"><?=$link_text?></a><?	
 				  if ($next_parent) {?></blockquote><? }
 				}
 			endforeach;	
