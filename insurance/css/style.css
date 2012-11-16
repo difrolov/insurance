@@ -47,11 +47,11 @@ div#bottom_insur{
 	margin-top:16px;
 }
 #bottom_menu{
-	line-height:32px;
+	/*line-height:32px;*/
 }
 div#bottom_menu 
 	ul{
-	margin-left:-40px;
+	/*margin-left:-40px;*/
 }
 div#bottom_menu li{
 	background:url(../images/separator_bottom_menu.gif) right 6px no-repeat;
@@ -59,9 +59,9 @@ div#bottom_menu li{
 }
 div#bottom_menu li.active{
 	background:#4D4D4F;
-	margin-left:-5px;
+	/*margin-left:-5px;
 	padding-left:25px;
-	padding-right:25px;
+	padding-right:25px;*/
 }
 div#bottom_menu ul li.active:first-child{
 	margin-left:initial;
@@ -609,31 +609,31 @@ div[id*="ddMenu_"] blockquote{
 }
 div#mainmenu 
 	ul{
-	margin:5px 0 8px 0;
-	margin-left:-10px;
+	/*margin:5px 0 8px 0;
+	margin-left:-10px;*/
 }
 div#mainmenu 
 	ul li{
-	border-right:solid 1px #ccc;
+	/*border-right:solid 1px #ccc;
 	margin-left:-4px; 
 	padding:5px 5px 9px 13px;
-	text-align:left;
+	text-align:left;*/
 }
 div#mainmenu 
 	ul li, 
 div#bottom_menu 
 	ul li{
-	display:inline;
-	list-style: none;
+	/*display:inline;
+	list-style: none;*/
 }
 div#mainmenu 
 	ul li{
-	padding-right:15px;
+	/*padding-right:15px;*/
 }
 div#mainmenu ul >
 	li:first-child{
-	margin-left:-30px;
-	padding-left:24px;
+	/*margin-left:-30px;
+	padding-left:24px;*/
 }
 div#mainmenu 
 	ul >
@@ -809,6 +809,26 @@ ul.insideDiv{
 	margin-left: -2px;
 	text-transform:none;
 }
+div#mainmenu ul{
+	margin:1px 0 8px 0;
+}
+div#mainmenu ul li{
+	line-height:31px;
+}
+div#mainmenu ul,
+div#bottom_menu ul{
+	display:table;
+	padding-left:0;
+	width:100%;
+}
+ul#yw0 li,
+ul#yw2 li{
+	border-right:solid 1px #ccc;
+	display:table-cell !important;
+	list-style:none;
+	text-align:center;
+}
+
 /*	ТЕСТОВЫЕ СТИЛИ	*/
 .testBlock{
 	background:#FF9;

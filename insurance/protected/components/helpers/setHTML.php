@@ -1,4 +1,4 @@
-4<?
+<?
 class setHTML{
 	static $arrMenuWidget;
 	static $arrMenuWidgetSecond;
