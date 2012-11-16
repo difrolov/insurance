@@ -107,7 +107,7 @@ class setHTML{
         
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
 	<?	$subMenuItems=self::getSubMenuItems($parent_id,NULL);
-		if($test) { var_dump("<h4>".__LINE__.": subMenuItems:</h4><pre>",$subMenuItems,"</pre>");}
+		if($test) { echo "parent_alias=$parent_alias"; var_dump("<h4>".__LINE__.": subMenuItems:</h4><pre>",$subMenuItems,"</pre>");}
 		if (!isset($subMenuItems)){
 			$j=rand(1,8);
 			for ($i=0;$i<$j;$i++) {
@@ -115,7 +115,7 @@ class setHTML{
 				$subMenuItems[$i]['alias']="url_alias";
 			}
 		}
-		self::buildSubmenuLinks($subMenuItems);?>
+		self::buildSubmenuLinks($subMenuItems,$parent_alias);?>
         </div> 
 <?	}
 /**
@@ -328,19 +328,19 @@ class setHTML{
  * @subpackage		menu
  * построить контент подменю
  */
-	function buildSubmenuLinks($subMenuItems,$parent=false){
+	function buildSubmenuLinks( $subMenuItems,
+								$top_parent,
+								$next_parent=false
+							  ){
 		if (is_array($subMenuItems))
 			foreach($subMenuItems as $alias=>$link_text):
 				if (is_array($link_text)){
-					self::buildSubmenuLinks($link_text,$alias);
+					self::buildSubmenuLinks($link_text,$top_parent,$alias);
 				}elseif ($alias!="parent_alias"){
-				  if ($parent) {?><blockquote><? }
-					?><a href="<? 
-					echo Yii::app()->request->baseUrl;
-					if (isset($subMenuItems["parent_alias"])) 
-						echo '/'.$subMenuItems["parent_alias"];
-					echo '/'.$alias;?>"><?=$link_text?></a><?	
-				  if ($parent) {?></blockquote><? }
+				  	if ($next_parent) { // предыдущий уровень внутри главного меню
+					  ?><blockquote><? // сформировать отступ
+					}?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent.'/'.$alias;?>"><?=$link_text?></a><?	
+				  if ($next_parent) {?></blockquote><? }
 				}
 			endforeach;	
 	}

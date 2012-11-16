@@ -325,8 +325,8 @@ img[align="right"]{
 div#inner_content{
 	display:inline-block; 
 	margin-left:30px; 
-	margin-right:-10px; 
-	max-width:720px; 
+	margin-right:0px; 
+	max-width:700px; 
 
 	vertical-align:top;
 }
