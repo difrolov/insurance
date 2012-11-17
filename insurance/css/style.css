@@ -46,22 +46,12 @@ div#all_phones{
 div#bottom_insur{
 	margin-top:16px;
 }
-#bottom_menu{
-	/*line-height:32px;*/
-}
-div#bottom_menu 
-	ul{
-	/*margin-left:-40px;*/
-}
 div#bottom_menu li{
 	background:url(../images/separator_bottom_menu.gif) right 6px no-repeat;
 	padding: 5px 25px 7px 18px;
 }
 div#bottom_menu li.active{
 	background:#4D4D4F;
-	/*margin-left:-5px;
-	padding-left:25px;
-	padding-right:25px;*/
 }
 div#bottom_menu ul li.active:first-child{
 	margin-left:initial;
@@ -182,8 +172,6 @@ div#cmd_micro div[data-map]{
 div#cmd_micro div[data-search]{
 	width:18px;
 }
-
-
 div.company_news{
 	
 }
@@ -223,7 +211,6 @@ div#last_news{
 div#content_from_left{
 	display:inline-block;
 	margin-left:25px;
-	/*padding-bottom:160px;*/
 	padding-right:18px;
 	vertical-align:top;
 	width:616px;
@@ -239,16 +226,6 @@ div#content_from_left li p{
 	margin-left:-4px;
 	margin-bottom:-2px;
 }
-/*div#content_from_right{
-	width:230px;
-}
-div#content_from_right{
-	background-image:url(../images/separator_window_main_right_module.png); 
-	background-position:top right;
-	background-repeat:no-repeat;
-	display:inline-block;
-	padding-top:23px;
-}*/
 .floatLeft{
 	float:left;
 }
@@ -416,8 +393,6 @@ div#last_news{
 	margin-top:0;
 	padding-left:20px;
 	vertical-align:top;
-	/*padding-top:49px;
-	width:210px;*/
 }
 div#issue_date{
 	clear: both;
@@ -426,8 +401,6 @@ div#issue_date{
 	top: 46px;
 }
 div#last_news p#all_news{
-	/*margin-top:-12px;
-	text-align:right;*/
 }
 div#last_news > 
 	div:first-child[class*="txtHeader"]{
@@ -492,12 +465,9 @@ div#main_submenu
 }
 div#mod_insur_species{ 
 	display:inline-block;
-	/*height:120px;*/  
 	margin-bottom:20px;
 	margin-left:25px; 
 	vertical-align:top;
-	/*margin-top:-120px;  
-	width:600px;*/
 }
 div#mod_insur_species h2{
 	font-size: 1.4em;
@@ -587,12 +557,12 @@ div#main_submenu div[id*="ddMenu_"]{ /* drop-down menu	*/
 div[id*="ddMenu_"]{
 	z-index:1;
 }
-div[id*="ddMenu_"] a{	/* drop-down menu link	*/
+div[id*="ddMenu_"] a,
+div[id*="ddMenu_"] li a{	/* drop-down menu link	*/
 	display:block;
-	font-size:11px;
+	font-size:11px !important;
 	line-height:19px;
 	opacity:0.8;
-	/*padding:4px;*/
 	white-space:nowrap;
 }
 div[id*="ddMenu_"] a:hover{
@@ -607,34 +577,10 @@ div[id*="ddMenu_"] a:hover{
 div[id*="ddMenu_"] blockquote{
 	margin:0 0 0 10px;
 }
-div#mainmenu 
-	ul{
-	/*margin:5px 0 8px 0;
-	margin-left:-10px;*/
+div[id*="ddMenu_"] ul.asTable{
+	margin-top: -8px !important;
 }
-div#mainmenu 
-	ul li{
-	/*border-right:solid 1px #ccc;
-	margin-left:-4px; 
-	padding:5px 5px 9px 13px;
-	text-align:left;*/
-}
-div#mainmenu 
-	ul li, 
-div#bottom_menu 
-	ul li{
-	/*display:inline;
-	list-style: none;*/
-}
-div#mainmenu 
-	ul li{
-	/*padding-right:15px;*/
-}
-div#mainmenu ul >
-	li:first-child{
-	/*margin-left:-30px;
-	padding-left:24px;*/
-}
+
 div#mainmenu 
 	ul >
 		li:first-child[class!="active"]{
@@ -651,9 +597,6 @@ div#bottom_menu
 	ul > 
 		li:last-child{
 	border-right:none;
-}
-ul[id^="yw"] li{ /*верхнее главное меню*/
-	
 }
 #main_submenu ul[id^="yw"] li{/*верхнее главное подменю*/
 	background:#06AEDD;
@@ -690,6 +633,40 @@ li.active
 	a{
 	color:#FFF !important;/*dedede*/
 }
+div#mainmenu ul{
+	margin:1px 0 8px 0;
+}
+div#mainmenu ul li{
+	line-height:31px;
+}
+ul.asTable,
+div#mainmenu ul,
+div#bottom_menu ul{
+	display:table;
+	padding-left:0;
+	width:100%;
+}
+ul.asTable li,
+ul#yw0 li,
+ul#yw2 li{
+	display:table-cell !important;
+	list-style:none;
+}
+ul#yw0 li,
+ul#yw2 li{
+	border-right:solid 1px #ccc;
+	text-align:center;
+}
+ul.asTable li div.txtGrey a{
+	color:#333;
+}
+ul.asTable li div.txtGrey a:hover{
+	color:#FFF;
+}
+ul.asTable li > div:first-child{
+	border-bottom:solid 1px #ccc;
+	margin-bottom:10px;
+}
 div#our_museum{
 	margin-top:10px;
 	margin-bottom:6px;
@@ -722,8 +699,6 @@ div#slide_marks
 div#slides{
 	margin:10px -20px;
 	margin-top:-2px;
-	/*min-height:203px;
-	padding-bottom:15px;*/
 	padding-left: 6px;
 }
 div#slides div[id^="slide"]{
@@ -794,6 +769,10 @@ div#slides div#slide-last > div:first-child{
 .txtHeader3{
 	font-size:14px;
 }
+.txtGrey, 
+.txtGrey > *{
+	color:#666;
+}
 .txtLightBlue *, 
 .txtLightBlue{
 	color:#00BCE4;
@@ -809,26 +788,6 @@ ul.insideDiv{
 	margin-left: -2px;
 	text-transform:none;
 }
-div#mainmenu ul{
-	margin:1px 0 8px 0;
-}
-div#mainmenu ul li{
-	line-height:31px;
-}
-div#mainmenu ul,
-div#bottom_menu ul{
-	display:table;
-	padding-left:0;
-	width:100%;
-}
-ul#yw0 li,
-ul#yw2 li{
-	border-right:solid 1px #ccc;
-	display:table-cell !important;
-	list-style:none;
-	text-align:center;
-}
-
 /*	ТЕСТОВЫЕ СТИЛИ	*/
 .testBlock{
 	background:#FF9;

@@ -115,7 +115,35 @@ class setHTML{
 				$subMenuItems[$i]['alias']="url_alias";
 			}
 		}
-		self::buildSubmenuLinks($subMenuItems,$parent_alias);?>
+		ob_start();
+		self::buildSubmenuLinks($subMenuItems,$parent_alias);
+		$linksHTML=ob_get_contents();
+		ob_end_clean();
+		if ($parent_alias=="korporativnym_klientam") {?>
+          <ul class="asTable">
+			<li>
+            	<div class="txtLightBlue">Виды страхования</div>
+				<?=$linksHTML?></li>
+        <?	$corps=true;
+			if ($corps){
+				$arrCorps=array(
+							'building'=>'Строительные компании',
+							'trucking'=>'Транспортные компании',
+							'entertainment'=>'Организация развлекательных и спортивных мероприятий',
+						);?>
+            <li style="width:20px;">&nbsp;</li>
+        	<li>
+        		<div class="txtLightBlue">Корпоративным клиентам</div>
+                <div class="txtGrey">
+            <?	foreach($arrCorps as $alias=>$text):?>
+            		<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
+            <?	endforeach;?>    
+            	</div>
+            </li>
+		<?	}?>
+          </ul>
+	<?	}else
+			echo $linksHTML;?>
         </div> 
 <?	}
 /**
@@ -332,7 +360,7 @@ class setHTML{
 								$top_parent,
 								$next_parent=false
 							  ){
-		if (is_array($subMenuItems))
+		if (is_array($subMenuItems)){
 			foreach($subMenuItems as $alias=>$link_text):
 				if (is_array($link_text)){
 					self::buildSubmenuLinks($link_text,$top_parent,$alias);
@@ -344,7 +372,8 @@ class setHTML{
 					echo '/'.$alias;?>"><?=$link_text?></a><?	
 				  if ($next_parent) {?></blockquote><? }
 				}
-			endforeach;	
+			endforeach;
+		}
 	}
 /**
  * @package		HTML
