@@ -55,7 +55,10 @@ class GeneratorController extends Controller
 			$this->render('update',array('gridDataProvider'=>$gridDataProvider));
 		}
 	}
-
+	/**
+	 * @package
+	 * Извлечь данные макета выбранного подраздела и разместить их в HTML
+	 */
 	public function actionEdit($section_id=false){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
