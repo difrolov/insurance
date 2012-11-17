@@ -56,14 +56,12 @@ class GeneratorController extends Controller
 		}
 	}
 
-	public function actionEdit(){
+	public function actionEdit($section_id=false){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		die('Edit mode');
-		
-		if(isset($_GET['id'])){
-		
+		if($section_id){
+			echo "EDIT SECTION id ".$section_id;
 		}
 	}
 	

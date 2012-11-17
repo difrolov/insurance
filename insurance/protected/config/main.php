@@ -59,24 +59,26 @@ return array(
 				// правила для обработки URL подразделов:
 				// admin:
 				'admin'=>'admin',
+				// редактирование макета подраздела:
+				'admin/<controller:\w+>/edit/<section_id:\d+>'=>'admin/<controller>/edit',
+				// 
 				'admin/<controller:\w+>/<id:\d+>'=>'admin/<controller>',
                 'admin/<controller:\w+>/<action:\w+>/<id:\d+>'=>'admin/<controller>/<action>',
                 'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
+				// Frontend
+				// извлечь данные подраздела второго уровня:
 				'o_kompanii/<alias:\w+>/<subsection:\w+>' =>  'o_kompanii/subsection',
-				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
-				
 				'korporativnym_klientam/<alias:\w+>/<subsection:\w+>' =>  'korporativnym_klientam/subsection',
-				'korporativnym_klientam/<alias:\w+>' =>  'korporativnym_klientam/index',
-				
 				'malomu_i_srednemu_biznesu/<alias:\w+>/<subsection:\w+>' =>  'malomu_i_srednemu_biznesu/subsection',
-				'malomu_i_srednemu_biznesu/<alias:\w+>' =>  'malomu_i_srednemu_biznesu/index',
-				
 				'fizicheskim_litzam/<alias:\w+>/<subsection:\w+>' =>  'fizicheskim_litzam/subsection',
-				'fizicheskim_litzam/<alias:\w+>' =>  'fizicheskim_litzam/index',
-				
 				'partneram/<alias:\w+>/<subsection:\w+>' =>  'partneram/subsection',
+				// извлечь данные главного раздела и подраздела первого уровня:
+				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
+				'korporativnym_klientam/<alias:\w+>' =>  'korporativnym_klientam/index',
+				'malomu_i_srednemu_biznesu/<alias:\w+>' =>  'malomu_i_srednemu_biznesu/index',
+				'fizicheskim_litzam/<alias:\w+>' =>  'fizicheskim_litzam/index',
 				'partneram/<alias:\w+>' =>  'partneram/index',
-
+				//	
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

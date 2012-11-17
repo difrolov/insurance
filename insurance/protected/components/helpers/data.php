@@ -22,6 +22,7 @@ class Data {
 	/*
 	 *	@package		content
 	 *	@subpackage		metadata
+	 *	Загрузить макет подраздела, разместить данные и выдать в HTML
 	 */
 	function setPageData($this_obj, $section_data, $test=false){
 		// генерирует и размещает title страницы:
@@ -111,7 +112,8 @@ class Data {
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
-		}else{
+		}else{ // загрузить макет
+			
 		}?>
    </div>     
 	<?
