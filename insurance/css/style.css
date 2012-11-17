@@ -578,6 +578,7 @@ div[id*="ddMenu_"] blockquote{
 	margin:0 0 0 10px;
 }
 div[id*="ddMenu_"] ul.asTable{
+	margin-bottom:0 !important;
 	margin-top: -8px !important;
 }
 
@@ -666,6 +667,7 @@ ul.asTable li div.txtGrey a:hover{
 ul.asTable li > div:first-child{
 	border-bottom:solid 1px #ccc;
 	margin-bottom:10px;
+	opacity:0.8;
 }
 div#our_museum{
 	margin-top:10px;
@@ -758,6 +760,9 @@ div#slides div#slide-last > div:first-child{
 } 
 .tiny_info{
 	font-size:0.7em;
+}
+.txtMediumSmall{
+	font-size:11px;
 }
 .txtHeader2, 
 .txtHeader3{

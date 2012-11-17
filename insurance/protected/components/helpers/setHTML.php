@@ -122,7 +122,7 @@ class setHTML{
 		if ($parent_alias=="korporativnym_klientam") {?>
           <ul class="asTable">
 			<li>
-            	<div class="txtLightBlue">Виды страхования</div>
+            	<div class="txtLightBlue txtMediumSmall">Виды страхования</div>
 				<?=$linksHTML?></li>
         <?	$corps=true;
 			if ($corps){
@@ -133,7 +133,7 @@ class setHTML{
 						);?>
             <li style="width:20px;">&nbsp;</li>
         	<li>
-        		<div class="txtLightBlue">Корпоративным клиентам</div>
+        		<div class="txtLightBlue txtMediumSmall">Корпоративным клиентам</div>
                 <div class="txtGrey">
             <?	foreach($arrCorps as $alias=>$text):?>
             		<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
@@ -187,59 +187,6 @@ class setHTML{
   	<!--/footer_content-->
   </div>
 <?	}
-/**
- * @package		HTML
- * @subpackage		menu
- * построить меню верхнего уровня
- */
-	function buildMainMenu(
-					$this_object,
-					$submenu=false
-				  ){
-		$mainPageAlias='site/index';
-		$currentController=Yii::app()->controller->getId();
-		$menuWidget=($submenu)? self::$arrMenuWidgetSecond:self::$arrMenuWidget;
-		if (!$menuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
-			$newborn_menu=true; 
-			$arrMenu=self::getMainMenuItems($submenu);
-			foreach($arrMenu as $parent_id=>$parent_data) {
-				$text=$parent_data['text'];
-				$alias=$parent_data['alias'];
-				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
-				if ($alias!=$mainPageAlias)
-					$arr['active']= $currentController == $alias;
-				$menuWidget[]=$arr; 
-			}
-			if ($submenu)
-				self::$arrMenuWidgetSecond=$menuWidget;
-			else
-				self::$arrMenuWidget=$menuWidget;
-		}
-		// старый IE
-		if (self::detectOldIE()){ //
-			$URL=explode("/",$_SERVER['REQUEST_URI']);
-			$nURL=array_reverse($URL);
-			if ($nURL[1]=='index')
-				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
-			else $urlAlias='/'.$nURL[1].'/';?>
-        <ul<? //id=yw0?>>
-		<?	$menuItems=self::getMainMenuItems($submenu);
-			$dx=array_shift($menuItems);
-			foreach($menuItems as $parent_id=>$parentData){
-				$alias=$parentData['alias'];
-				$text=$parentData['text'];?>
-			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
-					echo $text;?></a>
-			<?	if ( $alias!='/'.$mainPageAlias.'/'
-			         && isset($newborn_menu)
-				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
-            </li>	
-		<?	}?>
-        </ul>
-	<?	}else $this_object->widget( 'zii.widgets.CMenu',
-							  array('items'=>$menuWidget)
-							);
-	}
 /**
  * @package		HTML
  * @subpackage		logo
@@ -296,6 +243,59 @@ class setHTML{
 		}else{?><img alt="Открытие Страхование" title="На главную" src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo.gif" width="372" height="80" border="0"><? }?></a>
                 </div>
 <?	}
+/**
+ * @package		HTML
+ * @subpackage		menu
+ * построить меню верхнего уровня
+ */
+	function buildMainMenu(
+					$this_object,
+					$submenu=false
+				  ){
+		$mainPageAlias='site/index';
+		$currentController=Yii::app()->controller->getId();
+		$menuWidget=($submenu)? self::$arrMenuWidgetSecond:self::$arrMenuWidget;
+		if (!$menuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
+			$newborn_menu=true; 
+			$arrMenu=self::getMainMenuItems($submenu);
+			foreach($arrMenu as $parent_id=>$parent_data) {
+				$text=$parent_data['text'];
+				$alias=$parent_data['alias'];
+				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
+				if ($alias!=$mainPageAlias)
+					$arr['active']= $currentController == $alias;
+				$menuWidget[]=$arr; 
+			}
+			if ($submenu)
+				self::$arrMenuWidgetSecond=$menuWidget;
+			else
+				self::$arrMenuWidget=$menuWidget;
+		}
+		// старый IE
+		if (self::detectOldIE()){ //
+			$URL=explode("/",$_SERVER['REQUEST_URI']);
+			$nURL=array_reverse($URL);
+			if ($nURL[1]=='index')
+				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
+			else $urlAlias='/'.$nURL[1].'/';?>
+        <ul<? //id=yw0?>>
+		<?	$menuItems=self::getMainMenuItems($submenu);
+			$dx=array_shift($menuItems);
+			foreach($menuItems as $parent_id=>$parentData){
+				$alias=$parentData['alias'];
+				$text=$parentData['text'];?>
+			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
+					echo $text;?></a>
+			<?	if ( $alias!='/'.$mainPageAlias.'/'
+			         && isset($newborn_menu)
+				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
+            </li>	
+		<?	}?>
+        </ul>
+	<?	}else $this_object->widget( 'zii.widgets.CMenu',
+							  array('items'=>$menuWidget)
+							);
+	}
 /**
  * @package		HTML
  * @subpackage		navigation
@@ -442,16 +442,6 @@ class setHTML{
 		if (isset($_GET['qtest'])) echo "<pre style='color:green'>".__LINE__."<BR>".$query."</pre>";
 		return Yii::app()->db->createCommand($query)->queryAll();
 	}
-	
-	/*function createSubMenuItems($submenus){
-		if ($submenus['child_count'])
-			createSubMenuItems($submenus);
-		else
-			return array( 'text'=>$submenus['name'],
-						  'alias'=>$submenus['alias']
-						);
-	}*/
-
 /**
  * @package		interface
  * @subpackage		browser
