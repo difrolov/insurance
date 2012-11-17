@@ -1,4 +1,6 @@
-<?	// если в тестовом режиме:
+<?	
+if (isset($data)) $tmplData=$data;
+	// если в тестовом режиме:
 	if (isset($_GET['test'])){?>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/test.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
 <div data-test="template">
@@ -64,7 +66,8 @@ $this->breadcrumbs=array(
         <li>Щёлкните модули для размещения в ней.</li>
       </ol>
         <div id="select_mod" onClick="addModuleIntoBlock(event,this);">
-        <?php foreach($model_modules as $key_mod=>$val_mod):?>
+        <?php // получить все текущие модули:
+			foreach($model_modules as $key_mod=>$val_mod):?>
             <div onclick="_generator_modules.getModule(<?php
 
 				echo $model_modules[$key_mod]['id'];

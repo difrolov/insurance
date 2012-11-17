@@ -4,6 +4,9 @@ class GeneratorController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
 
+	function getAllModules(){
+		
+	}
 	public function actionIndex(){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
@@ -64,7 +67,13 @@ class GeneratorController extends Controller
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		if($section_id){
-			echo "EDIT SECTION id ".$section_id;
+			$data=InsurInsuranceObject::model()->findAll(
+					array('select'=>'name, parent_id, alias, category_id, title, keywords, description, content',
+							'condition'=>'id = '.$section_id.' AND status = 1'
+						));
+			//var_dump("<h1>model:</h1><pre>",$model,"</pre>");
+			$this->render('index', array('data' => $data));
+			//$this->getTmplData($section_id);
 		}
 	}
 	
@@ -185,6 +194,10 @@ class GeneratorController extends Controller
 			$jenc=json_encode(array("result"=>"Подраздел создан!"));				
 			echo $jenc;
 		}
+	}
+	/*********************************************************/	
+	function getTmplData($section_id){
+		echo "EDIT SECTION id ".$section_id;
 	}
 }
 
