@@ -3,24 +3,38 @@
 class GeneratorController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
-
-	function getAllModules(){
-		
+	protected $groot=NULL;
+	
+	function getGeneratorRoot(){
+		if (!$this->groot)
+			$this->groot=Yii::getPathOfAlias('webroot').'/protected/modules/admin/views/generator/';
 	}
-	public function actionIndex(){
-		if(!Yii::app()->user->checkAccess('admin')){
-			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
-		}
-
+	/**
+	 * @package
+	 * Получить данные существующих модулей
+	 */
+	function getAllModules(){
 		$model = new InsurArticleContent;
 		$sql = "SELECT o.`name`,o.`status`,o.`parent_id`,o.`alias`,m.id
 				FROM insur_modules as m
 				LEFT JOIN insur_insurance_object as o ON o.`id`=m.`object_id`
 				WHERE o.`status`= 1";
 		$model_modules = Yii::app()->db->createCommand($sql)->queryAll();
-		$this->render('index',array('model'=>$model,'model_modules'=>$model_modules));
+		return array('model'=>$model,'model_modules'=>$model_modules);
 	}
-
+	
+	public function actionIndex(){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		$this->getGeneratorRoot();
+		$arrModData=$this->getAllModules();
+		$this->render('index',array('model'=>$arrModData['model'],'model_modules'=>$arrModData['model_modules']));
+	}
+	/**
+	 * @package
+	 * 
+	 */
 	public function actionGetObject(){
 
 		if(!Yii::app()->user->checkAccess('admin')){
@@ -40,7 +54,6 @@ class GeneratorController extends Controller
 			$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
 		}
 	}
-
 	//
 	public function actionUpdate(){
 		if(!Yii::app()->user->checkAccess('admin')){
@@ -67,13 +80,13 @@ class GeneratorController extends Controller
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		if($section_id){
+			$this->getGeneratorRoot();
 			$data=InsurInsuranceObject::model()->findAll(
 					array('select'=>'name, parent_id, alias, category_id, title, keywords, description, content',
 							'condition'=>'id = '.$section_id.' AND status = 1'
 						));
-			//var_dump("<h1>model:</h1><pre>",$model,"</pre>");
-			$this->render('index', array('data' => $data));
-			//$this->getTmplData($section_id);
+			$arrModData=$this->getAllModules();
+			$this->render('index', array('data' => $data,'model'=>$arrModData['model'],'model_modules'=>$arrModData['model_modules']));
 		}
 	}
 	
