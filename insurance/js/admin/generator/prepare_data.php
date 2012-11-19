@@ -181,9 +181,9 @@ function defineLayoutSchema(eventObj){
 	}
 	// обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера
 	handlePyctos(eventObj);
-	// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
 	// указать параметры текущего выбора
-	setCurrentChoiceStatus(event,eventParent);
+	// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
+	setCurrentChoiceStatus(eventObj/*,eventParent*/);
 	// проверить - допускает ли текущее состояние макета его загрузку:
 	checkLayoutReady();
   }catch(e){
@@ -244,11 +244,13 @@ function handlePyctos(srce) { // источник события
 	var titleFooterInside="Внутренний псевдофутер";
 	var titleFooterShared="Общий псевдофутер";
 	// блоки "Выберите расположение...":
-	var divsToPick=document.getElementById('txtActions').getElementsByTagName('div');
+	var divsToPick=$('#txtActions div');
+	//document.getElementById('txtActions').getElementsByTagName('div');
 	// установить следующий блок для отображения при клике на пиктограмме текущего блока:
 	var pyctosNextBlock;
-	var blockTextToShowSubheader=divsToPick.item(1); // текст "Выберите..."
-	var blockTextToShowFooter=divsToPick.item(2);
+	var blockTextToShowSubheader=divsToPick[1]; // текст "Выберите..."
+	//alert(blockTextToShowSubheader);
+	var blockTextToShowFooter=divsToPick[2];
 	var divPyctosSubheader=document.getElementById('chHeaders');
 	var divPyctosFooter=document.getElementById('psFooter');
 	// подставить для отображения блоки (текст "Выберите...", пиктограммы схемы) следующего уровня:
@@ -339,28 +341,10 @@ function handlePyctos(srce) { // источник события
 }
 // сделать полупрозрачными неиспользуемые схемы
 // разместить информацию о текущем выборе в блока справа
-function setCurrentChoiceStatus(event,pyctosContainer){ //alert(pyctosContainer.id);
-	// блоки (div) элемента-источника события
-	var pyctosNextBlock=pyctosContainer.getElementsByTagName('div'); // container/div
-	var subHeaderPlacementType=false;
-	var currentPycto,srcElem; //alert(pyctosNextBlock.length);
-	srcElem=(navigator.appName=="Netscape")? event.target:event.srcElement;
-	for(i=0;i<pyctosNextBlock.length;i++){
-		currentPycto=pyctosNextBlock.item(i);		
-		if (srcElem==currentPycto) { // источник события - текущая пиктограмма 
-			currentPycto.style.opacity=1; // сделать непрозрачной (активной)
-			if (srcElem==currentPycto){ // источник события - текущая пиктограмма
-				// указать выбранный тип размещения подзаголовка:
-				if (srcElem.className.indexOf('Inside')!=-1) // внутренний подзаголовок
-					subHeaderPlacementType="внутренний"; 
-				else 
-					subHeaderPlacementType=(srcElem.className.indexOf('Shared')!=-1||srcElem.className=='twoColumnSubheader')? "общий":"без подзаголовка";
-			}
-		}
-		currentPycto.style.opacity=(srcElem==currentPycto)? 1:0.2;
-	}
-	// указать параметры текущего выбора
-	displayUserChoice(pyctosContainer);
+function setCurrentChoiceStatus(srcElem){ 
+	$(srcElem).parent().find('div').css('opacity',0.2);
+	$(srcElem).css('opacity',1);
+	displayUserChoice(srcElem.parentNode);//pyctosContainer
 }
 // показать блок
 function showBlock(tShow,line){
