@@ -150,10 +150,6 @@ function checkLayoutReady(){
 	// управлять видимостью остальных блоков:
 	if (Layout.Schema!=0) { 
 		$("#tmpl_commands").fadeIn(1000);
-		/*if($('#sel_modules').css('display')!='block'){
-			display(['tmpl_commands']); // кнопки управления шаблонами
-			makeSolid(['tmpl_commands']);
-		}*/
 		if ($('#btn_cancelLayoutChanges').attr('class')=='active') {
 			setButtonStat(['btn_loadLayout'],'active');
 		}
@@ -163,8 +159,6 @@ function checkLayoutReady(){
 			setButtonStat(['btn_loadLayout'],'passive');
 		}else{
 			$("#tmpl_commands").fadeOut(1000);
-			//makeLiquid(['tmpl_commands']); 
-			//hide(['tmpl_commands']);
 		}
 		return false;
 	}
@@ -191,28 +185,26 @@ function defineLayoutSchema(eventObj){
   }
 }
 // разместить и отобразить информацию о выборе юзера:
-function displayUserChoice(pyctosContainer){ 
+function displayUserChoice(pyctosContainer){ // контейнер с пиктограммами
   try{
-	var userInfo;
+	var userInfo,spans=$('#currentChoice span');
 	var sText=getLevelsArray();
- 	var sBlocks=document.getElementById('currentChoice').getElementsByTagName('span');
-	var currentPicTitle;
-	for (i=0;i<sText.length;i++){
-		if (pyctosContainer.id==sText[i][0]) {
-			var pBlocks=pyctosContainer.getElementsByTagName('div');
-			for (j=0;j<pBlocks.length;j++){
-				if (pBlocks.item(j).style.opacity==1) {
-					currentPicTitle=pBlocks.item(j).title.toLowerCase();
-					break;
-				}
-			}
-			//sText[i][1]
-			sBlocks.item(i).innerHTML='<b>&bull; '+currentPicTitle+'</b>';
-			// спрятать инфо ниже текущего уровня:
-			for (b=i+1;b<(sBlocks.length);b++)
-				sBlocks[b].innerHTML='';
-		}
-	}		
+	$(sText).each(	function(i) { // перебираем контейнеры пиктограмм
+		// 'tmplColSet'=>'количество колонок',
+		// 'chHeaders'=>'расположение подзаголовка',
+		// 'psFooter'=>'расположение псевдофутера'
+       	if ($(pyctosContainer).attr('id')==$(this)[0]){ 
+			// 'tmplColSet', 'chHeaders', 'psFooter'
+			$(pyctosContainer).find('div').each(  function (){
+				if($(this).css('opacity')==1){
+					currentPicTitle=$(this).attr('title').toLowerCase();
+					return false;
+				}	
+			});
+			var tSpan=$(spans)[i];
+			$(tSpan).html('<b>&bull; '+currentPicTitle+'</b>');
+		} 
+    });
   }catch(e){
 	  alert(e.message);
   }
@@ -245,7 +237,6 @@ function handlePyctos(srce) { // источник события
 	var titleFooterShared="Общий псевдофутер";
 	// блоки "Выберите расположение...":
 	var divsToPick=$('#txtActions div');
-	//document.getElementById('txtActions').getElementsByTagName('div');
 	// установить следующий блок для отображения при клике на пиктограмме текущего блока:
 	var pyctosNextBlock;
 	var blockTextToShowSubheader=divsToPick[1]; // текст "Выберите..."
