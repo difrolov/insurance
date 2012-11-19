@@ -22,7 +22,7 @@ function changeLayout(btn){
 	savedLayout={ // сохранить выбранную схему
 		Schema:Layout.Schema
 	}
-	initialiteLayout(); // создать макет заново
+	initializeLayout(); // создать макет заново
 	// кнопки:
 	setButtonStat([btn.id],'passive'); // пассивна
 	setButtonStat(['btn_cancelLayoutChanges'],'active'); // активна

@@ -45,22 +45,30 @@ ol, ul{
     <td>&nbsp;</td>
     <td>manage_template.php</td>
     </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    </tr>
   <tr valign="top">
-    <td colspan="4" style="line-height:1px; padding:0;" bgcolor="#CCCCCC">&nbsp;</td>
+    <td colspan="4" style="line-height:10px; border: none; padding:0;" bgcolor="#CCCCCC">&nbsp;</td>
     </tr>
+  <tr valign="top" class="main">
+    <td>&nbsp;</td>
+    <td>инициализировать (и РЕинициализировать) макет:<br>
+    <strong>initializeLayout();</strong></td>
+    <td>&nbsp;</td>
+    <td>prepare_data.php</td>
+  </tr>
   <tr valign="top" class="main">
     <td>&nbsp;</td>
     <td><p>Подготовить схему макета:<br>
 	<strong>defineLayoutSchema(2); </strong></p></td>
-    <td rowspan="7">Пиктораммы схем макета</td>
-    <td rowspan="7">prepare_data.php</td>
+    <td rowspan="8">Пиктораммы схем макета</td>
+    <td rowspan="8">prepare_data.php</td>
     </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <p>распарсить схему макета:<br>
+        <strong>parseLayoutSchema(); </strong></p>
+    </blockquote></td>
+  </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>

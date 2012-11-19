@@ -3,12 +3,22 @@
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
+// распарсить схему макета:
+function parseLayoutSchema(){
+	return new Array( parseInt(Layout.Schema.substring(0,1)),
+					  Layout.Schema.substring(1,2),
+					  Layout.Schema.substring(2)
+					);
+}
+// создать макет
 function createLayout(){
   try{ 	
   	// получить количество блоков:
-	var colsCountInit=colsCount=parseInt(Layout.Schema.substring(0,1));
-	var tmplValue2=Layout.Schema.substring(1,2);
-	var tmplValue3=Layout.Schema.substring(2);
+	var arrLayoutSchema=parseLayoutSchema();
+	var colsCountInit=colsCount=arrLayoutSchema[0];
+	var tmplValue2=arrLayoutSchema[1];
+	var tmplValue3=arrLayoutSchema[2];
+	
 	if (tmplValue2!='0') colsCount+=1;
 	if (tmplValue3!='0') colsCount+=1;
 	

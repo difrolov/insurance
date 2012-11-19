@@ -6,7 +6,7 @@
                 <div>Подзаголовок:</div>
                 <div>Псевдофутер:</div>
             </div>
-            <div id="txtChoice" onClick="defineLayoutSchema(event,this);">
+            <div id="txtChoice">
                 <div id="tmplColSet">
                     <div class="oneColumn" title="Одна колонка">&nbsp;</div>
                     <div class="twoColumn" title="Две колонки">&nbsp;</div>

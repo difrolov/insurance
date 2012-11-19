@@ -22,7 +22,10 @@ class GeneratorController extends Controller
 		$model_modules = Yii::app()->db->createCommand($sql)->queryAll();
 		return array('model'=>$model,'model_modules'=>$model_modules);
 	}
-	
+	/**
+	 * @package
+	 * 
+	 */
 	public function actionIndex(){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
