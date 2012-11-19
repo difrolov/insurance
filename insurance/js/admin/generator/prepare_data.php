@@ -23,26 +23,6 @@ function initializeLayout(){
 	alert(e.message);
   }
 }
-//
-function walkThroughLayout(Layout,act){
-	for(var prop in Layout){
-		// Layout 		- объект
-		// prop		- свойство объекта
-		// Layout[ob] 	- значение свойства (литерал) объекта		
-		var val=Layout[prop];
-		if (typeof(val)=='object'){
-			//toPlace.innerHTML+='<div class="rd">'+ob;
-			walkThroughLayout(val);
-			//toPlace.innerHTML+='</div>';
-		}else{
-			delete prop;
-			//Layout[prop]=null;
-			alert(prop+':'+val); 
-			//var nclass=ins? 'rd2':'rd';
-			//toPlace.innerHTML+='<div><div class="'+nclass+'"><div>'+currentObj+'</div></div></div>';
-		}
-	}
-}
 //проверить - допускает ли текущее состояние макета его загрузку
 function checkLayoutReady(){
 	Layout.Schema=0;
