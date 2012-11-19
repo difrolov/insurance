@@ -86,6 +86,7 @@ class InsurBanners extends CActiveRecord
 		$criteria->compare('link',$this->link,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('date_edit',$this->date_edit);
+		$criteria->compare('place',$this->place);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

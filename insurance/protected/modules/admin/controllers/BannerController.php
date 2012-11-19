@@ -14,8 +14,9 @@ class BannerController extends Controller{
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		$model = new InsurBanners();
-		$gridDataProvider = $model->search();
-		$this->render('getbanner',array('gridDataProvider'=>$gridDataProvider));
+		$gridDataProvider_out = $model->search('place="outside"');
+		$gridDataProvider_in = $model->search('place="inside"');
+		$this->render('getbanner',array('in'=>$gridDataProvider_in,'out'=>$gridDataProvider_out));
 	}
 	public function actionAjaxUpdate(){
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
@@ -32,7 +33,6 @@ class BannerController extends Controller{
 				echo '{success:1}';
 				exit;
 			}
-
 			echo '{success:ошбка вставки в БД}';
 			exit;
 		}

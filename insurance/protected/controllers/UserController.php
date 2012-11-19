@@ -30,13 +30,14 @@ class UserController extends Controller
 			$identity=new UserIdentity($_POST['Users']['login'],$_POST['Users']['password']);
 			if($identity->authenticate()){
 				Yii::app()->user->login($identity);
-
-				$this->redirect('index');
+				/* если мы пришли из админки, то отправляем обратно */
+				if(isset($_GET['admin'])){
+					$this->redirect(Yii::app()->homeUrl.'admin');
+				}
 			}else{
 				echo $identity->errorMessage;
 			}
 			// Выходим
-
 		}
 		$this->render('login',array('model'=>$model));
 	}
