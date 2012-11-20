@@ -35,7 +35,8 @@ $(function(){
 		tPyctFirst,		// активная пиктограмма для первого ряда
 		tPyctSecond,	// активная пиктограмма для второго ряда
 		tPyctLast,		// активная пиктограмма для третьего ряда
-		tIndex,			// индекс активной пиктограммы в её ряде
+		hIndex,			// индекс активной пиктограммы для идентификации типа подзаголовка
+		fIndex,			// индекс активной пиктограммы для 3/4-х колоночного макета, определяющей вид псевдофутера
 		multicol=false;	// индикатор макета с колич. колонок больше 2-х.
 	
 	tmplColSet=$('div#tmplColSet > div'); // строка Колонки
@@ -50,8 +51,8 @@ $(function(){
 		
 		case "200":case "210":
 		  tPyctFirst=$(tmplColSet)[1];
-		  tIndex=(Layout.Schema=='200')? 0:1;
-		  tPyctLast=$(chHeaders)[tIndex];
+		  hIndex=(Layout.Schema=='200')? 0:1;
+		  tPyctLast=$(chHeaders)[hIndex];
 		break;
 		
 		default: // определить кнопки активного макета для эмуляции клика
@@ -66,8 +67,8 @@ $(function(){
 					
 					switch(multicolHeader){ // тип подзаголовка
 						case "0": case "s": // 300, 30s : // 3s0, 3ss
-						  tIndex=(multicolHeader=="0")? 0:2;
-						  tPyctSecond=$(chHeaders)[tIndex]; // первая пиктограмма в ряду для типа подзаголовка						
+						  hIndex=(multicolHeader=="0")? 0:2;
+						  tPyctSecond=$(chHeaders)[hIndex]; // первая пиктограмма в ряду для типа подзаголовка						
 						  tPyctLast=definePyctIndex(multicolFooter,psFooter,"0","s",0,1);
 						break;
 						
@@ -77,33 +78,34 @@ $(function(){
 					}
 				break;
 				
-				/*case "4": // 4 колонки
-					tPyctFirst=$(tmplColSet)[2];
+				case "4": // 4 колонки
+					tPyctFirst=$(tmplColSet)[3];
 					
 					switch(multicolHeader){						
-						case "0": // 40[0/i/s]
+						case "0": // 400, 40i, 40s
+							tPyctSecond=$(chHeaders)[0]; // первая пиктограмма в ряду для типа подзаголовка
+							
 							switch(multicolFooter){						
 								case "0": // 400
-					  				tPyctLast=$('div#psFooter > div.fourColumn');
+					  				fIndex=0;
 								break;
 								case "i": // 40i
-									tIndex=1;
+									fIndex=1;
 								break;
 								case "s": // 40s
-									tIndex=2;
+									fIndex=2;
 								break;
 							}
 						break;
 						
-						
-						case "i":
-							tIndex=1;
-						break;
-						case "s":
-							tIndex=2;
+						case "i":case "s":
+							hIndex=(multicolHeader=='i')? 1:2;
+							tPyctSecond=$(chHeaders)[hIndex]; // вторая пиктограмма в ряду для типа подзаголовка
+							var fIndex=(multicolFooter=="0")? 0:1; // индекс третьей пиктограммы
+							
 						break;
 					}
-				*/
+					tPyctLast=$(psFooter)[fIndex];
 			}
 	}
 	//alert(multicol);
@@ -131,10 +133,10 @@ function definePyctIndex( multicolType,	// multicolFooter
 						  secondIndex	// 1
 						){ 
 	if (multicolType==firstSymbol) 
-		tIndex=firstIndex; // первая пиктограмма в ряду для типа псевдофутера
+		Index=firstIndex; // первая пиктограмма в ряду для типа псевдофутера
 	else if (multicolType==secondSymbol)
-		tIndex=secondIndex; // вторая пиктограмма в ряду для типа псевдофутера
-	return $(rowName)[tIndex];
+		Index=secondIndex; // вторая пиктограмма в ряду для типа псевдофутера
+	return $(rowName)[Index];
 }
 </script>    
 <?	
