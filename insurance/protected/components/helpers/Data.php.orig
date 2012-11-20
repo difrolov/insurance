@@ -1,8 +1,8 @@
 <<<<<<< HEAD
-﻿<?
-=======
 <?
->>>>>>> SaveTemplate
+=======
+﻿<?
+>>>>>>> GeneratorControllerModified
 class Data {
 	/**
 	  * @package		content
@@ -27,9 +27,9 @@ class Data {
 	 *	@package		content
 	 *	@subpackage		metadata
 <<<<<<< HEAD
-=======
 	 *	Загрузить макет подраздела, разместить данные и выдать в HTML
->>>>>>> SaveTemplate
+=======
+>>>>>>> GeneratorControllerModified
 	 */
 	function setPageData($this_obj, $section_data, $test=false){
 		// генерирует и размещает title страницы:
@@ -56,9 +56,6 @@ class Data {
 		if (!$section_data->first_header)
 			$section_data->first_header=$section_data->name;
 <<<<<<< HEAD
-		// это он - заголовок :)
-		echo "<h1>".$section_data->first_header."</h1>";
-=======
 	$arrItems=array( 'О компании',  
 					 'О корпорации',  
 					 'Руководство',  
@@ -117,7 +114,10 @@ class Data {
 	<?
 		// это он - заголовок :)
 		echo "<h1>HEADER: ".$section_data->first_header."</h1>";
->>>>>>> SaveTemplate
+=======
+		// это он - заголовок :)
+		echo "<h1>".$section_data->first_header."</h1>";
+>>>>>>> GeneratorControllerModified
 		// если тестируемся:
 		if ($test) {
 			echo "parent_id = ".$section_data->parent_id."<hr>";
@@ -125,14 +125,14 @@ class Data {
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
 <<<<<<< HEAD
-		}
-=======
 		}else{ // загрузить макет
 			
 		}?>
    </div>     
 	<?
->>>>>>> SaveTemplate
+=======
+		}
+>>>>>>> GeneratorControllerModified
 	}
 }
 ?>

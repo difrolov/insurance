@@ -1,4 +1,5 @@
-﻿<?
+<?
+// трабл с кодировкой возник
 class Data {
 	/**
 	  * @package		content
