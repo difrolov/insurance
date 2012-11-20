@@ -139,6 +139,14 @@ class GeneratorController extends Controller
 										ПРОЦЕДУРА СОХРАНЕНИЯ....
 									
 									************************************/
+									$model_content = new InsurArticleContent;
+									$model_content->content = $text;
+									$model_content->name = $header;
+									$model_content->status = 1;
+									$model_content->created = date("Y-m-d H:i:s");
+									$model_content->object_id = $post['parent'];
+									$model->save();
+
 
 									// 2. получить id сохранённой статьи
 									/************************************
@@ -146,6 +154,7 @@ class GeneratorController extends Controller
 										ПРОЦЕДУРА ПОЛУЧЕНИЯ id....
 										на выходе получаем $article_id
 									************************************/
+									$article_id = $model->id;
 									
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:
@@ -202,6 +211,16 @@ class GeneratorController extends Controller
 		insur_insurance_object.content: serialize($post);
 		
 		************************************/
+		$model_obj = new InsurInsuranceObject;
+		$model_obj->parent_id = $parent_id;
+		$model_obj->name = $name;
+		$model_obj->status = 1;
+		$model_obj->alias = $alias;
+		$model_obj->date_changes = date("Y-m-d H:i:s");
+		$model_obj->keywords = $keywords;
+		$model_obj->description = $description;
+		$model_obj->content = serialize($post);
+		$model_obj->save();
 		
 		
 		if ($localdata){
