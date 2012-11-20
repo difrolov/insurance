@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <title>Карта клиентских скриптов</title>
 <style>
+blockquote{
+	margin-right:0;
+	padding-right:0;
+}
 table *{
 	font-size:18px;
 	vertical-align:top;
@@ -13,6 +17,10 @@ h3{
 }
 .txtRed{
 	color:#F00;
+}
+tr.general td,
+td.general {
+	background:#CF3;
 }
 tr.main td {
 	background:#CCFFCC;
@@ -48,47 +56,27 @@ ol, ul{
   <tr valign="top">
     <td colspan="4" style="line-height:10px; border: none; padding:0;" bgcolor="#CCCCCC">&nbsp;</td>
     </tr>
-  <tr valign="top" class="main">
+  <tr valign="top" class="general">
     <td>&nbsp;</td>
     <td>инициализировать (и РЕинициализировать) макет:<br>
     <strong>initializeLayout();</strong></td>
-    <td>&nbsp;</td>
-    <td>prepare_data.php</td>
+    <td><strong>document.ready</strong></td>
+    <td rowspan="11">prepare_data.php</td>
   </tr>
   <tr valign="top" class="main">
     <td>&nbsp;</td>
-    <td><p>Подготовить схему макета:<br>
-	<strong>defineLayoutSchema(2); </strong></p></td>
-    <td rowspan="8">Пиктораммы схем макета</td>
-    <td rowspan="8">prepare_data.php</td>
-    </tr>
-  <tr>
-    <td>&nbsp;</td>
     <td><blockquote>
-      <p>распарсить схему макета:<br>
-        <strong>parseLayoutSchema(); </strong></p>
+      <p>Подготовить схему макета:<br>
+        <strong>defineLayoutSchema(2); </strong></p>
     </blockquote></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>показать блок "текущий выбор":<br>
-        <strong>showBlock(2); </strong></p>
-    </blockquote></td>
-    </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><blockquote>
-      <p>обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера:<br>
-        <strong>handlePyctos(1); </strong></p>
-    </blockquote></td>
+    <td rowspan="11">Пиктораммы схем макета</td>
     </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
       <blockquote>
-        <p>отобразить блоки следующего уровня, назначить класс первой пиктограмме:<br>
-          <strong>startHandleBlock(3);</strong></p>
+        <p>*показать блок "текущий выбор":<br>
+          <strong>showBlock(2); </strong></p>
         </blockquote>
     </blockquote></td>
     </tr>
@@ -96,33 +84,104 @@ ol, ul{
     <td>&nbsp;</td>
     <td><blockquote>
       <blockquote>
-        <p>сделать все пиктограммы блоков 2 и 3 непрозрачными:<br>
-          <strong>dropPyctosOpacity(1);</strong> </p>
+        <p>обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера:<br>
+          <strong>handlePyctos(1); </strong></p>
         </blockquote>
     </blockquote></td>
     </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
-      <p>установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере;<br>
-        указать параметры текущего выбора:<br>
-        <strong>setCurrentChoiceStatus(2); </strong></p>
+      <blockquote>
+        <blockquote>
+          <p>*отобразить блоки следующего уровня, назначить класс первой пиктограмме:<br>
+            <strong>startHandleBlock(3);</strong></p>
+          </blockquote>
+        </blockquote>
     </blockquote></td>
     </tr>
   <tr>
     <td>&nbsp;</td>
     <td><blockquote>
-      <p>проверить &#8212; допускает ли текущее состояние макета его загрузку;<br>
-        если да, <span class="txtRed">назначить схему для макета</span> :<br>
-        <strong>checkLayoutReady();</strong></p>
+      <blockquote>
+        <blockquote>
+          <p>*сделать все пиктограммы блоков 2 и 3 непрозрачными:<br>
+            <strong>dropPyctosOpacity(1);</strong> </p>
+          </blockquote>
+        </blockquote>
     </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере;<br>
+          указать параметры текущего выбора:<br>
+          <strong>setCurrentChoiceStatus(2); </strong></p>
+        </blockquote>
+    </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <blockquote>
+          <p>разместить и отобразить информацию о выборе юзера:<br>
+            <strong>displayUserChoice(1);</strong></p>
+          </blockquote>
+        </blockquote>
+    </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>проверить &#8212; допускает ли текущее состояние макета его загрузку;<br>
+          если да, <span class="txtRed">назначить схему для макета</span> :<br>
+          <strong>checkLayoutReady();</strong></p>
+        </blockquote>
+    </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <blockquote>
+          <p>вернуть массив уровней с пиктограммами:<br>
+            <strong>getLevelsArray();</strong></p>
+          </blockquote>
+        </blockquote>
+    </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <blockquote>
+          <p>*получить начальное значение схемы макета:<br>
+            <strong>getSchema(1);</strong></p>
+          </blockquote>
+        </blockquote>
+    </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <blockquote>
+          <p>*управление кнопками:<br>
+            <strong>setButtonStat(2);</strong></p>
+          </blockquote>
+        </blockquote>
+    </blockquote></td>
+    <td class="general">switch_states.php</td>
     </tr>
   <tr class="main">
     <td>&nbsp;</td>
     <td><p>Загрузить макет по сформированному шаблону:<strong><br>
     loadLayout();</strong></p></td>
-    <td rowspan="3">Кнопка <q><strong>Загрузить макет</strong></q></td>
-    <td rowspan="3">load_template.php</td>
+    <td rowspan="4">Кнопка <q><strong>Загрузить макет</strong></q></td>
+    <td rowspan="4">load_template.php</td>
     </tr>
   <tr>
     <td>&nbsp;</td>
@@ -136,6 +195,15 @@ ol, ul{
     <td><blockquote>
       <p>собрать блочную структуру макета по выбранной ранее схеме:<br>
         <strong>createLayout();</strong></p>
+    </blockquote></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><blockquote>
+      <blockquote>
+        <p>распарсить схему макета:<br>
+          <strong>parseLayoutSchema(); </strong></p>
+        </blockquote>
     </blockquote></td>
     </tr>
   <tr class="main">

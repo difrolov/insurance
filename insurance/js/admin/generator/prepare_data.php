@@ -147,27 +147,29 @@ function checkLayoutReady(){
 // * количества колонок
 // * наличия и расположения подзаголовка
 // * наличия и расположения псевдофутера
-function defineLayoutSchema(eventObj){
+function defineLayoutSchema(activePycto){ // кнопка активного макета
   try{
-	var eventParent=eventObj.parentNode;
-	if (eventParent.id=="tmplColSet") { 
+	if ($(activePycto).parent().attr('id')=="tmplColSet") { 
 		showBlock('currentChoice','line'); 
 	}
 	// обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера
-	handlePyctos(eventObj);
+	handlePyctos(activePycto);
 	// указать параметры текущего выбора
 	// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
-	setCurrentChoiceStatus(eventObj/*,eventParent*/);
+	setCurrentChoiceStatus(activePycto);
 	// проверить - допускает ли текущее состояние макета его загрузку:
 	checkLayoutReady();
+	return true;
   }catch(e){
 	  alert(e.message);
   }
 }
 // разместить и отобразить информацию о выборе юзера:
-function displayUserChoice(pyctosContainer){ // контейнер с пиктограммами
+function displayUserChoice(activePycto){ // контейнер с пиктограммами
   try{
-	var userInfo,spans=$('#currentChoice span');
+	var userInfo,
+		spans=$('#currentChoice span'),
+		pyctosContainer=$(activePycto).parent();
 	var sText=getLevelsArray();
 	$(sText).each(	function(i) { // перебираем контейнеры пиктограмм
 		// 'tmplColSet'=>'количество колонок',
@@ -177,7 +179,9 @@ function displayUserChoice(pyctosContainer){ // контейнер с пикто
 			// 'tmplColSet', 'chHeaders', 'psFooter'
 			$(pyctosContainer).find('div').each(  function (){
 				if($(this).css('opacity')==1){
-					currentPicTitle=$(this).attr('title').toLowerCase();
+					//alert(this.title);
+					if (currentPicTitle=$(this).attr('title'))
+						currentPicTitle.toLowerCase();
 					return false;
 				}	
 			});
@@ -312,10 +316,10 @@ function handlePyctos(srce) { // источник события
 }
 // сделать полупрозрачными неиспользуемые схемы
 // разместить информацию о текущем выборе в блока справа
-function setCurrentChoiceStatus(srcElem){ 
-	$(srcElem).parent().find('div').css('opacity',0.2);
-	$(srcElem).css('opacity',1);
-	displayUserChoice(srcElem.parentNode);//pyctosContainer
+function setCurrentChoiceStatus(activePycto){ 
+	$(activePycto).parent().find('div').css('opacity',0.2);
+	$(activePycto).css('opacity',1);
+	displayUserChoice(activePycto);
 }
 // показать блок
 function showBlock(tShow,line){

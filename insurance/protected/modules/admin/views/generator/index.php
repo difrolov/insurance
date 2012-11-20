@@ -15,10 +15,8 @@ $(function(){
 						   );
 		//**********************************
 	
-	if ($section_data['content']):?>
-	Layout.Schema='<? 
-		echo $section_data['content']['Schema'];
-		// если раздел создаётся впервые, макет создаётся вызовом функции initializeLayout()?>';
+	if ($section_data['content']) {?>
+	Layout.Schema='<?=$section_data['content']['Schema']?>';
   	// распарсить схему макета посимвольно:
 	var arrLayoutSchema=parseLayoutSchema();
 	// получить объект пиктограммы для текущего макета:
@@ -29,52 +27,64 @@ $(function(){
 	//*************************************************
 	// СМ. схему ВСЕХ макетов в _docs\сайт.xlsx
 	//*************************************************
-	// отобразить все ряды выбора опций макета: колонки, подзаголовок, футер:
-	var tPyct,tRow,tIndex,tmplColSet,chHeaders,psFooter;
 	
-	var rColumns=$('div#tmplColSet > div'); // строка Колонки
+	// отобразить все ряды выбора опций макета: колонки, подзаголовок, футер:
+	var tmplColSet, 	// ряд пиктограмм для колич. колонок
+		chHeaders,		// ряд пиктограмм для подзаголовка
+		psFooter,		// ряд пиктограмм для псевдофутера
+		tPyctFirst,		// активная пиктограмма для первого ряда
+		tPyctSecond,	// активная пиктограмма для второго ряда
+		tPyctLast,		// активная пиктограмма для третьего ряда
+		tIndex,			// индекс активной пиктограммы в её ряде
+		multicol=false;	// индикатор макета с колич. колонок больше 2-х.
+	
+	tmplColSet=$('div#tmplColSet > div'); // строка Колонки
+	chHeaders=$('div#chHeaders > div'); // строка Подзаголовок
+	psFooter=$('div#psFooter > div'); // строка Псевдофутер
 	
 	switch(Layout.Schema){
+		
 		case "100":
-		  tPyct=$(rColumns)[0]; // строка Колонки / первая пиктограмма
-		break;
-
-		//case "200":case "210":
-		
-		case "200":
-		  tPyct=$('div#chHeaders > div')[0];
+		  tPyctLast=$(tmplColSet)[0]; // строка Колонки / первая пиктограмма
 		break;
 		
-		case "210":
-		  tPyct=$('div#chHeaders > div')[1];
-			break;
+		case "200":case "210":
+		  tPyctFirst=$(tmplColSet)[1];
+		  tIndex=(Layout.Schema=='200')? 0:1;
+		  tPyctLast=$(chHeaders)[tIndex];
+		break;
 		
-		/*default:
+		default: // определить кнопки активного макета для эмуляции клика
+			multicol=Layout.Schema.substr(0,1); // колич.колонок (1-е значение схемы)
+			var multicolHeader=Layout.Schema.substr(1,1); // наличие подзаголовка (второе значение схемы)
+			var multicolFooter=Layout.Schema.substr(2); // наличие псевдофутера (третье значение схемы)
 			
-			switch(arrLayoutSchema[0]){
-				case "3":
-					switch(arrLayoutSchema[1]){
-						case "0": // 300, 30s
-						  if (arrLayoutSchema[2]=="0")
-								tIndex=0;
-						  else if (arrLayoutSchema[2]=="s")
-								tIndex=1;
-						  tPyct=$('div#psFooter > div')[tIndex];
-							break;
+			switch(multicol){
+				
+				case "3": // 3 колонки
+					tPyctFirst=$(tmplColSet)[2];
+					
+					switch(multicolHeader){ // тип подзаголовка
+						case "0": case "s": // 300, 30s : // 3s0, 3ss
+						  tIndex=(multicolHeader=="0")? 0:2;
+						  tPyctSecond=$(chHeaders)[tIndex]; // первая пиктограмма в ряду для типа подзаголовка						
+						  tPyctLast=definePyctIndex(multicolFooter,psFooter,"0","s",0,1);
+						break;
+						
 						case "i": // 3i0
-						  tPyct=$('div#chHeaders > div')[1];
-							break;
-						case "s":
-							// code
-							break;
+						  tPyctLast=$(chHeaders)[1]; // вторая (она же - последняя) пиктограмма в ряду для типа подзаголовка
+						break;
 					}
 				break;
-				case "4":
-					switch(arrLayoutSchema[1]){						
+				
+				/*case "4": // 4 колонки
+					tPyctFirst=$(tmplColSet)[2];
+					
+					switch(multicolHeader){						
 						case "0": // 40[0/i/s]
-							switch(arrLayoutSchema[2]){						
+							switch(multicolFooter){						
 								case "0": // 400
-					  				tPyct=$('div#psFooter > div.fourColumn');
+					  				tPyctLast=$('div#psFooter > div.fourColumn');
 								break;
 								case "i": // 40i
 									tIndex=1;
@@ -93,48 +103,39 @@ $(function(){
 							tIndex=2;
 						break;
 					}
-
-					switch(arrLayoutSchema[2]){	
-					}
-					
-
-
-					case "":
-					  tPyct=$('div#psFooter > div');
-						break;
-					case "":
-					  tPyct=$('div#psFooter > div');
-						break;
-					case "":
-					  tPyct=$('div#psFooter > div');
-						break;
-					case "":
-					  tPyct=$('div#psFooter > div');
-						break;
-					case "":
-					  tPyct=$('div#psFooter > div');
-						break;
-					case "":
-					  tPyct=$('div#psFooter > div');
-						break;
-					break;
-			}*/
+				*/
+			}
 	}
-
-	//$(tPyct).trigger('click'); // клик по пиктограмме макета
-	//$(btn_loadLayout).trigger('click'); // клик по пиктограмме загрузки макета
-	//$('div#tmplPlace >div:first-child >div:first-child').trigger('click'); // клик по активной (первой) колонке
-	
-	<?	$go=true;
-		if ($go){?>	
-	//alert($(tPyct).attr('title'));
-	defineLayoutSchema(event,tPyct);
-	<?	} 
-	endif;?>
+	//alert(multicol);
+	if (defineLayoutSchema(tPyctLast)){ // получить кнопку!
+		if (Layout.Schema!='100'){
+			$(tPyctFirst).trigger('click'); // клик по первой пиктограмме макета
+			if (multicol&&tPyctSecond) // больше 2-х колонок и есть 3-й ряд (что бывает не всегда)
+				$(tPyctSecond).trigger('click'); // клик по второй пиктограмме макета			
+			$(tPyctLast).trigger('click'); // клик по последней пиктограмме макета
+		}
+		$(btn_loadLayout).trigger('click'); // клик по пиктограмме загрузки макета
+		$('div#tmplPlace >div:first-child >div:first-child').trigger('click'); // клик по активной (первой) колонке
+	}
+<?	}?>
   }catch(e){
 	  alert(e.message);
   }
 });
+// получить индекс активной пиктограммы
+function definePyctIndex( multicolType,	// multicolFooter
+						  rowName,		// psFooter		
+						  firstSymbol,	// 0 
+						  secondSymbol,	// s
+						  firstIndex,	// 0
+						  secondIndex	// 1
+						){ 
+	if (multicolType==firstSymbol) 
+		tIndex=firstIndex; // первая пиктограмма в ряду для типа псевдофутера
+	else if (multicolType==secondSymbol)
+		tIndex=secondIndex; // вторая пиктограмма в ряду для типа псевдофутера
+	return $(rowName)[tIndex];
+}
 </script>    
 <?	
 }
