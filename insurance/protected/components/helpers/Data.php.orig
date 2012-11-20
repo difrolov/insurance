@@ -1,14 +1,17 @@
+<<<<<<< HEAD
 <?
-// трабл с кодировкой возник
+=======
+﻿<?
+>>>>>>> GeneratorControllerModified
 class Data {
 	/**
 	  * @package		content
 	  * @subpackage		navigation
-	  * Р—Р°РіСЂСѓР¶Р°РµС‚ РєРѕРЅС‚РµРЅС‚ СЂР°Р·РґРµР»Р°/РїРѕРґСЂР°Р·РґРµР»Р° РёР· Р‘Р” РїРѕ РїРѕР»СѓС‡РµРЅРЅРѕРјСѓ Р°Р»РёР°СЃСѓ
-	  * РўСЂРµР±СѓРµС‚ СѓСЃС‚Р°РЅРѕРІРєРё РїСЂР°РІРёР» РІ UrlManager!
+	  * Загружает контент раздела/подраздела из БД по полученному алиасу
+	  * Требует установки правил в UrlManager!
 	  */
-	function getDataByAlias( $default_alias, // РіР»Р°РІРЅС‹Р№ СЂР°Р·РґРµР». РўРѕ, С‡С‚Рѕ РІ Р‘Р” СЃ parent_id -1/-2
-							 $alias=false // alias РїРѕРґСЂР°Р·РґРµР»Р°
+	function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
+							 $alias=false // alias подраздела
 						   ){
 		if (!$alias) {
 			$alias=$default_alias;	
@@ -23,12 +26,15 @@ class Data {
 	/*
 	 *	@package		content
 	 *	@subpackage		metadata
-	 *	Р—Р°РіСЂСѓР·РёС‚СЊ РјР°РєРµС‚ РїРѕРґСЂР°Р·РґРµР»Р°, СЂР°Р·РјРµСЃС‚РёС‚СЊ РґР°РЅРЅС‹Рµ Рё РІС‹РґР°С‚СЊ РІ HTML
+<<<<<<< HEAD
+	 *	Загрузить макет подраздела, разместить данные и выдать в HTML
+=======
+>>>>>>> GeneratorControllerModified
 	 */
 	function setPageData($this_obj, $section_data, $test=false){
-		// РіРµРЅРµСЂРёСЂСѓРµС‚ Рё СЂР°Р·РјРµС‰Р°РµС‚ title СЃС‚СЂР°РЅРёС†С‹:
+		// генерирует и размещает title страницы:
 		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
-		// РіРµРЅРµСЂРёСЂСѓРµС‚ Рё СЂР°Р·РјРµС‰Р°РµС‚ РЅР°Р·РІР°РЅРёРµ СЃС‚СЂР°РЅРёС†С‹ РІ С†РµРїРѕС‡РєРµ breadcrumbs:
+		// генерирует и размещает название страницы в цепочке breadcrumbs:
 		$breadcrumbs=array();
 		if ($section_data->parent_id>0)	{	
 			$parentName=InsurInsuranceObject::model()->find(array(
@@ -43,21 +49,22 @@ class Data {
 			$this_obj->breadcrumbs=array(
 				$section_data->name,
 			);
-		// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ description СЃС‚СЂР°РЅРёС†С‹:
+		// устанавливает description страницы:
 		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
-		// РїСЂРѕРїРёСЃС‹РІР°РµС‚ РїРµСЂРІС‹Р№ Р·Р°РіРѕР»РѕРІРѕРє РЅР° СЃС‚СЂР°РЅРёС†Рµ, СЃСЂР°Р·Сѓ Р¶Рµ РїРѕРґ breadcrumbs.
-		// РµСЃР»Рё Р·Р°РіРѕР»РѕРІРѕРє РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ (РЅРµС‚ РІ Р‘Р”), РїРѕРґСЃС‚Р°РІР»СЏРµС‚ РЅР°Р·РІР°РЅРёРµ СЃС‚СЂР°РЅРёС†С‹:
+		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
+		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
 			$section_data->first_header=$section_data->name;
-	$arrItems=array( 'Рћ РєРѕРјРїР°РЅРёРё',  
-					 'Рћ РєРѕСЂРїРѕСЂР°С†РёРё',  
-					 'Р СѓРєРѕРІРѕРґСЃС‚РІРѕ',  
-					 'Р Р°СЃРєСЂС‹С‚РёРµ РёРЅС„РѕСЂРјР°С†РёРё',  
-					 'РљР»РёРµРЅС‚С‹ РєРѕРјРїР°РЅРёРё',  
-					 'РџР°СЂС‚РЅРµСЂС‹ РєРѕРјРїР°РЅРёРё', 
-					 'РќРѕРІРѕСЃС‚Рё РєРѕРјРїР°РЅРёРё',  
-					 'Р’Р°РєР°РЅСЃРёРё',  
-					 'РљРѕРЅС‚Р°РєС‚С‹');
+<<<<<<< HEAD
+	$arrItems=array( 'О компании',  
+					 'О корпорации',  
+					 'Руководство',  
+					 'Раскрытие информации',  
+					 'Клиенты компании',  
+					 'Партнеры компании', 
+					 'Новости компании',  
+					 'Вакансии',  
+					 'Контакты');
 	$items_data=Yii::app()->db->createCommand("
 	SELECT id, name,  `status` , 
 		IF( parent_id <0, 
@@ -105,19 +112,27 @@ class Data {
     </div>
     <div id="inner_content">
 	<?
-		// СЌС‚Рѕ РѕРЅ - Р·Р°РіРѕР»РѕРІРѕРє :)
+		// это он - заголовок :)
 		echo "<h1>HEADER: ".$section_data->first_header."</h1>";
-		// РµСЃР»Рё С‚РµСЃС‚РёСЂСѓРµРјСЃСЏ:
+=======
+		// это он - заголовок :)
+		echo "<h1>".$section_data->first_header."</h1>";
+>>>>>>> GeneratorControllerModified
+		// если тестируемся:
 		if ($test) {
 			echo "parent_id = ".$section_data->parent_id."<hr>";
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
-		}else{ // Р·Р°РіСЂСѓР·РёС‚СЊ РјР°РєРµС‚
+<<<<<<< HEAD
+		}else{ // загрузить макет
 			
 		}?>
    </div>     
 	<?
+=======
+		}
+>>>>>>> GeneratorControllerModified
 	}
 }
 ?>
