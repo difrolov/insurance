@@ -1,9 +1,9 @@
 <?php
-
 class GeneratorController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
 	protected $groot=NULL;
+	static protected $section_root;
 	
 	function getGeneratorRoot(){
 		if (!$this->groot)
@@ -97,13 +97,16 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		
+			
 		$localdata=false;
-		
+		if (isset($_GET['gtest']))
+			$localdata=$_GET['gtest'];
+
 		// если в режиме тестирования, т.е., данные извлекаются НЕ из запроса:
 		if (!$post=$_POST) {
 			$localdata=true;
 			$post=TestGenerator::$test_post;
+			var_dump("<h1>".__LINE__." \$post:</h1><pre>",$post,"</pre>");
 		}
 		// начало записи в текстовом модуле:	
 		$dText="Текст :: "; // общее
@@ -127,9 +130,8 @@ class GeneratorController extends Controller
 								$header=substr($arrMods[$i],$start,$strlen);
 								$text=substr($arrMods[$i],$finish+1);
 								//1. добавить новую статью в таблицу статей (ПОЛЯ ТАБЛИЦЫ)
-								if ($localdata){
-									$arrMods[$i]=TestGenerator::testCodeOutput1($artId);
-								}else{
+								$drop_saving=false;
+								if(!$drop_saving){
 									// 1. сохранить статью как новую...
 									/************************************
 										Заголовок статьи: $header (см. выше)
@@ -144,9 +146,29 @@ class GeneratorController extends Controller
 									$model_content->status = 1;
 									$model_content->created = date("Y-m-d H:i:s");
 									$model_content->object_id = $post['parent'];
-									$model_content->save();
-
-
+									$model_content->insur_coworkers_id = Yii::app()->user->id;
+									
+									/*var_dump("<h1>user:</h1><pre>",Yii::app()->user,"</pre>");
+									echo "<div class=''>
+										content= ".$model_content->content."<br>
+										name= ".$model_content->name."<br>
+										status= ".$model_content->status."<br>
+										created= ".$model_content->created."<br>
+										object_id= ".$model_content->object_id."<br>
+										insur_coworkers_id= ".$model_content->insur_coworkers_id."<br>
+									</div>";
+									
+									die();*/
+									
+									if(!$model_content->save()){
+										var_dump("<h1>ERROR:</h1><pre>",$model_content->getErrors(),"</pre>");
+										die();
+									}
+									/*if (!){
+										$jenc=json_encode(array("result"=>mysql_error()));				
+										echo $jenc;
+										exit;
+									}*/
 									// 2. получить id сохранённой статьи
 									/************************************
 									
@@ -159,15 +181,30 @@ class GeneratorController extends Controller
 									// вместо заголовка и текста подставляем:
 									// "Текст :: article id: [id_статьи]";
 									$arrMods[$i]=$dTextArtId.$article_id;
-								}							
+								}
+								if ($localdata) {
+									echo "<div class=''>".__LINE__." article_id= ".$article_id." (".gettype($article_id).")<hr>
+									\$arrMods[$i] = ".$arrMods[$i]."<hr>
+									</div>";
+								}
 							}
 						}
 					}
 					if (!strstr($data,"header:"))	
 						$val[$block]=$arrMods; // обратно в строку
+					
+					if ($localdata){
+						echo "<div>\$block = $block</div>arrMods:<br>";
+						var_dump("<pre>",$arrMods,"</pre>");
+					}
 				}
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$val);
 			$post[$key]=$val;
+			
+			if ($localdata&&$key=="blocks"){
+				echo "<div>\$post[$key]:</div>";
+				var_dump("<pre>",$post[$key],"</pre>");
+			}
 		}	
 		// модифицируем массив данных:
 		$parent_id=$post['parent'];
@@ -220,25 +257,93 @@ class GeneratorController extends Controller
 		$model_obj->description = $description;
 		$model_obj->content = serialize($post);
 		$model_obj->save();
-		
+		$section_id=$model_obj->id;
 		
 		if ($localdata){
-			TestGenerator::testCodeOutput3($post);
+			TestGenerator::testCodeOutput3($post,$model_obj->content,__LINE__);
 		}else{
-			$jenc=json_encode(array("result"=>"Подраздел создан!"));				
+			$show_content="RESULT :: ";
+			if (isset($article_id))
+				$show_content.="article_id: ".$article_id.", ";
+			$show_content.="section_id: ".$section_id;
+			self::getParents($section_id);
+			//echo "<hr>all parents: ".self::$section_root;
+			//die();	
+			$jenc=json_encode(array("result"=>self::$section_root));				
 			echo $jenc;
 		}
 	}
-	/*********************************************************/	
-	function getTmplData($section_id){
-		echo "EDIT SECTION id ".$section_id;
+	function getParents($section_id,$child_id=false){
+		$query="SELECT `parent_id` FROM insur_insurance_object
+	WHERE `id` = $section_id";
+		$arr_parent_id=Yii::app()->db->createCommand($query)->queryAll();
+		/* 
+			1) 	getParents(7)
+				section_id = 7
+				parent_id = 6
+				child_id = false
+		
+			2)	getParents(6,7)
+				section_id = 6
+				parent_id = 2
+				child_id = 7
+				section_id = 6/7
+
+			3)	getParents(2,6/7)
+				section_id = 2
+				parent_id = -1
+				child_id = 6/7
+				section_id = 2/6/7
+			
+			4)  getParents(-1,2/6/7)
+				section_id = -1
+				parent_id = 0
+				child_id = 6/7
+				section_id = -1/2/6/7
+				return -1/2/6/7
+		*/
+		if (isset($arr_parent_id[0]))
+			$parent_id=$arr_parent_id[0]['parent_id'];
+		
+		if ($child_id)
+			$section_id.="/".$child_id;
+		
+		if (!isset($parent_id)||$parent_id<0){
+			$arrRoots=explode("/",$section_id);
+			$root=array();
+			for($i=0,$j=count($arrRoots);$i<$j;$i++){
+				$id=$arrRoots[$i];
+				$query="SELECT `alias` FROM insur_insurance_object WHERE `id` = $id";
+				$arr_alias=Yii::app()->db->createCommand($query)->queryAll();
+				$root[]=$arr_alias[0]['alias'];
+			}
+			self::$section_root=implode("/",$root);
+		}else{ // передать родительский id, текущий id
+			self::getParents( (int)$parent_id, // 6
+							  $section_id // 7
+							);
+		}
 	}
 }
-
 //*********************************************************************************
 // для тестирования:
 class TestGenerator{
-	public $test_post=array("Schema"=>"4ss",		
+
+/*
+Schema":"100","blocks":{"1":"Новость|Готовое решение 1"},"parent":"3","name":"Исторический","alias":"historical","title":"Про то, что было","keywords":"история хистори слухи сплетни","description":"страница о славных днях прошлого"}
+*/
+	
+	public static $test_post=array(
+							"Schema" => "100",
+							"blocks"=>array("1" => "Новость|Готовое решение 1|Текст :: Про голых чувагов!^<p>\n\tЗа введение запрета на обнаженку в Сан-Франциско проголосовали 6 из 11 членов наблюдательного совета. А это значит, что больше не будет никаких раздеваний на площадях, улицах, в метро и автобусах одного из главных туристических центров мира.</p>\n"),
+							"parent" => "3",
+							"name" => "Исторический",
+							"alias" => "historical",
+							"title" => "Про то, что было",
+							"keywords" => "история хистори слухи сплетни",
+							"description" => "страница о славных днях прошлого"
+
+					/*"Schema"=>"4ss",		
 					"blocks"=>array(
 						"1"=>"Новость|Текст :: Статеюшка такая!^<p>\n\tПринцип нарушен, что человек, попадающий в другую эпоху, другое время, все равно остается самим собой. Но мне кажется этот прием работает на то, чтобы доказать то, что мы обычно любим говорить, вот если бы я был бы тогда, я бы сделал...</p>\n|Новость",
 						"2"=>"header:Подзаголовок такой подзаголовок!",
@@ -254,25 +359,29 @@ class TestGenerator{
 					"alias"=>"myarticle",
 					"title"=>"Про всякие дела",
 					"keywords"=>"статья мессага",
-					"description"=>"Описание будет позже. Обязательно!"
+					"description"=>"Описание будет позже. Обязательно!"*/
 					);
-	function testCodeOutput1($artId){
-		return $artId." [id добавленной статьи]";
-									echo "<div>
-									<span style='color:red'>1. Добавляем в таблицу данные новой статьи:</div>
-										<div style='border:solid 1px;'>$header</div>
-										<br>
-										<div style='border:solid 1px;'>$text</div>
-											<span style='color:blue'>2. Заменяем запись в текстовом модуле на id новой (только что добавленной) статьи:</span>
-										</div>
-										<div style='border:solid 1px;'>\$arrMods[$i]=".$arrMods[$i]."</div>
-									</div>";
+	
+	function testCodeOutput1($artId,$header,$text){
+		echo "<div>
+		<span style='color:red'>1. Добавляем в таблицу данные новой статьи:</div>
+			<div style='border:solid 1px; background:lightskyblue; padding:10px;'>".$header."</div>
+			<br>
+			<div style='border:solid 1px; background:lightyellow; padding:10px;'>".$text."</div>
+				<span style='color:blue'>2. Заменяем запись в текстовом модуле на id новой (только что добавленной) статьи:</span>
+			</div>
+			<div style='border:solid 1px;'>id добавленной статьи: ".$artId."</div>
+		</div>";
 	}
+	
 	function testCodeOutput2($key,$val){
-		echo "<div><div>$key: $val</div></div>";
+		echo "<div><div>".__LINE__." $key: $val</div></div>";
 	}
-	function testCodeOutput3($post){
-		echo "<h4>Сериализованный массив:</h4>";	
+	
+	function testCodeOutput3($post,$seral_post,$line){
+		echo "<h4>".$line." testCodeOutput3(\$post): Исходный массив:</h4>";	
 		var_dump("<pre>",$post,"</pre>");
+		echo "<hr><h4>".$line." testCodeOutput3(\$post): Сериализованный массив:</h4>";	
+		var_dump("<pre>",$seral_post,"</pre>");
 	}
 }

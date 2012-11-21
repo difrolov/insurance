@@ -54,14 +54,15 @@ $(function(){
 			Layout.title=$('#title').val();
 			Layout.keywords=$('#keywords').val();
 			Layout.description=$('#description').val();
-			alert('action: '+$('#content_save').attr('action')+'\nJSON:\n'+JSON.stringify(Layout)+'\n\n*Проверить радиокнопки\n*Забрать данные из и Layout отослать на ACTION формы с JSON!');
+			alert('action: '+$('#content_save').attr('action'));
 			$.ajax ({
 					type: "POST",
 					url: $('#content_save').attr('action'),
 					dataType: 'json',
 					data: Layout,
 					success: function (data) {
-						alert(data.result); 
+						alert("Подраздел добавлен!");
+						location.href='<?=Yii::app()->request->getBaseUrl(true)?>/'+data.result; 
 					},
 					error: function () {
 						alert("Не удалось отправить данные"); 
