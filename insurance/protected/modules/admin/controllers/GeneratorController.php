@@ -111,11 +111,10 @@ class GeneratorController extends Controller
 		$dTextArtId=$dText.$artId; // вся подстрока для добавленной существующей статьи
 		foreach($post as $key=>$val){
 			if ($key=="blocks"){ // если блоки с модулями
-				
 				foreach($val as $block => $data){ // перебрать каждый блок
 					$arrMods=explode("|",$data); // получить массив модулей
 					if ( strstr($data,$dText) // если в наборе модулей есть начало для текстового блока
-						 && !strstr($data,$dTextArtId) // и нет записи о добавл
+						 && !strstr($data,$dTextArtId) // и нет записи о добавленной существующей статье (article id:)
 					   ){ 
 						for($i=0;$i<count($arrMods);$i++){
 							// повторить условие поиска текста для текущего модуля:
@@ -145,7 +144,7 @@ class GeneratorController extends Controller
 									$model_content->status = 1;
 									$model_content->created = date("Y-m-d H:i:s");
 									$model_content->object_id = $post['parent'];
-									$model->save();
+									$model_content->save();
 
 
 									// 2. получить id сохранённой статьи
@@ -154,7 +153,7 @@ class GeneratorController extends Controller
 										ПРОЦЕДУРА ПОЛУЧЕНИЯ id....
 										на выходе получаем $article_id
 									************************************/
-									$article_id = $model->id;
+									$article_id = $model_content->id;
 									
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:

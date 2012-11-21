@@ -77,12 +77,15 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <div class="container" id="page">
 <?php	
 	HelperAdmin::menuItem();
-	if (Yii::app()->controller->getId()!='generator') : /*
-		if(isset($this->breadcrumbs)):?>
+	$breadcrumbs=$this->breadcrumbs;
+	if(isset($breadcrumbs[1])):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif;*/ ?>
+		)); 
+	endif;
+	//var_dump("<h1>breadcrumbs:</h1><pre>",$breadcrumbs,"</pre>");
+	if (Yii::app()->controller->getId()!='generator') : 
+		 ?>
 	<div class="">
 		<?php
 		
