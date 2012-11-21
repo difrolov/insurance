@@ -2,7 +2,6 @@
 class GeneratorController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
-	protected $groot=NULL;
 	static protected $section_root;
 	
 	function getGeneratorRoot(){
@@ -136,9 +135,7 @@ class GeneratorController extends Controller
 									/************************************
 										Заголовок статьи: $header (см. выше)
 										Текст статьи: $text (см. выше)
-										
 										ПРОЦЕДУРА СОХРАНЕНИЯ....
-									
 									************************************/
 									$model_content = new InsurArticleContent;
 									$model_content->content = $text;
@@ -147,64 +144,25 @@ class GeneratorController extends Controller
 									$model_content->created = date("Y-m-d H:i:s");
 									$model_content->object_id = $post['parent'];
 									$model_content->insur_coworkers_id = Yii::app()->user->id;
-									
-									/*var_dump("<h1>user:</h1><pre>",Yii::app()->user,"</pre>");
-									echo "<div class=''>
-										content= ".$model_content->content."<br>
-										name= ".$model_content->name."<br>
-										status= ".$model_content->status."<br>
-										created= ".$model_content->created."<br>
-										object_id= ".$model_content->object_id."<br>
-										insur_coworkers_id= ".$model_content->insur_coworkers_id."<br>
-									</div>";
-									
-									die();*/
-									
-									if(!$model_content->save()){
-										var_dump("<h1>ERROR:</h1><pre>",$model_content->getErrors(),"</pre>");
-										die();
-									}
-									/*if (!){
-										$jenc=json_encode(array("result"=>mysql_error()));				
-										echo $jenc;
-										exit;
-									}*/
 									// 2. получить id сохранённой статьи
 									/************************************
-									
 										ПРОЦЕДУРА ПОЛУЧЕНИЯ id....
 										на выходе получаем $article_id
 									************************************/
 									$article_id = $model_content->id;
-									
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:
 									// "Текст :: article id: [id_статьи]";
 									$arrMods[$i]=$dTextArtId.$article_id;
-								}
-								if ($localdata) {
-									echo "<div class=''>".__LINE__." article_id= ".$article_id." (".gettype($article_id).")<hr>
-									\$arrMods[$i] = ".$arrMods[$i]."<hr>
-									</div>";
 								}
 							}
 						}
 					}
 					if (!strstr($data,"header:"))	
 						$val[$block]=$arrMods; // обратно в строку
-					
-					if ($localdata){
-						echo "<div>\$block = $block</div>arrMods:<br>";
-						var_dump("<pre>",$arrMods,"</pre>");
-					}
 				}
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$val);
 			$post[$key]=$val;
-			
-			if ($localdata&&$key=="blocks"){
-				echo "<div>\$post[$key]:</div>";
-				var_dump("<pre>",$post[$key],"</pre>");
-			}
 		}	
 		// модифицируем массив данных:
 		$parent_id=$post['parent'];
@@ -222,30 +180,11 @@ class GeneratorController extends Controller
 		unset($post["title"]);
 		unset($post["keywords"]);
 		unset($post["description"]);
-		
 		/************************************/
-
 		// 3. Сохранить подраздел
-		/************************************/
-		
 		/************************************
-		
-		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА....
-
-		insur_insurance_object.parent_id: $parent_id
-
-		insur_insurance_object.name: $name
-
-		insur_insurance_object.alias: $alias
-
-		insur_insurance_object.title: $title
-
-		insur_insurance_object.keywords: $keywords
-
-		insur_insurance_object.description: $description";
-
-		insur_insurance_object.content: serialize($post);
-		
+		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА 
+		(insur_insurance_object)
 		************************************/
 		$model_obj = new InsurInsuranceObject;
 		$model_obj->parent_id = $parent_id;
@@ -262,14 +201,8 @@ class GeneratorController extends Controller
 		if ($localdata){
 			TestGenerator::testCodeOutput3($post,$model_obj->content,__LINE__);
 		}else{
-			$show_content="RESULT :: ";
-			if (isset($article_id))
-				$show_content.="article_id: ".$article_id.", ";
-			$show_content.="section_id: ".$section_id;
-			self::getParents($section_id);
-			//echo "<hr>all parents: ".self::$section_root;
-			//die();	
-			$jenc=json_encode(array("result"=>self::$section_root));				
+			self::getParents($section_id); // get URL path
+			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".self::$section_root));				
 			echo $jenc;
 		}
 	}
@@ -277,8 +210,7 @@ class GeneratorController extends Controller
 		$query="SELECT `parent_id` FROM insur_insurance_object
 	WHERE `id` = $section_id";
 		$arr_parent_id=Yii::app()->db->createCommand($query)->queryAll();
-		/* 
-			1) 	getParents(7)
+		/* 	1) 	getParents(7)
 				section_id = 7
 				parent_id = 6
 				child_id = false
@@ -328,10 +260,6 @@ class GeneratorController extends Controller
 //*********************************************************************************
 // для тестирования:
 class TestGenerator{
-
-/*
-Schema":"100","blocks":{"1":"Новость|Готовое решение 1"},"parent":"3","name":"Исторический","alias":"historical","title":"Про то, что было","keywords":"история хистори слухи сплетни","description":"страница о славных днях прошлого"}
-*/
 	
 	public static $test_post=array(
 							"Schema" => "100",

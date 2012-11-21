@@ -1,4 +1,4 @@
-﻿<?	$url=$_GET['base_url'];
+<?	$url=$_GET['base_url'];
 	$test=(isset($_GET['test']))? $_GET['test']:false;
 if (isset($dwshow)){?><script><? }
 ob_start();?>

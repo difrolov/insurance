@@ -1,4 +1,4 @@
-﻿<?	if (isset($dwshow)){?><script><? }
+<?	if (isset($dwshow)){?><script><? }
 ob_start();?>
 $(document).ready(	function() {
     $('.wclose').click(

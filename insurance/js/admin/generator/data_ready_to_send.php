@@ -1,4 +1,4 @@
-﻿<?	if (isset($dwshow)){?><script><? }
+<?	if (isset($dwshow)){?><script><? }
 ob_start();?>
 $(function(){
   try{
@@ -62,7 +62,7 @@ $(function(){
 					data: Layout,
 					success: function (data) {
 						alert("Подраздел добавлен!");
-						location.href='<?=Yii::app()->request->getBaseUrl(true)?>/'+data.result; 
+						location.href=data.result; 
 					},
 					error: function () {
 						alert("Не удалось отправить данные"); 

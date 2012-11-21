@@ -98,7 +98,21 @@ function addArticleIdOrTextToModule(artID,text,header){
   }
 }
 // добавить текст полученной ajax'ом статьи в поле редактора
-function addArticleTextToEditor(artBox,artID){с}
+function addArticleTextToEditor(artBox,artID){
+	//alert();
+	if (artBox) { // получим html контейнера:
+		
+		//alert('artBox: '+artBox);	
+		if(window.textTarget=='ready') // добавляли ID существующей статьи
+			addArticleIdOrTextToModule(artID);	
+		else // если уже размещали заголовок и текст статьи в области предпросмотра, выставим флаг:
+			addTextIntoEditor('preview');
+	}
+	// загрузим статью ajax'ом, после чего добавим её в поле редактора:
+	else if (artID) getArticleTextFromDB(false,artID);
+	// закрыть окна предпросмотра текста и таблицы статей:
+	hideArticlesStuff(true); // окно редактора оставляем открытым
+}
 // добавить текст в поле редактора
 function addTextIntoEditor(content){
 	var aHeader,aText;
