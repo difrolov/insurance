@@ -216,6 +216,10 @@ div#page{
 	width:980px;
 	/*background:#FFFF00;*/
 }
+div#page div.breadcrumbs{
+	margin-top: -49px;
+	text-align: left;
+}
 div#search{
 	height:27px;
 	border:solid 1px #CCC;
