@@ -3,6 +3,7 @@ class GeneratorController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
 	static protected $section_root;
+	protected $groot=NULL; // see getGeneratorRoot()
 	
 	function getGeneratorRoot(){
 		if (!$this->groot)
