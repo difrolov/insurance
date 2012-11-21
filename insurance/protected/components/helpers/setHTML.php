@@ -499,5 +499,103 @@ class setHTML{
     </div>
     <div class="clear">&nbsp;</div>
 <?	}
+/**
+ * Описать структуру всех разделов и подразделов
+ * @package
+ * @subpackage
+ */
+	function walkThroughSections($params=false){
+		if(!$params) $params=array('div');
+		$menuItems=self::getMainMenuItems(); // получить главное меню
+		//var_dump("<h1>menuItems:</h1><pre>",$menuItems,"</pre>");
+		foreach($menuItems as $parent_id=>$parent_data){
+			// построить HTML для самого верхнего уровня:
+			self::genPartHTML($params,true);
+			
+			echo "<div>".$parent_data['alias']." :: ".$parent_data['text']."</div><hr>";
+			// если не главная (можно подставить любой другой разде) - сгенерировать все вложенные уровни:
+			if ($parent_data['alias']!='site/index') {
+				// получить ВСЕ вложенные уровни для текущего верхнего уровня:
+				$subMenuItems=self::getSubMenuItems($parent_id,NULL);
+				self::buildSections( 
+						// все вложенные подразделы через рекурсию:
+						$subMenuItems, 
+						// alias текущего раздела, передаваемый дочернему:
+						$parent_data['alias'],
+						// означает отсутствие родительского раздела: 
+						false, 
+						// назначенные теги и их атрибуты для дочерних элементов 
+						// (в порядке вложенности - от внешних ко внутренним):
+						array( array('div',
+									array('class'=>'unknown', 
+										  'style'=>'padding:6px; color: green !important;'
+										  )
+									 ), 
+								array('label'),
+								array('span',
+									array('class'=>'unknown', 
+										  'style'=>'padding:6px; color: brown;'
+										 )
+									 )
+							  )
+					   );
+			}
+			// закрыть HTML для самого верхнего уровня:
+			self::genPartHTML($params);
+		}
+	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	function buildSections( $subMenuItems,
+							$top_parent,
+							$next_parent=false,
+							$offsetTag
+						  ){
+		if (is_array($subMenuItems)){
+			foreach($subMenuItems as $alias=>$text):
+				if (is_array($text)){
+					self::buildSections( $text,
+										 $top_parent,
+										 $alias,
+										 $offsetTag
+									   );
+				}elseif ($alias!="parent_alias"){
+					// предыдущий уровень внутри главного меню
+					if ($next_parent)
+						foreach($offsetTag as $i=> $params)
+							if($i) self::genPartHTML($params,true);
+					
+					if(!$next_parent) self::genPartHTML($offsetTag[0],true);
+					
+					echo $text;
+					
+					if(!$next_parent) self::genPartHTML($offsetTag[0]);
+
+					if ($next_parent)
+						foreach($offsetTag as $i=> $params)
+							if($i) self::genPartHTML($params); 
+				}
+			endforeach;
+		}
+	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	function genPartHTML($tag,$stat=false){
+		if($stat){
+			echo "<".$tag[0];
+				if (isset($tag[1]))
+					foreach($tag[1] as $attr => $params)
+						echo " ".$attr.'="'.$params.'"';
+			echo ">";
+		}else
+			echo "</".$tag[0].">";
+	}
+	
 }
 ?>

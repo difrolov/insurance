@@ -5,7 +5,9 @@ $groot=$this->groot; // директория Генератора
 $includes=$groot.'includes/'; // директория подключаемых файлов
 // вывести блок контроля Layout в тестовом режиме:
 require_once $includes.'test_control.php';
-//$this->breadcrumbs=array($this->module->id,);?>
+//$this->breadcrumbs=array($this->module->id,);
+echo "<hr>walkThroughSections<hr>";
+setHTML::walkThroughSections(array('div',array('align'=>'left','style'=>'background: lightyellow; border:solid 2px #EEE; margin-bottom:6px; padding:10px;')));?>
 <div id="article_preview_text">
 </div>
 <div align="left">
