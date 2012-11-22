@@ -36,6 +36,11 @@
         array(
             'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
             'htmlOptions'=>array('style'=>'width: 50px'),
+        	'buttons'=>array(
+        			'update' => array(
+        					'url'=>'Yii::app()->controller->createUrl("/admin/generator/edit/$data->id")',
+        			),
+        	),
         ),
     ),
 )); ?>
