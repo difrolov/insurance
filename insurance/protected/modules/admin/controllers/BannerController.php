@@ -16,7 +16,10 @@ class BannerController extends Controller{
 		$model = new InsurBanners();
 		$gridDataProvider_out = $model->search('place="outside"');
 		$gridDataProvider_in = $model->search('place="inside"');
-		$this->render('getbanner',array('in'=>$gridDataProvider_in,'out'=>$gridDataProvider_out));
+		$out_query = InsurBanners::model()->findAll(array('condition'=>'place="outside"'));
+		$in_query = InsurBanners::model()->findAll(array('condition'=>'place="inside"'));
+		$this->render('getbanner',array('in'=>$gridDataProvider_in,'out'=>$gridDataProvider_out,
+										'out_query'=>$out_query,'in_query'=>$in_query));
 	}
 	public function actionAjaxUpdate(){
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){

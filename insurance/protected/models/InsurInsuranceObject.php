@@ -47,11 +47,11 @@ class InsurInsuranceObject extends CActiveRecord
 			array('name', 'required'),
 			array('status, parent_id, category_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>100),
-			array('action', 'length', 'max'=>255),
+			array('alias', 'length', 'max'=>255),
 			array('date_changes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, status, parent_id, action, category_id, date_changes', 'safe', 'on'=>'search'),
+			array('id, name, status, parent_id, alias, category_id, date_changes', 'safe', 'on'=>'search'),
 		);
 	}
 
