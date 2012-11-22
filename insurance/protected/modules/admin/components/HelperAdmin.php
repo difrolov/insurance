@@ -165,6 +165,11 @@ ORDER BY name, parent_name';
 		public static function createStatusBaner($data){
 			return ($data?'<span class="out_'.$data.'"> Активен </span>':'<span class="out_'.$data.'"> Отключен </span>');
 		}
+		public static function createStatusContent($data,$id){
+			$a="<a onclick='_object.updateContentStatus(".$id.");return false;' href='#'".
+			"class='contStatus_".$id."' >".($data?'Активен':'Отключен')."</a>";
+			return $a;
+		}
 		public static function dateToRender($fromDate)
 		{
 			if ($fromDate == null) return null;
