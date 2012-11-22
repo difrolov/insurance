@@ -1,15 +1,28 @@
 <div>Статьи</div>
+<br class="clear">
+<?php $this->widget('bootstrap.widgets.TbButton', array(
+	    'label'=>"Добавить статью",
+	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	    'size'=>'small', // null, 'large', 'small' or 'mini'
+	    'htmlOptions'=>array(
+	    		'data-toggle'=>"modal",
+	    		'data-target'=>"#myModal"
+	    		),
+)); ?>
+<br class="clear">
 <?php
 if (isset($gridDataProvider)){
  $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider,
-    'template'=>"{items}",
+    'template'=>"{items}{pager}",
+ 	'filter'=>$model,
     'columns'=>array(
        	array('name'=>'id', 'header'=>'#'),
         array('name'=>'name', 'header'=>'Наименование'),
-       /*  array('name'=>'created', 'header'=>'Дата изменения'),
-    	array('name'=>'status', 'header'=>'Видимость'), */
+        array('name'=>'status','header'=>'Статус','type'=>'html',
+        		'value'=>'HelperAdmin::createStatusContent($data->status,$data->id)'),
+    	/*array('name'=>'status', 'header'=>'Видимость'), */
 
         array(
             'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
@@ -28,15 +41,7 @@ if (isset($gridDataProvider)){
 ));
 } ?>
 <br class="clear">
-<?php $this->widget('bootstrap.widgets.TbButton', array(
-	    'label'=>"Добавить статью",
-	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-	    'size'=>'small', // null, 'large', 'small' or 'mini'
-	    'htmlOptions'=>array(
-	    		'data-toggle'=>"modal",
-	    		'data-target'=>"#myModal"
-	    		),
-)); ?>
+
 
 <?php $this->beginWidget('application.extensions.bootstrap.widgets.TbModal',
 			array('id'=>'myModal',

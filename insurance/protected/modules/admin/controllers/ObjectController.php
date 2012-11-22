@@ -4,7 +4,7 @@ class ObjectController extends Controller
 	public $layout = "application.modules.admin.views.layouts.admin";
 
 	public function actionIndex()
-	{	
+	{
 
 		$this->render('index');
 	}
@@ -30,12 +30,46 @@ class ObjectController extends Controller
 	}
 
 	//отображаем статьи
-	public function actionUpdate(){
-		
+	public function actionGetContent(){
+
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		$model = new InsurArticleContent();
+		//фильтр по таблице
+		if(isset($_GET['InsurArticleContent'])){
+			if(isset($_GET['InsurArticleContent']['id']) && $_GET['InsurArticleContent']['id']!=""){
+				$gridDataProvider = $model->search("id=".$_GET['InsurArticleContent']['id']);
+			}elseif(isset($_GET['InsurArticleContent']['name']) && $_GET['InsurArticleContent']['name']!=""){
+				$gridDataProvider = $model->search("name='".$_GET['InsurArticleContent']['name']."'");
+			}
+			return $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
+				    'type'=>'striped bordered condensed',
+				    'dataProvider'=>$gridDataProvider,
+				    'template'=>"{items}{pager}",
+				 	'filter'=>$model,
+				    'columns'=>array(
+				       	array('name'=>'id', 'header'=>'#'),
+				        array('name'=>'name', 'header'=>'Наименование'),
+				       /*  array('name'=>'created', 'header'=>'Дата изменения'),
+				    	array('name'=>'status', 'header'=>'Видимость'), */
+
+				        array(
+				            'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
+				            'htmlOptions'=>array('style'=>'width: 50px'),
+				        	'template'=>'{update}{delete}',
+				        	'buttons'=>array(
+				        				'update' => array(
+				        						'url'=>'Yii::app()->createUrl("admin/object/edit", array("id"=>$data[\'id\']))',
+				        				),
+				        				'delete' => array(
+				        						'url'=>'Yii::app()->createUrl("admin/object/delete", array("id"=>$data[\'id\']))',
+				        				),
+				        		),
+				        ),
+				    ),
+				));
+		}
 		if(isset($_GET['id'])){
 			//Достаем контент страницы
 			$content = InsurArticleContent::model()->findAll(array('condition'=>"object_id=".$_GET['id']));
@@ -44,9 +78,10 @@ class ObjectController extends Controller
 			}
 			//таблица для отображения
 			$gridDataProvider = $model->search('object_id='.$_GET['id']);
-			$this->render('update',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
+			$this->render('GetContent',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
 		}else{
-			$this->render('update',array('model'=>$model));
+			$gridDataProvider = $model->search();
+			$this->render('GetContent',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
 		}
 	}
 
