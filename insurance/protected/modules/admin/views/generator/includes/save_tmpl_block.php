@@ -7,12 +7,9 @@
           </span>
         </label>
 	<?	$items=HelperAdmin::menuItem();
-		var_dump("<h1>items:</h1><pre>",$items,"</pre>");
-		
 		HelperAdmin::makeArrayForSelect($items);
 		$MainSections=HelperAdmin::$MainMenu;
 		$SubSections=HelperAdmin::$SubMenu;
-		var_dump("<h1>SubSections:</h1><pre>",$SubSections,"</pre>");
 		foreach($MainSections as $section_id=>$section_name){?>
         <label>
           <span>

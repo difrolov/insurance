@@ -74,7 +74,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	</div>
 	<!-- header -->
 
-<div class="container" id="page">
+<div align="left" class="container" id="page">
 <?php	
 	HelperAdmin::menuItem();
 	$breadcrumbs=$this->breadcrumbs;

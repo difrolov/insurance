@@ -231,8 +231,8 @@ li.command a.command{
 	color:#08c;
 }
 li.active.command a.command:hover{
-	color:#06c;
-	text-decoration:underline;
+	color:#FFF;
+	text-decoration:none;
 }
 li.active.command a.command span{
 	background:url(img/glyphicons-halflings.png) 0 -95px !important;

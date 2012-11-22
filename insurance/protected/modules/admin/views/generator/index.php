@@ -7,7 +7,7 @@ $includes=$groot.'includes/'; // директория подключаемых �
 require_once $includes.'test_control.php';
 //$this->breadcrumbs=array($this->module->id,);
 echo "<hr>walkThroughSections<hr>";
-setHTML::walkThroughSections(array('div',array('align'=>'left','style'=>'background: lightyellow; border:solid 2px #EEE; margin-bottom:6px; padding:10px;')));?>
+setHTML::walkThroughSections();?>
 <div id="article_preview_text">
 </div>
 <div align="left">
