@@ -4,6 +4,7 @@ class setHTML{
 	protected static $childrenWrapperTag;
 	static $arrMenuWidget;
 	static $arrMenuWidgetSecond;
+	
 /**
  * @package HTML
  * @subpackage navigation
@@ -750,6 +751,45 @@ class setHTML{
 			echo ">";
 		}elseif(!strpos($tag[0],"unclosed:"))
 			echo "</".$tag[0].">";
+	}
+	
+	function getObjectsRecursive($parent_id=false){
+		static $result=array();
+		if (!$parent_id) $parent_id='-1';
+		else $xtra_id=$parent_id;
+		$query="SELECT id,name,parent_id,alias,
+    (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
+      WHERE parent_id = t1.id 
+		AND `status` = 1
+    ) AS children 
+FROM insur_insurance_object as t1
+WHERE parent_id = ".$parent_id." and `status` = 1
+order by id ASC";
+		$res=Yii::app()->db->createCommand($query)->queryAll();
+		// Главная
+		// О компании
+		// ...
+			// Новости
+			// О корпорации
+			// ...
+		for($i=0,$j=count($res);$i<$j;$i++){
+			$section=$res[$i];
+			$result[$section['id']]=array(
+							'alias'=>$section['alias'],
+							'name'=>$section['name'],
+							'parent_id'=>$section['parent_id']
+						);
+			if((int)$section['children']>0){
+				for($k=0,$m=$section['children'];$k<$m;$k++){
+					self::getObjectsRecursive((int)$section['id']);
+				}
+			}
+			if (isset($xtra_id)) {
+				$result[$xtra_id]['children'][$section['id']]=$result[$section['id']];
+				unset($result[$section['id']]);
+			}
+		}
+		return $result;
 	}
 }
 ?>
