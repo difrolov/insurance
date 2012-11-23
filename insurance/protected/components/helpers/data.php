@@ -1,6 +1,5 @@
 <?
 class Data {
-
 /**
   * @package		content
   * @subpackage		navigation

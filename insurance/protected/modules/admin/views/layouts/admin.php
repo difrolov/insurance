@@ -59,7 +59,13 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <body>
 	<div id="header">
 		<div id="main_submenu">
-		<?php $this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
+	<?php	// ПОЛУЧИМ ВСЕ РАЗДЕЛЫ САЙТА:
+			// Начиная с главных:
+			$allObjectsArray=Data::getObjectsRecursive();
+			// Те, у которых parent_id = -2:
+			$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
+						
+			$this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
 		    'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(

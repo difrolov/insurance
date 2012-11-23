@@ -4,7 +4,8 @@
   <div align="left" class="container" id="page">
     <div id="fit_height"<? if(isset($_GET['test_bg'])){?> style="background:url(<?=Yii::app()->request->getBaseUrl(true)?>/_docs/sources/BODY.gif) -20px 0 no-repeat;"<? }?>>
 	  <div id="header">
-	<?	// /components/helpers
+	<?	// Data::getObjectsRecursive();
+		// /components/helpers
 		setHTML::buildLogosBlock();
 
 		setHTML::buildContactsAndSearchBlock();

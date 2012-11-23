@@ -108,15 +108,9 @@ class setHTML{
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
         
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	$subMenuItems=self::getSubMenuItems($parent_id,NULL);
-		if($test) { echo "parent_alias=$parent_alias"; var_dump("<h4>".__LINE__.": subMenuItems:</h4><pre>",$subMenuItems,"</pre>");}
-		if (!isset($subMenuItems)){
-			$j=rand(1,8);
-			for ($i=0;$i<$j;$i++) {
-				$subMenuItems[$i]['text']="Текст меню ".$i;
-				$subMenuItems[$i]['alias']="url_alias";
-			}
-		}
+	<?	$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
+								  		  		$parent_id);
+		//if($test) if ($parent_id) { echo "<div>parent_alias=$parent_alias</div>parent_id (".gettype($parent_id).") = $parent_id<hr>"; var_dump("<h4>".__LINE__.": subMenuItems:</h4><pre>",$subMenuItems,"</pre>");}
 		ob_start();
 		self::buildSubmenuLinks($subMenuItems,$parent_alias);
 		$linksHTML=ob_get_contents();
@@ -361,19 +355,16 @@ class setHTML{
 	function buildSubmenuLinks( $subMenuItems,
 								$top_parent,
 								$next_parent=false
-							  ){
+							  ){	
 		if (is_array($subMenuItems)){
 			foreach($subMenuItems as $alias_value=>$link_text):
 				if (is_array($link_text)){
 					self::buildSubmenuLinks($link_text,$top_parent,$alias_value);
-				}elseif ( $alias_value!="parent_alias"
-						  && $alias_value!="id"
-						  && $alias_value!="alias"
-						){
-				  	if ($next_parent) { // предыдущий уровень внутри главного меню
+				}elseif ($alias_value=="name"){
+					$level=$subMenuItems['level'];
+				  	if ($level>1) { // предыдущий уровень внутри главного меню
 					  ?><blockquote><? // сформировать отступ
 					}?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent;
-					if ($next_parent) echo '/'.$subMenuItems['parent_alias'];
 					echo '/'.$alias_value;?>"><?=$link_text?></a><?	
 				  if ($next_parent) {?></blockquote><? }
 				}
@@ -394,70 +385,6 @@ class setHTML{
 											);
 		}
 		return $menuItems;
-	}
-/**
- * @package		HTML
- * @subpackage		menu
- * выпадающее меню, как для mainmenu, submenu
- */
-	function getSubMenuItems( 
-							  	  $parent_id, // нужен для формирования запроса к БД
-							  	  $parent=false,
-							  	  $subMenuItems=false
-								){ 
-		$submenus=self::getSubmenu($parent_id);
-		if (isset($_GET['test'])) {
-			if ($parent===NULL) 
-				echo "<h4 style='color:red;font-weight:100;'>Parent id is <b>$parent_id</b></h4>";
-			
-			else echo "<h4 style='color:brown;font-weight:100;'>Parent id is <b>$parent_id</b><br>parent key is <b>$parent</b></h4>";
-		}
-		//var_dump("<h1>submenus:</h1><pre>",$submenus,"</pre>");
-		$i=0;
-		foreach($submenus as $submenu_data_array){
-			//echo "<div>\$submenu_data_array id = <b>".$submenu_data_array['id']."</b></div>";
-			//if (!$parent){
-			$submenu_alias=$submenu_data_array['alias'];
-			$submenu_id=$submenu_data_array['id'];
-			$submenu_name=$submenu_data_array['name'];
-			if ((int)$submenu_data_array['child_count']){
-				$subMenuItems[$submenu_alias]=array('id'=>$submenu_id, 'name'=>$submenu_name);
-				//$subMenuItems[$submenu_alias]['children']=array();
-				//var_dump("<h4>submenu_data_array:</h4><pre>",$submenu_data_array,"</pre>");
-				/*
-				array(4) {
-				  ["id"]=>
-				  string(1) "3"
-				  ["name"]=>
-				  string(14) "История"
-				  ["alias"]=>
-				  string(8) "istorija"
-				  ["child_count"]=>
-				  string(1) "2"
-				}*/
-				//$subMenuItems[$submenu_data_array['id']]=$submenu_data_array['id']; 
-				//$submenus['myID']='myid';
-				//$subMenuItems[$submenu_data_array['id']]=array('parent_alias'=>$submenu_data_array['alias']);
-			  	if (isset($_GET['test'])) echo "<div class='testBlock'>Has children<br>";
-				self::getSubMenuItems( // для передачи запросу id раздела
-									   // в качестве родительского:
-									   $submenu_data_array['id'],  
-									   $submenu_data_array['alias'], // parent alias
-									   &$subMenuItems[$submenu_data_array['alias']]
-									 );			
-			  if (isset($_GET['test'])) echo "</div>";
-			}else{
-				if ($parent){ // alias
-					$subMenuItems['children'][$submenu_data_array['alias']]=array(
-													'id'=>$submenu_data_array['id'],
-													'name'=>$submenu_data_array['name']
-											);
-				}
-			}
-			$i++;
-		}	
-		
-		return $subMenuItems; 
 	}
 /**
   *

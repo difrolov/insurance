@@ -18,7 +18,6 @@ class AdminModule extends CWebModule
         	'admin.views.*',
 
         ));
-
 	}
 
 	public function beforeControllerAction($controller, $action)
