@@ -360,9 +360,9 @@ class setHTML{
 			foreach($subMenuItems as $alias_value=>$link_text):
 				if (is_array($link_text)){ 
 					$level=(isset($link_text['level']))? $link_text['level']:0;
-					if ($level>1) echo "<blockquote>";
+					if ($level>1){?><blockquote><? }
 					self::buildSubmenuLinks($link_text,$top_parent,$alias_value);
-					if ($level>1) echo "</blockquote>";
+					if ($level>1) {?></blockquote><? }
 				}elseif ($alias_value=="name"){?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent.'/'.$subMenuItems['alias'];?>"><?=$link_text?></a><?
 				}
 			endforeach;
