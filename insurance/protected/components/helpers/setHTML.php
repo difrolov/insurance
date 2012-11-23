@@ -110,7 +110,6 @@ class setHTML{
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
 	<?	$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		//if($test) if ($parent_id) { echo "<div>parent_alias=$parent_alias</div>parent_id (".gettype($parent_id).") = $parent_id<hr>"; var_dump("<h4>".__LINE__.": subMenuItems:</h4><pre>",$subMenuItems,"</pre>");}
 		ob_start();
 		self::buildSubmenuLinks($subMenuItems,$parent_alias);
 		$linksHTML=ob_get_contents();
@@ -382,19 +381,6 @@ class setHTML{
 											);
 		}
 		return $menuItems;
-	}
-/**
-  *
-  */	
-	function getSubmenu($parent_id){
-		$query="SELECT id, name, alias, (
-					SELECT COUNT(*) FROM insur_insurance_object
-					WHERE parent_id = t.id
-				) as child_count
-			FROM insur_insurance_object AS t
-			WHERE parent_id = ".$parent_id." AND `status` = 1";
-		if (isset($_GET['qtest'])) echo "<pre style='color:green'>".__LINE__."<BR>".$query."</pre>";
-		return Yii::app()->db->createCommand($query)->queryAll();
 	}
 /**
  * @package		interface
