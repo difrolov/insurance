@@ -1,35 +1,22 @@
+<?	
+if (!isset($allObjectsArray)){ // ...
+	$allObjectsArray=Data::getObjectsRecursive();	
+}	
+if (!isset($allObjectsSecondArray)){ // ...
+	$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
+	//var_dump("<h1>allObjectsSecondArray:</h1><pre>",$allObjectsSecondArray,"</pre>");	
+}?>
     <h5 id="pick_out_section" class="link" style="display:<?="none"?>;">Выберите родительский раздел для создаваемой страницы</h5>
-	<div id="<?="save_tmpl_block"?>">
+	<div id="<?="save_tmpl_block"?>"<? if(isset($_GET['test'])){?> style="display:block;"<? }?>>
     	<div id="sections_radios">
         <label>
           <span>
         	<input type="radio" name="menu" id="none" value="radio"><b id="no_parent">Без родительского раздела</b>
           </span>
         </label>
-	<?	$items=HelperAdmin::menuItem();
-		HelperAdmin::makeArrayForSelect($items);
-		$MainSections=HelperAdmin::$MainMenu;
-		$SubSections=HelperAdmin::$SubMenu;
-		foreach($MainSections as $section_id=>$section_name){?>
-        <label>
-          <span>
-        	<input name="menu" id="menu_<?=$section_id?>" type="radio" value="<?=$section_id?>"><b><?=$section_name?></b>
-          </span>
-        </label>
-		<?	if (isset($SubSections[$section_id])) {?>
-        <div>
-        	<blockquote>
-		<?		foreach ($SubSections[$section_id] as $id => $page){?>
-            	<label>
-                  <span>
-					<input name="menu" id="submenu_<?=$id?>" type="radio" value="<?=$id?>"><?=$page?>
-                  </span>
-                </label>
-			<?	}?>
-        	</blockquote>
-        </div>
-		<?	}?>
-	<?	}?>
+	<?	HelperAdmin::makeSectionsMap($allObjectsArray);?>
+    	<hr>
+	<?	HelperAdmin::makeSectionsMap($allObjectsSecondArray);?>
     	</div>
         <hr>
         <div id="subsection_ids">

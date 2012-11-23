@@ -56,15 +56,9 @@ class Data {
     ) AS children 
 FROM insur_insurance_object as t1
 WHERE parent_id = ".$parent_id." and `status` = 1
-order by id ASC"; //echo $query; //die();
+order by id ASC"; 
 		$res=Yii::app()->db->createCommand($query)->queryAll();
 		$arrFields=explode(",",$fields); // поля с табличными данными
-		// Главная
-		// О компании
-		// ...
-			// Новости
-			// О корпорации
-			// ...
 		// присвоить данные полученным объектам:
 		for($i=0,$j=count($res);$i<$j;$i++){
 			$section_data=$res[$i]; // текущая запись из БД
@@ -72,12 +66,15 @@ order by id ASC"; //echo $query; //die();
 				$arrRes[$arrFields[$y]]=$section_data[$arrFields[$y]];
 			$arrRes['level']=$level; // добавляем в массив данных сведения об иерархическом уровне текущего подраздела (может пригодиться при назначении HTML-атрибутов и т.п.)
 			$result[$section_data['id']]=$arrRes; // сохраняем данные таблицы для подраздела в массиве
-			if((int)$section_data['children']>0){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
+			if((int)$section_data['children']){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
+				if($parent_id==-2) echo "<h1 style='color:red'>children : ".$section_data['children']."</h1><hr>";
 				for($k=0,$m=$section_data['children'];$k<$m;$k++){
 					self::getObjectsRecursive($fields,(int)$section_data['id'],$level,&$result);
 				}
 			}
-			if (isset($xtra_id)) { // если получили id родительского (под)раздела 
+			if ( isset($xtra_id)
+				 && $xtra_id>=0 // исключить разделы самого верхнего уровня (-1, -2)
+			   ) { // если получили id родительского (под)раздела 
 				// скопировать данные текущего подраздела в массив родительского подраздела 
 				$result[$xtra_id]['children'][$section_data['id']]=$result[$section_data['id']];
 				// удалить исходные данные текущего подраздела, т.к. копия уже размещена в родительском:
