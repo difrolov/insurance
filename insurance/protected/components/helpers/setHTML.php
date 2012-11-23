@@ -365,7 +365,7 @@ class setHTML{
 				  	if ($level>1) { // предыдущий уровень внутри главного меню
 					  ?><blockquote><? // сформировать отступ
 					}?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent;
-					echo '/'.$alias_value;?>"><?=$link_text?></a><?	
+					echo '/'.$subMenuItems['alias'];?>"><?=$link_text?></a><?	
 				  if ($next_parent) {?></blockquote><? }
 				}
 			endforeach;
