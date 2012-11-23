@@ -358,15 +358,12 @@ class setHTML{
 							  ){	
 		if (is_array($subMenuItems)){
 			foreach($subMenuItems as $alias_value=>$link_text):
-				if (is_array($link_text)){
+				if (is_array($link_text)){ 
+					$level=(isset($link_text['level']))? $link_text['level']:0;
+					if ($level>1) echo "<blockquote>";
 					self::buildSubmenuLinks($link_text,$top_parent,$alias_value);
-				}elseif ($alias_value=="name"){
-					$level=$subMenuItems['level'];
-				  	if ($level>1) { // предыдущий уровень внутри главного меню
-					  ?><blockquote><? // сформировать отступ
-					}?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent;
-					echo '/'.$subMenuItems['alias'];?>"><?=$link_text?></a><?	
-				  if ($next_parent) {?></blockquote><? }
+					if ($level>1) echo "</blockquote>";
+				}elseif ($alias_value=="name"){?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent.'/'.$subMenuItems['alias'];?>"><?=$link_text?></a><?
 				}
 			endforeach;
 		}
