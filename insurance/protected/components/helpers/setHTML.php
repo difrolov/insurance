@@ -1,7 +1,6 @@
 <?
 class setHTML{
 	protected static $arrAvoidSubmenu=array('site/index');
-	protected static $childrenWrapperTag;
 	static $arrMenuWidget;
 	static $arrMenuWidgetSecond;
 	
@@ -421,9 +420,6 @@ class setHTML{
 			$submenu_alias=$submenu_data_array['alias'];
 			$submenu_id=$submenu_data_array['id'];
 			$submenu_name=$submenu_data_array['name'];
-			
-				//$submenus[$i]['MY']='MYDATA';
-			//}
 			if ((int)$submenu_data_array['child_count']){
 				$subMenuItems[$submenu_alias]=array('id'=>$submenu_id, 'name'=>$submenu_name);
 				//$subMenuItems[$submenu_alias]['children']=array();
@@ -451,18 +447,11 @@ class setHTML{
 									 );			
 			  if (isset($_GET['test'])) echo "</div>";
 			}else{
-				// parent_id 		= 	$submenu_data_array['id']
-				// parent 			=	$submenu_data_array['alias']
-				// subMenuItems 	=	&$subMenuItems[$submenu_data_array['alias']]
 				if ($parent){ // alias
-						// 		  $parent=["istorija"]["istorija"]
-					//$subMenuItems[$parent]="ELSE ID : ".$submenu_data_array['id'];
 					$subMenuItems['children'][$submenu_data_array['alias']]=array(
 													'id'=>$submenu_data_array['id'],
 													'name'=>$submenu_data_array['name']
 											);
-					
-					//echo "<div>i=$i, id=".$submenu_data_array['id'].", name=".$submenu_data_array['name']."</div>";						//$subMenuItems[$parent_id]['children'][$submenu_data_array['alias']]=$submenu_data_array['name'];  
 				}
 			}
 			$i++;
@@ -505,6 +494,105 @@ class setHTML{
     <button onClick="window.print();">Печать страницы</button>
 <?	}
 /**
+ *	@package		content
+ *	@subpackage		metadata
+ *	Загрузить макет подраздела, разместить данные и выдать в HTML
+ */
+	function setPageData($this_obj, $section_data, $test=false){
+		// генерирует и размещает title страницы:
+		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
+		// генерирует и размещает название страницы в цепочке breadcrumbs:
+		$breadcrumbs=array();
+		if ($section_data->parent_id>0)	{	
+			$parentName=InsurInsuranceObject::model()->find(array(
+							'select'=>'name',
+							'condition'=>'id = '.$section_data->parent_id,
+						)); 
+			$this_obj->breadcrumbs=array(
+				$parentName->name=>array('index'),
+				$section_data->name
+			);
+		}else 
+			$this_obj->breadcrumbs=array(
+				$section_data->name,
+			);
+		// устанавливает description страницы:
+		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
+		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
+		// если заголовок не установлен (нет в БД), подставляет название страницы:
+		if (!$section_data->first_header)
+			$section_data->first_header=$section_data->name;
+	$arrItems=array( 'О компании',  
+					 'О корпорации',  
+					 'Руководство',  
+					 'Раскрытие информации',  
+					 'Клиенты компании',  
+					 'Партнеры компании', 
+					 'Новости компании',  
+					 'Вакансии',  
+					 'Контакты');
+	$items_data=Yii::app()->db->createCommand("
+	SELECT id, name,  `status` , 
+		IF( parent_id <0, 
+			(	SELECT alias
+				FROM insur_insurance_object
+				WHERE id = i2.id
+			), 
+			(	SELECT alias
+				FROM insur_insurance_object
+				WHERE id = i2.parent_id
+			) 
+		) AS parent, alias
+		FROM insur_insurance_object AS i2
+		WHERE name
+		IN (  '".implode("','",$arrItems)."'
+			)")->queryAll();
+			//var_dump("<pre>",$_GET,"</pre>");?>
+	<div id="inner_left_menu">
+	<?	$cnt=0;		
+		for($i=0,$j=count($arrItems);$i<$j;$i++){?>
+        <div<?
+			
+			if ( isset($_GET['alias'])
+				 && $items_data[$cnt]['alias']
+				 && $arrItems[$i]==$items_data[$cnt]['name']
+			   ) : 	if ($_GET['alias']==$items_data[$cnt]['alias']):
+						?> class="active"<? 
+					endif;
+			endif;?>><?		
+			
+			if ($arrItems[$i]==$items_data[$cnt]['name']){?>
+            	<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<?
+                echo $items_data[$cnt]['parent'];
+				if ($items_data[$cnt]['parent']!=$items_data[$cnt]['alias']){
+					?>/<? echo $items_data[$cnt]['alias'];
+				}?>"><?=$items_data[$cnt]['name']?></a>
+	<?		}else{
+				echo $arrItems[$i];
+				$cnt--;
+			}
+			$cnt++;?>
+        </div>
+	<?	}?>
+    		
+    </div>
+    <div id="inner_content">
+	<?
+		// это он - заголовок :)
+		echo "<h1>HEADER: ".$section_data->first_header."</h1>";
+		// если тестируемся:
+		if ($test) {
+			echo "parent_id = ".$section_data->parent_id."<hr>";
+			echo "title: ".$section_data->title."<hr>";
+			echo "keywords: ".$section_data->keywords."<hr>";
+			echo "description: ".$section_data->description."<hr>";
+		}else{ // загрузить макет
+			
+		}?>
+   </div>     
+	<?
+	}
+/**
  * @package		content
  * @subpackage		news
  *
@@ -540,269 +628,5 @@ class setHTML{
     </div>
     <div class="clear">&nbsp;</div>
 <?	}
-/**
- * Определить теги-wrapper'ы для элементов верхнего уровня
- * Определить метод-построитель HTML верхнего уровня
- * Определить поля извлечения данных для построителя HTML верхнего уровня
- * Определить теги-wrapper'ы для элементов вложенных уровней
- * @package
- * @subpackage
- */
-	function takeInputs(){
-		// атрибуты тега <input>, общие для пунктов всех уровней
-		$arrInput=array(  'name'=>'menu',
-						  'id'=>'submenu_:id',
-						  'type'=>'radio',
-						  'value'=>':id'
-						 );
-		return 
-			array( 	// элементы первого уровня:
-					'tags'=>array(
-								array('label'),
-								array('span'),
-								array('unclosed:input',$arrInput),
-								array('b')
-							),
-					// имя метода-построителя HTML первого уровня и используемые им поля:
-				  	'topBuilder'=>array( 'name'=>'buildSectionChoice',
-									   	 'fields'=>array('alias','text') 
-									   ),
-					// индикатор отображения блока со всеми дочерними элементами РЯДОМ с родительским блоком элементов 1-го уровня:
-					'nextAsSibling'=>true,
-					// теги и их атрибуты для всех элементов ниже основного уровня: 
-				  	'children'=>array(// (в порядке вложенности - от внешних ко внутренним):
-									array('div'), 
-									array('blockquote'),
-									array('label'),
-									array('span'),
-									array('unclosed:input',$arrInput)
-								)
-				);
-	}
-/**
- * Построить текст элемента
- * @package
- * @subpackage
- */
-	function buildSectionChoice($params,$fields){
-		echo $params[$fields[1]];
-	}
-/**
- * Описать структуру всех разделов и подразделов
- * @package
- * @subpackage
- * $function -- указать имя метода, возвращающего:
- 	теги для п.п. верхнего уровня
-		
- */
-	function walkThroughSections($function=false) {
-		if (!$function) $function='takeInputs';
-		// получить все параметры для элементов как верхнего уровня, так и вложенных:
-		$params=self::$function();
-		// назначить теги/атрибуты для элементов самого верхнего уровня:
-		// by default:
-		if(!$params['tags']) $params['tags']=array(
-												array('div')
-											  ); 
-		if(!$params['children']) 
-			$params['children']=array( // назначенные теги и их атрибуты для дочерних элементов 
-									// (в порядке вложенности - от внешних ко внутренним):
-									array('div',
-											array('class'=>'unknown', 
-													'style'=>'padding:6px; color: green !important;'
-												)
-										 ), 
-									array('label'),
-									array('span',
-											array('class'=>'unknown', 
-											  'style'=>'padding:6px; color: brown;'
-											 )
-										 ));
-		
-		$menuItems=self::getMainMenuItems(); // получить главное меню
-		//var_dump("<h1>menuItems:</h1><pre>",$menuItems,"</pre>");
-		self::$childrenWrapperTag=array('blockquote');
-		foreach($menuItems as $parent_id=>$parent_data){ // id=>text, alias
-			// построить HTML для самого верхнего уровня:
-			// открыть тег для верхнего уровня:
-			foreach($params['tags'] as $i=>$tParams)
-				self::genPartHTML($tParams,$parent_id); 
-			// построить HTML после открытия тега:
-			self::$params['topBuilder']['name']($parent_data,$params['topBuilder']['fields']);	
-			// если выбрали отобразить элементы следующего уровня как соседние - закрыть тег верхнего уровня:
-			if($params['nextAsSibling']) 
-				foreach($params['tags'] as $i=>$tParams)
-					self::genPartHTML($tParams); 
-			// если нет в списке разделов БЕЗ подменю - сгенерировать все вложенные уровни:
-			if (!in_array($parent_data['alias'],self::$arrAvoidSubmenu)) {
-				// получить ВСЕ вложенные уровни для текущего верхнего уровня:
-				$subMenuItems=self::getSubMenuItems($parent_id,NULL);
-				self::buildSections( 
-						// все вложенные подразделы через рекурсию:
-						$subMenuItems, 
-						// alias текущего раздела, передаваемый дочернему:
-						$parent_data['alias'],
-						// означает отсутствие родительского раздела: 
-						true, 
-						// назначенные теги и их атрибуты для дочерних элементов:
-						$params['children']
-					   );
-			}
-			// если НЕ выбирали отображение элементов следующего уровня как соседние - закрыть тег верхнего уровня сейчас:
-			if(!$params['nextAsSibling'])
-				foreach($params['tags'] as $i=>$tParams)
-					self::genPartHTML($tParams);
-		}
-	}
-/**
- * Проходит по всем подразделам, оборачивая их контент HTML-тегами
- * @package
- * @subpackage
- */
-	function buildSections( $subMenuItems,
-							$top_parent,
-							$next_parent=false,
-							$arrTagsAndParams // теги и их атрибуты 
-						  ){
-		if (is_array($subMenuItems)){	// var_dump("<h2 style='color:green'>subMenuItems:</h2><pre>",$subMenuItems,"</pre>");
-			foreach($subMenuItems as $alias_value=>$text) {
-				//if (is_array($text)){
-					$id=(isset($text['id']))? $text['id']:true;
-					//echo "<h1>ID ".$text['id']."</h1>";
-					//echo "<h1>".$subMenuItems[$alias_value]."</h1>";
-					//var_dump("<h3 style='color:red'>text:</h3><pre>",$text,"</pre>");
-				//}
-				if (isset($text['children'])&&is_array($text['children'])){
-					//echo "<h4>children:</h4>";
-					//var_dump("<pre>",$text['children'],"</pre>");
-					self::genPartHTML(self::$childrenWrapperTag,$id);
-				}
-				if (is_array($text)){
-					//echo "<div style='background:lightyellow; padding:10px; border:solid 1px blue; margin-bottom:20px; border-bottom:solid 4px blue'>START HTML recurse<br>";
-					//var_dump("<h1>text:</h1><pre>",$text,"</pre>");
-					self::buildSections( $text,
-										 $top_parent,
-										 $alias_value,
-										 $arrTagsAndParams
-									   );
-					//echo "<br>STOP HTML</div>";
-				}elseif ( $alias_value!="parent_alias"
-						  && $alias_value!="id"
-						  && $alias_value!="alias"
-						){
-					
-					//echo "<div style='background:lightskyblue; border:solid 1px orange; margin-bottom:20px; padding:10px; border-bottom:solid 4px orange'>START HTML no array<br>";
-					//echo "<h4>alias_value=$alias_value<br>top_parent=$top_parent<br>next_parent=$next_parent</h4>";
-					//if (isset($subMenuItems['children'])&&is_array($subMenuItems['children'])) echo "<div>HAS CHILDREN</div>";
-					//var_dump("<h1>subMenuItems:</h1><pre>",$subMenuItems,"</pre>");
-					//var_dump("<h1>arrTagsAndParams:</h1><pre>",$arrTagsAndParams,"</pre>");
-					// предыдущий уровень внутри главного меню
-					
-					$no_children=(isset($subMenuItems['children'])&&is_array($subMenuItems['children']))? false:true;
-					
-					//echo "<h4>NO children? : ".$no_children."</h4>";
-					
-					
-					if ($no_children){
-						//echo " * NO CHILDREN! * ";
-						foreach($arrTagsAndParams as $i=> $params)
-							if($i) self::genPartHTML($params,true);
-					}
-					else {
-						//echo " HAS CHILDREN! ";
-						self::genPartHTML($arrTagsAndParams[4],true);
-					}
-					echo $text;
-					
-					if(!$no_children) self::genPartHTML($arrTagsAndParams[4]);
-
-					else
-						foreach($arrTagsAndParams as $i=> $params)
-							if($i) self::genPartHTML($params); 
-					//echo "<br>STOP HTML</div>";
-				}
-				if (isset($text['children'])&&is_array($text['children']))
-					self::genPartHTML(self::$childrenWrapperTag);
-			}
-		}
-	}
-/**
- * Обвёртывает текст тегами с заданными атрибутами
- * @package
- * @subpackage
- */
-	function genPartHTML($tag,$stat=false){
-		if($stat){
-			if (strstr($tag[0],"unclosed:")){
-				$tag[0]=substr($tag[0],9);
-			} 
-			echo "<".$tag[0];
-				if (isset($tag[1]))
-					foreach($tag[1] as $attr => $params){
-						$data='';
-						if(strstr($params,':')){
-							$arp=explode(':',$params);
-							$params=$arp[0];
-							if ($stat!==true)
-								$data=$stat; // обычно - id объекта в таблице 
-						}	
-						echo " ".$attr.'="'.$params.$data.'"';
-					}
-			echo ">";
-		}elseif(!strpos($tag[0],"unclosed:"))
-			echo "</".$tag[0].">";
-	}
-	
-	function getObjectsRecursive( $fields=false, // поля извлечения данных
-								  $parent_id=false, // id родительского (под)раздела
-								  $level=0	// иерархический уровень текущего подраздела
-								){
-		static $result=array(); // инициализировать массив выходных данных
-		if(!$fields) // набор полей извлечения данных по умолчанию
-			$fields='id,name,parent_id,alias';
-		if (!$parent_id) {
-			$level=0;
-			$parent_id='-1';
-		}else{ 
-			$level++;
-			$xtra_id=$parent_id; // для идентификации id родительского подраздела при рекурсивном вызове
-		}
-		$query="SELECT ".$fields.", "; // запятая нужна, т.к. в \$fields отсутствует; не добавлять туда, поскольку это вызовет ошибку далее, при конвертации в массив в цикле!
-		$query.="
-    (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
-      WHERE parent_id = t1.id 
-		AND `status` = 1
-    ) AS children 
-FROM insur_insurance_object as t1
-WHERE parent_id = ".$parent_id." and `status` = 1
-order by id ASC";
-		$res=Yii::app()->db->createCommand($query)->queryAll();
-		// Главная
-		// О компании
-		// ...
-			// Новости
-			// О корпорации
-			// ...
-		for($i=0,$j=count($res);$i<$j;$i++){
-			$section_data=$res[$i];
-			$arrFields=explode(",",$fields); // поля с табличными данными
-			for($y=1,$x=count($arrFields);$y<$x;$y++) // начиная с "name", т.к. 'id' является ключом массива
-				$arrRes[$arrFields[$y]]=$section_data[$arrFields[$y]];
-			$arrRes['level']=$level; // добавляем в массив данных сведения об иерархическом уровне текущего подраздела (может пригодиться при назначении HTML-атрибутов и т.п.)
-			$result[$section_data['id']]=$arrRes; // сохраняем данные таблицы для подраздела в массиве
-			if((int)$section_data['children']>0){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
-				for($k=0,$m=$section_data['children'];$k<$m;$k++){
-					self::getObjectsRecursive($fields,(int)$section_data['id'],$level);
-				}
-			}
-			if (isset($xtra_id)) {
-				// скопировать данные текущего подраздела в массив родительского подраздела 
-				$result[$xtra_id]['children'][$section_data['id']]=$result[$section_data['id']];
-				// удалить исходные данные текущего подраздела, т.к. копия уже размещена в родительском:
-				unset($result[$section_data['id']]);
-			}
-		}
-		return $result;
-	}
 }
 ?>

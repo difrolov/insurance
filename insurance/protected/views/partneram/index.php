@@ -70,4 +70,4 @@ if (isset($_GET['static'])){?>
   </tr>
 </table><?
 }else
-	Data::setPageData($this,$res,true);
+	setHTML::setPageData($this,$res,true);

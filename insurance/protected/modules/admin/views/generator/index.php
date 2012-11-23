@@ -6,10 +6,13 @@ $includes=$groot.'includes/'; // директория подключаемых �
 // вывести блок контроля Layout в тестовом режиме:
 require_once $includes.'test_control.php';
 //$this->breadcrumbs=array($this->module->id,);
-//echo "<hr>walkThroughSections<hr>";
-//setHTML::walkThroughSections();
-$sect=setHTML::getObjectsRecursive();
-var_dump("<h1>sect:</h1><pre>",$sect,"</pre>");?>
+
+$sect1=Data::getObjectsRecursive(false);
+var_dump("<h1>sect1:</h1><pre>",$sect1,"</pre>");
+
+$sect2=Data::getObjectsRecursive(' ','-2');
+var_dump("<h1>sect2:</h1><pre>",$sect2,"</pre>");
+?>
 <div id="article_preview_text">
 </div>
 <div align="left">

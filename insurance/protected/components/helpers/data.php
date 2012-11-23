@@ -1,11 +1,12 @@
 <?
 class Data {
-	/**
-	  * @package		content
-	  * @subpackage		navigation
-	  * Загружает контент раздела/подраздела из БД по полученному алиасу
-	  * Требует установки правил в UrlManager!
-	  */
+
+/**
+  * @package		content
+  * @subpackage		navigation
+  * Загружает контент раздела/подраздела из БД по полученному алиасу
+  * Требует установки правил в UrlManager!
+  */
 	function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
 							 $alias=false // alias подраздела
 						   ){
@@ -19,104 +20,72 @@ class Data {
 		}
 		return $data;	
 	}
-	/*
-	 *	@package		content
-	 *	@subpackage		metadata
-	 *	Загрузить макет подраздела, разместить данные и выдать в HTML
-	 */
-	function setPageData($this_obj, $section_data, $test=false){
-		// генерирует и размещает title страницы:
-		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
-		// генерирует и размещает название страницы в цепочке breadcrumbs:
-		$breadcrumbs=array();
-		if ($section_data->parent_id>0)	{	
-			$parentName=InsurInsuranceObject::model()->find(array(
-							'select'=>'name',
-							'condition'=>'id = '.$section_data->parent_id,
-						)); 
-			$this_obj->breadcrumbs=array(
-				$parentName->name=>array('index'),
-				$section_data->name
-			);
-		}else 
-			$this_obj->breadcrumbs=array(
-				$section_data->name,
-			);
-		// устанавливает description страницы:
-		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
-		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
-		// если заголовок не установлен (нет в БД), подставляет название страницы:
-		if (!$section_data->first_header)
-			$section_data->first_header=$section_data->name;
-	$arrItems=array( 'О компании',  
-					 'О корпорации',  
-					 'Руководство',  
-					 'Раскрытие информации',  
-					 'Клиенты компании',  
-					 'Партнеры компании', 
-					 'Новости компании',  
-					 'Вакансии',  
-					 'Контакты');
-	$items_data=Yii::app()->db->createCommand("
-	SELECT id, name,  `status` , 
-		IF( parent_id <0, 
-			(	SELECT alias
-				FROM insur_insurance_object
-				WHERE id = i2.id
-			), 
-			(	SELECT alias
-				FROM insur_insurance_object
-				WHERE id = i2.parent_id
-			) 
-		) AS parent, alias
-		FROM insur_insurance_object AS i2
-		WHERE name
-		IN (  '".implode("','",$arrItems)."'
-			)")->queryAll();
-			//var_dump("<pre>",$_GET,"</pre>");?>
-	<div id="inner_left_menu">
-	<?	$cnt=0;		
-		for($i=0,$j=count($arrItems);$i<$j;$i++){?>
-        <div<?
-			
-			if ( isset($_GET['alias'])
-				 && $items_data[$cnt]['alias']
-				 && $arrItems[$i]==$items_data[$cnt]['name']
-			   ) : 	if ($_GET['alias']==$items_data[$cnt]['alias']):
-						?> class="active"<? 
-					endif;
-			endif;?>><?		
-			
-			if ($arrItems[$i]==$items_data[$cnt]['name']){?>
-            	<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<?
-                echo $items_data[$cnt]['parent'];
-				if ($items_data[$cnt]['parent']!=$items_data[$cnt]['alias']){
-					?>/<? echo $items_data[$cnt]['alias'];
-				}?>"><?=$items_data[$cnt]['name']?></a>
-	<?		}else{
-				echo $arrItems[$i];
-				$cnt--;
+/**
+ * Получить структурированный массив всех разделов и подразделов
+ * @package
+ * @subpackage
+ */
+	function getObjectsRecursive( $fields=false, // поля извлечения данных
+								  $parent_id=false, // id родительского (под)раздела
+								  $level=0,	// иерархический уровень текущего подраздела
+								  $result=false // результат; при вхождении в рекурсию передаётся по ссылке
+								){
+		if(!$fields) { // набор полей извлечения данных по умолчанию
+			$fields='id,name,parent_id,alias'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
+		}elseif(!$result){ // если с дуру передали пустую строку, извлечь все поля таблицы:
+			if (!str_replace(" ",'',$fields)){
+				$qFields="DESC insur_insurance_object";
+				$desc=Yii::app()->db->createCommand($qFields)->queryAll();
+				for($i=0,$j=count($desc);$i<$j;$i++){
+					if ($i) $fields.=',';
+					$fields.=$desc[$i]['Field'];
+				} 
+			} // echo "<div class='txtRed'>GO FIELDS AGAIN! : ".$fields."</div>";
+		}
+		if (!$parent_id) {
+			$level=0;
+			$parent_id='-1';
+		}else{ 
+			$level++;
+			$xtra_id=$parent_id; // для идентификации id родительского подраздела при рекурсивном вызове
+		}
+		$query="SELECT ".$fields.", "; // запятая нужна, т.к. в \$fields отсутствует; не добавлять туда, поскольку это вызовет ошибку далее, при конвертации в массив в цикле!
+		$query.="
+    (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
+      WHERE parent_id = t1.id 
+		AND `status` = 1
+    ) AS children 
+FROM insur_insurance_object as t1
+WHERE parent_id = ".$parent_id." and `status` = 1
+order by id ASC"; //echo $query; //die();
+		$res=Yii::app()->db->createCommand($query)->queryAll();
+		$arrFields=explode(",",$fields); // поля с табличными данными
+		// Главная
+		// О компании
+		// ...
+			// Новости
+			// О корпорации
+			// ...
+		// присвоить данные полученным объектам:
+		for($i=0,$j=count($res);$i<$j;$i++){
+			$section_data=$res[$i]; // текущая запись из БД
+			for($y=1,$x=count($arrFields);$y<$x;$y++) // начиная с "name", т.к. 'id' является ключом массива
+				$arrRes[$arrFields[$y]]=$section_data[$arrFields[$y]];
+			$arrRes['level']=$level; // добавляем в массив данных сведения об иерархическом уровне текущего подраздела (может пригодиться при назначении HTML-атрибутов и т.п.)
+			$result[$section_data['id']]=$arrRes; // сохраняем данные таблицы для подраздела в массиве
+			if((int)$section_data['children']>0){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
+				for($k=0,$m=$section_data['children'];$k<$m;$k++){
+					self::getObjectsRecursive($fields,(int)$section_data['id'],$level,&$result);
+				}
 			}
-			$cnt++;?>
-        </div>
-	<?	}?>
-    		
-    </div>
-    <div id="inner_content">
-	<?
-		// это он - заголовок :)
-		echo "<h1>HEADER: ".$section_data->first_header."</h1>";
-		// если тестируемся:
-		if ($test) {
-			echo "parent_id = ".$section_data->parent_id."<hr>";
-			echo "title: ".$section_data->title."<hr>";
-			echo "keywords: ".$section_data->keywords."<hr>";
-			echo "description: ".$section_data->description."<hr>";
-		}else{ // загрузить макет
-			
-		}?>
-   </div>     
-	<?
-	}
+			if (isset($xtra_id)) { // если получили id родительского (под)раздела 
+				// скопировать данные текущего подраздела в массив родительского подраздела 
+				$result[$xtra_id]['children'][$section_data['id']]=$result[$section_data['id']];
+				// удалить исходные данные текущего подраздела, т.к. копия уже размещена в родительском:
+				unset($result[$section_data['id']]);
+			}
+		}
+		return $result;
+	}	
 }
 ?>
