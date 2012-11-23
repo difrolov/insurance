@@ -753,11 +753,22 @@ class setHTML{
 			echo "</".$tag[0].">";
 	}
 	
-	function getObjectsRecursive($parent_id=false){
-		static $result=array();
-		if (!$parent_id) $parent_id='-1';
-		else $xtra_id=$parent_id;
-		$query="SELECT id,name,parent_id,alias,
+	function getObjectsRecursive( $fields=false, // поля извлечения данных
+								  $parent_id=false, // id родительского (под)раздела
+								  $level=0	// иерархический уровень текущего подраздела
+								){
+		static $result=array(); // инициализировать массив выходных данных
+		if(!$fields) // набор полей извлечения данных по умолчанию
+			$fields='id,name,parent_id,alias';
+		if (!$parent_id) {
+			$level=0;
+			$parent_id='-1';
+		}else{ 
+			$level++;
+			$xtra_id=$parent_id; // для идентификации id родительского подраздела при рекурсивном вызове
+		}
+		$query="SELECT ".$fields.", "; // запятая нужна, т.к. в \$fields отсутствует; не добавлять туда, поскольку это вызовет ошибку далее, при конвертации в массив в цикле!
+		$query.="
     (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
       WHERE parent_id = t1.id 
 		AND `status` = 1
@@ -773,20 +784,22 @@ order by id ASC";
 			// О корпорации
 			// ...
 		for($i=0,$j=count($res);$i<$j;$i++){
-			$section=$res[$i];
-			$result[$section['id']]=array(
-							'alias'=>$section['alias'],
-							'name'=>$section['name'],
-							'parent_id'=>$section['parent_id']
-						);
-			if((int)$section['children']>0){
-				for($k=0,$m=$section['children'];$k<$m;$k++){
-					self::getObjectsRecursive((int)$section['id']);
+			$section_data=$res[$i];
+			$arrFields=explode(",",$fields); // поля с табличными данными
+			for($y=1,$x=count($arrFields);$y<$x;$y++) // начиная с "name", т.к. 'id' является ключом массива
+				$arrRes[$arrFields[$y]]=$section_data[$arrFields[$y]];
+			$arrRes['level']=$level; // добавляем в массив данных сведения об иерархическом уровне текущего подраздела (может пригодиться при назначении HTML-атрибутов и т.п.)
+			$result[$section_data['id']]=$arrRes; // сохраняем данные таблицы для подраздела в массиве
+			if((int)$section_data['children']>0){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
+				for($k=0,$m=$section_data['children'];$k<$m;$k++){
+					self::getObjectsRecursive($fields,(int)$section_data['id'],$level);
 				}
 			}
 			if (isset($xtra_id)) {
-				$result[$xtra_id]['children'][$section['id']]=$result[$section['id']];
-				unset($result[$section['id']]);
+				// скопировать данные текущего подраздела в массив родительского подраздела 
+				$result[$xtra_id]['children'][$section_data['id']]=$result[$section_data['id']];
+				// удалить исходные данные текущего подраздела, т.к. копия уже размещена в родительском:
+				unset($result[$section_data['id']]);
 			}
 		}
 		return $result;
