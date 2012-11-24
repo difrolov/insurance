@@ -374,9 +374,7 @@ class setHTML{
 							$parent_alias=$topLevelAlias;
 							$link=$topLevelAlias."/".$subMenuItems['alias'];
 						}
-						if ( isset($subMenuItems['children'])
-							 || $level>1
-						   ){
+						if (isset($subMenuItems['children'])||$level>1){
 							$parent_alias.='/'.$subMenuItems['alias'];
 							$link=$parent_alias;						
 						}

@@ -69,7 +69,7 @@ return array(
 				// извлечь данные подраздела второго уровня:
 				//'o_kompanii/<alias:\w+>/<subsection:\w+>' =>  'o_kompanii/subsection',
 				'o_kompanii/*' =>  'o_kompanii/index',
-				//'o_kompanii/<alias:\w+>/<subsection:\w+>/*' =>  'o_kompanii/subsection',
+				'o_kompanii/<alias:\w+>/<subsection:\w+>/*' =>  'o_kompanii/subsection',
 
 
 				'korporativnym_klientam/<alias:\w+>/<subsection:\w+>' =>  'korporativnym_klientam/subsection',
