@@ -350,35 +350,37 @@ class setHTML{
  */
 	function buildSubmenuLinks( $subMenuItems,
 								$parent_alias,
-								$top_parent=false // самое верхнее меню
-							  ){	
+								$topAndNext=false // самое верхнее меню alias
+							  ){
+		if($topAndNext){
+			$topLevelAlias=($topAndNext===true)? $parent_alias:$topAndNext;
+		}
+		
 		if (is_array($subMenuItems)){
 			foreach($subMenuItems as $alias_value=>$link_text):
 				if (is_array($link_text)){
 					$level=(isset($link_text['level']))? $link_text['level']:0;
 					if ($level>1){?><blockquote><? }
-					self::buildSubmenuLinks($link_text,&$parent_alias);
+					self::buildSubmenuLinks($link_text,&$parent_alias,&$topLevelAlias);
 					if ($level>1) {?></blockquote><? }
-				}elseif ($alias_value=="name"){?><a href="<?=Yii::app()->request->baseUrl.'/';
-					if ($top_parent){
-						$link=$subMenuItems['alias'];
-					}else {
-						if (isset($subMenuItems['children'])){
+				}elseif ($alias_value=="name"){
+//					echo "<div class=''>parent_alias= ".$parent_alias;
+//					if(isset($topLevelAlias)) echo ", topLevelAlias= $topLevelAlias";
+//					else echo ", <h1 style='color:red'>NO topLevelAlias!</h1>";
+//					echo "</div>";
+						?><a href="<?=Yii::app()->request->baseUrl.'/';
+						$level=$subMenuItems['level'];
+						if ($level==1) {
+							$parent_alias=$topLevelAlias;
+							$link=$topLevelAlias."/".$subMenuItems['alias'];
+						}
+						if ( isset($subMenuItems['children'])
+							 || $level>1
+						   ){
 							$parent_alias.='/'.$subMenuItems['alias'];
 							$link=$parent_alias;						
-						}else{
-							$link=$parent_alias.'/'.$subMenuItems['alias'];
-							$level=$subMenuItems['level'];
-							if($level>1){
-								$arrParentAliases=explode("/",$parent_alias);
-								while ($level){
-									unset($arrParentAliases[$level]);
-									$level--;
-								}
-								$parent_alias=implode("/",$arrParentAliases);
-							}
 						}
-					}echo $link;?>"><?=$link_text?></a><?
+					echo $link;?>"><?=$link_text?></a><?	
 				}
 			endforeach;
 		}

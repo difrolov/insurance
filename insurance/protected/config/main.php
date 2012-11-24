@@ -67,11 +67,16 @@ return array(
                 'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
 				// Frontend
 				// извлечь данные подраздела второго уровня:
-				'o_kompanii/<alias:\w+>/<subsection:\w+>' =>  'o_kompanii/subsection',
+				//'o_kompanii/<alias:\w+>/<subsection:\w+>' =>  'o_kompanii/subsection',
+				'o_kompanii/*' =>  'o_kompanii/index',
+				//'o_kompanii/<alias:\w+>/<subsection:\w+>/*' =>  'o_kompanii/subsection',
+
+
 				'korporativnym_klientam/<alias:\w+>/<subsection:\w+>' =>  'korporativnym_klientam/subsection',
 				'malomu_i_srednemu_biznesu/<alias:\w+>/<subsection:\w+>' =>  'malomu_i_srednemu_biznesu/subsection',
 				'fizicheskim_litzam/<alias:\w+>/<subsection:\w+>' =>  'fizicheskim_litzam/subsection',
 				'partneram/<alias:\w+>/<subsection:\w+>' =>  'partneram/subsection',
+				
 				// извлечь данные главного раздела и подраздела первого уровня:
 				'o_kompanii/<alias:\w+>' =>  'o_kompanii/index',
 				'korporativnym_klientam/<alias:\w+>' =>  'korporativnym_klientam/index',

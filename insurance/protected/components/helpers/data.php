@@ -8,17 +8,32 @@ class Data {
   */
 	function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
 							 $alias=false // alias подраздела
-						   ){
+						   ){ 
 		if (!$alias) {
 			$alias=$default_alias;	
 			$subsection=true;
 		}
 		$data = InsurInsuranceObject::model()->findByAttributes(array('alias' => $alias));
-		if ($data === null&&$subsection) {
+		if ($data === null/*&&$subsection*/) {
 			throw new CHttpException(404, 'Not found');		
 		}
 		return $data;	
 	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	function getObjectByUrl($obj,$subsection){
+		if($subsection!='site'){
+			$Uri=explode("/",$_SERVER['REQUEST_URI']);
+			$hash=array_pop($Uri);
+			if($hash!=$subsection) $subsection=$hash;
+		}
+		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
+    	$obj->render('index', array('res' => $data));
+	}
+	
 /**
  * Получить структурированный массив всех разделов и подразделов
  * @package
