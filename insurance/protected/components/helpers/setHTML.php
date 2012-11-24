@@ -422,11 +422,15 @@ class setHTML{
     <button onClick="window.print();">Печать страницы</button>
 <?	}
 /**
- *	@package		content
- *	@subpackage		metadata
- *	Загрузить макет подраздела, разместить данные и выдать в HTML
+ * Получает данные от Data::getObjectByUrl() в виде объекта активной записи в insur_insurance_object (setPageData()::$section_data = Data::getObjectByUrl()->res)
+ * @package		content
+ * @subpackage		metadata
+ * Загрузить макет подраздела, разместить данные и выдать в HTML
  */
-	function setPageData($this_obj, $section_data, $test=false){
+	function setPageData( $this_obj, 
+						  $section_data, 
+						  $test=false
+						){
 		// генерирует и размещает title страницы:
 		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
 		// генерирует и размещает название страницы в цепочке breadcrumbs:
@@ -474,8 +478,7 @@ class setHTML{
 		FROM insur_insurance_object AS i2
 		WHERE name
 		IN (  '".implode("','",$arrItems)."'
-			)")->queryAll();
-			//var_dump("<pre>",$_GET,"</pre>");?>
+			)")->queryAll();?>
 	<div id="inner_left_menu">
 	<?	$cnt=0;		
 		for($i=0,$j=count($arrItems);$i<$j;$i++){?>
@@ -504,21 +507,116 @@ class setHTML{
 	<?	}?>
     		
     </div>
-    <div id="inner_content">
-	<?
-		// это он - заголовок :)
-		echo "<h1>HEADER: ".$section_data->first_header."</h1>";
-		// если тестируемся:
+    <?	// если тестируемся:
 		if ($test) {
+			// это он - заголовок :)
+			echo "<h1>HEADER: ".$section_data->first_header."</h1>";
 			echo "parent_id = ".$section_data->parent_id."<hr>";
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
-		}else{ // загрузить макет
+		}
+		else { // загрузить макет
+			$tmpl=unserialize($section_data->content);?>
+    <div id="inner_content" class="<?=$tmpl['Schema']?>">
+		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
+			$bloxHeaderType=$tmpl['Schema'][1];
+			$bloxFooterType=$tmpl['Schema'][2];
+			$bWidths=array();
+			$bWidths[0]=100/$colCount;
 			
-		}?>
+			if ($bloxHeaderType!='0')
+				$bloxCnt++;
+			if ($bloxFooterType!='0')
+				$bloxCnt++;
+			
+			
+			//echo "<div class=''>bloxCnt = ".$bloxCnt.", bloxHeaderType = $bloxHeaderType, bloxFooterType = $bloxFooterType</div>";
+			
+			/*
+			 * См. схему построения макетов в файле:
+			 * /_docs/схема.xslx!Макет для создания разделов
+			 */
+			if( ( $bloxHeaderType=='0' 	// нет подзаголовка
+				  || ( $bloxHeaderType=='i' // есть, но только внутренний
+				  	   && $colCount==3		// 3 колонки, что значит - ширина распределяется поровну
+					 )
+				) && $bloxFooterType=='0'	// нет псевдофутера
+			  ){ // тупо делим 100% на количество колонок
+				// 100, 200, 300, 400
+				$cWidth=$bWidths[0];	// echo "<div class=''>= NO ARRAY</div>";
+				unset($bWidths); // больше не нужен
+			}else{	
+				if ($colCount==3){
+					// ширина 2-й, 3-й, 4-й колонок по умолчанию:
+					$bWidths[1]=$bWidths[2]=$bWidths[3]=100/3; // ~33%
+					// если заголовок внутренний, изменить ширину 2-й:
+					if ($bloxHeaderType=='s'){ 
+						$bWidths[1]*=2; // ~66%
+						if($bloxFooterType=='s')
+							$bWidths[4]=$bWidths[1]; // ~66%
+					}
+					else // изменить ширину 4-й:
+						$bWidths[3]*=2; // ~66%
+				}elseif($colCount==4){
+					$bWidths[1]=$bWidths[2]=$bWidths[3]=25; // by default
+					if ($bloxHeaderType=='i') // 4i
+						$bWidths[1]=50;
+					else{
+						if($bloxHeaderType=='s') // 4s
+							$bWidths[1]=75;
+						elseif($bloxHeaderType=='0') {//40i, 40s
+							if ($bloxFooterType=='i') 
+								$bWidths[3]=50;
+							elseif($bloxFooterType=='s') 
+								$bWidths[3]=75;
+						}
+					}
+					if ($bloxHeaderType!='0') {
+						$bWidths[4]=25;
+						if ($bloxFooterType=='i')
+							$bWidths[5]=50;
+						elseif ($bloxFooterType=='s')
+							$bWidths[5]=75;
+					}
+				}
+				
+			} echo "<div class=''>colCount= ".$colCount.", bloxHeaderType= $bloxHeaderType, bloxFooterType= $bloxFooterType</div>"; var_dump("<h1>bWidths:</h1><pre>",$bWidths,"</pre>");	die();
+			for ($i=0;$i<$bloxCnt;$i++){?>
+				<div class="float<? // установить обтекание:
+				echo ( $i==2
+				   	   && $bloxHeaderType=='s'  
+				   	 ) ? // сразу за внутренним заголовком
+					"Right":"Left";
+				?>" style=" <?		
+                // если есть заголовок, добавить отступ слева, равный ширине левой колонки
+				if( ( $bloxHeaderType!='0'
+				  	  && $i==1 // это он, заголовок!
+					) ||
+					( $bloxFooterType!='0'
+				  	  && $i==($bloxCnt-1) // это псевдофутер!
+					)
+				  ){?> margin-left:<?=$offsetLeft?>%;<? 
+				  	$bWidths[$i]-=$bWidths[0]; // уменьшить ширину, чтобы нивелировать margin слева 
+				  } 
+				  ?>width:<?
+				if(isset($cWidth)){ // все колонки одинаковые по ширине
+					echo $cWidth;
+					$offsetLeft=$cWidth;
+				}else{ 
+					echo $bWidths[$i];
+					$offsetLeft=$bWidths[0];
+				}?>%;">
+                	<div class="testBlock">
+                    	inner block block # <?=$i+1?>
+                	</div>
+                </div>	
+		<?	}
+
+			
+			var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
    </div>     
-	<?
+	<?	}
 	}
 /**
  * @package		content

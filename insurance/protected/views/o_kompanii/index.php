@@ -74,7 +74,6 @@ $this->breadcrumbs=array(
   </tr>
 </table><?
 }else
-	setHTML::setPageData($this,$res,true);
-	
+	setHTML::setPageData($this,$res,false);
 
 

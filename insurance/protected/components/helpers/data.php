@@ -14,13 +14,13 @@ class Data {
 			$subsection=true;
 		}
 		$data = InsurInsuranceObject::model()->findByAttributes(array('alias' => $alias));
-		if ($data === null/*&&$subsection*/) {
+		if ($data === null) {
 			throw new CHttpException(404, 'Not found');		
-		}
+		} 
 		return $data;	
 	}
 /**
- * Описание
+ * Анализирует URL, забирает данные из БД и передаёт их в макет, откуда они извлекаются методом setHTML::setPageData(), который формирует и рамещает на странице конечное представление данных.
  * @package
  * @subpackage
  */
