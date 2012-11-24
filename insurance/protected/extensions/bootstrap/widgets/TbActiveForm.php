@@ -268,6 +268,18 @@ class TbActiveForm extends CActiveForm
 	 * @return string the generated input list.
 	 * @since 0.9.5
 	 */
+	/**
+	 * Renders a WYSIWYG bootstrap editor
+	 * @param $model
+	 * @param $attribute
+	 * @param array $htmlOptions
+	 * @return string
+	 */
+	public function html5EditorRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_HTML5EDITOR, $model, $attribute, null, $htmlOptions);
+	}
+
 	protected function inputsList($checkbox, $model, $attribute, $data, $htmlOptions = array())
 	{
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
@@ -357,6 +369,18 @@ class TbActiveForm extends CActiveForm
 			$htmlOptions['class'] = 'alert alert-block alert-error'; // Bootstrap error class as default
 
 		return parent::errorSummary($models, $header, $footer, $htmlOptions);
+	}
+
+	/**
+	 * Renders a toggle input row.
+	 * @param CModel $model the data model
+	 * @param string $attribute the attribute
+	 * @param array $htmlOptions additional HTML attributes (options key sets the options for the toggle component)
+	 * @return string the generated row
+	 */
+	public function toggleButtonRow($model, $attribute, $htmlOptions = array())
+	{
+		return $this->inputRow(TbInput::TYPE_TOGGLEBUTTON, $model, $attribute, null, $htmlOptions);
 	}
 
 	/**

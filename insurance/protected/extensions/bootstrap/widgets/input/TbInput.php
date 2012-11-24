@@ -27,6 +27,8 @@ abstract class TbInput extends CInputWidget
 	const TYPE_TEXT = 'textfield';
 	const TYPE_CAPTCHA = 'captcha';
 	const TYPE_UNEDITABLE = 'uneditable';
+	const TYPE_HTML5EDITOR = 'wysihtml5';
+	const TYPE_TOGGLEBUTTON = 'togglebutton';
 
 	/**
 	 * @var TbActiveForm the associated form widget.
@@ -206,6 +208,10 @@ abstract class TbInput extends CInputWidget
 				$this->radioButton();
 				break;
 
+			case self::TYPE_HTML5EDITOR:
+				$this->html5Editor();
+				break;
+
 			case self::TYPE_RADIOLIST:
 				$this->radioButtonList();
 				break;
@@ -228,6 +234,10 @@ abstract class TbInput extends CInputWidget
 
 			case self::TYPE_UNEDITABLE:
 				$this->uneditableField();
+				break;
+
+			case self::TYPE_TOGGLEBUTTON:
+				$this->toggleButton();
 				break;
 
 			default:
@@ -300,13 +310,13 @@ abstract class TbInput extends CInputWidget
 		else
 			return '';
 	}
-	
+
 	/**
 	 * Returns the id that should be used for the specified attribute
 	 * @param string $attribute the attribute
-	 * @return string the id 
+	 * @return string the id
 	 */
-	protected function getAttributeId($attribute) 
+	protected function getAttributeId($attribute)
 	{
 		return isset($this->htmlOptions['id'])
 				? $this->htmlOptions['id']
@@ -467,4 +477,11 @@ abstract class TbInput extends CInputWidget
 	 * @abstract
 	 */
 	abstract protected function uneditableField();
+
+	/**
+	 * Renders a bootstrap wysihtml5 editor.
+	 * @abstract
+	 * @return mixed
+	 */
+	abstract protected function html5Editor();
 }

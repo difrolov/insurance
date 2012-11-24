@@ -170,8 +170,7 @@ ORDER BY name, parent_name';
 			"class='contStatus_".$id."' >".($data?'Активен':'Отключен')."</a>";
 			return $a;
 		}
-		public static function dateToRender($fromDate)
-		{
+		public static function dateToRender($fromDate){
 			if ($fromDate == null) return null;
 			// var_dump($fromDate); die();
 			$date = explode('-',$fromDate);

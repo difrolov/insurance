@@ -6,13 +6,13 @@
 	    'label'=>'банер на главной',
 	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	    'size'=>'small', // null, 'large', 'small' or 'mini'
-	    'htmlOptions'=>array('onclick'=>'_banner.MainMenuButton($(this))','data-item'=>'banner_out'),
+	    'htmlOptions'=>array('class'=>'btn-menu','onclick'=>'_banner.MainMenuButton($(this))','data-item'=>'banner_out'),
 ));
 	$this->widget('bootstrap.widgets.TbButton', array(
 			'label'=>'банер на внутренних страницах',
 			'type'=>'', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 			'size'=>'small', // null, 'large', 'small' or 'mini'
-			'htmlOptions'=>array('onclick'=>'_banner.MainMenuButton($(this))','data-item'=>'banner_in'),
+			'htmlOptions'=>array('class'=>'btn-menu','onclick'=>'_banner.MainMenuButton($(this))','data-item'=>'banner_in'),
 	));
 
 ?>
@@ -34,7 +34,8 @@ foreach ($out_query as $key=>$value){
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
     'dataProvider'=>$out,
-    'template'=>"{items}",
+    'template'=>"{items}{pager}",
+	'enablePagination' => true,
 	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
 	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
     'columns'=>array(
@@ -49,16 +50,17 @@ foreach ($out_query as $key=>$value){
 )); ?>
 <?php
 	$this->widget('bootstrap.widgets.TbButton', array(
-	    'label'=>'Отключить',
+	    'label'=>$out_query[0]['status']?'Включить':'Отключить',
 	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	    'size'=>'small', // null, 'large', 'small' or 'mini'
-	    'htmlOptions'=>array('onclick'=>'_banner.statusButton("out")')
+	    'htmlOptions'=>array('onclick'=>'_banner.statusButton("outside",'.($out_query[0]['status']?0:1).')')
 ));
 	$this->widget('bootstrap.widgets.TbButton', array(
 			'label'=>'Добавить',
-			'type'=>'', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 			'size'=>'small', // null, 'large', 'small' or 'mini'
-			'htmlOptions'=>array('onclick'=>'_banner.MainMenuButton($(this))','data-item'=>'banner_in'),
+			'url'=>Yii::app()->homeUrl."admin/banner/addBaner/set/out",
+			'htmlOptions'=>array(),
 	));
 
 ?>
