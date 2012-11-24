@@ -6,7 +6,7 @@ if (!isset($allObjectsSecondArray)){ // ...
 	$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
 	//var_dump("<h1>allObjectsSecondArray:</h1><pre>",$allObjectsSecondArray,"</pre>");	
 }?>
-    <h5 id="pick_out_section" class="link" style="display:<?="none"?>;">Выберите родительский раздел для создаваемой страницы</h5>
+    <h5 id="pick_out_section" class="link" style="display:<? if(isset($_GET['test'])){?>block<? }else{?>none<? }?>;">Выберите родительский раздел для создаваемой страницы</h5>
 	<div id="<?="save_tmpl_block"?>"<? if(isset($_GET['test'])){?> style="display:block;"<? }?>>
     	<div id="sections_radios">
         <label>

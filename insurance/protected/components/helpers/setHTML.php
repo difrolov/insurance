@@ -110,21 +110,17 @@ class setHTML{
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
 	<?	$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		ob_start();
-		self::buildSubmenuLinks($subMenuItems,$parent_alias);
-		$linksHTML=ob_get_contents();
-		ob_end_clean();
 		if ($parent_alias=="korporativnym_klientam") {?>
           <ul class="asTable">
 			<li>
             	<div class="txtLightBlue txtMediumSmall">Виды страхования</div>
-				<?=$linksHTML?></li>
+			<? self::buildSubmenuLinks($subMenuItems,$parent_alias);?></li>
         <?	$corps=true;
 			if ($corps){
 				$arrCorps=array(
-							'building'=>'Строительные компании',
-							'trucking'=>'Транспортные компании',
-							'entertainment'=>'Организация развлекательных и спортивных мероприятий',
+						'building'=>'Строительные компании',
+						'trucking'=>'Транспортные компании',
+						'entertainment'=>'Организация развлекательных и спортивных мероприятий',
 						);?>
             <li style="width:20px;">&nbsp;</li>
         	<li>
@@ -138,7 +134,8 @@ class setHTML{
 		<?	}?>
           </ul>
 	<?	}else
-			echo $linksHTML;?>
+			//echo "<div class='testBlock'>"; var_dump("<pre>",$subMenuItems,"</pre>");
+			self::buildSubmenuLinks($subMenuItems,$parent_alias,true); //echo "</div>";?>
         </div> 
 <?	}
 /**
@@ -352,17 +349,36 @@ class setHTML{
  * построить контент подменю
  */
 	function buildSubmenuLinks( $subMenuItems,
-								$top_parent,
-								$next_parent=false
+								$parent_alias,
+								$top_parent=false // самое верхнее меню
 							  ){	
 		if (is_array($subMenuItems)){
 			foreach($subMenuItems as $alias_value=>$link_text):
-				if (is_array($link_text)){ 
+				if (is_array($link_text)){
 					$level=(isset($link_text['level']))? $link_text['level']:0;
 					if ($level>1){?><blockquote><? }
-					self::buildSubmenuLinks($link_text,$top_parent,$alias_value);
+					self::buildSubmenuLinks($link_text,&$parent_alias);
 					if ($level>1) {?></blockquote><? }
-				}elseif ($alias_value=="name"){?><a href="<?=Yii::app()->request->baseUrl.'/'.$top_parent.'/'.$subMenuItems['alias'];?>"><?=$link_text?></a><?
+				}elseif ($alias_value=="name"){?><a href="<?=Yii::app()->request->baseUrl.'/';
+					if ($top_parent){
+						$link=$subMenuItems['alias'];
+					}else {
+						if (isset($subMenuItems['children'])){
+							$parent_alias.='/'.$subMenuItems['alias'];
+							$link=$parent_alias;						
+						}else{
+							$link=$parent_alias.'/'.$subMenuItems['alias'];
+							$level=$subMenuItems['level'];
+							if($level>1){
+								$arrParentAliases=explode("/",$parent_alias);
+								while ($level){
+									unset($arrParentAliases[$level]);
+									$level--;
+								}
+								$parent_alias=implode("/",$arrParentAliases);
+							}
+						}
+					}echo $link;?>"><?=$link_text?></a><?
 				}
 			endforeach;
 		}

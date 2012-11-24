@@ -77,7 +77,7 @@
     </table>
   	  </div>
     </div>
-	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="#">Загрузить статью...</a></div>
+	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="#" title="Выбрать из имеющихся статей">Загрузить статью...</a></div>
 <input type="submit" name="submit" onclick="getDataFromCKeditor();return false;" value="Сохранить">
 </div>
 </form>
