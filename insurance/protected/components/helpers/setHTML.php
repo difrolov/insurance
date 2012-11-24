@@ -516,14 +516,127 @@ class setHTML{
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
 		}
-		else { // загрузить макет
-			$tmpl=unserialize($section_data->content);?>
-    <div id="inner_content" class="<?=$tmpl['Schema']?>">
+		else { // загрузить макет?>
+<style type="text/css">
+/******** always *******/
+div#inner_content{
+	width:100%;
+}
+div#div1{ 
+	float:left;
+}
+/***********************/
+
+div.schema100, 
+	div.schema100> div{
+	width:100%;
+}
+
+div.schema200 > div#div1,
+div.schema200 > div#div2{
+	width:50%;
+}
+	div.schema200 > div#div2{
+		float:right;
+	}
+
+div.schema210 > div{
+	width:50%;
+}
+	div.schema210 > div#div2,
+	div.schema210 > div#div3{
+		float:right;
+	}
+
+div.schema300 > div{
+	float:left;
+	width:33%;
+}
+	div.schema300 > div#div3{
+		width:34%;
+	}
+
+div.schema3i0 > div{
+	float:left;
+	width:33%;
+}
+	div.schema3i0 > div#div1{
+		 margin-right:-33%;
+	}
+	div.schema3i0 > div#div2,
+	div.schema3i0 > div#div4{
+		 margin-left:33%;
+	}
+	div.schema3i0 > div#div3{
+		float:right;
+		width:34%;
+	}
+
+div.schema3s0 > div{
+	float:left;
+	width:33%;
+}
+	div.schema3s0 > div#div1{
+		margin-right:-33%;
+	}
+	div.schema3s0 > div#div2{
+		margin-left:33%;
+		width:67%;
+	}
+	div.schema3s0 > div#div3{
+		margin-left:33%;
+	}
+	div.schema3s0 > div#div4{
+		width:34%;
+	}
+	
+div.schema3ss > div{
+	float:left;
+	width:33%;
+}
+	div.schema3ss > div#div1{
+		margin-right:-33%;
+	}
+	
+	div.schema3ss > div#div2,
+	div.schema3ss > div#div5{
+		width:67%;
+	}
+	
+	div.schema3ss > div#div4{
+		width:34%;
+	}
+	div.schema3ss > div#div2,
+	div.schema3ss > div#div3,
+	div.schema3ss > div#div5{
+		margin-left:33%;
+	}
+	
+div.schema30s > div{
+	float:left;
+	width:33%;
+}
+	div.schema30s > div#div1{
+		margin-right:-33%;
+	}
+	div.schema30s > div#div2,
+	div.schema30s > div#div4{
+		margin-left:33%;
+	}
+	div.schema30s > div#div3{
+		width:34%;
+	}
+	div.schema30s > div#div4{
+		width:67%;
+	}
+	
+</style>        
+		<?	//$tmpl=unserialize($section_data->content);
+			$tmpl['Schema']='30s';?>
+    <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 			$bloxHeaderType=$tmpl['Schema'][1];
 			$bloxFooterType=$tmpl['Schema'][2];
-			$bWidths=array();
-			$bWidths[0]=100/$colCount;
 			
 			if ($bloxHeaderType!='0')
 				$bloxCnt++;
@@ -537,83 +650,26 @@ class setHTML{
 			 * См. схему построения макетов в файле:
 			 * /_docs/схема.xslx!Макет для создания разделов
 			 */
-			if( ( $bloxHeaderType=='0' 	// нет подзаголовка
-				  || ( $bloxHeaderType=='i' // есть, но только внутренний
-				  	   && $colCount==3		// 3 колонки, что значит - ширина распределяется поровну
-					 )
-				) && $bloxFooterType=='0'	// нет псевдофутера
-			  ){ // тупо делим 100% на количество колонок
-				// 100, 200, 300, 400
-				$cWidth=$bWidths[0];	// echo "<div class=''>= NO ARRAY</div>";
-				unset($bWidths); // больше не нужен
-			}else{	
-				if ($colCount==3){
-					// ширина 2-й, 3-й, 4-й колонок по умолчанию:
-					$bWidths[1]=$bWidths[2]=$bWidths[3]=100/3; // ~33%
-					// если заголовок внутренний, изменить ширину 2-й:
-					if ($bloxHeaderType=='s'){ 
-						$bWidths[1]*=2; // ~66%
-						if($bloxFooterType=='s')
-							$bWidths[4]=$bWidths[1]; // ~66%
-					}
-					else // изменить ширину 4-й:
-						$bWidths[3]*=2; // ~66%
-				}elseif($colCount==4){
-					$bWidths[1]=$bWidths[2]=$bWidths[3]=25; // by default
-					if ($bloxHeaderType=='i') // 4i
-						$bWidths[1]=50;
-					else{
-						if($bloxHeaderType=='s') // 4s
-							$bWidths[1]=75;
-						elseif($bloxHeaderType=='0') {//40i, 40s
-							if ($bloxFooterType=='i') 
-								$bWidths[3]=50;
-							elseif($bloxFooterType=='s') 
-								$bWidths[3]=75;
-						}
-					}
-					if ($bloxHeaderType!='0') {
-						$bWidths[4]=25;
-						if ($bloxFooterType=='i')
-							$bWidths[5]=50;
-						elseif ($bloxFooterType=='s')
-							$bWidths[5]=75;
-					}
-				}
-				
-			} echo "<div class=''>colCount= ".$colCount.", bloxHeaderType= $bloxHeaderType, bloxFooterType= $bloxFooterType</div>"; var_dump("<h1>bWidths:</h1><pre>",$bWidths,"</pre>");	die();
+			//echo "<div class=''>colCount= ".$colCount.", bloxHeaderType= $bloxHeaderType, bloxFooterType= $bloxFooterType</div>";die();
 			for ($i=0;$i<$bloxCnt;$i++){?>
-				<div class="float<? // установить обтекание:
-				echo ( $i==2
-				   	   && $bloxHeaderType=='s'  
-				   	 ) ? // сразу за внутренним заголовком
-					"Right":"Left";
-				?>" style=" <?		
-                // если есть заголовок, добавить отступ слева, равный ширине левой колонки
-				if( ( $bloxHeaderType!='0'
-				  	  && $i==1 // это он, заголовок!
-					) ||
-					( $bloxFooterType!='0'
-				  	  && $i==($bloxCnt-1) // это псевдофутер!
-					)
-				  ){?> margin-left:<?=$offsetLeft?>%;<? 
-				  	$bWidths[$i]-=$bWidths[0]; // уменьшить ширину, чтобы нивелировать margin слева 
-				  } 
-				  ?>width:<?
-				if(isset($cWidth)){ // все колонки одинаковые по ширине
-					echo $cWidth;
-					$offsetLeft=$cWidth;
-				}else{ 
-					echo $bWidths[$i];
-					$offsetLeft=$bWidths[0];
-				}?>%;">
+				<div id="div<?=($i+1)?>">
                 	<div class="testBlock">
                     	inner block block # <?=$i+1?>
+            	<? 	if(!($i==1&&$bloxHeaderType!='0')){ ?>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
+
+		diam nonumy eirmod tempor invidunt ut labore et dolore magna 
+
+		aliquyam erat, sed diam voluptua. At vero eos et accusam et 
+
+		justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
+
+		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+				<?	}?>
+
                 	</div>
                 </div>	
 		<?	}
-
-			
 			var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
    </div>     
 	<?	}
