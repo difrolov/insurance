@@ -350,10 +350,10 @@ class setHTML{
  */
 	function buildSubmenuLinks( $subMenuItems,
 								$parent_alias,
-								$topAndNext=false // самое верхнее меню alias
+								$topAlias=false // самое верхнее меню alias
 							  ){
-		if($topAndNext){
-			$topLevelAlias=($topAndNext===true)? $parent_alias:$topAndNext;
+		if($topAlias){
+			$topLevelAlias=($topAlias===true)? $parent_alias:$topAlias;
 		}
 		if (!isset($topLevelAlias)) $topLevelAlias=false;
 		

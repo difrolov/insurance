@@ -26,17 +26,9 @@ class PartneramController extends Controller
 	 */
 	public function actionIndex($alias=false)
 	{
-		$data=Data::getDataByAlias('partneram',$alias);
-    	$this->render('index', array('res' => $data));
+		Data::getObjectByUrl($this,$alias);
 	}
-	/**
-	 * Для подразделов, вложенных в главный раздел и в подраздел
-	 */
-	public function actionSubsection($subsection=false)
-	{
-		$data=Data::getDataByAlias('partneram',$subsection);
-    	$this->render('index', array('res' => $data));
-	}
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */

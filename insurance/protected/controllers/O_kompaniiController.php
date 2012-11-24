@@ -25,17 +25,10 @@ class O_kompaniiController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex($alias=false)
-	{	//die('actionIndex');
+	{	
 		Data::getObjectByUrl($this,$alias);
-		// $data=Data::getDataByAlias('o_kompanii',$alias);
-    	// $this->render('index', array('res' => $data));
 	}
-	/**
-	 * Для подразделов, вложенных в главный раздел и в подраздел
-	 */
-	public function actionSubsection($subsection=false)
-	{	Data::getObjectByUrl($this,$subsection);
-	}
+
 	/**
 	  *
 	  */
