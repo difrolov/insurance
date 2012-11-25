@@ -54,7 +54,7 @@ $(function(){
 			Layout.title=$('#title').val();
 			Layout.keywords=$('#keywords').val();
 			Layout.description=$('#description').val();
-			alert('action: '+$('#content_save').attr('action'));
+			// alert('action: '+$('#content_save').attr('action'));
 			$.ajax ({
 					type: "POST",
 					url: $('#content_save').attr('action'),

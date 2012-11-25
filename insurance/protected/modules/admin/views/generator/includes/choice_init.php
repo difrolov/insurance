@@ -1,5 +1,5 @@
 <div id="choice_init">
-        <h5>Выберите параметры макета <? if(isset($section_data)){?> для текущего подраздела<? }else{?> создаваемой страницы<? }?></h5>
+        <h5>Выберите параметры макета <? if(isset($SectionDataContent)){?> для текущего подраздела<? }else{?> создаваемой страницы<? }?></h5>
         <div id="mng">
             <div id="txtActions">
                 <div>Колонки:</div>
