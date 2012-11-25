@@ -35,6 +35,7 @@ foreach ($out_query as $key=>$value){
     'type'=>'striped bordered condensed',
     'dataProvider'=>$out,
     'template'=>"{items}{pager}",
+	'pager'=>array('pageSize'=>3),
 	'enablePagination' => true,
 	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
 	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',

@@ -30,11 +30,9 @@ if (isset($gridDataProvider)){
         	'template'=>'{update}{delete}',
         	'buttons'=>array(
         				'update' => array(
-        						'url'=>'Yii::app()->createUrl("admin/object/edit", array("id"=>$data[\'id\']))',
+        						'url'=>'Yii::app()->createUrl("admin/content/edit", array("id"=>$data[\'id\']))',
         				),
-        				'delete' => array(
-        						'url'=>'Yii::app()->createUrl("admin/object/delete", array("id"=>$data[\'id\']))',
-        				),
+
         		),
         ),
     ),

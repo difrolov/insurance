@@ -67,7 +67,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/browser')),
 		        array('label'=>'Управление разделами', 'url'=>Yii::app()->createUrl('admin/object/getobject/44'), 'active'=>true),
 		        array('label'=>'Управление баннерами', 'url'=>Yii::app()->createUrl('admin/banner/getbanner')),
-		    	array('label'=>'Управление статьями', 'url'=>Yii::app()->createUrl('admin/object/getcontent')),
+		    	array('label'=>'Управление статьями', 'url'=>Yii::app()->createUrl('admin/content/getcontent')),
 		    	array('label'=>'Управление вакансиями', 'url'=>Yii::app()->createUrl('admin/modules/getjobs')),
 		    ),
 		)); ?>
