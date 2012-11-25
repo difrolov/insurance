@@ -129,16 +129,5 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <div align="center" id="pls_wait" style="position:fixed; top:40%; bottom:50%;  opacity:1;z-index:2; width:100%; display:<?="none"?>;">
 	<div style="background: #FF9; line-height:26px; padding:30px 60px; border-radius:8px; display: inline-block; box-shadow:#000;">Создание подраздела... <br />Пожалуйста, подождите...</div>
 </div>
-<!--<script>
-$( function(){
-	  try{
-		//alert('on');
-		
-		//$.designMode = "on";
-	  }catch(e){
-		  alert(e.message);
-	  }
-	});
-</script>-->
 </body>
 </html>
