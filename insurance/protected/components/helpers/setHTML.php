@@ -114,7 +114,7 @@ class setHTML{
           <ul class="asTable">
 			<li>
             	<div class="txtLightBlue txtMediumSmall">Виды страхования</div>
-			<? self::buildSubmenuLinks($subMenuItems,$parent_alias);?></li>
+			<? self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
         <?	$corps=true;
 			if ($corps){
 				$arrCorps=array(
@@ -430,7 +430,7 @@ class setHTML{
 	function setPageData( $this_obj, 
 						  $section_data, 
 						  $test=false
-						){
+						){	$test=false; // принудительно
 		// генерирует и размещает title страницы:
 		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
 		// генерирует и размещает название страницы в цепочке breadcrumbs:
@@ -518,14 +518,37 @@ class setHTML{
 		}
 		else { // загрузить макет?>
 <style type="text/css">
-/******** always *******/
+/******** Для элементов всех макетов: ********/
 div#inner_content{
 	width:100%;
+}
+div#inner_content .clear{
+	float: none;
+	width: 100%;
+}
+div#inner_content 
+	> div > div{
+	padding: 10px;
+	padding-left: 8px;
+}
+
+div#inner_content 
+	> div > div .subsectHeader{
+	font-size:16px;
+	margin:0;
+}
+div#inner_content 
+	> div > div .contentHeader{
+	color:#06AEDD;
+	font-size:16px;
+	margin:0;
+	margin-bottom:10px;
 }
 div#div1{ 
 	float:left;
 }
-/***********************/
+
+/******** Для индивидуальных макетов: ********/
 
 div.schema100, 
 	div.schema100> div{
@@ -631,8 +654,8 @@ div.schema30s > div{
 	}
 	
 </style>        
-		<?	//$tmpl=unserialize($section_data->content);
-			$tmpl['Schema']='30s';?>
+		<?	$tmpl=unserialize($section_data->content);
+			// $tmpl['Schema']='30s';?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 			$bloxHeaderType=$tmpl['Schema'][1];
@@ -651,12 +674,46 @@ div.schema30s > div{
 			 * /_docs/схема.xslx!Макет для создания разделов
 			 */
 			//echo "<div class=''>colCount= ".$colCount.", bloxHeaderType= $bloxHeaderType, bloxFooterType= $bloxFooterType</div>";die();
-			for ($i=0;$i<$bloxCnt;$i++){?>
+			//***	FOR TEST:	***//
+			$testColors=array('whitesmoke','mistyrose','lemonchiffon','honeydew','lightcyan','lavender');
+			$showLoremIpsum=false;
+			//***	/FOR TEST:	***//
+			$modules=array(
+					'news'=>'Новость',
+					'ready_solution1'=>'Готовое решение 1',
+					'ready_solution2'=>'Готовое решение 2',
+				);
+			for ($i=0;$i<$bloxCnt;$i++){
+					$block=$tmpl['blocks'];
+					$bCnt=$i+1;?>
 				<div id="div<?=($i+1)?>">
-                	<div class="testBlock">
-                    	inner block block # <?=$i+1?>
-            	<? 	if(!($i==1&&$bloxHeaderType!='0')){ ?>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
+                	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
+                    	<!--inner block block # <?=$bCnt?>-->
+            	<? 	if($i==1&&$bloxHeaderType!='0'){ 
+						$headerText=substr($block[2],strpos($block[2],":")+1);
+						echo "<h2 class=\"subsectHeader\">".$headerText."</h2>";?>
+				<?	}else{
+						$artIdSbstr="Текст :: article id:";
+						// собрать контент текущего блока:
+						for($b=0,$c=count($block[$bCnt]);$b<$c;$b++){
+							$bContent=$block[$bCnt][$b];
+							if(strstr($bContent,$artIdSbstr)){
+								$article_id=(int)substr($bContent,strlen($artIdSbstr));
+								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); //var_dump("<h1>article_data:</h1><pre>",$article_data,"</pre>");
+								if ($article_data['name']){?>
+		<h3 class="contentHeader"><?=$article_data['name']?></h3>
+							<?	}	echo $article_data['content'];
+							}else{?>
+		<h3 class="contentHeader"><?=$bContent?></h3>
+        					<?	if ($folder_name=array_search($bContent,$modules)){
+									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$folder_name.'/default.php';
+									//echo "<div class=''>module_path= ".$module_path."</div>";
+									require $module_path;	
+								}else echo "<div class='txtRed'>МОДУЛЬ НЕ НАЙДЕН!</div>";
+							}
+						}
+						if ($showLoremIpsum){
+						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
 
 		diam nonumy eirmod tempor invidunt ut labore et dolore magna 
 
@@ -665,12 +722,14 @@ div.schema30s > div{
 		justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
 
 		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-				<?	}?>
+				<?		}
+					}?>
 
                 	</div>
                 </div>	
-		<?	}
-			var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
+		<?	}?>
+        <div class="clear">&nbsp;</div>
+		<?	// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
    </div>     
 	<?	}
 	}
