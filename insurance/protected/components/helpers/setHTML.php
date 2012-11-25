@@ -352,6 +352,7 @@ class setHTML{
 								$parent_alias,
 								$topAlias=false // самое верхнее меню alias
 							  ){
+		static $prev_level='top'; // для управления цепочкой родительских алиасов
 		if($topAlias){
 			$topLevelAlias=($topAlias===true)? $parent_alias:$topAlias;
 		}
@@ -361,26 +362,38 @@ class setHTML{
 			foreach($subMenuItems as $alias_value=>$link_text):
 				if (is_array($link_text)){
 					$level=(isset($link_text['level']))? $link_text['level']:0;
-					if ($level>1){?><blockquote><? }
+					if ($level>1){?><blockquote><? } // echo "<div class='testBlock'>prev_level(".gettype($prev_level).") = ".$prev_level."</div>";
 					self::buildSubmenuLinks($link_text,&$parent_alias,&$topLevelAlias);
 					if ($level>1) {?></blockquote><? }
 				}elseif ($alias_value=="name"){
-					/*echo "<div class=''>parent_alias= ".$parent_alias;
-					if(isset($topLevelAlias)) echo ", topLevelAlias= $topLevelAlias";
-					else echo ", <h1 style='color:red'>NO topLevelAlias!</h1>";
-					echo "</div>";*/
+					$level=$subMenuItems['level'];
+					// echo "<div class=''>current_level(".gettype($level).")= $level";
+					// if(isset($topLevelAlias)) echo "<br><b>topLevelAlias:</b><br>$topLevelAlias";
+					// else echo ", <h1 style='color:red'>NO topLevelAlias!</h1>";
+					//echo "</div>"; //**********************************
 						?><a href="<?=Yii::app()->request->baseUrl.'/';
-						$level=$subMenuItems['level'];
 						if ($level==1) {
 							$parent_alias=$topLevelAlias;
 							$link=$topLevelAlias."/".$subMenuItems['alias'];
+						}elseif($level<$prev_level){ // данный подраздел находится выше предыдущего
+							// будем вырезать промежуточные алиасы:
+							$aDiff=$prev_level-$level;
+							$parentAliases=explode("/",$parent_alias);
+							while($aDiff){
+								array_pop($parentAliases);
+								$aDiff--;
+							}
+							$parent_alias=implode("/",$parentAliases);
 						}
-						if (isset($subMenuItems['children'])||$level>1){
+						if ( isset($subMenuItems['children']) // есть вложенные уровни
+							 || $level>1	// вложенных нет, есть родительские
+						   ){
 							$link=$parent_alias.'/'.$subMenuItems['alias'];						
 							if(isset($subMenuItems['children']))
 								$parent_alias.='/'.$subMenuItems['alias'];
 						}
 					echo $link;?>"><?=$link_text?></a><?	
+					$prev_level=$level; // установим текущий уровень подраздела // echo "<br>parent_alias= ".$parent_alias."<br>";
 				}
 			endforeach;
 		}
@@ -655,7 +668,8 @@ div.schema30s > div{
 	
 </style>        
 		<?	$tmpl=unserialize($section_data->content);
-			// $tmpl['Schema']='30s';?>
+			// $tmpl['Schema']='30s';
+			// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");// die();?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 			$bloxHeaderType=$tmpl['Schema'][1];
@@ -683,20 +697,21 @@ div.schema30s > div{
 					'ready_solution1'=>'Готовое решение 1',
 					'ready_solution2'=>'Готовое решение 2',
 				);
-			for ($i=0;$i<$bloxCnt;$i++){
-					$block=$tmpl['blocks'];
-					$bCnt=$i+1;?>
-				<div id="div<?=($i+1)?>">
+			$i=1;
+			foreach ($tmpl['blocks'] as $block_name=>$block){?>
+				<div id="div<?=$i?>">
                 	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
-                    	<!--inner block block # <?=$bCnt?>-->
-            	<? 	if($i==1&&$bloxHeaderType!='0'){ 
-						$headerText=substr($block[2],strpos($block[2],":")+1);
+            	<? 	if($block_name==2&&$bloxHeaderType!='0'){ 
+						//echo "<h1 style='color:red'>block[2]= ".$block[2]."</h1>"; die();
+						$headerText=substr($block,strpos($block,":")+1);
 						echo "<h2 class=\"subsectHeader\">".$headerText."</h2>";?>
 				<?	}else{
 						$artIdSbstr="Текст :: article id:";
 						// собрать контент текущего блока:
-						for($b=0,$c=count($block[$bCnt]);$b<$c;$b++){
-							$bContent=$block[$bCnt][$b];
+					  $for=true;
+					  if ($for)
+						for($b=0,$c=count($block);$b<$c;$b++){
+							$bContent=$block[$b];
 							if(strstr($bContent,$artIdSbstr)){
 								$article_id=(int)substr($bContent,strlen($artIdSbstr));
 								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); //var_dump("<h1>article_data:</h1><pre>",$article_data,"</pre>");
@@ -709,9 +724,15 @@ div.schema30s > div{
 									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$folder_name.'/default.php';
 									//echo "<div class=''>module_path= ".$module_path."</div>";
 									require $module_path;	
-								}else echo "<div class='txtRed'>МОДУЛЬ НЕ НАЙДЕН!</div>";
+								}else echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
-						}
+						}else{
+						  
+						  if (isset($block)) {
+							  echo "<div class=''>block= ".$block."</div>";
+						  	  var_dump("<h1>block:</h1><pre>",$block,"</pre>");
+						  }else echo "<div class=''>skip</div>";
+					  }
 						if ($showLoremIpsum){
 						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
 
@@ -727,7 +748,8 @@ div.schema30s > div{
 
                 	</div>
                 </div>	
-		<?	}?>
+		<?		$i++;
+			}?>
         <div class="clear">&nbsp;</div>
 		<?	// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
    </div>     

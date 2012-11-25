@@ -178,7 +178,9 @@ div#save_tmpl_block blockquote{
 	margin-left: 4px;
 	border-left: solid 3px #C3D9FF;
 }
-
+div#save_tmpl_block label{
+	display:inline-block;
+}
 div#save_tmpl_block label span{
 	border-radius: 3px;
 	padding: 4px 10px 4px 6px;

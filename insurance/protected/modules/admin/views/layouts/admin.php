@@ -124,6 +124,21 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	</div >--><!-- footer -->
 
 </div><!-- page -->
-
+<div id="veil" style="background:#000; position:fixed; top:0; right:0; bottom:0; left:0; opacity:0.8; display:<?="none"?>;">
+</div>
+<div align="center" id="pls_wait" style="position:fixed; top:40%; bottom:50%;  opacity:1;z-index:2; width:100%; display:<?="none"?>;">
+	<div style="background: #FF9; line-height:26px; padding:30px 60px; border-radius:8px; display: inline-block; box-shadow:#000;">Создание подраздела... <br />Пожалуйста, подождите...</div>
+</div>
+<!--<script>
+$( function(){
+	  try{
+		//alert('on');
+		
+		//$.designMode = "on";
+	  }catch(e){
+		  alert(e.message);
+	  }
+	});
+</script>-->
 </body>
 </html>

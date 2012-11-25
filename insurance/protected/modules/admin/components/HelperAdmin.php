@@ -82,7 +82,7 @@ ORDER BY name, parent_name';
           <span>
         	<input name="menu" id="<?=$sub?>menu_<?=$section_id?>" type="radio" value="<?=$section_id?>"><?=$b?><?=$section_data['name']?><?=$b_close?>
           </span>
-        </label>
+        </label><br>
 		<?	if (isset($section_data['children'])) {
 				$children=$section_data['children'];?>
         <div>

@@ -16,14 +16,15 @@ if (!isset($allObjectsSecondArray)){ // ...
         </label>
 	<?	HelperAdmin::makeSectionsMap($allObjectsArray);?>
     	<hr>
-	<?	HelperAdmin::makeSectionsMap($allObjectsSecondArray);?>
+	<?	// HelperAdmin::makeSectionsMap($allObjectsSecondArray);?>
     	</div>
         <hr>
         <div id="subsection_ids">
             Укажите название подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Текст в меню для загрузки данного подраздела">
     <input name="name" type="text" id="name" required>
             <hr>
-            Укажите алиас подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Уникальная подстрока в адресе страницы с данным подразделом"> 
+            Укажите алиас подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Будет фигурировать в адресной строке браузера"> 
+            <div>(<span class="txtRed">только</span> латинские буквы, цифры и &quot;_&quot;)</div> 
             <input name="alias" type="text" id="alias" required>
             <hr>
         </div>

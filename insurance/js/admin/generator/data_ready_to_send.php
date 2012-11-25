@@ -60,6 +60,9 @@ $(function(){
 					url: $('#content_save').attr('action'),
 					dataType: 'json',
 					data: Layout,
+					beforeSend: function() {
+                   		$("div#veil").show();
+  					},
 					success: function (data) {
 						alert("Подраздел добавлен!");
 						location.href=data.result; 
