@@ -1,21 +1,32 @@
-<?
-	$section_data=$data[0]; // данные подраздела (array, имена полей таблицы)?>
+<?	$Shema=false;
+	if(isset($data)){
+		$Name=$data['name'];
+		$ParentId=$data['parent_id'];
+		$Alias=$data['alias'];
+		$Title=$data['title'];
+		$Keywords=$data['keywords'];
+		$Description=$data['description'];
+		// get Template data:
+		$SectionDataContent=unserialize($data['content']);
+		// получить текущую схему макета:
+		$Shema=$SectionDataContent['Schema'];
+	} // данные подраздела (array, имена полей таблицы)		
+	// var_dump("<h1>SectionDataContent:</h1><pre>",$SectionDataContent,"</pre>"); die();
+?>
 <script>
 $(function(){
   try{ 	
-	//initializeLayout(); // создать объект для сохранения данных макета
-	// получить текущую схему макета:
-<?		
+<?	$testTmpl=false;
+	if (!$Shema&&$testTmpl) {
 		//**********************************
-		//var_dump("<h1>section_data:</h1><pre>",$section_data,"</pre>"); die();
 		$getSchema=(isset($_GET['Schema']))? $_GET['Schema']:'100';
 		$section_data=array( 'content'=>
 								array('Schema'=>$getSchema)
 						   );
 		//**********************************
-	
-	if ($section_data['content']) {?>
-	Layout.Schema='<?=$section_data['content']['Schema']?>';
+  	}
+	if ($Shema) {?>
+	Layout.Schema='<?=$Shema?>';
   	// распарсить схему макета посимвольно:
 	var arrLayoutSchema=parseLayoutSchema();
 	// получить объект пиктограммы для текущего макета:

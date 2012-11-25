@@ -1,4 +1,4 @@
-<?	
+<? // var_dump("<h1>data:</h1><pre>",$data,"</pre>"); die();
 if (isset($data)) // подключить скрипт с js-обработкой существущего макета:
 	require_once Yii::getPathOfAlias('webroot')."/js/admin/generator/edit_template.php";
 $groot=$this->groot; // директория Генератора
