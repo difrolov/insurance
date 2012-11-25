@@ -44,5 +44,12 @@ if (!isset($allObjectsSecondArray)){ // ...
       		</div>
 		</div>
         <hr>
-        <button id="save_page" type="button">Сохранить страницу</button>
+        <button id="preview_page" type="button">Предпросмотр</button>
+        &nbsp;
+        или
+        &nbsp;
+        <button id="save_page" type="button">&nbsp;Сохранение&nbsp;</button>
+        &nbsp;
+        подраздела
+        &nbsp;
 	</div>

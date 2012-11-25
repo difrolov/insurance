@@ -26,6 +26,14 @@ $(function(){
 				errPlace=$('#alias');
 			reqS[errCount]='alias';
 			errCount++;
+		}else{
+			var aVal=$('#alias').val(); 
+			var re = /[^a-z]/g;
+			if(re.test(aVal)){
+				errMess[errCount]='Вы ввели недопустимые символы в поле для алиаса подраздела!\nДопускаются ТОЛЬКО латинские буквы, цифры и знак подчёркивания.';
+				reqS[errCount]='alias';
+				errCount++;
+			}
 		}
 		if (!$('#title').val()){
 			errMess[errCount]='Вы не указали заголовок страницы.';
@@ -62,6 +70,7 @@ $(function(){
 					data: Layout,
 					beforeSend: function() {
                    		$("div#veil").show();
+						$("div#pls_wait").show();
   					},
 					success: function (data) {
 						alert("Подраздел добавлен!");
