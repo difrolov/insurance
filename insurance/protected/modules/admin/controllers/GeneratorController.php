@@ -204,6 +204,21 @@ class GeneratorController extends Controller
 			echo $jenc;
 		}
 	}
+/**
+ * Проверить доступность алиаса
+ * @package
+ * @subpackage
+ */
+	function actionAliasCheck(){
+		echo ($alias = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$_GET['alias'].'"')->queryScalar()) ?
+			'taken' : 'allow';		
+		//echo "<div class=''>alias= ".$alias."</div>";
+	}
+/**
+ * 
+ * @package
+ * @subpackage
+ */
 	function getParents($section_id,$child_id=false){
 		$query="SELECT `parent_id` FROM insur_insurance_object
 	WHERE `id` = $section_id";

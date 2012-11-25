@@ -84,6 +84,11 @@ div#call_us_free
 	> div:last-child{
 	font-size:20px;
 }
+.checkData{
+	background:#FF6;
+	border-radius:4px;
+	padding:4px;
+}
 .clear{
 	clear:both;
 }

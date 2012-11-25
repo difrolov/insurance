@@ -2,6 +2,46 @@
 ob_start();?>
 $(function(){
   try{
+	$('#alias').blur( function (){
+		var alias=$(this).val();
+		var checkAl=$('#check_alias_info');
+		var txtColorWhite='#FFF';
+		$(checkAl).fadeIn(200);
+		if (alias){
+			var re = /[^a-z]/g;
+			if(re.test(alias)){
+				$(checkAl).css({
+							backgroundColor:'red',
+							color:txtColorWhite
+						}).html('Вы ввели недопустимые символы в поле для алиаса!');
+			}else{
+				// alert('Url: '+$('#seek_alias').val()+'\nData: '+alias);
+				$.ajax ({
+					type: "GET",
+					url: $('#seek_alias').val(),
+					data: "alias="+alias,
+					success: function (data) {
+						var alias_stat,bg;
+						if (data=='allow'){
+							alias_stat="свободен";
+							bg='#060';
+						}else{
+							alias_stat="занят, укажите другой";
+							bg='salmon';
+						} //alert(data);
+						$(checkAl).css({
+							backgroundColor:bg,
+							color:txtColorWhite
+						});
+						$(checkAl).html('&nbsp;алиас '+alias_stat+'&nbsp;');
+					},
+					error: function (alias_stat) {
+						alert("Не проверить доступность указанного алиаса..."); 
+					}
+				})
+			}
+		} //		
+	});
 	$('button#save_page').click( function (){
 		var radioChecked=$('div#sections_radios input[type="radio"]:checked');
 		var errMess=new Array();
