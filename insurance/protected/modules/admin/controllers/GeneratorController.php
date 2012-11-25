@@ -3,6 +3,7 @@ class GeneratorController extends Controller
 {
 	public $layout = "application.modules.admin.views.layouts.admin";
 	static protected $section_root;
+	static $modules_names;
 	protected $groot=NULL; // see getGeneratorRoot()
 	
 	function getGeneratorRoot(){
@@ -22,6 +23,17 @@ class GeneratorController extends Controller
 		$model_modules = Yii::app()->db->createCommand($sql)->queryAll();
 		return array('model'=>$model,'model_modules'=>$model_modules);
 	}
+/**
+ * Получить упрощённый набор модулей
+ * @package
+ * @subpackage
+ */
+	function getAllModulesNames($model_modules){
+		for($i=0,$j=count($model_modules);$i<$j;$i++)
+			$modulesNames[]=$model_modules[$i]["name"];
+		return $modulesNames;
+	}
+	
 	/**
 	 * @package
 	 * 
