@@ -23,8 +23,8 @@ class ObjectController extends Controller
 						//таблица для отображения
 			$model = new InsurInsuranceObject();
 
-			$gridDataProvider['parent'] = $model->search('id='.$_GET['id'].' and status=1');
-			$gridDataProvider['child'] = $model->search('parent_id='.$_GET['id'].' and status=1');
+			$gridDataProvider['parent'] = $model->search('id='.$_GET['id']);
+			$gridDataProvider['child'] = $model->search('parent_id='.$_GET['id']);
 			$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
 		}
 	}
