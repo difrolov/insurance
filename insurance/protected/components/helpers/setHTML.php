@@ -503,36 +503,8 @@ class setHTML{
 		if (!$section_data->first_header)
 			$section_data->first_header=$section_data->name;?>
 	<div id="inner_left_menu">
-	<?	//var_dump("<h1>section_data:</h1><pre>",$section_data->id,"</pre>");
-		self::buildLeftStaticMenu($section_data->id);
-
-		
-		/*$cnt=0;		
-		if ($cnt)
-		for($i=0,$j=count($arrItems);$i<$j;$i++){?>
-        <div<?
-			
-			if ( isset($_GET['alias'])
-				 && $items_data[$cnt]['alias']
-				 && $arrItems[$i]==$items_data[$cnt]['name']
-			   ) : 	if ($_GET['alias']==$items_data[$cnt]['alias']):
-						?> class="active"<? 
-					endif;
-			endif;?>><?		
-			
-			if ($arrItems[$i]==$items_data[$cnt]['name']){?>
-            	<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<?
-                echo $items_data[$cnt]['parent'];
-				if ($items_data[$cnt]['parent']!=$items_data[$cnt]['alias']){
-					?>/<? echo $items_data[$cnt]['alias'];
-				}?>"><?=$items_data[$cnt]['name']?></a>
-	<?		}else{
-				echo $arrItems[$i];
-				$cnt--;
-			}
-			$cnt++;?>
-        </div>
-	<?	}*/?>
+	<?	//
+		self::buildLeftStaticMenu($section_data->id);?>
     		
     </div>
     <?	// если тестируемся:
