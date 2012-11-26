@@ -1,4 +1,4 @@
-banner = {
+_banner = {
 	//ajax обновление данных
 	update_field:function(field,value,id){
 		if(field!="" && value!=""){
@@ -8,5 +8,25 @@ banner = {
 				}
 			});
 		}
+	},
+	MainMenuButton: function(el){
+		if(el.hasClass("btn-primary")){
+			return false;
+		}else{
+			$(".btn-menu").removeClass("btn-primary");
+			el.addClass("btn-primary");
+			$(".table_baner").hide();
+			$("."+el.attr('data-item')).show();
+		}
+
+	},
+	statusButton: function(ban,val){
+		$.post('ajaxupdatestatus',{ban:ban,val:val},function(data){
+
+			if(data.success == 1){
+				location.reload();
+			}
+		},"json");
 	}
+
 };

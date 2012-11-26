@@ -1,6 +1,86 @@
+<div class="mainmenu_button">
+
+	<p>
+<?php
+	$this->widget('bootstrap.widgets.TbButton', array(
+	    'label'=>'банер на главной',
+	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	    'size'=>'small', // null, 'large', 'small' or 'mini'
+	    'htmlOptions'=>array('class'=>'btn-menu','onclick'=>'_banner.MainMenuButton($(this))','data-item'=>'banner_out'),
+));
+	$this->widget('bootstrap.widgets.TbButton', array(
+			'label'=>'банер на внутренних страницах',
+			'type'=>'', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			'size'=>'small', // null, 'large', 'small' or 'mini'
+			'htmlOptions'=>array('class'=>'btn-menu','onclick'=>'_banner.MainMenuButton($(this))','data-item'=>'banner_in'),
+	));
+
+?>
+	</p>
+</div>
+<div class="table_baner banner_out">
+<br class="clear">
+<div class="out_baner_img">
+<?php
+foreach ($out_query as $key=>$value){
+?>
+	<img class="banner" id="banner_<?=$out_query[$key]['id']?>" alt="<?=$out_query[$key]['name']?>" src="<?=Yii::app()->homeUrl.$out_query[$key]['src']?>">
+<?php
+}
+?>
+
+
+</div>
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
-    'dataProvider'=>$gridDataProvider,
+    'dataProvider'=>$out,
+    'template'=>"{items}{pager}",
+	'pager'=>array('pageSize'=>3),
+	'enablePagination' => true,
+	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
+	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
+    'columns'=>array(
+       array('name'=>'id', 'header'=>'#','type'=>'html'),
+        array('name'=>'name', 'header'=>'Наименование','type'=>'raw', 'value'=>'HelperAdmin::createInput($data->name,"name",$data->id,"_banner.update_field")'),
+        array('name'=>'src', 'type'=>'raw',  'header'=>'Изображение', 'value'=>'HelperAdmin::selectBanner($data->src,$data->id)'),
+        array('name'=>'link','type'=>'raw','header'=>'Ссылка', 'value'=>'HelperAdmin::createBannerlink($data->link,"name",$data->id)'),
+    	array('name'=>'date_edit', 'header'=>'Дата изменения'),
+    	array('name'=>'status','header'=>'Статус','type'=>'html',
+    			'value'=>'HelperAdmin::createStatusBaner($data->status)')
+    ),
+)); ?>
+<?php
+	$this->widget('bootstrap.widgets.TbButton', array(
+	    'label'=>$out_query[0]['status']?'Включить':'Отключить',
+	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	    'size'=>'small', // null, 'large', 'small' or 'mini'
+	    'htmlOptions'=>array('onclick'=>'_banner.statusButton("outside",'.($out_query[0]['status']?0:1).')')
+));
+	$this->widget('bootstrap.widgets.TbButton', array(
+			'label'=>'Добавить',
+			'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			'size'=>'small', // null, 'large', 'small' or 'mini'
+			'url'=>Yii::app()->homeUrl."admin/banner/addBaner/set/out",
+			'htmlOptions'=>array(),
+	));
+
+?>
+</div>
+
+<div class="table_baner banner_in" style="display: none;">
+<br class="clear">
+<div class="in_baner_img">
+<?php
+foreach ($in_query as $key=>$value){
+?>
+	<img class="banner" id="banner_<?=$in_query[$key]['id']?>" alt="<?=$in_query[$key]['name']?>" src="<?=Yii::app()->homeUrl.$in_query[$key]['src']?>">
+<?php
+}
+?>
+</div>
+<?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
+    'type'=>'striped bordered condensed',
+    'dataProvider'=>$in,
     'template'=>"{items}",
 	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
 	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
@@ -15,17 +95,8 @@
             'htmlOptions'=>array('style'=>'width: 50px'),
         ), */
     ),
-	'selectionChanged'=>'js:function(id)
-	{
-		/* $("#dialog").val($.fn.yiiGridView.getSelection(id));
-		$("#dialog").click(); */
-		/* $("#id_place").val($.fn.yiiGridView.getSelection(id));
-	    var select_val = $(".selected");
-	    $("#place_location").val(select_val.find("td").eq(0).text());
-	    $("#place_address").val(select_val.find("td").eq(1).text()+" ("+select_val.find("td").eq(2).text()+")");
-	    $("#mydialog").dialog("close"); */
-	}'
 )); ?>
+</div>
 
 <input type="hidden" name="dialog" value="" data-toggle="modal" data-target="#myModal" id="dialog"/>
 <?php $this->beginWidget('application.extensions.bootstrap.widgets.TbModal', array('id'=>'myModal')); ?>
@@ -74,7 +145,7 @@
         'label'=>'Сохранить',
         'url'=>'#',
     	'htmlOptions'=>array('data-dismiss'=>'modal',
-    							'onclick'=>'banner.update_field(
+    							'onclick'=>'_banner.update_field(
     													"link",
     													$(".modal_select_radio:checked").attr("data-id"),
     													$(".modal_select_radio:checked").attr("data-banner"))'),

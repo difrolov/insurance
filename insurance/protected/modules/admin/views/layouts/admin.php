@@ -1,4 +1,4 @@
-<?php /* @var $this Controller */ 
+<?php /* @var $this Controller */
 	$url=Yii::app()->request->getBaseUrl(true);?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -21,9 +21,9 @@
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
-<?	if (isset($_GET['test'])):?>    
+<?	if (isset($_GET['test'])):?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/test.css" media="screen, projection" />
-<?	endif;?>    
+<?	endif;?>
 	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
@@ -31,7 +31,7 @@
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/generator.css" />
-<?	
+<?
 	require_once Yii::getPathOfAlias('webroot')."/css/admin/generator2.php";
 	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
 	<script src="<?=$url?>/js/admin/generator/prepare_data.php"></script>
@@ -73,6 +73,8 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		    	array('label'=>'Файловый менеджер', 'url'=>Yii::app()->createUrl('admin/default/browser')),
 		        array('label'=>'Управление разделами', 'url'=>Yii::app()->createUrl('admin/object/getobject/44'), 'active'=>true),
 		        array('label'=>'Управление баннерами', 'url'=>Yii::app()->createUrl('admin/banner/getbanner')),
+		    	array('label'=>'Управление статьями', 'url'=>Yii::app()->createUrl('admin/content/getcontent')),
+		    	array('label'=>'Управление вакансиями', 'url'=>Yii::app()->createUrl('admin/modules/getjobs')),
 		    ),
 		)); ?>
 	</div>

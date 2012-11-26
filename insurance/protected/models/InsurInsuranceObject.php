@@ -51,7 +51,7 @@ class InsurInsuranceObject extends CActiveRecord
 			array('date_changes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, status, parent_id, action, category_id, date_changes', 'safe', 'on'=>'search'),
+			array('id, name, status, parent_id, alias, category_id, date_changes', 'safe', 'on'=>'search'),
 		);
 	}
 

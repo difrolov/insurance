@@ -182,9 +182,8 @@ ORDER BY name, parent_name';
 		}
 		$sel="";
 		if(count($str) > 0){
-			$sel .= '<img class="banner" id="banner_'.$id.'" alt="" src="/insur/insurance/'.$sel_img.'">'.
-					'<br/><br/><select name="banner"'.
-					'onchange="banner.update_field(\'src\',\'upload/img/banner/\'+$(this).val(),'.$id.')">';
+				$sel .= '<select name="banner"'.
+						'onchange="_banner.update_field(\'src\',\'upload/img/banner/\'+$(this).val(),'.$id.')">';
 			foreach($str as $val){
 				$sel .='<option onmouseover="$(\'#banner_'.$id.'\').attr(\'src\',\'/insur/insurance/upload/img/banner/'.$val.'\')"'.
 						'value="'.$val.'" '.($val==substr($sel_img,18)?"selected":"").'>'.
@@ -199,9 +198,15 @@ ORDER BY name, parent_name';
 		return '<a data-toggle="modal" href="#" data-target="#myModal"'.
 		'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">'.$val.'</a>';
 	}
-
-	public static function dateToRender($fromDate)
-	{
+		public static function createStatusBaner($data){
+			return ($data?'<span class="out_'.$data.'"> Активен </span>':'<span class="out_'.$data.'"> Отключен </span>');
+		}
+		public static function createStatusContent($data,$id){
+			$a="<a onclick='_object.updateContentStatus(".$id.");return false;' href='#'".
+			"class='contStatus_".$id."' >".($data?'Активен':'Отключен')."</a>";
+			return $a;
+		}
+		public static function dateToRender($fromDate){
 		if ($fromDate == null) return null;
 		// var_dump($fromDate); die();
 		$date = explode('-',$fromDate);

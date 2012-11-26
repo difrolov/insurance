@@ -1,32 +1,4 @@
 <div>Статьи</div>
-<?php
-if (isset($gridDataProvider)){
- $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
-    'type'=>'striped bordered condensed',
-    'dataProvider'=>$gridDataProvider,
-    'template'=>"{items}",
-    'columns'=>array(
-       	array('name'=>'id', 'header'=>'#'),
-        array('name'=>'name', 'header'=>'Наименование'),
-       /*  array('name'=>'created', 'header'=>'Дата изменения'),
-    	array('name'=>'status', 'header'=>'Видимость'), */
-
-        array(
-            'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
-            'htmlOptions'=>array('style'=>'width: 50px'),
-        	'template'=>'{update}{delete}',
-        	'buttons'=>array(
-        				'update' => array(
-        						'url'=>'Yii::app()->createUrl("admin/object/edit", array("id"=>$data[\'id\']))',
-        				),
-        				'delete' => array(
-        						'url'=>'Yii::app()->createUrl("admin/object/delete", array("id"=>$data[\'id\']))',
-        				),
-        		),
-        ),
-    ),
-));
-} ?>
 <br class="clear">
 <?php $this->widget('bootstrap.widgets.TbButton', array(
 	    'label'=>"Добавить статью",
@@ -37,6 +9,37 @@ if (isset($gridDataProvider)){
 	    		'data-target'=>"#myModal"
 	    		),
 )); ?>
+<br class="clear">
+<?php
+if (isset($gridDataProvider)){
+ $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
+    'type'=>'striped bordered condensed',
+    'dataProvider'=>$gridDataProvider,
+    'template'=>"{items}{pager}",
+ 	'filter'=>$model,
+    'columns'=>array(
+       	array('name'=>'id', 'header'=>'#'),
+        array('name'=>'name', 'header'=>'Наименование'),
+        array('name'=>'status','header'=>'Статус','type'=>'html',
+        		'value'=>'HelperAdmin::createStatusContent($data->status,$data->id)'),
+    	/*array('name'=>'status', 'header'=>'Видимость'), */
+
+        array(
+            'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
+            'htmlOptions'=>array('style'=>'width: 50px'),
+        	'template'=>'{update}{delete}',
+        	'buttons'=>array(
+        				'update' => array(
+        						'url'=>'Yii::app()->createUrl("admin/content/edit", array("id"=>$data[\'id\']))',
+        				),
+
+        		),
+        ),
+    ),
+));
+} ?>
+<br class="clear">
+
 
 <?php $this->beginWidget('application.extensions.bootstrap.widgets.TbModal',
 			array('id'=>'myModal',

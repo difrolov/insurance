@@ -1,6 +1,7 @@
 <?php
 // change the following paths if necessary
 error_reporting(E_ALL);
+session_start();
 $yii=dirname(__FILE__).'/../yii/framework/yii.php';
 if(strstr($_SERVER['HTTP_HOST'],"localhost")){
 	$config=dirname(__FILE__).'/protected/config/local.php';

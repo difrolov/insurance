@@ -14,12 +14,22 @@ class BannerController extends Controller{
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		$model = new InsurBanners();
-		$gridDataProvider = $model->search();
-		$this->render('getbanner',array('gridDataProvider'=>$gridDataProvider));
+		$gridDataProvider_out = new CActiveDataProvider($model->search('place="outside"'), array(
+				'pagination'=> array(
+						'pageSize'=> 3
+				),
+		));
+		//$gridDataProvider_out = $model->search('place="outside"');
+		$gridDataProvider_in = $model->search('place="inside"');
+		$out_query = InsurBanners::model()->findAll(array('condition'=>'place="outside"'));
+		$in_query = InsurBanners::model()->findAll(array('condition'=>'place="inside"'));
+		$this->render('getbanner',array('in'=>$gridDataProvider_in,'out'=>$gridDataProvider_out,
+										'out_query'=>$out_query,'in_query'=>$in_query));
 	}
 	public function actionAjaxUpdate(){
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+			exit;
 		}
 		if(isset($_POST['id']) && isset($_POST['field']) && isset($_POST['val'])){
 			$query = InsurBanners::model()->find(array('condition'=>'id='.$_POST['id']));
@@ -32,14 +42,46 @@ class BannerController extends Controller{
 				echo '{success:1}';
 				exit;
 			}
-
 			echo '{success:ошбка вставки в БД}';
 			exit;
 		}
 		echo '{success:переданы не все параметры}';
 		exit;
 	}
-
+	//меняем статус банера
+	public function actionAjaxUpdateStatus(){
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+			exit;
+		}
+		if(isset($_POST['ban']) && isset($_POST['val'])){
+			$query = InsurBanners::model()->findAll(array('condition'=>'place="'.$_POST['ban'].'"'));
+			foreach($query as $key=>$val){
+				$query[$key]->status = $_POST['val'];
+				$query[$key]->save();
+			}
+			echo json_encode(array('success'=>1));
+			exit;
+		}
+		echo json_encode(array('success'=>'переданы не все параметры'));
+		exit;;
+	}
+	//добавляем банеры
+	public function actionAddBaner(){
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		if(isset($_GET['set'])){
+			if($_GET['set']=="out"){
+				$model = new InsurBanners();
+				$model->name="банер1";
+				$model->status = 0;
+				$model->place = 'outside';
+				$model->save();
+			}
+		}
+		$this->redirect(Yii::app()->createUrl('admin/banner/getbanner'));
+	}
 
 
 

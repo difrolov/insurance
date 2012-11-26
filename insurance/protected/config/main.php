@@ -52,6 +52,7 @@ return array(
 		),
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
+			'caseSensitive'=>false,
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(

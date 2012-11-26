@@ -6,12 +6,13 @@ class DefaultController extends Controller
 	public function actionIndex(){
 
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
-	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login/admin'));
 		}
 		$this->render('index');
 	}
 
 	public function actions() {
+		die("qqqqq");
 	    return array(
             'connector' => array(
                 'class' => 'application.extensions.elfinder.ElFinderConnectorAction',

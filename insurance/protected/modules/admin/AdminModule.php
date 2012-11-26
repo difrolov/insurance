@@ -1,4 +1,4 @@
-<?php	
+<?php
 class AdminModule extends CWebModule
 {
 	private $_config = array();
@@ -8,8 +8,8 @@ class AdminModule extends CWebModule
 		$this->configure($config);
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-		if (Yii::app()->user->isGuest){
-			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
+	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login/admin'));
 		}
 		// import the module-level models and components
         $this->setImport(array(

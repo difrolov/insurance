@@ -173,6 +173,29 @@ class Bootstrap extends CApplicationComponent
 	}
 
 	/**
+	 * Registers a specific css in the asset's css folder
+	 * @param string $cssFile the css file name to register
+	 * @param string $media the media that the CSS file should be applied to. If empty, it means all media types.
+	 */
+	public function registerAssetCss($cssFile, $media = '')
+	{
+		Yii::app()->getClientScript()->registerCssFile($this->getAssetsUrl() . "/css/{$cssFile}", $media);
+	}
+
+	/**
+	 * Register a specific js file in the asset's js folder
+	 * @param string $jsFile
+	 * @param int $position the position of the JavaScript code.
+	 * @see CClientScript::registerScriptFile
+	 */
+	public function registerAssetJs($jsFile, $position = CClientScript::POS_END)
+	{
+		Yii::app()->getClientScript()->registerScriptFile($this->getAssetsUrl() . "/js/{$jsFile}", $position);
+	}
+
+
+
+	/**
 	 * Registers the Bootstrap carousel plugin.
 	 * @param string $selector the CSS selector
 	 * @param array $options the plugin options
@@ -318,7 +341,7 @@ class Bootstrap extends CApplicationComponent
 	* Returns the URL to the published assets folder.
 	* @return string the URL
 	*/
-	protected function getAssetsUrl()
+	public function getAssetsUrl()
 	{
 		if (isset($this->_assetsUrl))
 			return $this->_assetsUrl;
