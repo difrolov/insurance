@@ -418,13 +418,17 @@ class setHTML{
 					ob_start(); 
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
-					if ( isset($curController)
-						 && $curController==$subMenuItems["id"]
-					   ) {?>
-					<div class="active"><?=$linkContent?></div>	
-				<?	}else 
-						echo $linkContent;
-					// echo "<br>parent_alias= ".$parent_alias."<br>";
+					if (isset($curController)){
+			?><div<?	// 
+						if ($curController==$subMenuItems["id"]):
+		
+			?> class="active"<? 
+		
+						endif;?>><?	echo $linkContent;
+		
+			?></div><?	
+		
+					}else echo $linkContent;
 				}
 			endforeach;
 		}

@@ -77,12 +77,11 @@ order by id ASC";
 		// присвоить данные полученным объектам:
 		for($i=0,$j=count($res);$i<$j;$i++){
 			$section_data=$res[$i]; // текущая запись из БД
-			for($y=0,$x=count($arrFields);$y<$x;$y++) // начиная с "name", т.к. 'id' является ключом массива
+			for($y=0,$x=count($arrFields);$y<$x;$y++)
 				$arrRes[$arrFields[$y]]=$section_data[$arrFields[$y]];
 			$arrRes['level']=$level; // добавляем в массив данных сведения об иерархическом уровне текущего подраздела (может пригодиться при назначении HTML-атрибутов и т.п.)
 			$result[$section_data['id']]=$arrRes; // сохраняем данные таблицы для подраздела в массиве
 			if((int)$section_data['children']){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
-				//if($parent_id==-2) echo "<h1 style='color:red'>children : ".$section_data['children']."</h1><hr>";
 				for($k=0,$m=$section_data['children'];$k<$m;$k++){
 					self::getObjectsRecursive($fields,(int)$section_data['id'],$level,&$result);
 				}
