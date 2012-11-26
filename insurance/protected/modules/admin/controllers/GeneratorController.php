@@ -149,11 +149,12 @@ class GeneratorController extends Controller
 									************************************/
 									$model_content = new InsurArticleContent;
 									$model_content->content = $text;
-									$model_content->name = $header;
-									$model_content->status = 1;
 									$model_content->created = date("Y-m-d H:i:s");
-									$model_content->object_id = $post['parent'];
+									$model_content->status = 1;
 									$model_content->insur_coworkers_id = Yii::app()->user->id;
+									$model_content->object_id = $post['parent'];
+									$model_content->name = $header;
+									$model_content->save();
 									// 2. получить id сохранённой статьи
 									/************************************
 										ПРОЦЕДУРА ПОЛУЧЕНИЯ id....

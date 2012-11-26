@@ -44,10 +44,12 @@ function test_parseLayout(obj){
 			var pContent='<div>';
 			pContent+='		<div class="padding10 borderRadius marginBottom4">Блок ['+ob+']:';
 			pContent+='			<div class="padding10 borderRadius bgLightGrey">';
-			if (ob.indexOf('moduleClicked')==-1){ 
+			if (ob.indexOf('moduleClicked')==-1
+				 && ob.indexOf('activeBlockIdentifier')==-1
+			   ){ 
 				var arrObj;
 				
-				if (ob!="Schema") alert('Тип элемента: '+typeof(currentObj)+'\nLayouts.blocks['+ob+'] = '+currentObj);
+				// if (ob!="Schema") alert('Тип элемента: '+typeof(currentObj)+'\nLayouts.blocks['+ob+'] = '+currentObj);
 				
 				if ( typeof currentObj == 'string'
 					 && currentObj.indexOf("|")!=-1
@@ -57,10 +59,10 @@ function test_parseLayout(obj){
 				else arrObj=new Array(currentObj);
 				
 				for(i=0;i<arrObj.length;i++)
-					pContent+='			<div>arrObj['+i+'] = '+arrObj[i]+'</div>';
+					pContent+='			<div>'+arrObj[i]+'</div>';
 			
 			}else{
-				pContent+='			<div style="background:#CEEFFF; padding:10px; margin:-10px;">Layouts.blocks['+ob+'] = '+currentObj+'</div>';
+				pContent+='			<div style="background:#CEEFFF; padding:10px; margin:-10px;">'+ob+' : '+currentObj+'</div>';
 			}
 			pContent+='			</div>';
 			pContent+='		</div>';

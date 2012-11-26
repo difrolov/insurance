@@ -365,15 +365,14 @@ class setHTML{
 							  ){
 		static $prev_level='top'; // для управления цепочкой родительских алиасов
 		
-		static $curController;
+		static $curControllerLeftMenu; // для управления доступом к главному и левому меню
 		
 		if($topAlias){
-			if($topAlias===true||is_array($topAlias)) {
+			if( $topAlias===true // пришли из главного меню
+				|| is_array($topAlias) // пришли из левого меню
+			  ) {
 				$topLevelAlias=$parent_alias;
-				if (is_array($topAlias)){
-					$curController=$topAlias['section_id'];  
-				}else
-					$curController=0;
+				$curControllerLeftMenu=(is_array($topAlias))? $topAlias['section_id']:0;
 			}else{
 				$topLevelAlias=$topAlias;
 			}
@@ -419,9 +418,9 @@ class setHTML{
 					ob_start(); 
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
-					if ($curController){
+					if ($curControllerLeftMenu){
 			?><div<?	// 
-						if ($curController==$subMenuItems["id"]):
+						if ($curControllerLeftMenu==$subMenuItems["id"]):
 		
 			?> class="active"<? 
 		
