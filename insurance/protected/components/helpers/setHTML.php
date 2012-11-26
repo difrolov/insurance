@@ -372,10 +372,11 @@ class setHTML{
 				$topLevelAlias=$parent_alias;
 				if (is_array($topAlias)){
 					$curController=$topAlias['section_id'];  
-				}
-			}
-			else
+				}else
+					$curController=0;
+			}else{
 				$topLevelAlias=$topAlias;
+			}
 		}
 		if (!isset($topLevelAlias)) $topLevelAlias=false;
 		
@@ -418,7 +419,7 @@ class setHTML{
 					ob_start(); 
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
-					if (isset($curController)){
+					if ($curController){
 			?><div<?	// 
 						if ($curController==$subMenuItems["id"]):
 		
