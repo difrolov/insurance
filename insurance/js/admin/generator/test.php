@@ -2,6 +2,7 @@
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 $(document).ready(	function(e) {
+	testCount=0;
 	var tInfoBlock=$('div[data-test="template"]');
 	var aManage=$('#test_block_appearance');
 	//$(tInfoBlock).mousedown().resizable();
@@ -21,7 +22,14 @@ $(document).ready(	function(e) {
 });
 // распарсить и отобразить объект макета:
 function test_parseLayout(obj){
-	if (!obj) obj=Layout;
+	testCount++;
+	document.title='tCnt: '+testCount+', aId: '+Layout.blocks.activeBlockIdentifier;
+	if (!obj){ 
+		if (obj===false){
+			// alert('parsed activeBlockIdentifier START: '+Layout.blocks.activeBlockIdentifier);
+		}
+		obj=Layout;
+	}
 	// obj 		- объект
 	// ob		- свойство объекта
 	// currentObj[ob] 	- значение свойства (литерал) объекта
@@ -33,29 +41,33 @@ function test_parseLayout(obj){
 			toPlace.innerHTML+='<div>Блок '+ob+':</div>';
 			test_parseLayout(currentObj);
 		}else{ 
-				var pContent='<div>';
-				pContent+='		<div class="padding10 borderRadius marginBottom4">Блок '+ob+':';
-				pContent+='			<div class="padding10 borderRadius bgLightGrey">';
+			var pContent='<div>';
+			pContent+='		<div class="padding10 borderRadius marginBottom4">Блок ['+ob+']:';
+			pContent+='			<div class="padding10 borderRadius bgLightGrey">';
 			if (ob.indexOf('moduleClicked')==-1){ 
 				var arrObj;
-				//if (ob!="Schema") alert('type of currentObj is: '+typeof(currentObj)+'\nname of element is: '+ob+'\nvalue of currentObj is: '+currentObj);
+				
+				if (ob!="Schema") alert('Тип элемента: '+typeof(currentObj)+'\nLayouts.blocks['+ob+'] = '+currentObj);
+				
 				if ( typeof currentObj == 'string'
 					 && currentObj.indexOf("|")!=-1
 				   )
 					var	arrObj=currentObj.split("|");
+				
 				else arrObj=new Array(currentObj);
 				
 				for(i=0;i<arrObj.length;i++)
-					pContent+='			<div>'+arrObj[i]+'</div>';
+					pContent+='			<div>arrObj['+i+'] = '+arrObj[i]+'</div>';
+			
 			}else{
-				pContent+='			<div style="background:#CEEFFF; padding:10px; margin:-10px;">'+ob+': '+currentObj+'</div>';
+				pContent+='			<div style="background:#CEEFFF; padding:10px; margin:-10px;">Layouts.blocks['+ob+'] = '+currentObj+'</div>';
 			}
 			pContent+='			</div>';
 			pContent+='		</div>';
 			pContent+='</div>';
 			toPlace.innerHTML+=pContent;
 		}
-	}	
+	} //alert('parsed activeBlockIdentifier FINISH: '+Layout.blocks.activeBlockIdentifier);	
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

@@ -28,7 +28,7 @@ if (isset($data)&&isset($model_modules)){
     	<div id="sections_radios">
         <label>
           <span>
-        	<input type="radio" name="menu" id="none" value="radio"<? if (!$section_parent_id){?> checked<? }?>><b id="no_parent">Без родительского раздела</b>
+        	<input type="radio" name="menu" id="none" value="radio"<? if ($section_parent_id!==false){?> checked<? }?>><b id="no_parent">Без родительского раздела</b>
           </span>
         </label><br>
 	<?	HelperAdmin::makeSectionsMap($allObjectsArray,$section_parent_id);?>

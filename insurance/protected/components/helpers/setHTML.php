@@ -222,6 +222,18 @@ class setHTML{
 					<p id="all_news"><a href="#">все новости...</a></p>
 <?	}
 /**
+ * Построить левое статическое меню, идентичное по содержанию выпадающему
+ * @package
+ * @subpackage
+ */
+	function buildLeftStaticMenu($section_id){
+		$top_alias=Yii::app()->controller->getId();
+		$top_id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$top_alias.'"')->queryScalar();
+		$items_data=Data::getObjectsRecursive( false, // поля извлечения данных
+								  		  	   $top_id);
+		self::buildSubmenuLinks($items_data,$top_alias,$section=array('section_id'=>$section_id));
+	}
+/**
  * @package		HTML
  * @subpackage		logo
  *
@@ -352,8 +364,18 @@ class setHTML{
 								$topAlias=false // самое верхнее меню alias
 							  ){
 		static $prev_level='top'; // для управления цепочкой родительских алиасов
+		
+		static $curController;
+		
 		if($topAlias){
-			$topLevelAlias=($topAlias===true)? $parent_alias:$topAlias;
+			if($topAlias===true||is_array($topAlias)) {
+				$topLevelAlias=$parent_alias;
+				if (is_array($topAlias)){
+					$curController=$topAlias['section_id'];  
+				}
+			}
+			else
+				$topLevelAlias=$topAlias;
 		}
 		if (!isset($topLevelAlias)) $topLevelAlias=false;
 		
@@ -370,29 +392,39 @@ class setHTML{
 					// if(isset($topLevelAlias)) echo "<br><b>topLevelAlias:</b><br>$topLevelAlias";
 					// else echo ", <h1 style='color:red'>NO topLevelAlias!</h1>";
 					//echo "</div>"; //**********************************
-						?><a href="<?=Yii::app()->request->baseUrl.'/';
-						if ($level==1) {
-							$parent_alias=$topLevelAlias;
-							$link=$topLevelAlias."/".$subMenuItems['alias'];
-						}elseif($level<$prev_level){ // данный подраздел находится выше предыдущего
-							// будем вырезать промежуточные алиасы:
-							$aDiff=$prev_level-$level;
-							$parentAliases=explode("/",$parent_alias);
-							while($aDiff){
-								array_pop($parentAliases);
-								$aDiff--;
-							}
-							$parent_alias=implode("/",$parentAliases);
+						
+					if ($level==1) {
+						$parent_alias=$topLevelAlias;
+						$link=$topLevelAlias."/".$subMenuItems['alias'];
+					}elseif($level<$prev_level){ // данный подраздел находится выше предыдущего
+						// будем вырезать промежуточные алиасы:
+						$aDiff=$prev_level-$level;
+						$parentAliases=explode("/",$parent_alias);
+						while($aDiff){
+							array_pop($parentAliases);
+							$aDiff--;
 						}
-						if ( isset($subMenuItems['children']) // есть вложенные уровни
-							 || $level>1	// вложенных нет, есть родительские
-						   ){
-							$link=$parent_alias.'/'.$subMenuItems['alias'];						
-							if(isset($subMenuItems['children']))
-								$parent_alias.='/'.$subMenuItems['alias'];
-						}
-					echo $link;?>"><?=$link_text?></a><?	
-					$prev_level=$level; // установим текущий уровень подраздела // echo "<br>parent_alias= ".$parent_alias."<br>";
+						$parent_alias=implode("/",$parentAliases);
+					}
+					if ( isset($subMenuItems['children']) // есть вложенные уровни
+						 || $level>1	// вложенных нет, есть родительские
+					   ){
+						$link=$parent_alias.'/'.$subMenuItems['alias'];						
+						if(isset($subMenuItems['children']))
+							$parent_alias.='/'.$subMenuItems['alias'];
+					}
+					$prev_level=$level; // установим текущий уровень подраздела 
+					
+					ob_start(); 
+						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
+					ob_get_clean();
+					if ( isset($curController)
+						 && $curController==$subMenuItems["id"]
+					   ) {?>
+					<div class="active"><?=$linkContent?></div>	
+				<?	}else 
+						echo $linkContent;
+					// echo "<br>parent_alias= ".$parent_alias."<br>";
 				}
 			endforeach;
 		}
@@ -465,34 +497,14 @@ class setHTML{
 		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
 		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
-			$section_data->first_header=$section_data->name;
-	$arrItems=array( 'О компании',  
-					 'О корпорации',  
-					 'Руководство',  
-					 'Раскрытие информации',  
-					 'Клиенты компании',  
-					 'Партнеры компании', 
-					 'Новости компании',  
-					 'Вакансии',  
-					 'Контакты');
-	$items_data=Yii::app()->db->createCommand("
-	SELECT id, name,  `status` , 
-		IF( parent_id <0, 
-			(	SELECT alias
-				FROM insur_insurance_object
-				WHERE id = i2.id
-			), 
-			(	SELECT alias
-				FROM insur_insurance_object
-				WHERE id = i2.parent_id
-			) 
-		) AS parent, alias
-		FROM insur_insurance_object AS i2
-		WHERE name
-		IN (  '".implode("','",$arrItems)."'
-			)")->queryAll();?>
+			$section_data->first_header=$section_data->name;?>
 	<div id="inner_left_menu">
-	<?	$cnt=0;		
+	<?	//var_dump("<h1>section_data:</h1><pre>",$section_data->id,"</pre>");
+		self::buildLeftStaticMenu($section_data->id);
+
+		
+		/*$cnt=0;		
+		if ($cnt)
 		for($i=0,$j=count($arrItems);$i<$j;$i++){?>
         <div<?
 			
@@ -516,7 +528,7 @@ class setHTML{
 			}
 			$cnt++;?>
         </div>
-	<?	}?>
+	<?	}*/?>
     		
     </div>
     <?	// если тестируемся:

@@ -318,12 +318,12 @@ div#inner_left_menu{
 	vertical-align:top;  
 	width:200px;
 }
-div#inner_left_menu 
-	> div{
-	line-height:27px;
+div#inner_left_menu blockquote{
+	margin:0;
+	padding:0 0 0 10px;
 }
-div#inner_left_menu div{
-	
+div#inner_left_menu a{
+	line-height:27px;
 }
 div#inner_left_menu div.active{
 	margin-left:-16px;

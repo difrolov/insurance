@@ -1,4 +1,4 @@
-﻿<?
+<?
 $base_url=$_GET['base_url'];
 if (isset($dwshow)){?><script><? }
 ob_start();?>
@@ -219,7 +219,7 @@ function getDataFromCKeditor(){
   try{
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
 	var eHeader=$('input#article_header').val();
-	//alert(eText);
+	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
 	// добавить к текстовому модулю текст статьи
 	addArticleIdOrTextToModule(false,eText,eHeader);
   }catch(e){
@@ -379,6 +379,8 @@ function storeLayoutBlockData(obj){
 	Layout.blocks.activeBlockIdentifier=getBlockNumber(curColumn); // идентификатор (№/footer) активного  блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
 	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
+	test_parseLayout(false);
+	//alert('after test: '+Layout.blocks.activeBlockIdentifier);
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

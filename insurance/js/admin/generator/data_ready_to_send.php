@@ -14,33 +14,35 @@ $(function(){
 			$(checkAl).fadeIn(200);
 		}
 		if (alias){
-			var re = /[^\w]/g;
-			if(re.test(alias)){
+			//var re = /[^\w_]/g;
+			//if(re.test(alias)){
+			var mss=false;
+			if (mss=checkAliasValid(alias)){
 				$(checkAl).attr('class','alarm');
-				$(checking_result).html('Вы ввели недопустимые символы в поле для алиаса!');
+				$(checking_result).html(mss);
 			}else{
 				// alert('Url: '+$('#seek_alias').val()+'\nData: '+alias);
 				if (new_alias){
 					$.ajax ({
-					type: "GET",
-					url: $('#seek_alias').val(),
-					data: "alias="+alias,
-					success: function (data) {
-						var alias_stat,classNm;
-						if (data=='allow'){
-							alias_stat="свободен";
-							classNm='safe';
-						}else{
-							alias_stat="занят, укажите другой";
-							classNm='warning';
-						} //alert(data);
-						$(checkAl).attr('class',classNm);
-						$(checking_result).html('&nbsp;алиас '+alias_stat+'&nbsp;');
-					},
-					error: function (alias_stat) {
-						alert("Не проверить доступность указанного алиаса..."); 
-					}
-				})
+						type: "GET",
+						url: $('#seek_alias').val(),
+						data: "alias="+alias,
+						success: function (data) {
+							var alias_stat,classNm;
+							if (data=='allow'){
+								alias_stat="свободен";
+								classNm='safe';
+							}else{
+								alias_stat="занят, укажите другой";
+								classNm='warning';
+							} //alert(data);
+							$(checkAl).attr('class',classNm);
+							$(checking_result).html('&nbsp;алиас '+alias_stat+'&nbsp;');
+						},
+						error: function (alias_stat) {
+							alert("Не проверить доступность указанного алиаса..."); 
+						}
+					})
 				}
 			}
 		} //		
@@ -70,13 +72,19 @@ $(function(){
 			reqS[errCount]='alias';
 			errCount++;
 		}else{
+			var mss=false;
+			if (mss=checkAliasValid($('#alias').val())){
+				errMess[errCount]=mss;
+				reqS[errCount]='alias';
+				errCount++;
+			}/*
 			var aVal=$('#alias').val(); 
-			var re = /[^a-z]/g;
+			var re = /[^\w_]/g;
 			if(re.test(aVal)){
 				errMess[errCount]='Вы ввели недопустимые символы в поле для алиаса подраздела!\nДопускаются ТОЛЬКО латинские буквы, цифры и знак подчёркивания.';
 				reqS[errCount]='alias';
 				errCount++;
-			}else if($('#check_alias_info').attr('class')=='warning'){
+			}*/else if($('#check_alias_info').attr('class')=='warning'){
 				errMess[errCount]='Указанный вами алиас занят, укажите другой.';
 				reqS[errCount]='alias';
 				errCount++;
@@ -133,6 +141,13 @@ $(function(){
 	  alert(e.message);
   }
 });
+function checkAliasValid(aVal){
+	var re = /[^\w_]/g;
+	if(re.test(aVal)){
+		return 'Вы ввели недопустимые символы в поле для алиаса подраздела!\nДопускаются ТОЛЬКО латинские буквы, цифры и знак подчёркивания.';
+	}else
+		return false;
+}
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
 echo $myscript;
