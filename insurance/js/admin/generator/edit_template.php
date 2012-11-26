@@ -1,6 +1,6 @@
-<?	$aMods=$this->getAllModulesNames($model_modules);
+<?	$aMods=$this->getAllModulesNames($model_modules); 
 	// см. $aMods в set_modules.php
-	$testTmpl=true; // test mode
+	$testTmpl=false; // test mode
 	//**************************************************
 	$Shema=false;
 	if(isset($data)){
@@ -138,34 +138,44 @@ $(function(){
 				$(tPyctSecond).trigger('click'); // клик по второй пиктограмме макета			
 			$(tPyctLast).trigger('click'); // клик по последней пиктограмме макета
 		}
+		
+		
+		$('div#tmplPlace').css('display','block');
+		
+		
 		$(btn_loadLayout).trigger('click'); // клик по пиктограмме загрузки макета
 		var tmplArea=$('div#tmplPlace >div:first-child >div'); // колонки макета
-		$(tmplArea).filter(':first-child').trigger('click'); // клик по активной (первой) колонке
 		var curMods=$('div#select_mod div[data-module-type]');
 	<?	// пройтись по всем блокам и собрать их контент:
+		$colCnt=0; // индекс колонки
 		foreach($SectionDataContent['blocks'] as $block_name=>$block){
 			if( $block_name==2 // заголовок подраздела
 			    && strstr($block,"header:") // не массив, а строка; есть метка заголовка
 			  ){ 
 				$headerText=substr($block,strpos($block,":")+1);?>
 		$('div[data-block-type="header"] input[type="text"]').val('<?=$headerText?>');
-		<?	}else{
-				// пройтись по блоку и собрать его модули:
-				for($i=0,$j=count($block);$i<$j;$i++){
-					$blockContent=$block[$i]; // Новости, Готовое решение ...
+		Layout.blocks[2]='<?=$block?>';
+		<?	}else{?>
+		$(tmplArea).eq(<?=$colCnt?>).trigger('click'); // эмулировать клик по активной колонке
+			<?	for($i=0,$blockModulesCount=count($block);
+					$i<$blockModulesCount;
+					$i++
+				   ){ // пройтись по блоку и собрать его модули
+					$moduleContent=$block[$i]; // Новости, Готовое решение ...
+					$modIndex=false;
 					// получить ключ существующего модуля, чтобы далее эмулировать клик по нему и добавление в текущую колонку:
-					if(in_array($blockContent,$aMods))
-						$modIndex=array_search($blockContent,$aMods);
-					elseif(strstr($blockContent,"Текст :: article id:"))
+					if(in_array($moduleContent,$aMods)){
+						$modIndex=array_search($moduleContent,$aMods);?>
+				<?	}elseif(strstr($moduleContent,"Текст :: article id:"))
 						$modIndex=count($aMods)-1;					
-					if($modIndex){?>
-	$(curMods).eq(<?=$modIndex?>).trigger('click');
-	alert('exists: <?=$blockContent?>');
-				<? }
+					if($modIndex!==false){?>
+	$(curMods).eq(<?=$modIndex?>).trigger('click'); // добавить модуль в активную колонку
+				<? 	}
 				}
 			}
+			$colCnt++;
 		}?>	
-		// $(tmplArea).each(  function (i){});
+		$(tmplArea).last().removeAttr('style').removeAttr('data-column_stat');
 <?		if($testTmpl) :?>
 		test_parseLayout();
 <?		endif;?>

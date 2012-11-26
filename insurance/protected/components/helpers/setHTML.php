@@ -115,7 +115,7 @@ class setHTML{
 			<li>
             	<div class="txtLightBlue txtMediumSmall">Виды страхования</div>
 			<? self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
-        <?	$corps=true;
+        <?	$corps=false;
 			if ($corps){
 				$arrCorps=array(
 						'building'=>'Строительные компании',
@@ -697,14 +697,16 @@ div.schema30s > div{
 					'ready_solution2'=>'Готовое решение 2',
 				);
 			$i=1;
-			foreach ($tmpl['blocks'] as $block_name=>$block){?>
+			if (isset($tmpl['blocks'])) {
+				foreach ($tmpl['blocks'] as $block_name=>$block){?>
 				<div id="div<?=$i?>">
                 	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
             	<? 	if($block_name==2&&$bloxHeaderType!='0'){ 
-						//echo "<h1 style='color:red'>block[2]= ".$block[2]."</h1>"; die();
-						$headerText=substr($block,strpos($block,":")+1);
-						echo "<h2 class=\"subsectHeader\">".$headerText."</h2>";?>
-				<?	}else{
+						echo(is_array($block))? 
+							"<span style='color:red'>Ошибка: неправильный тип данных для заголовка (массив вместо строки)...</span>"
+							:
+						 	"<h2 class=\"subsectHeader\">".substr($block,strpos($block,":")+1)."</h2>";
+					}else{
 						$artIdSbstr="Текст :: article id:";
 						// собрать контент текущего блока:
 					  $for=true;
@@ -748,7 +750,10 @@ div.schema30s > div{
                 	</div>
                 </div>	
 		<?		$i++;
-			}?>
+			}
+			}else{?>
+            <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
+		<? 	}?>
         <div class="clear">&nbsp;</div>
 		<?	// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
    </div>     

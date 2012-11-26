@@ -6,7 +6,13 @@ $(function(){
 		var alias=$(this).val();
 		var checkAl=$('#check_alias_info');
 		var checking_result=$(checkAl).find('div#checking_result');
-		$(checkAl).fadeIn(200);
+		var new_alias=false;
+		if (!document.getElementById('old_alias')
+			|| $('input#old_alias').val()!=alias
+		   ) {
+			new_alias=true;
+			$(checkAl).fadeIn(200);
+		}
 		if (alias){
 			var re = /[^\w]/g;
 			if(re.test(alias)){
@@ -14,7 +20,8 @@ $(function(){
 				$(checking_result).html('Вы ввели недопустимые символы в поле для алиаса!');
 			}else{
 				// alert('Url: '+$('#seek_alias').val()+'\nData: '+alias);
-				$.ajax ({
+				if (new_alias){
+					$.ajax ({
 					type: "GET",
 					url: $('#seek_alias').val(),
 					data: "alias="+alias,
@@ -34,6 +41,7 @@ $(function(){
 						alert("Не проверить доступность указанного алиаса..."); 
 					}
 				})
+				}
 			}
 		} //		
 	});

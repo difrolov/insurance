@@ -50,7 +50,7 @@ class GeneratorController extends Controller
 	 * @package
 	 * 
 	 */
-	public function actionGetObject(){
+	public function actionGetObject(){ 
 
 		if(!Yii::app()->user->checkAccess('admin')){
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));

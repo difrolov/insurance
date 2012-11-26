@@ -373,6 +373,9 @@ table#tblSlidesLastSeen td.slidesPointer{
 .txtLightBlue *, .txtLightBlue{
 	color:#00BCE4;
 }
+.txtRed{
+	color:red;
+}
 ul.insideDiv{
 	margin-left:-20px;
 }

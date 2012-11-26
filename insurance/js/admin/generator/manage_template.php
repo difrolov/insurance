@@ -2,72 +2,71 @@
 	$test=(isset($_GET['test']))? $_GET['test']:false;
 if (isset($dwshow)){?><script><? }
 ob_start();?>
+$( function(){
+	$('div#select_mod div[data-module-type]').click( function (){
+		addModuleIntoBlock(this);	
+	});
+});
 tBlock=false; // здесь будет сохраняться активный блок (объект)
 // добавить модуль в активную колонку:
-function addModuleIntoBlock(event,divBlock){
+function addModuleIntoBlock(srcEl){
   try{
-	var srcEl=(event.target)? event.target:event.srcElement;
-	if ( srcEl.parentNode==divBlock
-		 && tBlock // активный блок (гл. пер.) установлен (в selectColumn())
-	   ) {
-		var dataModuleType=$(srcEl).attr('data-module-type');
-		// получим индекс активной колонки и элемента объекта (блока):
-		var cIndex=$(tBlock.parentNode).children('div').index(tBlock);
-		var bi=0;
-		// block - имя элемента
-		// Layout.blocks[block] - значение элемента
-		for(var block in Layout.blocks){
-			if (bi==cIndex){
-				if (Layout.blocks[block]!='')
-					Layout.blocks[block]+='|';
-				Layout.blocks[block]+=dataModuleType;
-				//alert('block: '+block+', Layout.blocks[block]: '+Layout.blocks[block]);
-			}
-			bi++;
+	var dataModuleType=$(srcEl).attr('data-module-type');
+	// получим индекс активной колонки и элемента объекта (блока):
+	var aCol=$('div[data-column_stat="active"]');
+	var cIndex=$(aCol).parent('div').children().index(aCol); // alert(cIndex);
+	var bi=0;
+	// Layout.blocks[block] - значение элемента
+	for(var block in Layout.blocks){
+		if (bi==cIndex){
+			if (Layout.blocks[block]!='')
+				Layout.blocks[block]+='|';
+			Layout.blocks[block]+=dataModuleType; //alert('block: '+block+', Layout.blocks[block]: '+Layout.blocks[block]);
 		}
-<?	if ($test){?>		
-		// добавить данные в тестовый блок:
-		test_parseLayout();
-<?	}?>		
-		var newModule=$('<div>').appendTo(tBlock).attr({
-			class:'innerModule',
-			title:'Можно перемещать вверх-вниз...',
-		}).css('cursor','move')
-		  .append($('<div>').attr({
-				class:'mod_trash'
-			}).css('cursor','pointer')
-			  .append(
-				$('<a>',{
-					href:'#',
-					click:function(){
-						removeModule(this);
-						return false;
-					}
-				}).append(
-					$('<img>',{
-						src:"<?=$_GET['base_url']?>/images/trash.gif",
-						title:"Удалить модуль из колонки"
-					}).css('border','0'))));
-		
-		var content=$('<div>').appendTo(newModule)
-							  .text($(srcEl).text())
-							  .attr({
-								  'data-module-type':dataModuleType,
-								  class:'mod_content'
-								});
-		if ($(srcEl).attr('class')=='mod_type_text'){
-			var cPadding=parseInt($(newModule).css('padding-top').replace("px", ""));
-			$(newModule).css({
-					background:'#FFF',
-					border:'solid 2px #F90',
-					padding:(cPadding-2)+'px'
-			});
-			$(content).css('color','#08C');
-			// добавить ссылки (команды добавления текста/статьи) в текстовый модуль:
-			addTextModuleComLinks(content);
-		}
-		$('#pick_out_section').fadeIn(2000);
+		bi++;
 	}
+<?	if ($test){?>		
+	// добавить данные в тестовый блок:
+	test_parseLayout();
+<?	}?>		
+	var newModule=$('<div>').appendTo(tBlock).attr({
+		class:'innerModule',
+		title:'Можно перемещать вверх-вниз...',
+	}).css('cursor','move')
+	  .append($('<div>').attr({
+			class:'mod_trash'
+		}).css('cursor','pointer')
+		  .append(
+			$('<a>',{
+				href:'#',
+				click:function(){
+					removeModule(this);
+					return false;
+				}
+			}).append(
+				$('<img>',{
+					src:"<?=$_GET['base_url']?>/images/trash.gif",
+					title:"Удалить модуль из колонки"
+				}).css('border','0'))));
+	
+	var content=$('<div>').appendTo(newModule)
+						  .text($(srcEl).text())
+						  .attr({
+							  'data-module-type':dataModuleType,
+							  class:'mod_content'
+							});
+	if ($(srcEl).attr('class')=='mod_type_text'){
+		var cPadding=parseInt($(newModule).css('padding-top').replace("px", ""));
+		$(newModule).css({
+				background:'#FFF',
+				border:'solid 2px #F90',
+				padding:(cPadding-2)+'px'
+		});
+		$(content).css('color','#08C');
+		// добавить ссылки (команды добавления текста/статьи) в текстовый модуль:
+		addTextModuleComLinks(content);
+	}
+	$('#pick_out_section').fadeIn(2000);
   }catch(e){
 	  alert(e.message);
   }

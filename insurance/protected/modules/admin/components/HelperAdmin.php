@@ -65,7 +65,7 @@ ORDER BY name, parent_name';
  *
  *	
  */
-	function makeSectionsMap($array){
+	function makeSectionsMap($array,$external_parent_id=false){
 		foreach ($array as $section_id=>$section_data){
 			$sub='';
 			$b='';
@@ -73,14 +73,17 @@ ORDER BY name, parent_name';
 			if(isset($section_data['parent_id'])){
 				$parent_id=$section_data['parent_id'];
 				if($parent_id<0){
-					$b='<b>';
+					$b='<b';
+					if($external_parent_id==$section_id)
+						$b.=' style="color:#FFF"';
+					$b.='>';
 					$b_close='</b>';
 				}elseif($parent_id>0)
 					$sub='sub';
 			}?> 
         <label>
-          <span>
-        	<input name="menu" id="<?=$sub?>menu_<?=$section_id?>" type="radio" value="<?=$section_id?>"><?=$b?><?=$section_data['name']?><?=$b_close?>
+          <span<? if($external_parent_id==$section_id){?> class="selLabel"<? }?>>
+        	<input name="menu" id="<?=$sub?>menu_<?=$section_id?>" type="radio" value="<?=$section_id?>"<? if($external_parent_id==$section_id){?> checked<? }?>><?=$b?><?=$section_data['name']?><?=$b_close?>
           </span>
         </label><br>
 		<?	if (isset($section_data['children'])) {
