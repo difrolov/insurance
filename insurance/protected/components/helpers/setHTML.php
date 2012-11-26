@@ -133,9 +133,8 @@ class setHTML{
             </li>
 		<?	}?>
           </ul>
-	<?	}else
-			//echo "<div class='testBlock'>"; var_dump("<pre>",$subMenuItems,"</pre>");
-			self::buildSubmenuLinks($subMenuItems,$parent_alias,true); //echo "</div>";?>
+	<?	}else 
+			self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?>
         </div> 
 <?	}
 /**

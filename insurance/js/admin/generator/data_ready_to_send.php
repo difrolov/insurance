@@ -5,15 +5,13 @@ $(function(){
 	$('#alias').blur( function (){
 		var alias=$(this).val();
 		var checkAl=$('#check_alias_info');
-		var txtColorWhite='#FFF';
+		var checking_result=$(checkAl).find('div#checking_result');
 		$(checkAl).fadeIn(200);
 		if (alias){
-			var re = /[^a-z]/g;
+			var re = /[^\w]/g;
 			if(re.test(alias)){
-				$(checkAl).css({
-							backgroundColor:'red',
-							color:txtColorWhite
-						}).html('Вы ввели недопустимые символы в поле для алиаса!');
+				$(checkAl).attr('class','alarm');
+				$(checking_result).html('Вы ввели недопустимые символы в поле для алиаса!');
 			}else{
 				// alert('Url: '+$('#seek_alias').val()+'\nData: '+alias);
 				$.ajax ({
@@ -21,19 +19,16 @@ $(function(){
 					url: $('#seek_alias').val(),
 					data: "alias="+alias,
 					success: function (data) {
-						var alias_stat,bg;
+						var alias_stat,classNm;
 						if (data=='allow'){
 							alias_stat="свободен";
-							bg='#060';
+							classNm='safe';
 						}else{
 							alias_stat="занят, укажите другой";
-							bg='salmon';
+							classNm='warning';
 						} //alert(data);
-						$(checkAl).css({
-							backgroundColor:bg,
-							color:txtColorWhite
-						});
-						$(checkAl).html('&nbsp;алиас '+alias_stat+'&nbsp;');
+						$(checkAl).attr('class',classNm);
+						$(checking_result).html('&nbsp;алиас '+alias_stat+'&nbsp;');
 					},
 					error: function (alias_stat) {
 						alert("Не проверить доступность указанного алиаса..."); 
@@ -71,6 +66,10 @@ $(function(){
 			var re = /[^a-z]/g;
 			if(re.test(aVal)){
 				errMess[errCount]='Вы ввели недопустимые символы в поле для алиаса подраздела!\nДопускаются ТОЛЬКО латинские буквы, цифры и знак подчёркивания.';
+				reqS[errCount]='alias';
+				errCount++;
+			}else if($('#check_alias_info').attr('class')=='warning'){
+				errMess[errCount]='Указанный вами алиас занят, укажите другой.';
 				reqS[errCount]='alias';
 				errCount++;
 			}
