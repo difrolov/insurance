@@ -67,6 +67,7 @@ function addModuleIntoBlock(srcEl){
 		addTextModuleComLinks(content);
 	}
 	$('#pick_out_section').fadeIn(2000);
+	$('#save_tmpl_block').fadeIn(3000);
   }catch(e){
 	  alert(e.message);
   }

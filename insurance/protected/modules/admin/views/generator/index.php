@@ -1,4 +1,4 @@
-<? // var_dump("<h1>data:</h1><pre>",$data,"</pre>"); die();
+<DIV align="left" id="testBlockInfoBottom" class="testBlock pFixed" style="right:0; bottom:0; color:#F00; display:<?="none"?>;">&nbsp;</DIV><? // var_dump("<h1>data:</h1><pre>",$data,"</pre>"); die();
 if (isset($data)) // подключить скрипт с js-обработкой существущего макета:
 	require_once Yii::getPathOfAlias('webroot')."/js/admin/generator/edit_template.php";
 $groot=$this->groot; // директория Генератора

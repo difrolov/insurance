@@ -2,7 +2,7 @@
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 $(document).ready(	function(e) {
-	testCount=0;
+	// testCount=0;
 	var tInfoBlock=$('div[data-test="template"]');
 	var aManage=$('#test_block_appearance');
 	//$(tInfoBlock).mousedown().resizable();
@@ -22,8 +22,8 @@ $(document).ready(	function(e) {
 });
 // распарсить и отобразить объект макета:
 function test_parseLayout(obj){
-	testCount++;
-	document.title='tCnt: '+testCount+', aId: '+Layout.blocks.activeBlockIdentifier;
+	// testCount++;
+	// document.title='tCnt: '+testCount+', aId: '+Layout.blocks.activeBlockIdentifier;
 	if (!obj){ 
 		if (obj===false){
 			// alert('parsed activeBlockIdentifier START: '+Layout.blocks.activeBlockIdentifier);

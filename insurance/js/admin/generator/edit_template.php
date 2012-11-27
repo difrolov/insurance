@@ -15,7 +15,7 @@
 		// получить текущую схему макета:
 		$Shema=$SectionDataContent['Schema'];
 	} // данные подраздела (array, имена полей таблицы)		
-	if($testTmpl){?>
+	if($testTmpl||isset($_GET['dump'])){?>
     	<div id="SectionDataContent" align="left" style="position:fixed; top:40; right:0;">
 		<?	ob_start();
 			var_dump("<pre>",$SectionDataContent,"</pre>"); 
@@ -149,13 +149,18 @@ $(function(){
 	<?	// пройтись по всем блокам и собрать их контент:
 		$colCnt=0; // индекс колонки
 		foreach($SectionDataContent['blocks'] as $block_name=>$block){
-			if( $block_name==2 // заголовок подраздела
-			    && strstr($block,"header:") // не массив, а строка; есть метка заголовка
-			  ){ 
-				$headerText=substr($block,strpos($block,":")+1);?>
+			if( $block_name==2 // 2-й блок, может содержать заголовок
+			  	&& $Shema[1]!='0' // ...заголовок есть в соответствии со схемой макета
+			  ) {	// заголовок подраздела  
+			  	if (is_array($block)){ // внештатная ситуация: ?>
+		$('#testBlockInfoBottom').show().html('$block is ARRAY!<br>LINE: <?=__LINE__?>');
+			<?		$headerText="!!!ARRAY!!!";
+				}elseif(strstr($block,"header:")) { // не массив, а строка; есть метка заголовка
+					$headerText=substr($block,strpos($block,":")+1);
+				}?>
 		$('div[data-block-type="header"] input[type="text"]').val('<?=$headerText?>');
 		Layout.blocks[2]='<?=$block?>';
-		<?	}else{?>
+		<?	}else{ // НЕ заголовок?>
 		$(tmplArea).eq(<?=$colCnt?>).trigger('click'); // эмулировать клик по активной колонке
 			<?	for($i=0,$blockModulesCount=count($block);
 					$i<$blockModulesCount;
@@ -165,9 +170,18 @@ $(function(){
 					$modIndex=false;
 					// получить ключ существующего модуля, чтобы далее эмулировать клик по нему и добавление в текущую колонку:
 					if(in_array($moduleContent,$aMods)){
-						$modIndex=array_search($moduleContent,$aMods);?>
-				<?	}elseif(strstr($moduleContent,"Текст :: article id:"))
-						$modIndex=count($aMods)-1;					
+						$modIndex=array_search($moduleContent,$aMods);
+					}elseif(strstr($moduleContent,"Текст :: article id:")) { // если статья
+						$modIndex=count($aMods);?>
+
+	/*	var arrPreData=setTxtReadyContent(artID);
+		preHeader=arrPreData['art']; // подстрока Статья id (artID)
+		bg=arrPreData['bgClass']; // класс для фона блока
+
+						
+		// saveBlockContentString();					
+	*/
+				<?	}
 					if($modIndex!==false){?>
 	$(curMods).eq(<?=$modIndex?>).trigger('click'); // добавить модуль в активную колонку
 				<? 	}
@@ -179,6 +193,7 @@ $(function(){
 <?		if($testTmpl) :?>
 		test_parseLayout();
 <?		endif;?>
+		$('#pick_out_section').fadeIn(2000);
 	}
 <?	}?>
   }catch(e){

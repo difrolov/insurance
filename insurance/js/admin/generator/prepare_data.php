@@ -1,6 +1,14 @@
 <?	if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
+// тестовый вывод в консоль (+ alert)
+function consoleOutput(message,test_mode){
+	if (testMode||test_mode) 
+		console.info(message);
+	if(test_mode=='alert')
+		alert(message);
+}
+//
 textTarget=false; // будет определять, куда вставлять текст - в редактор или в модуль
 /* 	Возможные варианты макета описываются по схеме:
 	Layout.Schema[0] 	// колич. колонок: 1,2,3,4

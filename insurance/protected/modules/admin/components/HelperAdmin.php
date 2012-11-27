@@ -90,7 +90,7 @@ ORDER BY name, parent_name';
 				$children=$section_data['children'];?>
         <div>
         	<blockquote>
-			<?	self::makeSectionsMap($children);?>
+			<?	self::makeSectionsMap($children,$external_parent_id);?>
         	</blockquote>
         </div>
 		<?	}

@@ -14,8 +14,6 @@ $(function(){
 			$(checkAl).fadeIn(200);
 		}
 		if (alias){
-			//var re = /[^\w_]/g;
-			//if(re.test(alias)){
 			var mss=false;
 			if (mss=checkAliasValid(alias)){
 				$(checkAl).attr('class','alarm');
@@ -77,14 +75,7 @@ $(function(){
 				errMess[errCount]=mss;
 				reqS[errCount]='alias';
 				errCount++;
-			}/*
-			var aVal=$('#alias').val(); 
-			var re = /[^\w_]/g;
-			if(re.test(aVal)){
-				errMess[errCount]='Вы ввели недопустимые символы в поле для алиаса подраздела!\nДопускаются ТОЛЬКО латинские буквы, цифры и знак подчёркивания.';
-				reqS[errCount]='alias';
-				errCount++;
-			}*/else if($('#check_alias_info').attr('class')=='warning'){
+			}else if($('#check_alias_info').attr('class')=='warning'){
 				errMess[errCount]='Указанный вами алиас занят, укажите другой.';
 				reqS[errCount]='alias';
 				errCount++;
@@ -117,7 +108,7 @@ $(function(){
 			Layout.title=$('#title').val();
 			Layout.keywords=$('#keywords').val();
 			Layout.description=$('#description').val();
-			// alert('action: '+$('#content_save').attr('action'));
+			 alert('action: '+$('#content_save').attr('action'));
 			$.ajax ({
 					type: "POST",
 					url: $('#content_save').attr('action'),
@@ -128,11 +119,16 @@ $(function(){
 						$("div#pls_wait").show();
   					},
 					success: function (data) {
-						alert("Подраздел добавлен!");
+						//alert("Подраздел добавлен!");
 						location.href=data.result; 
 					},
-					error: function () {
-						alert("Не удалось отправить данные"); 
+					error: function (data, textStatus, jqXHR) {
+						$("div#veil").hide();
+						$("div#pls_wait").hide();
+						var obj = jQuery.parseJSON(jqXHR.responseText);
+						alert("Не удалось отправить данные \n"+obj);
+						notify(data.toString());
+						notify(textStatus.toString()); 
 					}
 				})
 		}

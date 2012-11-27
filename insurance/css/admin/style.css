@@ -144,6 +144,9 @@ div#content_from_right{
 #header_top a{
 	font-size:1.1em;
 }
+.hidden{
+	display:none;
+}
 div#last_articles{
 	display:inline-block;
 	height:212px;
@@ -224,6 +227,12 @@ div#page{
 div#page div.breadcrumbs{
 	margin-top: -49px;
 	text-align: left;
+}
+.pAbs{
+	position:absolute;
+}
+.pFixed{
+	position:fixed;
 }
 div#search{
 	height:27px;
@@ -360,6 +369,14 @@ td.slidesPointer{
 }
 table#tblSlidesLastSeen td.slidesPointer{
 	padding-top:0;
+}
+.testBlock{
+	background:#FF6;
+	border-radius:6px;
+	padding:8px;
+}
+.testBlock *{
+	text-align:left !important;
 }
 .txtHeader2, .txtHeader3{
 	text-transform:uppercase;

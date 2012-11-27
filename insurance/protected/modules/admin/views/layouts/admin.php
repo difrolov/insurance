@@ -24,6 +24,12 @@
 <?	if (isset($_GET['test'])):?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/test.css" media="screen, projection" />
 <?	endif;?>
+<script>
+testMode=false; 
+<?	if (isset($_GET['test'])):?>
+testMode=true;
+<? endif;?>	
+</script>	
 	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
