@@ -11,7 +11,7 @@ function parseLayoutSchema(){
 					);
 }
 // создать макет
-function createLayout(){
+function createLayout(editMode){
   try{ 	
   	// получить количество блоков:
 	var arrLayoutSchema=parseLayoutSchema();
@@ -448,6 +448,8 @@ function createLayout(){
 		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
 	else
 		document.getElementById('tmplPlace').innerHTML=tmplBlock;
+	if (editMode)
+		loadModulesEditMode(); // загрузить макет ранее созданного подраздела
 <?	if ($test){?>		
 		// прописать количество блоков макета в тестовом блоке:
 		//test_addBlocks();
@@ -458,16 +460,17 @@ function createLayout(){
   }
 }
 // загрузим макет по сформированному шаблону
-function loadLayout(){ 
+function loadLayout(editMode){ 
   try{	
 	var topPos=$('#txtActions').offset().top;
 	$("html, body").animate(
 		{scrollTop:topPos},
 		500,
-		function(){stateLayoutIsLoaded()}
+		function(){
+			stateLayoutIsLoaded();
+		}
 	);
-	//
-	createLayout();
+	createLayout(editMode); // скомпиллировать макет
 	var headerBlock=$("div[data-block-type='header']")[0];
 	if (headerBlock){
 		var pWidth=$(headerBlock).width()-10;

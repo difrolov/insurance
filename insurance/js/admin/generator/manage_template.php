@@ -22,6 +22,9 @@ function addModuleIntoBlock(srcEl){
 			if (Layout.blocks[block]!='')
 				Layout.blocks[block]+='|';
 			Layout.blocks[block]+=dataModuleType; //alert('block: '+block+', Layout.blocks[block]: '+Layout.blocks[block]);
+			// вывод информации в консоль в тестовом режиме
+			// если test_mode='alert' также выводит alert
+			consoleOutput('Layout.blocks[block] = '+Layout.blocks[block]);
 		}
 		bi++;
 	}
@@ -136,9 +139,16 @@ function splitBlockContent(blockNumber){
 	return Layout.blocks[blockNumber].split("|");
 }
 // преобразовать контент блока в строку и сохранить в Layout:
-function saveBlockContentString(blockNumber,tBlockArray){
-	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
+function saveBlockContentString( blockNumber, tBlockArray){
+	
+	if (typeof(tBlockArray)=='object')	
+		tBlockStr=tBlockArray.join("|"); // преобразуем в строку
+	else
+		tBlockStr=tBlockArray;
 	Layout.blocks[blockNumber]=tBlockStr;
+	// вывод информации в консоль в тестовом режиме
+	// если test_mode='alert' также выводит alert
+	consoleOutput('blockNumber = '+blockNumber+'\ntBlockArray = '+tBlockArray+'\ntBlockStr = '+tBlockStr+'\nLayout.blocks[blockNumber] = '+Layout.blocks[blockNumber]);
 <?	if (isset($_GET['test'])){?>
 		test_parseLayout();
 <?	}?>		

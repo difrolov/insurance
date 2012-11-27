@@ -130,7 +130,7 @@ $(function(){
 					}
 					tPyctLast=$(psFooter)[fIndex];
 			}
-	} //alert(multicol);
+	} 
 	if (defineLayoutSchema(tPyctLast)){ // получить кнопку!
 		if (Layout.Schema!='100'){
 			$(tPyctFirst).trigger('click'); // клик по первой пиктограмме макета
@@ -138,68 +138,84 @@ $(function(){
 				$(tPyctSecond).trigger('click'); // клик по второй пиктограмме макета			
 			$(tPyctLast).trigger('click'); // клик по последней пиктограмме макета
 		}
-		
-		
 		$('div#tmplPlace').css('display','block');
-		
-		
-		$(btn_loadLayout).trigger('click'); // клик по пиктограмме загрузки макета
-		var tmplArea=$('div#tmplPlace >div:first-child >div'); // колонки макета
-		var curMods=$('div#select_mod div[data-module-type]');
-	<?	// пройтись по всем блокам и собрать их контент:
-		$colCnt=0; // индекс колонки
-		foreach($SectionDataContent['blocks'] as $block_name=>$block){
-			if( $block_name==2 // 2-й блок, может содержать заголовок
-			  	&& $Shema[1]!='0' // ...заголовок есть в соответствии со схемой макета
-			  ) {	// заголовок подраздела  
-			  	if (is_array($block)){ // внештатная ситуация: ?>
-		$('#testBlockInfoBottom').show().html('$block is ARRAY!<br>LINE: <?=__LINE__?>');
-			<?		$headerText="!!!ARRAY!!!";
-				}elseif(strstr($block,"header:")) { // не массив, а строка; есть метка заголовка
-					$headerText=substr($block,strpos($block,":")+1);
-				}?>
-		$('div[data-block-type="header"] input[type="text"]').val('<?=$headerText?>');
-		Layout.blocks[2]='<?=$block?>';
-		<?	}else{ // НЕ заголовок?>
-		$(tmplArea).eq(<?=$colCnt?>).trigger('click'); // эмулировать клик по активной колонке
-			<?	for($i=0,$blockModulesCount=count($block);
-					$i<$blockModulesCount;
-					$i++
-				   ){ // пройтись по блоку и собрать его модули
-					$moduleContent=$block[$i]; // Новости, Готовое решение ...
-					$modIndex=false;
-					// получить ключ существующего модуля, чтобы далее эмулировать клик по нему и добавление в текущую колонку:
-					if(in_array($moduleContent,$aMods)){
-						$modIndex=array_search($moduleContent,$aMods);
-					}elseif(strstr($moduleContent,"Текст :: article id:")) { // если статья
-						$modIndex=count($aMods);?>
-
-	/*	var arrPreData=setTxtReadyContent(artID);
-		preHeader=arrPreData['art']; // подстрока Статья id (artID)
-		bg=arrPreData['bgClass']; // класс для фона блока
-
-						
-		// saveBlockContentString();					
-	*/
-				<?	}
-					if($modIndex!==false){?>
-	$(curMods).eq(<?=$modIndex?>).trigger('click'); // добавить модуль в активную колонку
-				<? 	}
-				}
-			}
-			$colCnt++;
-		}?>	
-		$(tmplArea).last().removeAttr('style').removeAttr('data-column_stat');
-<?		if($testTmpl) :?>
-		test_parseLayout();
-<?		endif;?>
-		$('#pick_out_section').fadeIn(2000);
+		loadLayout(true);		
 	}
 <?	}?>
   }catch(e){
 	  alert(e.message);
   }
 });
+/**
+ * Загрузить и обработать модули
+ */
+function loadModulesEditMode(){
+	var tmplColumns=$('div#tmplPlace >div:first-child > div'); // колонки макета
+	var curModsOrangeButton=$('div#select_mod div[data-module-type]'); // кнопки модулей
+<?	// пройтись по всем блокам и собрать их контент:
+	$colCnt=0; // индекс колонки
+	foreach($SectionDataContent['blocks'] as $block_name=>$block){
+		if( $block_name==2 // 2-й блок, может содержать заголовок
+			&& $Shema[1]!='0' // ...заголовок есть в соответствии со схемой макета
+		  ) {	// заголовок подраздела  
+			if (is_array($block)){ // внештатная ситуация: ?>
+	$('#testBlockInfoBottom').show().html('$block is ARRAY!<br>LINE: <?=__LINE__?>');
+		<?		$headerText="!!!ARRAY!!!";
+			}elseif(strstr($block,"header:")) { // не массив, а строка; есть метка заголовка
+				$headerText=substr($block,strpos($block,":")+1);
+			}?>
+	$('div[data-block-type="header"] input[type="text"]').val('<?=$headerText?>');
+	Layout.blocks[2]='<?=$block?>';
+	<?	}else{ // НЕ заголовок?>
+	var colActive=$(tmplColumns).eq(<?=$colCnt?>);
+	$(colActive).trigger('click'); // эмулировать клик по активной колонке
+		<?	$artPreString="Текст :: article id:"; // if an article
+			for($i=0,$blockModulesCount=count($block);
+				$i<$blockModulesCount; $i++){ // пройтись по блоку и собрать его модули
+				// конец условий
+				$moduleContent=$block[$i]; // Новости, Готовое решение ...
+				$modIndex=false;
+				$modText=false;
+				// получить ключ существующего модуля, чтобы далее эмулировать клик по нему и добавление в текущую колонку:
+				if(in_array($moduleContent,$aMods)){
+					$modIndex=array_search($moduleContent,$aMods);
+				}elseif(strstr($moduleContent,$artPreString)) { // если статья
+					$modIndex=count($aMods); 
+					$art_id=substr($moduleContent,strlen($artPreString));
+					// получить заголовок статьи:
+					$art_header = Yii::app()->db->createCommand()->select('name')->from('insur_article_content')->where('id="'.$art_id.'"')->queryScalar();
+					$modText=true;	// флаг обработки текстового модуля
+				}
+				if($modIndex!==false){?>
+	$(curModsOrangeButton).eq(<?=$modIndex?>).trigger('click'); // добавить модуль в активную колонку
+					<?	if($modText){ // если таки текстовый модуль, обработаем его ПОСЛЕ (!!!) эмуляции клика по кнопке (т.е., фактического добавления его в колонку)?>
+	var arrPreData=setTxtReadyContent(<?=$art_id?>);
+	preHeader=arrPreData['art'];
+	var txtModule=$(colActive).find('div.innerModule').eq(<?=$i?>); // текстовый модуль
+	setTxtReadyContentStyle(txtModule,arrPreData['bgClass']); // назначить параметры форматирования модулю 
+	var txtModuleInner=$(txtModule).find('div[data-module-type="Текст"]'); // блок с заголовком статьи
+	// установить заголовок текстового модуля:
+	setTxtReadyContentHeader(txtModuleInner,preHeader);
+	// инсталлируем ссылку - заголовок статьи
+	setTxtReadyContentHeaderLink(txtModuleInner,<?=$art_id?>,"<?=$art_header?>",'get');
+	// изменить содержание текстового модуля в колонке:
+	saveBlockContentString( <?=$block_name?>, // # родительского блока ссылки добавления готовой статьи
+							'<?=$artPreString.' '.$art_id?>' // распарсенный и обработанный массив текстового блока
+						  );
+			<?		}
+			 	}
+			}
+		}
+		$colCnt++;
+	}?>	
+$(tmplColumns).last().removeAttr('style').removeAttr('data-column_stat');
+<?		if($testTmpl) :?>
+test_parseLayout();
+<?		endif;?>
+$('#pick_out_section').fadeIn(2000);
+
+}
+
 // получить индекс активной пиктограммы
 function definePyctIndex( multicolType,	// multicolFooter
 						  rowName,		// psFooter		

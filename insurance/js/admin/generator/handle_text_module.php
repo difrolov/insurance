@@ -37,6 +37,9 @@ $(document).ready(function(){
 	alert(e.message);
   }
 });
+/**
+ *
+ */
 function setTxtReadyContent(artID){
 	var blClass, readyData=new Array();
 	
@@ -51,14 +54,50 @@ function setTxtReadyContent(artID){
 	readyData['bgClass']=blClass;
 	return readyData;
 }
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+function setTxtReadyContentHeader(txtModuleInner,preHeader){
+	$(txtModuleInner).html(preHeader+':&nbsp;');
+}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+function setTxtReadyContentStyle(txtModule,bg){
+	$(txtModule).css({
+		backgroundColor:bg,
+		border:'none'
+	});	
+}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+function setTxtReadyContentHeaderLink(txtModuleInner,artID,artHeader,headerClicked){
+	$('<a>',{
+		href:"#", // передаётся в качестве аргумента "this" в manageArticleText();
+		click: function(){ 			
+			manageArticleText(artID,this,headerClicked);
+			storeLayoutBlockData(this);
+			getTextModuleContentParsedFromLayout(); // извлечь заголовок и текст модуля из Layout и разместить их в области предпросмотра
+			return false;
+		}
+	}).text(artHeader)
+	.attr('data-link-type','show')
+	.appendTo($(txtModuleInner));	
+}
 // модифицировать текстовый модуль - добавить либо id, либо текст статьи
-function addArticleIdOrTextToModule(artID,text,header){
-  try{ 	//alert('artID: '+artID+'\nBlock #: '+Layout.blocks.activeBlockIdentifier+'\nModule index in Block: '+Layout.blocks.moduleClickedLocalIndex);
+function addArticleIdOrTextToModule(artID,text,header,arrEditMode){
+  try{
 	var ModuleIndex=Layout.blocks.moduleClickedLocalIndex;
 	/** 	
 	  * распарсить блок, чтобы добраться до контента модулей, которые записаны в виде строки через разделитель "|" 
-	  * извлечь контент блока из Layout
-	*/
+	  * извлечь контент блока из Layout*/
 	var arrBlockContentArray=splitBlockContent(Layout.blocks.activeBlockIdentifier);
 	arrBlockContentArray[ModuleIndex]=getTextStart(artID);
 	// получить целевую колонку:
@@ -67,25 +106,17 @@ function addArticleIdOrTextToModule(artID,text,header){
 	var txtModule=$(tBlock).children('div.innerModule')[Layout.blocks.moduleClickedLocalIndex];
 	// получить ВНУТРЕННИЙ блок модуля с текстом:
 	var txtModuleInner=$(txtModule).children('div[data-module-type="Текст"]');
-	var bg,preHeader,headerClicked;
+	
+	var preHeader,headerClicked;
 	
 	if (!artID) //{ // если ID статьи не передавали, стало быть, она новая; добавим её текст:
-		arrBlockContentArray[ModuleIndex]+=header+'^'+text;
-		//preHeader='Новая статья';
-		//bg='yellow';
-	//}else{
-		//preHeader='Статья id '+artID;
-		//bg='greenYellow';
-	//}
+		arrBlockContentArray[ModuleIndex]+=header+'^'+text;	
 	
 	var arrPreData=setTxtReadyContent(artID);
 	preHeader=arrPreData['art']; // подстрока Статья id (artID)
-	bg=arrPreData['bgClass']; // класс для фона блока
+	// учтановить стили для модуля:	
+	setTxtReadyContentStyle(txtModule,arrPreData['bgClass']);// класс для фона блока
 	
-	$(txtModule).css({
-		backgroundColor:bg,
-		border:'none'
-	});
 	var artHeader=''; //alert(63);
 	
 	if (!header){
@@ -95,31 +126,25 @@ function addArticleIdOrTextToModule(artID,text,header){
 			headerClicked='get';
 	}else{
 		artHeader=header;
-		headerClicked=true;
+		headerClicked=(text===false)? // false - извлекали заголовок через dblclick (см. обработчик события в начале страницы, элемент 'td[data-article-id]' ) 
+			'get':true;
 		// спрятать блок с кнопкой "Вставить", т.к. вставлять ничего не надо. 
 		// Не нравится добавленный текст? - удаляйте модуль и добавляйте новый!
 		$('div#btn_wrapper').hide();
 	} //alert('artHeader = '+artHeader+'\nheader = '+header);
-	$(txtModuleInner).html(preHeader+':&nbsp;');
-	$('<a>',{
-		href:"#", // передаётся в качестве аргумента "this" в manageArticleText();
-		click: function(){
-			// alert('onClick:\nartID: '+artID+'\nthis: '+this+'\nheaderClicked: '+headerClicked);
-			manageArticleText(artID,this,headerClicked);
-			storeLayoutBlockData(this);
-			getTextModuleContentParsedFromLayout(); // извлечь заголовок и текст модуля из Layout и разместить их в области предпросмотра
-			return false;
-		}
-	}).text(artHeader)
-	.attr('data-link-type','show')
-	.appendTo($(txtModuleInner));
+	// установить заголовок для модуля
+	setTxtReadyContentHeader(txtModuleInner,preHeader);
+	// соорудить ссылку с текстом заголовка готовой статьи
+	setTxtReadyContentHeaderLink(txtModuleInner,artID,artHeader,headerClicked);
 	// изменить содержание текстового модуля в колонке:
 	saveBlockContentString( Layout.blocks.activeBlockIdentifier, // # родительского блока ссылки добавления готовой статьи
 							arrBlockContentArray // распарсенный и обработанный массив текстового блока
 						  );
+	
 	addTextIntoEditor(''); // очистить поле редактора
 	// закрыть таблицу с готовыми статьями и область предпросмотра статьи:
 	hideArticlesStuff();
+
   }catch(e){
 	  alert(e.message);
   }
@@ -196,11 +221,11 @@ function addTextModuleComLinks(content){
 }
 // создать окно предпросмотра
 function createPreviewWindow( artID,
-							  art_header_clicked // get - при клике по заголовку текстового
+							  headerClicked // get - при клике по заголовку текстового
 							){	
 	// вывод информации в консоль в тестовом режиме
 	// если test_mode='alert' также выводит alert
-	// consoleOutput('createPreviewWindow(), artID = '+artID+', art_header_clicked = '+art_header_clicked);
+	// consoleOutput('createPreviewWindow(), artID = '+artID+', headerClicked = '+headerClicked);
 	
 	var prevArea='	<div id="doEdit">';
 		prevArea+='		<span class="wclose inside" id="close_artprevwin"></span>'; // при щелчке запускается событие, установленное обработчиком live(), см. начало страницы
@@ -209,7 +234,7 @@ function createPreviewWindow( artID,
 	prevArea+='			<div id="prev_header" title="Заголовок статьи"></div>';
 	prevArea+='			<div title="Текст статьи" id="prev_content"></div>';
 	prevArea+='			<div id="btn_wrapper">';
-	if (!art_header_clicked)
+	if (!headerClicked)
 		prevArea+='		<button id="btn_add_prev_content" type="button" value="'+artID+'">Вставить</button>'; // при щелчке запускается событие, установленное обработчиком live(), см. начало страницы
 	prevArea+='			</div>';
 	prevArea+='		</div>';
@@ -308,30 +333,30 @@ function hideArticlesStuff(keep_editor_open){
 // ТОЛЬКО В РЕДАКТОРЕ!
 function manageArticleText( artID,
 							eSrc, // только, если клацали по кнопке в области предпросмотра или по ссылке в текстовом модуле
-							art_header_clicked // если клацали по заголовку добавленной статьи:
+							headerClicked // если клацали по заголовку добавленной статьи:
 							// true для новой статьи, get - для существующей
 						  ){	
   try{ 	//**//
-	  	consoleOutput('artID = '+artID+', art_header_clicked = '+art_header_clicked);
+	  	consoleOutput('artID = '+artID+', headerClicked = '+headerClicked);
 	  if (eSrc)	{ // если с предпросмотром, клацали по кнопке в его окне		
 		var aPrev=$('div#article_preview_text'); // alert('aPrev 1: '+$(aPrev).html());
 		//**//
-		consoleOutput('aPrev.size() = '+$(aPrev).find('div#doEdit').size());
+		//consoleOutput('aPrev.size() = '+$(aPrev).find('div#doEdit').size());
 		if (!$(aPrev).find('div#doEdit').size()){ // если область предпросмотра не была создана ранее 
 			$(aPrev).appendTo($('body')); // добавить элемент в конец документа
-			var prevWindowContent=createPreviewWindow(artID,art_header_clicked); // art_header_clicked : get - при клике по заголовку текстового блока с добавленным id готовой статьи
+			var prevWindowContent=createPreviewWindow(artID,headerClicked); // headerClicked : get - при клике по заголовку текстового блока с добавленным id готовой статьи
 			$(aPrev).html(prevWindowContent); // добавить созданную область предпросмотра к области предпросмотр статьи (#article_preview_text) 
-			consoleOutput($(aPrev).parent().html());
+			//consoleOutput($(aPrev).parent().html());
 		}
-		var pTD=(art_header_clicked)? $(eSrc):$(eSrc).parent();
+		var pTD=(headerClicked)? $(eSrc):$(eSrc).parent();
 		var pleft=$(pTD).offset().left;
 		var ptop=$(pTD).offset().top;
-		if (art_header_clicked!==true) { //alert(art_header_clicked);
+		if (headerClicked!==true) { //alert(headerClicked);
 			getArticleTextFromDB('prev_content',artID);
 			// далее при закрытии окна предпросмотра или щелчке на кнопке "вставить" удаляется div#doEdit, что позволяет выполнить данный скрипт повторно. См. события элементов в начале страницы (заданы с помощью .live())
 		}else
 			showPreviewToEdit(eSrc);
-		//alert('artID: '+artID+', eSrc: '+eSrc+', art_header_clicked: '+art_header_clicked);
+		//alert('artID: '+artID+', eSrc: '+eSrc+', headerClicked: '+headerClicked);
 		$(aPrev).css({
 					cursor:'move',
 					display:'inline-block',
