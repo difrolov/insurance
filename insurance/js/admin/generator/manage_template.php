@@ -57,13 +57,13 @@ function addModuleIntoBlock(srcEl){
 			}
 			bi++;
 		}
+		// сгенерировать html-контент модуля:
+		setModContent(srcEl,dataModuleType);	
 	}
 <?	if ($test){?>		
 	// добавить данные в тестовый блок:
 	test_parseLayout();
 <?	}?>	
-	// сгенерировать html-контент модуля:
-	setModContent(srcEl,dataModuleType);	
 	
   }catch(e){
 	  alert(e.message);

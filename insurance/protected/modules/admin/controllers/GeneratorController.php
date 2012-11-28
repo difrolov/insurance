@@ -117,25 +117,36 @@ class GeneratorController extends Controller
 		$dText="Текст :: "; // общее
 		$artId="article id: "; // дописать подстроку для добавленной существующей статьи
 		$dTextArtId=$dText.$artId; // вся подстрока для добавленной существующей статьи
-		foreach($post as $key=>$val){
+		foreach($post as $key=>$sectionDataArray){
 			if ($key=="blocks"){ // если блоки с модулями
-				foreach($val as $block => $data){ // перебрать каждый блок
-					$arrMods=explode("|",$data); // получить массив модулей
-					
-					if ( strstr($data,$dText) // если в наборе модулей есть начало для текстового блока
-						 && !strstr($data,$dTextArtId) // и нет записи о добавленной существующей статье (article id:)
-					   ){ 
+				// [blocks]=array(blocks[1],blocks[2],...)
+				foreach($sectionDataArray as $blockName => $modulesInBlockString){ // перебрать каждый блок
+				// [blocks][2] as [2] => новости|готовое решение|случайная статья
+				//						 $modulesInBlockString
+					$arrBlockModules=explode("|",$modulesInBlockString); // получить массив модулей
+					//var_dump("<h1>arrBlockModules START ".__LINE__.":</h1><pre>",$arrBlockModules,"</pre>");
+					// $arrBlockModules=array(новости, готовое решение, случайная статья)
+					// если в наборе модулей (т.е., во ВСЕЙ СТРОКЕ) есть начало для текстового блока
+					if (strstr($modulesInBlockString,$dText)/* 
+						 && !strstr($modulesInBlockString,$dTextArtId) // и нет записи о добавленной существующей статье (article id:)
+					   */){ 
 						
-						for($i=0;$i<count($arrMods);$i++){
-							// повторить условие поиска текста для текущего модуля:
-							if ( strstr($arrMods[$i],$dText) // текст новой статьи
-								 && !strstr($arrMods[$i],$dTextArtId) // но не id существующей статьи
+						for($i=0;$i<count($arrBlockModules);$i++){
+							
+							// повторить условие поиска но ТЕПЕРЬ - НЕ для всей строки со всеми модулями, а для ТЕКУЩЕГО МОДУЛЯ текста для текущего модуля:
+							if (strstr($arrBlockModules[$i],$dText) // текст новой статьи
+								 && !strstr($arrBlockModules[$i],$dTextArtId) // но не id существующей статьи
 							   ){
-								$start=strpos($arrMods[$i],$dText)+strlen($dText);
-								$finish=strpos($arrMods[$i],"^");
+								
+								// var_dump("<h1>arrBlockModules[$i] INSIDE ".__LINE__.":</h1><pre>",$arrBlockModules[$i],"</pre>");
+//		$jenc=json_encode(array("result"=>'We_GOT actionSave. LINE is '.__LINE__."\n\nText: ".$arrBlockModules[$i]));				
+//		echo $jenc;	
+//		exit;
+								$start=strpos($arrBlockModules[$i],$dText)+strlen($dText);
+								$finish=strpos($arrBlockModules[$i],"^");
 								$strlen=$finish-$start;
-								$header=substr($arrMods[$i],$start,$strlen);
-								$text=substr($arrMods[$i],$finish+1);
+								$header=substr($arrBlockModules[$i],$start,$strlen);
+								$text=substr($arrBlockModules[$i],$finish+1);
 								//1. добавить новую статью в таблицу статей (ПОЛЯ ТАБЛИЦЫ)
 								$drop_saving=false;
 								if(!$drop_saving){
@@ -162,16 +173,21 @@ class GeneratorController extends Controller
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:
 									// "Текст :: article id: [id_статьи]";
-									$arrMods[$i]=$dTextArtId.$article_id;
+//				$dt[]="\nheader: $header";
+//				$dt[]="\nText: $text";
+//				$dt[]="\n\narticle_id=$article_id";
+									$arrBlockModules[$i]=$dTextArtId.$article_id;
 								}
 							}
 						}
 					}
-					if (!strstr($data,"header:"))	
-						$val[$block]=$arrMods; // обратно в строку
+					if (!strstr($modulesInBlockString,"header:"))	
+						$sectionDataArray[$blockName]=$arrBlockModules;
+					//var_dump("<h1>arrBlockModules FINISH ".__LINE__.":</h1><pre>",$arrBlockModules,"</pre>");
+					
 				}
-			}else if ($localdata) TestGenerator::testCodeOutput2($key,$val);
-			$post[$key]=$val;
+				$post[$key]=$sectionDataArray;
+			}else if ($localdata) TestGenerator::testCodeOutput2($key,$sectionDataArray);
 		}	
 		// модифицируем массив данных:
 		$parent_id=$post['parent'];
@@ -195,19 +211,22 @@ class GeneratorController extends Controller
 		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА 
 		(insur_insurance_object)
 		************************************/
-		$status=(isset($_GET['preview']))? 1:0;
+		
+//		$jenc=json_encode(array("result"=>'We_GOT actionSave. ERROR!!! LINE is '.__LINE__));				
+//		echo $jenc;	
+//		exit;
+		
+		$status=(isset($_GET['preview']))? 0:1;
 		$date_changes= date("Y-m-d H:i:s");
-		if($section_id=$update_id){
-			//$jenc=json_encode(array("result"=>'We_GOT actionSave. LINE is '.__LINE__.", data is: $section_id, $parent_id, $name, $status, $alias, $date_changes, $keywords, $description, $content"));				
-			//echo $jenc;	
-			//exit;
-
+		if($update_id){
+			$section_id=$update_id;
 			InsurInsuranceObject::model()->updateByPk($section_id, 
 					array(	'parent_id'=>$parent_id,
 							'name'=>$name,
 							'status'=>$status,
 							'alias'=>$alias,
 							'date_changes'=>$date_changes,
+							'title'=>$title,
 							'keywords'=>$keywords,
 							'description'=>$description,
 							'content'=>serialize($post),
@@ -219,7 +238,8 @@ class GeneratorController extends Controller
 			$model_obj->name = $name;
 			$model_obj->status = $status;
 			$model_obj->alias = $alias;
-			$model_obj->$date_changes;
+			$model_obj->date_changes = $date_changes;
+			$model_obj->title = $title;
 			$model_obj->keywords = $keywords;
 			$model_obj->description = $description;
 			$model_obj->content = serialize($post);
@@ -227,7 +247,7 @@ class GeneratorController extends Controller
 			$section_id=$model_obj->id;
 		}
 		if ($localdata){
-			TestGenerator::testCodeOutput3($post,$model_obj->content,__LINE__);
+			TestGenerator::testCodeOutput3($post,serialize($post),__LINE__);
 		}else{
 			self::getParents($section_id); // get URL path
 			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".self::$section_root));				
@@ -242,7 +262,6 @@ class GeneratorController extends Controller
 	function actionAliasCheck(){
 		echo ($alias = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$_GET['alias'].'"')->queryScalar()) ?
 			'taken' : 'allow';		
-		//echo "<div class=''>alias= ".$alias."</div>";
 	}
 /**
  * 
@@ -345,8 +364,8 @@ class TestGenerator{
 		</div>";
 	}
 	
-	function testCodeOutput2($key,$val){
-		echo "<div><div>".__LINE__." $key: $val</div></div>";
+	function testCodeOutput2($key,$sectionDataArray){
+		echo "<div><div>".__LINE__." $key: $sectionDataArray</div></div>";
 	}
 	
 	function testCodeOutput3($post,$seral_post,$line){

@@ -170,8 +170,12 @@ function loadModulesEditMode(){
 	var colActive=$(tmplColumns).eq(<?=$colCnt?>);
 	$(colActive).trigger('click'); // эмулировать клик по активной колонке
 		<?	$artPreString="Текст :: article id:"; // if an article
-			for($i=0,$blockModulesCount=count($block);
-				$i<$blockModulesCount; $i++){ // пройтись по блоку и собрать его модули
+			for($i=0,	$blockModulesCount=count($block);
+				$i<$blockModulesCount; 	$i++){ // пройтись по блоку и собрать его модули?>
+	// вывод информации в консоль в тестовом режиме
+	// если test_mode='alert' также выводит alert
+	consoleOutput('blockModulesCount=<?=$blockModulesCount?>, i=<?=$i?>');
+			<?
 				// конец условий
 				$moduleContent=$block[$i]; // Новости, Готовое решение ...
 				$modIndex=false;
@@ -198,20 +202,14 @@ function loadModulesEditMode(){
 	setTxtReadyContentHeader(txtModuleInner,preHeader);
 	// инсталлируем ссылку - заголовок статьи
 	setTxtReadyContentHeaderLink(txtModuleInner,<?=$art_id?>,"<?=$art_header?>",'get');
-	// изменить содержание текстового модуля в колонке:
-	saveBlockContentString( <?=$block_name?>, // # родительского блока ссылки добавления готовой статьи
-							'<?=$artPreString.' '.$art_id?>' // распарсенный и обработанный массив текстового блока
-						  );
-			<?		}else{?>
-	// Layout.blocks number, контент модуля
-	saveBlockContentString(<?=$block_name?>,'<?=$moduleContent?>');
-	// вывод информации в консоль в тестовом режиме
-	// если test_mode='alert' также выводит alert
-	consoleOutput('block name : <?=$block_name?>, moduleContent : <?=$moduleContent?>');
-				<?	}
+			<?		}/*else{?>
+				<?	}*/
 			 	}
-			}
-		}
+				$moduleContents[]=$moduleContent;
+			}?>
+	Layout.blocks[<?=$block_name?>]='<?=implode("|",$moduleContents);?>';
+	<?	}
+		unset($moduleContents);
 		$colCnt++;
 	}?>	
 $(tmplColumns).last().removeAttr('style').removeAttr('data-column_stat');

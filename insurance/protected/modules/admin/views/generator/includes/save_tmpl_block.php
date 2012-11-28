@@ -24,7 +24,10 @@ if (isset($data)&&isset($model_modules)){
 	$section_alias=$data['alias'];
 	$section_title=$data['title'];
 	$section_keywords=$data['keywords'];
-	$section_description=$data['description']; // die();
+	$section_description=$data['description']; 
+	//var_dump("<h1>data:</h1><pre>",$data,"</pre>");
+	//var_dump("<h1>model_modules:</h1><pre>",$model_modules,"</pre>");
+	//die();
 }?>
     <h5 id="pick_out_section" class="link" style="display:<? 
 		if(isset($_GET['test'])){
@@ -49,7 +52,7 @@ if (isset($data)&&isset($model_modules)){
     <input name="name" type="text" id="name" required value="<?=$section_name?>">
             <hr>
             Укажите алиас подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Будет фигурировать в адресной строке браузера"> 
-            <div>(<span class="txtRed">только</span> латинские буквы, цифры и &quot;_&quot;)</div> 
+            <div>(<span class="txtRed">только</span> латинские буквы, цифры и &quot;_&quot;)</div> ALIAS : <?=$section_alias?>
             <input name="alias" type="text" id="alias" required value="<?=$section_alias?>"><span class="checkData" id="check_alias_info" style="display:<?="none"?>;"><div id="checking_result">&nbsp;проверка уникальности алиаса...&nbsp;</div></span>
 <?	if($section_alias){ // ...?>
    			<!-- Для сверки текущего значения и значения ячейки: -->

@@ -653,7 +653,8 @@ div.schema30s > div{
 	}
 	
 </style>        
-		<?	$tmpl=unserialize($section_data->content);?>
+		<?	$tmpl=unserialize($section_data->content);
+			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 			$bloxHeaderType=$tmpl['Schema'][1];
@@ -710,7 +711,7 @@ div.schema30s > div{
 									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$folder_name.'/default.php';
 									//echo "<div class=''>module_path= ".$module_path."</div>";
 									require $module_path;	
-								}else echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+								}elseif($bContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
 							echo "<div class='clear'>&nbsp;</div>";
 						}else{
