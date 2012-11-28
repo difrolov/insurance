@@ -159,11 +159,18 @@ ORDER BY name, parent_name';
 		}
 		//выводим селект
 		public static function createBannerlink($val,$field_name,$id){
-			return '<a data-toggle="modal" href="#" data-target="#myModal"'.
-			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">'.$val.'</a>';
+			return ($val!=null?'<a data-toggle="modal" href="#" data-target="#myModal"'.
+			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">'.$val.'</a>':'<a data-toggle="modal" href="#" data-target="#myModal"'.
+			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">Выберите ссылку</a>');
 		}
-		public static function createStatusBaner($data){
-			return ($data?'<span class="out_'.$data.'"> Активен </span>':'<span class="out_'.$data.'"> Отключен </span>');
+		public static function createStatusBaner($data,$id){
+			if($data){
+				$str = 	'<div class="'.$id.'"><div class="1" id="'.$id.'"><div class="dark"><div class="toggle"></div></div></div>';
+			}else{
+				$str = 	'<div class="'.$id.'"><div class="dark"><div class="toggle_off">'.
+						'</div></div></div>';
+			}
+			return $str;
 		}
 		public static function createStatusContent($data,$id){
 			$a="<a onclick='_object.updateContentStatus(".$id.");return false;' href='#'".
