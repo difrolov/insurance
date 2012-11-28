@@ -25,10 +25,10 @@ class O_kompaniiController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex($alias=false)
-	{
-		$data=Data::getDataByAlias('o_kompanii',$alias);
-    	$this->render('index', array('res' => $data));
+	{	// извлечь данные раздела по его алиасу:
+		Data::getObjectByUrl($this,$alias);
 	}
+
 	/**
 	  *
 	  */

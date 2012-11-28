@@ -1,4 +1,7 @@
-﻿<!DOCTYPE HTML>
+﻿<?
+	echo "data=$localdata"; die();
+
+?><!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">

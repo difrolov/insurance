@@ -3,12 +3,22 @@
 if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
-function createLayout(){
+// распарсить схему макета:
+function parseLayoutSchema(){
+	return new Array( parseInt(Layout.Schema.substring(0,1)),
+					  Layout.Schema.substring(1,2),
+					  Layout.Schema.substring(2)
+					);
+}
+// создать макет
+function createLayout(editMode){
   try{ 	
   	// получить количество блоков:
-	var colsCountInit=colsCount=parseInt(Layout.Schema.substring(0,1));
-	var tmplValue2=Layout.Schema.substring(1,2);
-	var tmplValue3=Layout.Schema.substring(2);
+	var arrLayoutSchema=parseLayoutSchema();
+	var colsCountInit=colsCount=arrLayoutSchema[0];
+	var tmplValue2=arrLayoutSchema[1];
+	var tmplValue3=arrLayoutSchema[2];
+	
 	if (tmplValue2!='0') colsCount+=1;
 	if (tmplValue3!='0') colsCount+=1;
 	
@@ -117,7 +127,7 @@ function createLayout(){
 		break;
 	}
 	// 	построить схему блоков для визуализации:
-	var tmplBlock='<div class="first" onClick="selectColumn(event,this);">';
+	var tmplBlock='<div class="first">';
 	for (i=0;i<colsCount;i++){
 		
 		tmplBlock+='	<div';
@@ -435,9 +445,13 @@ function createLayout(){
 	tmplBlock+="</div>";
 	var goLoop=false;
 	if (goLoop) // чиста для теста, если хотим вывести все возможные блоки
-		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
-	else
-		document.getElementById('tmplPlace').innerHTML=tmplBlock;
+		$('#tmplPlace').append('<div>'+Layout.Schema+'</div>'+tmplBlock);
+	else{
+		var tmplPlace=$('div#tmplPlace');
+		$(tmplPlace).html(tmplBlock);
+	}
+	if (editMode)
+		loadModulesEditMode(); // загрузить макет ранее созданного подраздела
 <?	if ($test){?>		
 		// прописать количество блоков макета в тестовом блоке:
 		//test_addBlocks();
@@ -448,16 +462,17 @@ function createLayout(){
   }
 }
 // загрузим макет по сформированному шаблону
-function loadLayout(){ 
+function loadLayout(editMode){ 
   try{	
 	var topPos=$('#txtActions').offset().top;
 	$("html, body").animate(
 		{scrollTop:topPos},
 		500,
-		function(){stateLayoutIsLoaded()}
+		function(){
+			stateLayoutIsLoaded();
+		}
 	);
-	//
-	createLayout();
+	createLayout(editMode); // скомпиллировать макет
 	var headerBlock=$("div[data-block-type='header']")[0];
 	if (headerBlock){
 		var pWidth=$(headerBlock).width()-10;

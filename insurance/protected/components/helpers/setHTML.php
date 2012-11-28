@@ -1,7 +1,9 @@
 <?
 class setHTML{
+	protected static $arrAvoidSubmenu=array('site/index');
 	static $arrMenuWidget;
 	static $arrMenuWidgetSecond;
+	
 /**
  * @package HTML
  * @subpackage navigation
@@ -91,9 +93,9 @@ class setHTML{
  *
  */
 	function buildDropDownMenu($submenu=false){
-		$menuItems=self::getMenuItems($submenu);
+		$menuItems=self::getMainMenuItems($submenu);
 		foreach($menuItems as $parent_id=>$parent_data){
-			if ($parent_data['alias']!='site/index') 
+			if (!in_array($parent_data['alias'],self::$arrAvoidSubmenu)) 
 				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
 		}
 	}
@@ -102,21 +104,37 @@ class setHTML{
  * @subpackage		menu
  *
  */
-	function buildDropDownSubMenu($parent_alias='',$parent_id=false){?>
-        <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }?>>
-	<?	$subMenuItems=self::getSubMenuItems($parent_id);
-		//var_dump("<h1>subMenuItems:</h1><pre>",$subMenuItems,"</pre>"); //die();
-		if (!isset($subMenuItems)){
-			$j=rand(1,8);
-			for ($i=0;$i<$j;$i++) {
-				$subMenuItems[$i]['text']="Текст меню ".$i;
-				$subMenuItems[$i]['alias']="url_alias";
-			}
-		}	
-		foreach($subMenuItems as $id=>$array):?>
-		<a href="<?php echo Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$subMenuItems[$id]['alias']?>"><?
-			echo $subMenuItems[$id]['text'];?></a>	
-	<?	endforeach;?>
+	function buildDropDownSubMenu($parent_alias='',$parent_id=false){
+		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
+        
+        <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
+	<?	$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
+								  		  		$parent_id);
+		if ($parent_alias=="korporativnym_klientam") {?>
+          <ul class="asTable">
+			<li>
+            	<div class="txtLightBlue txtMediumSmall">Виды страхования</div>
+			<? self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
+        <?	$corps=false;
+			if ($corps){
+				$arrCorps=array(
+						'building'=>'Строительные компании',
+						'trucking'=>'Транспортные компании',
+						'entertainment'=>'Организация развлекательных и спортивных мероприятий',
+						);?>
+            <li style="width:20px;">&nbsp;</li>
+        	<li>
+        		<div class="txtLightBlue txtMediumSmall">Корпоративным клиентам</div>
+                <div class="txtGrey">
+            <?	foreach($arrCorps as $alias=>$text):?>
+            		<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
+            <?	endforeach;?>    
+            	</div>
+            </li>
+		<?	}?>
+          </ul>
+	<?	}else 
+			self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?>
         </div> 
 <?	}
 /**
@@ -126,6 +144,8 @@ class setHTML{
  */
 	function buildFooterBlock($tp=false){?>
 			<div align="left" id="footer">
+            <hr noshade size="1" style="margin-bottom:0; margin-left:-20px; margin-right:-20px;">
+            <hr noshade size="1" style="margin:-4px -20px -8px -20px;">
   	<!--bottom_menu-->
 	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
@@ -136,75 +156,28 @@ class setHTML{
   	<!--footer_content-->
 	<?	if ($tp){?><h3>footer_content</h3><? }?>
     	<div id="footer_content">
-        	<div align="left" class="floatLeft">
-            	<div style="display:inline-block">
-                	<div>&copy; &quot;ОТКРЫТИЕ СТРАХОВАНИЕ&quot; 2012</div>
-                    <div>Все права защищены.</div>
-                    <div>Адрес: Москва, рядом с Кремлём.</div>
-                </div>
-                <div id="call_us_free" align="center">
-                	<div>8 800 200 71 00</div>
-					<div>круглосуточно</div>
+                <div id="footer_inside_left">
+                	<div><a href="<?=Yii::app()->request->getBaseUrl(true)?>">www.open.ru</a></div>
+					<div class="tiny_info">Финансовая корпорация &quot;Открытие&quot;</div>
 				</div>
-            </div>
-            <div class="floatRight">&nbsp;</div>
+            	
+                <div id="footer_inside_center">
+                	<div id="fcompany">&copy; &quot;ОТКРЫТИЕ СТРАХОВАНИЕ&quot; 2012</div>
+                    <div id="faddress">Адрес: 23007, Москва, ул. 4-я Магистральная, д. 11, стр. 2</div>
+                    <div id="fcopy" class="tiny_info">&copy; &quot;Открытие страхование&quot; 2012</div>
+                </div>
+            	
+                <div id="footer_inside_right">
+            		<div align="right">8 800 200 71 00</div>
+					<div class="tiny_info" id="overnight_calling" align="right">круглосуточно</div>
+            
+		</div>
+        	
         </div>
 			<?	if ($tp){?><h3>/footer_content</h3><? }?>
   	<!--/footer_content-->
   </div>
 <?	}
-/**
- * @package		HTML
- * @subpackage		menu
- * построить меню верхнего уровня
- */
-	function buildMainMenu(
-					$this_object,
-					$submenu=false
-				  ){
-		$mainPageAlias='site/index';
-		$currentController=Yii::app()->controller->getId();
-		$menuWidget=($submenu)? self::$arrMenuWidgetSecond:self::$arrMenuWidget;
-		if (!$menuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
-			$newborn_menu=true; 
-			$arrMenu=self::getMenuItems($submenu);
-			foreach($arrMenu as $parent_id=>$parent_data) {
-				$text=$parent_data['text'];
-				$alias=$parent_data['alias'];
-				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
-				if ($alias!=$mainPageAlias)
-					$arr['active']= $currentController == $alias;
-				$menuWidget[]=$arr; 
-			}
-			if ($submenu)
-				self::$arrMenuWidgetSecond=$menuWidget;
-			else
-				self::$arrMenuWidget=$menuWidget;
-		}
-		if (self::detectOldIE()){ //
-			$URL=explode("/",$_SERVER['REQUEST_URI']);
-			$nURL=array_reverse($URL);
-			if ($nURL[1]=='index')
-				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
-			else $urlAlias='/'.$nURL[1].'/';?>
-        <ul<? //id=yw0?>>
-		<?	$menuItems=self::getMenuItems($submenu);
-			$dx=array_shift($menuItems);
-			foreach($menuItems as $parent_id=>$parentData){
-				$alias=$parentData['alias'];
-				$text=$parentData['text'];?>
-			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
-					echo $text;?></a>
-			<?	if ( $alias!='/'.$mainPageAlias.'/'
-			         && isset($newborn_menu)
-				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
-            </li>	
-		<?	}?>
-        </ul>
-	<?	}else $this_object->widget( 'zii.widgets.CMenu',
-							  array('items'=>$menuWidget)
-							);
-	}
 /**
  * @package		HTML
  * @subpackage		logo
@@ -249,13 +222,25 @@ class setHTML{
 					<p id="all_news"><a href="#">все новости...</a></p>
 <?	}
 /**
+ * Построить левое статическое меню, идентичное по содержанию выпадающему
+ * @package
+ * @subpackage
+ */
+	function buildLeftStaticMenu($section_id){
+		$top_alias=Yii::app()->controller->getId();
+		$top_id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$top_alias.'"')->queryScalar();
+		$items_data=Data::getObjectsRecursive( false, // поля извлечения данных
+								  		  	   $top_id);
+		self::buildSubmenuLinks($items_data,$top_alias,$section=array('section_id'=>$section_id));
+	}
+/**
  * @package		HTML
  * @subpackage		logo
  *
  */
 	function buildLogosBlock(){?>
 				<div id="logo" align="left">
-                    <a href="/insur/insurance/site/index"><?
+                    <a href="<?=Yii::app()->request->getBaseUrl(true)?>"><?
     	if (isset($test_logo)){
 			?><img src="../../../images/logo.gif" width="372" height="80"><? 
 		}else{?><img alt="Открытие Страхование" title="На главную" src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo.gif" width="372" height="80" border="0"><? }?></a>
@@ -263,11 +248,64 @@ class setHTML{
 <?	}
 /**
  * @package		HTML
+ * @subpackage		menu
+ * построить меню верхнего уровня
+ */
+	function buildMainMenu(
+					$this_object,
+					$submenu=false
+				  ){
+		$mainPageAlias='site/index';
+		$currentController=Yii::app()->controller->getId();
+		$menuWidget=($submenu)? self::$arrMenuWidgetSecond:self::$arrMenuWidget;
+		if (!$menuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
+			$newborn_menu=true; 
+			$arrMenu=self::getMainMenuItems($submenu);
+			foreach($arrMenu as $parent_id=>$parent_data) {
+				$text=$parent_data['text'];
+				$alias=$parent_data['alias'];
+				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
+				if ($alias!=$mainPageAlias)
+					$arr['active']= $currentController == $alias;
+				$menuWidget[]=$arr; 
+			}
+			if ($submenu)
+				self::$arrMenuWidgetSecond=$menuWidget;
+			else
+				self::$arrMenuWidget=$menuWidget;
+		}
+		// старый IE
+		if (self::detectOldIE()){ //
+			$URL=explode("/",$_SERVER['REQUEST_URI']);
+			$nURL=array_reverse($URL);
+			if ($nURL[1]=='index')
+				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
+			else $urlAlias='/'.$nURL[1].'/';?>
+        <ul<? //id=yw0?>>
+		<?	$menuItems=self::getMainMenuItems($submenu);
+			$dx=array_shift($menuItems);
+			foreach($menuItems as $parent_id=>$parentData){
+				$alias=$parentData['alias'];
+				$text=$parentData['text'];?>
+			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
+					echo $text;?></a>
+			<?	if ( $alias!='/'.$mainPageAlias.'/'
+			         && isset($newborn_menu)
+				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
+            </li>	
+		<?	}?>
+        </ul>
+	<?	}else $this_object->widget( 'zii.widgets.CMenu',
+							  array('items'=>$menuWidget)
+							);
+	}
+/**
+ * @package		HTML
  * @subpackage		navigation
  *
  */
 	function buildPointersNext($direction){?>
-		<a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_<?=$direction?>.png" width="9" height="18" border="0">
+		<a href="#"><img src="<?=Yii::app()->request->baseUrl?>/images/pointer_<?=$direction?>.png" width="9" height="18" border="0"></a>
 <?	}
 /**
  * @package		HTML
@@ -319,39 +357,96 @@ class setHTML{
 /**
  * @package		HTML
  * @subpackage		menu
- * получить меню верхнего уровня
+ * построить контент подменю
  */
-	function getMenuItems($parent_id_level=false){ 
-		if (!$parent_id_level) $parent_id_level='-1';
-		$model=InsurInsuranceObject::model()->findAll(
-					array('select'=>'id, name, alias',
-							'condition'=>'parent_id = '.$parent_id_level.' AND status = 1'
-						));
-		for($i=0,$j=count($model);$i<$j;$i++){
-			$menuItems[$model[$i]->id]=array('text'=>$model[$i]->name,
-											 'alias'=>$model[$i]->alias
-											);
+	function buildSubmenuLinks( $subMenuItems,
+								$parent_alias,
+								$topAlias=false // самое верхнее меню alias
+							  ){
+		static $prev_level='top'; // для управления цепочкой родительских алиасов
+		
+		static $curControllerLeftMenu; // для управления доступом к главному и левому меню
+		
+		if($topAlias){
+			if( $topAlias===true // пришли из главного меню
+				|| is_array($topAlias) // пришли из левого меню
+			  ) {
+				$topLevelAlias=$parent_alias;
+				$curControllerLeftMenu=(is_array($topAlias))? $topAlias['section_id']:0;
+			}else{
+				$topLevelAlias=$topAlias;
+			}
 		}
-		return $menuItems;
+		if (!isset($topLevelAlias)) $topLevelAlias=false;
+		
+		if (is_array($subMenuItems)){
+			foreach($subMenuItems as $alias_value=>$link_text):
+				if (is_array($link_text)){
+					$level=(isset($link_text['level']))? $link_text['level']:0;
+					if ($level>1){?><blockquote><? } // echo "<div class='testBlock'>prev_level(".gettype($prev_level).") = ".$prev_level."</div>";
+					self::buildSubmenuLinks($link_text,&$parent_alias,&$topLevelAlias);
+					if ($level>1) {?></blockquote><? }
+				}elseif ($alias_value=="name"){
+					$level=$subMenuItems['level'];
+					// echo "<div class=''>current_level(".gettype($level).")= $level";
+					// if(isset($topLevelAlias)) echo "<br><b>topLevelAlias:</b><br>$topLevelAlias";
+					// else echo ", <h1 style='color:red'>NO topLevelAlias!</h1>";
+					//echo "</div>"; //**********************************
+						
+					if ($level==1) {
+						$parent_alias=$topLevelAlias;
+						$link=$topLevelAlias."/".$subMenuItems['alias'];
+					}elseif($level<$prev_level){ // данный подраздел находится выше предыдущего
+						// будем вырезать промежуточные алиасы:
+						$aDiff=$prev_level-$level;
+						$parentAliases=explode("/",$parent_alias);
+						while($aDiff){
+							array_pop($parentAliases);
+							$aDiff--;
+						}
+						$parent_alias=implode("/",$parentAliases);
+					}
+					if ( isset($subMenuItems['children']) // есть вложенные уровни
+						 || $level>1	// вложенных нет, есть родительские
+					   ){
+						$link=$parent_alias.'/'.$subMenuItems['alias'];						
+						if(isset($subMenuItems['children']))
+							$parent_alias.='/'.$subMenuItems['alias'];
+					}
+					$prev_level=$level; // установим текущий уровень подраздела 
+					
+					ob_start(); 
+						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
+					ob_get_clean();
+					if ($curControllerLeftMenu){
+			?><div<?	// 
+						if ($curControllerLeftMenu==$subMenuItems["id"]):
+		
+			?> class="active"<? 
+		
+						endif;?>><?	echo $linkContent;
+		
+			?></div><?	
+		
+					}else echo $linkContent;
+				}
+			endforeach;
+		}
 	}
 /**
  * @package		HTML
  * @subpackage		menu
- * выпадающее меню, как для mainmenu, submenu
+ * получить меню верхнего уровня
  */
-	function getSubMenuItems($parent_id){ 
-		$model=InsurInsuranceObject::model()->findAll(
-					array('select'=>'id, name, alias',
-							'condition'=>'parent_id = '.$parent_id.' AND status = 1'
-						));
-		$subMenuItems=array();
-		for($i=0,$j=count($model);$i<$j;$i++){
-			$subMenuItems[$model[$i]->name]=array(
-									'text'=>$model[$i]->name,
-									'alias'=>$model[$i]->alias
-								);
+	function getMainMenuItems($parent_id_level=false){ 
+		if (!$parent_id_level) $parent_id_level='-1';
+		$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias` FROM insur_insurance_object WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY id')->queryAll(); 
+		for($i=0,$j=count($data);$i<$j;$i++){
+			$menuItems[$data[$i]['id']]=array('text'=>$data[$i]['name'],
+											 'alias'=>$data[$i]['alias']
+											);
 		}
-		return $subMenuItems;
+		return $menuItems;
 	}
 /**
  * @package		interface
@@ -374,6 +469,283 @@ class setHTML{
 	function setButtonPrint(){?>
     <button onClick="window.print();">Печать страницы</button>
 <?	}
+/**
+ * Получает данные от Data::getObjectByUrl() в виде объекта активной записи в insur_insurance_object (setPageData()::$section_data = Data::getObjectByUrl()->res)
+ * @package		content
+ * @subpackage		metadata
+ * Загрузить макет подраздела, разместить данные и выдать в HTML
+ */
+	function setPageData( $this_obj, 
+						  $section_data, 
+						  $test=false
+						){	$test=false; // принудительно
+		// генерирует и размещает title страницы:
+		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
+		// генерирует и размещает название страницы в цепочке breadcrumbs:
+		$breadcrumbs=array();
+		if ($section_data->parent_id>0)	{	
+			$parentName=InsurInsuranceObject::model()->find(array(
+							'select'=>'name',
+							'condition'=>'id = '.$section_data->parent_id,
+						)); 
+			$this_obj->breadcrumbs=array(
+				$parentName->name=>array('index'),
+				$section_data->name
+			);
+		}else 
+			$this_obj->breadcrumbs=array(
+				$section_data->name,
+			);
+		// устанавливает description страницы:
+		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
+		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
+		// если заголовок не установлен (нет в БД), подставляет название страницы:
+		if (!$section_data->first_header)
+			$section_data->first_header=$section_data->name;?>
+	<div id="inner_left_menu">
+	<?	// сгенерировать ссылки:
+		self::buildLeftStaticMenu($section_data->id);?>
+    </div>
+    <?	// если тестируемся:
+		if ($test) {
+			// это он - заголовок :)
+			echo "<h1>HEADER: ".$section_data->first_header."</h1>";
+			echo "parent_id = ".$section_data->parent_id."<hr>";
+			echo "title: ".$section_data->title."<hr>";
+			echo "keywords: ".$section_data->keywords."<hr>";
+			echo "description: ".$section_data->description."<hr>";
+		}
+		else { // загрузить макет?>
+<style type="text/css">
+/******** Для элементов всех макетов: ********/
+div#inner_content{
+	width:100%;
+}
+div#inner_content .clear{
+	float: none;
+	width: 100%;
+}
+div#inner_content 
+	> div > div{
+	padding: 10px;
+	padding-left: 8px;
+}
+
+div#inner_content 
+	> div > div .subsectHeader{
+	font-size:16px;
+	margin:0;
+}
+div#inner_content 
+	> div > div .contentHeader{
+	color:#06AEDD;
+	font-size:16px;
+	margin:0;
+	margin-bottom:10px;
+}
+div#div1{ 
+	float:left;
+}
+
+/******** Для индивидуальных макетов: ********/
+
+div.schema100, 
+	div.schema100> div{
+	width:100%;
+}
+
+div.schema200 > div#div1,
+div.schema200 > div#div2{
+	width:50%;
+}
+	div.schema200 > div#div2{
+		float:right;
+	}
+
+div.schema210 > div{
+	width:50%;
+}
+	div.schema210 > div#div2,
+	div.schema210 > div#div3{
+		float:right;
+	}
+
+div.schema300 > div{
+	float:left;
+	width:33%;
+}
+	div.schema300 > div#div3{
+		width:34%;
+	}
+
+div.schema3i0 > div{
+	float:left;
+	width:33%;
+}
+	div.schema3i0 > div#div1{
+		 margin-right:-33%;
+	}
+	div.schema3i0 > div#div2,
+	div.schema3i0 > div#div4{
+		 margin-left:33%;
+	}
+	div.schema3i0 > div#div3{
+		float:right;
+		width:34%;
+	}
+
+div.schema3s0 > div{
+	float:left;
+	width:33%;
+}
+	div.schema3s0 > div#div1{
+		margin-right:-33%;
+	}
+	div.schema3s0 > div#div2{
+		margin-left:33%;
+		width:67%;
+	}
+	div.schema3s0 > div#div3{
+		margin-left:33%;
+	}
+	div.schema3s0 > div#div4{
+		width:34%;
+	}
+	
+div.schema3ss > div{
+	float:left;
+	width:33%;
+}
+	div.schema3ss > div#div1{
+		margin-right:-33%;
+	}
+	
+	div.schema3ss > div#div2,
+	div.schema3ss > div#div5{
+		width:67%;
+	}
+	
+	div.schema3ss > div#div4{
+		width:34%;
+	}
+	div.schema3ss > div#div2,
+	div.schema3ss > div#div3,
+	div.schema3ss > div#div5{
+		margin-left:33%;
+	}
+	
+div.schema30s > div{
+	float:left;
+	width:33%;
+}
+	div.schema30s > div#div1{
+		margin-right:-33%;
+	}
+	div.schema30s > div#div2,
+	div.schema30s > div#div4{
+		margin-left:33%;
+	}
+	div.schema30s > div#div3{
+		width:34%;
+	}
+	div.schema30s > div#div4{
+		width:67%;
+	}
+	
+</style>        
+		<?	$tmpl=unserialize($section_data->content);
+			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
+    <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
+		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
+			$bloxHeaderType=$tmpl['Schema'][1];
+			$bloxFooterType=$tmpl['Schema'][2];
+			
+			if ($bloxHeaderType!='0')
+				$bloxCnt++;
+			if ($bloxFooterType!='0')
+				$bloxCnt++;
+			
+			
+			//echo "<div class=''>bloxCnt = ".$bloxCnt.", bloxHeaderType = $bloxHeaderType, bloxFooterType = $bloxFooterType</div>";
+			
+			/*
+			 * См. схему построения макетов в файле:
+			 * /_docs/схема.xslx!Макет для создания разделов
+			 */
+			//echo "<div class=''>colCount= ".$colCount.", bloxHeaderType= $bloxHeaderType, bloxFooterType= $bloxFooterType</div>";die();
+			//***	FOR TEST:	***//
+			$testColors=array('whitesmoke','mistyrose','lemonchiffon','honeydew','lightcyan','lavender');
+			$showLoremIpsum=false;
+			//***	/FOR TEST:	***//
+			$modules=array(
+					'news'=>'Новость',
+					'ready_solution1'=>'Готовое решение 1',
+					'ready_solution2'=>'Готовое решение 2',
+				);
+			$i=1;
+			if (isset($tmpl['blocks'])) {
+				foreach ($tmpl['blocks'] as $block_name=>$block){?>
+				<div id="div<?=$i?>">
+                	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
+            	<? 	if($block_name==2&&$bloxHeaderType!='0'){ 
+						echo(is_array($block))? 
+							"<span style='color:red'>Ошибка: неправильный тип данных для заголовка (массив вместо строки)...</span>"
+							:
+						 	"<h2 class=\"subsectHeader\">".substr($block,strpos($block,":")+1)."</h2>";
+					}else{
+						$artIdSbstr="Текст :: article id:";
+						// собрать контент текущего блока:
+					  $for=true;
+					  if ($for)
+						for($b=0,$c=count($block);$b<$c;$b++){
+							$bContent=$block[$b];
+							if(strstr($bContent,$artIdSbstr)){ // статья
+								$article_id=(int)substr($bContent,strlen($artIdSbstr));
+								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); //var_dump("<h1>article_data:</h1><pre>",$article_data,"</pre>");
+								if ($article_data['name']){?>
+		<h3 class="contentHeader"><?=$article_data['name']?></h3>
+							<?	}	echo $article_data['content'];
+							}else{?>
+		<h3 class="contentHeader"><?=$bContent?></h3>
+        					<?	if ($folder_name=array_search($bContent,$modules)){
+									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$folder_name.'/default.php';
+									//echo "<div class=''>module_path= ".$module_path."</div>";
+									require $module_path;	
+								}elseif($bContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+							}
+							echo "<div class='clear'>&nbsp;</div>";
+						}else{
+						  
+						  if (isset($block)) {
+							  echo "<div class=''>block= ".$block."</div>";
+						  	  var_dump("<h1>block:</h1><pre>",$block,"</pre>");
+						  }else echo "<div class=''>skip</div>";
+					  }
+						if ($showLoremIpsum){
+						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
+
+		diam nonumy eirmod tempor invidunt ut labore et dolore magna 
+
+		aliquyam erat, sed diam voluptua. At vero eos et accusam et 
+
+		justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
+
+		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+				<?		}
+					}?>
+
+                	</div>
+                </div>	
+		<?		$i++;
+			}
+			}else{?>
+            <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
+		<? 	}?>
+        <div class="clear">&nbsp;</div>
+		<?	// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
+   </div>     
+	<?	}
+	}
 /**
  * @package		content
  * @subpackage		news

@@ -84,6 +84,11 @@ div#call_us_free
 	> div:last-child{
 	font-size:20px;
 }
+.checkData{
+	background:#FF6;
+	border-radius:4px;
+	padding:4px;
+}
 .clear{
 	clear:both;
 }
@@ -138,6 +143,9 @@ div#content_from_right{
 }
 #header_top a{
 	font-size:1.1em;
+}
+.hidden{
+	display:none;
 }
 div#last_articles{
 	display:inline-block;
@@ -216,6 +224,16 @@ div#page{
 	width:980px;
 	/*background:#FFFF00;*/
 }
+div#page div.breadcrumbs{
+	margin-top: -49px;
+	text-align: left;
+}
+.pAbs{
+	position:absolute;
+}
+.pFixed{
+	position:fixed;
+}
 div#search{
 	height:27px;
 	border:solid 1px #CCC;
@@ -227,8 +245,8 @@ li.command a.command{
 	color:#08c;
 }
 li.active.command a.command:hover{
-	color:#06c;
-	text-decoration:underline;
+	color:#FFF;
+	text-decoration:none;
 }
 li.active.command a.command span{
 	background:url(img/glyphicons-halflings.png) 0 -95px !important;
@@ -352,6 +370,14 @@ td.slidesPointer{
 table#tblSlidesLastSeen td.slidesPointer{
 	padding-top:0;
 }
+.testBlock{
+	background:#FF6;
+	border-radius:6px;
+	padding:8px;
+}
+.testBlock *{
+	text-align:left !important;
+}
 .txtHeader2, .txtHeader3{
 	text-transform:uppercase;
 }
@@ -363,6 +389,9 @@ table#tblSlidesLastSeen td.slidesPointer{
 }
 .txtLightBlue *, .txtLightBlue{
 	color:#00BCE4;
+}
+.txtRed{
+	color:red;
 }
 ul.insideDiv{
 	margin-left:-20px;

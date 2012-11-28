@@ -130,6 +130,31 @@ td[data-article-id]:hover{
 	background:#08C;
 	color:#FFF;
 }
+/*	check data valid	*/
+#check_alias_info{
+	border-radius:4px;
+	display:inline-block;
+	padding:0 7px;
+	width:50%;
+}
+#check_alias_info >div{
+	padding:8px;
+}
+.alarm,	.safe,	.warning{
+	display:inline-block;
+}
+.safe, .safe *{
+	background:#060;
+	color:#FFF;
+}
+.warning, .warning *{
+	background:#FCC;
+	color:#F00;
+}
+.alarm, .alarm *{
+	background:#F00;
+	color:#FFF;
+}
 .wclose{
 	background:url(<?=$url?>/images/gtk-cancel.png);
 	cursor:pointer;

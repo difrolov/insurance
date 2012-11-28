@@ -14,7 +14,7 @@ class ObjectController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		if(isset($_GET['id'])){
+		if(isset($_GET['id'])){ 
 			//достаём объект из базы
 			$object = InsurInsuranceObject::model()->findByPk($_GET['id']);
 			if(!$object){

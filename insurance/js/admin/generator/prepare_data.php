@@ -1,6 +1,14 @@
 <?	if (isset($dwshow)){?><script><? }
 ob_start();?>
 // JavaScript Document
+// тестовый вывод в консоль (+ alert)
+function consoleOutput(message,test_mode){
+	if (testMode||test_mode) 
+		console.info(message);
+	if(test_mode=='alert')
+		alert(message);
+}
+//
 textTarget=false; // будет определять, куда вставлять текст - в редактор или в модуль
 /* 	Возможные варианты макета описываются по схеме:
 	Layout.Schema[0] 	// колич. колонок: 1,2,3,4
@@ -8,38 +16,20 @@ textTarget=false; // будет определять, куда вставлят�
 	Layout.Schema[2]	// наличие/тип псевдофутера: 0 (нет), i - внутренний (не пересекает последнюю колонку), s - общий (пересекает последнюю колонку). 
 	Внимание! Тип псевдофутера 1 отсутствует, т.к. не может быть пседвофутера для количества колонок, меньше 3. В этом случае роль псевдофутера может выполнять любой добавляемый модуль.
 */
-
 jQuery(	function(){
-		initialiteLayout(); // инициализировать (и РЕинициализировать макет)
+		initializeLayout(); // инициализировать (и РЕинициализировать) макет
+		$('div#txtChoice > div > div').click( function (){
+				defineLayoutSchema(this);
+			});
 	});
 // инициализировать объект сохранения данных макета
-function initialiteLayout(){
+function initializeLayout(){
   try{	
 	delete Layout;
 	Layout=new Object();
   }catch(e){
 	alert(e.message);
   }
-}
-//
-function walkThroughLayout(Layout,act){
-	for(var prop in Layout){
-		// Layout 		- объект
-		// prop		- свойство объекта
-		// Layout[ob] 	- значение свойства (литерал) объекта		
-		var val=Layout[prop];
-		if (typeof(val)=='object'){
-			//toPlace.innerHTML+='<div class="rd">'+ob;
-			walkThroughLayout(val);
-			//toPlace.innerHTML+='</div>';
-		}else{
-			delete prop;
-			//Layout[prop]=null;
-			alert(prop+':'+val); 
-			//var nclass=ins? 'rd2':'rd';
-			//toPlace.innerHTML+='<div><div class="'+nclass+'"><div>'+currentObj+'</div></div></div>';
-		}
-	}
 }
 //проверить - допускает ли текущее состояние макета его загрузку
 function checkLayoutReady(){
@@ -148,10 +138,6 @@ function checkLayoutReady(){
 	// управлять видимостью остальных блоков:
 	if (Layout.Schema!=0) { 
 		$("#tmpl_commands").fadeIn(1000);
-		/*if($('#sel_modules').css('display')!='block'){
-			display(['tmpl_commands']); // кнопки управления шаблонами
-			makeSolid(['tmpl_commands']);
-		}*/
 		if ($('#btn_cancelLayoutChanges').attr('class')=='active') {
 			setButtonStat(['btn_loadLayout'],'active');
 		}
@@ -161,8 +147,6 @@ function checkLayoutReady(){
 			setButtonStat(['btn_loadLayout'],'passive');
 		}else{
 			$("#tmpl_commands").fadeOut(1000);
-			//makeLiquid(['tmpl_commands']); 
-			//hide(['tmpl_commands']);
 		}
 		return false;
 	}
@@ -171,63 +155,48 @@ function checkLayoutReady(){
 // * количества колонок
 // * наличия и расположения подзаголовка
 // * наличия и расположения псевдофутера
-function defineLayoutSchema(event,pyctosContainer){ // pyctosContainer - родительский блок для текущего набора пиктограмм
+function defineLayoutSchema(activePycto){ // кнопка активного макета
   try{
-	var srce=false; // инициализируем источник события (пиктограмму)
-	var eventObj=(navigator.appName=="Netscape")? event.target:event.srcElement; 
-	var sClass=eventObj.className;
-	var sClassParent= eventObj.parentNode.className;
-	// установить target-элемент DIV:
-	if ( sClass.indexOf('Column')!=-1
-	     || sClass.indexOf('Shared')!=-1
-		 || sClass.indexOf('Inside')!=-1
-	   ) srce=eventObj;
-	if ( sClassParent.indexOf('Column')!=-1
-	     || sClassParent.indexOf('Shared')!=-1
-		 || sClassParent.indexOf('Inside')!=-1
-	   ) srce=eventObj.parentNode;
-	// источник - одна из пиктограмм схемы:
-	if (srce) { //alert(eventObj.className);
-		var currentPyctosContainer=srce.parentNode;
-		// показать блок "текущий выбор":
-		if (currentPyctosContainer.id=="tmplColSet") { 
-			showBlock('currentChoice','line'); 
-		}
-		// обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера
-		handlePyctos(srce);
-		// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
-		// указать параметры текущего выбора
-		setCurrentChoiceStatus(event,currentPyctosContainer);
-		// проверить - допускает ли текущее состояние макета его загрузку:
-		checkLayoutReady();
+	if ($(activePycto).parent().attr('id')=="tmplColSet") { 
+		showBlock('currentChoice','line'); 
 	}
+	// обработать скрытые блоки с выбором типа размещения подзаголовка и псевдофутера
+	handlePyctos(activePycto);
+	// указать параметры текущего выбора
+	// установить состояние прозрачности для пиктограмм, добавить информацию о подзаголовке и псевдофутере
+	setCurrentChoiceStatus(activePycto);
+	// проверить - допускает ли текущее состояние макета его загрузку:
+	checkLayoutReady();
+	return true;
   }catch(e){
 	  alert(e.message);
   }
 }
 // разместить и отобразить информацию о выборе юзера:
-function displayUserChoice(pyctosContainer){ 
+function displayUserChoice(activePycto){ // контейнер с пиктограммами
   try{
-	var userInfo;
+	var userInfo,
+		spans=$('#currentChoice span'),
+		pyctosContainer=$(activePycto).parent();
 	var sText=getLevelsArray();
- 	var sBlocks=document.getElementById('currentChoice').getElementsByTagName('span');
-	var currentPicTitle;
-	for (i=0;i<sText.length;i++){
-		if (pyctosContainer.id==sText[i][0]) {
-			var pBlocks=pyctosContainer.getElementsByTagName('div');
-			for (j=0;j<pBlocks.length;j++){
-				if (pBlocks.item(j).style.opacity==1) {
-					currentPicTitle=pBlocks.item(j).title.toLowerCase();
-					break;
-				}
-			}
-			//sText[i][1]
-			sBlocks.item(i).innerHTML='<b>&bull; '+currentPicTitle+'</b>';
-			// спрятать инфо ниже текущего уровня:
-			for (b=i+1;b<(sBlocks.length);b++)
-				sBlocks[b].innerHTML='';
-		}
-	}		
+	$(sText).each(	function(i) { // перебираем контейнеры пиктограмм
+		// 'tmplColSet'=>'количество колонок',
+		// 'chHeaders'=>'расположение подзаголовка',
+		// 'psFooter'=>'расположение псевдофутера'
+       	if ($(pyctosContainer).attr('id')==$(this)[0]){ 
+			// 'tmplColSet', 'chHeaders', 'psFooter'
+			$(pyctosContainer).find('div').each(  function (){
+				if($(this).css('opacity')==1){
+					//alert(this.title);
+					if (currentPicTitle=$(this).attr('title'))
+						currentPicTitle.toLowerCase();
+					return false;
+				}	
+			});
+			var tSpan=$(spans)[i];
+			$(tSpan).html('<b>&bull; '+currentPicTitle+'</b>');
+		} 
+    });
   }catch(e){
 	  alert(e.message);
   }
@@ -259,11 +228,12 @@ function handlePyctos(srce) { // источник события
 	var titleFooterInside="Внутренний псевдофутер";
 	var titleFooterShared="Общий псевдофутер";
 	// блоки "Выберите расположение...":
-	var divsToPick=document.getElementById('txtActions').getElementsByTagName('div');
+	var divsToPick=$('#txtActions div');
 	// установить следующий блок для отображения при клике на пиктограмме текущего блока:
 	var pyctosNextBlock;
-	var blockTextToShowSubheader=divsToPick.item(1); // текст "Выберите..."
-	var blockTextToShowFooter=divsToPick.item(2);
+	var blockTextToShowSubheader=divsToPick[1]; // текст "Выберите..."
+	//alert(blockTextToShowSubheader);
+	var blockTextToShowFooter=divsToPick[2];
 	var divPyctosSubheader=document.getElementById('chHeaders');
 	var divPyctosFooter=document.getElementById('psFooter');
 	// подставить для отображения блоки (текст "Выберите...", пиктограммы схемы) следующего уровня:
@@ -354,28 +324,10 @@ function handlePyctos(srce) { // источник события
 }
 // сделать полупрозрачными неиспользуемые схемы
 // разместить информацию о текущем выборе в блока справа
-function setCurrentChoiceStatus(event,pyctosContainer){ //alert(pyctosContainer.id);
-	// блоки (div) элемента-источника события
-	var pyctosNextBlock=pyctosContainer.getElementsByTagName('div'); // container/div
-	var subHeaderPlacementType=false;
-	var currentPycto,srcElem; //alert(pyctosNextBlock.length);
-	srcElem=(navigator.appName=="Netscape")? event.target:event.srcElement;
-	for(i=0;i<pyctosNextBlock.length;i++){
-		currentPycto=pyctosNextBlock.item(i);		
-		if (srcElem==currentPycto) { // источник события - текущая пиктограмма 
-			currentPycto.style.opacity=1; // сделать непрозрачной (активной)
-			if (srcElem==currentPycto){ // источник события - текущая пиктограмма
-				// указать выбранный тип размещения подзаголовка:
-				if (srcElem.className.indexOf('Inside')!=-1) // внутренний подзаголовок
-					subHeaderPlacementType="внутренний"; 
-				else 
-					subHeaderPlacementType=(srcElem.className.indexOf('Shared')!=-1||srcElem.className=='twoColumnSubheader')? "общий":"без подзаголовка";
-			}
-		}
-		currentPycto.style.opacity=(srcElem==currentPycto)? 1:0.2;
-	}
-	// указать параметры текущего выбора
-	displayUserChoice(pyctosContainer);
+function setCurrentChoiceStatus(activePycto){ 
+	$(activePycto).parent().find('div').css('opacity',0.2);
+	$(activePycto).css('opacity',1);
+	displayUserChoice(activePycto);
 }
 // показать блок
 function showBlock(tShow,line){

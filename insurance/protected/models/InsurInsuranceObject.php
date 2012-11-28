@@ -83,7 +83,13 @@ class InsurInsuranceObject extends CActiveRecord
 			'date_changes' => 'Date Changes',
 		);
 	}
-
+	/**
+	 * Загружает данные макета подраздела.
+	 * @return .
+	 */
+	function getTmplData($section_id){
+		echo "EDIT SECTION id ".$section_id;
+	}
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

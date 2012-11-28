@@ -1,17 +1,11 @@
 // JavaScript Document
 $(document).ready(function() {
   try{
-	$('#save_tmpl_block').click(
+	$('#save_tmpl_block input[type="radio"]').click(
 		function(){
-			var srcEl=(event.target)? event.target:event.srcElement;
-				if ( srcEl.tagName.toLowerCase()=="input"
-					 && srcEl.type=="radio"
-				   ){
-					$('label span').removeAttr('class');
-					$('label span b').css('color','');
-					$(srcEl.parentNode).attr('class','selLabel');
-					$(srcEl.parentNode).find('b').css('color','#FFF');
-				}
+			$('label span').removeAttr('class');
+			$('label span b').css('color','');
+			$(this).parent().attr('class','selLabel').find('b').css('color','#FFF');
 		});
 	$('#pick_out_section').click(
 		function(){
@@ -23,7 +17,7 @@ $(document).ready(function() {
 		});
 	$('#wclose').click(
 			function(){
-				$(this.parentNode.parentNode).fadeOut(1000);
+				$(this).parent().parent().fadeOut(1000);
 		});
   }catch(e){
 	  alert(e.message);

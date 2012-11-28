@@ -1,7 +1,50 @@
-﻿<?	if (isset($dwshow)){?><script><? }
+<?	if (isset($dwshow)){?><script><? }
 ob_start();?>
 $(function(){
   try{
+	$('#alias').blur( function (){
+		var alias=$(this).val();
+		var checkAl=$('#check_alias_info');
+		var checking_result=$(checkAl).find('div#checking_result');
+		var new_alias=false;
+		if (!document.getElementById('old_alias')
+			|| $('input#old_alias').val()!=alias
+		   ) {
+			new_alias=true;
+			$(checkAl).fadeIn(200);
+		}
+		if (alias){
+			var mss=false;
+			if (mss=checkAliasValid(alias)){
+				$(checkAl).attr('class','alarm');
+				$(checking_result).html(mss);
+			}else{
+				// alert('Url: '+$('#seek_alias').val()+'\nData: '+alias);
+				if (new_alias){
+					$.ajax ({
+						type: "GET",
+						url: $('#seek_alias').val(),
+						data: "alias="+alias,
+						success: function (data) {
+							var alias_stat,classNm;
+							if (data=='allow'){
+								alias_stat="свободен";
+								classNm='safe';
+							}else{
+								alias_stat="занят, укажите другой";
+								classNm='warning';
+							} //alert(data);
+							$(checkAl).attr('class',classNm);
+							$(checking_result).html('&nbsp;алиас '+alias_stat+'&nbsp;');
+						},
+						error: function (alias_stat) {
+							alert("Не проверить доступность указанного алиаса..."); 
+						}
+					})
+				}
+			}
+		} //		
+	});
 	$('button#save_page').click( function (){
 		var radioChecked=$('div#sections_radios input[type="radio"]:checked');
 		var errMess=new Array();
@@ -26,6 +69,17 @@ $(function(){
 				errPlace=$('#alias');
 			reqS[errCount]='alias';
 			errCount++;
+		}else{
+			var mss=false;
+			if (mss=checkAliasValid($('#alias').val())){
+				errMess[errCount]=mss;
+				reqS[errCount]='alias';
+				errCount++;
+			}else if($('#check_alias_info').attr('class')=='warning'){
+				errMess[errCount]='Указанный вами алиас занят, укажите другой.';
+				reqS[errCount]='alias';
+				errCount++;
+			}
 		}
 		if (!$('#title').val()){
 			errMess[errCount]='Вы не указали заголовок страницы.';
@@ -54,17 +108,27 @@ $(function(){
 			Layout.title=$('#title').val();
 			Layout.keywords=$('#keywords').val();
 			Layout.description=$('#description').val();
-			alert('action: '+$('#content_save').attr('action')+'\nJSON:\n'+JSON.stringify(Layout)+'\n\n*Проверить радиокнопки\n*Забрать данные из и Layout отослать на ACTION формы с JSON!');
+			//alert('action: '+$('#content_save').attr('action'));
 			$.ajax ({
 					type: "POST",
 					url: $('#content_save').attr('action'),
 					dataType: 'json',
 					data: Layout,
+					beforeSend: function() {
+                   		$("div#veil").show();
+						$("div#pls_wait").show();
+  					},
 					success: function (data) {
-						alert(data.result); 
+						//alert("Подраздел добавлен!");
+						if (data.result.indexOf('We_GOT')!=-1)
+							alert(data.result);
+						else
+							location.href=data.result; 
 					},
-					error: function () {
-						alert("Не удалось отправить данные"); 
+					error: function (data) {
+						$("div#veil").hide();
+						$("div#pls_wait").hide();
+						alert("Не удалось отправить данные.\nОтвет: "+data.result);
 					}
 				})
 		}
@@ -73,6 +137,13 @@ $(function(){
 	  alert(e.message);
   }
 });
+function checkAliasValid(aVal){
+	var re = /[^\w_]/g;
+	if(re.test(aVal)){
+		return 'Вы ввели недопустимые символы в поле для алиаса подраздела!\nДопускаются ТОЛЬКО латинские буквы, цифры и знак подчёркивания.';
+	}else
+		return false;
+}
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
 echo $myscript;

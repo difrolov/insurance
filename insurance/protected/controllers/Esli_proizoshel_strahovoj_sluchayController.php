@@ -30,6 +30,14 @@ class Esli_proizoshel_strahovoj_sluchayController extends Controller
     	$this->render('index', array('res' => $data));
 	}
 	/**
+	 * Для подразделов, вложенных в главный раздел и в подраздел
+	 */
+	public function actionSubsection($subsection=false)
+	{
+		$data=Data::getDataByAlias('esli_proizoshel_strahovoj_sluchay',$subsection);
+    	$this->render('index', array('res' => $data));
+	}
+	/**
 	 * This is the action to handle external exceptions.
 	 */
 	public function actionError()

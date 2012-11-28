@@ -1,73 +1,70 @@
-﻿<?	$url=$_GET['base_url'];
+<?	$url=$_GET['base_url'];
 	$test=(isset($_GET['test']))? $_GET['test']:false;
 if (isset($dwshow)){?><script><? }
 ob_start();?>
+$( function(){
+	
+	$('div#tmplPlace > div:first-child > div[data-block-type]')
+			.live( 'click', function (){
+				selectColumn(this);	
+				// вывод информации в консоль в тестовом режиме
+				// если test_mode='alert' также выводит alert
+				//consoleOutput(this);
+	});
+	$('div#select_mod div[data-module-type]')
+			.click( function (){
+				addModuleIntoBlock(this);	
+	});
+});
+
 tBlock=false; // здесь будет сохраняться активный блок (объект)
 // добавить модуль в активную колонку:
-function addModuleIntoBlock(event,divBlock){
+function addModuleIntoBlock(srcEl){
   try{
-	var srcEl=(event.target)? event.target:event.srcElement;
-	if ( srcEl.parentNode==divBlock
-		 && tBlock // активный блок (гл. пер.) установлен (в selectColumn())
-	   ) {
-		var dataModuleType=$(srcEl).attr('data-module-type');
-		// получим индекс активной колонки и элемента объекта (блока):
-		var cIndex=$(tBlock.parentNode).children('div').index(tBlock);
+	var dataModuleType=$(srcEl).attr('data-module-type');
+	// получим индекс активной колонки и элемента объекта (блока):
+	var stActive='div[data-column_stat="active"]';
+	
+	var cols=$('div[data-block-type]');
+	var astat=false;
+	// AHTUNG!!! 
+	// по неизвестным причинам проверка $(cols).find(stActive).size() НЕ СРАБАТЫВАЕТ!!! Всегда возвращает 0
+	$(cols).each( function(){
+		if ($(this).attr('data-column_stat'))
+			astat=true;
+	});
+	if (!astat) {
+		if (Layout.Schema=='100') {
+			$(cols).eq(0).trigger('click');
+			astat=true;
+		}else if (!astat){
+			alert('Сначала щёлкните по колонке, в которую хотите добавить модуль.');
+		}
+	}
+	
+	if (astat) {
+		var aCol=$(stActive);
+		var cIndex=$(aCol).parent('div').children().index(aCol); // alert(cIndex);
 		var bi=0;
-		// block - имя элемента
+		// вывод информации в консоль в тестовом режиме
+		// если test_mode='alert' также выводит alert
 		// Layout.blocks[block] - значение элемента
 		for(var block in Layout.blocks){
 			if (bi==cIndex){
 				if (Layout.blocks[block]!='')
 					Layout.blocks[block]+='|';
-				Layout.blocks[block]+=dataModuleType;
-				//alert('block: '+block+', Layout.blocks[block]: '+Layout.blocks[block]);
+				Layout.blocks[block]+=dataModuleType; 
 			}
 			bi++;
 		}
-<?	if ($test){?>		
-		// добавить данные в тестовый блок:
-		test_parseLayout();
-<?	}?>		
-		var newModule=$('<div>').appendTo(tBlock).attr({
-			class:'innerModule',
-			title:'Можно перемещать вверх-вниз...',
-		}).css('cursor','move')
-		  .append($('<div>').attr({
-				class:'mod_trash'
-			}).css('cursor','pointer')
-			  .append(
-				$('<a>',{
-					href:'#',
-					click:function(){
-						removeModule(this);
-						return false;
-					}
-				}).append(
-					$('<img>',{
-						src:"<?=$_GET['base_url']?>/images/trash.gif",
-						title:"Удалить модуль из колонки"
-					}).css('border','0'))));
-		
-		var content=$('<div>').appendTo(newModule)
-							  .text($(srcEl).text())
-							  .attr({
-								  'data-module-type':dataModuleType,
-								  class:'mod_content'
-								});
-		if ($(srcEl).attr('class')=='mod_type_text'){
-			var cPadding=parseInt($(newModule).css('padding-top').replace("px", ""));
-			$(newModule).css({
-					background:'#FFF',
-					border:'solid 2px #F90',
-					padding:(cPadding-2)+'px'
-			});
-			$(content).css('color','#08C');
-			// добавить ссылки (команды добавления текста/статьи) в текстовый модуль:
-			addTextModuleComLinks(content);
-		}
-		$('#pick_out_section').fadeIn(2000);
+		// сгенерировать html-контент модуля:
+		setModContent(srcEl,dataModuleType);	
 	}
+<?	if ($test){?>		
+	// добавить данные в тестовый блок:
+	test_parseLayout();
+<?	}?>	
+	
   }catch(e){
 	  alert(e.message);
   }
@@ -136,41 +133,96 @@ function splitBlockContent(blockNumber){
 	return Layout.blocks[blockNumber].split("|");
 }
 // преобразовать контент блока в строку и сохранить в Layout:
-function saveBlockContentString(blockNumber,tBlockArray){
-	tBlockStr=tBlockArray.join("|"); // преобразуем в строку
+function saveBlockContentString( blockNumber, tBlockArray){
+	
+	if (typeof(tBlockArray)=='object')	
+		tBlockStr=tBlockArray.join("|"); // преобразуем в строку
+	else
+		tBlockStr=tBlockArray;
 	Layout.blocks[blockNumber]=tBlockStr;
+	// вывод информации в консоль в тестовом режиме
+	// если test_mode='alert' также выводит alert
+	consoleOutput('blockNumber = '+blockNumber+'\ntBlockArray = '+tBlockArray+'\ntBlockStr = '+tBlockStr+'\nLayout.blocks[blockNumber] = '+Layout.blocks[blockNumber]);
 <?	if (isset($_GET['test'])){?>
 		test_parseLayout();
 <?	}?>		
 	//alert(Layout.blocks[blockNumber]);
 }
 // выделить фоном активную колонку:
-function selectColumn(event,divBlock){
+function selectColumn(srcEl){
   try{
 	// колонка, по которой кликали:
-	var srcEl=(event.target)? event.target:event.srcElement;
-	if (srcEl.parentNode==divBlock) {
-		if (!$(srcEl).find('input').length) {
-			$(divBlock).children('div')
-				.css('background-color','#FFF')
-				.removeAttr('data-column_stat');
-			$(srcEl).sortable({
-					start: function (event,ui){
-						itemIndexStart=ui.item.index();
-					},
-					stop: function(event,ui){
-						rearrangeModulesOrder(this,itemIndexStart,ui.item.index());
-					}
-				});
-			tBlock=srcEl;
-			$(srcEl).css({
-				backgroundColor:'#CEEFFF',
-			}).attr('data-column_stat','active'); // reserved
-		}
+	$(srcEl).parent('div').children('div')
+		.css('background-color','#FFF')
+		.removeAttr('data-column_stat');
+	
+	if (!$(srcEl).find('input').size()) {
+		$(srcEl).sortable({
+				start: function (event,ui){
+					itemIndexStart=ui.item.index();
+				},
+				stop: function(event,ui){
+					rearrangeModulesOrder(this,itemIndexStart,ui.item.index());
+				}
+			});
+		
+		tBlock=srcEl; // сохранить в глобальной переменной активную колонку
+		
+		$(srcEl).css({
+			backgroundColor:'#CEEFFF',
+		}).attr('data-column_stat','active'); // reserved
+		// вывод информации в консоль в тестовом режиме
+		// если test_mode='alert' также выводит alert
+		//consoleOutput('selectColumn active : '+$('div[data-column_stat="active"]').size());
 	}
+
   }catch(e){
 	  alert(e.message);
   }
+}
+/**
+ *
+ */
+function setModContent(srcEl,dataModuleType){
+	var newModule=$('<div>').appendTo(tBlock).attr({
+		class:'innerModule',
+		title:'Можно перемещать вверх-вниз...',
+	}).css('cursor','move')
+	  .append($('<div>').attr({
+			class:'mod_trash'
+		}).css('cursor','pointer')
+		  .append(
+			$('<a>',{
+				href:'#',
+				click:function(){
+					removeModule(this);
+					return false;
+				}
+			}).append(
+				$('<img>',{
+					src:"<?=$_GET['base_url']?>/images/trash.gif",
+					title:"Удалить модуль из колонки"
+				}).css('border','0'))));
+	
+	var content=$('<div>').appendTo(newModule)
+						  .text($(srcEl).text())
+						  .attr({
+							  'data-module-type':dataModuleType,
+							  class:'mod_content'
+							});
+	if ($(srcEl).attr('class')=='mod_type_text'){
+		var cPadding=parseInt($(newModule).css('padding-top').replace("px", ""));
+		$(newModule).css({
+				background:'#FFF',
+				border:'solid 2px #F90',
+				padding:(cPadding-2)+'px'
+		});
+		$(content).css('color','#08C');
+		// добавить ссылки (команды добавления текста/статьи) в текстовый модуль:
+		addTextModuleComLinks(content);
+	}
+	$('#pick_out_section').fadeIn(2000);
+	$('#save_tmpl_block').fadeIn(3000);
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

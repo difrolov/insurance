@@ -26,9 +26,9 @@ class Fizicheskim_litzamController extends Controller
 	 */
 	public function actionIndex($alias=false)
 	{
-		$data=Data::getDataByAlias('fizicheskim_litzam',$alias);
-    	$this->render('index', array('res' => $data));
+		Data::getObjectByUrl($this,$alias);
 	}
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */
