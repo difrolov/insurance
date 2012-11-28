@@ -38,12 +38,8 @@ class ObjectController extends Controller
 
 		if(isset($_GET['id'])){
 			$model = InsurInsuranceObject::model()->find(array('condition'=>"id=".$_GET['id']));
-			if(isset($model->content)){
-				$model->status = 0;
-				$model->save();
-			}elseif(isset($model->name)){
-				$model->status = 0;
-				$model->save();
+			if(isset($model->name)){
+				$model->delete();
 			}
 		}
 
