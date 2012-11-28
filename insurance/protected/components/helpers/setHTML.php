@@ -698,7 +698,7 @@ div.schema30s > div{
 					  if ($for)
 						for($b=0,$c=count($block);$b<$c;$b++){
 							$bContent=$block[$b];
-							if(strstr($bContent,$artIdSbstr)){
+							if(strstr($bContent,$artIdSbstr)){ // статья
 								$article_id=(int)substr($bContent,strlen($artIdSbstr));
 								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); //var_dump("<h1>article_data:</h1><pre>",$article_data,"</pre>");
 								if ($article_data['name']){?>
@@ -712,6 +712,7 @@ div.schema30s > div{
 									require $module_path;	
 								}else echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
+							echo "<div class='clear'>&nbsp;</div>";
 						}else{
 						  
 						  if (isset($block)) {

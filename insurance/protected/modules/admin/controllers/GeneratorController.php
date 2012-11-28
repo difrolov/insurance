@@ -38,7 +38,7 @@ class GeneratorController extends Controller
 	 * @package
 	 * 
 	 */
-	public function actionIndex(){
+	public function actionIndex(){ 
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
@@ -69,21 +69,18 @@ class GeneratorController extends Controller
 			$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
 		}
 	}
-	//
-	public function actionUpdate(){
+/**
+ *	Сохранить изменённые данные макета
+ *
+ */
+	public function actionUpdate($id){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		if(isset($_GET['id'])){
-			//Достаем контент страницы
-			$content = InsurArticleContent::model()->findAll(array('condition'=>"object_id=".$_GET['id']));
-			if(!$content){
-				$this->redirect('index');
-			}
-			//таблица для отображения
-			$model = new InsurArticleContent();
-			$gridDataProvider = $model->search('object_id='.$_GET['id']);
-			$this->render('update',array('gridDataProvider'=>$gridDataProvider));
+		if (!$id){ 
+			die('Ошибка!<p>Не получен id подраздела</p>.'); 
+		}else{
+			$this->actionSave($id);
 		}
 	}
 	/**
@@ -96,17 +93,16 @@ class GeneratorController extends Controller
 		}
 		if($section_id){
 			$this->getGeneratorRoot();
-			$data = Yii::app()->db->createCommand()->select('name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
+			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$arrModData=$this->getAllModules();
 			$this->render('index', array('data' => $data,'model'=>$arrModData['model'],'model_modules'=>$arrModData['model_modules']));
 		}
 	}
 	
-	public function actionSave(){ // см. _docs\tests\test2.php
+	public function actionSave($update_id=false){ // см. _docs\tests\test2.php
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-			
 		$localdata=false;
 		if (isset($_GET['gtest']))
 			$localdata=$_GET['gtest'];
@@ -125,9 +121,11 @@ class GeneratorController extends Controller
 			if ($key=="blocks"){ // если блоки с модулями
 				foreach($val as $block => $data){ // перебрать каждый блок
 					$arrMods=explode("|",$data); // получить массив модулей
+					
 					if ( strstr($data,$dText) // если в наборе модулей есть начало для текстового блока
 						 && !strstr($data,$dTextArtId) // и нет записи о добавленной существующей статье (article id:)
 					   ){ 
+						
 						for($i=0;$i<count($arrMods);$i++){
 							// повторить условие поиска текста для текущего модуля:
 							if ( strstr($arrMods[$i],$dText) // текст новой статьи
@@ -197,18 +195,37 @@ class GeneratorController extends Controller
 		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА 
 		(insur_insurance_object)
 		************************************/
-		$model_obj = new InsurInsuranceObject;
-		$model_obj->parent_id = $parent_id;
-		$model_obj->name = $name;
-		$model_obj->status = 1;
-		$model_obj->alias = $alias;
-		$model_obj->date_changes = date("Y-m-d H:i:s");
-		$model_obj->keywords = $keywords;
-		$model_obj->description = $description;
-		$model_obj->content = serialize($post);
-		$model_obj->save();
-		$section_id=$model_obj->id;
-		
+		$status=(isset($_GET['preview']))? 1:0;
+		$date_changes= date("Y-m-d H:i:s");
+		if($section_id=$update_id){
+			//$jenc=json_encode(array("result"=>'We_GOT actionSave. LINE is '.__LINE__.", data is: $section_id, $parent_id, $name, $status, $alias, $date_changes, $keywords, $description, $content"));				
+			//echo $jenc;	
+			//exit;
+
+			InsurInsuranceObject::model()->updateByPk($section_id, 
+					array(	'parent_id'=>$parent_id,
+							'name'=>$name,
+							'status'=>$status,
+							'alias'=>$alias,
+							'date_changes'=>$date_changes,
+							'keywords'=>$keywords,
+							'description'=>$description,
+							'content'=>serialize($post),
+						 )
+				);
+		}else{
+			$model_obj = new InsurInsuranceObject;
+			$model_obj->parent_id = $parent_id;
+			$model_obj->name = $name;
+			$model_obj->status = $status;
+			$model_obj->alias = $alias;
+			$model_obj->$date_changes;
+			$model_obj->keywords = $keywords;
+			$model_obj->description = $description;
+			$model_obj->content = serialize($post);
+			$model_obj->save();
+			$section_id=$model_obj->id;
+		}
 		if ($localdata){
 			TestGenerator::testCodeOutput3($post,$model_obj->content,__LINE__);
 		}else{

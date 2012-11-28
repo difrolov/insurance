@@ -127,7 +127,7 @@ function createLayout(editMode){
 		break;
 	}
 	// 	построить схему блоков для визуализации:
-	var tmplBlock='<div class="first" onClick="selectColumn(event,this);">';
+	var tmplBlock='<div class="first">';
 	for (i=0;i<colsCount;i++){
 		
 		tmplBlock+='	<div';
@@ -445,9 +445,11 @@ function createLayout(editMode){
 	tmplBlock+="</div>";
 	var goLoop=false;
 	if (goLoop) // чиста для теста, если хотим вывести все возможные блоки
-		document.getElementById('tmplPlace').innerHTML+='<div>'+Layout.Schema+'</div>'+tmplBlock;
-	else
-		document.getElementById('tmplPlace').innerHTML=tmplBlock;
+		$('#tmplPlace').append('<div>'+Layout.Schema+'</div>'+tmplBlock);
+	else{
+		var tmplPlace=$('div#tmplPlace');
+		$(tmplPlace).html(tmplBlock);
+	}
 	if (editMode)
 		loadModulesEditMode(); // загрузить макет ранее созданного подраздела
 <?	if ($test){?>		

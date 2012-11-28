@@ -108,7 +108,7 @@ $(function(){
 			Layout.title=$('#title').val();
 			Layout.keywords=$('#keywords').val();
 			Layout.description=$('#description').val();
-			 alert('action: '+$('#content_save').attr('action'));
+			//alert('action: '+$('#content_save').attr('action'));
 			$.ajax ({
 					type: "POST",
 					url: $('#content_save').attr('action'),
@@ -120,15 +120,15 @@ $(function(){
   					},
 					success: function (data) {
 						//alert("Подраздел добавлен!");
-						location.href=data.result; 
+						if (data.result.indexOf('We_GOT')!=-1)
+							alert(data.result);
+						else
+							location.href=data.result; 
 					},
-					error: function (data, textStatus, jqXHR) {
+					error: function (data) {
 						$("div#veil").hide();
 						$("div#pls_wait").hide();
-						var obj = jQuery.parseJSON(jqXHR.responseText);
-						alert("Не удалось отправить данные \n"+obj);
-						notify(data.toString());
-						notify(textStatus.toString()); 
+						alert("Не удалось отправить данные.\nОтвет: "+data.result);
 					}
 				})
 		}

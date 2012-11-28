@@ -1,4 +1,4 @@
-<DIV align="left" id="testBlockInfoBottom" class="testBlock pFixed" style="right:0; bottom:0; color:#F00; display:<?="none"?>;">&nbsp;</DIV><? // var_dump("<h1>data:</h1><pre>",$data,"</pre>"); die();
+<? 	$go_action=(isset($data))? "update?id=".$data['id']:"save";?><DIV align="left" id="testBlockInfoBottom" class="testBlock pFixed" style="right:0; bottom:0; color:#F00; display:<?="none"?>;">&nbsp;</DIV><? // var_dump("<h1>data:</h1><pre>",$data,"</pre>"); die();
 if (isset($data)) // подключить скрипт с js-обработкой существущего макета:
 	require_once Yii::getPathOfAlias('webroot')."/js/admin/generator/edit_template.php";
 $groot=$this->groot; // директория Генератора
@@ -9,7 +9,7 @@ require_once $includes.'test_control.php';
 <div id="article_preview_text">
 </div>
 <div align="left">
-<form style="margin:0;" name="content_save" id="content_save" method="post" action="<?php echo Yii::app()->createUrl('admin/generator/save/') ?>">
+<form style="margin:0;" name="content_save" id="content_save" method="post" action="<?php echo Yii::app()->createUrl('admin/generator/'.$go_action) ?>">
 <? // подключить опции начального выбора макета:
 require_once $includes.'choice_init.php';?>
 <? // подключить кнопки управления макетом:
