@@ -188,7 +188,7 @@ function loadModulesEditMode(){
 				}
 				if($modIndex!==false){?>
 	$(curModsOrangeButton).eq(<?=$modIndex?>).trigger('click'); // добавить модуль в активную колонку
-					<?	if($modText){ // если таки текстовый модуль, обработаем его ПОСЛЕ (!!!) эмуляции клика по кнопке (т.е., фактического добавления его в колонку)?>
+				<?	if($modText){ // если таки текстовый модуль, обработаем его ПОСЛЕ (!!!) эмуляции клика по кнопке (т.е., фактического добавления его в колонку)?>
 	var arrPreData=setTxtReadyContent(<?=$art_id?>);
 	preHeader=arrPreData['art'];
 	var txtModule=$(colActive).find('div.innerModule').eq(<?=$i?>); // текстовый модуль
@@ -202,7 +202,13 @@ function loadModulesEditMode(){
 	saveBlockContentString( <?=$block_name?>, // # родительского блока ссылки добавления готовой статьи
 							'<?=$artPreString.' '.$art_id?>' // распарсенный и обработанный массив текстового блока
 						  );
-			<?		}
+			<?		}else{?>
+	// Layout.blocks number, контент модуля
+	saveBlockContentString(<?=$block_name?>,'<?=$moduleContent?>');
+	// вывод информации в консоль в тестовом режиме
+	// если test_mode='alert' также выводит alert
+	consoleOutput('block name : <?=$block_name?>, moduleContent : <?=$moduleContent?>');
+				<?	}
 			 	}
 			}
 		}
@@ -212,8 +218,7 @@ $(tmplColumns).last().removeAttr('style').removeAttr('data-column_stat');
 <?		if($testTmpl) :?>
 test_parseLayout();
 <?		endif;?>
-$('#pick_out_section').fadeIn(2000);
-
+	$('#pick_out_section').fadeIn(2000);
 }
 
 // получить индекс активной пиктограммы
