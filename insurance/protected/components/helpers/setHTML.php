@@ -78,8 +78,8 @@ class setHTML{
           	<div align="center" id="all_phones">
               <div id="cmd_micro">
               	<div data-home="home" title="На главную" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/'">&nbsp;</div>
-                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/map.php"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/map.php'">&nbsp;</a></div>
-                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/search.php'">&nbsp;</div>
+                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/map"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/map/'">&nbsp;</a></div>
+                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/search'"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/search/'">&nbsp;</a></div>
               </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
 			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>

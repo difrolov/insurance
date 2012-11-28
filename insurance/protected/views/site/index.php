@@ -74,10 +74,13 @@
 </div>        
 	<div align="left" id="last_news" style="position:relative;">
         <div class="clear">Новости</div>
-        <p class="txtLightBlue txtInpact floatLeft" id="textLastNew">Последняя новость</p>
-        <p class="floatRight txtLightBlue" id="all_news" style="margin-top:4px; border-bottom:dotted 1px"><a href="#" style="text-decoration:none;">все новости</a></p>
-        <div id="issue_date">31.08.2012</div>
-        <p id="new_preview"><!--В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.-->
+        <!--<p class="txtLightBlue txtInpact floatLeft" id="textLastNew">Последняя новость</p>-->
+        <div class="clear" style="margin-bottom:26px;">
+        <span id="issue_date" style="margin-top:20px;">31.08.2012</span>
+        <span class="floatRight txtLightBlue" id="all_news" style="border-bottom:dotted 1px; font-size:10.5px; margin-top:18px;"><a href="#" style="text-decoration:none;">все новости</a></span>
+        </div>
+        <p id="new_preview">
+        <!--В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.-->
         мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок</p>
     </div>        
 </div>
