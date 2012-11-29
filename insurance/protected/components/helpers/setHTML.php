@@ -657,6 +657,7 @@ div.schema30s > div{
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	// определиться с типом генерации контента - либо как специально разработанный модуль, либо как стандартный раздел, созданный Генератором:
 			if ( $asModule // если передан массив alias'ов, контент страниц которых должен выводиться как специально разработанный модуль
+				 && is_array($asModule)
 				 && in_array($section_data['alias'],$asModule)
 			   ){?><div id="innerXtraModule"><?
 			   require_once Yii::getPathOfAlias('webroot').'/protected/views/'.Yii::app()->controller->getId().'/' . $section_data['alias'] . '.php';?></div><?

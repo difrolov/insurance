@@ -29,6 +29,15 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('index');
 	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public function actionDebug(){
+		
+		$this->render('debug',array());
+	}
 	/**
 	  *
 	  */

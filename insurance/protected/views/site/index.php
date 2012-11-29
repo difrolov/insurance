@@ -60,31 +60,8 @@
 
 <div id="content_from_right"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/pix/old_cars.gif" width="296" height="284">
 </div>
-<div id="bottom_insur">
-	<div id="mod_insur_species">
-	<h2 class="txtLightBlue">Виды страхования</h2>
-	<div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/car.png" width="77" height="49">
-    <a href="#" class="txtLightBlue">Автострахование</a></div>
-    <div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/health.png" width="54" height="47">
-    <a href="#" class="txtLightBlue">Здоровье</a></div>
-    <div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/home.png" width="67" height="50">
-    <a href="#" class="txtLightBlue">Имущество</a></div>
-    <div><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/modules/insurance_species/travel.png" width="63" height="52">
-    <a href="#" class="txtLightBlue">Путешествия</a></div>
-</div>        
-	<div align="left" id="last_news" style="position:relative;">
-        <div class="clear">Новости</div>
-        <!--<p class="txtLightBlue txtInpact floatLeft" id="textLastNew">Последняя новость</p>-->
-        <div class="clear" style="margin-bottom:26px;">
-        <span id="issue_date" style="margin-top:20px;">31.08.2012</span>
-        <span class="floatRight txtLightBlue" id="all_news" style="border-bottom:dotted 1px; font-size:10.5px; margin-top:18px;"><a href="#" style="text-decoration:none;">все новости</a></span>
-        </div>
-        <p id="new_preview">
-        <!--В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.-->
-        мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок</p>
-    </div>        
-</div>
-<?	if ($tp){?><h3>/tblSlides</h3><? }?>
+<?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
+	if ($tp){?><h3>/tblSlides</h3><? }?>
 		<!-- /tblSlides -->
 			<!--<div id="content_from_right" align="center">
 			  <img src="<?=Yii::app()->request->baseUrl?>/images/pix/museum.jpg" width="180" height="233">
