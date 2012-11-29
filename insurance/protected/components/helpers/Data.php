@@ -6,7 +6,7 @@ class Data {
   * Загружает контент раздела/подраздела из БД по полученному алиасу
   * Требует установки правил в UrlManager!
   */
-	function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
+	static function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
 							 $alias=false // alias подраздела
 						   ){ 
 		if (!$alias) {
@@ -24,7 +24,7 @@ class Data {
  * @package
  * @subpackage
  */
-	function getObjectByUrl($obj,$subsection){
+	static function getObjectByUrl($obj,$subsection){
 		if($subsection!='site'){
 			$Uri=explode("/",$_SERVER['REQUEST_URI']);
 			$hash=array_pop($Uri);
@@ -39,10 +39,10 @@ class Data {
  * @package
  * @subpackage
  */
-	function getObjectsRecursive( $fields=false, // поля извлечения данных
+	static function getObjectsRecursive( $fields=false, // поля извлечения данных
 								  $parent_id=false, // id родительского (под)раздела
 								  $level=0,	// иерархический уровень текущего подраздела
-								  $result=false // результат; при вхождении в рекурсию передаётся по ссылке
+								  &$result=false // результат; при вхождении в рекурсию передаётся по ссылке
 								){
 		if(!$fields) { // набор полей извлечения данных по умолчанию
 			$fields='id,name,parent_id,alias'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
@@ -83,7 +83,7 @@ order by id ASC";
 			$result[$section_data['id']]=$arrRes; // сохраняем данные таблицы для подраздела в массиве
 			if((int)$section_data['children']){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
 				for($k=0,$m=$section_data['children'];$k<$m;$k++){
-					self::getObjectsRecursive($fields,(int)$section_data['id'],$level,&$result);
+					self::getObjectsRecursive($fields,(int)$section_data['id'],$level,$result);
 				}
 			}
 			if (isset($xtra_id)

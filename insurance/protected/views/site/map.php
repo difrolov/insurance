@@ -1,4 +1,4 @@
-﻿<div id="inner_left_menu" style="background:none; box-shadow:none; width:initial;">
+<div id="inner_left_menu" style="background:none; box-shadow:none; width:initial;">
 <h2 class="txtLightBlue">Карта сайта</h2>
 <? 
 function buildMap($array) {

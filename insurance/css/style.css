@@ -381,6 +381,18 @@ table.inner_layout tr >
 	td:first-child{
 	padding-right:14px;
 }
+div#innerXtraModule{ /*	то же, что для левого мудля любой схемы макета	*/
+	padding:10px;
+	padding-left:8px;
+}
+div#innerXtraModule > h1,
+div#innerXtraModule > h2,
+div#innerXtraModule > h3,
+div#innerXtraModule > h4,
+div#innerXtraModule > h5{
+	margin-bottom:10px;
+	margin-top:0;
+}
 div#last_articles{
 	display:inline-block;
 	height:212px;

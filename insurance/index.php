@@ -1,6 +1,8 @@
 <?php
 // change the following paths if necessary
 error_reporting(E_ALL);
+error_reporting(E_NOTICE);
+// error_reporting(E_STRICT);
 session_start();
 $yii=dirname(__FILE__).'/../yii/framework/yii.php';
 if(strstr($_SERVER['HTTP_HOST'],"localhost")){

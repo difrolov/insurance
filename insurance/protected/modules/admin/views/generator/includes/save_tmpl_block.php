@@ -1,4 +1,11 @@
 <?	
+// ПОЛУЧИМ ВСЕ РАЗДЕЛЫ САЙТА:
+// Начиная с главных:
+$allObjectsArray=Data::getObjectsRecursive();
+// Те, у которых parent_id = -2:
+$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
+						
+
 if (!isset($allObjectsArray)){ // ...
 	$allObjectsArray=Data::getObjectsRecursive();	
 }	
