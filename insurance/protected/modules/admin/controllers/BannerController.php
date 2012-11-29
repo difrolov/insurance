@@ -14,16 +14,16 @@ class BannerController extends Controller{
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		$model = new InsurBanners();
-		$gridDataProvider_out = new CActiveDataProvider($model->search('place="outside"'), array(
-				'pagination'=> array(
-						'pageSize'=> 3
-				),
-		));
+		$gridDataProvider_out = $model->search('place="outside"');
 		//$gridDataProvider_out = $model->search('place="outside"');
 		$gridDataProvider_in = $model->search('place="inside"');
+		$gridDataProvider_3 = $model->search('place="3"');
+		$gridDataProvider_4 = $model->search('place="4"');
 		$out_query = InsurBanners::model()->findAll(array('condition'=>'place="outside"'));
 		$in_query = InsurBanners::model()->findAll(array('condition'=>'place="inside"'));
 		$this->render('getbanner',array('in'=>$gridDataProvider_in,'out'=>$gridDataProvider_out,
+										'ban3'=>$gridDataProvider_3,
+										'ban4'=>$gridDataProvider_4,
 										'out_query'=>$out_query,'in_query'=>$in_query));
 	}
 	public function actionAjaxUpdate(){
@@ -54,12 +54,14 @@ class BannerController extends Controller{
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 			exit;
 		}
-		if(isset($_POST['ban']) && isset($_POST['val'])){
-			$query = InsurBanners::model()->findAll(array('condition'=>'place="'.$_POST['ban'].'"'));
-			foreach($query as $key=>$val){
-				$query[$key]->status = $_POST['val'];
-				$query[$key]->save();
-			}
+		if(isset($_POST['ban']) && isset($_POST['val']) && isset($_POST['id'])){
+				$query = InsurBanners::model()->findAll(array('condition'=>'id in ('.$_POST['id'].')'));
+				foreach($query as $key=>$val){
+					$query[$key]->status = $_POST['val'];
+					$query[$key]->save();
+				}
+
+
 			echo json_encode(array('success'=>1));
 			exit;
 		}
@@ -77,6 +79,7 @@ class BannerController extends Controller{
 				$model->name="банер1";
 				$model->status = 0;
 				$model->place = 'outside';
+				$model->date_edit = date('Y-m-d H:i:s');
 				$model->save();
 			}
 		}

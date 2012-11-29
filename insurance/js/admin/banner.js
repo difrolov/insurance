@@ -20,8 +20,8 @@ _banner = {
 		}
 
 	},
-	statusButton: function(ban,val){
-		$.post('ajaxupdatestatus',{ban:ban,val:val},function(data){
+	statusButton: function(ban,val,id){
+		$.post('ajaxupdatestatus',{ban:ban,val:val,id:id},function(data){
 
 			if(data.success == 1){
 				location.reload();

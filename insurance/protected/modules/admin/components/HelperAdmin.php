@@ -63,7 +63,7 @@ ORDER BY name, parent_name';
 /**
  * Сгенерировать иерархический список подразделов для выбора родительского в генераторе:
  *
- *	
+ *
  */
 	function makeSectionsMap($array,$external_parent_id=false){
 		foreach ($array as $section_id=>$section_data){
@@ -80,7 +80,7 @@ ORDER BY name, parent_name';
 					$b_close='</b>';
 				}elseif($parent_id>0)
 					$sub='sub';
-			}?> 
+			}?>
         <label>
           <span<? if($external_parent_id==$section_id){?> class="selLabel"<? }?>>
         	<input name="menu" id="<?=$sub?>menu_<?=$section_id?>" type="radio" value="<?=$section_id?>"<? if($external_parent_id==$section_id){?> checked<? }?>><?=$b?><?=$section_data['name']?><?=$b_close?>
@@ -193,13 +193,22 @@ ORDER BY name, parent_name';
 			return $sel;
 		}
 	}
-	//выводим селект
-	public static function createBannerlink($val,$field_name,$id){
-		return '<a data-toggle="modal" href="#" data-target="#myModal"'.
-		'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">'.$val.'</a>';
-	}
-		public static function createStatusBaner($data){
-			return ($data?'<span class="out_'.$data.'"> Активен </span>':'<span class="out_'.$data.'"> Отключен </span>');
+
+		//выводим селект
+		public static function createBannerlink($val,$field_name,$id){
+			return ($val!=null?'<a data-toggle="modal" href="#" data-target="#myModal"'.
+			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">'.$val.'</a>':'<a data-toggle="modal" href="#" data-target="#myModal"'.
+			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">Выберите ссылку</a>');
+		}
+		public static function createStatusBaner($data,$id){
+			if($data){
+				$str = 	'<div class="'.$id.'"><div class="1" id="'.$id.'"><div class="dark"><div class="toggle"></div></div></div>';
+			}else{
+				$str = 	'<div class="'.$id.'"><div class="dark"><div class="toggle_off">'.
+						'</div></div></div>';
+			}
+			return $str;
+
 		}
 		public static function createStatusContent($data,$id){
 			$a="<a onclick='_object.updateContentStatus(".$id.");return false;' href='#'".
