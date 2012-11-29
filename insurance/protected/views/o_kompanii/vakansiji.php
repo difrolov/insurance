@@ -335,25 +335,24 @@ dl p{
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+  try{
+	// uses /js/custom_accordion.js
 	$('a.txtLightBlue').click( function (){
 		var myDl=$(this).siblings('dl').eq(0);
 		var stat=$(myDl).css('display');
 		var dLs=$('dl');
 		var dlIndex=$(dLs).index(myDl);
-		//alert(dlIndex);
 		$(dLs).each(	function(index, element) {
             var xIndex=$(dLs).index(element);
-			if (xIndex!=dlIndex)
-				$(this).css('display','none');
-				//alert(xIndex+' ! = '+dlIndex);
+			if (xIndex!=dlIndex&&$(element).attr('data-stat')=='shown')
+				handleHeight(element,'show'); 
         });
-		if (stat=='none')
-			$(myDl).animate({height:'show'},1000);
-		else
-			$(myDl).animate({height:'hide'},1000);
-			//alert('shown!');
+		handleHeight(myDl,stat);
 		return false;
 	});
+  }catch(e){
+	  alert(e.message);
+  }
 });
 </script>
 <h4 class="txtLightBlue">Наши вакансии</h4>
@@ -389,10 +388,10 @@ function replaceBall($str){
 }
 for ($i=0,$j=count($arrJobs);$i<$j;$i++){
 		$job=$arrJobs[$i];?>
+  <a name="job<?=$i?>"></a>
   <div class="jDef">
-  	<a name="job<?=$i?>"></a>
-    <a href="#job<?=$i?>" class="txtLightBlue"><?=$job['jobs_name']?></a>
-	<dl>
+    	<a href="#job<?=$i?>" class="txtLightBlue"><?=$job['jobs_name']?></a>
+	  <dl>
         <dt>Требования:</dt>
             <dd><?=replaceBall($job['requirements'])?></dd>
         
@@ -407,7 +406,7 @@ for ($i=0,$j=count($arrJobs);$i<$j;$i++){
         
         <dt>Контактное лицо:</dt>
             <dd><?=$job['contact_name']?></dd>
-    </dl>
+      </dl>
   </div>
 <?		
 }?>
