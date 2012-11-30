@@ -96,7 +96,7 @@ class setHTML{
 		$menuItems=self::getMainMenuItems($submenu);
 		foreach($menuItems as $parent_id=>$parent_data){
 			if (!in_array($parent_data['alias'],self::$arrAvoidSubmenu)) 
-				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
+				self::buildDropDownSubMenu($parent_data['alias'],$parent_id,true);
 		}
 	}
 /**
@@ -104,17 +104,18 @@ class setHTML{
  * @subpackage		menu
  *
  */
-	static function buildDropDownSubMenu($parent_alias='',$parent_id=false){
+	static function buildDropDownSubMenu($parent_alias='',$parent_id=false,$top_level=false){
+		static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
-        
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
+	<?	if ($top_level) 
+			echo $insur_species; 
+		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
 		if ($parent_alias=="korporativnym_klientam") {?>
           <ul class="asTable">
 			<li>
-            	<div class="txtLightBlue txtMediumSmall">Виды страхования</div>
-			<? self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
+		<?	self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
         <?	$corps=false;
 			if ($corps){
 				$arrCorps=array(
@@ -414,7 +415,6 @@ class setHTML{
 							$parent_alias.='/'.$subMenuItems['alias'];
 					}
 					$prev_level=$level; // установим текущий уровень подраздела 
-					
 					ob_start(); 
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
@@ -470,10 +470,11 @@ class setHTML{
     <button onClick="window.print();">Печать страницы</button>
 <?	}
 /**
+ * Основной метод, создающий контент подраздела на основе поля insur_insurance_object.content (это то, что можно создавать в качестве подразделов сайта в Генераторе)
  * Получает данные от Data::getObjectByUrl() в виде объекта активной записи в insur_insurance_object (setPageData()::$section_data = Data::getObjectByUrl()->res)
  * @package		content
  * @subpackage		metadata
- * Загрузить макет подраздела, разместить данные и выдать в HTML
+ * Загрузить макет подраздела, разместить в HTML
  */
 	static function setPageData( $this_obj, 
 						  $section_data, 
@@ -482,14 +483,19 @@ class setHTML{
 		// генерирует и размещает title страницы:
 		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
 		// генерирует и размещает название страницы в цепочке breadcrumbs:
+		
 		$breadcrumbs=array();
 		if ($section_data->parent_id>0)	{	
+			// получить имя и алиас для размещения в цепочке:
 			$parentName=InsurInsuranceObject::model()->find(array(
-							'select'=>'name',
+							'select'=>'name,alias',
 							'condition'=>'id = '.$section_data->parent_id,
 						)); 
+			$top_name=Yii::app()->db->createCommand()->select('name')->from('insur_insurance_object')->where('alias="'.Yii::app()->controller->getId().'"')->queryScalar();				
+						
 			$this_obj->breadcrumbs=array(
-				$parentName->name=>array('index'),
+				$top_name=>array('index'),
+				$parentName->name=>array($parentName->alias),
 				$section_data->name
 			);
 		}else 
@@ -665,12 +671,10 @@ div.schema30s > div{
 				$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 				$bloxHeaderType=$tmpl['Schema'][1];
 				$bloxFooterType=$tmpl['Schema'][2];
-				
 				if ($bloxHeaderType!='0')
 					$bloxCnt++;
 				if ($bloxFooterType!='0')
 					$bloxCnt++;
-				
 				/*
 				 * См. схему построения макетов в файле:
 				 * /_docs/схема.xslx!Макет для создания разделов
@@ -739,22 +743,12 @@ div.schema30s > div{
 							// если статья:
 							if(strstr($moduleContent,$artIdSbstr)){ 
 								$article_id=(int)substr($moduleContent,strlen($artIdSbstr));
-								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); //var_dump("<h1>article_data:</h1><pre>",$article_data,"</pre>");
+								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); 
 								if ($article_data['name']){?>
 		<h3 class="contentHeader"><?=$article_data['name']?></h3>
 							<?	}	echo $article_data['content'];
 							}else{ // НЕ статья?>
 		<h3 class="contentHeader"><?=$moduleContent?></h3>
-        <?	//var_dump("<h1>modules:</h1><pre>",$modules,"</pre>");
-			//$modname=(array)$modules[$b]['name'];
-			//$modfolder=(array)$modules[$b]['module'];
-			//$mod_name=$modname[0];
-			//$mod_folder=$modfolder[0];
-			//echo "<div class=''>moduleContent = $moduleContent, mod_name= ".$mod_name.", mod_folder= $mod_folder</div>";
-			//var_dump("<h1>modules[$b]:</h1><pre>",$modules[$b],"</pre>");
-			//die();	
-			/*if (isset($mmm))*/
-?>
         					<?	if ($mod_folder=array_search($moduleContent,$modules)){
 									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
 									//echo "<div class=''>module_path= ".$module_path."</div>";
@@ -781,7 +775,6 @@ div.schema30s > div{
 		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 				<?		}
 					}?>
-
                 	</div>
                 </div>	
 					<?	$i++;
@@ -791,7 +784,6 @@ div.schema30s > div{
 			<? 	}
 			}?>
         <div class="clear">&nbsp;</div>
-		<?	// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
    </div>     
 	<?	}
 	}

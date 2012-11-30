@@ -21,16 +21,6 @@ class GeneratorController extends Controller
 		return handleFiles($mpath);
 	}
 /**
- * Получить упрощённый набор модулей
- * @package
- * @subpackage
- 
-	function getAllModulesNames($modules){
-		for($i=0,$j=count($modules);$i<$j;$i++)
-			$modulesNames[]=$modules[$i]["name"];
-		return $modulesNames;
-	}*/
-/**
  * @package
  * 
  */
@@ -64,7 +54,7 @@ class GeneratorController extends Controller
 
 			$gridDataProvider['parent'] = $model->search('id='.$_GET['id']);
 			$gridDataProvider['child'] = $model->search('parent_id='.$_GET['id']);
-			$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
+			$this->render('getobject',array('gridDataProvider'=>$gridDataProvider));
 		}
 	}
 /**
@@ -175,8 +165,6 @@ class GeneratorController extends Controller
 					}
 					if (!strstr($modulesInBlockString,"header:"))	
 						$sectionDataArray[$blockName]=$arrBlockModules;
-					//var_dump("<h1>arrBlockModules FINISH ".__LINE__.":</h1><pre>",$arrBlockModules,"</pre>");
-					
 				}
 				$post[$key]=$sectionDataArray;
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$sectionDataArray);
