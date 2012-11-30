@@ -14,7 +14,7 @@
 		$SectionDataContent=unserialize($data['content']);
 		// получить текущую схему макета:
 		$Shema=$SectionDataContent['Schema'];
-	} // данные подраздела (array, имена полей таблицы)		
+	} // данные подраздела (array, имена полей таблицы)	
 	if($testTmpl||isset($_GET['dump'])){?>
     	<div id="SectionDataContent" align="left" style="position:fixed; top:40; right:0;">
 		<?	ob_start();
@@ -146,6 +146,8 @@ $(function(){
 	  alert(e.message);
   }
 });
+<?	
+if ($SectionDataContent['blocks']){?>
 /**
  * Загрузить и обработать модули
  */
@@ -218,7 +220,8 @@ test_parseLayout();
 <?		endif;?>
 	$('#pick_out_section').fadeIn(2000);
 }
-
+<?
+}?>
 // получить индекс активной пиктограммы
 function definePyctIndex( multicolType,	// multicolFooter
 						  rowName,		// psFooter		

@@ -1,4 +1,11 @@
 <?	
+// ПОЛУЧИМ ВСЕ РАЗДЕЛЫ САЙТА:
+// Начиная с главных:
+$allObjectsArray=Data::getObjectsRecursive();
+// Те, у которых parent_id = -2:
+$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
+						
+
 if (!isset($allObjectsArray)){ // ...
 	$allObjectsArray=Data::getObjectsRecursive();	
 }	
@@ -15,7 +22,7 @@ $section_keywords=false;
 $section_description=false;
 
 // если в режиме редактирования, получим данные макета:
-if (isset($data)&&isset($model_modules)){
+if (isset($data)&&isset($modules)){
 	$edit_mode=true;
 	//var_dump("<h1>data:</h1><pre>",$data,"</pre>"); 
 	//var_dump("<h1>model_modules:</h1><pre>",$model_modules,"</pre>");
@@ -25,9 +32,6 @@ if (isset($data)&&isset($model_modules)){
 	$section_title=$data['title'];
 	$section_keywords=$data['keywords'];
 	$section_description=$data['description']; 
-	//var_dump("<h1>data:</h1><pre>",$data,"</pre>");
-	//var_dump("<h1>model_modules:</h1><pre>",$model_modules,"</pre>");
-	//die();
 }?>
     <h5 id="pick_out_section" class="link" style="display:<? 
 		if(isset($_GET['test'])){

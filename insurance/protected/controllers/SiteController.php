@@ -29,20 +29,41 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('index');
 	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public function actionDebug(){
+		
+		$this->render('debug',array());
+	}
 	/**
 	  *
 	  */
-	/*public function actionName()
-	{	//обращаемся к модели и получаем данные таблицы:
+	public function actionMap()
+	{	
+		
+		//обращаемся к модели и получаем данные таблицы:
 		//$res=ClassName::model()->findAll( array('select'=>'name',
 			//					     	'condition'=>' name <> "" '
 				//					  ), //условие запроса
 					//			     array('order'=>' id DESC '
 						//		   )
 							//	 );
-		$res="Контент страницы \"Name\"";
-		$this->render('file_name_in_this_view', array('res'=>$res));
-	}*/
+		$res=Data::getObjectsRecursive();
+		$this->render('map', array('res'=>$res));
+	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	function actionSearch(){
+		$res="Результат поиска";
+		$this->render('search', array('res'=>$res));
+	}
+	
 	/**
 	  *
 	  */

@@ -15,36 +15,34 @@ class GeneratorController extends Controller
 	 * Получить данные существующих модулей
 	 */
 	function getAllModules(){
-		$model = new InsurArticleContent;
-		$sql = "SELECT o.`name`,o.`status`,o.`parent_id`,o.`alias`,m.id
-				FROM insur_modules as m
-				LEFT JOIN insur_insurance_object as o ON o.`id`=m.`object_id`
-				WHERE o.`status`= 1";
-		$model_modules = Yii::app()->db->createCommand($sql)->queryAll();
-		return array('model'=>$model,'model_modules'=>$model_modules);
+		// получить все текущие модули:
+		$mpath=Yii::getPathOfAlias('webroot').'/protected/components/modules';
+		require_once $mpath.'/mod_helper.php';
+		return handleFiles($mpath);
 	}
 /**
  * Получить упрощённый набор модулей
  * @package
  * @subpackage
  */
-	function getAllModulesNames($model_modules){
-		for($i=0,$j=count($model_modules);$i<$j;$i++)
-			$modulesNames[]=$model_modules[$i]["name"];
+	function getAllModulesNames($modules){
+		for($i=0,$j=count($modules);$i<$j;$i++)
+			$modulesNames[]=$modules[$i]["name"];
 		return $modulesNames;
 	}
-	
-	/**
-	 * @package
-	 * 
-	 */
+/**
+ * @package
+ * 
+ */
 	public function actionIndex(){ 
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
+		$model = new InsurInsuranceObject;
+
 		$this->getGeneratorRoot();
-		$arrModData=$this->getAllModules();
-		$this->render('index',array('model'=>$arrModData['model'],'model_modules'=>$arrModData['model_modules']));
+		$modules=$this->getAllModules();
+		$this->render('index',array('model'=>$model,'modules'=>$modules));
 	}
 	/**
 	 * @package
@@ -124,12 +122,9 @@ class GeneratorController extends Controller
 				// [blocks][2] as [2] => новости|готовое решение|случайная статья
 				//						 $modulesInBlockString
 					$arrBlockModules=explode("|",$modulesInBlockString); // получить массив модулей
-					//var_dump("<h1>arrBlockModules START ".__LINE__.":</h1><pre>",$arrBlockModules,"</pre>");
 					// $arrBlockModules=array(новости, готовое решение, случайная статья)
 					// если в наборе модулей (т.е., во ВСЕЙ СТРОКЕ) есть начало для текстового блока
-					if (strstr($modulesInBlockString,$dText)/* 
-						 && !strstr($modulesInBlockString,$dTextArtId) // и нет записи о добавленной существующей статье (article id:)
-					   */){ 
+					if (strstr($modulesInBlockString,$dText)){ 
 						
 						for($i=0;$i<count($arrBlockModules);$i++){
 							
@@ -138,7 +133,6 @@ class GeneratorController extends Controller
 								 && !strstr($arrBlockModules[$i],$dTextArtId) // но не id существующей статьи
 							   ){
 								
-								// var_dump("<h1>arrBlockModules[$i] INSIDE ".__LINE__.":</h1><pre>",$arrBlockModules[$i],"</pre>");
 //		$jenc=json_encode(array("result"=>'We_GOT actionSave. LINE is '.__LINE__."\n\nText: ".$arrBlockModules[$i]));				
 //		echo $jenc;	
 //		exit;
@@ -173,9 +167,6 @@ class GeneratorController extends Controller
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:
 									// "Текст :: article id: [id_статьи]";
-//				$dt[]="\nheader: $header";
-//				$dt[]="\nText: $text";
-//				$dt[]="\n\narticle_id=$article_id";
 									$arrBlockModules[$i]=$dTextArtId.$article_id;
 								}
 							}

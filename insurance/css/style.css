@@ -64,7 +64,7 @@ div#bottom_menu
 	font-size:13px;
 }
 div#breadcrumbs{
-	font-size:0.8em;
+	font-size:11px;
 	line-height:28px;
 	margin-left: 274px;
 	padding-top: 10px;
@@ -311,7 +311,7 @@ div#inner_left_menu{
 	border-left:solid 10px #FFF;
 	box-shadow: -4px 0px 10px #DDD inset;
 	display:inline-block;
-	margin-top: -20px;
+	margin-top: -10px;
 	padding-top:6px;
 	padding-bottom:10px;
 	padding-left:15px;
@@ -322,8 +322,21 @@ div#inner_left_menu blockquote{
 	margin:0;
 	padding:0 0 0 10px;
 }
+div#inner_left_menu blockquote a{
+	font-size:11px;
+}
+div#inner_left_menu > div{
+	padding-bottom:5px;
+	padding-top:0px;
+	line-height: 100%;
+}
+div#inner_left_menu > blockquote div{
+	padding-bottom:4px;
+	padding-top:2px;
+	line-height: 84%;
+}
 div#inner_left_menu a{
-	line-height:27px;
+	/*line-height:22px;*/
 }
 div#inner_left_menu div.active{
 	margin-left:-16px;
@@ -368,6 +381,18 @@ table.inner_layout tr >
 	td:first-child{
 	padding-right:14px;
 }
+div#innerXtraModule{ /*	то же, что для левого мудля любой схемы макета	*/
+	padding:10px;
+	padding-left:8px;
+}
+div#innerXtraModule > h1,
+div#innerXtraModule > h2,
+div#innerXtraModule > h3,
+div#innerXtraModule > h4,
+div#innerXtraModule > h5{
+	margin-bottom:10px;
+	margin-top:0;
+}
 div#last_articles{
 	display:inline-block;
 	height:212px;
@@ -394,11 +419,12 @@ div#last_news{
 	padding-left:20px;
 	vertical-align:top;
 }
-div#issue_date{
+#issue_date{
 	clear: both;
+	display:block;
+	float:left;
 	font-size: 10.5px;
-	position: absolute;
-	top: 46px;
+	margin-bottom:6px;
 }
 div#last_news p#all_news{
 }
@@ -615,7 +641,8 @@ div.active{
 #new_preview{ 
 	text-align: justify;
 	clear: both;
-	margin-top: 46px;
+	display:inline-block;
+	margin-top: 6px;
 	font-size: 11px;
 }
 ul[id^="yw"] li a,
@@ -626,6 +653,9 @@ div#bottom_menu a:hover,
 div#inner_left_menu a,
 div[id*="ddMenu_"] a{
 	color:#06AEDD;
+}
+div#inner_left_menu > div> a{
+	font-size:15px;
 }
 div#bottom_menu a{
 	color:#4C4C4E;

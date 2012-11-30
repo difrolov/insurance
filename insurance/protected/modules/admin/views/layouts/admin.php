@@ -65,6 +65,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <body>
 	<div id="header">
 		<div id="main_submenu">
+
 	<?php	// ПОЛУЧИМ ВСЕ РАЗДЕЛЫ САЙТА:
 			// Начиная с главных:
 			/* $allObjectsArray=Data::getObjectsRecursive();
