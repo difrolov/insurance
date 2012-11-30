@@ -679,48 +679,94 @@ div.schema30s > div{
 				$testColors=array('whitesmoke','mistyrose','lemonchiffon','honeydew','lightcyan','lavender');
 				$showLoremIpsum=false;
 				//***	/FOR TEST:	***//
-				$modules=array(
-						'news'=>'Новость',
-						'ready_solution1'=>'Готовое решение 1',
-						'ready_solution2'=>'Готовое решение 2',
-					);
+				// получить все модули:
+				require_once Yii::getPathOfAlias('webroot').'/protected/modules/admin/controllers/GeneratorController.php';
+				$raw_modules=generatorController::getAllModules();
+				$modules=Data::simplifyModules($raw_modules,true);
+				if(!isset($modules)){
+					// $modules[$i]=>
+					// 		'module'=>'news'
+					// 		'name'=>'Новости'
+					//		'description'=>'Модуль новостей компании'
+					//		'created'=>'nov. 2012'
+					//		'author'=>'srgg6701'
+					$modules=array(
+							'news'=>'Новость',
+							'ready_solution1'=>'Готовое решение 1',
+							'ready_solution2'=>'Готовое решение 2',
+						);
+				}
 				$i=1;
 				if (isset($tmpl['blocks'])) {
-					foreach ($tmpl['blocks'] as $block_name=>$block){?>
+					foreach ($tmpl['blocks'] as $block_name=>$blockModules){
+					 // массив: блоки макета as имя блока => массив модулей (строка): 
+					 	// 	$block_name:
+						//	[1] => 
+						//
+						//	$blockModules:	
+							// 	[0] Новость
+							// 	[1] Текст :: article id: 13
+							// 	[2] Готовое решение 1
+							// 	[3] Текст :: article id: 93
+							// 	[4] Готовое решение 2 
+						
+					 	// 	$block_name:
+						// [2] => 
+
+						//	$blockModules:	
+							//	[0] Новость |
+							//	[1] Готовое решение 2
+							//	[2] Готовое решение 2
+							//	[3] Текст :: article id: 94
+							//	[4] Текст :: article id: 95 	?>
 				<div id="div<?=$i?>">
                 	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
             	<? 	if($block_name==2&&$bloxHeaderType!='0'){ 
-						echo(is_array($block))? 
+						echo(is_array($blockModules))? 
 							"<span style='color:red'>Ошибка: неправильный тип данных для заголовка (массив вместо строки)...</span>"
 							:
-						 	"<h2 class=\"subsectHeader\">".substr($block,strpos($block,":")+1)."</h2>";
+						 	"<h2 class=\"subsectHeader\">".substr($blockModules,strpos($blockModules,":")+1)."</h2>";
 					}else{
 						$artIdSbstr="Текст :: article id:";
 						// собрать контент текущего блока:
 					  $for=true;
-					  if ($for)
-						for($b=0,$c=count($block);$b<$c;$b++){
-							$bContent=$block[$b];
-							if(strstr($bContent,$artIdSbstr)){ // статья
-								$article_id=(int)substr($bContent,strlen($artIdSbstr));
+					  if ($for) { // перебрать все модули в МАКЕТЕ:
+						for($b=0,$c=count($blockModules);$b<$c;$b++){
+							$moduleContent=$blockModules[$b];
+							// Новость
+							// Готовое решение 2
+							// ...
+							// если статья:
+							if(strstr($moduleContent,$artIdSbstr)){ 
+								$article_id=(int)substr($moduleContent,strlen($artIdSbstr));
 								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); //var_dump("<h1>article_data:</h1><pre>",$article_data,"</pre>");
 								if ($article_data['name']){?>
 		<h3 class="contentHeader"><?=$article_data['name']?></h3>
 							<?	}	echo $article_data['content'];
-							}else{?>
-		<h3 class="contentHeader"><?=$bContent?></h3>
-        					<?	if ($folder_name=array_search($bContent,$modules)){
-									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$folder_name.'/default.php';
+							}else{ // НЕ статья?>
+		<h3 class="contentHeader"><?=$moduleContent?></h3>
+        <?	//var_dump("<h1>modules:</h1><pre>",$modules,"</pre>");
+			//$modname=(array)$modules[$b]['name'];
+			//$modfolder=(array)$modules[$b]['module'];
+			//$mod_name=$modname[0];
+			//$mod_folder=$modfolder[0];
+			//echo "<div class=''>moduleContent = $moduleContent, mod_name= ".$mod_name.", mod_folder= $mod_folder</div>";
+			//var_dump("<h1>modules[$b]:</h1><pre>",$modules[$b],"</pre>");
+			//die();	
+			/*if (isset($mmm))*/
+?>
+        					<?	if ($mod_folder=array_search($moduleContent,$modules)){
+									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
 									//echo "<div class=''>module_path= ".$module_path."</div>";
 									require $module_path;	
-								}elseif($bContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+								}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
 							echo "<div class='clear'>&nbsp;</div>";
-						}else{
-						  
-						  if (isset($block)) {
-							  echo "<div class=''>block= ".$block."</div>";
-						  	  var_dump("<h1>block:</h1><pre>",$block,"</pre>");
+						}
+					  }else{
+						  if (isset($blockModules)) {
+							  echo "<div class=''>block= ".$blockModules."</div>";
+						  	  var_dump("<h1>block:</h1><pre>",$blockModules,"</pre>");
 						  }else echo "<div class=''>skip</div>";
 					  }
 						if ($showLoremIpsum){

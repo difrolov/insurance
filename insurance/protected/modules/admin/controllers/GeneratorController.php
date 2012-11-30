@@ -24,12 +24,12 @@ class GeneratorController extends Controller
  * Получить упрощённый набор модулей
  * @package
  * @subpackage
- */
+ 
 	function getAllModulesNames($modules){
 		for($i=0,$j=count($modules);$i<$j;$i++)
 			$modulesNames[]=$modules[$i]["name"];
 		return $modulesNames;
-	}
+	}*/
 /**
  * @package
  * 
@@ -91,9 +91,10 @@ class GeneratorController extends Controller
 		}
 		if($section_id){
 			$this->getGeneratorRoot();
+			$model = new InsurInsuranceObject();
 			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
-			$arrModData=$this->getAllModules();
-			$this->render('index', array('data' => $data,'model'=>$arrModData['model'],'model_modules'=>$arrModData['model_modules']));
+			$modules=$this->getAllModules();
+			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules));
 		}
 	}
 	

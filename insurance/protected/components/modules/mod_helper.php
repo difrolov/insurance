@@ -12,19 +12,18 @@ function handleFiles($dir) {
 				if ($file!='.'&&$file!='..') {
 					$path=$dir.$file.'/';
 					if (is_dir($path)){
-						echo "<div class=''>dir= ".$file."</div>";
 						handleFiles($path);
 					}else{ 
-						$af=explode(".",$file);
+						$af=explode(".",$file); // разбиваем имя файла собственно на имя (это будет имя модуля) и расширение
 						if(array_pop($af)=='xml'){
-							//echo "<div class=''>xml= ".$file."</div>";
 							$xml = simplexml_load_file($dir.$file);
-							$modData[]=array( 'module'=>array_pop($af),
-											  'name'=>$xml->name,
-											  'description'=>$xml->description,
-											  'created'=>$xml->created,
-											  'author'=>$xml->author
-											);
+							$modData[]=array( 
+										'module'=>array_pop($af),
+										'name'=>$xml->name,
+										'description'=>$xml->description,
+										'created'=>$xml->created,
+										'author'=>$xml->author
+									);
 						}
 					}
 				}

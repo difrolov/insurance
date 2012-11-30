@@ -97,5 +97,18 @@ order by id ASC";
 		}
 		return $result;
 	}	
+/**
+ * Модифицирует массив модулей, приводя его к виду "folder_name"=>"Название модуля"
+ * @package
+ * @subpackage
+ */
+	public static function simplifyModules($modules,$mod=NULL){
+		$i=0;
+		foreach($modules as $key_mod=>$val_mod){
+			$key=($mod)? $modules[$key_mod]['module']:$i++;
+			$aMods[$key]=$modules[$key_mod]['name'];
+		}
+		return $aMods;
+	}
 }
 ?>
