@@ -25,11 +25,11 @@
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/test.css" media="screen, projection" />
 <?	endif;?>
 <script>
-testMode=false; 
+testMode=false;
 <?	if (isset($_GET['test'])):?>
 testMode=true;
-<? endif;?>	
-</script>	
+<? endif;?>
+</script>
 	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
@@ -55,7 +55,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
     <script src="<?=$url?>/js/admin/generator/data_ready_to_send.php?base_url=<?
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
-<?	
+<?
 }else{
 // если любой другой раздел, приаттачить скрипт генерации доп. кнопки:?>
 	<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
@@ -67,10 +67,10 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		<div id="main_submenu">
 	<?php	// ПОЛУЧИМ ВСЕ РАЗДЕЛЫ САЙТА:
 			// Начиная с главных:
-			$allObjectsArray=Data::getObjectsRecursive();
+			/* $allObjectsArray=Data::getObjectsRecursive();
 			// Те, у которых parent_id = -2:
-			$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
-						
+			$allObjectsSecondArray=Data::getObjectsRecursive(false,-2); */
+
 			$this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
 		    'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
 		    'stacked'=>false, // whether this is a stacked menu
@@ -88,25 +88,25 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	</div>
 	<!-- header -->
 
-<div class="container" id="page">
-<?php	
+<div class="container" id="page" >
+<?php
 	HelperAdmin::menuItem();
 	$breadcrumbs=$this->breadcrumbs;
 	if(isset($breadcrumbs[1])):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
-		)); 
+		));
 	endif;
 	//var_dump("<h1>breadcrumbs:</h1><pre>",$breadcrumbs,"</pre>");
-	if (Yii::app()->controller->getId()!='generator') : 
+	if (Yii::app()->controller->getId()!='generator') :
 		 ?>
-	<div class="">
+	<div style="margin-top: 20px;">
 		<?php
-		
+
 		//***********************************
-		//	МЕНЮ САЙТА		
+		//	МЕНЮ САЙТА
 		//***********************************
-	
+
 		$items=HelperAdmin::$arrMenuItems;
 		$this->widget('ext.efgmenu.EFgMenu',array(
 				'bDev'=>true,
@@ -118,7 +118,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 				),
 			));?>
 	</div>
-<?	else:	
+<?	else:
 		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
 	endif;?>
 	<div class="content_right">
@@ -137,5 +137,8 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <div align="center" id="pls_wait" style="position:fixed; top:40%; bottom:50%;  opacity:1;z-index:2; width:100%; display:<?="none"?>;">
 	<div style="background: #FF9; line-height:26px; padding:30px 60px; border-radius:8px; display: inline-block; box-shadow:#000;">Создание подраздела... <br />Пожалуйста, подождите...</div>
 </div>
+<script type="text/javascript">
+	var baseUrl="<?php echo Yii::app()->baseUrl; ?>";
+</script>
 </body>
 </html>

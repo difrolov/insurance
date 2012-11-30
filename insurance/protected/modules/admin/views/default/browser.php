@@ -12,7 +12,7 @@
     }',
 )); */
 $this->widget('application.extensions.elfinder.ElFinderWidget', array(
-		'connectorRoute' =>  'admin/default/connector',
+		'connectorRoute' =>  '/admin/default/connector',
 		'settings' => array('toolbar'=>'open')
 )
 );

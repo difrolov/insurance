@@ -3,7 +3,7 @@ class setHTML{
 	protected static $arrAvoidSubmenu=array('site/index');
 	static $arrMenuWidget;
 	static $arrMenuWidgetSecond;
-	
+
 /**
  * @package HTML
  * @subpackage navigation
@@ -50,7 +50,7 @@ class setHTML{
   <tr>
     <td id="cellSolutions">
 <?	foreach($solutions as $solution)
-		self::showReadySolutionBlock($solution);?>      
+		self::showReadySolutionBlock($solution);?>
 	</td>
     <td id="cellPrograms">
 <?	//var_dump("<h1>programs:</h1><pre>",$programs,"</pre>");
@@ -63,7 +63,7 @@ class setHTML{
 		<? readyProduct::showProgram($programs[$i+1]);?>
       </div>
 <?		}
-	}?>      
+	}?>
 	</td>
   </tr>
 </table>
@@ -95,7 +95,7 @@ class setHTML{
 	function buildDropDownMenu($submenu=false){
 		$menuItems=self::getMainMenuItems($submenu);
 		foreach($menuItems as $parent_id=>$parent_data){
-			if (!in_array($parent_data['alias'],self::$arrAvoidSubmenu)) 
+			if (!in_array($parent_data['alias'],self::$arrAvoidSubmenu))
 				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
 		}
 	}
@@ -106,7 +106,7 @@ class setHTML{
  */
 	function buildDropDownSubMenu($parent_alias='',$parent_id=false){
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
-        
+
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
 	<?	$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
@@ -128,14 +128,14 @@ class setHTML{
                 <div class="txtGrey">
             <?	foreach($arrCorps as $alias=>$text):?>
             		<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
-            <?	endforeach;?>    
+            <?	endforeach;?>
             	</div>
             </li>
 		<?	}?>
           </ul>
-	<?	}else 
+	<?	}else
 			self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?>
-        </div> 
+        </div>
 <?	}
 /**
  * @package		HTML
@@ -160,19 +160,19 @@ class setHTML{
                 	<div><a href="<?=Yii::app()->request->getBaseUrl(true)?>">www.open.ru</a></div>
 					<div class="tiny_info">Финансовая корпорация &quot;Открытие&quot;</div>
 				</div>
-            	
+
                 <div id="footer_inside_center">
                 	<div id="fcompany">&copy; &quot;ОТКРЫТИЕ СТРАХОВАНИЕ&quot; 2012</div>
                     <div id="faddress">Адрес: 23007, Москва, ул. 4-я Магистральная, д. 11, стр. 2</div>
                     <div id="fcopy" class="tiny_info">&copy; &quot;Открытие страхование&quot; 2012</div>
                 </div>
-            	
+
                 <div id="footer_inside_right">
             		<div align="right">8 800 200 71 00</div>
 					<div class="tiny_info" id="overnight_calling" align="right">круглосуточно</div>
-            
+
 		</div>
-        	
+
         </div>
 			<?	if ($tp){?><h3>/footer_content</h3><? }?>
   	<!--/footer_content-->
@@ -186,26 +186,26 @@ class setHTML{
 	function buildLastArticles(){
 		ob_start();?>
 		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-	
+
 				diam nonumy eirmod tempor invidunt ut labore et dolore magna
-	
+
 				aliquyam erat, sed diam voluptua. At vero eos et accusam et
-	
+
 				justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-	
-				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>        
+
+				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 <?		$articles[]=ob_get_contents();
 		ob_end_clean();
 		ob_start();?>
 		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-	
+
 				diam nonumy eirmod tempor invidunt ut labore et dolore magna
-	
+
 				aliquyam erat, sed diam voluptua. At vero eos et accusam et
-	
+
 				justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-	
-				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>        
+
+				sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 <?		$articles[]=ob_get_contents();
 		ob_end_clean();
 		return $articles;
@@ -242,7 +242,7 @@ class setHTML{
 				<div id="logo" align="left">
                     <a href="<?=Yii::app()->request->getBaseUrl(true)?>"><?
     	if (isset($test_logo)){
-			?><img src="../../../images/logo.gif" width="372" height="80"><? 
+			?><img src="../../../images/logo.gif" width="372" height="80"><?
 		}else{?><img alt="Открытие Страхование" title="На главную" src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo.gif" width="372" height="80" border="0"><? }?></a>
                 </div>
 <?	}
@@ -259,7 +259,7 @@ class setHTML{
 		$currentController=Yii::app()->controller->getId();
 		$menuWidget=($submenu)? self::$arrMenuWidgetSecond:self::$arrMenuWidget;
 		if (!$menuWidget) { // если меню ещё не создавали. Иначе получит из статического массива, дабы не выполнять процедуру повторно для нижнего меню
-			$newborn_menu=true; 
+			$newborn_menu=true;
 			$arrMenu=self::getMainMenuItems($submenu);
 			foreach($arrMenu as $parent_id=>$parent_data) {
 				$text=$parent_data['text'];
@@ -267,7 +267,7 @@ class setHTML{
 				$arr=array('label'=>$text, 'url'=>array('/'.$alias.'/'));
 				if ($alias!=$mainPageAlias)
 					$arr['active']= $currentController == $alias;
-				$menuWidget[]=$arr; 
+				$menuWidget[]=$arr;
 			}
 			if ($submenu)
 				self::$arrMenuWidgetSecond=$menuWidget;
@@ -292,7 +292,7 @@ class setHTML{
 			<?	if ( $alias!='/'.$mainPageAlias.'/'
 			         && isset($newborn_menu)
 				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
-            </li>	
+            </li>
 		<?	}?>
         </ul>
 	<?	}else $this_object->widget( 'zii.widgets.CMenu',
@@ -328,11 +328,11 @@ class setHTML{
 				$img="for_persons";
 				$ready_target="клиентов банка &quot;Открытие&quot;";
 				$all_ready_target="физических лиц";
-			break;			
+			break;
 		}?>
 				<div class="solution_content"><?
     	if (isset($test_logo)){
-			?><img src="../../../images/ready_solutions/for_business.jpg" width="248" height="143"><? 
+			?><img src="../../../images/ready_solutions/for_business.jpg" width="248" height="143"><?
 		}else{?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/ready_solutions/<?=$img?>.jpg" width="252" height="143"><? }?>
 					<div>готовые решения для
 						<span><?=$ready_target?></span>
@@ -364,9 +364,9 @@ class setHTML{
 								$topAlias=false // самое верхнее меню alias
 							  ){
 		static $prev_level='top'; // для управления цепочкой родительских алиасов
-		
+
 		static $curControllerLeftMenu; // для управления доступом к главному и левому меню
-		
+
 		if($topAlias){
 			if( $topAlias===true // пришли из главного меню
 				|| is_array($topAlias) // пришли из левого меню
@@ -378,7 +378,7 @@ class setHTML{
 			}
 		}
 		if (!isset($topLevelAlias)) $topLevelAlias=false;
-		
+
 		if (is_array($subMenuItems)){
 			foreach($subMenuItems as $alias_value=>$link_text):
 				if (is_array($link_text)){
@@ -392,7 +392,7 @@ class setHTML{
 					// if(isset($topLevelAlias)) echo "<br><b>topLevelAlias:</b><br>$topLevelAlias";
 					// else echo ", <h1 style='color:red'>NO topLevelAlias!</h1>";
 					//echo "</div>"; //**********************************
-						
+
 					if ($level==1) {
 						$parent_alias=$topLevelAlias;
 						$link=$topLevelAlias."/".$subMenuItems['alias'];
@@ -409,25 +409,25 @@ class setHTML{
 					if ( isset($subMenuItems['children']) // есть вложенные уровни
 						 || $level>1	// вложенных нет, есть родительские
 					   ){
-						$link=$parent_alias.'/'.$subMenuItems['alias'];						
+						$link=$parent_alias.'/'.$subMenuItems['alias'];
 						if(isset($subMenuItems['children']))
 							$parent_alias.='/'.$subMenuItems['alias'];
 					}
-					$prev_level=$level; // установим текущий уровень подраздела 
-					
-					ob_start(); 
+					$prev_level=$level; // установим текущий уровень подраздела
+
+					ob_start();
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
 					if ($curControllerLeftMenu){
-			?><div<?	// 
+			?><div<?	//
 						if ($curControllerLeftMenu==$subMenuItems["id"]):
-		
-			?> class="active"<? 
-		
+
+			?> class="active"<?
+
 						endif;?>><?	echo $linkContent;
-		
-			?></div><?	
-		
+
+			?></div><?
+
 					}else echo $linkContent;
 				}
 			endforeach;
@@ -438,9 +438,9 @@ class setHTML{
  * @subpackage		menu
  * получить меню верхнего уровня
  */
-	function getMainMenuItems($parent_id_level=false){ 
+	function getMainMenuItems($parent_id_level=false){
 		if (!$parent_id_level) $parent_id_level='-1';
-		$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias` FROM insur_insurance_object WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY id')->queryAll(); 
+		$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias` FROM insur_insurance_object WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY id')->queryAll();
 		for($i=0,$j=count($data);$i<$j;$i++){
 			$menuItems[$data[$i]['id']]=array('text'=>$data[$i]['name'],
 											 'alias'=>$data[$i]['alias']
@@ -459,7 +459,7 @@ class setHTML{
 			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
 				$old_versions[]=$version[$i];
 			}
-		return (isset($old_versions))? true:false;	
+		return (isset($old_versions))? true:false;
 	}
 /**
  * @package		interface
@@ -475,24 +475,24 @@ class setHTML{
  * @subpackage		metadata
  * Загрузить макет подраздела, разместить данные и выдать в HTML
  */
-	function setPageData( $this_obj, 
-						  $section_data, 
+	function setPageData( $this_obj,
+						  $section_data,
 						  $test=false
 						){	$test=false; // принудительно
 		// генерирует и размещает title страницы:
 		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
 		// генерирует и размещает название страницы в цепочке breadcrumbs:
 		$breadcrumbs=array();
-		if ($section_data->parent_id>0)	{	
+		if ($section_data->parent_id>0)	{
 			$parentName=InsurInsuranceObject::model()->find(array(
 							'select'=>'name',
 							'condition'=>'id = '.$section_data->parent_id,
-						)); 
+						));
 			$this_obj->breadcrumbs=array(
 				$parentName->name=>array('index'),
 				$section_data->name
 			);
-		}else 
+		}else
 			$this_obj->breadcrumbs=array(
 				$section_data->name,
 			);
@@ -525,31 +525,31 @@ div#inner_content .clear{
 	float: none;
 	width: 100%;
 }
-div#inner_content 
+div#inner_content
 	> div > div{
 	padding: 10px;
 	padding-left: 8px;
 }
 
-div#inner_content 
+div#inner_content
 	> div > div .subsectHeader{
 	font-size:16px;
 	margin:0;
 }
-div#inner_content 
+div#inner_content
 	> div > div .contentHeader{
 	color:#06AEDD;
 	font-size:16px;
 	margin:0;
 	margin-bottom:10px;
 }
-div#div1{ 
+div#div1{
 	float:left;
 }
 
 /******** Для индивидуальных макетов: ********/
 
-div.schema100, 
+div.schema100,
 	div.schema100> div{
 	width:100%;
 }
@@ -611,7 +611,7 @@ div.schema3s0 > div{
 	div.schema3s0 > div#div4{
 		width:34%;
 	}
-	
+
 div.schema3ss > div{
 	float:left;
 	width:33%;
@@ -619,12 +619,12 @@ div.schema3ss > div{
 	div.schema3ss > div#div1{
 		margin-right:-33%;
 	}
-	
+
 	div.schema3ss > div#div2,
 	div.schema3ss > div#div5{
 		width:67%;
 	}
-	
+
 	div.schema3ss > div#div4{
 		width:34%;
 	}
@@ -633,7 +633,7 @@ div.schema3ss > div{
 	div.schema3ss > div#div5{
 		margin-left:33%;
 	}
-	
+
 div.schema30s > div{
 	float:left;
 	width:33%;
@@ -651,23 +651,23 @@ div.schema30s > div{
 	div.schema30s > div#div4{
 		width:67%;
 	}
-	
-</style>        
+
+</style>
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 			$bloxHeaderType=$tmpl['Schema'][1];
 			$bloxFooterType=$tmpl['Schema'][2];
-			
+
 			if ($bloxHeaderType!='0')
 				$bloxCnt++;
 			if ($bloxFooterType!='0')
 				$bloxCnt++;
-			
-			
+
+
 			//echo "<div class=''>bloxCnt = ".$bloxCnt.", bloxHeaderType = $bloxHeaderType, bloxFooterType = $bloxFooterType</div>";
-			
+
 			/*
 			 * См. схему построения макетов в файле:
 			 * /_docs/схема.xslx!Макет для создания разделов
@@ -687,8 +687,8 @@ div.schema30s > div{
 				foreach ($tmpl['blocks'] as $block_name=>$block){?>
 				<div id="div<?=$i?>">
                 	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
-            	<? 	if($block_name==2&&$bloxHeaderType!='0'){ 
-						echo(is_array($block))? 
+            	<? 	if($block_name==2&&$bloxHeaderType!='0'){
+						echo(is_array($block))?
 							"<span style='color:red'>Ошибка: неправильный тип данных для заголовка (массив вместо строки)...</span>"
 							:
 						 	"<h2 class=\"subsectHeader\">".substr($block,strpos($block,":")+1)."</h2>";
@@ -710,32 +710,32 @@ div.schema30s > div{
         					<?	if ($folder_name=array_search($bContent,$modules)){
 									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$folder_name.'/default.php';
 									//echo "<div class=''>module_path= ".$module_path."</div>";
-									require $module_path;	
+									require $module_path;
 								}elseif($bContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
 							echo "<div class='clear'>&nbsp;</div>";
 						}else{
-						  
+
 						  if (isset($block)) {
 							  echo "<div class=''>block= ".$block."</div>";
 						  	  var_dump("<h1>block:</h1><pre>",$block,"</pre>");
 						  }else echo "<div class=''>skip</div>";
 					  }
 						if ($showLoremIpsum){
-						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
+						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
 
-		diam nonumy eirmod tempor invidunt ut labore et dolore magna 
+		diam nonumy eirmod tempor invidunt ut labore et dolore magna
 
-		aliquyam erat, sed diam voluptua. At vero eos et accusam et 
+		aliquyam erat, sed diam voluptua. At vero eos et accusam et
 
-		justo duo dolores et ea rebum. Stet clita kasd gubergren, no 
+		justo duo dolores et ea rebum. Stet clita kasd gubergren, no
 
 		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 				<?		}
 					}?>
 
                 	</div>
-                </div>	
+                </div>
 		<?		$i++;
 			}
 			}else{?>
@@ -743,7 +743,7 @@ div.schema30s > div{
 		<? 	}?>
         <div class="clear">&nbsp;</div>
 		<?	// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
-   </div>     
+   </div>
 	<?	}
 	}
 /**
@@ -772,7 +772,7 @@ div.schema30s > div{
 		}else $solution_name=$params['name'];
 		if (!$params['id']) {
 			$link="#";
-		}else{ 
+		}else{
 			$link=Yii::app()->request->baseUrl."/".Yii::app()->controller->getId()."/Gotovoye_reshenije/".$params['id'];
 		}?>
 	<div class="ready_solution_preview">

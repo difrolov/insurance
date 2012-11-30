@@ -5,7 +5,7 @@ class UserIdentity extends CUserIdentity
     public $role;
     public function authenticate()
     {
-    	$record=Users::model()->findByAttributes(array('login'=>$this->username));
+    	$record=InsurCoworkers::model()->findByAttributes(array('login'=>$this->username));
         if($record===null)
             $this->errorCode=self::ERROR_USERNAME_INVALID;
         else if($record->password!==md5($this->password))

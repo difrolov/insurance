@@ -22,7 +22,7 @@ if (isset($gridDataProvider)){
         array('name'=>'name', 'header'=>'Наименование'),
         array('name'=>'status','header'=>'Статус','type'=>'html',
         		'value'=>'HelperAdmin::createStatusContent($data->status,$data->id)'),
-    	/*array('name'=>'status', 'header'=>'Видимость'), */
+
 
         array(
             'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
@@ -53,7 +53,7 @@ if (isset($gridDataProvider)){
 </div>
 <div class="modal-body">
 
-<form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/object/setcontent/') ?>">
+<form name="content_edit" method="post" action="<?php echo Yii::app()->createUrl('admin/content/setcontent/') ?>">
 <div class="modal-header">
     <label>Наименование статьи</label>
     <input type="text" name="name_content">
@@ -105,3 +105,33 @@ $this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
 </form>
 </div>
 <?php $this->endWidget(); ?>
+<?php $cs = Yii::app()->getClientScript();
+/* $cs->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.jeditable.mini.js'); */
+$cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/toogle-button.js');
+$cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/object.js');
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/toogle-button.css" />
+<script type="text/javascript">
+$(document).ready(function(){
+		$('.toggle_off').toggles({on:false,dragable:false});
+		$('.toggle').toggles({dragable:false});
+		$('.toggle_off').bind('click',function(){
+			id = $(this).parent().parent().attr('class');
+			if($(this).children().hasClass('active')){
+				val=1;
+			}else{
+				val=0;
+			}
+			_object.updateContentStatus(id,val);
+		});
+		$('.toggle').bind('click',function(){
+			id = $(this).parent().parent().attr('class');
+			if($(this).children().hasClass('active')){
+				val=1;
+			}else{
+				val=0;
+			}
+			_object.updateContentStatus(id,val);
+		});
+})
+</script>

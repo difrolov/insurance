@@ -211,9 +211,13 @@ ORDER BY name, parent_name';
 
 		}
 		public static function createStatusContent($data,$id){
-			$a="<a onclick='_object.updateContentStatus(".$id.");return false;' href='#'".
-			"class='contStatus_".$id."' >".($data?'Активен':'Отключен')."</a>";
-			return $a;
+			if($data){
+				$str = 	'<div class="'.$id.'"><div class="dark"><div class="toggle"></div></div></div>';
+			}else{
+				$str = 	'<div class="'.$id.'"><div class="dark"><div class="toggle_off">'.
+						'</div></div></div>';
+			}
+			return $str;
 		}
 		public static function dateToRender($fromDate){
 		if ($fromDate == null) return null;

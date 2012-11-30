@@ -72,7 +72,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 			'links'=>$this->breadcrumbs,
 		)); ?><!-- breadcrumbs -->
 	<?php endif?>
-	<div class="">
+	<div style="margin-top: 20px;">
 		<?php
 		if (!$items=HelperAdmin::$arrMenuItems){
 			//echo "<div>No HelperAdmin::arrMenuItems</div>";
@@ -104,6 +104,8 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	</div >--><!-- footer -->
 
 </div><!-- page -->
-
+<script type="text/javascript">
+	var baseUrl="<?php echo Yii::app()->baseUrl; ?>";
+</script>
 </body>
 </html>
