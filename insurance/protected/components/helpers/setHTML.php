@@ -77,9 +77,16 @@ class setHTML{
     		<div id="call_us" align="right">
           	<div align="center" id="all_phones">
               <div id="cmd_micro">
-              	<div data-home="home" title="На главную" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/'">&nbsp;</div>
-                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/map"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/map">&nbsp;</a></div>
-                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/search'"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/search/'">&nbsp;</a></div>
+<?	$arrPyctosGo=array(
+				'home'=>array('title'=>'На главную','href'=>'/','width'=>'18'),
+				'map'=>array('title'=>'Карта сайта','href'=>'/site/map','width'=>'18'),
+				'search'=>array('title'=>'Поиск','href'=>'/site/search','width'=>'18'),
+			);
+	foreach ($arrPyctosGo as $data=>$array):?>
+                <div data-<?=$data?>="<?=$data?>" title="<?=$array['title']?>" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true).$array['href']?>'">
+           			<a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/spacer.png" width="<?=$array['width']?>" height="16"></a>
+                </div>
+<?	endforeach;?>
               </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
 			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>
@@ -783,7 +790,74 @@ div.schema30s > div{
             <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
 			<? 	}
 			}?>
-        <div class="clear">&nbsp;</div>
+        <div class="clear">&nbsp;</div><?
+   			
+		if (isset($_GET['mode'])&&$_GET['mode']=='preview'){ ?>
+    <div align="left" id="manage_new_section" style="background:#666; border-radius:6px; box-shadow: 3px 1px 20px 1px #999; color:#FFF; cursor:move; display:<?="none"?>; left:200px; padding:10px; top:200px; position:fixed; width:180px;">
+    	Подраздел загружен в режиме предпросмотра. Выберите дальнейшее действие:
+        <div style="background:#999; border-radius:3px; margin-top:10px; padding:6px;">
+        	<ul>
+        	  <li><a href="#" id="save_as_is">Сохранить </a></li>
+        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/edit/<?=$section_data->id?>">Изменить</a></li>
+        	  <li><a href="#" id="ask_to_delete">Удалить</a></li>
+        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator">Добавить подраздел</a></li>
+      	  </ul>
+       	</div>
+    </div>
+<script>
+$( function(){
+  try{
+	$('a#ask_to_delete').click( function (){
+			if (confirm('Вы уверены, что хотите удалить этот раздел?\nвсе погибнут...'))
+				location.href='<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/delete';
+			return false;		
+		});
+	$('a#save_as_is').click( function (){
+		$.get({
+			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store',
+			beforeSend: function() {
+				manageVeil('start','Сохранение данных...');
+			},
+			success: function (data) {
+				manageVeil(false);
+				alert("Данные сохранены!");
+				},
+			error: function (data) {
+				manageVeil(false);
+				alert("Не удалось отправить данные.\nОтвет: "+data.result);
+			}
+		})
+		return false;
+	}
+	var mprev=$('#manage_new_section');
+	$(mprev).find('ul').css('padding-left','18px');
+	$(mprev).find('a, li').css('color','#FFF');
+	$(mprev).find('a').css('margin-left','-6px');	
+	var leftOff=$(mprev).parent().offset().left;
+	var wdt=$(mprev).width();
+	var goLeft=leftOff-wdt-45;
+	console.info('leftOff = '+typeof(leftOff)+', wdt = '+typeof(wdt)+', summ = '+goLeft);
+	$(mprev).css({
+			left:goLeft+'px',
+		}).fadeTo(2500,0.9)
+			.draggable()
+				.hover( 
+				function (){
+					$(this).css('opacity',1)
+				},
+				function (){
+					$(this).css('opacity',0.9)
+				});
+  }catch(e){
+		alert(e.message);
+  }
+});
+function askToDelete(){
+}
+function saveChanges(){
+}
+</script>    
+	<?	}?>
    </div>     
 	<?	}
 	}
@@ -822,6 +896,18 @@ div.schema30s > div{
 		<div><?='<a href="'.$link.'">'.$solution_name.'</a>'?></div>
     </div>
     <div class="clear">&nbsp;</div>
+<?	}
+/**
+ * Вуаль
+ * @package
+ * @subpackage
+ */
+	static public function veil(){?>
+<div id="veil" style="background:#000; position:fixed; top:0; right:0; bottom:0; left:0; opacity:0.8; display:<?="none"?>;">
+</div>
+<div align="center" id="pls_wait" style="position:fixed; top:40%; bottom:50%;  opacity:1;z-index:2; width:100%; display:<?="none"?>;">
+	<div id="processing" style="background: #FF9; line-height:26px; padding:30px 60px; border-radius:8px; display: inline-block; box-shadow:#000;">Создание подраздела... <br />Пожалуйста, подождите...</div>
+</div>
 <?	}
 }
 ?>

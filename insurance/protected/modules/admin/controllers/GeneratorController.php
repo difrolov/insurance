@@ -196,7 +196,9 @@ class GeneratorController extends Controller
 //		echo $jenc;	
 //		exit;
 		
-		$status=(isset($_GET['preview']))? 0:1;
+		// если в режиме предпросмотра со значением 'yes' - выставляем статус неопубликованного ДО явного указания юзера, что делать дальше:
+		$status=(isset($_GET['preview'])&&$_GET['preview']=='yes')? 0:1;
+
 		$date_changes= date("Y-m-d H:i:s");
 		if($update_id){
 			$section_id=$update_id;
@@ -226,11 +228,14 @@ class GeneratorController extends Controller
 			$model_obj->save();
 			$section_id=$model_obj->id;
 		}
+		$direct_to=self::$section_root;
+		if (!$status)
+			$direct_to.="?mode=preview";
 		if ($localdata){
 			TestGenerator::testCodeOutput3($post,serialize($post),__LINE__);
 		}else{
 			self::getParents($section_id); // get URL path
-			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".self::$section_root));				
+			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".$direct_to));				
 			echo $jenc;
 		}
 	}

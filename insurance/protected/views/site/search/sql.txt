@@ -1,0 +1,18 @@
+
+CREATE TABLE `bizmain` (
+  `biz_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `biz_name` varchar(100) default NULL,
+  `biz_address` varchar(255) default NULL,
+  `biz_phone` varchar(100) default NULL,
+  `biz_email` varchar(100) default NULL,
+  `biz_url` varchar(100) default NULL,
+  `biz_cat` varchar(100) default NULL,
+  PRIMARY KEY  (`biz_id`)
+) ;
+
+INSERT INTO `bizmain` (`biz_id`, `biz_name`, `biz_address`, `biz_phone`, `biz_email`, `biz_url`, `biz_cat`) VALUES (1, 'LocalFilipino.com', 'Makati, Philippines', '(632) 848-0886', 'info@localfilipino.com', 'http://www.localfilipino.com', 'Advertising'),
+(2, 'Liberty Realty', '2451 S. Buffalo Drive, Suite 145, Las Vegas, NV 89117', '(702) 248-8899', 'info@libertyrealty.com', 'http://www.libertyrealty.com', 'Real Estate, Realty'),
+(3, 'FRS Philippine Freight', '5960 Spring Mtn Rd, 3-D<br> Las Vegas, NV 89146', '(702) 253-7555', 'info@frsphilippines.com', 'http://www.frsphilippines.com', 'Freight, Cargo');
+
+
+

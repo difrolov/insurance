@@ -46,6 +46,16 @@ $(function(){
 		} //		
 	});
 	$('button#save_page').click( function (){
+			sendTmplData();
+		});
+	$('button#preview_page').click( function (){
+			sendTmplData(true,$(this).val());
+		});
+  }catch(e){
+	  alert(e.message);
+  }
+});
+function sendTmplData(preview,preview_stat){
 		var radioChecked=$('div#sections_radios input[type="radio"]:checked');
 		var errMess=new Array();
 		var reqS=new Array();
@@ -109,14 +119,18 @@ $(function(){
 			Layout.keywords=$('#keywords').val();
 			Layout.description=$('#description').val();
 			//alert('action: '+$('#content_save').attr('action'));
+			var sendToUrl=$('#content_save').attr('action');
+			if (preview) 
+				sendToUrl+='?preview='+preview_stat;
 			$.ajax ({
 					type: "POST",
-					url: $('#content_save').attr('action'),
+					url: sendToUrl,
 					dataType: 'json',
 					data: Layout,
 					beforeSend: function() {
-                   		$("div#veil").show();
-						$("div#pls_wait").show();
+						var text=($('input#old_alias').val())?
+							'Сохранение данных...':'Создание подраздела...';
+                   		manageVeil('start',text);
   					},
 					success: function (data) {
 						//alert("Подраздел добавлен!");
@@ -126,17 +140,12 @@ $(function(){
 							location.href=data.result; 
 					},
 					error: function (data) {
-						$("div#veil").hide();
-						$("div#pls_wait").hide();
+						manageVeil(false);
 						alert("Не удалось отправить данные.\nОтвет: "+data.result);
 					}
 				})
 		}
-	});
-  }catch(e){
-	  alert(e.message);
-  }
-});
+}
 function checkAliasValid(aVal){
 	var re = /[^\w_]/g;
 	if(re.test(aVal)){

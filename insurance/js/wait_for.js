@@ -1,0 +1,18 @@
+// JavaScript Document
+function manageVeil(stat,text){
+  	if (text!==false){
+		var plswt=' <br />Пожалуйста, подождите...';
+		if (text)
+			text+=plswt;
+		else
+			text=plswt;
+		$('#processing').text(text);
+	}
+	if (stat=='start'){	
+	  $("div#veil").show();
+	  $("div#pls_wait").show();
+	}else{
+	  $("div#veil").hide();
+	  $("div#pls_wait").hide();
+	}
+}

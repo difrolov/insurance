@@ -52,8 +52,37 @@ class SiteController extends Controller
  * @subpackage
  */
 	function actionSearch(){
-		$res="Результат поиска";
-		$this->render('search', array('res'=>$res));
+		if ($_SERVER['REQUEST_METHOD']=="POST"){	
+			require_once Yii::getPathOfAlias('webroot').'/protected/views/site/search/class.search.php';
+			
+			$config = array('localhost','root','','insur_db');
+			$table = 'insur_article_content';
+			$key = 'id';
+			$fields = array('name','content');
+			
+			$keyword = $_POST['keyword'];
+			
+			$found = new search_engine($config);
+			$found->set_table($table);
+			$found->set_primarykey($key);
+			$found->set_keyword($keyword);
+			$found->set_fields($fields);			
+			$result = $found->set_result();
+			$resultStr=implode(",",$result);
+			$results=Yii::app()->db->createCommand("
+	SELECT `id`, `name`, `content`
+FROM insur_article_content
+WHERE id IN ( $resultStr )")->queryAll();
+			for($i=0,$j=count($results);$i<$j;$i++){
+				$row=$results[$i];
+				foreach ($row as $field=>$content)
+					$res[$row['name']]=$row['content'];
+			}
+		}else{
+			$keyword=false;
+			$res="Введите поисковый запрос...";
+		}
+		$this->render('search', array('res'=>$res,'swords'=>$keyword));
 	}
 	
 	/**
