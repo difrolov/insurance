@@ -105,7 +105,7 @@
 		$text=strip_tags($text); ?>
   <tr>
     <td>&nbsp;</td>
-    <td class="testBlock"><?=$name?></td>
+    <td><?=$name?></td>
     <td><?
 			//$arrT=explode(" ",$text);
 	for($i=0,$j=count($aWords);$i<$j;$i++){
