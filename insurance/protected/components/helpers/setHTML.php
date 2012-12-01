@@ -808,13 +808,13 @@ div.schema30s > div{
 $( function(){
   try{
 	$('a#ask_to_delete').click( function (){
-			if (confirm('Вы уверены, что хотите удалить этот раздел?\nвсе погибнут...'))
-				location.href='<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/delete';
+			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...'))
+				location.href='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/delete/<?=$section_data->id?>';
 			return false;		
 		});
 	$('a#save_as_is').click( function (){
 		$.get({
-			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store',
+			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store/<?=$section_data->id?>',
 			beforeSend: function() {
 				manageVeil('start','Сохранение данных...');
 			},
@@ -826,9 +826,9 @@ $( function(){
 				manageVeil(false);
 				alert("Не удалось отправить данные.\nОтвет: "+data.result);
 			}
-		})
+		});
 		return false;
-	}
+	});
 	var mprev=$('#manage_new_section');
 	$(mprev).find('ul').css('padding-left','18px');
 	$(mprev).find('a, li').css('color','#FFF');
@@ -852,10 +852,6 @@ $( function(){
 		alert(e.message);
   }
 });
-function askToDelete(){
-}
-function saveChanges(){
-}
 </script>    
 	<?	}?>
    </div>     
