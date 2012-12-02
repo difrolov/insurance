@@ -420,6 +420,7 @@ function showArticlesTable(){
 */
 	$('div#upload_article_window').css({
 			display:'inline-block',
+			position:'fixed',
 		}).fadeIn(150);
 	return false; // cancel href="#"
 }
@@ -427,7 +428,11 @@ function showArticlesTable(){
 function showEditor(src){ //alert('showEditor');
 	window.textTarget='editor';
 	storeLayoutBlockData(src);
-	$('#tblArticles').parent('div').css('overflow-x','hidden');
+	var tblArticles=$('#tblArticles');
+	$(tblArticles).parent('div').css('overflow-x','hidden');
+	var tMaxHeight=$('body').height()*0.8;
+	$(tblArticles).css('max-height',tMaxHeight+'px');
+	console.info('tMaxHeight = '+tMaxHeight+', table height = '+$(tblArticles).height());
 	$(getPreviewWindow()).appendTo($('a#upload_article').parent())
 	.css({
 		maxHeight:'500px',
@@ -435,7 +440,7 @@ function showEditor(src){ //alert('showEditor');
 		top:'initial',
 		left:'2px', 
 		bottom:'36px'
-	});
+	}).resizable();
 }
 // снова показать окно предпросмотра с возможностью редактирования ранее добавленного текста
 // вызывается кликом по заголовку текстового блока
