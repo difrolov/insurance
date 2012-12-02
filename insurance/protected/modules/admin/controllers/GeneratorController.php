@@ -38,7 +38,8 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		$model = new InsurInsuranceObject;
+		//$model = new InsurInsuranceObject;
+		$model = new InsurArticleContent();
 
 		$this->getGeneratorRoot();
 		$modules=$this->getAllModules();

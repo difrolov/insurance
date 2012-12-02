@@ -46,11 +46,12 @@ function setTxtReadyContent(artID){
 	readyData['art']='Статья id ';
 	
 	if (artID){
-		readyData['art']+=artID;
+		readyData['art']='Статья id '+artID;
 		blClass='yellow';
-	}else
-		blClass='greenYellow'
-	
+	}else{
+		blClass='greenYellow';
+		readyData['art']='Новая статья';
+	}
 	readyData['bgClass']=blClass;
 	return readyData;
 }
@@ -279,12 +280,37 @@ function getBlockNumber(curColumn){
 	var blockNum=($(curColumn).attr('data-block-type')=="footer")? 'footer':$('div#tmplPlace > div > div').index(curColumn)+1;
 	return blockNum;
 }
+function obLoop(obj){
+	for(var ob in obj) {
+		if (typeof(ob)=='object')
+			obLoop(ob);
+		else{
+			console.info('obj: '+typeof(ob)+', '+ob+', '+obj[ob]);
+		}
+	}
+}
 // забрать из поля редактора и разместить в блоке Layout'а и тестовом модуле
 function getDataFromCKeditor(){
   try{
+	
+	// obj 		- объект
+	// ob		- свойство объекта
+	// obj[ob] 	- значение свойства (литерал) объекта
+	
+	/*for(var ob in CKEDITOR) {
+		if (typeof(CKEDITOR[ob])=='object'&&ob=='instances')
+			for(var inst in CKEDITOR[ob]) {
+				console.info(typeof(CKEDITOR[ob])+' CKEDITOR.instances['+inst+']:\n');
+				if (typeof(CKEDITOR[ob][inst])=='object')
+					for (var obInst in CKEDITOR[ob][inst])
+						console.info('instance content object: '+typeof(obInst)+', '+obInst+', '+CKEDITOR[ob][inst]);
+			}
+	}*/
+	//console.info('getData: '+CKEDITOR.instances.InsurArticleContent.content.getData());
+	// undefined:
+	// 		InsurArticleContent
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
 	var eHeader=$('input#article_header').val();
-	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
 	// добавить к текстовому модулю текст статьи
 	addArticleIdOrTextToModule(false,eText,eHeader);
   }catch(e){
@@ -443,9 +469,9 @@ function storeLayoutBlockData(obj){
 	var curColumn=curModule.parentNode;	// колонка
 	Layout.blocks.activeBlockIdentifier=getBlockNumber(curColumn); // идентификатор (№/footer) активного  блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
-	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
+<?	if ($_GET['test']):?>
 	test_parseLayout(false);
-	//alert('after test: '+Layout.blocks.activeBlockIdentifier);
+<?	endif;?>
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();
