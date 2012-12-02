@@ -219,7 +219,7 @@ function addTextModuleComLinks(content){
 		}
 	}).appendTo(content);
 }
-// создать окно предпросмотра
+// создать окно предпросмотра текста статьи
 function createPreviewWindow( artID,
 							  headerClicked // get - при клике по заголовку текстового
 							){	
