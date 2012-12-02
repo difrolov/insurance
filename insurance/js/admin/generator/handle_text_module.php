@@ -191,7 +191,7 @@ function addTextModuleComLinks(content){
 		title:"Добавить произвольный текст",
 		href:"#",
 		click: function(){
-			showEditor(this);
+				showEditor(this);
 			},
 	}).attr({
 		'data-toggle':'modal',
@@ -282,6 +282,7 @@ function getBlockNumber(curColumn){
 // забрать из поля редактора и разместить в блоке Layout'а и тестовом модуле
 function getDataFromCKeditor(){
   try{
+	console.info('CKEDITOR InsurArticleContent[content]: '+CKEDITOR.instances['InsurArticleContent[content]']);
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
 	var eHeader=$('input#article_header').val();
 	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
@@ -394,6 +395,7 @@ function showArticlesTable(){
 */
 	$('div#upload_article_window').css({
 			display:'inline-block',
+			position:'fixed',
 		}).fadeIn(150);
 	return false; // cancel href="#"
 }
@@ -401,15 +403,18 @@ function showArticlesTable(){
 function showEditor(src){ //alert('showEditor');
 	window.textTarget='editor';
 	storeLayoutBlockData(src);
-	$('#tblArticles').parent('div').css('overflow-x','hidden');
+	var tblArticles=$('#tblArticles');
+	$(tblArticles).parent('div').css('overflow-x','hidden');
+	var tMaxHeight=$('body').height()*0.8;
+	$(tblArticles).css('max-height',tMaxHeight+'px');
+	console.info('tMaxHeight = '+tMaxHeight+', table height = '+$(tblArticles).height());
 	$(getPreviewWindow()).appendTo($('a#upload_article').parent())
 	.css({
-		maxHeight:'500px',
 		// отсчитывается от родительского блока ссылки:
 		top:'initial',
 		left:'2px', 
 		bottom:'36px'
-	});
+	}).resizable();
 }
 // снова показать окно предпросмотра с возможностью редактирования ранее добавленного текста
 // вызывается кликом по заголовку текстового блока
@@ -443,9 +448,9 @@ function storeLayoutBlockData(obj){
 	var curColumn=curModule.parentNode;	// колонка
 	Layout.blocks.activeBlockIdentifier=getBlockNumber(curColumn); // идентификатор (№/footer) активного  блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
-	//alert(Layout.blocks.activeBlockIdentifier+', '+Layout.blocks.moduleClickedLocalIndex);
+<?	if(isset($_SERVER['REQUEST_URI'])&&strstr($_SERVER['REQUEST_URI'],'test')) :?>
 	test_parseLayout(false);
-	//alert('after test: '+Layout.blocks.activeBlockIdentifier);
+<?	endif;?>
 }
 <? 	$myscript=ob_get_contents();
 ob_get_clean();

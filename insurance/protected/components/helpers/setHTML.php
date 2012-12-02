@@ -487,10 +487,16 @@ class setHTML{
 						  $section_data, 
 						  $asModule=false
 						){	$test=false; // принудительно
-		// генерирует и размещает title страницы:
-		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
-		// генерирует и размещает название страницы в цепочке breadcrumbs:
-		
+		// HEADER
+		// ***** NOTICE: ************************************************ 
+		// Title для подразделов устанавливается в Data::getObjectByUrl()
+		// непосредственно перед рендерингом страницы
+		// **************************************************************
+		// устанавливает description страницы:
+		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
+		// устанавливает keywords страницы:
+		Yii::app()->clientScript->registerMetaTag($section_data->keywords, 'keywords');
+		// соорудить цепочку ссылок:
 		$breadcrumbs=array();
 		if ($section_data->parent_id>0)	{	
 			// получить имя и алиас для размещения в цепочке:
@@ -509,8 +515,6 @@ class setHTML{
 			$this_obj->breadcrumbs=array(
 				$section_data->name,
 			);
-		// устанавливает description страницы:
-		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
 		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
 		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
@@ -795,11 +799,11 @@ div.schema30s > div{
 		if (isset($_GET['mode'])&&$_GET['mode']=='preview'){ ?>
     <div align="left" id="manage_new_section" style="background:#666; border-radius:6px; box-shadow: 3px 1px 20px 1px #999; color:#FFF; cursor:move; display:<?="none"?>; left:200px; padding:10px; top:200px; position:fixed; width:180px;">
     	Подраздел загружен в режиме предпросмотра. Выберите дальнейшее действие:
-        <div style="background:#999; border-radius:3px; margin-top:10px; padding:6px;">
+        <div style="background:#06AEDD; border-radius:3px; margin-top:10px; padding:6px;">
         	<ul>
         	  <li><a href="#" id="save_as_is">Сохранить </a></li>
         	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/edit/<?=$section_data->id?>">Изменить</a></li>
-        	  <li><a href="#" id="ask_to_delete">Удалить</a></li>
+        	  <li class="txtRed"><a href="#" id="ask_to_delete">Удалить</a></li>
         	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator">Добавить подраздел</a></li>
       	  </ul>
        	</div>
@@ -807,7 +811,7 @@ div.schema30s > div{
 <script>
 $( function(){
   try{
-	$('a#ask_to_delete').click( function (){
+	$('a#ask_to_delete').css('color','#F00').click( function (){
 			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...'))
 				location.href='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/delete/<?=$section_data->id?>';
 			return false;		
@@ -831,7 +835,7 @@ $( function(){
 	});
 	var mprev=$('#manage_new_section');
 	$(mprev).find('ul').css('padding-left','18px');
-	$(mprev).find('a, li').css('color','#FFF');
+	$(mprev).find('a[id!="ask_to_delete"], li[class!="txtRed"]').css('color','#FFF');
 	$(mprev).find('a').css('margin-left','-6px');	
 	var leftOff=$(mprev).parent().offset().left;
 	var wdt=$(mprev).width();

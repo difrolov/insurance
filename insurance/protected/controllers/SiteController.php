@@ -69,15 +69,17 @@ class SiteController extends Controller
 			$found->set_fields($fields);			
 			$result = $found->set_result();
 			$resultStr=implode(",",$result);
-			$results=Yii::app()->db->createCommand("
+			$results=0;
+			if ($resultStr&&$results=Yii::app()->db->createCommand("
 	SELECT `id`, `name`, `content`
 FROM insur_article_content
-WHERE id IN ( $resultStr )")->queryAll();
-			for($i=0,$j=count($results);$i<$j;$i++){
-				$row=$results[$i];
-				foreach ($row as $field=>$content)
-					$res[$row['name']]=$row['content'];
-			}
+WHERE id IN ( $resultStr )")->queryAll()){
+				for($i=0,$j=count($results);$i<$j;$i++){
+					$row=$results[$i];
+					foreach ($row as $field=>$content)
+						$res[$row['name']]=$row['content'];
+				}
+			}else $res="Данных не обнаружено...";
 		}else{
 			$keyword=false;
 			$res="Введите поисковый запрос...";

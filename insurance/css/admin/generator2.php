@@ -69,6 +69,7 @@ table#new_art_header tr td:first-child{
 }
 table#tblArticles {
 	border:solid 1px #CCC;
+	display:inline-block;
 }
 table#tblArticles tr td{
 	border-bottom:dashed 1px #CCC;

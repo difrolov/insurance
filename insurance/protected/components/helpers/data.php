@@ -34,7 +34,8 @@ class Data {
 			if($hash!=$subsection) $subsection=$hash;
 		}
 		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
-    	$obj->render('index', array('res' => $data));
+		$obj->pageTitle=$data->title;
+		$obj->render('index', array('res' => $data));
 	}
 	
 /**

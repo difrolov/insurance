@@ -1,6 +1,6 @@
 <html>
 <head>
-<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+<title><?=$this->pageTitle?></title>
 <meta charset="utf-8">
 <meta name="language" content="ru">
 <link href="<?=Yii::app()->request->baseUrl?>/css/style.css" rel="stylesheet" type="text/css">
