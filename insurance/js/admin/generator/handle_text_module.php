@@ -43,8 +43,6 @@ $(document).ready(function(){
 function setTxtReadyContent(artID){
 	var blClass, readyData=new Array();
 	
-	readyData['art']='Статья id ';
-	
 	if (artID){
 		readyData['art']='Статья id '+artID;
 		blClass='yellow';
@@ -208,15 +206,14 @@ function addTextModuleComLinks(content){
 		click:	function(){
 			window.textTarget='ready';
 			storeLayoutBlockData(this);
-			$('#tblArticles').css('width','auto').parent('div').css('overflow-x','hidden');
+			setTblArticlesCss(aTable);
 			$(aTable).css({
-				display:'inline-block',
 				bottom:'auto',
 				left:$(this).offset().left+$(this).width()+'px',
 				top: $(this).offset().top+20+'px'
-			}).show()
-			.appendTo('body')
-			.resizable();
+				}).show()
+				.appendTo('body')
+				.resizable();
 		}
 	}).appendTo(content);
 }
@@ -280,35 +277,9 @@ function getBlockNumber(curColumn){
 	var blockNum=($(curColumn).attr('data-block-type')=="footer")? 'footer':$('div#tmplPlace > div > div').index(curColumn)+1;
 	return blockNum;
 }
-function obLoop(obj){
-	for(var ob in obj) {
-		if (typeof(ob)=='object')
-			obLoop(ob);
-		else{
-			console.info('obj: '+typeof(ob)+', '+ob+', '+obj[ob]);
-		}
-	}
-}
 // забрать из поля редактора и разместить в блоке Layout'а и тестовом модуле
 function getDataFromCKeditor(){
   try{
-	
-	// obj 		- объект
-	// ob		- свойство объекта
-	// obj[ob] 	- значение свойства (литерал) объекта
-	
-	/*for(var ob in CKEDITOR) {
-		if (typeof(CKEDITOR[ob])=='object'&&ob=='instances')
-			for(var inst in CKEDITOR[ob]) {
-				console.info(typeof(CKEDITOR[ob])+' CKEDITOR.instances['+inst+']:\n');
-				if (typeof(CKEDITOR[ob][inst])=='object')
-					for (var obInst in CKEDITOR[ob][inst])
-						console.info('instance content object: '+typeof(obInst)+', '+obInst+', '+CKEDITOR[ob][inst]);
-			}
-	}*/
-	//console.info('getData: '+CKEDITOR.instances.InsurArticleContent.content.getData());
-	// undefined:
-	// 		InsurArticleContent
 	var eText=CKEDITOR.instances['InsurArticleContent[content]'].getData();
 	var eHeader=$('input#article_header').val();
 	// добавить к текстовому модулю текст статьи
@@ -424,23 +395,31 @@ function showArticlesTable(){
 		}).fadeIn(150);
 	return false; // cancel href="#"
 }
+/**
+ * Установить параметры отображения таблицы со статьями
+ */
+function setTblArticlesCss(tblArticles){
+	if (!tblArticles) 
+		var tblArticles=$('#tblArticles');
+	$(tblArticles).parent('div').css('overflow-x','hidden');
+	var tMaxHeight=$('body').height()*0.8;
+	$(tblArticles).css('max-height',tMaxHeight+'px');
+	//console.info('tMaxHeight = '+tMaxHeight+', table height = '+$(tblArticles).height());
+}
 // загрузить редактор
 function showEditor(src){ //alert('showEditor');
 	window.textTarget='editor';
 	storeLayoutBlockData(src);
-	var tblArticles=$('#tblArticles');
-	$(tblArticles).parent('div').css('overflow-x','hidden');
-	var tMaxHeight=$('body').height()*0.8;
-	$(tblArticles).css('max-height',tMaxHeight+'px');
-	console.info('tMaxHeight = '+tMaxHeight+', table height = '+$(tblArticles).height());
-	$(getPreviewWindow()).appendTo($('a#upload_article').parent())
-	.css({
-		maxHeight:'500px',
-		// отсчитывается от родительского блока ссылки:
-		top:'initial',
-		left:'2px', 
-		bottom:'36px'
-	}).resizable();
+	setTblArticlesCss();
+	$(getPreviewWindow())
+		.appendTo($('a#upload_article')
+			.parent())
+				.css({
+					// отсчитывается от родительского блока ссылки:
+					top:'initial',
+					left:'2px', 
+					bottom:'36px'
+				}).resizable();
 }
 // снова показать окно предпросмотра с возможностью редактирования ранее добавленного текста
 // вызывается кликом по заголовку текстового блока
