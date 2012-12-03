@@ -762,19 +762,18 @@ div.schema30s > div{
 		<h3 class="contentHeader"><?=$moduleContent?></h3>
         					<?	if ($mod_folder=array_search($moduleContent,$modules)){
 									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
-									//echo "<div class=''>module_path= ".$module_path."</div>";
 									require $module_path;	
 								}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
 							echo "<div class='clear'>&nbsp;</div>";
 						}
-					  }else{
+					  }else{ // в псевдотестовом режиме
 						  if (isset($blockModules)) {
 							  echo "<div class=''>block= ".$blockModules."</div>";
 						  	  var_dump("<h1>block:</h1><pre>",$blockModules,"</pre>");
 						  }else echo "<div class=''>skip</div>";
 					  }
-						if ($showLoremIpsum){
+						if ($showLoremIpsum){ // заглушка
 						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
 
 		diam nonumy eirmod tempor invidunt ut labore et dolore magna 
@@ -816,20 +815,22 @@ $( function(){
 				location.href='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/delete/<?=$section_data->id?>';
 			return false;		
 		});
-	$('a#save_as_is').click( function (){
-		$.get({
-			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store/<?=$section_data->id?>',
+	$('a#save_as_is').click( function (){ manageVeil('start','Сохранение данных...');
+		$.ajax({
+			type:"GET",
+			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store/',
+			data: "section_id=<?=$section_data->id?>",
 			beforeSend: function() {
 				manageVeil('start','Сохранение данных...');
 			},
 			success: function (data) {
 				manageVeil(false);
-				alert("Данные сохранены!");
+				alert("Данные сохранены!"+'\n'+data);
 				},
 			error: function (data) {
 				manageVeil(false);
-				alert("Не удалось отправить данные.\nОтвет: "+data.result);
-			}
+				alert("Не удалось отправить данные.\nОтвет: "+data);
+			},
 		});
 		return false;
 	});

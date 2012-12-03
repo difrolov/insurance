@@ -1,12 +1,13 @@
 // JavaScript Document
-function manageVeil(stat,text){
+function manageVeil(stat,text){ 
+  try{
   	if (text!==false){
 		var plswt=' <br />Пожалуйста, подождите...';
 		if (text)
 			text+=plswt;
 		else
 			text=plswt;
-		$('#processing').text(text);
+		$('#processing').html(text);
 	}
 	if (stat=='start'){	
 	  $("div#veil").show();
@@ -15,4 +16,7 @@ function manageVeil(stat,text){
 	  $("div#veil").hide();
 	  $("div#pls_wait").hide();
 	}
+  }catch(e){
+	  alert(e.message);
+  }
 }

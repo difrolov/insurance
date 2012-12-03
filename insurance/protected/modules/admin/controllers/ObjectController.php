@@ -42,9 +42,5 @@ class ObjectController extends Controller
 				$model->delete();
 			}
 		}
-
 	}
-
-
-
 }

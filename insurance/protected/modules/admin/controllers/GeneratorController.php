@@ -241,6 +241,25 @@ class GeneratorController extends Controller
 		}
 	}
 /**
+ * Опубликовать данные раздела
+ * @package
+ * @subpackage
+ */
+	public function actionStore($section_id=false){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		if (!$section_id){
+			$mess='ОШИБКА! Не получен id раздела.';	
+		}elseif (InsurInsuranceObject::model()->updateByPk($section_id, 
+				array('status'=>1,'date_changes'=>date("Y-m-d H:i:s"))
+			)){
+			$mess='Раздел сохранён и опубликован.';	
+		}
+		echo $mess; 
+		exit;
+	}
+/**
  * Проверить доступность алиаса
  * @package
  * @subpackage
