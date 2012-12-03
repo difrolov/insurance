@@ -824,8 +824,10 @@ $( function(){
 				manageVeil('start','Сохранение данных...');
 			},
 			success: function (data) {
-				manageVeil(false);
-				alert("Данные сохранены!"+'\n'+data);
+					manageVeil(false);
+					alert("Данные сохранены!"+'\n'+data);
+					var goUrl=location.href.substring(0,location.href.indexOf('?mode='));
+					location.href=goUrl;
 				},
 			error: function (data) {
 				manageVeil(false);

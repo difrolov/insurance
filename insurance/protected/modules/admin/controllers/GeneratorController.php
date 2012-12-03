@@ -229,13 +229,13 @@ class GeneratorController extends Controller
 			$model_obj->save();
 			$section_id=$model_obj->id;
 		}
+		self::getParents($section_id); // get URL path
 		$direct_to=self::$section_root;
 		if (!$status)
 			$direct_to.="?mode=preview";
 		if ($localdata){
 			TestGenerator::testCodeOutput3($post,serialize($post),__LINE__);
 		}else{
-			self::getParents($section_id); // get URL path
 			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".$direct_to));				
 			echo $jenc;
 		}
