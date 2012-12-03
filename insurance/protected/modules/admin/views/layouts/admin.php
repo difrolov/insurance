@@ -24,6 +24,7 @@
 <?	if (isset($_GET['test'])):?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/test.css" media="screen, projection" />
 <?	endif;?>
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/drop_down_menu.css" media="screen, projection" />
 <script>
 testMode=false; 
 <?	if (isset($_GET['test'])):?>
@@ -62,6 +63,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <?
 }?>
 <script src="<?=$url?>/js/wait_for.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu.js"></script>
 </head>
 <body>
 	<div id="header">
@@ -93,25 +95,12 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		)); 
 	endif;
 	//var_dump("<h1>breadcrumbs:</h1><pre>",$breadcrumbs,"</pre>");
-	if (Yii::app()->controller->getId()!='generator') : 
-		 ?>
-	<div class="">
-		<?php
-		
-		//***********************************
-		//	МЕНЮ САЙТА		
-		//***********************************
-	
-		$items=HelperAdmin::$arrMenuItems;
-		$this->widget('ext.efgmenu.EFgMenu',array(
-				'bDev'=>true,
-				'id'=>'horz1',
-				'items'=>$items,
-				'menubarOptions' => array(
-						'direction'=>'horizontal',
-						'width'=> 70,
-				),
-			));?>
+	if (Yii::app()->controller->getId()!='generator') : ?>
+	<div id="mainmenu" class="sectionsAdminMenu">
+<?		// главное меню:
+		setHTML::buildMainMenu($this); // главное меню
+		// выпадающее меню:
+		setHTML::buildDropDownMenu();	// выпадающее меню	?>
 	</div>
 <?	else:	
 		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));

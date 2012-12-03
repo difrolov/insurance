@@ -111,18 +111,27 @@ class setHTML{
  * @subpackage		menu
  *
  */
-	static function buildDropDownSubMenu($parent_alias='',$parent_id=false,$top_level=false){
-		static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
+	static function buildDropDownSubMenu( $parent_alias='',
+										  $parent_id=false,
+										  $top_level=false
+										){
+		$admin_mode=(strstr($_SERVER['REQUEST_URI'],"/admin")) ? true:false;
+		//is_object(Yii::app()->controller->module))? true:false;
+		if (!$admin_mode)
+			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	if ($top_level) 
+	<?	if ($top_level&&!$admin_mode) 
 			echo $insur_species; 
+		
 		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		if ($parent_alias=="korporativnym_klientam") {?>
+		if ($parent_alias=="korporativnym_klientam"&&!$admin_mode){?>
           <ul class="asTable">
 			<li>
-		<?	self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
+		<?	if ($admin_mode)
+				self::buildAdminSubmenu($subMenuItems);
+			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
         <?	$corps=false;
 			if ($corps){
 				$arrCorps=array(
@@ -141,8 +150,12 @@ class setHTML{
             </li>
 		<?	}?>
           </ul>
-	<?	}else 
-			self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?>
+	<?		
+		}else{ 
+			if ($admin_mode)
+				self::buildAdminSubmenu($subMenuItems);
+			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
+		}?>
         </div> 
 <?	}
 /**
@@ -363,6 +376,30 @@ class setHTML{
                 </div>
 <?	}
 /**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function buildAdminSubmenu($subMenuItems){
+		if (is_array($subMenuItems)){
+			foreach($subMenuItems as $alias_value=>$link_text):
+				if (is_array($link_text)){
+					$level=(isset($link_text['level']))? $link_text['level']:0;
+					if ($level>1):?>
+                    <blockquote>
+				<?	endif;//echo "alias_value= $alias_value<br>";
+					self::buildAdminSubmenu($link_text);
+					if ($level>1):?>
+					</blockquote>
+			<?		endif;
+				}elseif ($alias_value=="name"){
+				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
+		<a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
+			<?	}
+			endforeach;
+		}
+	}
+/**
  * @package		HTML
  * @subpackage		menu
  * построить контент подменю
@@ -395,6 +432,8 @@ class setHTML{
 					self::buildSubmenuLinks($link_text,&$parent_alias,&$topLevelAlias);
 					if ($level>1) {?></blockquote><? }
 				}elseif ($alias_value=="name"){
+					
+					
 					$level=$subMenuItems['level'];
 					// echo "<div class=''>current_level(".gettype($level).")= $level";
 					// if(isset($topLevelAlias)) echo "<br><b>topLevelAlias:</b><br>$topLevelAlias";
@@ -414,6 +453,7 @@ class setHTML{
 						}
 						$parent_alias=implode("/",$parentAliases);
 					}
+					
 					if ( isset($subMenuItems['children']) // есть вложенные уровни
 						 || $level>1	// вложенных нет, есть родительские
 					   ){
@@ -422,6 +462,7 @@ class setHTML{
 							$parent_alias.='/'.$subMenuItems['alias'];
 					}
 					$prev_level=$level; // установим текущий уровень подраздела 
+					
 					ob_start(); 
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();

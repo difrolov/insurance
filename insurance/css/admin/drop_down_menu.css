@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS Document */
+div#mainmenu{
+}
+div#mainmenu 
+	ul[id*="yw"]{
+	display: table;
+	margin:0;
+	padding:initial;
+	width: 100%;
+}
+div#mainmenu 
+	ul[id*="yw"] li{
+	background:#08C;
+	border-radius:6px;
+	border:solid 1px #FFF;
+	display: table-cell !important;
+	list-style: none;
+	padding:4px 8px;
+	text-align:center !important;
+}
+div#mainmenu 
+	ul[id*="yw"] li a{
+	font-family:Verdana, Arial, sans-serif;
+	font-weight:normal !important;
+	text-transform:none;
+}
+div#mainmenu 
+	ul[id*="yw"] li a:hover{
+		background-color:inherit !important;
+		color:#FFF;
+		cursor: pointer;
+}
+div[id*="ddMenu_"]{
+	background:#FFF;
+	border:solid 1px #CCC;
+	border-radius:4px;
+	display:none;
+	padding:2px;
+	position: absolute;
+	top:135px;
+	z-index:5000;
+}
+div[id*="ddMenu_"] a{
+	color:#666;
+	display:block;
+	font-style:normal;
+	padding:4px 8px;
+}
+div[id*="ddMenu_"] a:hover{
+	background:#dfdfdf;
+	border-radius:4px;
+	text-decoration:none;
+}
+div[id*="ddMenu_"] blockquote{
+	border-left:none;
+	margin-bottom:0;
+}
+
