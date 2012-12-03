@@ -452,7 +452,7 @@ function storeLayoutBlockData(obj){
 	var curColumn=curModule.parentNode;	// колонка
 	Layout.blocks.activeBlockIdentifier=getBlockNumber(curColumn); // идентификатор (№/footer) активного  блока
 	Layout.blocks.moduleClickedLocalIndex=getModuleIndex(curColumn,curModule); // индекс модуля
-<?	if ($_GET['test']):?>
+<?	if (isset($_GET['test'])):?>
 	test_parseLayout(false);
 <?	endif;?>
 }
