@@ -28,11 +28,11 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		$model = new InsurInsuranceObject;
-
+		$model = new InsurInsuranceObject(); // для извлечения данных раздела 
+		$art_model=new InsurArticleContent(); // для редактора
 		$this->getGeneratorRoot();
 		$modules=$this->getAllModules();
-		$this->render('index',array('model'=>$model,'modules'=>$modules));
+		$this->render('index',array('model'=>$model,'art_model'=>$art_model,'modules'=>$modules));
 	}
 	/**
 	 * @package
@@ -81,10 +81,11 @@ class GeneratorController extends Controller
 		}
 		if($section_id){
 			$this->getGeneratorRoot();
-			$model = new InsurInsuranceObject();
+			$model = new InsurInsuranceObject(); // для извлечения данных раздела 
+			$art_model=new InsurArticleContent(); // для редактора
 			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$modules=$this->getAllModules();
-			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules));
+			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model));
 		}
 	}
 	
