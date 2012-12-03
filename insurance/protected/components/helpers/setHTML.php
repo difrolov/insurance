@@ -846,7 +846,7 @@ $( function(){
 	console.info('leftOff = '+typeof(leftOff)+', wdt = '+typeof(wdt)+', summ = '+goLeft);
 	$(mprev).css({
 			left:goLeft+'px',
-		}).fadeTo(2500,0.9)
+		}).fadeTo(1500,0.9)
 			.draggable()
 				.hover( 
 				function (){
