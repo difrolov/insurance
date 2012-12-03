@@ -811,11 +811,29 @@ div.schema30s > div{
 $( function(){
   try{
 	$('a#ask_to_delete').css('color','#F00').click( function (){
-			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...'))
-				location.href='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/delete/<?=$section_data->id?>';
+			var Url='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/remove';
+			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...')){
+				$.ajax({
+					type:"GET",
+					url: Url,
+					data: "section_id=<?=$section_data->id?>",
+					beforeSend: function() {
+						manageVeil('start','Удаление данных...');
+					},
+					success: function (data) {
+							alert(data);
+							location.href=Url;
+						},
+					error: function (data) {
+						manageVeil(false);
+						alert(data);
+					},
+				});
+			}
 			return false;		
 		});
-	$('a#save_as_is').click( function (){ manageVeil('start','Сохранение данных...');
+	$('a#save_as_is').click( function (){ 
+		manageVeil('start','Сохранение данных...');
 		$.ajax({
 			type:"GET",
 			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store/',
