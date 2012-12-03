@@ -11,7 +11,7 @@ _editMenu = {
 				str += '<table class="items table table-striped table-bordered table-condensed">';
 				str += '<thead><tr><th>Наименование</th>'+
 						'<th>Статус</th>'+
-						'<th>ССылка</th>'+
+						'<th>Сылка</th>'+
 						'<th>Родитель</th>'+
 						'<th>Дата изменения</th>'+
 						'<th></th>'+
