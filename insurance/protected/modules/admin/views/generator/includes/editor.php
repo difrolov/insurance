@@ -17,7 +17,9 @@
     </table>
 <?php	$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
   array(
-    'model'=>$model,                # Data-Model (form model)
+    # Data-Model (form model):
+	'model'=>$art_model, // а патамушта основная модель-то должна быть - InsurInsuranceObject, дурилка! (и именно она сначала извлекается в GeneratorController). А иначе будет абсолютно нелогично и чревато проблемами при извлечении данных самого объекта            
+	
     'attribute'=>'content',         # Attribute in the Data-Model
     'height'=>'240px',
     'width'=>'100%',
