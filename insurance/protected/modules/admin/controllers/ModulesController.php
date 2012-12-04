@@ -67,4 +67,58 @@ class ModulesController extends Controller{
 
 	}
 
+	public function actionContacts(){
+		$model = new InsurContacts();
+		if(isset($_POST['InsurContacts'])){
+			if(isset($_GET['id'])){
+				$model=InsurContacts::model()->findByPk($_GET['id']);
+			}
+			$model->attributes = $_POST['InsurContacts'];
+			$model->creat_date = date("Y-m-d H:i:s");
+			$model->save();
+		}elseif(isset($_GET['id'])){
+			$model = InsurContacts::model()->findByPk($_GET['id']);
+
+		}
+		$this->render('contacts',array('model'=>$model));
+	}
+	public function actionGetContacts(){
+		$gridDataProvider = action::getContacts(false,true);
+		$this->render('getjContacts',array('gridDataProvider'=>$gridDataProvider));
+	}
+	public function actionUpdateStatusContacts(){
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+			echo json_encode(array('success'=>'не хватает прав'));
+			exit;
+		}
+		if(isset($_POST['status']) && isset($_POST['id'])){
+			$query = InsurContacts::model()->find(array('condition'=>'id in ('.$_POST['id'].')'));
+			$query->status = $_POST['status'];
+			$query->save();
+			echo json_encode(array('success'=>1));
+			exit;
+		}
+		echo json_encode(array('success'=>'переданы не все параметры'));
+		exit;
+
+	}
+	//удаляем вакансию
+	public function actionDeleteContacts(){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+
+		if(isset($_GET['id'])){
+			$model = InsurJobs::model()->find(array('condition'=>"id=".$_GET['id']));
+			if(isset($model->id)){
+				$model->delete();
+			}
+			$model = new InsurJobs();
+			$gridDataProvider = $model->search();
+			$this->render('getjobs',array('gridDataProvider'=>$gridDataProvider));
+		}
+
+	}
+
 }

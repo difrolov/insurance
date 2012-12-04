@@ -1,3 +1,4 @@
+<br class="clear">
 <div>Продукт</div>
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
