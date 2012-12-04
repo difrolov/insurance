@@ -67,7 +67,7 @@ class InsurJobs extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params = false)
+	public function search($params = false,$pager=false)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -87,9 +87,12 @@ class InsurJobs extends CActiveRecord
 		$criteria->compare('contact_name',$this->contact_name);
 		$criteria->compare('status',$this->status,true);
 		$criteria->compare('creat_date',$this->creat_date);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
+		if($pager){
+			return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+			));
+		}else{
+			return new CActiveDataProvider($this);
+		}
 	}
 }

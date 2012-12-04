@@ -44,11 +44,11 @@ class InsurArticleContent extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('insur_coworkers_id', 'required'),
-			array('status, insur_coworkers_id, object_id', 'numerical', 'integerOnly'=>true),
+			array('status, insur_coworkers_id', 'numerical', 'integerOnly'=>true),
 			array('content, created', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, content, created, status, insur_coworkers_id, object_id', 'safe', 'on'=>'search'),
+			array('id, content, created, status, insur_coworkers_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,8 +60,8 @@ class InsurArticleContent extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'object' => array(self::BELONGS_TO, 'InsurInsuranceObject', 'object_id'),
-			/* 'insurCoworkers' => array(self::BELONGS_TO, 'InsurCoworkers', 'insur_coworkers_id'), */
+
+
 		);
 	}
 
@@ -76,7 +76,7 @@ class InsurArticleContent extends CActiveRecord
 			'created' => 'Created',
 			'status' => 'Status',
 			'insur_coworkers_id' => 'Insur Coworkers',
-			'object_id' => 'Object',
+
 		);
 	}
 
@@ -98,7 +98,7 @@ class InsurArticleContent extends CActiveRecord
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('insur_coworkers_id',$this->insur_coworkers_id);
-		$criteria->compare('object_id',$this->object_id);
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -23,11 +23,11 @@ class UserController extends Controller
 */
 	public function actionLogin()
 	{
-		$model=new Users;
+		$model=new InsurCoworkers();
 		$this->performAjaxValidation($model);
-		if (isset($_POST['Users'])){
+		if (isset($_POST['InsurCoworkers'])){
 			// Аутентифицируем пользователя по имени и паролю
-			$identity=new UserIdentity($_POST['Users']['login'],$_POST['Users']['password']);
+			$identity=new UserIdentity($_POST['InsurCoworkers']['login'],$_POST['InsurCoworkers']['password']);
 			if($identity->authenticate()){
 				Yii::app()->user->login($identity);
 				/* если мы пришли из админки, то отправляем обратно */

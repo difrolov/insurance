@@ -1,4 +1,5 @@
-<?php /* @var $this Controller */ ?>
+<?php /* @var $this Controller */
+	$url=Yii::app()->request->getBaseUrl(true);?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -6,50 +7,65 @@
 	<meta name="language" content="en" />
 
 	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/style.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-	<![endif]-->
-
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/style.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-	<link rel="stylesheet/less" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.less">
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/banner.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/form.css" />
+	<link rel="stylesheet/less" type="text/css" href="<?=$url?>/css/styles.less">
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap-responsive.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap-responsive.min.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/bootstrap/bootstrap.min.css" media="screen, projection" />
+<?	if (isset($_GET['test'])):?>
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/test.css" media="screen, projection" />
+<?	endif;?>
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/drop_down_menu.css" media="screen, projection" />
+<script>
+testMode=false;
+<?	if (isset($_GET['test'])):?>
+testMode=true;
+<? endif;?>
+</script>
+	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
 // если загрузили раздел добавления подраздела:
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/generator.css" />
-<?	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/prepare_data.php"></script>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/load_template.php"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/switch_states.php"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/manage_template.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
-
-
-
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/generator/customize_page.js"></script>
-	<?
-
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/generator.css" />
+<?
+	require_once Yii::getPathOfAlias('webroot')."/css/admin/generator2.php";
+	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
+	<script src="<?=$url?>/js/admin/generator/prepare_data.php"></script>
+	<script src="<?=$url?>/js/admin/generator/load_template.php?base_url=<?
+	echo $url;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
+    <script src="<?=$url?>/js/admin/generator/switch_states.php"></script>
+    <script src="<?=$url?>/js/admin/generator/manage_template.php?base_url=<?
+	echo $url;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
+    <script src="<?=$url?>/js/admin/generator/handle_text_module.php?base_url=<?
+	echo $url;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
+    <script src="<?=$url?>/js/admin/generator/customize_page.js"></script>
+    <script src="<?=$url?>/js/admin/generator/data_ready_to_send.php?base_url=<?
+	echo $url;
+	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
+<?
 }else{
-// если любой другой раздел, приаттачи скрип генерации доп. кнопки:?>
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin/add_button.php?base_url=<?=Yii::app()->request->baseUrl?>"></script>
+// если любой другой раздел, приаттачить скрипт генерации доп. кнопки:?>
+	<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
 <?
 }?>
+<script src="<?=$url?>/js/wait_for.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu.js"></script>
 </head>
 <body>
-
-
 	<div id="header">
 		<div id="main_submenu">
-		<?php $this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
+	<?php	$this->widget('application.extensions.bootstrap.widgets.TbMenu', array(
 		    'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
 		    'stacked'=>false, // whether this is a stacked menu
 		    'items'=>array(
@@ -67,32 +83,25 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<!-- header -->
 
 <div class="container" id="page">
-	<?php if(isset($this->breadcrumbs)):?>
+<?php
+	HelperAdmin::menuItem();
+	$breadcrumbs=$this->breadcrumbs;
+	if(isset($breadcrumbs[1])):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
-	<div class="">
-		<?php
-		if (!$items=HelperAdmin::$arrMenuItems){
-			//echo "<div>No HelperAdmin::arrMenuItems</div>";
-			$items=HelperAdmin::menuItem();
-		}
-		//$items = HelperAdmin::menuItem();
-		$this->widget('ext.efgmenu.EFgMenu',array(
-				'bDev'=>true,
-				'id'=>'horz1',
-				'items'=>$items,
-				'menubarOptions' => array(
-						'direction'=>'horizontal',
-						'width'=> 70,
-				),
-			));
-
-		?>
-
-
+		));
+	endif;
+	//var_dump("<h1>breadcrumbs:</h1><pre>",$breadcrumbs,"</pre>");
+	if (Yii::app()->controller->getId()!='generator') : ?>
+	<div id="mainmenu" class="sectionsAdminMenu">
+<?		// главное меню:
+		setHTML::buildMainMenu($this); // главное меню
+		// выпадающее меню:
+		setHTML::buildDropDownMenu();	// выпадающее меню	?>
 	</div>
+<?	else:
+		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
+	endif;?>
 	<div class="content_banner">
 	<?php echo $content; ?>
 	</div>
@@ -104,6 +113,9 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	</div >--><!-- footer -->
 
 </div><!-- page -->
-
+<script type="text/javascript">
+	var baseUrl="<?php echo Yii::app()->baseUrl; ?>";
+</script>
+<?	setHTML::veil();?>
 </body>
 </html>

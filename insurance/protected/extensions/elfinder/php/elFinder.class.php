@@ -278,6 +278,7 @@ class elFinder {
 	 * @return void
 	 **/
 	public function run() {
+
 		if (!function_exists('json_encode')) {
 			exit('{"error":"PHP JSON module not installed"}');
 		}
@@ -316,6 +317,7 @@ class elFinder {
 				'extract'    => array(),
 				'url'        => $this->_options['fileURL'] ? $this->_options['URL'] : ''
 				);
+
 			if (isset($this->_commands['archive']) || isset($this->_commands['extract'])) {
 				$this->_checkArchivers();
 				if (isset($this->_commands['archive'])) {
@@ -325,6 +327,7 @@ class elFinder {
 					$this->_result['params']['extract'] = array_keys($this->_options['archivers']['extract']);
 				}
 			}
+
 			// clean thumbnails dir
 			if ($this->_options['tmbDir']) {
 				srand((double) microtime() * 1000000);
@@ -1785,6 +1788,7 @@ class elFinder {
 			$this->_options['archivers'] = $this->_options['archive'] = array();
 			return;
 		}
+
 		$arcs = array(
 			'create'  => array(),
 			'extract' => array()
@@ -1805,7 +1809,6 @@ class elFinder {
 				$arcs['extract']['application/x-bzip2'] = array('cmd' => 'tar', 'argc' => '-xjf', 'ext' => 'tbz');
 			}
 		}
-
 		exec('zip --version', $o, $c);
 		if ($c == 0) {
 			$arcs['create']['application/zip']  = array('cmd' => 'zip', 'argc' => '-r9', 'ext' => 'zip');

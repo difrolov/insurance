@@ -1,3 +1,4 @@
+<?php $this->pageTitle = "Управление банерами"; ?>
 <div class="mainmenu_button">
 
 	<p>
@@ -122,7 +123,7 @@ foreach ($in_query as $key=>$value){
     ),
 )); ?>
 </div>
-<div class="table_baner banner_3">
+<div class="table_baner banner_3" style="display: none;">
 <br class="clear">
 <div class="out_baner_img">
 <?php

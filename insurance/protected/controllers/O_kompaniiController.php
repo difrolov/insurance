@@ -76,4 +76,9 @@ class O_kompaniiController extends Controller
 		}
 		$this->render('contact',array('model'=>$model));
 	}
+
+	public function actionVakansiji(){
+		$gridDataProvider = action::getJobs();
+		$this->render('vakansiji',array('gridDataProvider'=>$gridDataProvider));
+	}
 }

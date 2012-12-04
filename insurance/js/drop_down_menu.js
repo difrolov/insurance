@@ -1,6 +1,6 @@
 // JavaScript Document
 $(function(){
-  try{	
+  try{
   	var tMenus=$('div#mainmenu >ul >li');
 	// проверить наличие подменю и определиться с видом курсора и отменой действия по клику
 	$(tMenus).find('a').mouseenter( function(){
@@ -13,21 +13,21 @@ $(function(){
 			});
 		}
 	});
-	$(tMenus).mouseenter(function(){ 
+	$(tMenus).mouseenter(function(){
 			// get alias
 			var alias=getAlias(this);
 			var fl,tp,ofs=$(this).offset();
-			if ($('div#fit_height').size()>0){ 
+			if ($('div#fit_height').size()>0){
 				//alert('fit_height');
 				fl=$('div#fit_height').offset().left;
 				tl=ofs.left-fl+'px';
 				tp=$(this).outerHeight()-1+'px';
-			}else{ 
+			}else{
 				var sectionsAdminMenu=$('div.sectionsAdminMenu');
 				if($(sectionsAdminMenu).find('ul')){
-					fl=$(sectionsAdminMenu).offset().left;	
+					fl=$(sectionsAdminMenu).offset().left;
 					tl=$(this).offset().left+'px';
-					console.info('fl.offset.left: '+fl+', this.offset.top: '+$(this).offset().top);
+
 				}// console.info($(sectionsAdminMenu).html());
 			} // document.title='left:'+ofs.left;
 			$('div#ddMenu_'+alias).css({

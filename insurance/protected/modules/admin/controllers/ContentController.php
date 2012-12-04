@@ -55,10 +55,10 @@ class ContentController extends Controller
 			}
 			//таблица для отображения
 			$gridDataProvider = $model->search('object_id='.$_GET['id']);
-			$this->render('GetContent',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
+			$this->render('getcontent',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
 		}else{
 			$gridDataProvider = $model->search();
-			$this->render('GetContent',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
+			$this->render('getcontent',array('gridDataProvider'=>$gridDataProvider,'model'=>$model));
 		}
 	}
 
@@ -67,21 +67,21 @@ class ContentController extends Controller
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		if(isset($_POST['InsurArticleContent'])){
-			$model = InsurArticleContent::model()->find(array('condition'=>"id=".$_GET['id']));
-			if(isset($model->content)){
+			$model = InsurArticleContent::model()->find(array('condition'=>"id=".$_GET['section_id']));
+			if(isset($model->id)){
 				$model->content = $_POST['InsurArticleContent']['content'];
+				$model->name = $_POST['name_content'];
 				$model->save();
 			}
 		}
-		if(isset($_GET['id'])){
+		if(isset($_GET['section_id'])){
 			//Достаем контент страницы
-			$content = InsurArticleContent::model()->findAll(array('condition'=>"id=".$_GET['id']));
+			$content = InsurArticleContent::model()->findAll(array('condition'=>"id=".$_GET['section_id']));
 			if(!$content){
-				$this->redirect('index');
+				$this->redirect('Edit');
 			}
 			//таблица для отображения
-
-			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['id']));
+			$this->render('edit',array('model'=>$content,'id_content'=>$_GET['section_id']));
 		}
 	}
 	//удаляем раздел
@@ -89,12 +89,10 @@ class ContentController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-
 		if(isset($_GET['id'])){
 			$model = InsurArticleContent::model()->find(array('condition'=>"id=".$_GET['id']));
 			if(isset($model->content)){
-				$model->status = 0;
-				$model->save();
+				$model->delete();
 			}
 		}
 	}
@@ -102,17 +100,32 @@ class ContentController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
+		$model = new InsurArticleContent;
 		if (isset($_POST['InsurArticleContent'])){
-			$model = new InsurArticleContent;
 			$model->content = $_POST['InsurArticleContent']['content'];
 			$model->created = date("Y-m-d h:i:s");
-			$model->status = 1;
+			$model->status = 0;
 			$model->name = @$_POST['name_content'];
 			$model->insur_coworkers_id = Yii::app()->user->id;
-			$model->object_id = @$_POST['object_id'];
 			$model->save();
-			$this->redirect('Update/'.$_POST['object_id']);
 		}
+		$gridDataProvider = $model->search();
+		$this->redirect('getcontent');
+	}
+	public function actionUpdateStatus(){
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+			exit;
+		}
+		if(isset($_POST['status']) && isset($_POST['id'])){
+			$query = InsurArticleContent::model()->find(array('condition'=>'id in ('.$_POST['id'].')'));
+			$query->status = $_POST['status'];
+			$query->save();
+			echo json_encode(array('success'=>1));
+			exit;
+		}
+		echo json_encode(array('success'=>'переданы не все параметры'));
+		exit;;
 	}
 
 

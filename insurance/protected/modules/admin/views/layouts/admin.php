@@ -9,11 +9,8 @@
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/screen.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/style.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/print.css" media="print" />
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/ie.css" media="screen, projection" />
-	<![endif]-->
-
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/form.css" />
 	<link rel="stylesheet/less" type="text/css" href="<?=$url?>/css/styles.less">
@@ -26,11 +23,11 @@
 <?	endif;?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/drop_down_menu.css" media="screen, projection" />
 <script>
-testMode=false; 
+testMode=false;
 <?	if (isset($_GET['test'])):?>
 testMode=true;
-<? endif;?>	
-</script>	
+<? endif;?>
+</script>
 	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
@@ -56,7 +53,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
     <script src="<?=$url?>/js/admin/generator/data_ready_to_send.php?base_url=<?
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
-<?	
+<?
 }else{
 // если любой другой раздел, приаттачить скрипт генерации доп. кнопки:?>
 	<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
@@ -86,13 +83,13 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<!-- header -->
 
 <div class="container" id="page">
-<?php	
+<?php
 	HelperAdmin::menuItem();
 	$breadcrumbs=$this->breadcrumbs;
 	if(isset($breadcrumbs[1])):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
-		)); 
+		));
 	endif;
 	//var_dump("<h1>breadcrumbs:</h1><pre>",$breadcrumbs,"</pre>");
 	if (Yii::app()->controller->getId()!='generator') : ?>
@@ -102,10 +99,10 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		// выпадающее меню:
 		setHTML::buildDropDownMenu();	// выпадающее меню	?>
 	</div>
-<?	else:	
+<?	else:
 		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
 	endif;?>
-	<div class="content_right">
+	<div class="content_banner">
 	<?php echo $content; ?>
 	</div>
 
@@ -116,6 +113,9 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	</div >--><!-- footer -->
 
 </div><!-- page -->
+<script type="text/javascript">
+	var baseUrl="<?php echo Yii::app()->baseUrl; ?>";
+</script>
 <?	setHTML::veil();?>
 </body>
 </html>

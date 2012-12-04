@@ -21,6 +21,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.components.helpers.*',
+		'application.modules.admin.components.*',
 
 	),
 
@@ -62,25 +63,25 @@ return array(
 				'admin'=>'admin',
 				// редактирование макета подраздела:
 				'admin/<controller:\w+>/edit/<section_id:\d+>'=>'admin/<controller>/edit',
-				// 
+				//
 				'admin/<controller:\w+>/<id:\d+>'=>'admin/<controller>',
                 'admin/<controller:\w+>/<action:\w+>/<id:\d+>'=>'admin/<controller>/<action>',
                 'admin/<controller:\w+>/<action:\w+>'=>'admin/<controller>/<action>',
-				
-				
+
+
 				// Frontend
 				// извлечь данные подразделов:
 				'o_kompanii/*' =>  'o_kompanii/index',
-				
+
 				'korporativnym_klientam/*' =>  'korporativnym_klientam/index',
-				
+
 				'malomu_i_srednemu_biznesu/*' =>  'malomu_i_srednemu_biznesu/index',
-				
+
 				'fizicheskim_litzam/*' =>  'fizicheskim_litzam/index',
-				
+
 				'partneram/*' =>  'partneram/index',
-				
-				//	
+
+				//
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

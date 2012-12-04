@@ -12,14 +12,13 @@ class DefaultController extends Controller
 	}
 
 	public function actions() {
-		die("qqqqq");
-	    return array(
+		return array(
             'connector' => array(
                 'class' => 'application.extensions.elfinder.ElFinderConnectorAction',
                 'settings' => array(
                     'root' => Yii::getPathOfAlias('webroot') . '/upload/',
                     'URL' => Yii::app()->baseUrl . '/upload/',
-                    'rootAlias' => 'http://localhost/insur/insurance/',
+                    'rootAlias' => Yii::app()->baseUrl,
                     'mimeDetect' => 'none'
                 )
             ),

@@ -15,6 +15,9 @@
  */
 class InsurCoworkers extends CActiveRecord
 {
+	const ROLE_ADMIN = 'admin';
+	public $rememberMe;
+	public $role;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -24,7 +27,7 @@ class InsurCoworkers extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -47,6 +50,13 @@ class InsurCoworkers extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, id_role, name_middlename_surname, insur_workers_roles_id', 'safe', 'on'=>'search'),
+				array('id, login, password, status, role', 'required'),
+				array('id, status, role', 'numerical', 'integerOnly'=>true),
+				array('login', 'length', 'max'=>100),
+				array('password', 'length', 'max'=>255),
+				// The following rule is used by search().
+				// Please remove those attributes that should not be searched.
+				array('id, login, password, status, role', 'safe', 'on'=>'search'),
 		);
 	}
 

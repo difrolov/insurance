@@ -14,7 +14,7 @@ class ObjectController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		if(isset($_GET['id'])){ 
+		if(isset($_GET['id'])){
 			//достаём объект из базы
 			$object = InsurInsuranceObject::model()->findByPk($_GET['id']);
 			if(!$object){
@@ -50,4 +50,26 @@ class ObjectController extends Controller
 		echo ($this->actionDelete($section_id))? "Подраздел удалён.":"ОШИБКА! Подраздел не был удалён...";
 		exit;
 	}
+
+
+	public function actionUpdateStatus(){
+		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+			echo json_encode(array('success'=>'не хватает прав'));
+			exit;
+		}
+		if(isset($_POST['status']) && isset($_POST['id'])){
+			$query = InsurInsuranceObject::model()->find(array('condition'=>'id in ('.$_POST['id'].')'));
+			$query->status = $_POST['status'];
+			$query->save();
+			echo json_encode(array('success'=>1));
+			exit;
+		}
+		echo json_encode(array('success'=>'переданы не все параметры'));
+		exit;;
+	}
+
+
+
+
 }

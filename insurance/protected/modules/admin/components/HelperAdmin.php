@@ -211,15 +211,160 @@ ORDER BY name, parent_name';
 
 		}
 		public static function createStatusContent($data,$id){
-			$a="<a onclick='_object.updateContentStatus(".$id.");return false;' href='#'".
-			"class='contStatus_".$id."' >".($data?'Активен':'Отключен')."</a>";
-			return $a;
+			if($data){
+				$str = 	'<div class="'.$id.'"><div class="dark"><div class="toggle"></div></div></div>';
+			}else{
+				$str = 	'<div class="'.$id.'"><div class="dark"><div class="toggle_off">'.
+						'</div></div></div>';
+			}
+			return $str;
 		}
 		public static function dateToRender($fromDate){
 		if ($fromDate == null) return null;
 		// var_dump($fromDate); die();
 		$date = explode('-',$fromDate);
 		return $date[2].'.'.$date[1].'.'.$date[0];
+	}
+	function buildSearchForm(){?>
+	<div id="search">
+	<form>
+	<input name="search" type="text">
+	<input type="image" src="<?=Yii::app()->request->baseUrl?>/images/search_button.png">
+	</form>
+	</div>
+	<?	}
+	/**
+	* @package		HTML
+	* @subpackage		menu
+	* построить контент подменю
+	*/
+	static function buildSubmenuLinks( $subMenuItems,
+	$parent_alias,
+	$topAlias=false // самое верхнее меню alias
+	){
+	static $prev_level='top'; // для управления цепочкой родительских алиасов
+
+	static $curControllerLeftMenu; // для управления доступом к главному и левому меню
+
+	if($topAlias){
+	if( $topAlias===true // пришли из главного меню
+	|| is_array($topAlias) // пришли из левого меню
+	) {
+	$topLevelAlias=$parent_alias;
+	$curControllerLeftMenu=(is_array($topAlias))? $topAlias['section_id']:0;
+	}else{
+	$topLevelAlias=$topAlias;
+	}
+	}
+	if (!isset($topLevelAlias)) $topLevelAlias=false;
+
+	if (is_array($subMenuItems)){
+	foreach($subMenuItems as $alias_value=>$link_text):
+	if (is_array($link_text)){
+	$level=(isset($link_text['level']))? $link_text['level']:0;
+	if ($level>1){?><ul><? } // echo "<div class='testBlock'>prev_level(".gettype($prev_level).") = ".$prev_level."</div>";
+	self::buildSubmenuLinks($link_text,&$parent_alias,&$topLevelAlias);
+	if ($level>1) {?></ul><? }
+	}elseif ($alias_value=="name"){
+	$level=$subMenuItems['level'];
+	// echo "<div class=''>current_level(".gettype($level).")= $level";
+	// if(isset($topLevelAlias)) echo "<br><b>topLevelAlias:</b><br>$topLevelAlias";
+	// else echo ", <h1 style='color:red'>NO topLevelAlias!</h1>";
+	//echo "</div>"; //**********************************
+
+	if ($level==1) {
+	$parent_alias=$topLevelAlias;
+	echo '</ul>';
+	$link=$topLevelAlias."/".$subMenuItems['alias'];
+	}elseif($level<$prev_level){ // данный подраздел находится выше предыдущего
+	// будем вырезать промежуточные алиасы:
+	$aDiff=$prev_level-$level;
+	$parentAliases=explode("/",$parent_alias);
+	while($aDiff){
+	array_pop($parentAliases);
+	$aDiff--;
+	}
+	$parent_alias=implode("/",$parentAliases);
+	}
+	if ( isset($subMenuItems['children']) // есть вложенные уровни
+	|| $level>1	// вложенных нет, есть родительские
+	){
+	$link=$parent_alias.'/'.$subMenuItems['alias'];
+	if(isset($subMenuItems['children']))
+	$parent_alias.='/'.$subMenuItems['alias'];
+	}
+	$prev_level=$level; // установим текущий уровень подраздела
+	ob_start();
+	?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
+	ob_get_clean();
+	if ($curControllerLeftMenu){
+	?><li><?
+	echo $linkContent;
+	?></li><?
+
+	}else echo $linkContent;
+	}
+	endforeach;
+	}
+	}
+
+	static function getObjectsRecursive( $fields=false, // поля извлечения данных
+			$parent_id=false, // id родительского (под)раздела
+			$level=0,	// иерархический уровень текущего подраздела
+			&$result=false // результат; при вхождении в рекурсию передаётся по ссылке
+	){
+		if(!$fields) { // набор полей извлечения данных по умолчанию
+			$fields='id,name,parent_id,alias'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
+		}elseif(!$result){ // если с дуру передали пустую строку, извлечь все поля таблицы:
+			if (!str_replace(" ",'',$fields)){
+				$qFields="DESC insur_insurance_object";
+				$desc=Yii::app()->db->createCommand($qFields)->queryAll();
+				for($i=0,$j=count($desc);$i<$j;$i++){
+					if ($i) $fields.=',';
+					$fields.=$desc[$i]['Field'];
+				}
+			} // echo "<div class='txtRed'>GO FIELDS AGAIN! : ".$fields."</div>";
+		}
+		if (!$parent_id) {
+			$level=0;
+			$parent_id='-1';
+		}else{
+			$level++;
+			$xtra_id=$parent_id; // для идентификации id родительского подраздела при рекурсивном вызове
+		}
+		$query="SELECT ".$fields.", "; // запятая нужна, т.к. в \$fields отсутствует; не добавлять туда, поскольку это вызовет ошибку далее, при конвертации в массив в цикле!
+		$query.="
+		(   SELECT COUNT(*) AS cnt FROM insur_insurance_object
+		WHERE parent_id = t1.id
+		AND `status` = 1
+		) AS children
+		FROM insur_insurance_object as t1
+		WHERE parent_id = ".$parent_id." and `status` = 1
+		order by id ASC";
+		$res=Yii::app()->db->createCommand($query)->queryAll();
+		$arrFields=explode(",",$fields); // поля с табличными данными
+		// присвоить данные полученным объектам:
+		for($i=0,$j=count($res);$i<$j;$i++){
+			$section_data=$res[$i]; // текущая запись из БД
+			for($y=0,$x=count($arrFields);$y<$x;$y++)
+				$arrRes[$arrFields[$y]]=$section_data[$arrFields[$y]];
+				$arrRes['level']=$level; // добавляем в массив данных сведения об иерархическом уровне текущего подраздела (может пригодиться при назначении HTML-атрибутов и т.п.)
+				$result[$section_data['id']]=$arrRes; // сохраняем данные таблицы для подраздела в массиве
+				if((int)$section_data['children']){ // если есть дочерние подразделы, делаем рекурсивный вызов метода
+				for($k=0,$m=$section_data['children'];$k<$m;$k++){
+				self::getObjectsRecursive($fields,(int)$section_data['id'],$level,$result);
+		}
+		}
+			if (isset($xtra_id)
+			&& $xtra_id>=0 // исключить разделы самого верхнего уровня (-1, -2)
+				) { // если получили id родительского (под)раздела
+			// скопировать данные текущего подраздела в массив родительского подраздела
+			$result[$xtra_id]['children'][$section_data['id']]=$result[$section_data['id']];
+			// удалить исходные данные текущего подраздела, т.к. копия уже размещена в родительском:
+			unset($result[$section_data['id']]);
+	}
+	}
+	return $result;
 	}
 
 	public static function dateToTextMonth($fromDate)

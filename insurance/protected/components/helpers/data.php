@@ -8,16 +8,16 @@ class Data {
   */
 	static function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
 							 $alias=false // alias подраздела
-						   ){ 
+						   ){
 		if (!$alias) {
-			$alias=$default_alias;	
+			$alias=$default_alias;
 			$subsection=true;
 		}
 		$data = InsurInsuranceObject::model()->findByAttributes(array('alias' => $alias));
 		if ($data === null) {
-			throw new CHttpException(404, 'Not found');		
-		} 
-		return $data;	
+			throw new CHttpException(404, 'Not found');
+		}
+		return $data;
 	}
 /**
  * Анализирует URL, забирает данные из БД и передаёт их в макет, откуда они извлекаются методом setHTML::setPageData(), который формирует и рамещает на странице конечное представление данных.
@@ -37,7 +37,7 @@ class Data {
 		$obj->pageTitle=$data->title;
 		$obj->render('index', array('res' => $data));
 	}
-	
+
 /**
  * Получить структурированный массив всех разделов и подразделов
  * @package
@@ -57,25 +57,25 @@ class Data {
 				for($i=0,$j=count($desc);$i<$j;$i++){
 					if ($i) $fields.=',';
 					$fields.=$desc[$i]['Field'];
-				} 
+				}
 			} // echo "<div class='txtRed'>GO FIELDS AGAIN! : ".$fields."</div>";
 		}
 		if (!$parent_id) {
 			$level=0;
 			$parent_id='-1';
-		}else{ 
+		}else{
 			$level++;
 			$xtra_id=$parent_id; // для идентификации id родительского подраздела при рекурсивном вызове
 		}
 		$query="SELECT ".$fields.", "; // запятая нужна, т.к. в \$fields отсутствует; не добавлять туда, поскольку это вызовет ошибку далее, при конвертации в массив в цикле!
 		$query.="
     (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
-      WHERE parent_id = t1.id 
+      WHERE parent_id = t1.id
 		AND `status` = 1
-    ) AS children 
+    ) AS children
 FROM insur_insurance_object as t1
 WHERE parent_id = ".$parent_id." and `status` = 1
-order by id ASC"; 
+order by id ASC";
 		$res=Yii::app()->db->createCommand($query)->queryAll();
 		$arrFields=explode(",",$fields); // поля с табличными данными
 		// присвоить данные полученным объектам:
@@ -92,15 +92,15 @@ order by id ASC";
 			}
 			if (isset($xtra_id)
 				 && $xtra_id>=0 // исключить разделы самого верхнего уровня (-1, -2)
-			   ) { // если получили id родительского (под)раздела 
-				// скопировать данные текущего подраздела в массив родительского подраздела 
+			   ) { // если получили id родительского (под)раздела
+				// скопировать данные текущего подраздела в массив родительского подраздела
 				$result[$xtra_id]['children'][$section_data['id']]=$result[$section_data['id']];
 				// удалить исходные данные текущего подраздела, т.к. копия уже размещена в родительском:
 				unset($result[$section_data['id']]);
 			}
 		}
 		return $result;
-	}	
+	}
 /**
  * Подключить дополнительную таблицу стилей
  * @package
