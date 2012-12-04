@@ -132,7 +132,7 @@ return array(
 			),
 		),
 		'email'=>array(
-			'class'=>'application.extensions.email.Email',
+			'class'=>'application.extensions.email.components.Email',
 			'delivery'=>'php', //Will use the php mailing function.  
 			//May also be set to 'debug' to instead dump the contents of the email into the view
 		),
