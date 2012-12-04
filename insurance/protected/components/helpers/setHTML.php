@@ -885,6 +885,7 @@ $( function(){
 			success: function (data) {
 					manageVeil(false);
 					alert("Данные сохранены!"+'\n'+data);
+					$('#manage_new_section').hide();
 					var goUrl=location.href.substring(0,location.href.indexOf('?mode='));
 					location.href=goUrl;
 				},
