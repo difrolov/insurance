@@ -1,3 +1,4 @@
+<?php $this->pageTitle = "Управление банерами"; ?>
 <div class="mainmenu_button">
 
 	<p>

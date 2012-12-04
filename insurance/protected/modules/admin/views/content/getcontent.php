@@ -22,8 +22,6 @@ if (isset($gridDataProvider)){
         array('name'=>'name', 'header'=>'Наименование'),
         array('name'=>'status','header'=>'Статус','type'=>'html',
         		'value'=>'HelperAdmin::createStatusContent($data->status,$data->id)'),
-
-
         array(
             'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
             'htmlOptions'=>array('style'=>'width: 50px'),

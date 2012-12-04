@@ -43,14 +43,6 @@ class SiteController extends Controller
 	  */
 	public function actionMap()
 	{	
-		
-		//обращаемся к модели и получаем данные таблицы:
-		//$res=ClassName::model()->findAll( array('select'=>'name',
-			//					     	'condition'=>' name <> "" '
-				//					  ), //условие запроса
-					//			     array('order'=>' id DESC '
-						//		   )
-							//	 );
 		$res=Data::getObjectsRecursive();
 		$this->render('map', array('res'=>$res));
 	}

@@ -1,14 +1,14 @@
 <style>
 div#inner_left_menu {
-	background:none; 
-	box-shadow:none; 
+	background:none;
+	box-shadow:none;
 	max-width: 955px;
-	width:100%; 
+	width:100%;
 }
 div#inner_left_menu a{
 	color:#666;
 }
-div.mainWrapper 
+div.mainWrapper
 	> div > a,
 blockquote div a{
 	font-size:11px !important;
@@ -39,23 +39,20 @@ div.mainWrapper{
 </style>
 <div id="inner_left_menu">
 <h2 class="txtLightBlue">Карта сайта</h2>
-<? 
+<?
 function buildMap($array) {
 	$a=count($array)-1;
 	foreach($array as $key=>$val){
 		$a--;
-		if (isset($val['parent_id'])&&$val['parent_id']=='-1'){?>
-	<h4><a href="<?=Yii::app()->request->getBaseUrl(true)?>/<?=$val['alias']?>"><?=$val['name']?></a></h4>
-	<div class="mainWrapper">
-	<?	}
-		$items_data=Data::getObjectsRecursive( 
+
+		$items_data=Data::getObjectsRecursive(
 						false, // поля извлечения данных
 	  		  	   		$val['id']
 				   );
 		setHTML::buildSubmenuLinks($items_data,$val['alias'],$section=array('section_id'=>$val['id']));?>
    </div>
    <? 	if($a>=0):?>
-   <div class="separator2"><div>&nbsp;</div></div>     
+   <div class="separator2"><div>&nbsp;</div></div>
 <?		endif;
 	}
 }

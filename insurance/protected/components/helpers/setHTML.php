@@ -73,13 +73,13 @@ class setHTML{
  * @subpackage		contacts
  *
  */
-	function buildContactsAndSearchBlock(){?>
+	static function buildContactsAndSearchBlock(){?>
     		<div id="call_us" align="right">
           	<div align="center" id="all_phones">
               <div id="cmd_micro">
               	<div data-home="home" title="На главную" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/'">&nbsp;</div>
-                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/map.php"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/map.php'">&nbsp;</a></div>
-                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/search.php'">&nbsp;</div>
+                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/map"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/map">&nbsp;</a></div>
+                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/search'"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/search/'">&nbsp;</a></div>
               </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
 			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>
@@ -92,11 +92,11 @@ class setHTML{
  * @subpackage		menu
  *
  */
-	function buildDropDownMenu($submenu=false){
+	static function buildDropDownMenu($submenu=false){
 		$menuItems=self::getMainMenuItems($submenu);
 		foreach($menuItems as $parent_id=>$parent_data){
 			if (!in_array($parent_data['alias'],self::$arrAvoidSubmenu))
-				self::buildDropDownSubMenu($parent_data['alias'],$parent_id);
+				self::buildDropDownSubMenu($parent_data['alias'],$parent_id,true);
 		}
 	}
 /**
@@ -104,17 +104,18 @@ class setHTML{
  * @subpackage		menu
  *
  */
-	function buildDropDownSubMenu($parent_alias='',$parent_id=false){
+	static function buildDropDownSubMenu($parent_alias='',$parent_id=false,$top_level=false){
+		static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
-
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
+	<?	if ($top_level)
+			echo $insur_species;
+		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
 		if ($parent_alias=="korporativnym_klientam") {?>
           <ul class="asTable">
 			<li>
-            	<div class="txtLightBlue txtMediumSmall">Виды страхования</div>
-			<? self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
+		<?	self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
         <?	$corps=false;
 			if ($corps){
 				$arrCorps=array(
@@ -226,7 +227,7 @@ class setHTML{
  * @package
  * @subpackage
  */
-	function buildLeftStaticMenu($section_id){
+	static function buildLeftStaticMenu($section_id){
 		$top_alias=Yii::app()->controller->getId();
 		$top_id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$top_alias.'"')->queryScalar();
 		$items_data=Data::getObjectsRecursive( false, // поля извлечения данных
@@ -238,7 +239,7 @@ class setHTML{
  * @subpackage		logo
  *
  */
-	function buildLogosBlock(){?>
+	static function buildLogosBlock(){?>
 				<div id="logo" align="left">
                     <a href="<?=Yii::app()->request->getBaseUrl(true)?>"><?
     	if (isset($test_logo)){
@@ -251,7 +252,7 @@ class setHTML{
  * @subpackage		menu
  * построить меню верхнего уровня
  */
-	function buildMainMenu(
+	static function buildMainMenu(
 					$this_object,
 					$submenu=false
 				  ){
@@ -359,7 +360,7 @@ class setHTML{
  * @subpackage		menu
  * построить контент подменю
  */
-	function buildSubmenuLinks( $subMenuItems,
+	static function buildSubmenuLinks( $subMenuItems,
 								$parent_alias,
 								$topAlias=false // самое верхнее меню alias
 							  ){
@@ -414,7 +415,6 @@ class setHTML{
 							$parent_alias.='/'.$subMenuItems['alias'];
 					}
 					$prev_level=$level; // установим текущий уровень подраздела
-
 					ob_start();
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
@@ -438,7 +438,7 @@ class setHTML{
  * @subpackage		menu
  * получить меню верхнего уровня
  */
-	function getMainMenuItems($parent_id_level=false){
+	static function getMainMenuItems($parent_id_level=false){
 		if (!$parent_id_level) $parent_id_level='-1';
 		$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias` FROM insur_insurance_object WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY id')->queryAll();
 		for($i=0,$j=count($data);$i<$j;$i++){
@@ -453,7 +453,7 @@ class setHTML{
  * @subpackage		browser
  *
  */
-	function detectOldIE($version=array(6,7,8)){
+	static function detectOldIE($version=array(6,7,8)){
 		$usAg=$_SERVER['HTTP_USER_AGENT'];
 		for($i=0,$j=count($version);$i<$j;$i++)
 			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
@@ -470,26 +470,32 @@ class setHTML{
     <button onClick="window.print();">Печать страницы</button>
 <?	}
 /**
+ * Основной метод, создающий контент подраздела на основе поля insur_insurance_object.content (это то, что можно создавать в качестве подразделов сайта в Генераторе)
  * Получает данные от Data::getObjectByUrl() в виде объекта активной записи в insur_insurance_object (setPageData()::$section_data = Data::getObjectByUrl()->res)
  * @package		content
  * @subpackage		metadata
- * Загрузить макет подраздела, разместить данные и выдать в HTML
+ * Загрузить макет подраздела, разместить в HTML
  */
-	function setPageData( $this_obj,
+	static function setPageData( $this_obj,
 						  $section_data,
-						  $test=false
+						  $asModule=false
 						){	$test=false; // принудительно
 		// генерирует и размещает title страницы:
 		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
 		// генерирует и размещает название страницы в цепочке breadcrumbs:
+
 		$breadcrumbs=array();
 		if ($section_data->parent_id>0)	{
+			// получить имя и алиас для размещения в цепочке:
 			$parentName=InsurInsuranceObject::model()->find(array(
-							'select'=>'name',
+							'select'=>'name,alias',
 							'condition'=>'id = '.$section_data->parent_id,
 						));
+			$top_name=Yii::app()->db->createCommand()->select('name')->from('insur_insurance_object')->where('alias="'.Yii::app()->controller->getId().'"')->queryScalar();
+
 			$this_obj->breadcrumbs=array(
-				$parentName->name=>array('index'),
+				$top_name=>array('index'),
+				$parentName->name=>array($parentName->alias),
 				$section_data->name
 			);
 		}else
@@ -514,8 +520,7 @@ class setHTML{
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
-		}
-		else { // загрузить макет?>
+		}else { // загрузить макет?>
 <style type="text/css">
 /******** Для элементов всех макетов: ********/
 div#inner_content{
@@ -656,69 +661,106 @@ div.schema30s > div{
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
-		<?	$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
-			$bloxHeaderType=$tmpl['Schema'][1];
-			$bloxFooterType=$tmpl['Schema'][2];
+		<?	// определиться с типом генерации контента - либо как специально разработанный модуль, либо как стандартный раздел, созданный Генератором:
+			if ( $asModule // если передан массив alias'ов, контент страниц которых должен выводиться как специально разработанный модуль
+				 && is_array($asModule)
+				 && in_array($section_data['alias'],$asModule)
+			   ){?><div id="innerXtraModule"><?
+			   require_once Yii::getPathOfAlias('webroot').'/protected/views/'.Yii::app()->controller->getId().'/' . $section_data['alias'] . '.php';?></div><?
+			}else{
+				$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
+				$bloxHeaderType=$tmpl['Schema'][1];
+				$bloxFooterType=$tmpl['Schema'][2];
+				if ($bloxHeaderType!='0')
+					$bloxCnt++;
+				if ($bloxFooterType!='0')
+					$bloxCnt++;
+				/*
+				 * См. схему построения макетов в файле:
+				 * /_docs/схема.xslx!Макет для создания разделов
+				 */
+				//***	FOR TEST:	***//
+				$testColors=array('whitesmoke','mistyrose','lemonchiffon','honeydew','lightcyan','lavender');
+				$showLoremIpsum=false;
+				//***	/FOR TEST:	***//
+				// получить все модули:
+				require_once Yii::getPathOfAlias('webroot').'/protected/modules/admin/controllers/GeneratorController.php';
+				$raw_modules=generatorController::getAllModules();
+				$modules=Data::simplifyModules($raw_modules,true);
+				if(!isset($modules)){
+					// $modules[$i]=>
+					// 		'module'=>'news'
+					// 		'name'=>'Новости'
+					//		'description'=>'Модуль новостей компании'
+					//		'created'=>'nov. 2012'
+					//		'author'=>'srgg6701'
+					$modules=array(
+							'news'=>'Новость',
+							'ready_solution1'=>'Готовое решение 1',
+							'ready_solution2'=>'Готовое решение 2',
+						);
+				}
+				$i=1;
+				if (isset($tmpl['blocks'])) {
+					foreach ($tmpl['blocks'] as $block_name=>$blockModules){
+					 // массив: блоки макета as имя блока => массив модулей (строка):
+					 	// 	$block_name:
+						//	[1] =>
+						//
+						//	$blockModules:
+							// 	[0] Новость
+							// 	[1] Текст :: article id: 13
+							// 	[2] Готовое решение 1
+							// 	[3] Текст :: article id: 93
+							// 	[4] Готовое решение 2
 
-			if ($bloxHeaderType!='0')
-				$bloxCnt++;
-			if ($bloxFooterType!='0')
-				$bloxCnt++;
+					 	// 	$block_name:
+						// [2] =>
 
-
-			//echo "<div class=''>bloxCnt = ".$bloxCnt.", bloxHeaderType = $bloxHeaderType, bloxFooterType = $bloxFooterType</div>";
-
-			/*
-			 * См. схему построения макетов в файле:
-			 * /_docs/схема.xslx!Макет для создания разделов
-			 */
-			//echo "<div class=''>colCount= ".$colCount.", bloxHeaderType= $bloxHeaderType, bloxFooterType= $bloxFooterType</div>";die();
-			//***	FOR TEST:	***//
-			$testColors=array('whitesmoke','mistyrose','lemonchiffon','honeydew','lightcyan','lavender');
-			$showLoremIpsum=false;
-			//***	/FOR TEST:	***//
-			$modules=array(
-					'news'=>'Новость',
-					'ready_solution1'=>'Готовое решение 1',
-					'ready_solution2'=>'Готовое решение 2',
-				);
-			$i=1;
-			if (isset($tmpl['blocks'])) {
-				foreach ($tmpl['blocks'] as $block_name=>$block){?>
+						//	$blockModules:
+							//	[0] Новость |
+							//	[1] Готовое решение 2
+							//	[2] Готовое решение 2
+							//	[3] Текст :: article id: 94
+							//	[4] Текст :: article id: 95 	?>
 				<div id="div<?=$i?>">
                 	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
             	<? 	if($block_name==2&&$bloxHeaderType!='0'){
-						echo(is_array($block))?
+						echo(is_array($blockModules))?
 							"<span style='color:red'>Ошибка: неправильный тип данных для заголовка (массив вместо строки)...</span>"
 							:
-						 	"<h2 class=\"subsectHeader\">".substr($block,strpos($block,":")+1)."</h2>";
+						 	"<h2 class=\"subsectHeader\">".substr($blockModules,strpos($blockModules,":")+1)."</h2>";
 					}else{
 						$artIdSbstr="Текст :: article id:";
 						// собрать контент текущего блока:
 					  $for=true;
-					  if ($for)
-						for($b=0,$c=count($block);$b<$c;$b++){
-							$bContent=$block[$b];
-							if(strstr($bContent,$artIdSbstr)){ // статья
-								$article_id=(int)substr($bContent,strlen($artIdSbstr));
-								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow(); //var_dump("<h1>article_data:</h1><pre>",$article_data,"</pre>");
+					  if ($for) { // перебрать все модули в МАКЕТЕ:
+						for($b=0,$c=count($blockModules);$b<$c;$b++){
+							$moduleContent=$blockModules[$b];
+							// Новость
+							// Готовое решение 2
+							// ...
+							// если статья:
+							if(strstr($moduleContent,$artIdSbstr)){
+								$article_id=(int)substr($moduleContent,strlen($artIdSbstr));
+								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow();
 								if ($article_data['name']){?>
 		<h3 class="contentHeader"><?=$article_data['name']?></h3>
 							<?	}	echo $article_data['content'];
-							}else{?>
-		<h3 class="contentHeader"><?=$bContent?></h3>
-        					<?	if ($folder_name=array_search($bContent,$modules)){
-									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$folder_name.'/default.php';
+							}else{ // НЕ статья?>
+		<h3 class="contentHeader"><?=$moduleContent?></h3>
+        					<?	if ($mod_folder=array_search($moduleContent,$modules)){
+									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
 									//echo "<div class=''>module_path= ".$module_path."</div>";
 									require $module_path;
-								}elseif($bContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+								}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
 							echo "<div class='clear'>&nbsp;</div>";
-						}else{
-
-						  if (isset($block)) {
-							  echo "<div class=''>block= ".$block."</div>";
-						  	  var_dump("<h1>block:</h1><pre>",$block,"</pre>");
+						}
+					  }else{
+						  if (isset($blockModules)) {
+							  echo "<div class=''>block= ".$blockModules."</div>";
+						  	  var_dump("<h1>block:</h1><pre>",$blockModules,"</pre>");
 						  }else echo "<div class=''>skip</div>";
 					  }
 						if ($showLoremIpsum){
@@ -733,16 +775,15 @@ div.schema30s > div{
 		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 				<?		}
 					}?>
-
                 	</div>
                 </div>
-		<?		$i++;
-			}
-			}else{?>
+					<?	$i++;
+                    }
+                }else{?>
             <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
-		<? 	}?>
+			<? 	}
+			}?>
         <div class="clear">&nbsp;</div>
-		<?	// var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
    </div>
 	<?	}
 	}

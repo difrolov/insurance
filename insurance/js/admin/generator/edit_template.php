@@ -1,5 +1,4 @@
-<?	$aMods=$this->getAllModulesNames($model_modules); 
-	// см. $aMods в set_modules.php
+<?	$aMods=Data::simplifyModules($modules); // получить массив модулей вида "folder_name"=>"Название модуля"
 	$testTmpl=false; // test mode
 	//**************************************************
 	$Shema=false;
@@ -157,6 +156,7 @@ function loadModulesEditMode(){
 <?	// пройтись по всем блокам и собрать их контент:
 	$colCnt=0; // индекс колонки
 	foreach($SectionDataContent['blocks'] as $block_name=>$block){
+		
 		if( $block_name==2 // 2-й блок, может содержать заголовок
 			&& $Shema[1]!='0' // ...заголовок есть в соответствии со схемой макета
 		  ) {	// заголовок подраздела  
@@ -173,14 +173,10 @@ function loadModulesEditMode(){
 	$(colActive).trigger('click'); // эмулировать клик по активной колонке
 		<?	$artPreString="Текст :: article id:"; // if an article
 			for($i=0,	$blockModulesCount=count($block);
-				$i<$blockModulesCount; 	$i++){ // пройтись по блоку и собрать его модули?>
-	// вывод информации в консоль в тестовом режиме
-	// если test_mode='alert' также выводит alert
-	consoleOutput('blockModulesCount=<?=$blockModulesCount?>, i=<?=$i?>');
-			<?
+				$i<$blockModulesCount; 	$i++){ // пройтись по блоку и собрать его модули
 				// конец условий
 				$moduleContent=$block[$i]; // Новости, Готовое решение ...
-				$modIndex=false;
+				$modIndex=0;
 				$modText=false;
 				// получить ключ существующего модуля, чтобы далее эмулировать клик по нему и добавление в текущую колонку:
 				if(in_array($moduleContent,$aMods)){
@@ -191,8 +187,11 @@ function loadModulesEditMode(){
 					// получить заголовок статьи:
 					$art_header = Yii::app()->db->createCommand()->select('name')->from('insur_article_content')->where('id="'.$art_id.'"')->queryScalar();
 					$modText=true;	// флаг обработки текстового модуля
-				}
-				if($modIndex!==false){?>
+				}?>
+	// вывод информации в консоль в тестовом режиме
+	// если test_mode='alert' также выводит alert
+	consoleOutput('i=<?=$i?>, modIndex = <?=$modIndex?>, moduleContent= <?=$block[$i]?>');
+			<?	if($modIndex!==false){?>
 	$(curModsOrangeButton).eq(<?=$modIndex?>).trigger('click'); // добавить модуль в активную колонку
 				<?	if($modText){ // если таки текстовый модуль, обработаем его ПОСЛЕ (!!!) эмуляции клика по кнопке (т.е., фактического добавления его в колонку)?>
 	var arrPreData=setTxtReadyContent(<?=$art_id?>);

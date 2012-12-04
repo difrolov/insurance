@@ -4,7 +4,7 @@
     <input type="text" name="name_content" value="<?=$model[0]->name?>">
 </div>
 <?php
-$this->widget('application.extensions.TheCKEditor.theCKEditorWidget',array(
+$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',array(
 	'id'=> 'editor',
     'model'=>$model[0],                # Data-Model (form model)
     'attribute'=>'content',         # Attribute in the Data-Model

@@ -46,7 +46,6 @@ class ObjectController extends Controller
 	}
 
 	public function actionUpdateStatus(){
-		echo 1;
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 			echo json_encode(array('success'=>'не хватает прав'));
