@@ -1,4 +1,6 @@
-<h2 class="txtLightBlue" style="margin:-4px 0 18px 25px">Поиск</h2>
+<?	Data::includeXtraCss();?>
+<div id="inner_left_menu">
+<h2 class="txtLightBlue">Поиск</h2>
 <div>
 <? 	$seeking='';
 	if ($swords){
@@ -176,3 +178,4 @@ $(html).html(s);
 </table>
 </div>
 <?	}?>
+</div>

@@ -19,6 +19,37 @@ class SiteController extends Controller
 			),
 		);
 	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	function actionSendApplication(){
+/*	var_dump("<h1>post:</h1><pre>",$_POST,"</pre>");
+array(5) {
+  ["name"]=>
+  string(12) "Сержик"
+  ["email"]=>
+  string(16) "srgg67@gmail.com"
+  ["phone"]=>
+  string(12) "+79044428447"
+  ["message"]=>
+  string(40) "Мессага такая мессага"
+  ["yt0"]=>
+  string(19) "Отправить!"
+}
+*/		
+		$email = Yii::app()->email;
+		$email->to = Yii::app()->params['adminEmail'];
+		$email->subject = 'Заявка потенциального клиента';
+		$email->message = $_POST['message'];
+		if (!$email->send())
+			die("<div style='color:red;'>Ошибка отправки почты...</div>");
+		else{?>
+<script>alert('Сообщение отправлено!\nМы свяжемся с вами в ближайшее время. Спасибо за обращение в нашу компанию!');</script>        
+	<?		$this->redirect(Yii::app()->request->getBaseUrl(true));
+		}
+	}	
 
 	/**
 	 * This is the default 'index' action that is invoked

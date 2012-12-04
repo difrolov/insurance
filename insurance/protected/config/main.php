@@ -97,10 +97,6 @@ return array(
 				'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
 				'coreCss'=>false,
 		),
-		/* 'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		), */
-		// uncomment the following to use a MySQL database
 		'db'=>array(
 				'connectionString' => 'mysql:host=insur.mysql;dbname=insur_db',
 				'emulatePrepare' => true,
@@ -108,8 +104,6 @@ return array(
 				'password' => '64z3tzev',
 				'charset' => 'utf8',
 		),
-
-
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
@@ -137,12 +131,17 @@ return array(
 				), */
 			),
 		),
+		'email'=>array(
+			'class'=>'application.extensions.email.Email',
+			'delivery'=>'php', //Will use the php mailing function.  
+			//May also be set to 'debug' to instead dump the contents of the email into the view
+		),
 	),
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'srgg140201@yandex.ru',
 	),
 );

@@ -102,6 +102,24 @@ order by id ASC";
 		return $result;
 	}	
 /**
+ * Подключить дополнительную таблицу стилей
+ * @package
+ * @subpackage
+ */
+	function includeXtraCss($file_path=false){
+		if (!$file_path) $file_path='xtra_modules.css';
+		echo '<link href="'.Yii::app()->request->getBaseUrl(true).'/css/'.$file_path.'" rel="stylesheet" type="text/css">';	
+	}
+/**
+ * Подключить дополнительный клиентский скрипт
+ * @package
+ * @subpackage
+ */
+	function includeXtraJS($file_path=false){
+		echo '<script src="'.Yii::app()->request->getBaseUrl(true).'/js/'.$file_path.'"></script>';	
+	}
+
+/**
  * Модифицирует массив модулей, приводя его к виду "folder_name"=>"Название модуля"
  * @package
  * @subpackage

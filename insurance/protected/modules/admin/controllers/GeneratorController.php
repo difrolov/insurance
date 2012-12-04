@@ -99,9 +99,13 @@ class GeneratorController extends Controller
 
 		// если в режиме тестирования, т.е., данные извлекаются НЕ из запроса:
 		if (!$post=$_POST) {
+			$html_test_style=" style='background:lightyellow;border:solid 2px orange;border-radius:6px;padding:10px;'";
 			$localdata=true;
-			$post=TestGenerator::$test_post;
-			var_dump("<h1>".__LINE__." \$post:</h1><pre>",$post,"</pre>");
+			$post=TestGenerator::$test_post[0];
+			echo "<div{$html_test_style}>".__LINE__."
+				<h2>"." Входяций массив (\$_POST):</h2>";
+				var_dump("<pre>",$post,"</pre>");
+			echo "</div>";
 		}
 		// начало записи в текстовом модуле:	
 		$dText="Текст :: "; // общее
@@ -147,7 +151,6 @@ class GeneratorController extends Controller
 									$model_content->created = date("Y-m-d H:i:s");
 									$model_content->status = 1;
 									$model_content->insur_coworkers_id = Yii::app()->user->id;
-									$model_content->object_id = $post['parent'];
 									$model_content->name = $header;
 									if (!isset($_GET['gtest'])) { // если не тест
 										$model_content->save();
@@ -160,16 +163,17 @@ class GeneratorController extends Controller
 									}else{ // показать данные, включая id, который будет назначен добавляемой статье:
 										$article_id = Yii::app()->db->createCommand()->select('auto_increment')->from('information_schema.TABLES')->where(" TABLE_NAME ='insur_article_content' and TABLE_SCHEMA='insur_db' ")->queryScalar();
 echo <<<STR
+								<blockquote>
 									<div>	
 										content = $model_content->content<br>
 										created = $model_content->created<br>
 										status = $model_content->status<br>
 										insur_coworkers_id = $model_content->insur_coworkers_id<br>
-										object_id = $model_content->object_id<br>
 										name = $model_content->name<br>
 									</div>
 										<h4>Эмуляция процесса сохранения новой статьи... </h4>										
 										<hr><b>added article_id = $article_id</b><hr>
+								</blockquote>
 STR;
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:
@@ -248,6 +252,7 @@ STR;
 			}else{
 				$section_id = Yii::app()->db->createCommand()->select('auto_increment')->from('information_schema.TABLES')->where(" TABLE_NAME ='insur_insurance_object' and TABLE_SCHEMA='insur_db' ")->queryScalar();
 echo <<<STR2
+		<blockquote>
 			<div>
 				parent_id = $model_obj->parent_id<br>
 				name = $model_obj->name<br>										
@@ -261,8 +266,9 @@ echo <<<STR2
 			</div>
 			<h4>Эмуляция процесса создания нового подраздела... </h4>
 			<hr><b>added section_id = $section_id</b><hr>
+		</blockquote>
 STR2;
-				TestGenerator::testCodeOutput3($post,serialize($post),__LINE__);
+				TestGenerator::testCodeOutput3($post,serialize($post),__LINE__,$html_test_style);
 			}
 		}
 		if (!isset($_GET['gtest'])) { // если не тест
@@ -365,32 +371,37 @@ STR2;
 class TestGenerator{
 	
 	public static $test_post=array(
+						// 100
+						array(
 							"Schema" => "100",
 							"blocks"=>array("1" => "Новость|Готовое решение 1|Текст :: Про голых чувагов!^<p>\n\tЗа введение запрета на обнаженку в Сан-Франциско проголосовали 6 из 11 членов наблюдательного совета. А это значит, что больше не будет никаких раздеваний на площадях, улицах, в метро и автобусах одного из главных туристических центров мира.</p>\n"),
-							"parent" => "3",
+							"parent" => "2",
 							"name" => "Исторический",
 							"alias" => "historical",
 							"title" => "Про то, что было",
 							"keywords" => "история хистори слухи сплетни",
 							"description" => "страница о славных днях прошлого"
-
-					/*"Schema"=>"4ss",		
-					"blocks"=>array(
-						"1"=>"Новость|Текст :: Статеюшка такая!^<p>\n\tПринцип нарушен, что человек, попадающий в другую эпоху, другое время, все равно остается самим собой. Но мне кажется этот прием работает на то, чтобы доказать то, что мы обычно любим говорить, вот если бы я был бы тогда, я бы сделал...</p>\n|Новость",
-						"2"=>"header:Подзаголовок такой подзаголовок!",
-						"3"=>"Готовое решение 1",
-						"4"=>"Готовое решение 1",
-						"5"=>"Готовое решение 2|Случайная статья",
-						"footer"=>"Готовое решение 2|Текст",
-						"activeBlockIdentifier"=>'1',
-						"moduleClickedLocalIndex"=>'1'
-					),
-					"parent"=>"4",
-					"name"=>"Экстремальное страхование",
-					"alias"=>"myarticle",
-					"title"=>"Про всякие дела",
-					"keywords"=>"статья мессага",
-					"description"=>"Описание будет позже. Обязательно!"*/
+						),
+						// 4ss
+						array(
+							"Schema"=>"4ss",		
+							"blocks"=>array(
+								"1"=>"Новость|Текст :: Статеюшка такая!^<p>\n\tПринцип нарушен, что человек, попадающий в другую эпоху, другое время, все равно остается самим собой. Но мне кажется этот прием работает на то, чтобы доказать то, что мы обычно любим говорить, вот если бы я был бы тогда, я бы сделал...</p>\n|Новость",
+								"2"=>"header:Подзаголовок такой подзаголовок!",
+								"3"=>"Готовое решение 1",
+								"4"=>"Готовое решение 1",
+								"5"=>"Готовое решение 2|Случайная статья",
+								"footer"=>"Готовое решение 2|Текст",
+								"activeBlockIdentifier"=>'1',
+								"moduleClickedLocalIndex"=>'1'
+							),
+							"parent"=>"2",
+							"name"=>"Экстремальное страхование",
+							"alias"=>"myarticle",
+							"title"=>"Про всякие дела",
+							"keywords"=>"статья мессага",
+							"description"=>"Описание будет позже. Обязательно!"
+						)
 					);
 	
 	function testCodeOutput1($artId,$header,$text){
@@ -409,9 +420,9 @@ class TestGenerator{
 		echo "<div><div>".__LINE__." $key: $sectionDataArray</div></div>";
 	}
 	
-	function testCodeOutput3($post,$seral_post,$line){
-		echo "<div style='background:lightyellow;border:solid 2px orange;border-radius:6px;padding:10px;'>";
-			echo "<h4>".$line." testCodeOutput3(\$post): Исходный массив:</h4>";	
+	function testCodeOutput3($post,$seral_post,$line,$html_test_style){
+		echo "<div{$html_test_style}>";
+			echo "<h4>".$line." testCodeOutput3(\$post): Обработанный массив ДО сериализации:</h4>";	
 			var_dump("<pre>",$post,"</pre>");
 			echo "<hr><h4>".$line." testCodeOutput3(\$post): Сериализованный массив:</h4>";	
 			var_dump("<pre>",$seral_post,"</pre>");

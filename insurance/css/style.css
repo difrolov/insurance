@@ -299,6 +299,12 @@ img[align="right"]{
 	margin-left:8px;
 	margin-right:0;
 }
+.inline{
+	display:inline !important;
+}
+.inlineBlock{
+	display:inline-block !important;
+}
 div#inner_content{
 	display:inline-block; 
 	margin-left:30px; 
