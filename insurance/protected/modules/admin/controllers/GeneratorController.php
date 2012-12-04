@@ -149,16 +149,32 @@ class GeneratorController extends Controller
 									$model_content->insur_coworkers_id = Yii::app()->user->id;
 									$model_content->object_id = $post['parent'];
 									$model_content->name = $header;
-									$model_content->save();
-									// 2. получить id сохранённой статьи
-									/************************************
-										ПРОЦЕДУРА ПОЛУЧЕНИЯ id....
-										на выходе получаем $article_id
-									************************************/
-									$article_id = $model_content->id;
+									if (!isset($_GET['gtest'])) { // если не тест
+										$model_content->save();
+										// 2. получить id сохранённой статьи
+										/************************************
+											ПРОЦЕДУРА ПОЛУЧЕНИЯ id....
+											на выходе получаем $article_id
+										************************************/
+										$article_id = $model_content->id;
+									}else{ // показать данные, включая id, который будет назначен добавляемой статье:
+										$article_id = Yii::app()->db->createCommand()->select('auto_increment')->from('information_schema.TABLES')->where(" TABLE_NAME ='insur_article_content' and TABLE_SCHEMA='insur_db' ")->queryScalar();
+echo <<<STR
+									<div>	
+										content = $model_content->content<br>
+										created = $model_content->created<br>
+										status = $model_content->status<br>
+										insur_coworkers_id = $model_content->insur_coworkers_id<br>
+										object_id = $model_content->object_id<br>
+										name = $model_content->name<br>
+									</div>
+										<h4>Эмуляция процесса сохранения новой статьи... </h4>										
+										<hr><b>added article_id = $article_id</b><hr>
+STR;
 									// заменяем контент текстового модуля:
 									// вместо заголовка и текста подставляем:
 									// "Текст :: article id: [id_статьи]";
+									}
 									$arrBlockModules[$i]=$dTextArtId.$article_id;
 								}
 							}
@@ -226,18 +242,38 @@ class GeneratorController extends Controller
 			$model_obj->keywords = $keywords;
 			$model_obj->description = $description;
 			$model_obj->content = serialize($post);
-			$model_obj->save();
-			$section_id=$model_obj->id;
+			if (!isset($_GET['gtest'])) { // если не тест
+				$model_obj->save();
+				$section_id=$model_obj->id;
+			}else{
+				$section_id = Yii::app()->db->createCommand()->select('auto_increment')->from('information_schema.TABLES')->where(" TABLE_NAME ='insur_insurance_object' and TABLE_SCHEMA='insur_db' ")->queryScalar();
+echo <<<STR2
+			<div>
+				parent_id = $model_obj->parent_id<br>
+				name = $model_obj->name<br>										
+				status = $model_obj->status<br>
+				alias = $model_obj->alias<br>
+				date_changes = $model_obj->date_changes<br>
+				title = $model_obj->title<br>
+				keywords = $model_obj->keywords<br>
+				description = $model_obj->description<br>
+				content = $model_obj->content<br>
+			</div>
+			<h4>Эмуляция процесса создания нового подраздела... </h4>
+			<hr><b>added section_id = $section_id</b><hr>
+STR2;
+				TestGenerator::testCodeOutput3($post,serialize($post),__LINE__);
+			}
 		}
-		self::getParents($section_id); // get URL path
-		$direct_to=self::$section_root;
-		if (!$status)
-			$direct_to.="?mode=preview";
-		if ($localdata){
-			TestGenerator::testCodeOutput3($post,serialize($post),__LINE__);
-		}else{
+		if (!isset($_GET['gtest'])) { // если не тест
+			self::getParents($section_id); // get URL path
+			$direct_to=self::$section_root;
+			if (!$status)
+				$direct_to.="?mode=preview";
+			// вернуть сообщение странице-отправителю:
 			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".$direct_to));				
 			echo $jenc;
+			exit;
 		}
 	}
 /**
@@ -374,9 +410,11 @@ class TestGenerator{
 	}
 	
 	function testCodeOutput3($post,$seral_post,$line){
-		echo "<h4>".$line." testCodeOutput3(\$post): Исходный массив:</h4>";	
-		var_dump("<pre>",$post,"</pre>");
-		echo "<hr><h4>".$line." testCodeOutput3(\$post): Сериализованный массив:</h4>";	
-		var_dump("<pre>",$seral_post,"</pre>");
+		echo "<div style='background:lightyellow;border:solid 2px orange;border-radius:6px;padding:10px;'>";
+			echo "<h4>".$line." testCodeOutput3(\$post): Исходный массив:</h4>";	
+			var_dump("<pre>",$post,"</pre>");
+			echo "<hr><h4>".$line." testCodeOutput3(\$post): Сериализованный массив:</h4>";	
+			var_dump("<pre>",$seral_post,"</pre>");
+		echo "</div>";
 	}
 }
