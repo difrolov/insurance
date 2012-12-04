@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Открытие.Страхование &#8212; в составе финансовой корпорации &laquo;Открытие&raquo;.',
 	'charset'=>'UTF-8',
 	'language'=>'ru',
 	'timeZone'=>'Europe/Moscow',

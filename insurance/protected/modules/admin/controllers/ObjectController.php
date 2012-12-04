@@ -31,19 +31,26 @@ class ObjectController extends Controller
 
 
 	//удаляем раздел
-	public function actionDelete(){
+	// ** метод также может быть вызван методом $this->actionRemove(), в случае, если запрос поступает со страницы предпросмотра нового подраздела. В этом случае id приходит в виде аргумента от вызывающего метода; в противном случае, как и раньше - с $_GET['id']
+	public function actionDelete($section_id=false){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-
-		if(isset($_GET['id'])){
-			$model = InsurInsuranceObject::model()->find(array('condition'=>"id=".$_GET['id']));
+		if (!$id=$section_id)
+			if (isset($_GET['id'])) $id=$_GET['id'];
+		if($id){
+			$model = InsurInsuranceObject::model()->find(array('condition'=>"id=".$id));
 			if(isset($model->name)){
 				$model->delete();
 			}
 		}
-
+		return true;
 	}
+	public function actionRemove($section_id=false){
+		echo ($this->actionDelete($section_id))? "Подраздел удалён.":"ОШИБКА! Подраздел не был удалён...";
+		exit;
+	}
+
 
 	public function actionUpdateStatus(){
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
@@ -61,6 +68,7 @@ class ObjectController extends Controller
 		echo json_encode(array('success'=>'переданы не все параметры'));
 		exit;;
 	}
+
 
 
 

@@ -29,7 +29,7 @@ class ModulesController extends Controller{
 		$this->render('jobs',array('model'=>$model));
 	}
 	public function actionGetJobs(){
-		$gridDataProvider = action::getJobs();
+		$gridDataProvider = action::getJobs(false,true);
 		$this->render('getjobs',array('gridDataProvider'=>$gridDataProvider));
 	}
 	public function actionUpdateStatusJobs(){

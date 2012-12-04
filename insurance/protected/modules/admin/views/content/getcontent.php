@@ -1,5 +1,5 @@
-<div>Статьи</div>
 <br class="clear">
+<div>Статьи</div>
 <?php $this->widget('bootstrap.widgets.TbButton', array(
 	    'label'=>"Добавить статью",
 	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'

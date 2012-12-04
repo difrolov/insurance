@@ -155,9 +155,11 @@ function loadModulesEditMode(){
 	var curModsOrangeButton=$('div#select_mod div[data-module-type]'); // кнопки модулей
 <?	// пройтись по всем блокам и собрать их контент:
 	$colCnt=0; // индекс колонки
-	foreach($SectionDataContent['blocks'] as $block_name=>$block){
-		
-		if( $block_name==2 // 2-й блок, может содержать заголовок
+	foreach($SectionDataContent['blocks'] as $block_name=>$block){?>
+	// вывод информации в консоль в тестовом режиме
+	// если test_mode='alert' также выводит alert
+	//consoleOutput('colCnt = <?=$colCnt?>');
+	<?	if( $block_name==2 // 2-й блок, может содержать заголовок
 			&& $Shema[1]!='0' // ...заголовок есть в соответствии со схемой макета
 		  ) {	// заголовок подраздела  
 			if (is_array($block)){ // внештатная ситуация: ?>
@@ -183,14 +185,19 @@ function loadModulesEditMode(){
 					$modIndex=array_search($moduleContent,$aMods);
 				}elseif(strstr($moduleContent,$artPreString)) { // если статья
 					$modIndex=count($aMods); 
-					$art_id=substr($moduleContent,strlen($artPreString));
-					// получить заголовок статьи:
+					if(!$art_id=substr($moduleContent,strlen($artPreString))){?>
+	alert('ОШИБКА!\nНе получен id статьи.\nid подраздела: <?=$data['name']?>\nиндекс колонки: <?=$colCnt?>\nблок: <?=$block_name?>\nиндекс модуля: <?=$i?>');
+				<? 	}?>
+	// вывод информации в консоль в тестовом режиме
+	// если test_mode='alert' также выводит alert
+	//consoleOutput('moduleContent = <?=$moduleContent?>\nart_id = <?=$art_id?>, artPreString = <?=$artPreString?>');
+				<?	// получить заголовок статьи:
 					$art_header = Yii::app()->db->createCommand()->select('name')->from('insur_article_content')->where('id="'.$art_id.'"')->queryScalar();
 					$modText=true;	// флаг обработки текстового модуля
 				}?>
 	// вывод информации в консоль в тестовом режиме
 	// если test_mode='alert' также выводит alert
-	consoleOutput('i=<?=$i?>, modIndex = <?=$modIndex?>, moduleContent= <?=$block[$i]?>');
+	//consoleOutput('i=<?=$i?>, modIndex = <?=$modIndex?>, moduleContent= <?=$block[$i]?>');
 			<?	if($modIndex!==false){?>
 	$(curModsOrangeButton).eq(<?=$modIndex?>).trigger('click'); // добавить модуль в активную колонку
 				<?	if($modText){ // если таки текстовый модуль, обработаем его ПОСЛЕ (!!!) эмуляции клика по кнопке (т.е., фактического добавления его в колонку)?>
@@ -203,8 +210,7 @@ function loadModulesEditMode(){
 	setTxtReadyContentHeader(txtModuleInner,preHeader);
 	// инсталлируем ссылку - заголовок статьи
 	setTxtReadyContentHeaderLink(txtModuleInner,<?=$art_id?>,"<?=$art_header?>",'get');
-			<?		}/*else{?>
-				<?	}*/
+			<?		}
 			 	}
 				$moduleContents[]=$moduleContent;
 			}?>

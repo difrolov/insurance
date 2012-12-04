@@ -77,9 +77,16 @@ class setHTML{
     		<div id="call_us" align="right">
           	<div align="center" id="all_phones">
               <div id="cmd_micro">
-              	<div data-home="home" title="На главную" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/'">&nbsp;</div>
-                <div data-map="map" title="Карта сайта" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/map"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/map">&nbsp;</a></div>
-                <div data-search="search" title="Поиск" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true);?>/site/search'"><a href="<?=Yii::app()->request->getBaseUrl(true);?>/site/search/'">&nbsp;</a></div>
+<?	$arrPyctosGo=array(
+				'home'=>array('title'=>'На главную','href'=>'/','width'=>'18'),
+				'map'=>array('title'=>'Карта сайта','href'=>'/site/map','width'=>'18'),
+				'search'=>array('title'=>'Поиск','href'=>'/site/search','width'=>'18'),
+			);
+	foreach ($arrPyctosGo as $data=>$array):?>
+                <div data-<?=$data?>="<?=$data?>" title="<?=$array['title']?>" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true).$array['href']?>'">
+           			<a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/spacer.png" width="<?=$array['width']?>" height="16"></a>
+                </div>
+<?	endforeach;?>
               </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
 			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>
@@ -104,18 +111,27 @@ class setHTML{
  * @subpackage		menu
  *
  */
-	static function buildDropDownSubMenu($parent_alias='',$parent_id=false,$top_level=false){
-		static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
+	static function buildDropDownSubMenu( $parent_alias='',
+										  $parent_id=false,
+										  $top_level=false
+										){
+		$admin_mode=(strstr($_SERVER['REQUEST_URI'],"/admin")) ? true:false;
+		//is_object(Yii::app()->controller->module))? true:false;
+		if (!$admin_mode)
+			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	if ($top_level)
+	<?	if ($top_level&&!$admin_mode)
 			echo $insur_species;
+
 		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		if ($parent_alias=="korporativnym_klientam") {?>
+		if ($parent_alias=="korporativnym_klientam"&&!$admin_mode){?>
           <ul class="asTable">
 			<li>
-		<?	self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
+		<?	if ($admin_mode)
+				self::buildAdminSubmenu($subMenuItems);
+			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
         <?	$corps=false;
 			if ($corps){
 				$arrCorps=array(
@@ -134,8 +150,12 @@ class setHTML{
             </li>
 		<?	}?>
           </ul>
-	<?	}else
-			self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?>
+	<?
+		}else{
+			if ($admin_mode)
+				self::buildAdminSubmenu($subMenuItems);
+			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
+		}?>
         </div>
 <?	}
 /**
@@ -356,6 +376,30 @@ class setHTML{
                 </div>
 <?	}
 /**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function buildAdminSubmenu($subMenuItems){
+		if (is_array($subMenuItems)){
+			foreach($subMenuItems as $alias_value=>$link_text):
+				if (is_array($link_text)){
+					$level=(isset($link_text['level']))? $link_text['level']:0;
+					if ($level>1):?>
+                    <blockquote>
+				<?	endif;//echo "alias_value= $alias_value<br>";
+					self::buildAdminSubmenu($link_text);
+					if ($level>1):?>
+					</blockquote>
+			<?		endif;
+				}elseif ($alias_value=="name"){
+				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
+		<a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
+			<?	}
+			endforeach;
+		}
+	}
+/**
  * @package		HTML
  * @subpackage		menu
  * построить контент подменю
@@ -388,6 +432,8 @@ class setHTML{
 					self::buildSubmenuLinks($link_text,&$parent_alias,&$topLevelAlias);
 					if ($level>1) {?></blockquote><? }
 				}elseif ($alias_value=="name"){
+
+
 					$level=$subMenuItems['level'];
 					// echo "<div class=''>current_level(".gettype($level).")= $level";
 					// if(isset($topLevelAlias)) echo "<br><b>topLevelAlias:</b><br>$topLevelAlias";
@@ -407,6 +453,7 @@ class setHTML{
 						}
 						$parent_alias=implode("/",$parentAliases);
 					}
+
 					if ( isset($subMenuItems['children']) // есть вложенные уровни
 						 || $level>1	// вложенных нет, есть родительские
 					   ){
@@ -415,6 +462,7 @@ class setHTML{
 							$parent_alias.='/'.$subMenuItems['alias'];
 					}
 					$prev_level=$level; // установим текущий уровень подраздела
+
 					ob_start();
 						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
@@ -480,10 +528,16 @@ class setHTML{
 						  $section_data,
 						  $asModule=false
 						){	$test=false; // принудительно
-		// генерирует и размещает title страницы:
-		$this_obj->pageTitle=Yii::app()->name . ' - '.$section_data->title;
-		// генерирует и размещает название страницы в цепочке breadcrumbs:
-
+		// HEADER
+		// ***** NOTICE: ************************************************
+		// Title для подразделов устанавливается в Data::getObjectByUrl()
+		// непосредственно перед рендерингом страницы
+		// **************************************************************
+		// устанавливает description страницы:
+		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
+		// устанавливает keywords страницы:
+		Yii::app()->clientScript->registerMetaTag($section_data->keywords, 'keywords');
+		// соорудить цепочку ссылок:
 		$breadcrumbs=array();
 		if ($section_data->parent_id>0)	{
 			// получить имя и алиас для размещения в цепочке:
@@ -502,8 +556,6 @@ class setHTML{
 			$this_obj->breadcrumbs=array(
 				$section_data->name,
 			);
-		// устанавливает description страницы:
-		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
 		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
 		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
@@ -751,19 +803,18 @@ div.schema30s > div{
 		<h3 class="contentHeader"><?=$moduleContent?></h3>
         					<?	if ($mod_folder=array_search($moduleContent,$modules)){
 									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
-									//echo "<div class=''>module_path= ".$module_path."</div>";
 									require $module_path;
 								}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 							}
 							echo "<div class='clear'>&nbsp;</div>";
 						}
-					  }else{
+					  }else{ // в псевдотестовом режиме
 						  if (isset($blockModules)) {
 							  echo "<div class=''>block= ".$blockModules."</div>";
 						  	  var_dump("<h1>block:</h1><pre>",$blockModules,"</pre>");
 						  }else echo "<div class=''>skip</div>";
 					  }
-						if ($showLoremIpsum){
+						if ($showLoremIpsum){ // заглушка
 						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
 
 		diam nonumy eirmod tempor invidunt ut labore et dolore magna
@@ -783,7 +834,93 @@ div.schema30s > div{
             <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
 			<? 	}
 			}?>
-        <div class="clear">&nbsp;</div>
+        <div class="clear">&nbsp;</div><?
+
+		if (isset($_GET['mode'])&&$_GET['mode']=='preview'){ ?>
+    <div align="left" id="manage_new_section" style="background:#666; border-radius:6px; box-shadow: 3px 1px 20px 1px #999; color:#FFF; cursor:move; display:<?="none"?>; left:200px; padding:10px; top:200px; position:fixed; width:180px;">
+    	Подраздел загружен в режиме предпросмотра. Выберите дальнейшее действие:
+        <div style="background:#06AEDD; border-radius:3px; margin-top:10px; padding:6px;">
+        	<ul>
+        	  <li><a href="#" id="save_as_is">Сохранить </a></li>
+        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/edit/<?=$section_data->id?>">Изменить</a></li>
+        	  <li class="txtRed"><a href="#" id="ask_to_delete">Удалить</a></li>
+        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator">Добавить подраздел</a></li>
+      	  </ul>
+       	</div>
+    </div>
+<script>
+$( function(){
+  try{
+	$('a#ask_to_delete').css('color','#F00').click( function (){
+			var Url='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/remove';
+			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...')){
+				$.ajax({
+					type:"GET",
+					url: Url,
+					data: "section_id=<?=$section_data->id?>",
+					beforeSend: function() {
+						manageVeil('start','Удаление данных...');
+					},
+					success: function (data) {
+							alert(data);
+							location.href=Url;
+						},
+					error: function (data) {
+						manageVeil(false);
+						alert(data);
+					},
+				});
+			}
+			return false;
+		});
+	$('a#save_as_is').click( function (){
+		manageVeil('start','Сохранение данных...');
+		$.ajax({
+			type:"GET",
+			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store/',
+			data: "section_id=<?=$section_data->id?>",
+			beforeSend: function() {
+				manageVeil('start','Сохранение данных...');
+			},
+			success: function (data) {
+					manageVeil(false);
+					alert("Данные сохранены!"+'\n'+data);
+					$('#manage_new_section').hide();
+					var goUrl=location.href.substring(0,location.href.indexOf('?mode='));
+					location.href=goUrl;
+				},
+			error: function (data) {
+				manageVeil(false);
+				alert("Не удалось отправить данные.\nОтвет: "+data);
+			},
+		});
+		return false;
+	});
+	var mprev=$('#manage_new_section');
+	$(mprev).find('ul').css('padding-left','18px');
+	$(mprev).find('a[id!="ask_to_delete"], li[class!="txtRed"]').css('color','#FFF');
+	$(mprev).find('a').css('margin-left','-6px');
+	var leftOff=$(mprev).parent().offset().left;
+	var wdt=$(mprev).width();
+	var goLeft=leftOff-wdt-45;
+	console.info('leftOff = '+typeof(leftOff)+', wdt = '+typeof(wdt)+', summ = '+goLeft);
+	$(mprev).css({
+			left:goLeft+'px',
+		}).fadeTo(1500,0.9)
+			.draggable()
+				.hover(
+				function (){
+					$(this).css('opacity',1)
+				},
+				function (){
+					$(this).css('opacity',0.9)
+				});
+  }catch(e){
+		alert(e.message);
+  }
+});
+</script>
+	<?	}?>
    </div>
 	<?	}
 	}
@@ -822,6 +959,18 @@ div.schema30s > div{
 		<div><?='<a href="'.$link.'">'.$solution_name.'</a>'?></div>
     </div>
     <div class="clear">&nbsp;</div>
+<?	}
+/**
+ * Вуаль
+ * @package
+ * @subpackage
+ */
+	static public function veil(){?>
+<div id="veil" style="background:#000; position:fixed; top:0; right:0; bottom:0; left:0; opacity:0.8; display:<?="none"?>;">
+</div>
+<div align="center" id="pls_wait" style="position:fixed; top:40%; bottom:50%;  opacity:1;z-index:2; width:100%; display:<?="none"?>;">
+	<div id="processing" style="background: #FF9; line-height:26px; padding:30px 60px; border-radius:8px; display: inline-block; box-shadow:#000;">Создание подраздела... <br />Пожалуйста, подождите...</div>
+</div>
 <?	}
 }
 ?>

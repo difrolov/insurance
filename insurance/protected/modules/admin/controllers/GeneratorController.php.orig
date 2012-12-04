@@ -28,8 +28,13 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
+<<<<<<< HEAD
 		$model = new InsurInsuranceObject(); // для извлечения данных раздела 
 		$art_model=new InsurArticleContent(); // для редактора
+=======
+		$model = new InsurInsuranceObject(); 
+		$art_model=new InsurArticleContent();
+>>>>>>> ca259301e26b141add579fc16b717423b3e5fa7a
 		$this->getGeneratorRoot();
 		$modules=$this->getAllModules();
 		$this->render('index',array('model'=>$model,'art_model'=>$art_model,'modules'=>$modules));
@@ -81,8 +86,13 @@ class GeneratorController extends Controller
 		}
 		if($section_id){
 			$this->getGeneratorRoot();
+<<<<<<< HEAD
 			$model = new InsurInsuranceObject(); // для извлечения данных раздела 
 			$art_model=new InsurArticleContent(); // для редактора
+=======
+			$model = new InsurInsuranceObject();
+			$art_model=new InsurArticleContent();
+>>>>>>> ca259301e26b141add579fc16b717423b3e5fa7a
 			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$modules=$this->getAllModules();
 			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model));
@@ -229,13 +239,13 @@ class GeneratorController extends Controller
 			$model_obj->save();
 			$section_id=$model_obj->id;
 		}
-		self::getParents($section_id); // get URL path
 		$direct_to=self::$section_root;
 		if (!$status)
 			$direct_to.="?mode=preview";
 		if ($localdata){
 			TestGenerator::testCodeOutput3($post,serialize($post),__LINE__);
 		}else{
+			self::getParents($section_id); // get URL path
 			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".$direct_to));				
 			echo $jenc;
 		}

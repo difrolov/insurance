@@ -28,10 +28,14 @@ class Data {
 		if($subsection!='site'){
 			$Uri=explode("/",$_SERVER['REQUEST_URI']);
 			$hash=array_pop($Uri);
+			if (strstr($hash,"?")) 
+				$hash=substr($hash,0,strpos($hash,"?"));
+				// o_kompanii/istorija/historical/?mode=preview
 			if($hash!=$subsection) $subsection=$hash;
 		}
 		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
-    	$obj->render('index', array('res' => $data));
+		$obj->pageTitle=$data->title;
+		$obj->render('index', array('res' => $data));
 	}
 
 /**

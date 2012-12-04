@@ -33,4 +33,5 @@
   </div>
 	<?	setHTML::buildFooterBlock($tp);	?>
 </div>
-<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script><?
+// </body> - в main.php

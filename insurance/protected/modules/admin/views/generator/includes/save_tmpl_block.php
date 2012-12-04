@@ -48,7 +48,7 @@ if (isset($data)&&isset($modules)){
           </span>
         </label><br>
 	<?	HelperAdmin::makeSectionsMap($allObjectsArray,$section_parent_id);?>
-    	<hr><?	// HelperAdmin::makeSectionsMap($allObjectsSecondArray);?>
+    	<hr>
     	</div>
         <hr>
         <div id="subsection_ids">
@@ -82,7 +82,7 @@ if (isset($data)&&isset($modules)){
       		</div>
 		</div>
         <hr>
-        <button id="preview_page" type="button">Предпросмотр</button>
+        <button id="preview_page" type="button" value="yes">Предпросмотр</button>
         &nbsp;
         или
         &nbsp;

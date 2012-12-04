@@ -808,15 +808,18 @@ div#slides div#slide-last > div:first-child{
 .txtGrey > *{
 	color:#666;
 }
+.txtInpact{
+	letter-spacing:-0.1em;
+}
 .txtLightBlue *, 
 .txtLightBlue{
 	color:#00BCE4;
 }
+.txtRed{
+	color:#F00;
+}
 ul.insideDiv{
 	margin-left:-20px;
-}
-.txtInpact{
-	letter-spacing:-0.1em;
 }
 #why_open{
 	font-size: 24px;

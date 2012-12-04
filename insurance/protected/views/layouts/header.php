@@ -1,6 +1,6 @@
 <html>
 <head>
-<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+<title><?=$this->pageTitle?></title>
 <meta charset="utf-8">
 <meta name="language" content="ru">
 <link href="<?=Yii::app()->request->baseUrl?>/css/style.css" rel="stylesheet" type="text/css">
@@ -27,4 +27,5 @@ table {
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/custom_accordion.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/wait_for.js"></script>
 </head>
