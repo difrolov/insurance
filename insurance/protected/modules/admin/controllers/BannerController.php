@@ -14,11 +14,10 @@ class BannerController extends Controller{
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		$model = new InsurBanners();
-		$gridDataProvider_out = $model->search('place="outside"');
-		//$gridDataProvider_out = $model->search('place="outside"');
-		$gridDataProvider_in = $model->search('place="inside"');
-		$gridDataProvider_3 = $model->search('place="3"');
-		$gridDataProvider_4 = $model->search('place="4"');
+		$gridDataProvider_out = $model->search('place="outside"',true);
+		$gridDataProvider_in = $model->search('place="inside"',true);
+		$gridDataProvider_3 = $model->search('place="3"',true);
+		$gridDataProvider_4 = $model->search('place="4"',true);
 		$out_query = InsurBanners::model()->findAll(array('condition'=>'place="outside"'));
 		$in_query = InsurBanners::model()->findAll(array('condition'=>'place="inside"'));
 		$this->render('getbanner',array('in'=>$gridDataProvider_in,'out'=>$gridDataProvider_out,

@@ -1,3 +1,4 @@
+<br class="clear">
 <div id="file-uploader"></div>
 
 <?php
@@ -13,7 +14,7 @@
 )); */
 $this->widget('application.extensions.elfinder.ElFinderWidget', array(
 		'connectorRoute' =>  '/admin/default/connector',
-		'settings' => array('toolbar'=>'open')
+		//'settings' => array('toolbar'=>'all')
 )
 );
 
