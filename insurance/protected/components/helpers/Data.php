@@ -33,8 +33,9 @@ class Data {
 				// o_kompanii/istorija/historical/?mode=preview
 			if($hash!=$subsection) $subsection=$hash;
 		}
-		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
+		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection); 
 		$obj->pageTitle=$data->title;
+		$_SESSION['SUBSECTION_DATA_ARRAY']=array('alias'=>$data->alias); // метка для элементов, специфичных для подразделов, созданных генератором
 		$obj->render('index', array('res' => $data));
 	}
 

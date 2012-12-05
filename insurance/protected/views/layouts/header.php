@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="language" content="ru">
 <link href="<?=Yii::app()->request->baseUrl?>/css/style.css" rel="stylesheet" type="text/css">
+<?	// если загружаем подраздел, созданный генератором:
+	if(isset($_SESSION['SUBSECTION_DATA_ARRAY'])) :?>
+<link href="<?=Yii::app()->request->baseUrl?>/css/section_template.css" rel="stylesheet" type="text/css">
+<?		unset($_SESSION['SUBSECTION_DATA_ARRAY']);
+	endif;?>
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->

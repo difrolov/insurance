@@ -27,7 +27,7 @@
 		</div>
 	<?	
 		setHTML::buildBreadCrumbs();
-		
+		// see views/[page_alias]
 		echo $content;?>
   	</div>
   </div>

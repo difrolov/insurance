@@ -350,7 +350,9 @@ class setHTML{
 				$ready_target="клиентов банка &quot;Открытие&quot;";
 				$all_ready_target="физических лиц";
 			break;
-		}?>
+		}	
+		$model = new InsurBanners();
+		var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();?>
 				<div class="solution_content"><?
     	if (isset($test_logo)){
 			?><img src="../../../images/ready_solutions/for_business.jpg" width="248" height="143"><?
@@ -573,143 +575,6 @@ class setHTML{
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
 		}else { // загрузить макет?>
-<style type="text/css">
-/******** Для элементов всех макетов: ********/
-div#inner_content{
-	width:100%;
-}
-div#inner_content .clear{
-	float: none;
-	width: 100%;
-}
-div#inner_content
-	> div > div{
-	padding: 10px;
-	padding-left: 8px;
-}
-
-div#inner_content
-	> div > div .subsectHeader{
-	font-size:16px;
-	margin:0;
-}
-div#inner_content
-	> div > div .contentHeader{
-	color:#06AEDD;
-	font-size:16px;
-	margin:0;
-	margin-bottom:10px;
-}
-div#div1{
-	float:left;
-}
-
-/******** Для индивидуальных макетов: ********/
-
-div.schema100,
-	div.schema100> div{
-	width:100%;
-}
-
-div.schema200 > div#div1,
-div.schema200 > div#div2{
-	width:50%;
-}
-	div.schema200 > div#div2{
-		float:right;
-	}
-
-div.schema210 > div{
-	width:50%;
-}
-	div.schema210 > div#div2,
-	div.schema210 > div#div3{
-		float:right;
-	}
-
-div.schema300 > div{
-	float:left;
-	width:33%;
-}
-	div.schema300 > div#div3{
-		width:34%;
-	}
-
-div.schema3i0 > div{
-	float:left;
-	width:33%;
-}
-	div.schema3i0 > div#div1{
-		 margin-right:-33%;
-	}
-	div.schema3i0 > div#div2,
-	div.schema3i0 > div#div4{
-		 margin-left:33%;
-	}
-	div.schema3i0 > div#div3{
-		float:right;
-		width:34%;
-	}
-
-div.schema3s0 > div{
-	float:left;
-	width:33%;
-}
-	div.schema3s0 > div#div1{
-		margin-right:-33%;
-	}
-	div.schema3s0 > div#div2{
-		margin-left:33%;
-		width:67%;
-	}
-	div.schema3s0 > div#div3{
-		margin-left:33%;
-	}
-	div.schema3s0 > div#div4{
-		width:34%;
-	}
-
-div.schema3ss > div{
-	float:left;
-	width:33%;
-}
-	div.schema3ss > div#div1{
-		margin-right:-33%;
-	}
-
-	div.schema3ss > div#div2,
-	div.schema3ss > div#div5{
-		width:67%;
-	}
-
-	div.schema3ss > div#div4{
-		width:34%;
-	}
-	div.schema3ss > div#div2,
-	div.schema3ss > div#div3,
-	div.schema3ss > div#div5{
-		margin-left:33%;
-	}
-
-div.schema30s > div{
-	float:left;
-	width:33%;
-}
-	div.schema30s > div#div1{
-		margin-right:-33%;
-	}
-	div.schema30s > div#div2,
-	div.schema30s > div#div4{
-		margin-left:33%;
-	}
-	div.schema30s > div#div3{
-		width:34%;
-	}
-	div.schema30s > div#div4{
-		width:67%;
-	}
-
-</style>
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
