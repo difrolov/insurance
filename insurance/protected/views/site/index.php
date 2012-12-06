@@ -1,56 +1,38 @@
-<? 	if(isset($_GET['stop']))die("index by default"); $tp=false;
-	require_once Yii::getPathOfAlias('webroot').'/protected/components/helpers/debug.php';
-	
-	/*$model = new InsurBanners();
-	// под главным меню
-	//$gridDataProvider_out = $model->search('place="outside"',false);
-	$arrBanOut = $model->search('place="outside" and status=1',false)->data;
-	// тройной внутри сайта:
-	$arrBanIn = $model->search('place="inside"',false)->data;
-	//
-  	$arrBanIn3 = $model->search('place="3"',false)->data;
-	//
-	$arrBanIn4 = $model->search('place="4"',false)->data;*/
-	
-	/*foreach($arrBanOut as $i=>$value):
-		echo "<div class=''>id: ".$arrBanOut[$i]->id."</div>";
-		echo "<div class=''>src: ".$arrBanOut[$i]->src."</div>";
-		echo "<div class=''>name: ".$arrBanOut[$i]->name."</div>";
-		echo "<div class=''>link: ".$arrBanOut[$i]->link."</div>";
-		echo "<div class='testBlock'>place: <b>".$arrBanOut[$i]->place."</b></div>";
-	endforeach;*/
-	$arrBanOut=setHTML::getBannersAsObjects('outside');
-	//var_dump("<h1>arrBanOut:</h1><pre>",$arrBanOut,"</pre>");
-	//die();
-		?>
+<? 	if(isset($_GET['stop']))die("index by default"); 
+	$tp=false;?>
 <!-- slide_marks -->
 <?	if ($tp){?><h3>/slide_marks</h3><? }?>
 		<!-- /slide_marks -->
 		<!-- tblSlides -->
-<?		if ($tp){?><h3>tblSlides</h3><? }?>
+<?	// получить баннеры для слайд-шоу: 
+	$arrBanOut=setHTML::getBannersAsObjects('outside');
+		
+	if ($tp){?><h3>tblSlides</h3><? }
+	if (!(isset($_GET['slides'])&&!$_GET['slides'])) {?>
     	<div align="center" id="slides">
         	<div id="slide-first">
-            	<div></div>
+            	<div><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBanOut[0]['src']?>"></div>
             	<div>
                 	<div><a href="#">Добровольное мед. страхование</a></div>
                     <div>для корпоративных клиентов</div>
                 </div>
             </div>
             <div id="slide-middle">
-            	<div></div>
+            	<div><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBanOut[1]['src']?>"></div>
             	<div>
                 	<div><a href="#">Финансовые риски</a></div>
                     <div>малому и среднему бизнесу</div>
                 </div>
             </div>
             <div id="slide-last">
-            	<div></div>
+            	<div><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBanOut[2]['src']?>"></div>
             	<div>
                 	<div><a href="#">Страхование квартиры</a></div>
                     <div>Для физических лиц</div>
                 </div>
             </div>
         </div>
+<?	}else{?>
 <style>
 .gallery {
 }
@@ -60,23 +42,40 @@
 	padding:0;
 	width:10px;
 }
-.gallery ul{
-	
+.gallery ul img,
+.gallery ul li div.linkArea {
+	height:203px;
+	width:296px; 
 }
 .gallery li{
-	margin:0 10px;
-	
+	margin:0 11px;
+}
+div.linkArea{
+	background:#FF0;
+	position:absolute; 
+	opacity:0.5;
+}
+table#tblSlides{
+	background:#EDEEF0;
+	margin:0 -20px;
+	width:100%;
+}
+table#tblSlides td{
+	padding:10px 0;
+}
+table#tblSlides tbody >tr:first-child td{
+	padding-top:20px;
 }
 </style>
-
-<table style="margin:0 -14px;" width="100%" cellpadding="0" cellspacing="0">
+<table id="tblSlides" cellspacing="0">
 	<tr>
-    	<td><button class="prev">&lt;</button></td>
+    	<td style="width:29px; padding-left:6px;"><button class="prev">&lt;</button></td>
         <td align="center"><div id="gallery1" class="gallery">
-<?	//	source: http://www.xiper.net/collect/js-plugins/gallery/jcarousellite.html	?>
     			<ul>
 	<?	foreach($arrBanOut as $i=>$value):?>
-        			<li><img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" height="203px" width="296px" title="<?=$arrBanOut[$i]['src']?>"/></li>
+        			<li style="position:relative;">
+                    	<div class="linkArea">Чиста для ссылки понимаеш!</div>
+                    <img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
 	<?	endforeach;?>
     			</ul>
         	</div> </td>
@@ -84,7 +83,7 @@
         	<div id="gallery2" class="gallery">
     			<ul>
 	<?	foreach($arrBanOut as $i=>$value):?>
-        			<li><img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" height="203px" width="296px" title="<?=$arrBanOut[$i]['src']?>"/></li>
+        			<li><img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
 	<?	endforeach;?>
     			</ul>
         	</div>                 
@@ -92,15 +91,66 @@
         <td align="center"><div id="gallery3" class="gallery">
     			<ul>
 	<?	foreach($arrBanOut as $i=>$value):?>
-        			<li><img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" height="203px" width="296px" title="<?=$arrBanOut[$i]['src']?>"/></li>
+        			<li><img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
 	<?	endforeach;?>
     			</ul>
         	</div> </td>
-        <td><button class="next">&gt;</button></td>
+        <td style="width:29px;"><button class="next">&gt;</button></td>
 	</tr>
+	<tr>
+	  <td style="width:29px; padding-left:6px;">&nbsp;</td>
+	  <td align="center">&nbsp;</td>
+	  <td align="center">&nbsp;</td>
+	  <td align="center">&nbsp;</td>
+	  <td style="width:29px;">&nbsp;</td>
+  </tr>
 </table>
+<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/jcarousellite.js"></script>
+<? //source: http://www.xiper.net/collect/js-plugins/gallery/jcarousellite.html?>
+<script>
+$( function(){
+		$("#gallery1").jCarouselLite({
 
+			btnNext: ".next",
+	
+			btnPrev: ".prev",
+			
+			vertical: true,
+			
+			visible: 1,
+			
 
+    	});
+		$("#gallery2").jCarouselLite({
+
+			btnNext: ".next",
+	
+			btnPrev: ".prev",
+			
+			vertical: true,
+			
+			visible: 1,
+			
+			start : 3
+
+    	});
+		$("#gallery3").jCarouselLite({
+
+			btnNext: ".next",
+	
+			btnPrev: ".prev",
+			
+			vertical: true,
+			
+			visible: 1,
+			
+			start: 6
+
+    	});
+	}
+ );
+</script>
+<?	}?>
 <div id="content_from_left" align="left">
   <div id="why_open" class="txtLightBlue">Почему &laquo;Открытие&raquo;?</div>
   <!--<p>Сайт предназначен для:</p>-->
@@ -222,47 +272,3 @@
 	
 	<? 	} 
 		if ($tp){?><h3>/last_seen</h3><? }?>
-<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/jcarousellite.js"></script>
-<script>
-$( function(){
-		$("#gallery1").jCarouselLite({
-
-			btnNext: ".next",
-	
-			btnPrev: ".prev",
-			
-			vertical: true,
-			
-			visible: 1,
-			
-
-    	});
-		$("#gallery2").jCarouselLite({
-
-			btnNext: ".next",
-	
-			btnPrev: ".prev",
-			
-			vertical: true,
-			
-			visible: 1,
-			
-			start : 3
-
-    	});
-		$("#gallery3").jCarouselLite({
-
-			btnNext: ".next",
-	
-			btnPrev: ".prev",
-			
-			vertical: true,
-			
-			visible: 1,
-			
-			start: 6
-
-    	});
-	}
- );
-</script>

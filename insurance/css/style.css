@@ -500,6 +500,7 @@ div#mod_insur_species{
 	margin-bottom:20px;
 	margin-left:25px; 
 	vertical-align:top;
+	z-index:3;
 }
 div#mod_insur_species h2{
 	font-size: 1.4em;
@@ -747,7 +748,7 @@ div#slides div[id^="slide"]{
 div#slides div[id^="slide"] 
 	> div:first-child{
 	background-repeat:no-repeat;
-	background:#FFFF00;
+	/*background:#FFFF00;*/
 	height:203px;
 	margin-bottom:17px;
 	overflow:hidden;
@@ -775,19 +776,25 @@ div#slides div[id^="slide"]
 	letter-spacing: -0.1em;
 	text-align:right;
 }
-div#slides div#slide-first > div:first-child{
-	background:url(../images/slides/1.jpg);
-}
-div#slides div#slide-middle > div:first-child{
-	background:url(../images/slides/2.jpg);
-}
 div#slides div#slide-middle > div:first-child,
 div#slides div#slide-middle > div:first-child ~div{
 	margin-left:19px;
 	margin-right:18px;	
 }
+div#slides div#slide-first > div:first-child{
+	/*background:url(../images/slides/1.jpg);*/
+}
+div#slides div#slide-middle > div:first-child{
+	/*background:url(../images/slides/2.jpg);*/
+}
 div#slides div#slide-last > div:first-child{
-	background:url(../images/slides/3.jpg);
+	/*background:url(../images/slides/3.jpg);*/
+}
+div[id^="slide-"] 
+	> div:first-child 
+		img{
+	height:203px;
+	width:296px; 
 }
 #textLastNew{
 	display:inline-block;
