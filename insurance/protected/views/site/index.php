@@ -1,5 +1,6 @@
 <? 	if(isset($_GET['stop']))die("index by default"); 
-	$tp=false;?>
+	$tp=false;
+	$baseURL=Yii::app()->request->getBaseUrl(true)."/"?>
 <!-- slide_marks -->
 <?	if ($tp){?><h3>/slide_marks</h3><? }?>
 		<!-- /slide_marks -->
@@ -11,23 +12,23 @@
 	if (!(isset($_GET['slides'])&&!$_GET['slides'])) {?>
     	<div align="center" id="slides">
         	<div id="slide-first">
-            	<div><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBanOut[0]['src']?>"></div>
+            	<div><img src="<?=$baseURL.$arrBanOut[0]['src']?>"></div>
             	<div>
-                	<div><a href="#">Добровольное мед. страхование</a></div>
+                	<div><a href="<?=$baseURL.$arrBanOut[0]['link']?>">Добровольное мед. страхование</a></div>
                     <div>для корпоративных клиентов</div>
                 </div>
             </div>
             <div id="slide-middle">
-            	<div><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBanOut[1]['src']?>"></div>
+            	<div><img src="<?=$baseURL.$arrBanOut[1]['src']?>"></div>
             	<div>
-                	<div><a href="#">Финансовые риски</a></div>
+                	<div><a href="<?=$baseURL.$arrBanOut[1]['link']?>">Финансовые риски</a></div>
                     <div>малому и среднему бизнесу</div>
                 </div>
             </div>
             <div id="slide-last">
-            	<div><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBanOut[2]['src']?>"></div>
+            	<div><img src="<?=$baseURL.$arrBanOut[2]['src']?>"></div>
             	<div>
-                	<div><a href="#">Страхование квартиры</a></div>
+                	<div><a href="<?=$baseURL.$arrBanOut[2]['link']?>">Страхование квартиры</a></div>
                     <div>Для физических лиц</div>
                 </div>
             </div>
@@ -75,7 +76,7 @@ table#tblSlides tbody >tr:first-child td{
 	<?	foreach($arrBanOut as $i=>$value):?>
         			<li style="position:relative;">
                     	<div class="linkArea">Чиста для ссылки понимаеш!</div>
-                    <img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
+                    <img src="<?=$baseURL.$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
 	<?	endforeach;?>
     			</ul>
         	</div> </td>
@@ -83,7 +84,7 @@ table#tblSlides tbody >tr:first-child td{
         	<div id="gallery2" class="gallery">
     			<ul>
 	<?	foreach($arrBanOut as $i=>$value):?>
-        			<li><img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
+        			<li><img src="<?=$baseURL.$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
 	<?	endforeach;?>
     			</ul>
         	</div>                 
@@ -91,7 +92,7 @@ table#tblSlides tbody >tr:first-child td{
         <td align="center"><div id="gallery3" class="gallery">
     			<ul>
 	<?	foreach($arrBanOut as $i=>$value):?>
-        			<li><img src="<?=Yii::app()->request->getBaseUrl(true)."/".$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
+        			<li><img src="<?=$baseURL.$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
 	<?	endforeach;?>
     			</ul>
         	</div> </td>
@@ -105,7 +106,7 @@ table#tblSlides tbody >tr:first-child td{
 	  <td style="width:29px;">&nbsp;</td>
   </tr>
 </table>
-<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/jcarousellite.js"></script>
+<script type="text/javascript" src="<?=$baseURL?>js/jcarousellite.js"></script>
 <? //source: http://www.xiper.net/collect/js-plugins/gallery/jcarousellite.html?>
 <script>
 $( function(){
@@ -180,7 +181,9 @@ $( function(){
 </div>
 
 
-<div id="content_from_right"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/pix/old_cars.gif" width="296" height="284">
+<div id="content_from_right"><?
+$museum_link='musey_strahovanija';
+$img_museum=setHTML::getBannersAsObjects('outside',1,'`link` = '.$museum_link.' LIMIT 1');?><a href="<?=$baseURL.Data::buildAliasPath($museum_link)?>"><img src="<?=$baseURL.$img_museum[0]['src']?>" id="company_museum"></a>
 </div>
 <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
 	if ($tp){?><h3>/tblSlides</h3><? }?>

@@ -1,6 +1,48 @@
 <?
 class Data {
 /**
+ * Построить цепочку алиасов к конкретно взятой странице
+ * @package
+ * @subpackage
+ */
+	static public function buildAliasPath($start_point,$parent_alias=false){
+		if (!$parent_alias) { // первая итерация (начало извлечения алиасов)
+			if (gettype($start_point)=='string') { 
+				$field='alias';
+				$alias_path=$start_point;
+			}else{
+				$field='id';
+				$alias_path=self::getAliasById($start_point);
+			}
+			$condition=$start_point;
+		}else{ // продолжение извлечения алиасов
+			$field="alias";
+			$condition=$parent_alias;
+			$alias_path=$start_point."/".$parent_alias;
+		}	
+		if( $get_parent_alias = Yii::app()->db->createCommand()->select('
+       ( SELECT alias 
+          FROM insur_insurance_object
+         WHERE id = t.parent_id
+       ) AS parent_alias')->from('insur_insurance_object AS t')->where($field." = '$condition' LIMIT 1")->queryScalar()){
+		   self::buildAliasPath(&$alias_path,$get_parent_alias);
+		}else{ 
+			if ($alias_path){
+				echo implode("/",array_reverse(explode("/",$alias_path)));
+			}else 
+				return false;
+		}
+	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function getAliasById($id){
+		return Yii::app()->db->createCommand()->select('SELECT alias 
+          FROM insur_insurance_object')->where("id = ".$id)->queryScalar();
+	}
+/**
   * @package		content
   * @subpackage		navigation
   * Загружает контент раздела/подраздела из БД по полученному алиасу

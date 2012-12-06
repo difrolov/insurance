@@ -5,6 +5,30 @@ class setHTML{
 	static $arrMenuWidgetSecond;
 
 /**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function buildAdminSubmenu($subMenuItems){
+		if (is_array($subMenuItems)){
+			foreach($subMenuItems as $alias_value=>$link_text):
+				if (is_array($link_text)){
+					$level=(isset($link_text['level']))? $link_text['level']:0;
+					if ($level>1):?>
+                    <blockquote>
+				<?	endif;//echo "alias_value= $alias_value<br>";
+					self::buildAdminSubmenu($link_text);
+					if ($level>1):?>
+					</blockquote>
+			<?		endif;
+				}elseif ($alias_value=="name"){
+				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
+		<a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
+			<?	}
+			endforeach;
+		}
+	}
+/**
  * @package HTML
  * @subpackage navigation
  *
@@ -380,30 +404,6 @@ class setHTML{
                 </div>
 <?	}
 /**
- * Описание
- * @package
- * @subpackage
- */
-	public static function buildAdminSubmenu($subMenuItems){
-		if (is_array($subMenuItems)){
-			foreach($subMenuItems as $alias_value=>$link_text):
-				if (is_array($link_text)){
-					$level=(isset($link_text['level']))? $link_text['level']:0;
-					if ($level>1):?>
-                    <blockquote>
-				<?	endif;//echo "alias_value= $alias_value<br>";
-					self::buildAdminSubmenu($link_text);
-					if ($level>1):?>
-					</blockquote>
-			<?		endif;
-				}elseif ($alias_value=="name"){
-				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
-		<a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
-			<?	}
-			endforeach;
-		}
-	}
-/**
  * @package		HTML
  * @subpackage		menu
  * построить контент подменю
@@ -490,12 +490,21 @@ class setHTML{
  * @package
  * @subpackage
  */
-	function getBannersAsObjects($place=false, $status=1, $order_by=false){
+	function getBannersAsObjects( $place=false, 
+								  $status=1, 
+								  $and=false, 
+								  $order_by=false
+								){
 		static $arrBanners=array();
 		if (empty($arrBanners)){	
 			$query="SELECT * FROM insur_banners";
-			if ($place)	$query.=" WHERE place ='$place' AND `status` = $status";
-			if ($order_by) $query.=" ".$order_by;
+			if ($place)	$query.=" 
+  WHERE place ='$place' AND `status` = $status";
+			if ($and)
+				$query.="
+    AND $and";
+			if ($order_by) $query.=" 
+  ".$order_by;
 			$arrBanners=Yii::app()->db->createCommand($query)->queryAll();
 		}
 		return $arrBanners;
