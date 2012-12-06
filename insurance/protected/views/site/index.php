@@ -14,21 +14,21 @@
         	<div id="slide-first">
             	<div><img src="<?=$baseURL.$arrBanOut[0]['src']?>"></div>
             	<div>
-                	<div><a href="<?=$baseURL.$arrBanOut[0]['link']?>">Добровольное мед. страхование</a></div>
+                	<div><a href="<?=$baseURL?><? Data::buildAliasPath($arrBanOut[0]['link']);?>"><?=$arrBanOut[0]['name']?></a></div>
                     <div>для корпоративных клиентов</div>
                 </div>
             </div>
             <div id="slide-middle">
             	<div><img src="<?=$baseURL.$arrBanOut[1]['src']?>"></div>
             	<div>
-                	<div><a href="<?=$baseURL.$arrBanOut[1]['link']?>">Финансовые риски</a></div>
+                	<div><a href="<?=$baseURL?><? Data::buildAliasPath($arrBanOut[0]['link']);?>"><?=$arrBanOut[1]['name']?></a></div>
                     <div>малому и среднему бизнесу</div>
                 </div>
             </div>
             <div id="slide-last">
             	<div><img src="<?=$baseURL.$arrBanOut[2]['src']?>"></div>
             	<div>
-                	<div><a href="<?=$baseURL.$arrBanOut[2]['link']?>">Страхование квартиры</a></div>
+                	<div><a href="<?=$baseURL?><? Data::buildAliasPath($arrBanOut[2]['link']);?>"><?=$arrBanOut[2]['name']?></a></div>
                     <div>Для физических лиц</div>
                 </div>
             </div>
@@ -183,7 +183,7 @@ $( function(){
 
 <div id="content_from_right"><?
 $museum_link='musey_strahovanija';
-$img_museum=setHTML::getBannersAsObjects('outside',1,'`link` = '.$museum_link.' LIMIT 1');?><a href="<?=$baseURL.Data::buildAliasPath($museum_link)?>"><img src="<?=$baseURL.$img_museum[0]['src']?>" id="company_museum"></a>
+$img_museum=setHTML::getBannersAsObjects('outside',1,'`link` = "'.$museum_link.'" LIMIT 1');?><a href="<?=$baseURL?><? Data::buildAliasPath($museum_link);?>"><img src="<?=$baseURL.$img_museum[0]['src']?>" id="company_museum"></a>
 </div>
 <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
 	if ($tp){?><h3>/tblSlides</h3><? }?>

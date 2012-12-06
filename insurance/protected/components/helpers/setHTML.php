@@ -495,7 +495,7 @@ class setHTML{
 								  $and=false, 
 								  $order_by=false
 								){
-		static $arrBanners=array();
+		//static $arrBanners=array();
 		if (empty($arrBanners)){	
 			$query="SELECT * FROM insur_banners";
 			if ($place)	$query.=" 
@@ -504,7 +504,7 @@ class setHTML{
 				$query.="
     AND $and";
 			if ($order_by) $query.=" 
-  ".$order_by;
+  ".$order_by;  //"<div class=''>query= ".$query."</div>";
 			$arrBanners=Yii::app()->db->createCommand($query)->queryAll();
 		}
 		return $arrBanners;
@@ -588,9 +588,12 @@ class setHTML{
 		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
 			$section_data->first_header=$section_data->name;?>
-	<div id="inner_left_menu">
+	<div class="floatLeft">
+    	<div id="inner_left_menu">
 	<?	// сгенерировать ссылки:
 		self::buildLeftStaticMenu($section_data->id);?>
+    	</div>
+    <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners4.php';?>	
     </div>
     <?	// если тестируемся:
 		if ($test) {
@@ -600,12 +603,12 @@ class setHTML{
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
-		}else { // загрузить макет?>
+		}else{ // загрузить макет?>
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	// определиться с типом генерации контента - либо как специально разработанный модуль, либо как стандартный раздел, созданный Генератором:
-			if ( $asModule // если передан массив alias'ов, контент страниц которых должен выводиться как специально разработанный модуль
+			if ( $asModule // если передан массив alias'ов (view/[controller_name]/index.php), контент страниц которых должен выводиться как специально разработанный модуль
 				 && is_array($asModule)
 				 && in_array($section_data['alias'],$asModule)
 			   ){?><div id="innerXtraModule"><?
@@ -699,23 +702,7 @@ class setHTML{
 							}
 							echo "<div class='clear'>&nbsp;</div>";
 						}
-					  }else{ // в псевдотестовом режиме
-						  if (isset($blockModules)) {
-							  echo "<div class=''>block= ".$blockModules."</div>";
-						  	  var_dump("<h1>block:</h1><pre>",$blockModules,"</pre>");
-						  }else echo "<div class=''>skip</div>";
 					  }
-						if ($showLoremIpsum){ // заглушка
-						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-
-		diam nonumy eirmod tempor invidunt ut labore et dolore magna
-
-		aliquyam erat, sed diam voluptua. At vero eos et accusam et
-
-		justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-
-		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-				<?		}
 					}?>
                 	</div>
                 </div>
@@ -724,94 +711,13 @@ class setHTML{
                 }else{?>
             <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
 			<? 	}
-			}?>
-        <div class="clear">&nbsp;</div><?
-
-		if (isset($_GET['mode'])&&$_GET['mode']=='preview'){ ?>
-    <div align="left" id="manage_new_section" style="background:#666; border-radius:6px; box-shadow: 3px 1px 20px 1px #999; color:#FFF; cursor:move; display:<?="none"?>; left:200px; padding:10px; top:200px; position:fixed; width:180px;">
-    	Подраздел загружен в режиме предпросмотра. Выберите дальнейшее действие:
-        <div style="background:#06AEDD; border-radius:3px; margin-top:10px; padding:6px;">
-        	<ul>
-        	  <li><a href="#" id="save_as_is">Сохранить </a></li>
-        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/edit/<?=$section_data->id?>">Изменить</a></li>
-        	  <li class="txtRed"><a href="#" id="ask_to_delete">Удалить</a></li>
-        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator">Добавить подраздел</a></li>
-      	  </ul>
-       	</div>
-    </div>
-<script>
-$( function(){
-  try{
-	$('a#ask_to_delete').css('color','#F00').click( function (){
-			var Url='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/remove';
-			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...')){
-				$.ajax({
-					type:"GET",
-					url: Url,
-					data: "section_id=<?=$section_data->id?>",
-					beforeSend: function() {
-						manageVeil('start','Удаление данных...');
-					},
-					success: function (data) {
-							alert(data);
-							location.href=Url;
-						},
-					error: function (data) {
-						manageVeil(false);
-						alert(data);
-					},
-				});
 			}
-			return false;
-		});
-	$('a#save_as_is').click( function (){
-		manageVeil('start','Сохранение данных...');
-		$.ajax({
-			type:"GET",
-			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store/',
-			data: "section_id=<?=$section_data->id?>",
-			beforeSend: function() {
-				manageVeil('start','Сохранение данных...');
-			},
-			success: function (data) {
-					manageVeil(false);
-					alert("Данные сохранены!"+'\n'+data);
-					$('#manage_new_section').hide();
-					var goUrl=location.href.substring(0,location.href.indexOf('?mode='));
-					location.href=goUrl;
-				},
-			error: function (data) {
-				manageVeil(false);
-				alert("Не удалось отправить данные.\nОтвет: "+data);
-			},
-		});
-		return false;
-	});
-	var mprev=$('#manage_new_section');
-	$(mprev).find('ul').css('padding-left','18px');
-	$(mprev).find('a[id!="ask_to_delete"], li[class!="txtRed"]').css('color','#FFF');
-	$(mprev).find('a').css('margin-left','-6px');
-	var leftOff=$(mprev).parent().offset().left;
-	var wdt=$(mprev).width();
-	var goLeft=leftOff-wdt-45;
-	console.info('leftOff = '+typeof(leftOff)+', wdt = '+typeof(wdt)+', summ = '+goLeft);
-	$(mprev).css({
-			left:goLeft+'px',
-		}).fadeTo(1500,0.9)
-			.draggable()
-				.hover(
-				function (){
-					$(this).css('opacity',1)
-				},
-				function (){
-					$(this).css('opacity',0.9)
-				});
-  }catch(e){
-		alert(e.message);
-  }
-});
-</script>
-	<?	}?>
+			// подключить блок баннеров №3:
+			require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+			if (isset($_GET['mode'])&&$_GET['mode']=='preview') : 
+				// подключить меню предпросмотра:
+				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/preview_mode_menu.php';
+			endif;?>
    </div>
 	<?	}
 	}

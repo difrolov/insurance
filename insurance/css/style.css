@@ -30,6 +30,33 @@ html{
 	margin:0;
 	text-align:center;
 }
+div#banners3 {
+	clear:both;
+	height:150px;
+	text-align:center;
+}
+#banners3 > div{
+	background:#FFFF00;
+	display:inline-block;
+	height:120px;
+	margin:0 2%;
+	padding:0 !important;
+	width:28%;
+}
+#banners3 
+	> div img{
+	height:136px;
+	width:210px;
+}
+#banners4{
+	margin:10px;
+	margin-top:16px !important;
+	margin-right:0 !important;
+	min-height:90px;
+}
+#banners4 img{
+	width:215px;
+}
 body > 
 	div:first-child{
 	height:100%;
