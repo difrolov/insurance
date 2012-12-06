@@ -115,8 +115,10 @@ class setHTML{
 										  $parent_id=false,
 										  $top_level=false
 										){
-		$admin_mode=(strstr($_SERVER['REQUEST_URI'],"/admin")) ? true:false;
-		//is_object(Yii::app()->controller->module))? true:false;
+		$admin_mode=( // проверить, где находимся - frontend or backend
+			is_object(Yii::app()->controller->module)
+			&& Yii::app()->controller->module->id=='admin'
+		) ? true:false;
 		if (!$admin_mode)
 			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
@@ -482,6 +484,21 @@ class setHTML{
 				}
 			endforeach;
 		}
+	}
+/**
+ * Получить и разместить баннеры:
+ * @package
+ * @subpackage
+ */
+	function getBannersAsObjects($place=false, $status=1, $order_by=false){
+		static $arrBanners=array();
+		if (empty($arrBanners)){	
+			$query="SELECT * FROM insur_banners";
+			if ($place)	$query.=" WHERE place ='$place' AND `status` = $status";
+			if ($order_by) $query.=" ".$order_by;
+			$arrBanners=Yii::app()->db->createCommand($query)->queryAll();
+		}
+		return $arrBanners;
 	}
 /**
  * @package		HTML

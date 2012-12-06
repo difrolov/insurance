@@ -33,4 +33,5 @@ table {
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/custom_accordion.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/wait_for.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/debug.js"></script>
 </head>

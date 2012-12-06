@@ -2,7 +2,7 @@
 <div id="inner_left_menu">
 <h2 class="txtLightBlue">Поиск</h2>
 <div>
-<? 	$seeking='';
+<? 	$seeking=''; 
 	if ($swords){
 		$seeking=$swords;
 		$aWords=explode(" ",$swords); 
@@ -114,46 +114,66 @@ arrFoundWords=new Array(<?=$arrFoundWords?>);
 	echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='ptext".$ww."'>".$text."</div><hr>$arrFoundWords";?>
 <script>
 try{
-	var bunch='',newText='',wCount,pStart,pFinish,arrTextWords;
+	var b=0,bunch='',newText='',wCount,pStart,pFinish,arrTextWords;
 	var html=$('#ptext<?=$ww?>');
 	arrTextWords=$(html).text().split(" "); // text words array
-	// пройтись по всему масиву слов текста, найти и выделить совпадения
-	$(arrTextWords).each(function(index, textElem) {
+	// найденные слова:
+	$(arrFoundWords).each( function(index2,word){
+		
+		// пройтись по всему масиву слов текста, найти и выделить совпадения
+		$(arrTextWords).each(function(index, textElem) {
 		// каждое найденное слово:
-		$(arrFoundWords).each( function(index2,word){
-			pStart=$(html).text().toLowerCase().indexOf(word);
-			pFinish=pStart+word.length;
-			// если совпало со словом из распарсенного текста:
-			if (textElem.toLowerCase().indexOf(word.toLowerCase())!=-1){
+	
+		// если совпало со словом из распарсенного текста:	
+			if (textElem.toLowerCase().indexOf(word.toLowerCase())!=-1){ // ключевой момент - первое совпадение, после этого алгоритм генерации текста изменяется
+				console.info('word = '+word+', textElem = '+textElem);
 				// выделить:
 				bunch=' <span class="found">'+textElem+'</span> ';
-				
-				// добвить текст слева и справа
-				var b=0;
-				for (i=10;i;i--){ // по 4 слова
-					b++;
-					if (index>=b&&i<7){ // если слева уже не менее 4-х слов:
-						// проверить на совпадение с другими найденными словами:
-						$(arrTextWords).each( function(bindex,bword){
-							if(bword==arrTextWords[index-b]) return false;
-						});
-						bunch=arrTextWords[index-b]+' '+bunch;
-						console.info('\n\nindex= '+index+', b= '+b+', предыдущее слово: '+arrTextWords[index-b]+'\n\n');
+					if (!b){
+						var prevWord='',b=0; // b+1 - длина претекста
+						// добавить текст слева
+						do{	b++;
+							prevWord=arrTextWords[index-b];
+							bunch=prevWord+bunch;
+						}while( prevWord
+								 && prevWord.indexOf(".")=-1
+							   )
 					}
-					if ($(arrTextWords).size()>=index+b){
-						$(arrTextWords).each( function(bindex,bword){
-							if(bword==arrTextWords[index+b]) return false;
-						});
-						bunch+=' '+arrTextWords[index+b];
-						console.info('\n\nindex= '+index+', b= '+b+', следующее слово: '+arrTextWords[index+b]+'\n\n');
-					}
+					
+					/*var b=0;
+					for (i=10;i;i--){ // по 4 слова
+						b++;
+						if (index>=b&&i>3){ // если слева уже не менее 4-х слов:
+							// проверить на совпадение с другими найденными словами:
+							$(arrTextWords).each( function(bindex,bword){
+								if(bword==arrTextWords[index-b]) return false;
+							});
+							bunch=arrTextWords[index-b]+' '+bunch;
+							console.info('\n\ni = '+i+' << index= '+index+', b= '+b+', предыдущее слово: '+arrTextWords[index-b]+'\n\n');
+						}
+						
+						if ($(arrTextWords).size()>=index+b){
+							$(arrTextWords).each( function(bindex,bword){
+								if(bword==arrTextWords[index+b]) return false;
+							});
+							bunch+=' '+arrTextWords[index+b];
+							console.info('\n\ni = '+i+' >> index= '+index+', b= '+b+', следующее слово: '+arrTextWords[index+b]+'\n\n');
+						}
+					}*/
+					//console.info('\n\nfound! bunch: '+bunch+'\n\n');
+					//console.info('\nbunch = '+bunch);
+					//newText+=' ...'+bunch+'... ';
+					//console.info('\n\nnewText = '+newText);
+					if (b>0) return false;
 				}
-				console.info('\n\nfound! bunch: '+bunch+'\n\n');
-				newText+=' ...'+bunch+'... ';
-			}
-		});
+				console.info('after false');
+		});	
+	
+	
 	});
-	console.info('\nnewText = '+newText+'\n');
+	
+		
+
 	$('#content<?=$ww?>').html(newText+"<hr>");
 }catch(e){
 	alert(e.message);

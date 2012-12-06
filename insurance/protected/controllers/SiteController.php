@@ -140,9 +140,10 @@ WHERE id IN ( $resultStr )")->queryAll()){
 				for($i=0,$j=count($results);$i<$j;$i++){
 					$row=$results[$i];
 					foreach ($row as $field=>$content) {
-						$arrCont=explode(" ",$row['content']);
-						$trim=array_slice($arrCont,0,40);
-						$res[$row['name']]=implode(" ",$trim);
+						//$arrCont=explode(" ",$row['content']);
+						//$trim=array_slice($arrCont,0,40);
+						//$res[$row['name']]=implode(" ",$trim);
+						$res[$row['name']]=$row['content'];
 					}
 				}
 			}else $res="Данных не обнаружено...";
