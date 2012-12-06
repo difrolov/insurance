@@ -48,8 +48,6 @@ foreach ($out_query as $key=>$value){
 <?php
 }
 ?>
-
-
 </div>
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',

@@ -504,7 +504,7 @@ class setHTML{
 				$query.="
     AND $and";
 			if ($order_by) $query.=" 
-  ".$order_by;  //"<div class=''>query= ".$query."</div>";
+  ".$order_by;  //echo "<div class=''>query= ".$query."</div>";
 			$arrBanners=Yii::app()->db->createCommand($query)->queryAll();
 		}
 		return $arrBanners;

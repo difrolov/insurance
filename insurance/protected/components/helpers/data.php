@@ -7,7 +7,7 @@ class Data {
  */
 	static public function buildAliasPath($start_point,$parent_alias=false){
 		if (!$parent_alias) { // первая итерация (начало извлечения алиасов)
-			if (gettype($start_point)=='string') { 
+			if (!$start_point || gettype($start_point)=='string') { 
 				$field='alias';
 				$alias_path=$start_point;
 			}else{
@@ -39,8 +39,7 @@ class Data {
  * @subpackage
  */
 	public static function getAliasById($id){
-		return Yii::app()->db->createCommand()->select('SELECT alias 
-          FROM insur_insurance_object')->where("id = ".$id)->queryScalar();
+		return Yii::app()->db->createCommand()->select('alias')->from('insur_insurance_object')->where("id = ".$id)->queryScalar(); 
 	}
 /**
   * @package		content

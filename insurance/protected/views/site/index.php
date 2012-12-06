@@ -7,32 +7,30 @@
 		<!-- tblSlides -->
 <?	// получить баннеры для слайд-шоу: 
 	$arrBanOut=setHTML::getBannersAsObjects('outside');
-		
+	//if (empty($arrBanOut)) die('empty');
 	if ($tp){?><h3>tblSlides</h3><? }
 	if (!(isset($_GET['slides'])&&!$_GET['slides'])) {?>
     	<div align="center" id="slides">
-        	<div id="slide-first">
-            	<div><img src="<?=$baseURL.$arrBanOut[0]['src']?>"></div>
-            	<div>
-                	<div><a href="<?=$baseURL?><? Data::buildAliasPath($arrBanOut[0]['link']);?>"><?=$arrBanOut[0]['name']?></a></div>
-                    <div>для корпоративных клиентов</div>
-                </div>
-            </div>
-            <div id="slide-middle">
-            	<div><img src="<?=$baseURL.$arrBanOut[1]['src']?>"></div>
-            	<div>
-                	<div><a href="<?=$baseURL?><? Data::buildAliasPath($arrBanOut[0]['link']);?>"><?=$arrBanOut[1]['name']?></a></div>
-                    <div>малому и среднему бизнесу</div>
-                </div>
-            </div>
-            <div id="slide-last">
-            	<div><img src="<?=$baseURL.$arrBanOut[2]['src']?>"></div>
-            	<div>
-                	<div><a href="<?=$baseURL?><? Data::buildAliasPath($arrBanOut[2]['link']);?>"><?=$arrBanOut[2]['name']?></a></div>
-                    <div>Для физических лиц</div>
-                </div>
-            </div>
-        </div>
+<?	$arrSlides=array('first'=>'Для корпоративных клиентов',
+					'middle'=>'Малому и среднему бизнесу',
+					'last'=>'Для физических лиц'
+				);
+		$s=0;
+		foreach($arrSlides as $subname=>$subheader): 
+			// заплатки. А куда ж без них, если кривые ручки баннеры вставляют!
+			$imgsrc=(isset($arrBanOut[$s]['src']))? $arrBanOut[$s]['src']:'';
+			$slink=(isset($arrBanOut[$s]['link']))? $arrBanOut[$s]['link']:'';
+			$bname=(isset($arrBanOut[$s]['name']))? $arrBanOut[$s]['name']:'название не обнаружено...';?>        
+        	<div id="slide-<?=$subname?>">
+            	<div><img src="<?=$baseURL.$imgsrc?>"></div>
+            		<div>
+                		<div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
+                    	<div><?=$subheader?></div>
+                	</div>
+            	</div>
+         <?	$s++;
+		endforeach;?>            
+        	</div>
 <?	}else{?>
 <style>
 .gallery {
@@ -183,7 +181,9 @@ $( function(){
 
 <div id="content_from_right"><?
 $museum_link='musey_strahovanija';
-$img_museum=setHTML::getBannersAsObjects('outside',1,'`link` = "'.$museum_link.'" LIMIT 1');?><a href="<?=$baseURL?><? Data::buildAliasPath($museum_link);?>"><img src="<?=$baseURL.$img_museum[0]['src']?>" id="company_museum"></a>
+$img_museum=setHTML::getBannersAsObjects('outside',1,'`link` = "'.$museum_link.'" LIMIT 1');
+if (!isset($img_museum[0]['src'])) $img_museum[0]['src']='';
+?><a href="<?=$baseURL?><? Data::buildAliasPath($museum_link);?>"><img src="<?=$baseURL.$img_museum[0]['src']?>" id="company_museum"></a>
 </div>
 <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
 	if ($tp){?><h3>/tblSlides</h3><? }?>
