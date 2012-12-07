@@ -32,40 +32,9 @@
 		endforeach;?>            
         	</div>
 <?	}else{?>
-<style>
-.gallery {
-}
-.gallery button{
-	border:0;
-	margin:0;
-	padding:0;
-	width:10px;
-}
-.gallery ul img,
-.gallery ul li div.linkArea {
-	height:203px;
-	width:296px; 
-}
-.gallery li{
-	margin:0 11px;
-}
-div.linkArea{
-	background:#FF0;
-	position:absolute; 
-	opacity:0.5;
-}
-table#tblSlides{
-	background:#EDEEF0;
-	margin:0 -20px;
-	width:100%;
-}
-table#tblSlides td{
-	padding:10px 0;
-}
-table#tblSlides tbody >tr:first-child td{
-	padding-top:20px;
-}
-</style>
+<link href="<?	
+require_once Yii::app()->request->getBaseUrl(true).'/css/slideshow.css';	
+	?>" rel="stylesheet" type="text/css">
 <table id="tblSlides" cellspacing="0">
 	<tr>
     	<td style="width:29px; padding-left:6px;"><button class="prev">&lt;</button></td>
@@ -104,52 +73,12 @@ table#tblSlides tbody >tr:first-child td{
 	  <td style="width:29px;">&nbsp;</td>
   </tr>
 </table>
+<? 	// *************************************************************
+	//source: http://www.xiper.net/collect/js-plugins/gallery/jcarousellite.html?>
 <script type="text/javascript" src="<?=$baseURL?>js/jcarousellite.js"></script>
-<? //source: http://www.xiper.net/collect/js-plugins/gallery/jcarousellite.html?>
-<script>
-$( function(){
-		$("#gallery1").jCarouselLite({
-
-			btnNext: ".next",
-	
-			btnPrev: ".prev",
-			
-			vertical: true,
-			
-			visible: 1,
-			
-
-    	});
-		$("#gallery2").jCarouselLite({
-
-			btnNext: ".next",
-	
-			btnPrev: ".prev",
-			
-			vertical: true,
-			
-			visible: 1,
-			
-			start : 3
-
-    	});
-		$("#gallery3").jCarouselLite({
-
-			btnNext: ".next",
-	
-			btnPrev: ".prev",
-			
-			vertical: true,
-			
-			visible: 1,
-			
-			start: 6
-
-    	});
-	}
- );
-</script>
-<?	}?>
+<script src="<?	
+require_once Yii::app()->request->getBaseUrl(true)?>/js/slideshow.js"></script>
+<?	} // **********************************************************?>
 <div id="content_from_left" align="left">
   <div id="why_open" class="txtLightBlue">Почему &laquo;Открытие&raquo;?</div>
   <!--<p>Сайт предназначен для:</p>-->
