@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="language" content="ru">
 <link href="<?=Yii::app()->request->baseUrl?>/css/style.css" rel="stylesheet" type="text/css">
+
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->
@@ -23,9 +24,12 @@ table {
 <? }?>
 </style>
 <? 	}
-// include jQuery, jQuery UI	?>
-<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-1.7.2.min.js"></script>
+// include jQuery, jQuery UI
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl."/js/jquery-1.7.2.min.js", CClientScript::POS_HEAD);
+?>
+<!-- script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-1.7.2.min.js"></script -->
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/custom_accordion.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/wait_for.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/bootstrap.js"></script>
 </head>

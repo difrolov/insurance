@@ -2,7 +2,7 @@
 
 /**
  * EGmap3 Yii extension
- * 
+ *
  * Object oriented PHP interface to GMAP3 Javascript library for
  * Google Maps.
  *
@@ -27,7 +27,7 @@ require_once 'EGmap3Primitives.php';
 
 /**
  * Main class.
- * 
+ *
  * @author Ianaré Sévi
  */
 class EGmap3Widget extends CWidget
@@ -79,7 +79,7 @@ class EGmap3Widget extends CWidget
 	/**
 	 * @var EGmap3Map The map itself.
 	 */
-	protected $map;
+	public $map;
 
 	/**
 	 * Create a new Google map widget.
@@ -133,8 +133,8 @@ class EGmap3Widget extends CWidget
 
 	/**
 	 * Add an action to the map.
-	 * 
-	 * @param EGmap3ActionBase $action 
+	 *
+	 * @param EGmap3ActionBase $action
 	 */
 	public function add(EGmap3ActionBase $action)
 	{
@@ -193,7 +193,7 @@ class EGmap3Widget extends CWidget
 	{
 		return $this->routes;
 	}
-	
+
 	public function getStyledMaps()
 	{
 		return $this->styledMaps;
@@ -205,11 +205,11 @@ class EGmap3Widget extends CWidget
 	 */
 	protected function registerCoreScripts()
 	{
-		$params = array(
+		/* $params = array(
 			'sensor' => 'false',
 			'language' => Yii::app()->getLanguage()
-		);
-		$http = (Yii::app()->getRequest()->isSecureConnection)?'https':'http';
+		); */
+		/* $http = (Yii::app()->getRequest()->isSecureConnection)?'https':'http';
 		$apiScript = $http.'://maps.google.com/maps/api/js?' . http_build_query($params);
 
 		$assets = Yii::app()->assetManager->publish(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets');
@@ -218,7 +218,7 @@ class EGmap3Widget extends CWidget
 
 		$cs->registerScriptFile($apiScript)
 			->registerScriptFile($assets . (($this->mini) ? '/gmap3.min.js' : '/gmap3.js'));
-		
+ */
 		if ($this->resizable) {
 			$cs->registerCoreScript('jquery.ui');
 			$cs->registerCssFile($cs->getCoreScriptUrl().'/jui/css/base/jquery-ui.css');
@@ -309,7 +309,7 @@ class EGmap3Widget extends CWidget
 		$script = preg_replace('/[\n\r\t]/', null, $script);
 		Yii::app()->getClientScript()->registerScript($uid, $script, $position);
 	}
-	
+
 	/**
 	 * Used internally, should not be called.
 	 */
@@ -395,7 +395,7 @@ class EGmap3Widget extends CWidget
 	/**
 	 * Attach all action objects to the map, convert them to Javascript,
 	 * and render the map inside the widget.
-	 * 
+	 *
 	 * MUST be last method call.
 	 */
 	public function renderMap()

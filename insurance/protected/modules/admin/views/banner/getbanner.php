@@ -51,33 +51,36 @@ foreach ($out_query as $key=>$value){
 
 
 </div>
-<?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
-    'type'=>'striped bordered condensed',
-    'dataProvider'=>$out,
-    'template'=>"{items}{pager}",
-	'enablePagination' => true,
-	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
-	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
-    'columns'=>array(
-       array('name'=>'id', 'header'=>'#','type'=>'html'),
-        array('name'=>'name', 'header'=>'Наименование','type'=>'raw', 'value'=>'HelperAdmin::createInput($data->name,"name",$data->id,"_banner.update_field")'),
-        array('name'=>'src', 'type'=>'raw',  'header'=>'Изображение', 'value'=>'HelperAdmin::selectBanner($data->src,$data->id)'),
-        array('name'=>'link','type'=>'raw','header'=>'Ссылка', 'value'=>'HelperAdmin::createBannerlink($data->link,"name",$data->id)'),
-    	array('name'=>'date_edit', 'header'=>'Дата изменения'),
-    	array('name'=>'status','header'=>'Статус',
-    			'value'=>'$data->status==1?"Включен":"Отключен"')
-    ),
-)); ?>
-<?php
 
-	$this->widget('bootstrap.widgets.TbButton', array(
-	    'label'=>$out->data[0]->status?'Отключить':'Включить',
-	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-	    'size'=>'small', // null, 'large', 'small' or 'mini'
-	    'htmlOptions'=>array(
-	    		'onclick'=>'_banner.statusButton("outside",'.($out->data[0]->status?0:1).',"'.$out->keys[0].','.$out->keys[1].','.$out->keys[2].'")'
-	    		)
-));
+<?php
+		$this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
+	    'type'=>'striped bordered condensed',
+	    'dataProvider'=>$out,
+	    'template'=>"{items}{pager}",
+		'enablePagination' => true,
+		'afterAjaxUpdate'=>'function(id, data) {}',
+		'beforeAjaxUpdate'=>'function(id, data) {}',
+	    'columns'=>array(
+	       array('name'=>'id', 'header'=>'#','type'=>'html'),
+	        array('name'=>'name', 'header'=>'Наименование','type'=>'raw', 'value'=>'HelperAdmin::createInput($data->name,"name",$data->id,"_banner.update_field")'),
+	        array('name'=>'src', 'type'=>'raw',  'header'=>'Изображение', 'value'=>'HelperAdmin::selectBanner($data->src,$data->id)'),
+	        array('name'=>'link','type'=>'raw','header'=>'Ссылка', 'value'=>'HelperAdmin::createBannerlink($data->link,"name",$data->id)'),
+	    	array('name'=>'date_edit', 'header'=>'Дата изменения'),
+	    	array('name'=>'status','header'=>'Статус',
+	    			'value'=>'$data->status==1?"Включен":"Отключен"')
+	    ),
+	)); ?>
+	<?php
+	if(isset($out->data) && count($out->data)>0){
+		$this->widget('bootstrap.widgets.TbButton', array(
+		    'label'=>$out->data[0]->status?'Отключить':'Включить',
+		    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+		    'size'=>'small', // null, 'large', 'small' or 'mini'
+		    'htmlOptions'=>array(
+		    		'onclick'=>'_banner.statusButton("outside",'.($out->data[0]->status?0:1).',"'.$out->keys[0].','.$out->keys[1].','.$out->keys[2].'")'
+		    		)
+	));
+}
 	$this->widget('bootstrap.widgets.TbButton', array(
 			'label'=>'Добавить',
 			'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
@@ -97,6 +100,7 @@ foreach ($out_query as $key=>$value){
 <br class="clear">
 <div class="in_baner_img">
 <?php
+
 foreach ($in_query as $key=>$value){
 ?>
 	<img class="banner" id="banner_<?=$in_query[$key]['id']?>" alt="<?=$in_query[$key]['name']?>" src="<?=Yii::app()->homeUrl.$in_query[$key]['src']?>">
@@ -108,8 +112,8 @@ foreach ($in_query as $key=>$value){
     'type'=>'striped bordered condensed',
     'dataProvider'=>$in,
     'template'=>"{items}",
-	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
-	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
+	'afterAjaxUpdate'=>'function(id, data) { }',
+	'beforeAjaxUpdate'=>'function(id, data) {}',
     'columns'=>array(
        array('name'=>'id', 'header'=>'#','type'=>'html'),
         array('name'=>'name', 'header'=>'Наименование','type'=>'raw', 'value'=>'HelperAdmin::createInput($data->name,"name",$data->id,"banner.update_field")'),
@@ -144,8 +148,8 @@ foreach ($ban3->data as $key=>$value){
     'dataProvider'=>$ban3,
     'template'=>"{items}{pager}",
 	'enablePagination' => true,
-	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
-	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
+	'afterAjaxUpdate'=>'function(id, data) { }',
+	'beforeAjaxUpdate'=>'function(id, data) {}',
     'columns'=>array(
        array('name'=>'id', 'header'=>'#','type'=>'html'),
         array('name'=>'name', 'header'=>'Наименование','type'=>'raw', 'value'=>'HelperAdmin::createInput($data->name,"name",$data->id,"_banner.update_field")'),
@@ -157,7 +161,7 @@ foreach ($ban3->data as $key=>$value){
     ),
 )); ?>
 <?php
-
+if(isset($ban3->data) && count($ban3->data)>0){
 	$this->widget('bootstrap.widgets.TbButton', array(
 	    'label'=>$ban3->data[0]->status?'Отключить':'Включить',
 	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
@@ -166,7 +170,7 @@ foreach ($ban3->data as $key=>$value){
 	    		'onclick'=>'_banner.statusButton("ban3",'.($ban3->data[0]->status?0:1).',"'.$ban3->keys[0].','.$ban3->keys[1].','.$ban3->keys[2].'")'
 	    		)
 ));
-
+}
 ?>
 </div>
 <?php
@@ -189,8 +193,8 @@ foreach ($ban4->data as $key=>$value){
     'type'=>'striped bordered condensed',
     'dataProvider'=>$ban4,
     'template'=>"{items}",
-	'afterAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
-	'beforeAjaxUpdate'=>'function(id, data) { alert(id);setInlineEdit(); }',
+	'afterAjaxUpdate'=>'function(id, data) {}',
+	'beforeAjaxUpdate'=>'function(id, data) {}',
     'columns'=>array(
        array('name'=>'id', 'header'=>'#','type'=>'html'),
         array('name'=>'name', 'header'=>'Наименование','type'=>'raw', 'value'=>'HelperAdmin::createInput($data->name,"name",$data->id,"banner.update_field")'),
@@ -202,7 +206,7 @@ foreach ($ban4->data as $key=>$value){
     ),
 )); ?>
 <?php
-
+if(isset($ban4->data) && count($ban4->data)>0){
 	$this->widget('bootstrap.widgets.TbButton', array(
 	    'label'=>$ban4->data[0]->status?'Отключить':'Включить',
 	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
@@ -211,6 +215,7 @@ foreach ($ban4->data as $key=>$value){
 	    		'onclick'=>'_banner.statusButton("ban4",'.($ban4->data[0]->status?0:1).',"'.$ban4->keys[0].'")'
 	    		)
 ));
+}
 ?>
 </div>
 

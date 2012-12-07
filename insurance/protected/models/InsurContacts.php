@@ -1,15 +1,8 @@
 <?php
-class InsurContactss extends CActiveRecord
+class InsurContacts extends CActiveRecord
 {
-	/* public $id;
-	public $jobs_name;
-	public $requirements;
-	public $responsibility;
-	public $terms;
-	public $job;
-	public $contact_name;
-	public $status;
-	public $creat_date; */
+
+	public $mapZoomLevel;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -36,7 +29,8 @@ class InsurContactss extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('baranch_name, address, phone', 'required'),
+			array('baranch_name, address, phone, region', 'required'),
+			array('create_date, status, latitude, longitude, mapZoomLevel', 'safe'),
 
 
 
@@ -51,9 +45,13 @@ class InsurContactss extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'baranch_name' => 'Название региона',
+			'baranch_name' => 'Название филиала',
 			'address' => 'Адрес',
 			'phone' => 'Телефон',
+			'status' => 'Статус',
+			'create_date' => 'Дата создания',
+			'region' => 'Название региона',
+
 		);
 	}
 
@@ -61,7 +59,7 @@ class InsurContactss extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search($params = false,$pager=false)
+	public function search($params=false,$pager=false)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -75,6 +73,12 @@ class InsurContactss extends CActiveRecord
 		$criteria->compare('address',$this->address,true);
 		/* $criteria->compare('status',$this->status);*/
 		$criteria->compare('phone',$this->phone);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('create_date',$this->create_date);
+		$criteria->compare('latitude',$this->latitude);
+		$criteria->compare('longitude',$this->longitude);
+		$criteria->compare('mapZoomLevel',$this->mapZoomLevel);
+		$criteria->compare('region',$this->region);
 		if($pager){
 			return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,

@@ -69,22 +69,49 @@ class ModulesController extends Controller{
 
 	public function actionContacts(){
 		$model = new InsurContacts();
+		$modelRegion = new InsurRegion();
 		if(isset($_POST['InsurContacts'])){
 			if(isset($_GET['id'])){
 				$model=InsurContacts::model()->findByPk($_GET['id']);
 			}
 			$model->attributes = $_POST['InsurContacts'];
-			$model->creat_date = date("Y-m-d H:i:s");
+			if(isset($_POST['name'])){
+				$model->region=$_POST['name'];
+			}
+			$model->create_date = date("Y-m-d H:i:s");
 			$model->save();
 		}elseif(isset($_GET['id'])){
 			$model = InsurContacts::model()->findByPk($_GET['id']);
 
 		}
-		$this->render('contacts',array('model'=>$model));
+		Yii::import('application.extensions.gmap3.*');
+		/* $gmap = new EGmap3Widget();
+		$options = array(
+				'scaleControl' => true,
+				'streetViewControl' => false,
+				'zoom' => 1,
+				'center' => array(0,0),
+				'mapTypeId' => EGmap3MapTypeId::HYBRID,
+				'mapTypeControlOptions' => array(
+						'style' => EGmap3MapTypeControlStyle::DROPDOWN_MENU,
+						'position' => EGmap3ControlPosition::TOP_CENTER,
+				),
+				'zoomControlOptions' => array(
+						'style' => EGmap3ZoomControlStyle::SMALL,
+						'position' => EGmap3ControlPosition::BOTTOM_CENTER
+				),
+		);
+		$gmap->setOptions($options);
+		$address = new InsurContacts();
+
+		// init the map
+		$gmap = new EGmap3Widget();
+		$gmap->setOptions(array('zoom' => 14));
+ */		$this->render('contacts',array('model'=>$model,/* 'gmap'=>$gmap, */'modelRegion'=>$modelRegion));
 	}
 	public function actionGetContacts(){
 		$gridDataProvider = action::getContacts(false,true);
-		$this->render('getjContacts',array('gridDataProvider'=>$gridDataProvider));
+		$this->render('getContacts',array('gridDataProvider'=>$gridDataProvider));
 	}
 	public function actionUpdateStatusContacts(){
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
@@ -110,13 +137,13 @@ class ModulesController extends Controller{
 		}
 
 		if(isset($_GET['id'])){
-			$model = InsurJobs::model()->find(array('condition'=>"id=".$_GET['id']));
+			$model = InsurContacts::model()->find(array('condition'=>"id=".$_GET['id']));
 			if(isset($model->id)){
 				$model->delete();
 			}
-			$model = new InsurJobs();
+			$model = new InsurContacts();
 			$gridDataProvider = $model->search();
-			$this->render('getjobs',array('gridDataProvider'=>$gridDataProvider));
+			$this->render('getcontacts',array('gridDataProvider'=>$gridDataProvider));
 		}
 
 	}
