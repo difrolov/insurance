@@ -80,6 +80,18 @@ class BannerController extends Controller{
 				$model->place = 'outside';
 				$model->date_edit = date('Y-m-d H:i:s');
 				$model->save();
+				$model = new InsurBanners();
+				$model->name="банер1";
+				$model->status = 0;
+				$model->place = 'outside';
+				$model->date_edit = date('Y-m-d H:i:s');
+				$model->save();
+				$model = new InsurBanners();
+				$model->name="банер1";
+				$model->status = 0;
+				$model->place = 'outside';
+				$model->date_edit = date('Y-m-d H:i:s');
+				$model->save();
 			}
 		}
 		$this->redirect(Yii::app()->createUrl('admin/banner/getbanner'));
