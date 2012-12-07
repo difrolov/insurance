@@ -52,7 +52,7 @@
 								$build=>$build,
 								$dangerous=>$dangerous
 							);
-					echo CHtml::dropDownList('insur_species','',$listOptions);?>
+					echo CHtml::dropDownList('insur_species','',$listOptions,array('onblur'=>'toggleFieldWarning(this.id);'));?>
                 </td>
               </tr>
               <tr>
