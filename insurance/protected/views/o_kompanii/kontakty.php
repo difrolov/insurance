@@ -1,39 +1,4 @@
-<style>
-div.dropDown{
-	background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #CCCCCC;
-    box-shadow: 3px 4px 10px #333333;
-    padding: 13px 14px 17px;
-
-}
-div.dropDown li{
-	list-style: none outside none;
-	cursor:pointer;
-}
-a.txtLightBlue{
-	font-size:14.5px;
-}
-div.jDef{
-	padding-top:0 !important;
-	padding-left:0 !important;
-}
-dl{
-
-}
-dl *{
-	font-size:13.5px;
-}
-dt {
-	margin-top:22px;
-}
-dd{
-	margin-left:15px;
-}
-dl p{
-	margin:0;
-	line-height:20px;
-}
-</style>
+<h2 class="txtLightBlue">Контакты</h2>
 <?php
 /* @var $this SiteController */
 /* @var $model ContactForm */
@@ -53,11 +18,6 @@ Yii::import('application.extensions.gmap3.*');
 
 /* @var $form CActiveForm */
 
-?>
-
-<h1>Контакты</h1>
-
-<?php
 $gridDataProvider = action::getContacts('status=1');
 $arrContacts = $gridDataProvider->data;
 $contr = new Controller('O_кompanii');
