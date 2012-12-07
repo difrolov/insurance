@@ -22,7 +22,7 @@
 			$slink=(isset($arrBanOut[$s]['link']))? $arrBanOut[$s]['link']:'';
 			$bname=(isset($arrBanOut[$s]['name']))? $arrBanOut[$s]['name']:'название не обнаружено...';?>        
         	<div id="slide-<?=$subname?>">
-            	<div><img src="<?=$baseURL.$imgsrc?>"></div>
+            	<div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
             		<div>
                 		<div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
                     	<div><?=$subheader?></div>
@@ -177,13 +177,10 @@ $( function(){
     <li><p>Круглосуточная поддержка клиентов.</p></li>
   </ol>
 </div>
-
-
 <div id="content_from_right"><?
-$museum_link='musey_strahovanija';
-$img_museum=setHTML::getBannersAsObjects('outside',1,'`link` = "'.$museum_link.'" LIMIT 1');
-if (!isset($img_museum[0]['src'])) $img_museum[0]['src']='';
-?><a href="<?=$baseURL?><? Data::buildAliasPath($museum_link);?>"><img src="<?=$baseURL.$img_museum[0]['src']?>" id="company_museum"></a>
+$arrBan2=setHTML::getBannersAsObjects('inside');
+if (!isset($arrBan2[0]['src'])) $arrBan2[0]['src']='';
+?><a href="<?=$baseURL?><? Data::buildAliasPath($arrBan2[0]['link']);?>"><img src="<?=$baseURL.$arrBan2[0]['src']?>" id="company_museum"></a>
 </div>
 <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
 	if ($tp){?><h3>/tblSlides</h3><? }?>
