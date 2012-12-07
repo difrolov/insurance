@@ -145,24 +145,23 @@ try{
 						for(c=0;c<indexText;c++) {
 																
 							indexBack=indexText-c-1;
-
 							if (jsArrText[indexBack])
 								checkDot=jsArrText[indexBack].indexOf(".");
 							if ( // ЕСЛИ не конец текста
-								 indexText<textWordsLimit 
+								 indexText<jsArrText.length 
 								 // предыдущее слово не содержит точку
 								 && checkDot==-1
-								 // длина сгенерированного текста не более максимально <допустимой длины конечного фрагмента> (ограничитель внешнего цикла здесь не действует)
-								 //&& newTextCnt<textWordsLimit
 							   ) {
 								// ЕСЛИ первая итерация текущего (внутреннего) цикла
 								
+								console.info('IN LOOP, c = '+c);
 								if (c==0) {
 									// +++увеличить конечный фрагмент на выделенное слово
 									newText=lastWord=bunch;
 							   	}
 								// +++ ПРИСОЕДИНИТЬ к конечному фрагменту ПРЕДЫДУЩЕЕ СЛОВО
 								newText=jsArrText[indexBack]+' '+newText;
+								console.info('checkDot = '+checkDot+'\njsArrText[indexBack] = \n'+jsArrText[indexBack]);
 							}
 						// КОНЕЦ ЦИКЛА текущего фрагмента
 						}
