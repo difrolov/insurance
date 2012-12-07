@@ -495,7 +495,6 @@ class setHTML{
 								  $and=false, 
 								  $order_by=false
 								){
-		//static $arrBanners=array();
 		if (empty($arrBanners)){	
 			$query="SELECT * FROM insur_banners";
 			if ($place)	$query.=" 
@@ -504,7 +503,7 @@ class setHTML{
 				$query.="
     AND $and";
 			if ($order_by) $query.=" 
-  ".$order_by;  //echo "<div class=''>query= ".$query."</div>";
+  ".$order_by;  
 			$arrBanners=Yii::app()->db->createCommand($query)->queryAll();
 		}
 		return $arrBanners;

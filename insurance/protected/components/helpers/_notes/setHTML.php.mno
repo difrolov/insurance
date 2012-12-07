@@ -2,4 +2,6 @@
 <info>
 	<infoitem key="MM_css_include" value="../../../css/style.css,../../../css/test.css" />
 	<infoitem key="MM_css_exclude" value="" />
+	<infoitem key="notes" value="Убрать скрипт, обрабатывающий меню предпросмотра" />
+	<infoitem key="showOnOpen" value="true" />
 </info>
