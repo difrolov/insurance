@@ -9,6 +9,7 @@
 		$arrFoundWords="'".implode("','",$aWords)."'";?>
 <script>
 arrFoundWords=new Array(<?=$arrFoundWords?>);
+textWordsLimit=60;
 </script>
 <?	}?>
 <form method="post">
@@ -88,6 +89,9 @@ arrFoundWords=new Array(<?=$arrFoundWords?>);
 .found{
 	background:#FF0;
 }
+table.tblResults td {
+	border-bottom: solid 1px #666;
+}
 </style>
 <br>
 <hr>
@@ -95,86 +99,92 @@ arrFoundWords=new Array(<?=$arrFoundWords?>);
 <hr>
 <h2 class="txtLightBlue" style="margin:-4px 0 18px 25px">Результат поиска:</h2>
 <div>
-<table width="100%" cellspacing="0" cellpadding="0">
+<table class="tblResults" width="100%" cellspacing="0" cellpadding="10">
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
-
 <?	$ww=0;
-	
 	foreach($res as $name=>$text):
-		$text=strip_tags($text); 
+		$text=strip_tags($text);
+		$text=str_replace("&nbsp;"," ",$text); 
 		$ww++;?>
   <tr>
     <td>&nbsp;</td>
     <td><?=$name?></td>
-    <td><div id="content<?=$ww?>"></div><hr><?
-	echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='ptext".$ww."'>".$text."</div><hr>$arrFoundWords";?>
+    <td><div id="content<?=$ww?>"></div><?
+	echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='ptext".$ww."'>".$text."</div>";?>
 <script>
+<?	$loop=true;
+	if($loop){?>
 try{
-	var b=0,bunch='',newText='',wCount,pStart,pFinish,arrTextWords;
+	var b=0, bunch='', newText='', newTextCnt=0, checkDot, indexBack=0, lastWord='';
 	var html=$('#ptext<?=$ww?>');
-	arrTextWords=$(html).text().split(" "); // text words array
-	// найденные слова:
-	$(arrFoundWords).each( function(index2,word){
-		
-		// пройтись по всему масиву слов текста, найти и выделить совпадения
-		$(arrTextWords).each(function(index, textElem) {
-		// каждое найденное слово:
-	
-		// если совпало со словом из распарсенного текста:	
-			if (textElem.toLowerCase().indexOf(word.toLowerCase())!=-1){ // ключевой момент - первое совпадение, после этого алгоритм генерации текста изменяется
-				console.info('word = '+word+', textElem = '+textElem);
-				// выделить:
-				bunch=' <span class="found">'+textElem+'</span> ';
-					if (!b){
-						var prevWord='',b=0; // b+1 - длина претекста
-						// добавить текст слева
-						do{	b++;
-							prevWord=arrTextWords[index-b];
-							bunch=prevWord+bunch;
-						}while( prevWord
-								 && prevWord.indexOf(".")=-1
-							   )
-					}
-					
-					/*var b=0;
-					for (i=10;i;i--){ // по 4 слова
-						b++;
-						if (index>=b&&i>3){ // если слева уже не менее 4-х слов:
-							// проверить на совпадение с другими найденными словами:
-							$(arrTextWords).each( function(bindex,bword){
-								if(bword==arrTextWords[index-b]) return false;
-							});
-							bunch=arrTextWords[index-b]+' '+bunch;
-							console.info('\n\ni = '+i+' << index= '+index+', b= '+b+', предыдущее слово: '+arrTextWords[index-b]+'\n\n');
-						}
-						
-						if ($(arrTextWords).size()>=index+b){
-							$(arrTextWords).each( function(bindex,bword){
-								if(bword==arrTextWords[index+b]) return false;
-							});
-							bunch+=' '+arrTextWords[index+b];
-							console.info('\n\ni = '+i+' >> index= '+index+', b= '+b+', следующее слово: '+arrTextWords[index+b]+'\n\n');
-						}
-					}*/
-					//console.info('\n\nfound! bunch: '+bunch+'\n\n');
-					//console.info('\nbunch = '+bunch);
-					//newText+=' ...'+bunch+'... ';
-					//console.info('\n\nnewText = '+newText);
-					if (b>0) return false;
-				}
-				console.info('after false');
-		});	
-	
-	
-	});
-	
-		
+	var arrTextWords=$(html).text().split(" "); // text words array
+	var jsArrText=$(arrTextWords).toArray();
+	// ЦИКЛ слов текста; ДЕЛАТЬ:
+	$(arrTextWords).each( function(indexText, textElem) {
+		if (indexText>=textWordsLimit&&b>0) {
+			if (newText[newText.length-1].indexOf(".")==-1)
+				newText+=' ...';
+			return false; 
+		}
+		$.trim(textElem);
+		// текущее слово
+			// ЦИКЛ найденных слов 
+			$(arrFoundWords).each( function(indexFound, foundElem){
+				// ЕСЛИ текущее слово ТЕКСТА совпадает с текущим словом из НАЙДЕННЫХ
+				if (textElem.toLowerCase().indexOf(foundElem.toLowerCase())!=-1){
+					// console.info('ENTER LOOP\n========================================================================================\nindexFound = '+indexFound+', textElem = '+textElem+', foundElem = '+foundElem);
+					// +++ ВЫДЕЛИТЬ НАЙДЕННОЕ СЛОВО
+					bunch=' <span class="found">'+textElem+'</span> ';
+					// ЕСЛИ первое совпадение в тексте
+					if (b==0) {	
+						// ЦИКЛ текущего фрагмента (т.е., набор перебранных к данному моменту слов):
+						for(c=0;c<indexText;c++) {
+																
+							indexBack=indexText-c-1;
 
-	$('#content<?=$ww?>').html(newText+"<hr>");
+							if (jsArrText[indexBack])
+								checkDot=jsArrText[indexBack].indexOf(".");
+							if ( // ЕСЛИ не конец текста
+								 indexText<textWordsLimit 
+								 // предыдущее слово не содержит точку
+								 && checkDot==-1
+								 // длина сгенерированного текста не более максимально <допустимой длины конечного фрагмента> (ограничитель внешнего цикла здесь не действует)
+								 //&& newTextCnt<textWordsLimit
+							   ) {
+								// ЕСЛИ первая итерация текущего (внутреннего) цикла
+								
+								if (c==0) {
+									// +++увеличить конечный фрагмент на выделенное слово
+									newText=lastWord=bunch;
+							   	}
+								// +++ ПРИСОЕДИНИТЬ к конечному фрагменту ПРЕДЫДУЩЕЕ СЛОВО
+								newText=jsArrText[indexBack]+' '+newText;
+							}
+						// КОНЕЦ ЦИКЛА текущего фрагмента
+						}
+					}
+					b++; // console.info('\n========================================================================================\nLEAVE LOOP\n');
+				}
+				// КОНЕЦ ЦИКЛА найденных слов
+			});
+			// +++ ПРИСОЕДИНИТЬ к конечному фрагменту следующее слово
+			if (bunch=='') { 
+				newText+=' '+textElem;
+			}
+			else if (lastWord!=bunch) {
+					newText+=' '+bunch;
+			}
+			newTextCnt++;
+			bunch='';
+	// ПОКА ВЕЛИЧИНА ИТЕРАТОРА НЕ БОЛЕЕ <допустимой длины конечного фрагмента> (см. условие в начале цикла)
+    });
+<?	}?>		
+	$('#content<?=$ww?>').html(newText);
+	$(html).remove();
 }catch(e){
 	alert(e.message);
 }

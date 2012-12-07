@@ -147,7 +147,7 @@ WHERE id IN ( $resultStr )")->queryAll()){
 						$res[$row['name']]=$row['content'];
 					}
 				}
-			}else $res="Данных не обнаружено...";
+			}else $res="Данных не обнаружено..."; // die();
 		}else{
 			$keyword=false;
 			$res="Введите поисковый запрос...";

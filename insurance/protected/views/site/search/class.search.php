@@ -91,6 +91,7 @@ class search_engine
             {
                 $pattern = trim($this->keyword[$i]);
                 $sql = "SELECT * FROM ".$this->table." WHERE `".$this->field[$n]."` LIKE '%".$pattern."%'";
+				// echo "<div>sql: <hr><pre>".$sql."</pre></div>";
                 $result = mysql_query($sql);
                 while ($row = mysql_fetch_object($result) AND !empty($pattern))
                 {
