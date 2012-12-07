@@ -48,14 +48,17 @@ div#banners3 {
 	height:136px;
 	width:210px;
 }
-#banners4{
-	margin:10px;
-	margin-top:16px !important;
-	margin-right:0 !important;
+#banners4,
+#content_from_right{
+	border-right-color:#00AFDE;
+}
+div#banners4{
+	border-width:14px;
+	margin:16px 0 10px 10px !important;
 	min-height:90px;
 }
 #banners4 img{
-	width:215px;
+	width:187px; /* 215: 201,187*/
 }
 body > 
 	div:first-child{
@@ -69,6 +72,13 @@ div#all_phones{
 }
 .bold{
 	font-weight:bold;
+}
+.imgBannerBorder{
+	border-style:solid;
+	border-color:#D5D7D6;
+}
+.imgBannerBorder a{
+	background-color:#D5D7D6;
 }
 div#bottom_insur{
 	margin-top:16px;
@@ -124,8 +134,6 @@ div#call_us
 	letter-spacing:-0.1em;
 }
 img#company_museum{
-	border:solid 22px #D5D7D6; 
-	border-right-color:#00AFDE;
 	height:248px;
 	width:252px; 
 }
@@ -233,11 +241,12 @@ div#content
 	font-size:1.35em;
 }
 div#content_from_right{
+	border-width:22px !important; 
 	display:inline-block;
-	padding-top:10px;
+	margin-top:10px;
 	vertical-align:top;
+	width:252px; /* 296 - 44 */
 }
-div#content_from_right,
 div#last_news{
 	width:296px; 
 }
