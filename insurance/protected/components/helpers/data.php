@@ -1,6 +1,47 @@
 <?
 class Data {
 /**
+ * Построить цепочку алиасов к конкретно взятой странице
+ * @package
+ * @subpackage
+ */
+	static public function buildAliasPath($start_point,$parent_alias=false){
+		if (!$parent_alias) { // первая итерация (начало извлечения алиасов)
+			if (!$start_point || gettype($start_point)=='string') { 
+				$field='alias';
+				$alias_path=$start_point;
+			}else{
+				$field='id';
+				$alias_path=self::getAliasById($start_point);
+			}
+			$condition=$start_point;
+		}else{ // продолжение извлечения алиасов
+			$field="alias";
+			$condition=$parent_alias;
+			$alias_path=$start_point."/".$parent_alias;
+		}	
+		if( $get_parent_alias = Yii::app()->db->createCommand()->select('
+       ( SELECT alias 
+          FROM insur_insurance_object
+         WHERE id = t.parent_id
+       ) AS parent_alias')->from('insur_insurance_object AS t')->where($field." = '$condition' LIMIT 1")->queryScalar()){
+		   self::buildAliasPath(&$alias_path,$get_parent_alias);
+		}else{ 
+			if ($alias_path){
+				echo implode("/",array_reverse(explode("/",$alias_path)));
+			}else 
+				return false;
+		}
+	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function getAliasById($id){
+		return Yii::app()->db->createCommand()->select('alias')->from('insur_insurance_object')->where("id = ".$id)->queryScalar(); 
+	}
+/**
   * @package		content
   * @subpackage		navigation
   * Загружает контент раздела/подраздела из БД по полученному алиасу
@@ -33,8 +74,9 @@ class Data {
 				// o_kompanii/istorija/historical/?mode=preview
 			if($hash!=$subsection) $subsection=$hash;
 		}
-		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
+		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection); 
 		$obj->pageTitle=$data->title;
+		$_SESSION['SUBSECTION_DATA_ARRAY']=array('alias'=>$data->alias); // метка для элементов, специфичных для подразделов, созданных генератором
 		$obj->render('index', array('res' => $data));
 	}
 
@@ -101,6 +143,24 @@ order by id ASC";
 		}
 		return $result;
 	}
+/**
+ * Подключить дополнительную таблицу стилей
+ * @package
+ * @subpackage
+ */
+	function includeXtraCss($file_path=false){
+		if (!$file_path) $file_path='xtra_modules.css';
+		echo '<link href="'.Yii::app()->request->getBaseUrl(true).'/css/'.$file_path.'" rel="stylesheet" type="text/css">';	
+	}
+/**
+ * Подключить дополнительный клиентский скрипт
+ * @package
+ * @subpackage
+ */
+	function includeXtraJS($file_path=false){
+		echo '<script src="'.Yii::app()->request->getBaseUrl(true).'/js/'.$file_path.'"></script>';	
+	}
+
 /**
  * Модифицирует массив модулей, приводя его к виду "folder_name"=>"Название модуля"
  * @package

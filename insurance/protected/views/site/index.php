@@ -1,34 +1,84 @@
-<? if(isset($_GET['stop']))die("index by default"); $tp=false;?>
-
+<? 	if(isset($_GET['stop']))die("index by default"); 
+	$tp=false;
+	$baseURL=Yii::app()->request->getBaseUrl(true)."/"?>
 <!-- slide_marks -->
 <?	if ($tp){?><h3>/slide_marks</h3><? }?>
 		<!-- /slide_marks -->
 		<!-- tblSlides -->
-<?		if ($tp){?><h3>tblSlides</h3><? }?>
+<?	// получить баннеры для слайд-шоу: 
+	$arrBanOut=setHTML::getBannersAsObjects('outside');
+	//if (empty($arrBanOut)) die('empty');
+	if ($tp){?><h3>tblSlides</h3><? }
+	if (!(isset($_GET['slides'])&&!$_GET['slides'])) {?>
     	<div align="center" id="slides">
-        	<div id="slide-first">
-            	<div></div>
-            	<div>
-                	<div><a href="#">Добровольное мед. страхование</a></div>
-                    <div>для корпоративных клиентов</div>
-                </div>
-            </div>
-            <div id="slide-middle">
-            	<div></div>
-            	<div>
-                	<div><a href="#">Финансовые риски</a></div>
-                    <div>малому и среднему бизнесу</div>
-                </div>
-            </div>
-            <div id="slide-last">
-            	<div></div>
-            	<div>
-                	<div><a href="#">Страхование квартиры</a></div>
-                    <div>Для физических лиц</div>
-                </div>
-            </div>
-        </div>
-        
+<?	$arrSlides=array('first'=>'Для корпоративных клиентов',
+					'middle'=>'Малому и среднему бизнесу',
+					'last'=>'Для физических лиц'
+				);
+		$s=0;
+		foreach($arrSlides as $subname=>$subheader): 
+			// заплатки. А куда ж без них, если кривые ручки баннеры вставляют!
+			$imgsrc=(isset($arrBanOut[$s]['src']))? $arrBanOut[$s]['src']:'';
+			$slink=(isset($arrBanOut[$s]['link']))? $arrBanOut[$s]['link']:'';
+			$bname=(isset($arrBanOut[$s]['name']))? $arrBanOut[$s]['name']:'название не обнаружено...';?>        
+        	<div id="slide-<?=$subname?>">
+            	<div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
+            		<div>
+                		<div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
+                    	<div><?=$subheader?></div>
+                	</div>
+            	</div>
+         <?	$s++;
+		endforeach;?>            
+        	</div>
+<?	}else{?>
+<link href="<?	
+require_once Yii::app()->request->getBaseUrl(true).'/css/slideshow.css';	
+	?>" rel="stylesheet" type="text/css">
+<table id="tblSlides" cellspacing="0">
+	<tr>
+    	<td style="width:29px; padding-left:6px;"><button class="prev">&lt;</button></td>
+        <td align="center"><div id="gallery1" class="gallery">
+    			<ul>
+	<?	foreach($arrBanOut as $i=>$value):?>
+        			<li style="position:relative;">
+                    	<div class="linkArea">Чиста для ссылки понимаеш!</div>
+                    <img src="<?=$baseURL.$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
+	<?	endforeach;?>
+    			</ul>
+        	</div> </td>
+        <td align="center">
+        	<div id="gallery2" class="gallery">
+    			<ul>
+	<?	foreach($arrBanOut as $i=>$value):?>
+        			<li><img src="<?=$baseURL.$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
+	<?	endforeach;?>
+    			</ul>
+        	</div>                 
+		</td>
+        <td align="center"><div id="gallery3" class="gallery">
+    			<ul>
+	<?	foreach($arrBanOut as $i=>$value):?>
+        			<li><img src="<?=$baseURL.$arrBanOut[$i]['src']?>" title="<?=$arrBanOut[$i]['src']?>"/></li>
+	<?	endforeach;?>
+    			</ul>
+        	</div> </td>
+        <td style="width:29px;"><button class="next">&gt;</button></td>
+	</tr>
+	<tr>
+	  <td style="width:29px; padding-left:6px;">&nbsp;</td>
+	  <td align="center">&nbsp;</td>
+	  <td align="center">&nbsp;</td>
+	  <td align="center">&nbsp;</td>
+	  <td style="width:29px;">&nbsp;</td>
+  </tr>
+</table>
+<? 	// *************************************************************
+	//source: http://www.xiper.net/collect/js-plugins/gallery/jcarousellite.html?>
+<script type="text/javascript" src="<?=$baseURL?>js/jcarousellite.js"></script>
+<script src="<?	
+require_once Yii::app()->request->getBaseUrl(true)?>/js/slideshow.js"></script>
+<?	} // **********************************************************?>
 <div id="content_from_left" align="left">
   <div id="why_open" class="txtLightBlue">Почему &laquo;Открытие&raquo;?</div>
   <!--<p>Сайт предназначен для:</p>-->
@@ -56,9 +106,8 @@
     <li><p>Круглосуточная поддержка клиентов.</p></li>
   </ol>
 </div>
-
-
-<div id="content_from_right"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/pix/old_cars.gif" width="296" height="284">
+<div id="content_from_right"><?	
+require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners2.php';?>	
 </div>
 <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
 	if ($tp){?><h3>/tblSlides</h3><? }?>

@@ -1,4 +1,15 @@
 <style>
+div.dropDown{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 3px 4px 10px #333333;
+    padding: 13px 14px 17px;
+
+}
+div.dropDown li{
+	list-style: none outside none;
+	cursor:pointer;
+}
 a.txtLightBlue{
 	font-size:14.5px;
 }
@@ -7,7 +18,7 @@ div.jDef{
 	padding-left:0 !important;
 }
 dl{
-	display:<?="none"?>;
+
 }
 dl *{
 	font-size:13.5px;
@@ -26,6 +37,7 @@ dl p{
 <?php
 /* @var $this SiteController */
 /* @var $model ContactForm */
+
 /* @var $form CActiveForm */
 
 /* $this->pageTitle=Yii::app()->name . ' - Контакты';
@@ -38,24 +50,22 @@ $this->breadcrumbs=array(
 //google maps
 Yii::import('application.extensions.gmap3.*');
 
+
+/* @var $form CActiveForm */
+
 ?>
 
 <h1>Контакты</h1>
-<?	//var_dump("<h1>this:</h1><pre>",$this,"</pre>");?>
 
 <?php
 $gridDataProvider = action::getContacts('status=1');
 $arrContacts = $gridDataProvider->data;
 $contr = new Controller('O_кompanii');
-$contr->widget('CAutoComplete',
-		array(
-				'model'=>'InsurRegion',
-				'name'=>'name',
-				'url'=>array('admin/Ajax/autocompleteRegion'),
-				'minChars'=>2,
-				'htmlOptions'=>array('onchange'=>'$("."+$(this).val()).show()')
-		)
-);
+?>
+Выберете регион &nbsp
+<input id="region" type="text"  style="width:360px"/>
+
+<?php
 for ($i=0,$j=count($arrContacts);$i<$j;$i++){
 	$cont=$arrContacts[$i];
 	$gmap = new EGmap3Widget();
@@ -114,13 +124,12 @@ for ($i=0,$j=count($arrContacts);$i<$j;$i++){
 			// HTML options to pass to the field
 			array('class' => 'myCustomClass')
 	);
-?><div class="<?=$cont['region']?>" style="display:none">><?php
+?><div class="" data-region="<?=$cont['region']?>" style="display:none"><?php
 	$gmap->renderMap();
 	?>
-  <a name="job<?=$i?>"></a>
+  <a name="job<?=$i?>" href="#" onclick="return false;" class="txtLightBlue"><?=$cont['baranch_name']?></a>
   <div class="jDef">
-    	<?=$cont['baranch_name']?>
-	  <dl>
+	 <dl>
         <dt>Адрес:</dt>
             <dd><?=$cont['region']." ".$cont['address']?></dd>
 
@@ -135,3 +144,31 @@ for ($i=0,$j=count($arrContacts);$i<$j;$i++){
 }?>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=ru"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/assets/gmap3.min.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery.autocomplete.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#region").autocomplete(baseUrl+"/Ajax/autocompleteRegion", {
+    delay:10,
+    minChars:2,
+    matchSubset:1,
+    autoFill:true,
+    matchContains:1,
+    cacheLength:10,
+    selectFirst:true,
+    resultsClass:'dropDown',
+    maxItemsToShow:10,
+    onItemSelect:selectItem
+  });
+});
+
+
+function selectItem(li) {
+	if( li == null ) sValue = "Ничего не выбрано!";
+	if( !!li.extra ) sValue = li.extra[2];
+	else sValue = li.selectValue;
+	$("div[data-region='"+sValue+"']").attr('style','dispaly:bock');
+
+
+}
+
+</script>

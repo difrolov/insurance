@@ -48,8 +48,6 @@ foreach ($out_query as $key=>$value){
 <?php
 }
 ?>
-
-
 </div>
 
 <?php

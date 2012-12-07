@@ -19,7 +19,70 @@ class SiteController extends Controller
 			),
 		);
 	}
-
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public function actionSendApplication(){
+/*	var_dump("<h1>post:</h1><pre>",$_POST,"</pre>");
+array(5) {
+  ["name"]=>
+  string(12) "Сержик"
+  ["email"]=>
+  string(16) "srgg67@gmail.com"
+  ["phone"]=>
+  string(12) "+79044428447"
+  ["message"]=>
+  string(40) "Мессага такая мессага"
+  ["yt0"]=>
+  string(19) "Отправить!"
+}
+*/		
+		$email = Yii::app()->email;
+		$email->to = Yii::app()->params['adminEmail'];
+		$email->from = $_POST['email'];
+		$email->subject = 'Заявка потенциального клиента';
+		$email->message = $_POST['message']."
+<hr>
+<P>Данные заказчика:</P>
+<P>имя: $_POST[name]</P>
+<P>email:  $_POST[email]</P>
+<P>телефон: $_POST[phone]</P>";
+		if (!$email->send())
+			die("<div style='color:red;'>Ошибка отправки почты...</div>");
+		else{?>
+<script>
+alert('Сообщение отправлено!\nМы свяжемся с вами в ближайшее время. Спасибо за обращение в нашу компанию!');
+location.href='<?=Yii::app()->request->getBaseUrl(true)?>';
+</script>        
+	<?		//$this->redirect(Yii::app()->request->getBaseUrl(true));
+		}
+	}	
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public function actionSendQuestion(){
+		$email = Yii::app()->email;
+		$email->to = Yii::app()->params['adminEmail'];
+		$email->from = $_POST['email'];
+		$email->subject = 'Вопрос потенциального клиента';
+		$email->message = $_POST['message']."
+\nДанные потенциального клиента:
+\nимя: $_POST[name]
+\nemail:  $_POST[email]";
+		if (!$email->send())
+			die("<div style='color:red;'>Ошибка отправки почты...</div>");
+		else{?>
+<script>
+alert('Спасибо за ваш вопрос!\nМы постараемся ответить на него в ближайшее время.');
+location.href='<?=Yii::app()->request->getBaseUrl(true)?>';
+</script>        
+	<?		//$this->redirect(Yii::app()->request->getBaseUrl(true));
+		}
+	}
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -76,8 +139,12 @@ FROM insur_article_content
 WHERE id IN ( $resultStr )")->queryAll()){
 				for($i=0,$j=count($results);$i<$j;$i++){
 					$row=$results[$i];
-					foreach ($row as $field=>$content)
+					foreach ($row as $field=>$content) {
+						//$arrCont=explode(" ",$row['content']);
+						//$trim=array_slice($arrCont,0,40);
+						//$res[$row['name']]=implode(" ",$trim);
 						$res[$row['name']]=$row['content'];
+					}
 				}
 			}else $res="Данных не обнаружено...";
 		}else{

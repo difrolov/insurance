@@ -5,6 +5,30 @@ class setHTML{
 	static $arrMenuWidgetSecond;
 
 /**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function buildAdminSubmenu($subMenuItems){
+		if (is_array($subMenuItems)){
+			foreach($subMenuItems as $alias_value=>$link_text):
+				if (is_array($link_text)){
+					$level=(isset($link_text['level']))? $link_text['level']:0;
+					if ($level>1):?>
+                    <blockquote>
+				<?	endif;//echo "alias_value= $alias_value<br>";
+					self::buildAdminSubmenu($link_text);
+					if ($level>1):?>
+					</blockquote>
+			<?		endif;
+				}elseif ($alias_value=="name"){
+				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
+		<a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
+			<?	}
+			endforeach;
+		}
+	}
+/**
  * @package HTML
  * @subpackage navigation
  *
@@ -115,8 +139,10 @@ class setHTML{
 										  $parent_id=false,
 										  $top_level=false
 										){
-		$admin_mode=(strstr($_SERVER['REQUEST_URI'],"/admin")) ? true:false;
-		//is_object(Yii::app()->controller->module))? true:false;
+		$admin_mode=( // проверить, где находимся - frontend or backend
+			is_object(Yii::app()->controller->module)
+			&& Yii::app()->controller->module->id=='admin'
+		) ? true:false;
 		if (!$admin_mode)
 			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
@@ -350,7 +376,9 @@ class setHTML{
 				$ready_target="клиентов банка &quot;Открытие&quot;";
 				$all_ready_target="физических лиц";
 			break;
-		}?>
+		}	
+		$model = new InsurBanners();
+		var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();?>
 				<div class="solution_content"><?
     	if (isset($test_logo)){
 			?><img src="../../../images/ready_solutions/for_business.jpg" width="248" height="143"><?
@@ -375,30 +403,6 @@ class setHTML{
                     </form>
                 </div>
 <?	}
-/**
- * Описание
- * @package
- * @subpackage
- */
-	public static function buildAdminSubmenu($subMenuItems){
-		if (is_array($subMenuItems)){
-			foreach($subMenuItems as $alias_value=>$link_text):
-				if (is_array($link_text)){
-					$level=(isset($link_text['level']))? $link_text['level']:0;
-					if ($level>1):?>
-                    <blockquote>
-				<?	endif;//echo "alias_value= $alias_value<br>";
-					self::buildAdminSubmenu($link_text);
-					if ($level>1):?>
-					</blockquote>
-			<?		endif;
-				}elseif ($alias_value=="name"){
-				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
-		<a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
-			<?	}
-			endforeach;
-		}
-	}
 /**
  * @package		HTML
  * @subpackage		menu
@@ -482,6 +486,29 @@ class setHTML{
 		}
 	}
 /**
+ * Получить и разместить баннеры:
+ * @package
+ * @subpackage
+ */
+	function getBannersAsObjects( $place=false, 
+								  $status=1, 
+								  $and=false, 
+								  $order_by=false
+								){
+		if (empty($arrBanners)){	
+			$query="SELECT * FROM insur_banners";
+			if ($place)	$query.=" 
+  WHERE place ='$place' AND `status` = $status";
+			if ($and)
+				$query.="
+    AND $and";
+			if ($order_by) $query.=" 
+  ".$order_by;  
+			$arrBanners=Yii::app()->db->createCommand($query)->queryAll();
+		}
+		return $arrBanners;
+	}
+/**
  * @package		HTML
  * @subpackage		menu
  * получить меню верхнего уровня
@@ -560,9 +587,12 @@ class setHTML{
 		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
 			$section_data->first_header=$section_data->name;?>
-	<div id="inner_left_menu">
+	<div class="floatLeft">
+    	<div id="inner_left_menu">
 	<?	// сгенерировать ссылки:
 		self::buildLeftStaticMenu($section_data->id);?>
+    	</div>
+    <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners4.php';?>	
     </div>
     <?	// если тестируемся:
 		if ($test) {
@@ -572,149 +602,12 @@ class setHTML{
 			echo "title: ".$section_data->title."<hr>";
 			echo "keywords: ".$section_data->keywords."<hr>";
 			echo "description: ".$section_data->description."<hr>";
-		}else { // загрузить макет?>
-<style type="text/css">
-/******** Для элементов всех макетов: ********/
-div#inner_content{
-	width:100%;
-}
-div#inner_content .clear{
-	float: none;
-	width: 100%;
-}
-div#inner_content
-	> div > div{
-	padding: 10px;
-	padding-left: 8px;
-}
-
-div#inner_content
-	> div > div .subsectHeader{
-	font-size:16px;
-	margin:0;
-}
-div#inner_content
-	> div > div .contentHeader{
-	color:#06AEDD;
-	font-size:16px;
-	margin:0;
-	margin-bottom:10px;
-}
-div#div1{
-	float:left;
-}
-
-/******** Для индивидуальных макетов: ********/
-
-div.schema100,
-	div.schema100> div{
-	width:100%;
-}
-
-div.schema200 > div#div1,
-div.schema200 > div#div2{
-	width:50%;
-}
-	div.schema200 > div#div2{
-		float:right;
-	}
-
-div.schema210 > div{
-	width:50%;
-}
-	div.schema210 > div#div2,
-	div.schema210 > div#div3{
-		float:right;
-	}
-
-div.schema300 > div{
-	float:left;
-	width:33%;
-}
-	div.schema300 > div#div3{
-		width:34%;
-	}
-
-div.schema3i0 > div{
-	float:left;
-	width:33%;
-}
-	div.schema3i0 > div#div1{
-		 margin-right:-33%;
-	}
-	div.schema3i0 > div#div2,
-	div.schema3i0 > div#div4{
-		 margin-left:33%;
-	}
-	div.schema3i0 > div#div3{
-		float:right;
-		width:34%;
-	}
-
-div.schema3s0 > div{
-	float:left;
-	width:33%;
-}
-	div.schema3s0 > div#div1{
-		margin-right:-33%;
-	}
-	div.schema3s0 > div#div2{
-		margin-left:33%;
-		width:67%;
-	}
-	div.schema3s0 > div#div3{
-		margin-left:33%;
-	}
-	div.schema3s0 > div#div4{
-		width:34%;
-	}
-
-div.schema3ss > div{
-	float:left;
-	width:33%;
-}
-	div.schema3ss > div#div1{
-		margin-right:-33%;
-	}
-
-	div.schema3ss > div#div2,
-	div.schema3ss > div#div5{
-		width:67%;
-	}
-
-	div.schema3ss > div#div4{
-		width:34%;
-	}
-	div.schema3ss > div#div2,
-	div.schema3ss > div#div3,
-	div.schema3ss > div#div5{
-		margin-left:33%;
-	}
-
-div.schema30s > div{
-	float:left;
-	width:33%;
-}
-	div.schema30s > div#div1{
-		margin-right:-33%;
-	}
-	div.schema30s > div#div2,
-	div.schema30s > div#div4{
-		margin-left:33%;
-	}
-	div.schema30s > div#div3{
-		width:34%;
-	}
-	div.schema30s > div#div4{
-		width:67%;
-	}
-
-</style>
+		}else{ // загрузить макет?>
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
 		<?	// определиться с типом генерации контента - либо как специально разработанный модуль, либо как стандартный раздел, созданный Генератором:
-			if ( $asModule // если передан массив alias'ов, контент страниц которых должен выводиться как специально разработанный модуль
+			if ( $asModule // если передан массив alias'ов (view/[controller_name]/index.php), контент страниц которых должен выводиться как специально разработанный модуль
 				 && is_array($asModule)
 				 && in_array($section_data['alias'],$asModule)
 			   ){?><div id="innerXtraModule"><?
@@ -808,23 +701,7 @@ div.schema30s > div{
 							}
 							echo "<div class='clear'>&nbsp;</div>";
 						}
-					  }else{ // в псевдотестовом режиме
-						  if (isset($blockModules)) {
-							  echo "<div class=''>block= ".$blockModules."</div>";
-						  	  var_dump("<h1>block:</h1><pre>",$blockModules,"</pre>");
-						  }else echo "<div class=''>skip</div>";
 					  }
-						if ($showLoremIpsum){ // заглушка
-						?><hr>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-
-		diam nonumy eirmod tempor invidunt ut labore et dolore magna
-
-		aliquyam erat, sed diam voluptua. At vero eos et accusam et
-
-		justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-
-		sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-				<?		}
 					}?>
                 	</div>
                 </div>
@@ -833,94 +710,13 @@ div.schema30s > div{
                 }else{?>
             <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
 			<? 	}
-			}?>
-        <div class="clear">&nbsp;</div><?
-
-		if (isset($_GET['mode'])&&$_GET['mode']=='preview'){ ?>
-    <div align="left" id="manage_new_section" style="background:#666; border-radius:6px; box-shadow: 3px 1px 20px 1px #999; color:#FFF; cursor:move; display:<?="none"?>; left:200px; padding:10px; top:200px; position:fixed; width:180px;">
-    	Подраздел загружен в режиме предпросмотра. Выберите дальнейшее действие:
-        <div style="background:#06AEDD; border-radius:3px; margin-top:10px; padding:6px;">
-        	<ul>
-        	  <li><a href="#" id="save_as_is">Сохранить </a></li>
-        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/edit/<?=$section_data->id?>">Изменить</a></li>
-        	  <li class="txtRed"><a href="#" id="ask_to_delete">Удалить</a></li>
-        	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator">Добавить подраздел</a></li>
-      	  </ul>
-       	</div>
-    </div>
-<script>
-$( function(){
-  try{
-	$('a#ask_to_delete').css('color','#F00').click( function (){
-			var Url='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/remove';
-			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...')){
-				$.ajax({
-					type:"GET",
-					url: Url,
-					data: "section_id=<?=$section_data->id?>",
-					beforeSend: function() {
-						manageVeil('start','Удаление данных...');
-					},
-					success: function (data) {
-							alert(data);
-							location.href=Url;
-						},
-					error: function (data) {
-						manageVeil(false);
-						alert(data);
-					},
-				});
 			}
-			return false;
-		});
-	$('a#save_as_is').click( function (){
-		manageVeil('start','Сохранение данных...');
-		$.ajax({
-			type:"GET",
-			url: '<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/store/',
-			data: "section_id=<?=$section_data->id?>",
-			beforeSend: function() {
-				manageVeil('start','Сохранение данных...');
-			},
-			success: function (data) {
-					manageVeil(false);
-					alert("Данные сохранены!"+'\n'+data);
-					$('#manage_new_section').hide();
-					var goUrl=location.href.substring(0,location.href.indexOf('?mode='));
-					location.href=goUrl;
-				},
-			error: function (data) {
-				manageVeil(false);
-				alert("Не удалось отправить данные.\nОтвет: "+data);
-			},
-		});
-		return false;
-	});
-	var mprev=$('#manage_new_section');
-	$(mprev).find('ul').css('padding-left','18px');
-	$(mprev).find('a[id!="ask_to_delete"], li[class!="txtRed"]').css('color','#FFF');
-	$(mprev).find('a').css('margin-left','-6px');
-	var leftOff=$(mprev).parent().offset().left;
-	var wdt=$(mprev).width();
-	var goLeft=leftOff-wdt-45;
-	console.info('leftOff = '+typeof(leftOff)+', wdt = '+typeof(wdt)+', summ = '+goLeft);
-	$(mprev).css({
-			left:goLeft+'px',
-		}).fadeTo(1500,0.9)
-			.draggable()
-				.hover(
-				function (){
-					$(this).css('opacity',1)
-				},
-				function (){
-					$(this).css('opacity',0.9)
-				});
-  }catch(e){
-		alert(e.message);
-  }
-});
-</script>
-	<?	}?>
+			// подключить блок баннеров №3:
+			require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+			if (isset($_GET['mode'])&&$_GET['mode']=='preview') : 
+				// подключить меню предпросмотра:
+				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/preview_mode_menu.php';
+			endif;?>
    </div>
 	<?	}
 	}

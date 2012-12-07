@@ -5,6 +5,12 @@
 <meta name="language" content="ru">
 <link href="<?=Yii::app()->request->baseUrl?>/css/style.css" rel="stylesheet" type="text/css">
 
+<?	// если загружаем подраздел, созданный генератором:
+	if(isset($_SESSION['SUBSECTION_DATA_ARRAY'])) :?>
+<link href="<?=Yii::app()->request->baseUrl?>/css/section_template.css" rel="stylesheet" type="text/css">
+<?		unset($_SESSION['SUBSECTION_DATA_ARRAY']);
+	endif;?>
+
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->
@@ -32,4 +38,8 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl."
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/custom_accordion.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/wait_for.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/debug.js"></script>
+<script type="text/javascript">
+var baseUrl="<?php echo Yii::app()->baseUrl; ?>";
+</script>
 </head>

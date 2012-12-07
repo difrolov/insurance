@@ -30,6 +30,33 @@ html{
 	margin:0;
 	text-align:center;
 }
+div#banners3 {
+	clear:both;
+	height:150px;
+	text-align:center;
+}
+#banners3 > div{
+	background:#FFFF00;
+	display:inline-block;
+	height:120px;
+	margin:0 2%;
+	padding:0 !important;
+	width:28%;
+}
+#banners3 
+	> div img{
+	height:136px;
+	width:210px;
+}
+#banners4{
+	margin:10px;
+	margin-top:16px !important;
+	margin-right:0 !important;
+	min-height:90px;
+}
+#banners4 img{
+	width:215px;
+}
 body > 
 	div:first-child{
 	height:100%;
@@ -95,6 +122,12 @@ div#call_us
 	div#free_line {
 	font-size:1.2em;
 	letter-spacing:-0.1em;
+}
+img#company_museum{
+	border:solid 22px #D5D7D6; 
+	border-right-color:#00AFDE;
+	height:248px;
+	width:252px; 
 }
 div#free_line_always{ /*круглосуточно*/
 	font-size: 0.65em !important;
@@ -299,6 +332,12 @@ img[align="right"]{
 	margin-left:8px;
 	margin-right:0;
 }
+.inline{
+	display:inline !important;
+}
+.inlineBlock{
+	display:inline-block !important;
+}
 div#inner_content{
 	display:inline-block; 
 	margin-left:30px; 
@@ -494,6 +533,7 @@ div#mod_insur_species{
 	margin-bottom:20px;
 	margin-left:25px; 
 	vertical-align:top;
+	z-index:3;
 }
 div#mod_insur_species h2{
 	font-size: 1.4em;
@@ -741,7 +781,7 @@ div#slides div[id^="slide"]{
 div#slides div[id^="slide"] 
 	> div:first-child{
 	background-repeat:no-repeat;
-	background:#FFFF00;
+	/*background:#FFFF00;*/
 	height:203px;
 	margin-bottom:17px;
 	overflow:hidden;
@@ -769,19 +809,25 @@ div#slides div[id^="slide"]
 	letter-spacing: -0.1em;
 	text-align:right;
 }
-div#slides div#slide-first > div:first-child{
-	background:url(../images/slides/1.jpg);
-}
-div#slides div#slide-middle > div:first-child{
-	background:url(../images/slides/2.jpg);
-}
 div#slides div#slide-middle > div:first-child,
 div#slides div#slide-middle > div:first-child ~div{
 	margin-left:19px;
 	margin-right:18px;	
 }
+div#slides div#slide-first > div:first-child{
+	/*background:url(../images/slides/1.jpg);*/
+}
+div#slides div#slide-middle > div:first-child{
+	/*background:url(../images/slides/2.jpg);*/
+}
 div#slides div#slide-last > div:first-child{
-	background:url(../images/slides/3.jpg);
+	/*background:url(../images/slides/3.jpg);*/
+}
+div[id^="slide-"] 
+	> div:first-child 
+		img{
+	height:203px;
+	width:296px; 
 }
 #textLastNew{
 	display:inline-block;
