@@ -31,6 +31,7 @@
 		setHTML::buildBreadCrumbs();
 		// see views/[page_alias]
 		echo $content;?>
+        <div class="clear"></div>
   	</div>
   </div>
 	<?	setHTML::buildFooterBlock($tp);	?>

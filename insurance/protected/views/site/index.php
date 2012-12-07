@@ -1,11 +1,7 @@
 <? 	if(isset($_GET['stop']))die("index by default"); 
 	$tp=false;
-	$baseURL=Yii::app()->request->getBaseUrl(true)."/"?>
-<!-- slide_marks -->
-<?	if ($tp){?><h3>/slide_marks</h3><? }?>
-		<!-- /slide_marks -->
-		<!-- tblSlides -->
-<?	// получить баннеры для слайд-шоу: 
+	$baseURL=Yii::app()->request->getBaseUrl(true)."/";
+	// получить баннеры для слайд-шоу: 
 	$arrBanOut=setHTML::getBannersAsObjects('outside');
 	//if (empty($arrBanOut)) die('empty');
 	if ($tp){?><h3>tblSlides</h3><? }
@@ -106,7 +102,7 @@ require_once Yii::app()->request->getBaseUrl(true)?>/js/slideshow.js"></script>
     <li><p>Круглосуточная поддержка клиентов.</p></li>
   </ol>
 </div>
-<div id="content_from_right"><?	
+<div id="content_from_right" class="imgBannerBorder"><?	
 require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners2.php';?>	
 </div>
 <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
@@ -152,6 +148,7 @@ require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/ba
 			</div>
 			<div class="clear"></div>
 	<?	if ($tp){?><h3>last_seen</h3><? }
+		// уже смотрели?
 		$seen=false;
 		if ($seen){?>
 			<!--<div id="last_seen">
@@ -194,8 +191,6 @@ require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/ba
 				</table>
 			</div>-->
 	<?	}else{
-		
-		?>
-	
-	<? 	} 
+			// ещё не смотрели :(
+		} 
 		if ($tp){?><h3>/last_seen</h3><? }?>

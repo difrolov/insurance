@@ -1,4 +1,4 @@
-<div id="banners4" style="margin:10px;">
+<div id="banners4" class="imgBannerBorder">
 <?	$arrBan4=setHTML::getBannersAsObjects('4');
 	$blink=(isset($arrBan4[0]['link']))? $arrBan4[0]['link']:'';
 	$bsrc=(isset($arrBan4[0]['src']))? $arrBan4[0]['src']:'';

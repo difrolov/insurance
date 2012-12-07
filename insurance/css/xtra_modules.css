@@ -10,12 +10,20 @@ div.blockMail textarea{
 	display:block;
 	margin:4px 0;
 	padding:2px 4px;
-	width:90%;
+	width:97%;
 }
 div.blockMail input[type="submin"],
 div.blockMail button{
 	margin-top:8px;
 } 
+div.blockMail 
+	table tbody tr > 
+		td:first-child{
+	color:#00BCE4;
+	padding-right:4px;
+	text-align:right;
+	white-space:nowrap;
+}
 div#inner_left_menu {
 	background:none; 
 	box-shadow:none; 
@@ -29,6 +37,9 @@ div.mainWrapper
 	> div > a,
 blockquote div a{
 	font-size:11px !important;
+}
+.row.submit{
+	margin-top:5px;
 }
 div.separator2{
 	margin-top:10px !important;
