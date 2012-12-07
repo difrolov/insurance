@@ -1,6 +1,6 @@
 // JavaScript Document
 function validateFields(fields){
-  try{
+  try{	
 	var errs=0,badEmail=false;
 	$(fields).each(function(index, element) {
         if (element=='email'){
@@ -10,9 +10,18 @@ function validateFields(fields){
 				toggleFieldWarning(this,true);
 			}
 		}
-		else if  (!$('#'+element).val()) {
+		else {
+			var tElem='#'+element;
+			if ($(tElem).get(0).tagName.toLowerCase()=='select'){
+				if ($(tElem).find('option:selected').val()==0) {
+					errs++;
+					toggleFieldWarning(this,true);
+				}
+			}
+			if  (!$('#'+element).val()) {
 			errs++;
 			toggleFieldWarning(this,true);
+			}
 		}
     });
 	if (errs){

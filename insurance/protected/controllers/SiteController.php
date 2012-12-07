@@ -46,9 +46,10 @@ array(5) {
 		$email->message = $_POST['message']."
 <hr>
 <P>Данные заказчика:</P>
-<P>имя: $_POST[name]</P>
-<P>email:  $_POST[email]</P>
-<P>телефон: $_POST[phone]</P>";
+<P>Имя: $_POST[name]</P>
+<P>Email:  $_POST[email]</P>
+<P>Телефон: $_POST[phone]</P>
+<P>Вид страхования: $_POST[insur_species]</P>";
 		if (!$email->send())
 			die("<div style='color:red;'>Ошибка отправки почты...</div>");
 		else{?>
