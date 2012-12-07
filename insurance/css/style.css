@@ -742,13 +742,11 @@ div#bottom_menu ul{
 	width:100%;
 }
 ul.asTable li,
-ul#yw0 li,
-ul#yw2 li{
+ul[id^="yw"] li{
 	display:table-cell !important;
 	list-style:none;
 }
-ul#yw0 li,
-ul#yw2 li{
+ul[id^="yw"] li{
 	border-right:solid 1px #ccc;
 	text-align:center;
 }
