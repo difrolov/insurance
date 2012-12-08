@@ -62,7 +62,7 @@ $gridDataProvider = action::getContacts('status=1');
 $arrContacts = $gridDataProvider->data;
 $contr = new Controller('O_кompanii');
 ?>
-Выберете регион &nbsp
+Выберите регион &nbsp
 <input id="region" type="text"  style="width:360px"/>
 
 <?php

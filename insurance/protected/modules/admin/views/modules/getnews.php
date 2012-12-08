@@ -1,4 +1,4 @@
-<h3>Контакты</h3>
+<h3>Новости</h3>
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider,
@@ -6,10 +6,8 @@
 	'enablePagination' => true,
 	'columns'=>array(
        array('name'=>'id', 'header'=>'#','type'=>'html'),
-        array('name'=>'baranch_name', 'header'=>'Название региона'),
-        array('name'=>'address','header'=>'Адрес'),
-		array('name'=>'phone','header'=>'Телефон'),
-    	array('name'=>'create_date', 'header'=>'Дата создания'),
+        array('name'=>'name', 'header'=>'Наименование статьи'),
+        array('name'=>'date_edit', 'header'=>'Дата изменения'),
     	 array('name'=>'status','header'=>'Статус','type'=>'html',
         		'value'=>'HelperAdmin::createStatusContent($data->status,$data->id)'),
     	array(
@@ -18,10 +16,10 @@
     			'template'=>'{update}{delete}',
     			'buttons'=>array(
     					'update' => array(
-    							'url'=>'Yii::app()->controller->createUrl("/admin/modules/contacts/id/$data->id")',
+    							'url'=>'Yii::app()->controller->createUrl("/admin/modules/news/id/$data->id")',
     					),
     					'delete' => array(
-    							'url'=>'Yii::app()->createUrl("admin/modules/deletecontacts/", array("id"=>$data[\'id\']))'
+    							'url'=>'Yii::app()->createUrl("admin/modules/deletenews/", array("id"=>$data[\'id\']))'
     					),
     			),
     ),
@@ -29,14 +27,14 @@
 )); ?>
 <br class="clear">
 <?php $this->widget('bootstrap.widgets.TbButton', array(
-	    'label'=>"Добавить Контакт",
+	    'label'=>"Добавить Новость",
 	    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	    'size'=>'small', // null, 'large', 'small' or 'mini'
-	    'url'=> Yii::app()->controller->createUrl("/admin/modules/contacts")
+	    'url'=> Yii::app()->controller->createUrl("/admin/modules/news")
 )); ?>
 <?php $cs = Yii::app()->getClientScript();
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/toogle-button.js');
-$cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/contacts.js');
+$cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/news.js');
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/toogle-button.css" />
 <script type="text/javascript">
@@ -50,7 +48,7 @@ $(document).ready(function(){
 			}else{
 				val=0;
 			}
-			_contacts.updateContactsStatus(id,val);
+			_news.updateNewsStatus(id,val);
 		});
 		$('.toggle').bind('click',function(){
 			id = $(this).parent().parent().attr('class');
@@ -59,7 +57,7 @@ $(document).ready(function(){
 			}else{
 				val=0;
 			}
-			_contacts.updateContactsStatus(id,val);
+			_news.updateNewsStatus(id,val);
 		});
 })
 </script>

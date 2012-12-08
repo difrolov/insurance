@@ -1,7 +1,7 @@
-<h3>Контакты<h3>
+<h3>Новости<h3>
 <br>
 <?
-/** @var BootActiveForm $form */
+<?php /** @var BootActiveForm $form */
 	$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		'id'=>'verticalForm',
 		'htmlOptions'=>array('class'=>'well'),
