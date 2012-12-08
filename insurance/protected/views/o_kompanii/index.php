@@ -2,5 +2,5 @@
 /* @var $this SiteController */
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
-setHTML::setPageData($this,$res,array('vakansiji','kontakty'));
+setHTML::setPageData($this,$res);
 

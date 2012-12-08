@@ -175,4 +175,77 @@ order by id ASC";
 		return $aMods;
 	}
 }
+/**
+ * Обрабатывает набор исключений для страниц, а именно - те, которые были созданы НЕ генератором
+ * @package
+ * @subpackage
+ */
+class Views{
+	private $ViewsType;
+	// не объявлять как static, иначе не сработает array_walk_recursive()!
+	private $ViewsArray=array(
+					'esli_proizoshel_strahovoj_sluchay'=>false, 
+					'fizicheskim_litzam'=>false,
+					'korporativnym_klientam'=>false,
+					'malomu_i_srednemu_biznesu'=>false,
+					'o_kompanii'=>array('vakansiji','kontakty'),
+					'partneram'=>false,
+				);
+	private $ViewsIds=array();
+/**
+ * Получить массив специфических разделов, - НЕ созданных Генератором
+ * @package
+ * @subpackage
+ */
+	public function __construct($flat_list=false){
+		if ($flat_list){
+			$array=$this->ViewsArray;
+			array_walk_recursive($array,array($this,'getViewsIds'));
+			$this->ViewsType='ViewsIds';
+		}else
+			$this->ViewsType='ViewsArray';
+	}
+/**
+ * Возвращает:
+ *	либо true как подтверждение принадлежности текущего раздела к массиву исключений Views (если получен id раздела) - для изменения данных в Генераторе
+ *  либо алиас в качестве исключения текущего раздела - для проверки в составе родительского раздела и определении способа загрузки контента
+ *	либо false, если раздел не найден среди исключений 
+ * @package
+ * @subpackage
+ */
+	public function checkView( $section_data, // $section_data->alias/id
+							   $controller=false,
+							   $flat_list=false
+							 ){ 
+		$spViews=$this->getViews($flat_list); //
+		if ($controller) // фактически означает, что передавали алиас 
+			$spViews=$spViews[$controller];// получить массив исключений для текущего контроллера (т.е., - основного раздела (главного меню))
+		if (is_array($spViews)){ 
+			// передавали id:
+			if ($flat_list){ // проверить, есть ли раздел среди исключений:
+				if (array_key_exists((int)$section_data,$spViews))
+					return true;
+			}elseif(in_array($section_data,$spViews)) // есть в массиве контроллера
+			 	return array($section_data);
+		}else
+			return false;
+	}
+/**
+ * Получить массив специфических разделов одного из типов (иерархический/плоский)
+ * @package
+ * @subpackage
+ */
+	public function getViews(){
+		return $this->{$this->ViewsType};
+	}
+/**
+ * Трансформирует массив Views, делая его "плоским", т.е., оставляет только id и alias, без иерархии.
+ * @package
+ * @subpackage
+ */
+	private function getViewsIds($item,$key){
+		if( $id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$item.'"')->queryScalar() )
+			$this->ViewsIds[$id]=$item;
+	}
+}
 ?>

@@ -33,6 +33,44 @@ if (isset($data)&&isset($modules)){
 	$section_keywords=$data['keywords'];
 	$section_description=$data['description']; 
 }?>
+<?	
+if($inExViews) {?>
+<style>
+#mblock{
+	width:70%
+}
+#metadata input,
+#metadata textarea{
+	width:70% !important;
+}
+#issue{
+	background:#FF9; 
+	border-bottom-left-radius:8px; 
+	border-bottom-right-radius:8px; 
+	line-height:8px; 
+	margin-bottom:40px;
+	padding:10px;  
+	padding-top:20px;
+}
+#point_meta{
+	font-size:16px;
+	font-weight:300;
+}
+</style>
+<div align="center">
+  <div id="mblock">	
+    <div id="issue">
+      <p>Данный раздел разработан как программный модуль. </p>
+      <p>Вы можете изменить только метаданные страницы.</p>
+    </div>
+<?	require_once dirname(__FILE__).'/metadata.php';?>
+    <hr>
+    <button id="save_metadata" name="save_metadata" type="submit" value="<?=$data['id']?>">Сохраненить данные</button>
+  </div>
+</div>
+<?
+}else{?>        
+
     <h5 id="pick_out_section" class="link" style="display:<? 
 		if(isset($_GET['test'])){
 			?>block<? 
@@ -66,21 +104,7 @@ if (isset($data)&&isset($modules)){
             <input name="seek_alias" id="seek_alias" type="hidden" value="<?=Yii::app()->createUrl('admin/generator/aliasCheck');?>">
             <hr>
         </div>
-		<div id="metadata">
-        	<h4>Укажите метаданные страницы (важно для поисковой оптимизации):</h4>
-          	<div>
-            	<h5>Заголовок страницы (title):</h5>
-            	<input name="title" type="text" id="title" required value="<?=$section_title?>">
-            </div>
-          	<div>
-            	<h5>Ключевые слова (keywords, через пробел):</h5>
-            	<textarea name="keywords" id="keywords"><?=$section_keywords?></textarea>
-            </div>
-			<div>
-                <h5>Описание страницы (description):</h5>
-                <textarea name="description" id="description"><?=$section_description?></textarea>                
-      		</div>
-		</div>
+<?	require_once dirname(__FILE__).'/metadata.php';?>        
         <hr>
         <button id="preview_page" type="button" value="yes">Предпросмотр</button>
         &nbsp;
@@ -91,3 +115,5 @@ if (isset($data)&&isset($modules)){
         подраздела
         &nbsp;
 	</div>
+<?
+}?>

@@ -51,11 +51,19 @@ div#banners3 {
 #banners4,
 #content_from_right{
 	border-right-color:#00AFDE;
+	max-width:187px;
+	white-space:normal;
 }
 div#banners4{
 	border-width:14px;
-	margin:16px 0 10px 10px !important;
+	margin:16px 0 0 10px !important;
 	min-height:90px;
+}
+div#banners4 +div{
+	margin-left:10px;
+	padding:14px;
+	padding-top:0;
+	width:187px;
 }
 #banners4 img{
 	width:187px; /* 215: 201,187*/
@@ -77,8 +85,15 @@ div#all_phones{
 	border-style:solid;
 	border-color:#D5D7D6;
 }
-.imgBannerBorder a{
+.imgBannerBorder a,
+#banners4 +div{
 	background-color:#D5D7D6;
+}
+div#banners4 +div a,
+.imgBannerBorder div a {
+	color: #333;
+	font-size: 13px;
+	text-decoration:none;
 }
 div#bottom_insur{
 	margin-top:16px;
@@ -727,13 +742,10 @@ div#bottom_menu ul{
 	width:100%;
 }
 ul.asTable li,
-ul#yw0 li,
-ul#yw2 li{
+div#mainmenu ul[id^="yw"] li,
+div#bottom_menu ul[id^="yw"] li{
 	display:table-cell !important;
 	list-style:none;
-}
-ul#yw0 li,
-ul#yw2 li{
 	border-right:solid 1px #ccc;
 	text-align:center;
 }
@@ -751,6 +763,12 @@ ul.asTable li > div:first-child{
 div#our_museum{
 	margin-top:10px;
 	margin-bottom:6px;
+}
+.pic_signature{
+	display:inline-block;
+	letter-spacing: -0.1em; 
+	line-height:15px;
+	margin-top:-10px; 
 }
 .ready_solution{
 	background:#CCFFFF;
