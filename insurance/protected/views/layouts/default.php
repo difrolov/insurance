@@ -1,7 +1,12 @@
-<? 	require_once dirname(__FILE__).'/header.php';?>
+<? 	require_once dirname(__FILE__).'/header.php';
+$mode=(isset($_GET['mode']))? $_GET['mode']:false; ?>
 <body>
 <?	if (isset($_GET['debug'])) require_once Yii::getPathOfAlias('webroot').'/protected/components/helpers/debug.php';
-?>
+// если пытались подать на печать:
+if ($mode=='save'||$mode=='print')
+	require_once Yii::getPathOfAlias('webroot').'/protected/views/layouts/save_and_print.php';
+
+else{ // не пытались?>
 <div align="center">
   <div align="left" class="container" id="page">
     <div id="fit_height"<? if(isset($_GET['test_bg'])){?> style="background:url(<?=Yii::app()->request->getBaseUrl(true)?>/_docs/sources/BODY.gif) -20px 0 no-repeat;"<? }?>>
@@ -37,4 +42,5 @@
 	<?	setHTML::buildFooterBlock($tp);	?>
 </div>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script><?
+}
 // </body> - в main.php

@@ -3,7 +3,7 @@
         <li>Щёлкните нужную колонку; </li>
         <li>Щёлкните модули для размещения в ней.</li>
       </ol>
-        <div id="select_mod">
+        <div id="select_mod" style="max-width:700px;">
         <?php 
 			foreach($modules as $key_mod=>$val_mod):
 				$mod_name=$modules[$key_mod]['name'];?>
