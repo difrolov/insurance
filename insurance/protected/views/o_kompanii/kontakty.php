@@ -1,10 +1,5 @@
 <h2 class="txtLightBlue">Контакты</h2>
-<?php
-/* @var $this SiteController */
-/* @var $model ContactForm */
-
-/* @var $form CActiveForm */
-
+<?php	
 /* $this->pageTitle=Yii::app()->name . ' - Контакты';
 
 $this->breadcrumbs=array(

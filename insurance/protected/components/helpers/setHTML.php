@@ -560,6 +560,12 @@ class setHTML{
 		// Title для подразделов устанавливается в Data::getObjectByUrl()
 		// непосредственно перед рендерингом страницы
 		// **************************************************************
+		// проверить исключения - специфические разделы, с явно добавленными View (т.е., НЕ созданные Генератором)
+		if (!$asModule){
+			$Views=new Views(true);
+			$spViews=$Views->getViews();
+			var_dump("<h1>Views:</h1><pre>",$spViews,"</pre>");die();
+		}
 		// устанавливает description страницы:
 		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
 		// устанавливает keywords страницы:
