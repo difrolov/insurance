@@ -156,7 +156,7 @@ function selectFound(content,block_name,rowIndex,keepText){
 		}?>
 <br>
 <hr>
-Поисковая строка: <?=$swords?>
+Поисковая строка: <b><?=$swords?></b>
 <hr>
 <h2 class="txtLightBlue">Результат поиска:</h2>
 <table class="tblResults" width="100%" cellspacing="0" cellpadding="10">

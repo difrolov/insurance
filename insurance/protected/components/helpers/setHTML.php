@@ -618,16 +618,13 @@ class setHTML{
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
-		<?	// если исключения для Views не были явно переданы как аргумент метода, проверим их наличие в массиве иселючений (создаётся разработчиком):
+	<?	if ($print_mode){
+			?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo_blank.gif" width="182" height="44" /><br><br><? 
+		}	
+			// если исключения для Views не были явно переданы как аргумент метода, проверим их наличие в массиве иселючений (создаётся разработчиком):
 			if (!$asModule){
-				$Views=new Views(); // сформировать "объёмный" (иерархический) массив исключений
+				$Views=new Views(); // сформировать "объёмный" (иерархический) массив исключений для подразделов, являющихся программными модулями
 				$asModule=$Views->checkView($section_data->alias,$controller);
-				/*$spViews=$Views->getViews(); // 
-				$arrExViews=$spViews[$controller]; // получить массив исключений для текущего контроллера (т.е., - основного раздела (главного меню))
-				if ( is_array($arrExViews)
-					 // есть в массиве контроллера:
-					 && in_array($section_data->alias,$arrExViews)
-				   ) $asModule=array($section_data->alias);*/
 			}
 			// определиться с типом генерации контента - либо как специально разработанный модуль, либо как стандартный раздел, созданный Генератором:
 			if ( $asModule // если передан массив alias'ов (view/[controller_name]/index.php), контент страниц которых должен выводиться как специально разработанный модуль
@@ -742,6 +739,9 @@ class setHTML{
 			// подключить блок баннеров №3:
 			if (!$print_mode)
 				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+			else {
+				?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/contacts_blank.gif" width="700" height="109" /><? 
+			} 
 			if ($mode=='preview') : 
 				// подключить меню предпросмотра:
 				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/preview_mode_menu.php';
