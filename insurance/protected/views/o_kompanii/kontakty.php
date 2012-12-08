@@ -9,10 +9,7 @@ $this->breadcrumbs=array(
 
 //google maps
 Yii::import('application.extensions.gmap3.*');
-
-
 /* @var $form CActiveForm */
-
 $gridDataProvider = action::getContacts('status=1');
 $arrContacts = $gridDataProvider->data;
 $contr = new Controller('O_кompanii');

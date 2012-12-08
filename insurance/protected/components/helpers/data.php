@@ -206,6 +206,31 @@ class Views{
 			$this->ViewsType='ViewsArray';
 	}
 /**
+ * Возвращает:
+ *	либо true как подтверждение принадлежности текущего раздела к массиву исключений Views (если получен id раздела) - для изменения данных в Генераторе
+ *  либо алиас в качестве исключения текущего раздела - для проверки в составе родительского раздела и определении способа загрузки контента
+ *	либо false, если раздел не найден среди исключений 
+ * @package
+ * @subpackage
+ */
+	public function checkView( $section_data, // $section_data->alias/id
+							   $controller=false,
+							   $flat_list=false
+							 ){ 
+		$spViews=$this->getViews($flat_list); //
+		if ($controller) // фактически означает, что передавали алиас 
+			$spViews=$spViews[$controller];// получить массив исключений для текущего контроллера (т.е., - основного раздела (главного меню))
+		if (is_array($spViews)){ 
+			// передавали id:
+			if ($flat_list){ // проверить, есть ли раздел среди исключений:
+				if (array_key_exists((int)$section_data,$spViews))
+					return true;
+			}elseif(in_array($section_data,$spViews)) // есть в массиве контроллера
+			 	return array($section_data);
+		}else
+			return false;
+	}
+/**
  * Получить массив специфических разделов одного из типов (иерархический/плоский)
  * @package
  * @subpackage

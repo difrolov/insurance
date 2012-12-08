@@ -561,11 +561,7 @@ class setHTML{
 		// непосредственно перед рендерингом страницы
 		// **************************************************************
 		// проверить исключения - специфические разделы, с явно добавленными View (т.е., НЕ созданные Генератором)
-		if (!$asModule){
-			$Views=new Views(true);
-			$spViews=$Views->getViews();
-			var_dump("<h1>Views:</h1><pre>",$spViews,"</pre>");die();
-		}
+		$controller=Yii::app()->controller->getId();
 		// устанавливает description страницы:
 		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
 		// устанавливает keywords страницы:
@@ -578,7 +574,7 @@ class setHTML{
 							'select'=>'name,alias',
 							'condition'=>'id = '.$section_data->parent_id,
 						));
-			$top_name=Yii::app()->db->createCommand()->select('name')->from('insur_insurance_object')->where('alias="'.Yii::app()->controller->getId().'"')->queryScalar();
+			$top_name=Yii::app()->db->createCommand()->select('name')->from('insur_insurance_object')->where('alias="'.$controller.'"')->queryScalar();
 
 			$this_obj->breadcrumbs=array(
 				$top_name=>array('index'),
@@ -612,7 +608,18 @@ class setHTML{
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
-		<?	// определиться с типом генерации контента - либо как специально разработанный модуль, либо как стандартный раздел, созданный Генератором:
+		<?	// если исключения для Views не были явно переданы как аргумент метода, проверим их наличие в массиве иселючений (создаётся разработчиком):
+			if (!$asModule){
+				$Views=new Views(); // сформировать "объёмный" (иерархический) массив исключений
+				$asModule=$Views->checkView($section_data->alias,$controller);
+				/*$spViews=$Views->getViews(); // 
+				$arrExViews=$spViews[$controller]; // получить массив исключений для текущего контроллера (т.е., - основного раздела (главного меню))
+				if ( is_array($arrExViews)
+					 // есть в массиве контроллера:
+					 && in_array($section_data->alias,$arrExViews)
+				   ) $asModule=array($section_data->alias);*/
+			}
+			// определиться с типом генерации контента - либо как специально разработанный модуль, либо как стандартный раздел, созданный Генератором:
 			if ( $asModule // если передан массив alias'ов (view/[controller_name]/index.php), контент страниц которых должен выводиться как специально разработанный модуль
 				 && is_array($asModule)
 				 && in_array($section_data['alias'],$asModule)

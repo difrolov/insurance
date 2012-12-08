@@ -71,6 +71,25 @@ class GeneratorController extends Controller
 			$this->actionSave($id);
 		}
 	}
+/**
+ * Сохраняет метаописание страницы, являющейся программным модулем
+ * @package
+ * @subpackage
+ */
+	public function actionEditView(){
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		$section_id=$_POST['save_metadata'];
+		InsurInsuranceObject::model()->updateByPk($section_id, 
+					array(	'date_changes'=>date("Y-m-d H:i:s"),
+							'title'=>$_POST['title'],
+							'keywords'=>$_POST['keywords'],
+							'description'=>$_POST['description'],
+						 )
+				);
+		$this->redirect(Yii::app()->request->getBaseUrl(true).'/admin/object/getobject/'.$section_id);
+	}
 	/**
 	 * @package
 	 * Извлечь данные макета выбранного подраздела и разместить их в HTML
@@ -79,13 +98,16 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		if($section_id){
+		if($section_id){ 
+			require_once Yii::getPathOfAlias('webroot').'/protected/components/helpers/Data.php';
+			$checkView=new Views(true);
+			$inExViews=$checkView->checkView($section_id,false,true);
 			$this->getGeneratorRoot();
 			$model = new InsurInsuranceObject(); // для извлечения данных раздела 
 			$art_model=new InsurArticleContent(); // для редактора
 			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$modules=$this->getAllModules();
-			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model));
+			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model,'inExViews'=>$inExViews));
 		}
 	}
 	
