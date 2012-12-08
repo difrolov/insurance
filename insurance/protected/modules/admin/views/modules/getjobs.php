@@ -19,6 +19,7 @@
     					'update' => array(
     							'url'=>'Yii::app()->controller->createUrl("/admin/modules/jobs/id/$data->id")',
     					),
+
     			),
     ),
    )

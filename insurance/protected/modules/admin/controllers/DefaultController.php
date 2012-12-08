@@ -15,14 +15,22 @@ class DefaultController extends Controller
 		return array(
             'connector' => array(
                 'class' => 'application.extensions.elfinder.ElFinderConnectorAction',
-                'settings' => array(
+                /* 'options' => array(
                     'root' => Yii::getPathOfAlias('webroot') . '/upload/',
                     'URL' => Yii::app()->baseUrl . '/upload/',
                     'rootAlias' => Yii::app()->baseUrl,
                     'mimeDetect' => 'none'
-                )
-            ),
-        );
+                ) */
+            	/* 'roots'=>array(
+			              array(
+			                  'driver'  => "LocalFileSystem",
+			                  'path' => realpath(Yii::app()->basePath . "/../upload"),
+			                  'URL' => "/upload",
+			                  'accessControl' => "access"
+			              )
+            	) */
+        	)
+		);
 	}
 
 	public function actionBrowser() {

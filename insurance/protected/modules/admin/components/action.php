@@ -10,6 +10,11 @@ class action{
 		$gridDataProvider = $model->search($params,$pager);
 		return $gridDataProvider;
 	}
+	public static function getNews($params=false,$pager=false){
+		$model = new InsurNews();
+		$gridDataProvider = $model->search($params,$pager);
+		return $gridDataProvider;
+	}
 }
 
 ?>

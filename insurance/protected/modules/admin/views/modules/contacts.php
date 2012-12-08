@@ -1,48 +1,7 @@
-<h3>Вакансии<h3>
+<h3>Контакты<h3>
 <br>
 <?
-/* $address = new InsurContacts();
-
-// init the map
-$gmap = new EGmap3Widget();
-$gmap->setOptions(array('zoom' => 14));
-
-// create the marker
-	$marker = new EGmap3Marker(array(
-			'title' => 'Draggable address marker',
-			'draggable' => true,
-	));
-	$marker->address = 'россия москва тверская 1';
-	$marker->centerOnMap();
-	$marker->capturePosition(
-	// the model object
-			$address,
-			// model's latitude property name
-			'latitude',
-			// model's longitude property name
-			'longitude',
-			// Options set :
-	//   show the fields, defaults to hidden fields
-	//   update the fields during the marker drag event
-			array('visible','drag')
-	);
-	$gmap->add($marker);
-
-	// Capture the map's zoom level, by default generates a hidden field
-	// for passing the value through POST
-	$gmap->map->captureZoom(
-	// model object
-			$address,
-			// model attribute
-			'mapZoomLevel',
-			// whether to auto generate the field
-			true,
-			// HTML options to pass to the field
-			array('class' => 'myCustomClass')
-	);
-
-	$gmap->renderMap(); */ ?>
-<?php /** @var BootActiveForm $form */
+/** @var BootActiveForm $form */
 	$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		'id'=>'verticalForm',
 		'htmlOptions'=>array('class'=>'well'),

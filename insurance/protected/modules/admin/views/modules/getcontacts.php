@@ -1,4 +1,4 @@
-<h3>Вакансии</h3>
+<h3>Контакты</h3>
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider,
@@ -19,6 +19,9 @@
     			'buttons'=>array(
     					'update' => array(
     							'url'=>'Yii::app()->controller->createUrl("/admin/modules/contacts/id/$data->id")',
+    					),
+    					'delete' => array(
+    							'url'=>'Yii::app()->createUrl("admin/modules/deletecontacts/", array("id"=>$data[\'id\']))'
     					),
     			),
     ),
