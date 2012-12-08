@@ -1,4 +1,6 @@
 <? //
+if(!isset($inExViews)) 
+	$inExViews=false;
 if ($inExViews)
 	$go_action='editView';
 else

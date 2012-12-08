@@ -555,13 +555,20 @@ class setHTML{
 						  $section_data,
 						  $asModule=false
 						){	$test=false; // принудительно
+		$controller=Yii::app()->controller->getId();
+		// go print. Hide all panels!
+		if (isset($_GET['mode'])) {
+			if ($_GET['mode']=='save'||$_GET['mode']=='print')
+				$print_mode=true;
+			$mode=$_GET['mode'];
+		}else
+			$mode=$print_mode=false;
 		// HEADER
 		// ***** NOTICE: ************************************************
 		// Title для подразделов устанавливается в Data::getObjectByUrl()
 		// непосредственно перед рендерингом страницы
 		// **************************************************************
 		// проверить исключения - специфические разделы, с явно добавленными View (т.е., НЕ созданные Генератором)
-		$controller=Yii::app()->controller->getId();
 		// устанавливает description страницы:
 		Yii::app()->clientScript->registerMetaTag($section_data->description, 'description');
 		// устанавливает keywords страницы:
@@ -588,7 +595,9 @@ class setHTML{
 		// прописывает первый заголовок на странице, сразу же под breadcrumbs.
 		// если заголовок не установлен (нет в БД), подставляет название страницы:
 		if (!$section_data->first_header)
-			$section_data->first_header=$section_data->name;?>
+			$section_data->first_header=$section_data->name;
+		
+		if (!$print_mode){?>
 	<div class="floatLeft">
     	<div id="inner_left_menu">
 	<?	// сгенерировать ссылки:
@@ -596,7 +605,8 @@ class setHTML{
     	</div>
     <?	require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners4.php';?>	
     </div>
-    <?	// если тестируемся:
+    <?	}
+		// если тестируемся:
 		if ($test) {
 			// это он - заголовок :)
 			echo "<h1>HEADER: ".$section_data->first_header."</h1>";
@@ -724,9 +734,15 @@ class setHTML{
             <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
 			<? 	}
 			}
+			echo "<div class='clear'>
+					<div style='padding-right:20px;'>";
+			require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';
+			echo "	</div>
+				</div>";
 			// подключить блок баннеров №3:
-			require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
-			if (isset($_GET['mode'])&&$_GET['mode']=='preview') : 
+			if (!$print_mode)
+				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+			if ($mode=='preview') : 
 				// подключить меню предпросмотра:
 				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/preview_mode_menu.php';
 			endif;?>

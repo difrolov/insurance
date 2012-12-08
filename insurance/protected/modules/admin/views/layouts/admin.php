@@ -102,11 +102,17 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	</div>
 <?	else:
 		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
-	endif;?>
+	endif;
+	
+	if(Yii::app()->controller->getId()=='generator'){?>
+	<div class="content_right">
+	<?php echo $content; ?>
+	</div>
+<?	}else{?>
 	<div class="content_banner">
 	<?php echo $content; ?>
 	</div>
-
+<?	}?>
 	<div class="clear"></div>
 
 	<!-- <div id="footer">
