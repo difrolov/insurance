@@ -1,61 +1,181 @@
 <?php
+
+Yii::import("ext.ezzeelfinder.ElFinderConnectorAction");
+
 /**
- * Created by JetBrains PhpStorm.
- * User: z_bodya
- * Date: 6/20/12
- * Time: 7:41 PM
- * To change this template use File | Settings | File Templates.
+ * A widget to integrate ElFinder uploader.
+ *
+ * @author Dmitriy Pushkov <ezze@ezze.org>
+ * @version 2.0-rc1/0.0.2
  */
 class ElFinderWidget extends CWidget
 {
     /**
-     * Client settings.
-     * More about this: https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
+     * jQuery selector for a container to place ElFinder in.
+     *
+     * @var string
+     */
+    public $selector = "#elfinder";
+
+    /**
+     * ElFinder client's configuration options as described here:
+     * https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
+     *
+     * Please note that these options must be passed as an array and will be
+     * converted to JSON object automatically.
+     *
      * @var array
      */
-    public $settings = array();
-    public $connectorRoute = false;
-    private $assetsDir;
+    public $clientOptions = array();
 
+    /**
+     * A route to ElFinder connector's action.
+     *
+     * This action must be implemented as a reference to {@link ElFinderConnectorAction} class.
+     *
+     * @var string
+     */
+    public $connectorRoute = null;
 
+    /**
+     * ElFinder connector's configuration options as described here:
+     * https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
+     *
+     * @var array
+     */
+    public $connectorOptions = array();
+
+    /**
+     * Used to store an asset URL of ElFinder's initialization script.
+     * This script is located in "js" directory of the extension.
+     *
+     * @var string
+     */
+    protected $_initJsUrl = null;
+
+    /**
+     * Used to store an asset URL of ElFinder's scripts, images and CSS files.
+     * These files are located in "assets" directory of the extension.
+     *
+     * @var string
+     */
+    protected $_elFinderAssetsUrl = null;
+
+    /**
+     * Used to store an asset URL of ElFinder's CSS directory.
+     *
+     * @var string
+     */
+    protected $_elFinderCssUrl = null;
+
+    /**
+     * Used to store an asset URL of ElFinder's scripts directory.
+     *
+     * @var string
+     */
+    protected $_elFinderJsUrl = null;
+
+    /**
+     * Used to store JSON object's string retrieved from {@link clientOptions}.
+     *
+     * @var string
+     */
+    protected $_jsonClientOptions = null;
+
+    /**
+     * Retrieves an asset URL of ElFinder's initialization script.
+     *
+     * @return string
+     */
+    public function getInitJsUrl()
+    {
+        if ($this->_initJsUrl === null)
+        {
+            $this->_initJsUrl = Yii::app()->getAssetManager()->publish(
+                dirname(__FILE__) . "/js/elFinderInit.js"
+            );
+        }
+
+        return $this->_initJsUrl;
+    }
+
+    /**
+     * Retrieves an asset URL of ElFinder's files directory.
+     *
+     * @return string
+     */
+    public function getElFinderAssetsUrl()
+    {
+        if ($this->_elFinderAssetsUrl === null)
+        {
+            $this->_elFinderAssetsUrl = Yii::app()->getAssetManager()->publish(
+                dirname(__FILE__) . "/assets"
+            );
+        }
+
+        return $this->_elFinderAssetsUrl;
+    }
+
+    /**
+     * Retrieves an asset URL of ElFinder's CSS directory.
+     *
+     * @return string
+     */
+    public function getElFinderCssUrl()
+    {
+        if ($this->_elFinderCssUrl === null)
+            $this->_elFinderCssUrl = $this->elFinderAssetsUrl . "/css";
+
+        return $this->_elFinderCssUrl;
+    }
+
+    /**
+     * Retrieves an asset URL of ElFinder's scripts directory.
+     *
+     * @return string
+     */
+    public function getElFinderJsUrl()
+    {
+        if ($this->_elFinderJsUrl === null)
+            $this->_elFinderJsUrl = $this->elFinderAssetsUrl . "/js";
+
+        return $this->_elFinderJsUrl;
+    }
+
+    /**
+     * Retrieves a string representation of JSON object with ElFinder's
+     * client configuration options.
+     *
+     * @return string
+     */
+    public function getJsonClientOptions()
+    {
+        if ($this->_jsonClientOptions === null)
+            $this->_jsonClientOptions = json_encode($this->clientOptions);
+        return $this->_jsonClientOptions;
+    }
+
+    /**
+     * Initializes the widget preparing an URL to ElFinder's connector.
+     */
     public function init()
     {
-
-        $dir = dirname(__FILE__) . '/assets';
-        $this->assetsDir = Yii::app()->assetManager->publish($dir);
-        $cs = Yii::app()->getClientScript();
-
-        // jQuery and jQuery UI
-        $cs->registerCssFile($cs->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
-//        $cs->registerCssFile($this->assetsDir . '/smoothness/jquery-ui-1.8.21.custom.css');
-//        $cs->registerCssFile('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/smoothness/jquery-ui.css');
-        $cs->registerCoreScript('jquery');
-        $cs->registerCoreScript('jquery.ui');
-//        $cs->registerScriptFile('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js');
-
-        // elFinder CSS
-        $cs->registerCssFile($this->assetsDir . '/css/elfinder.css');
-
-        // elFinder JS
-        $cs->registerScriptFile($this->assetsDir . '/js/elfinder.full.js');
-        // elFinder translation
-        $cs->registerScriptFile($this->assetsDir . '/js/i18n/elfinder.ru.js');
-
-        // set required options
-        if (empty($this->connectorRoute))
-            throw new CException('$connectorRoute must be set!');
-        $this->settings['url'] = Yii::app()->createUrl($this->connectorRoute);
-        /* var_dump($this->settings['url']);die; */
-        $this->settings['lang'] = Yii::app()->language;
+        if ($this->connectorRoute !== null && is_string($this->connectorRoute)
+                && $this->connectorOptions !== null && is_array($this->connectorOptions))
+        {
+            $connectorOptionsSerialized = serialize($this->connectorOptions);
+            $connectorOptionsEncoded = base64_encode($connectorOptionsSerialized);
+            $this->clientOptions['url'] = Yii::app()->createUrl($this->connectorRoute, array(
+                ElFinderConnectorAction::GET_PARAM_ELFINDER_CONNECTOR_OPTIONS => $connectorOptionsEncoded
+            ));
+        }
     }
 
+    /**
+     * Runs the widget rendering a template.
+     */
     public function run()
     {
-        $id = $this->getId();
-        $settings = CJavaScript::encode($this->settings);
-        $cs = Yii::app()->getClientScript();
-        $cs->registerScript('elFinder', "$('#$id').elfinder($settings);");
-        echo "<div id=\"$id\"></div>";
+        $this->render("elfinder");
     }
-
 }

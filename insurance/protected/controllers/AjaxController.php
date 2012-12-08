@@ -25,13 +25,23 @@ class AjaxController extends Controller
 			$criteria = new CDbCriteria;
 			$criteria->condition = 'name LIKE :name';
 			$criteria->params = array(':name'=>$_GET['q'].'%');
-			$region = InsurRegion::model()->findAll($criteria);
+			$regions = InsurRegion::model()->findAll($criteria);
 
 			$resStr = '';
-			foreach ($region as $region) {
+			foreach ($regions as $region) {
 				$resStr .= $region->name."\n";
 			}
-			echo $resStr;
+
 		}
+		if(isset($_POST['data']) && $_POST['data']=='all'){
+			$regions = InsurRegion::model()->findAll(array('order'=>'name'));
+
+			$res = array();
+			foreach ($regions as $region) {
+				$res []= $region->name;
+			}
+			$resStr = json_encode($res);
+		}
+		echo $resStr;
 	}
 }

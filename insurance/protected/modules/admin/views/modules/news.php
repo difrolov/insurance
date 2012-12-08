@@ -1,7 +1,7 @@
 <h3>Новости<h3>
 <br>
 <?
-<?php /** @var BootActiveForm $form */
+/** @var BootActiveForm $form */
 	$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		'id'=>'verticalForm',
 		'htmlOptions'=>array('class'=>'well'),
@@ -13,26 +13,8 @@
 		)
 	)); ?>
     <fieldset>
-        <?php echo $form->textFieldRow($model, 'baranch_name',array('style'=>'width:600px')); ?>
-        <div class="control-group ">
-			<label class="control-label required" for="InsurContacts_region">
-				Регион
-				<span class="required">*</span>
-			</label>
-			<div class="controls">
-        	<?php $this->widget('CAutoComplete',
-				    array(
-				        'model'=>'InsurRegion',
-				        'name'=>'name',
-				        'url'=>array('Ajax/autocompleteRegion'),
-				        'minChars'=>2,
-				    	'htmlOptions'=>array('class'=>"ac_input", 'style'=>'width:600px')
-				    )
-				); ?>
-			</div>
-		</div>
-        <?php echo $form->textFieldRow($model, 'address',array('style'=>'width:600px','onchange'=>"_contacts.address($(this).val())")); ?>
-        <?php echo $form->textFieldRow($model, 'phone',array('style'=>'width:600px')); ?>
+        <?php echo $form->textFieldRow($model, 'name',array('style'=>'width:600px')); ?>
+        <?php echo $form->textFieldRow($model, 'img',array('style'=>'width:600px','onclick'=>'CKEDITOR.tools.callFunction(84, this); return false;')); ?>
         <div style="font-size:14px;">
         	<?php echo $form->toggleButtonRow($model,'status'); ?>
         </div>
@@ -42,6 +24,6 @@
     </div>
 
 <?php $this->endWidget(); ?>
-<!-- script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=ru"></script>
-<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/assets/gmap3.min.js"></script-->
+
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/admin/contacts.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/ckeditor/ckeditor.js"></script>

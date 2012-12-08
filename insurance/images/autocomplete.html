@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru">
+<head>
+<title>Построение пользовательских интерфейсов на основе библиотеки jQuery</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="Gennady A. Samkov" />
+<meta name="email" content="smkv@mail.ru" />
+<meta name="domain" content="linkexchanger.su" />
+<meta name="robots" content="noindex" />
+<script type="text/javascript" src="js/jquery-1.2.1.js"></script>
+<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+<style type="text/css">
+* {
+    margin:0;
+    padding:0;
+}
+html, body {
+    background-color:#E2F2E2;
+    font-family: "Trebuchet MS", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+}
+.ac_results {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	background-color: Window;
+	overflow: hidden;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:-1;
+	filter:mask();
+	width:3000px;
+	height:3000px;
+}
+
+.ac_results li {
+	position:relative;
+    margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background : Window url('autocomplete_indicator.gif') right center no-repeat;
+}
+
+.ac_over {
+	background-color: Highlight;
+	color: HighlightText;
+}
+#example {
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:150px;
+  font-family: "Trebuchet MS", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+}
+#example2 {
+  position:absolute;
+  top:10px;
+  left:170px;
+  width:240px;
+  font-family: "Trebuchet MS", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+}
+.qnt {
+  position:absolute;
+  top:2px;
+  right:10px;
+  font-size:0.8em;
+  color:#26A908;
+}
+</style>
+</head>
+<body>
+<!-- css и javascript-коды специально размещены непосредственно на странице. -->
+
+<input type="text" id="example" />
+
+<input type="text" id="example2" />
+
+<script type="text/javascript">
+$(document).ready(function(){
+// --- Автозаполнение ---
+$("#example").autocompleteArray([
+'Магадан',
+'Магас',
+'Магнитогорск',
+'Майкоп',
+'Майский',
+'Макаров',
+'Макарьев',
+'Макушино',
+'Малая Вишера',
+'Малгобек',
+'Малмыж',
+'Малоархангельск',
+'Малоярославец',
+'Мамадыш',
+'Мамоново',
+'Мантурово',
+'Мариинск',
+'Мариинский Посад',
+'Маркс',
+'Махачкала',
+'Мглин',
+'Мегион',
+'Медвежьегорск',
+'Медногорск',
+'Медынь',
+'Межгорье',
+'Междуреченск',
+'Мезень',
+'Меленки',
+'Мелеуз',
+'Менделеевск',
+'Мензелинск',
+'Мещовск',
+'Миасс',
+'Микунь',
+'Миллерово',
+'Минеральные Воды',
+'Минусинск',
+'Миньяр',
+'Мирный',
+'Михайлов',
+'Михайловка',
+'Михайловск',
+'Мичуринск',
+'Могоча',
+'Можайск',
+'Можга',
+'Моздок',
+'Мончегорск',
+'Морозовск',
+'Моршанск',
+'Мосальск',
+'Москва',
+'Московский',
+'Муравленко',
+'Мураши',
+'Мурманск',
+'Муром',
+'Мценск',
+'Мыски',
+'Мытищи',
+'Мышкин'
+],
+		{
+			delay:10,
+			minChars:1,
+			matchSubset:1,
+			autoFill:true,
+			maxItemsToShow:10
+		}
+);
+// --- Автозаполнение ---
+
+
+function liFormat (row, i, num) {
+	var result = row[0] + '<p class=qnt>' + row[1] + ' тыс.чел.</p>';
+	return result;
+}
+function selectItem(li) {
+	if( li == null ) var sValue = 'А ничего не выбрано!';
+	if( !!li.extra ) var sValue = li.extra[2];
+	else var sValue = li.selectValue;
+	alert("Выбрана запись с ID: " + sValue);
+}
+
+// --- Автозаполнение2 ---
+$("#example2").autocomplete("autocomplete.php", {
+	delay:10,
+	minChars:2,
+	matchSubset:1,
+	autoFill:true,
+	matchContains:1,
+	cacheLength:10,
+	selectFirst:true,
+	formatItem:liFormat,
+	maxItemsToShow:10,
+	onItemSelect:selectItem
+}); 
+// --- Автозаполнение2 ---
+});
+</script>
+</body>
+</html>
