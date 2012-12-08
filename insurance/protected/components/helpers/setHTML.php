@@ -557,12 +557,14 @@ class setHTML{
 						){	$test=false; // принудительно
 		$controller=Yii::app()->controller->getId();
 		// go print. Hide all panels!
+		$print_mode=false;
 		if (isset($_GET['mode'])) {
 			if ($_GET['mode']=='save'||$_GET['mode']=='print')
 				$print_mode=true;
 			$mode=$_GET['mode'];
-		}else
-			$mode=$print_mode=false;
+		}else{
+			$mode=false;
+		}
 		// HEADER
 		// ***** NOTICE: ************************************************
 		// Title для подразделов устанавливается в Data::getObjectByUrl()
@@ -736,10 +738,7 @@ class setHTML{
 			require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';
 			echo "	</div>
 				</div>";
-			// подключить блок баннеров №3:
-			if (!$print_mode)
-				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
-			else {
+			if ($print_mode){
 				?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/contacts_blank.gif" width="700" height="109" /><? 
 			} 
 			if ($mode=='preview') : 

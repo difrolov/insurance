@@ -188,8 +188,8 @@ $(document).ready(function(){
 		matchContains:1,
 		cacheLength:10,
 		selectFirst:true,
-
-		maxItemsToShow:10,
+		onItemSelect:selectItem,
+		maxItemsToShow:10
   });
   $("#all_regions").click(function(){
 		$.post(baseUrl+"/Ajax/autocompleteRegion",{data:'all'},function(data){

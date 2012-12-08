@@ -1,6 +1,21 @@
-<style>
+<?
+$arrToReplace=array('save','print');
+$str=$pureUrl='';
+$rawUrl=$_SERVER['REQUEST_URI'];
+$tUrl=array('save'=>$rawUrl,'print'=>$rawUrl);
+for($i=0,$j=count($arrToReplace);$i<$j;$i++){
+	$str="?mode=".$arrToReplace[$i];
+	if (strstr($rawUrl,$str)){
+		$pureUrl=str_replace($str,'',$rawUrl);
+		break;
+	}
+}	
+for($i=0,$j=count($arrToReplace);$i<$j;$i++)
+	$tUrl[$arrToReplace[$i]]=$pureUrl."?mode=".$arrToReplace[$i];
+$baseURL=Yii::app()->request->getBaseUrl(true);
+?><style>
 .save_and_print{
-	background:url(<?=Yii::app()->request->getBaseUrl(true)?>/images/save_and_print.gif);
+	background:url(<?=$baseURL?>/images/save_and_print.gif);
 	height:22px;
 	width:63px; 
 }
@@ -22,7 +37,7 @@
 </style>
 <div align="right">
 	<div class="save_and_print" style="padding:0;">
-		<div onClick="location.href=location.href+'?mode=save'" title="Перейти в режим сохранения и печати (по желанию) документа"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/spacer.png"></div>
-    	<div onClick="location.href=location.href+'?mode=print'" title="Распечатать документ"><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/spacer.png"></div>
+		<div onClick="location.href='<?=$tUrl['save']?>'" title="Перейти в режим сохранения и печати (по желанию) документа"><img src="<?=$baseURL?>/images/spacer.png"></div>
+    	<div onClick="location.href='<?=$tUrl['print']?>'" title="Распечатать документ"><img src="<?=$baseURL?>/images/spacer.png"></div>
 	</div>
 </div>
