@@ -52,7 +52,7 @@ div#banners3 {
 #banners4,
 #content_from_right{
 	border-right-color:#00AFDE;
-	max-width:187px;
+	/*max-width:187px;*/
 	white-space:normal;
 }
 div#banners4{

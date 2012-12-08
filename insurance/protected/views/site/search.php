@@ -1,15 +1,84 @@
 <?	Data::includeXtraCss();?>
-<div id="inner_left_menu">
+<link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/search.css" type="text/css" rel="stylesheet"><div id="inner_left_menu">
 <h2 class="txtLightBlue">Поиск</h2>
 <div>
 <? 	$seeking=''; 
 	if ($swords){
 		$seeking=$swords;
 		$aWords=explode(" ",$swords); 
-		$arrFoundWords="'".implode("','",$aWords)."'";?>
+		$arrFoundWords="'".implode("','",$aWords)."'";
+		//echo "<div>arrFoundWords = $arrFoundWords</div>";?>
 <script>
 arrFoundWords=new Array(<?=$arrFoundWords?>);
 textWordsLimit=60;
+function selectFound(content,block_name,rowIndex,keepText){
+	<?	$loop=true;
+		if($loop){?>
+	try{
+		var b=0, bunch='', newText='', newTextCnt=0, checkDot, indexBack=0, lastWord='';
+		var html=$('#'+content+rowIndex);
+		var arrTextWords=$(html).text().split(" "); // text words array
+		var jsArrText=$(arrTextWords).toArray();
+		// ЦИКЛ слов текста; ДЕЛАТЬ:
+		$(arrTextWords).each( function(indexText, textElem) {
+			if (newTextCnt==textWordsLimit) {
+				if (newText[newText.length-1].indexOf(".")==-1)
+					newText+=' ...';
+				return false; 
+			}
+			$.trim(textElem);
+			// текущее слово
+				// ЦИКЛ найденных слов 
+				$(arrFoundWords).each( function(indexFound){
+					// ЕСЛИ текущее слово ТЕКСТА совпадает с текущим словом из НАЙДЕННЫХ
+					if (textElem.toLowerCase().indexOf(this.toLowerCase())!=-1){
+						// +++ ВЫДЕЛИТЬ НАЙДЕННОЕ СЛОВО
+						bunch=' <span class="found">'+this+'</span> ';
+						//console.info('bunch = '+bunch+'\ntextElem = '+textElem+'\nthis = '+this);
+						// ЕСЛИ первое совпадение в тексте
+						if (b==0) {	
+							// ЦИКЛ текущего фрагмента (т.е., набор перебранных к данному моменту слов):
+							for(c=0;c<indexText;c++) {
+																	
+								indexBack=indexText-c-1;
+								if (jsArrText[indexBack])
+									checkDot=jsArrText[indexBack].indexOf(".");
+									// предыдущее слово не содержит точку
+								if (checkDot==-1) {
+									// ЕСЛИ первая итерация текущего (внутреннего) цикла
+									if (c==0) {
+										// +++увеличить конечный фрагмент на выделенное слово
+										newText=lastWord=bunch;
+									}
+									// +++ ПРИСОЕДИНИТЬ к конечному фрагменту ПРЕДЫДУЩЕЕ СЛОВО
+									newText=jsArrText[indexBack]+' '+newText;
+								}
+							// КОНЕЦ ЦИКЛА текущего фрагмента
+							}
+						}
+						b++; 
+					}
+					// КОНЕЦ ЦИКЛА найденных слов
+				});
+				// +++ ПРИСОЕДИНИТЬ к конечному фрагменту следующее слово
+				if (bunch=='') { 
+					newText+=' '+textElem;
+				}
+				else if (lastWord!=bunch) {
+						newText+=' '+bunch;
+				}
+				newTextCnt++;
+				bunch='';
+		// ПОКА ВЕЛИЧИНА ИТЕРАТОРА НЕ БОЛЕЕ <допустимой длины конечного фрагмента> (см. условие в начале цикла)
+		});
+	<?	}?>		
+		$('#'+block_name+rowIndex).html(newText);
+		if(!keepText)
+			$(html).remove();
+	}catch(e){
+		alert(e.message);
+	}
+}
 </script>
 <?	}?>
 <form method="post">
@@ -85,25 +154,15 @@ textWordsLimit=60;
 			}
 				if (!$wplus) echo "<div class='txtRed'> NOT FOUND? </div>"; 
 		}?>
-<style>
-.found{
-	background:#FF0;
-}
-table.tblResults td {
-	border-bottom: solid 1px #666;
-}
-</style>
 <br>
 <hr>
 Поисковая строка: <?=$swords?>
 <hr>
-<h2 class="txtLightBlue" style="margin:-4px 0 18px 25px">Результат поиска:</h2>
-<div>
+<h2 class="txtLightBlue">Результат поиска:</h2>
 <table class="tblResults" width="100%" cellspacing="0" cellpadding="10">
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+  <tr id="trHeaders" class="txtLightBlue bold">
+    <td>Раздел</td>
+    <td>Текст (выборка)</td>
   </tr>
 <?	$ww=0;
 	foreach($res as $name=>$text):
@@ -111,88 +170,21 @@ table.tblResults td {
 		$text=str_replace("&nbsp;"," ",$text); 
 		$ww++;?>
   <tr>
-    <td>&nbsp;</td>
-    <td><?=$name?></td>
-    <td><div id="content<?=$ww?>"></div><?
+    <td id="conetent_header<?=$ww?>"><?
+	echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='pname".$ww."'>".$name."</div>";?>
+<script>
+selectFound('pname','conetent_header',<?=$ww?>,'keep');
+</script>    
+    </td>
+    <td id="content<?=$ww?>"><?
 	echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='ptext".$ww."'>".$text."</div>";?>
 <script>
-<?	$loop=true;
-	if($loop){?>
-try{
-	var b=0, bunch='', newText='', newTextCnt=0, checkDot, indexBack=0, lastWord='';
-	var html=$('#ptext<?=$ww?>');
-	var arrTextWords=$(html).text().split(" "); // text words array
-	var jsArrText=$(arrTextWords).toArray();
-	// ЦИКЛ слов текста; ДЕЛАТЬ:
-	$(arrTextWords).each( function(indexText, textElem) {
-		if (indexText>=textWordsLimit&&b>0) {
-			if (newText[newText.length-1].indexOf(".")==-1)
-				newText+=' ...';
-			return false; 
-		}
-		$.trim(textElem);
-		// текущее слово
-			// ЦИКЛ найденных слов 
-			$(arrFoundWords).each( function(indexFound, foundElem){
-				// ЕСЛИ текущее слово ТЕКСТА совпадает с текущим словом из НАЙДЕННЫХ
-				if (textElem.toLowerCase().indexOf(foundElem.toLowerCase())!=-1){
-					// console.info('ENTER LOOP\n========================================================================================\nindexFound = '+indexFound+', textElem = '+textElem+', foundElem = '+foundElem);
-					// +++ ВЫДЕЛИТЬ НАЙДЕННОЕ СЛОВО
-					bunch=' <span class="found">'+textElem+'</span> ';
-					// ЕСЛИ первое совпадение в тексте
-					if (b==0) {	
-						// ЦИКЛ текущего фрагмента (т.е., набор перебранных к данному моменту слов):
-						for(c=0;c<indexText;c++) {
-																
-							indexBack=indexText-c-1;
-							if (jsArrText[indexBack])
-								checkDot=jsArrText[indexBack].indexOf(".");
-							if ( // ЕСЛИ не конец текста
-								 indexText<jsArrText.length 
-								 // предыдущее слово не содержит точку
-								 && checkDot==-1
-							   ) {
-								// ЕСЛИ первая итерация текущего (внутреннего) цикла
-								
-								console.info('IN LOOP, c = '+c);
-								if (c==0) {
-									// +++увеличить конечный фрагмент на выделенное слово
-									newText=lastWord=bunch;
-							   	}
-								// +++ ПРИСОЕДИНИТЬ к конечному фрагменту ПРЕДЫДУЩЕЕ СЛОВО
-								newText=jsArrText[indexBack]+' '+newText;
-								console.info('checkDot = '+checkDot+'\njsArrText[indexBack] = \n'+jsArrText[indexBack]);
-							}
-						// КОНЕЦ ЦИКЛА текущего фрагмента
-						}
-					}
-					b++; // console.info('\n========================================================================================\nLEAVE LOOP\n');
-				}
-				// КОНЕЦ ЦИКЛА найденных слов
-			});
-			// +++ ПРИСОЕДИНИТЬ к конечному фрагменту следующее слово
-			if (bunch=='') { 
-				newText+=' '+textElem;
-			}
-			else if (lastWord!=bunch) {
-					newText+=' '+bunch;
-			}
-			newTextCnt++;
-			bunch='';
-	// ПОКА ВЕЛИЧИНА ИТЕРАТОРА НЕ БОЛЕЕ <допустимой длины конечного фрагмента> (см. условие в начале цикла)
-    });
-<?	}?>		
-	$('#content<?=$ww?>').html(newText);
-	$(html).remove();
-}catch(e){
-	alert(e.message);
-}
+selectFound('ptext','content',<?=$ww?>);
 </script>    
     </td>
   </tr>
 
 <?	endforeach;?>
 </table>
-</div>
 <?	}?>
 </div>

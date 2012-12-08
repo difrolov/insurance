@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+.found{
+	background:#FF9;
+	padding:inherit 4px;
+}
+table.tblResults tbody > tr:first-child {
+	background:#EFEFEF;
+}
+table.tblResults tbody > tr:first-child td{
+	border-bottom:solid 2px #CCC;
+	border-top-width:solid 1px #999;
+}
+table.tblResults tbody > tr:last-child td{
+	border-bottom: none;
+}
+table.tblResults td {
+	border-bottom: solid 1px #999;
+}
+table.tblResults tr:not([id="trHeaders"]):hover{
+	background:aliceblue;
+}
+/*	aliceblue	*/

@@ -90,7 +90,7 @@ class search_engine
             for($i =0; $i<sizeof($this->keyword); $i++)
             {
                 $pattern = trim($this->keyword[$i]);
-                $sql = "SELECT * FROM ".$this->table." WHERE `".$this->field[$n]."` LIKE '%".$pattern."%'";
+                $sql = "SELECT * FROM ".$this->table." WHERE `".$this->field[$n]."` LIKE LOWER('%".$pattern."%')";
 				// echo "<div>sql: <hr><pre>".$sql."</pre></div>";
                 $result = mysql_query($sql);
                 while ($row = mysql_fetch_object($result) AND !empty($pattern))
