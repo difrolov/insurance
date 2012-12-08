@@ -1,23 +1,18 @@
 @charset "utf-8";
 /* CSS Document */
 .found{
-	background:#FF9;
+	background:#D4F2FD;
 	padding:inherit 4px;
 }
-table.tblResults tbody > tr:first-child {
-	background:#EFEFEF;
+input#seek_it{
+	background: #06AEDD;
+	border: none;
+	border-radius: 2px;
+	color: white;
+	padding: 3px 14px;
 }
-table.tblResults tbody > tr:first-child td{
-	border-bottom:solid 2px #CCC;
-	border-top-width:solid 1px #999;
+h3[id^="content_header"]{
+	margin-bottom: 8px;
+	margin-top:20px;
+	font-size: 16px !important;
 }
-table.tblResults tbody > tr:last-child td{
-	border-bottom: none;
-}
-table.tblResults td {
-	border-bottom: solid 1px #999;
-}
-table.tblResults tr:not([id="trHeaders"]):hover{
-	background:aliceblue;
-}
-/*	aliceblue	*/

@@ -31,9 +31,25 @@ function selectFound(content,block_name,rowIndex,keepText){
 				// ЦИКЛ найденных слов 
 				$(arrFoundWords).each( function(indexFound){
 					// ЕСЛИ текущее слово ТЕКСТА совпадает с текущим словом из НАЙДЕННЫХ
-					if (textElem.toLowerCase().indexOf(this.toLowerCase())!=-1){
+					var lowerElem=textElem.toLowerCase();
+					var lowerFound=this.toLowerCase();
+					
+					if (lowerElem.indexOf(lowerFound)!=-1){
+						
+						//var startPos=textElem.indexOf(lowerFound);
+						//var gotElemToSelect=textElem.substr(startPos,startPos+this.length);
+						var arrElems=lowerElem.split(lowerFound);
+						
+						//if (textElem.length>this.length) 
+							//bunch=textElem.substr(this.length);
 						// +++ ВЫДЕЛИТЬ НАЙДЕННОЕ СЛОВО
-						bunch=' <span class="found">'+this+'</span> ';
+						if (arrElems[0]!=lowerElem){
+							bunch=arrElems[0];
+							bunch+='<span class="found">'+this+'</span>';
+							if (arrElems[1])
+								bunch+=arrElems[1];
+						}else
+							bunch=' <span class="found">'+this+'</span> ';
 						//console.info('bunch = '+bunch+'\ntextElem = '+textElem+'\nthis = '+this);
 						// ЕСЛИ первое совпадение в тексте
 						if (b==0) {	
@@ -82,109 +98,36 @@ function selectFound(content,block_name,rowIndex,keepText){
 </script>
 <?	}?>
 <form method="post">
-Введите поисковую строку: <input style="width:50%;"  name="keyword" value="<?=$seeking?>">
-<input type=submit value="Submit">
+<input placeholder="Введите поисковую строку" style="width:80%;"  name="keyword" value="<?=$seeking?>">
+<input id="seek_it" type="submit" value="Искать!">
 </form>
 </div>
-<? 	if ($swords){
-		function handleResults(&$text,$word){
-			$fPos=0;
-			$fw=mb_strtolower($word,'UTF-8');
-			if ($fPos=stripos($text,$fw)){
-				$nTextStart=substr($text,$fPos);
-				$colorStr=str_replace($fw,"<span class='found'>".$fw."</span>",$text);
-				echo "<div class=''>(fPos: $fPos)".$colorStr."</div>";
-				echo "<hr><div class=''>".substr($colorStr,$fPos-50)."</div>";
-				//echo ("<h1>stps: ".($fPos-1)."</h1>");
-				/*$arrStart=explode(" ",$nTextStart); // массив слов после совпадения
-				echo "<br>nTextStart=<span class='txtRed'>$nTextStart</span><br>";
-				// опи санную
-				$tWord=$arrStart[0]; // искомое слово
-				$textBefore=stristr($text,$tWord,TRUE);
-				echo "<br>textBefore= $textBefore<br><br>tWord= $tWord<br>";
-				$acnt=count($arrStart);
-				if ($acnt>4) $acnt=(4+2);
-				$textAfter=$arrStart[1];		
-				$st=2;
-				while ($st<$acnt){
-					$textAfter.=" ".$arrStart[$st]; // несколько слов после
-					$st++;
-				}
-				$str_to_show_raw=$textBefore.$textAfter; 
-				$str_to_show=$textBefore." <span class='found'>$tWord</span> ". $textAfter." ... ";
-				$text=stristr($text,$str_to_show_raw,TRUE);
-				echo $str_to_show;*/
-				//echo "<br>$textBefore <span class='found'>$tWord</span> textAfter= $textAfter<br>";
-				//echo "<h2>RESULT IS ABOVE!</h2>";
-			}
-		}
-		function handleResults2(&$text,$word){
-			$arrWords=explode(" ",$text);
-			echo "<blockquoute class='txtLightBlue'> ".$text."</blockquoute>";
-			for($t=0,$ct=count($arrWords);$t<$ct;$t++){
-				$wplus=0;
-				
-				if (stripos($arrWords[$t],mb_strtolower($word,'UTF-8'))){
-					$wfound=$arrWords[$t]; // word that was found
-					// обнаж
-					echo ('<hr><h2>found</h2><DIV class="found">'.$wfound."</div>t= $t<hr>");
-					$str_init='';
-					$key_start=$t; // word number
-					$wplus=1;
-					while($t){
-						$str_init=$arrWords[$t-$wplus]." ".$str_init;
-						//echo "<div class='txtRed'>= ".$str_init."</div>";
-						if ($wplus>2) {
-							$str_init.=" <span class='found'>".$wfound."</span>";
-							break;
-						}
-						$wplus++;
-					}
-					$wplus+=3;
-					$tt=$t;
-					while($wplus){
-						$tt++;
-						$str_init.=" ".$arrWords[$tt];
-						$wplus--;
-					}
-					echo "<hr>".$str_init."<hr>";				
-				}else{
-					
-				}
-			}
-				if (!$wplus) echo "<div class='txtRed'> NOT FOUND? </div>"; 
-		}?>
+<? 	if ($swords){?>
 <br>
 <hr>
-Поисковая строка: <b><?=$swords?></b>
+Поисковый запрос: <b><?=$swords?></b>
 <hr>
-<h2 class="txtLightBlue">Результат поиска:</h2>
-<table class="tblResults" width="100%" cellspacing="0" cellpadding="10">
-  <tr id="trHeaders" class="txtLightBlue bold">
-    <td>Раздел</td>
-    <td>Текст (выборка)</td>
-  </tr>
+<h2 class="txtLightBlue">Результат поиска (<?
+echo (count($res))? count($res):'0';
+?>):</h2>
 <?	$ww=0;
 	foreach($res as $name=>$text):
+		
 		$text=strip_tags($text);
 		$text=str_replace("&nbsp;"," ",$text); 
-		$ww++;?>
-  <tr>
-    <td id="conetent_header<?=$ww?>"><?
-	echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='pname".$ww."'>".$name."</div>";?>
+		$ww++;
+		echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='pname".$ww."'>".$name."</div>";?>
+
+<h3 id="content_header<?=$ww?>"></h3>
 <script>
-selectFound('pname','conetent_header',<?=$ww?>,'keep');
-</script>    
-    </td>
-    <td id="content<?=$ww?>"><?
-	echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='ptext".$ww."'>".$text."</div>";?>
+selectFound('pname','content_header',<?=$ww?>);
+</script>
+<?		echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='ptext".$ww."'>".$text."</div>";?>    
+<div id="content<?=$ww?>"></div>
+Источники: <a href="#">источник 1</a>
 <script>
 selectFound('ptext','content',<?=$ww?>);
 </script>    
-    </td>
-  </tr>
-
-<?	endforeach;?>
-</table>
-<?	}?>
+<?	endforeach;
+}?>
 </div>
