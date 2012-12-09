@@ -247,5 +247,58 @@ class Views{
 		if( $id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$item.'"')->queryScalar() )
 			$this->ViewsIds[$id]=$item;
 	}
+	function tst(){echo "tst";}
+}
+
+/**	ВНЕ КЛАССА ПРЕДНАМЕРЕННО, т.к. некоторые модули не могут получить к нему доступ.
+* Возвращает распарсенный, начиная с "?" URL, в виде массива
+* @package
+* @subpackage
+*/
+function getUrlHashAsArray($rawUrl=false){
+	if (!$rawUrl) 
+		$rawUrl=$_SERVER['REQUEST_URI'];
+	if (strstr($rawUrl,"?")){
+		$arrUrls=explode("?",$rawUrl);
+		$hash=array_pop($arrUrls);
+		$arrHash=explode("&",$hash);
+		$urls=array();
+		for($i=0,$j=count($arrHash);$i<$j;$i++){
+			$urlParams=explode("=",$arrHash[$i]);
+			for($u=0,$r=count($urlParams);$u<$r;$u++){
+				$next=$u+1;
+				if ($u%2==0&&$next<$r)
+					$urls[$urlParams[$u]]=$urlParams[$u+1];
+			}
+		}
+		return $urls;			
+	}else
+		return false;	
+}
+function parseUrl($make_string=false,$get_hash=false){
+	$arrUrl=explode("/",$_SERVER['REQUEST_URI']);
+	//var_dump("<h1>arrUrl:</h1><pre>",$arrUrl,"</pre>");die($_SERVER['HTTP_HOST']);
+	$last_piece=array_pop($arrUrl);
+	//echo "<div class=''>last_piece= ".$last_piece."</div>";
+	$hash=false;
+	if (($pos=strpos($last_piece,"?"))!==false){
+		//echo "<div class=''>pos= ".$pos."</div>";
+		$hash=substr($last_piece,0);
+		//echo "<div class=''>hash= ".$hash."</div>";
+	}
+	array_push($arrUrl,substr($last_piece,0,$pos));
+	if ($arrUrl[0]=='') 
+		unset($arrUrl[0]);
+	array_unshift($arrUrl,'http:/',$_SERVER['HTTP_HOST']);
+	if ($make_string)
+		$arrUrl=implode("/",$arrUrl);
+	if($get_hash&&$hash){ 
+		//echo "<div class=''>value: 1, hash: ".$hash."</div>";
+		$urls=getUrlHashAsArray($hash);
+		$arr=array('uris'=>$arrUrl,'hashes'=>$urls);
+		//var_dump("<h1>arr:</h1><pre>",$arr,"</pre>");
+		return array('uris'=>$arrUrl,'hashes'=>$urls);
+	}else
+		return $arrUrl;
 }
 ?>
