@@ -100,11 +100,11 @@ div.bottomBannersWrapper div{
 }
 div.bottomBannersWrapper img{
 	height:138px;
-	width:239px; /*247*/
+	width:240px; /*247*/
 }	
 div.bottomBannersWrapper 
 	> div:first-child{
-	margin-left:20px;
+	margin-left:17px;
 }
 div.bottomBannersWrapper 
 	> div:first-child +div{
