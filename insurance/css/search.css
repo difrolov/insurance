@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+.found{
+	background:#D4F2FD;
+	padding:inherit 4px;
+}
+input#seek_it{
+	background: #06AEDD;
+	border: none;
+	border-radius: 2px;
+	color: white;
+	padding: 3px 14px;
+}
+h3[id^="content_header"]{
+	margin-bottom: 8px;
+	margin-top:20px;
+	font-size: 16px !important;
+}

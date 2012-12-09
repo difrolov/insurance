@@ -4,7 +4,7 @@ if(!isset($inExViews))
 if ($inExViews)
 	$go_action='editView';
 else
-	$go_action=(isset($data))? "update?id=".$data['id']:"save";?>
+	$go_action=(isset($data))? "update":"save";?>
 <DIV align="left" id="testBlockInfoBottom" class="testBlock pFixed" style="right:0; bottom:0; color:#F00; display:<?="none"?>;">&nbsp;</DIV>
 <? // var_dump("<h1>data:</h1><pre>",$data,"</pre>"); die();
 if (isset($data)) // подключить скрипт с js-обработкой существущего макета:

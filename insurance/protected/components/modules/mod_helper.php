@@ -15,7 +15,9 @@ function handleFiles($dir) {
 						handleFiles($path);
 					}else{ 
 						$af=explode(".",$file); // разбиваем имя файла собственно на имя (это будет имя модуля) и расширение
-						if(array_pop($af)=='xml'){
+						if( array_pop($af)=='xml'
+							&& $file!='dwsync.xml' // fucking DW
+						  ){
 							$xml = simplexml_load_file($dir.$file);
 							$modData[]=array( 
 										'module'=>array_pop($af),

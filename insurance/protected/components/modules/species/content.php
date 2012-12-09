@@ -1,7 +1,7 @@
 <div id="bottom_insur">
 	<div id="mod_insur_species">
 	<h2 class="txtLightBlue">Виды страхования</h2>
-    <? 	$upersimg=Yii::app()->request->getBaseUrl(true).'/images/modules/insurance_species/';
+    <? 	$upersimg=Yii::app()->request->getBaseUrl(true).'/upload/img/vidi_srahovania/';
 		$upers=Yii::app()->request->getBaseUrl(true).'/fizicheskim_litzam/';?>
 	<div><img src="<?=$upersimg?>car.png" width="77" height="49">
     <a href="<?=$upers?>avtostrahovanie" class="txtLightBlue">Автострахование</a></div>

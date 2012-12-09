@@ -14,7 +14,7 @@ class Data {
 				$field='id';
 				$alias_path=self::getAliasById($start_point);
 			}
-			$condition=$start_point;
+			$condition=$start_point; // alias || id
 		}else{ // продолжение извлечения алиасов
 			$field="alias";
 			$condition=$parent_alias;
