@@ -45,11 +45,11 @@ class InsurNews extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'name' => 'Название филиала',
+			'name' => 'Название новости',
 			'content' => 'Текст статьи',
 			'status' => 'Статус',
 			'date_edit' => 'Дата Изменения',
-			'img' => 'картинка статьи',
+			'img' => 'Картинка статьи',
 
 		);
 	}

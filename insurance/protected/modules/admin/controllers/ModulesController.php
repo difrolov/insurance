@@ -164,7 +164,7 @@ class ModulesController extends Controller{
 			$model->attributes = $_POST['InsurNews'];
 			$model->date_edit = date("Y-m-d H:i:s");
 			$model->save();
-			$this->redirect('getnews');
+			$this->redirect(Yii::app()->createUrl('admin/modules/getnews'));
 		}elseif(isset($_GET['id'])){
 			$model = Insurnews::model()->findByPk($_GET['id']);
 
@@ -180,14 +180,14 @@ class ModulesController extends Controller{
 		$gridDataProvider = action::getnews(false,true);
 		$this->render('getnews',array('gridDataProvider'=>$gridDataProvider));
 	}
-	public function actionUpdateStatusnews(){
+	public function actionUpdateStatusNews(){
 		if(!Yii::app()->user->checkAccess('admin') || Yii::app()->user->isGuest){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 			echo json_encode(array('success'=>'не хватает прав'));
 			exit;
 		}
 		if(isset($_POST['status']) && isset($_POST['id'])){
-			$query = InsurContacts::model()->find(array('condition'=>'id in ('.$_POST['id'].')'));
+			$query = InsurNews::model()->find(array('condition'=>'id='.$_POST['id']));
 			$query->status = $_POST['status'];
 			$query->save();
 			echo json_encode(array('success'=>1));
