@@ -122,6 +122,12 @@ function sendTmplData(preview,preview_stat){
 			var sendToUrl=$('#content_save').attr('action');
 			if (preview) 
 				sendToUrl+='?preview='+preview_stat;
+			
+			if ($('input#section_id').val()) {
+				sendToUrl+=(preview)? '&':'?';
+				sendToUrl+='section_id='+$('input#section_id').val();
+			}
+			alert(sendToUrl);		
 			$.ajax ({
 					type: "POST",
 					url: sendToUrl,

@@ -37,7 +37,9 @@
 // +----------------------------------------------------------------------+
 
 class search_engine
-{
+{	private $arrStopWords=array("а","без","более","бы","был","была","были","было","быть","в","вам","вас","весь","во","вот","все","всего","всех","вы","где","да","даже","для","до","его","ее","если","есть","ещё","же","за","здесь","и","из","из-за","или","им","их","к","как","как-то","ко","когда","кто","ли","либо","мне","может","мы","на","надо","наш","не","него","неё","нет","ни","них","но","ну","о","об","однако","он","она","они","оно","от","очень","по","под","при","с","со","так","также","такой","там","те","тем","то","того","тоже","той","только","том","ты","у","уже","хотя","чего","чей","чем","что","чтобы","чьё","чья","эта","эти","это","я");
+	public $keywords=array();
+	
     function __construct($mysql)
     {
         # set database connection
@@ -49,15 +51,18 @@ class search_engine
         $this->db_selected = mysql_select_db($this->database,$this->link) or die(mysql_error());
         $this->found = array();
     }
+	public function getStopWords($asString=false){
+		return ($asString)? "'".implode("','",$this->arrStopWords)."'":$this->arrStopWords;
+	}
     function set_table($table)
     {
         # set table
         $this->table = $table;
     }
-    function set_keyword($keyword)
+    function set_keyword($keywords)
     {
         # set keywords
-        $this->keyword = explode(" ", $keyword);
+        $this->keywords = explode(" ", $keywords);
     }
     function set_primarykey($key)
     {
@@ -81,27 +86,39 @@ class search_engine
         # total results found
         return sizeof($this->found);
     }
-    function set_result()
-    {
+    function set_result($fields_to_look)
+    {	$stop_string=$this->getStopWords(true);
         # find occurence of inputted keywords
         $key =  $this->key;
+		
         for ($n=0; $n<sizeof($this->field); $n++)
         {
-            for($i =0; $i<sizeof($this->keyword); $i++)
-            {
-                $pattern = trim($this->keyword[$i]);
-                $sql = "SELECT * FROM ".$this->table." WHERE `".$this->field[$n]."` LIKE LOWER('%".$pattern."%')";
-				// echo "<div>sql: <hr><pre>".$sql."</pre></div>";
-                $result = mysql_query($sql);
-                while ($row = mysql_fetch_object($result) AND !empty($pattern))
-                {
-                    $this->found[] = $row->$key;
-                }
-            }
+            for($i=0,$k=sizeof($this->keywords); $i<$k; $i++)
+            {	$pattern = trim($this->keywords[$i]);
+				if (!in_array($pattern,$this->arrStopWords)){
+					$field_content=$this->field[$n];
+					// seek in insur_article_content:
+					$sql = "SELECT id FROM ".$this->table." 
+	 WHERE (";
+					$where_sql=$and_not='';
+					for($f=0,$l=count($fields_to_look);$f<$l;$f++) {
+						$field_name=$fields_to_look[$f];
+						if ($f) $where_sql .="   
+			 OR "; 
+						$where_sql.="`".$field_name."` LIKE LOWER('%".$pattern."%')";
+					}
+					$sql.=$where_sql. "\n       ) "; 
+					// echo "<div class=''><pre>".$sql."</pre></div>";
+					$result = mysql_query($sql);
+					while ($row = mysql_fetch_object($result) AND !empty($pattern))
+					{
+						$this->found[] = $row->$key;
+					}
+				}
+            }//die();
         }
         $this->found = array_unique($this->found);
         return $this->found;
     }
 }
-
 ?>

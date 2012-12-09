@@ -61,13 +61,16 @@ class GeneratorController extends Controller
  *	Сохранить изменённые данные макета
  *
  */
-	public function actionUpdate($id){
+	public function actionUpdate($id=false){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
+		if (isset($_GET['section_id'])&&$_GET['section_id'])
+			$id=$_GET['section_id'];
 		if (!$id){ 
 			die('Ошибка!<p>Не получен id подраздела</p>.'); 
 		}else{
+			
 			$this->actionSave($id);
 		}
 	}
@@ -110,7 +113,11 @@ class GeneratorController extends Controller
 			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model,'inExViews'=>$inExViews));
 		}
 	}
-	
+/**
+ * Сохранить данные раздела
+ * @package
+ * @subpackage
+ */
 	public function actionSave($update_id=false){ // см. _docs\tests\test2.php
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));

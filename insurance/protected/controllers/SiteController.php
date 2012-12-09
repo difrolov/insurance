@@ -120,39 +120,73 @@ location.href='<?=Yii::app()->request->getBaseUrl(true)?>';
 			require_once Yii::getPathOfAlias('webroot').'/protected/views/site/search/class.search.php';
 			
 			$config = array('localhost','root','','insur_db');
+			$fields_to_look = array('name','content');
 			$table = 'insur_article_content';
 			$key = 'id';
 			$fields = array('name','content');
 			
-			$keyword = $_POST['keyword'];
+			$keywords = $post_words = $_POST['keywords'];
 			
 			$found = new search_engine($config);
 			$found->set_table($table);
 			$found->set_primarykey($key);
-			$found->set_keyword($keyword);
-			$found->set_fields($fields);			
-			$result = $found->set_result();
-			$resultStr=implode(",",$result);
-			$results=0;
-			if ($resultStr&&$results=Yii::app()->db->createCommand("
-	SELECT `id`, `name`, `content`
-FROM insur_article_content
-WHERE id IN ( $resultStr )")->queryAll()){
-				for($i=0,$j=count($results);$i<$j;$i++){
-					$row=$results[$i];
-					foreach ($row as $field=>$content) {
-						//$arrCont=explode(" ",$row['content']);
-						//$trim=array_slice($arrCont,0,40);
-						//$res[$row['name']]=implode(" ",$trim);
-						$res[$row['name']]=$row['content'];
-					}
-				}
-			}else $res="Данных не обнаружено..."; // die();
+			$found->set_keyword($keywords);
+			$found->set_fields($fields);
+			$getStopWords=array();
+			// id id:			
+			$result = $found->set_result($fields_to_look);
+			for($i=0,$j=count($result);$i<$j;$i++){
+				$article_id=$result[$i];
+				$sections_ids[$article_id]=Yii::app()->db->createCommand("
+	SELECT `id`, `name`
+FROM insur_insurance_object WHERE 
+    `content` LIKE '%:: article id: ".$article_id."%'")->queryAll();
+				// 98 КАСКО
+				// 35 Компании перевозчики
+				$article_data = Yii::app()->db->createCommand()->select('name, content')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow();
+				$res[$article_id]=array(
+						'name'=>$article_data['name'],
+						'content'=>$article_data['content'],
+						'sections'=>$sections_ids[$article_id]
+					);
+			}
+			/*
+				["Здоровье"]=>
+				  array(2) {
+					["content"]=>
+					string(2199) "
+							TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+							TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+				"
+					["sections"]=>
+						array(2) {
+						  [0]=>
+						  array(2) {
+							["id"]=>
+							string(2) "87"
+							["name"]=>
+							string(84) "Страхование от несчастных случае в и болезней"
+						  }
+						  [1]=>
+						  array(2) {
+							["id"]=>
+							string(3) "133"
+							["name"]=>
+							string(70) "Добровольное медицинское страхование"
+						  }
+						}
+					  } */
+			if ($i)
+				$getStopWords=$found->getStopWords(false); // array
+			else $res="Данных не обнаружено...";
+			
+			$true_words=array_diff($found->keywords,$getStopWords);
+			$true_words="'".implode("','",$true_words)."'";
 		}else{
-			$keyword=false;
+			$keywords=$true_words=$post_words=false;
 			$res="Введите поисковый запрос...";
 		}
-		$this->render('search', array('res'=>$res,'swords'=>$keyword));
+		$this->render('search', array('res'=>$res,'swords'=>$post_words,'true_words'=>$true_words));
 	}
 	
 	/**

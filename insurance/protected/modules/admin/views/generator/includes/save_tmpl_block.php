@@ -94,7 +94,7 @@ if($inExViews) {?>
     <input name="name" type="text" id="name" required value="<?=$section_name?>">
             <hr>
             Укажите алиас подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Будет фигурировать в адресной строке браузера"> 
-            <div>(<span class="txtRed">только</span> латинские буквы, цифры и &quot;_&quot;)</div> ALIAS : <?=$section_alias?>
+            <div>(<span class="txtRed">только</span> латинские буквы, цифры и &quot;_&quot;)</div>
             <input name="alias" type="text" id="alias" required value="<?=$section_alias?>"><span class="checkData" id="check_alias_info" style="display:<?="none"?>;"><div id="checking_result">&nbsp;проверка уникальности алиаса...&nbsp;</div></span>
 <?	if($section_alias){ // ...?>
    			<!-- Для сверки текущего значения и значения ячейки: -->
@@ -114,6 +114,9 @@ if($inExViews) {?>
         &nbsp;
         подраздела
         &nbsp;
+	<?	if(isset($data)){?>
+		<input name="section_id" id="section_id"  type="hidden" value="<?=$data['id']?>">
+	<? }?>        
 	</div>
 <?
 }?>
