@@ -185,11 +185,37 @@ ORDER BY name, parent_name';
 				$sel .= '<select name="banner"'.
 						'onchange="_banner.update_field(\'src\',\'upload/img/banner/\'+$(this).val(),'.$id.')">';
 			foreach($str as $val){
-				$sel .='<option onmouseover="$(\'#banner_'.$id.'\').attr(\'src\',\'/insur/insurance/upload/img/banner/'.$val.'\')"'.
+				$sel .='<option onmouseover="$(\'#banner_'.$id.'\').attr(\'src\',\''.Yii::app()->request->baseUrl.'/upload/img/banner/'.$val.'\')"'.
 						'value="'.$val.'" '.($val==substr($sel_img,18)?"selected":"").'>'.
 						'/upload/img/banner'.$val.'</option>';
 			}
 			$sel .='</select>';
+			return $sel;
+		}
+	}
+
+	public static function imgNews(){
+		$path = Yii::getPathOfAlias('webroot') . '/upload/img/news';
+		if (is_dir($path)){
+			$dir = opendir($path);
+		}
+		else{
+			return false;
+		}
+		while ($file = readdir($dir)){
+			if ($file != "." && $file != ".." && (stristr($file,'.jpg') || stristr($file,'.png') || stristr($file,'.gif'))){
+				$str[] = $file;
+			}
+		}
+		$sel="";
+		if(isset($str) && count($str) > 0){
+			$sel .= '<div>';
+			$i=1;
+			foreach($str as $val){
+				$sel .='<img onclick="$(\'#InsurNews_img\').val(\''.Yii::app()->request->baseUrl.'/upload/img/news/'.$val.'\');$(\'.close\').click()" style="width:100px;height:100px" alt="'.$val.'" src="'.Yii::app()->request->baseUrl.'/upload/img/news/'.$val.'">&nbsp'.($i%4==0?"<br><br>":"");
+				$i++;
+			}
+			$sel .='</div>';
 			return $sel;
 		}
 	}

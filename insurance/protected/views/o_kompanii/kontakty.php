@@ -192,6 +192,7 @@ $(document).ready(function(){
 		maxItemsToShow:10
   });
   $("#all_regions").click(function(){
+	  pos = $("#region").position();
 		$.post(baseUrl+"/Ajax/autocompleteRegion",{data:'all'},function(data){
 			str="";
 			str+="<ul>";
@@ -205,7 +206,7 @@ $(document).ready(function(){
 			$(".ac_results").css({position: 'absolute',
 								width: '400px',
 								top: '294px',
-								left: '596px',
+								left: pos.left,
 								display:'block',
 								overflow: 'scroll',
 								height:'400px'});
