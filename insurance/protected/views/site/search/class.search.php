@@ -40,16 +40,9 @@ class search_engine
 {	private $arrStopWords=array("а","без","более","бы","был","была","были","было","быть","в","вам","вас","весь","во","вот","все","всего","всех","вы","где","да","даже","для","до","его","ее","если","есть","ещё","же","за","здесь","и","из","из-за","или","им","их","к","как","как-то","ко","когда","кто","ли","либо","мне","может","мы","на","надо","наш","не","него","неё","нет","ни","них","но","ну","о","об","однако","он","она","они","оно","от","очень","по","под","при","с","со","так","также","такой","там","те","тем","то","того","тоже","той","только","том","ты","у","уже","хотя","чего","чей","чем","что","чтобы","чьё","чья","эта","эти","это","я");
 	public $keywords=array();
 	
-    function __construct($mysql)
+    function __construct()
     {
-        # set database connection
-        $this->host = $mysql[0];
-        $this->username = $mysql[1];
-        $this->password = $mysql[2];
-        $this->database = $mysql[3];
-        $this->link = mysql_connect($this->host,$this->username,$this->password) or die(mysql_error());
-        $this->db_selected = mysql_select_db($this->database,$this->link) or die(mysql_error());
-        $this->found = array();
+		$this->found = array();
     }
 	public function getStopWords($asString=false){
 		return ($asString)? "'".implode("','",$this->arrStopWords)."'":$this->arrStopWords;
@@ -90,7 +83,6 @@ class search_engine
     {	$stop_string=$this->getStopWords(true);
         # find occurence of inputted keywords
         $key =  $this->key;
-		
         for ($n=0; $n<sizeof($this->field); $n++)
         {
             for($i=0,$k=sizeof($this->keywords); $i<$k; $i++)
@@ -108,14 +100,12 @@ class search_engine
 						$where_sql.="`".$field_name."` LIKE LOWER('%".$pattern."%')";
 					}
 					$sql.=$where_sql. "\n       ) "; 
-					// echo "<div class=''><pre>".$sql."</pre></div>";
-					$result = mysql_query($sql);
-					while ($row = mysql_fetch_object($result) AND !empty($pattern))
-					{
-						$this->found[] = $row->$key;
+					$result=Yii::app()->db->createCommand($sql)->queryAll();
+					foreach($result as $i=>$data){
+						$this->found[] =$data['id'];
 					}
 				}
-            }//die();
+            } 
         }
         $this->found = array_unique($this->found);
         return $this->found;

@@ -1,6 +1,7 @@
 <?	Data::includeXtraCss();
 	//var_dump("<h1>true_words:</h1><pre>",$true_words,"</pre>");die();?>
-<link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/search.css" type="text/css" rel="stylesheet"><div id="inner_left_menu">
+<link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/search.css" type="text/css" rel="stylesheet">
+<div id="inner_left_menu">
 <h2 class="txtLightBlue">Поиск</h2>
 <div>
 <? 	$seeking=''; 
