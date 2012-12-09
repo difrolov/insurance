@@ -137,10 +137,11 @@ location.href='<?=Yii::app()->request->getBaseUrl(true)?>';
 			$result = $found->set_result($fields_to_look);
 			for($i=0,$j=count($result);$i<$j;$i++){
 				$article_id=$result[$i];
-				$sections_ids[$article_id]=Yii::app()->db->createCommand("
+				$query1="
 	SELECT `id`, `name`
 FROM insur_insurance_object WHERE 
-    `content` LIKE '%:: article id: ".$article_id."%'")->queryAll();
+    `content` LIKE '%:: article id: ".$article_id."%'";
+				$sections_ids[$article_id]=Yii::app()->db->createCommand($query1)->queryAll();
 				// 98 КАСКО
 				// 35 Компании перевозчики
 				$article_data = Yii::app()->db->createCommand()->select('name, content')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow();
@@ -149,10 +150,22 @@ FROM insur_insurance_object WHERE
 						'content'=>$article_data['content'],
 						'sections'=>$sections_ids[$article_id]
 					);
-			}
+				$test=false;
+				if ($test){
+					echo "<blockquote style='padding:10px; margin:10px; border:solid 1px'>";
+						echo "<div>id = ".$article_id."</div>"; 
+						echo "<div>name = ".$res[$article_id]['name']."</div>"; 
+						echo "<div>content here... </div>"; 
+						if (empty($res[$article_id]['sections']))
+							echo "<div class=''><pre>".$query1."</pre></div>";
+						else var_dump("<pre>sections:",$res[$article_id]['sections'],"</pre>"); 
+					echo "</blockquote>"; 
+				}
+			} 	if ($test)die();
 			/*
-				["Здоровье"]=>
-				  array(2) {
+				[19]=>
+				  array(3) {
+					["name"]=>"Здоровье"
 					["content"]=>
 					string(2199) "
 							TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT

@@ -102,7 +102,8 @@ function selectFound(content,block_name,rowIndex,keepText){
 echo (count($res))? count($res):'0';
 ?>):</h2>
 <?	$ww=0;
-	foreach($res as $name=>$array) :		
+	foreach($res as $id=>$array) :
+		$name=$array['name'];		
 		$text=strip_tags($array['content']);
 		$text=str_replace("&nbsp;"," ",$text); 
 		$ww++;
@@ -119,14 +120,16 @@ selectFound('ptext','content',<?=$ww?>);
 </script>
 <hr size="1" noshade color="#ccc">    
 <span class="txtLightBlue">Источники:</span> 
-	<?	var_dump("<h1>[array]:</h1><pre>",$array,"</pre>");
+<?	if(empty($array['sections'])){?>
+	<span style="background:#EEE">статья не опубликована ни в одном из разделов...</span>
+<? 	}else{
 		for ($i=0,$j=count($array['sections']);$i<$j;$i++){
-			$row=$array['sections'][$i]; echo "<div class=''>i= ".$i."</div>";
-			if ($i) echo ",";
-			//echo "<div class=''>row[$row[id]]: ".$row['name']."</div>";?>
+			$row=$array['sections'][$i]; 
+			if ($i) echo ",";?>
     &nbsp;
 	<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<? Data::buildAliasPath((int)$row['id']);?>" style="text-decoration:underline;"><?=$row['name']?></a><?	
-		}?>
+		}
+	}?>
 <?	endforeach;
 }?>
 </div>
