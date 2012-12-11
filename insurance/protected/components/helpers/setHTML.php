@@ -620,9 +620,9 @@ class setHTML{
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
     <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
-	<?	if ($print_mode){
-			?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo_blank.gif" width="182" height="44" /><br><br><? 
-		}	
+		<?	if ($print_mode){
+                ?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo_blank.gif" width="182" height="44" /><br><br><? 
+            }
 			// если исключения для Views не были явно переданы как аргумент метода, проверим их наличие в массиве иселючений (создаётся разработчиком):
 			if (!$asModule){
 				$Views=new Views(); // сформировать "объёмный" (иерархический) массив исключений для подразделов, являющихся программными модулями
@@ -632,8 +632,8 @@ class setHTML{
 			if ( $asModule // если передан массив alias'ов (view/[controller_name]/index.php), контент страниц которых должен выводиться как специально разработанный модуль
 				 && is_array($asModule)
 				 && in_array($section_data['alias'],$asModule)
-			   ){?><div id="innerXtraModule"><?
-			   require_once Yii::getPathOfAlias('webroot').'/protected/views/'.Yii::app()->controller->getId().'/' . $section_data['alias'] . '.php';?></div><?
+			   ) {?><div id="innerXtraModule"><?
+			   require_once Yii::getPathOfAlias('webroot').'/protected/views/'.Yii::app()->controller->getId().'/' . $section_data['alias'] . '.php';?></div><? 
 			}else{
 				$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 				$bloxHeaderType=$tmpl['Schema'][1];

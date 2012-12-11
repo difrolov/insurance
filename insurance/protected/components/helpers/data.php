@@ -188,7 +188,7 @@ class Views{
 					'fizicheskim_litzam'=>false,
 					'korporativnym_klientam'=>false,
 					'malomu_i_srednemu_biznesu'=>false,
-					'o_kompanii'=>array('vakansiji','kontakty'),
+					'o_kompanii'=>array('vakansiji','kontakty','news'),
 					'partneram'=>false,
 				);
 	private $ViewsIds=array();
@@ -275,23 +275,28 @@ function getUrlHashAsArray($rawUrl=false){
 	}else
 		return false;	
 }
+/**
+ * Распарсить URL по "/"
+ * @package
+ * @subpackage
+ */
 function parseUrl($make_string=false,$get_hash=false){
 	$arrUrl=explode("/",$_SERVER['REQUEST_URI']);
 	//var_dump("<h1>arrUrl:</h1><pre>",$arrUrl,"</pre>");die($_SERVER['HTTP_HOST']);
-	$last_piece=array_pop($arrUrl);
 	//echo "<div class=''>last_piece= ".$last_piece."</div>";
-	$hash=false;
+	$hash=$last_piece=false;
 	if (($pos=strpos($last_piece,"?"))!==false){
+		$last_piece=array_pop($arrUrl);
 		//echo "<div class=''>pos= ".$pos."</div>";
 		$hash=substr($last_piece,0);
 		//echo "<div class=''>hash= ".$hash."</div>";
+		array_push($arrUrl,substr($last_piece,0,$pos));
 	}
-	array_push($arrUrl,substr($last_piece,0,$pos));
 	if ($arrUrl[0]=='') 
 		unset($arrUrl[0]);
 	array_unshift($arrUrl,'http:/',$_SERVER['HTTP_HOST']);
 	if ($make_string)
-		$arrUrl=implode("/",$arrUrl);
+		$arrUrl=implode("/",$arrUrl); //var_dump("<h1>arrUrl:</h1><pre>",$arrUrl,"</pre>");
 	if($get_hash&&$hash){ 
 		//echo "<div class=''>value: 1, hash: ".$hash."</div>";
 		$urls=getUrlHashAsArray($hash);
@@ -299,6 +304,6 @@ function parseUrl($make_string=false,$get_hash=false){
 		//var_dump("<h1>arr:</h1><pre>",$arr,"</pre>");
 		return array('uris'=>$arrUrl,'hashes'=>$urls);
 	}else
-		return $arrUrl;
+		return array('uris'=>$arrUrl);
 }
 ?>
