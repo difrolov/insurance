@@ -97,27 +97,33 @@ class setHTML{
  * @subpackage		contacts
  *
  */
-	static function buildContactsAndSearchBlock(){?>
-    		<div id="call_us" align="right">
+	static function buildContactsAndSearchBlock(){
+		$arrPyctosGo=array(
+					'home'=>array('title'=>'На главную','href'=>'/','width'=>'18',''),
+					'map'=>array('title'=>'Карта сайта','href'=>'/site/map','width'=>'18'),
+					'search'=>array('title'=>'Поиск','href'=>'/site/search','width'=>'18'),
+			);?>
+    	<div id="call_us" align="right">
           	<div align="center" id="all_phones">
               <div id="cmd_micro">
-<?	$arrPyctosGo=array(
-				'home'=>array('title'=>'На главную','href'=>'/','width'=>'18'),
-				'map'=>array('title'=>'Карта сайта','href'=>'/site/map','width'=>'18'),
-				'search'=>array('title'=>'Поиск','href'=>'/site/search','width'=>'18'),
-			);
-	foreach ($arrPyctosGo as $data=>$array):?>
+	<?	if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){
+			foreach ($arrPyctosGo as $data=>$array):?>
+        <a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/ie/<?=$data?>.gif"></a>
+		<?	endforeach;
+		}else{
+			foreach ($arrPyctosGo as $data=>$array):?>
                 <div data-<?=$data?>="<?=$data?>" title="<?=$array['title']?>" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true).$array['href']?>'">
            			<a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/spacer.png" width="<?=$array['width']?>" height="16"></a>
                 </div>
-<?	endforeach;?>
+<?			endforeach;
+		}?>
               </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
 			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>
                 <div id="free_line_local" align="center">+7 495 649 71 71</div>
 			</div>
-          </div>
-<? 	}
+        </div>
+<?	}
 /**
  * @package		HTML
  * @subpackage		menu
@@ -190,13 +196,18 @@ class setHTML{
  *
  */
 	function buildFooterBlock($tp=false){?>
+    <div id="fhr1">&nbsp;</div>
 			<div align="left" id="footer">
     <?  if(Yii::app()->controller->getId()!='site')
-		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';?>
-            <hr noshade size="1" style="margin-bottom:0; margin-left:-20px; margin-right:-20px;">
-            <hr noshade size="1" style="margin:-4px -20px -8px -20px;">
+		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+		if (!($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))) {?>
+            <hr id="fhr1" noshade size="1">
+            <hr id="fhr2" noshade size="1">
   	<!--bottom_menu-->
-	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
+	<?	}else{?>
+    	
+	<?	}
+		if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
 	<?	setHTML::buildMainMenu($this); echo "\n"?>
         </div>
@@ -324,26 +335,40 @@ class setHTML{
 				self::$arrMenuWidget=$menuWidget;
 		}
 		// старый IE
-		if (self::detectOldIE()){ //
+		if (self::detectOldIE()||isset($_GET['iexp'])){ //
 			$URL=explode("/",$_SERVER['REQUEST_URI']);
 			$nURL=array_reverse($URL);
 			if ($nURL[1]=='index')
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
 			else $urlAlias='/'.$nURL[1].'/';?>
-        <ul<? //id=yw0?>>
+        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
+			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$menuItems=self::getMainMenuItems($submenu);
-			$dx=array_shift($menuItems);
+			//if (!$submenu) $dx=array_shift($menuItems);
 			foreach($menuItems as $parent_id=>$parentData){
 				$alias=$parentData['alias'];
-				$text=$parentData['text'];?>
-			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
-					echo $text;?></a>
-			<?	if ( $alias!='/'.$mainPageAlias.'/'
+				$text=$parentData['text'];
+				$tdActive=false;
+				if ( $currentController==$alias
+					   || ($currentController=='site'&&$alias=='site/index')
+					 ) $tdActive=true;
+				ob_start();
+				?><a href="<?php echo Yii::app()->request->baseUrl.'/'.$alias; ?>"><? echo $text;?></a><?
+				$tLink=ob_get_contents();
+				ob_clean();?>
+            <td<? if ($tdActive):?> class="active"<? endif;?>><?
+            	if ($tdActive){?>
+                <div><?=$tLink?></div>
+			<?	}else 
+					echo $tLink;
+					
+				if ( $alias!='/'.$mainPageAlias.'/'
 			         && isset($newborn_menu)
 				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
-            </li>
+            </td>
 		<?	}?>
-        </ul>
+        	</tr>
+        </table>
 	<?	}else $this_object->widget( 'zii.widgets.CMenu',
 							  array('items'=>$menuWidget)
 							);
@@ -537,7 +562,7 @@ class setHTML{
  *
  */
 	static function detectOldIE($version=array(6,7,8)){
-		$usAg=$_SERVER['HTTP_USER_AGENT'];
+		$usAg=$_SERVER['HTTP_USER_AGENT']; // die("HTTP_USER_AGENT = <hr>$_SERVER[HTTP_USER_AGENT]<hr>");
 		for($i=0,$j=count($version);$i<$j;$i++)
 			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
 				$old_versions[]=$version[$i];

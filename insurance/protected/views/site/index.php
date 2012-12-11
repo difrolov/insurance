@@ -1,22 +1,38 @@
-<? 	if(isset($_GET['stop']))die("index by default"); 
+<? 	//if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])) die("old!");
+	if(isset($_GET['stop']))die("index by default"); 
 	$tp=false;
 	$baseURL=Yii::app()->request->getBaseUrl(true)."/";
 	// получить баннеры для слайд-шоу: 
 	$arrBanOut=setHTML::getBannersAsObjects('outside');
 	//if (empty($arrBanOut)) die('empty');
 	if ($tp){?><h3>tblSlides</h3><? }
-	if (!(isset($_GET['slides'])&&!$_GET['slides'])) {?>
-    	<div align="center" id="slides">
-<?	$arrSlides=array('first'=>'Для корпоративных клиентов',
+	if (!(isset($_GET['slides'])&&!$_GET['slides'])) {
+		$arrSlides=array('first'=>'Для корпоративных клиентов',
 					'middle'=>'Малому и среднему бизнесу',
 					'last'=>'Для физических лиц'
 				);
 		$s=0;
+		if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+      <div style="background:#EDEEF0; padding:20px; margin-top:10px;">
+        <table id="tblSlides" cellspacing="0" cellpadding="0" width="980">
+        	<tr align="center">
+    <?	}else{
+        	echo '<div align="center" id="slides">';
+		}
 		foreach($arrSlides as $subname=>$subheader): 
 			// заплатки. А куда ж без них, если кривые ручки баннеры вставляют!
 			$imgsrc=(isset($arrBanOut[$s]['src']))? $arrBanOut[$s]['src']:'';
 			$slink=(isset($arrBanOut[$s]['link']))? $arrBanOut[$s]['link']:'';
-			$bname=(isset($arrBanOut[$s]['name']))? $arrBanOut[$s]['name']:'название не обнаружено...';?>        
+			$bname=(isset($arrBanOut[$s]['name']))? $arrBanOut[$s]['name']:'название не обнаружено...';
+			if($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+			<td nowrap>
+            	<div class="bigImage"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
+                <div class="txtBlock">
+                    <div class="link"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
+                	<div class="justText"><?=$subheader?></div>
+                </div>
+                </td>
+		<?	}else{?>        
         	<div id="slide-<?=$subname?>">
             	<div style="overflow: hidden;
 							width: 296px;
@@ -28,10 +44,17 @@
                     <div><?=$subheader?></div>
                 </div>
             </div>
-         <?	$s++;
-		endforeach;?>            
-        	</div>
-<?	}else{?>
+         <?	}
+		 	$s++;
+		endforeach;
+		if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+        	<tr>
+        </table>
+      </div>
+	<?	}else{            
+        	echo '</div>';
+		}
+	}else{?>
 <link href="<?	
 require_once Yii::app()->request->getBaseUrl(true).'/css/slideshow.css';	
 	?>" rel="stylesheet" type="text/css">
