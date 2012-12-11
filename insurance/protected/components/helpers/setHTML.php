@@ -14,7 +14,7 @@ class setHTML{
 			foreach($subMenuItems as $alias_value=>$link_text):
 				if (is_array($link_text)){
 					$level=(isset($link_text['level']))? $link_text['level']:0;
-					if ($level>1):?>
+					if ($level>1):?>	
                     <blockquote>
 				<?	endif;//echo "alias_value= $alias_value<br>";
 					self::buildAdminSubmenu($link_text);
@@ -147,7 +147,7 @@ class setHTML{
 			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
 		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	if ($top_level&&!$admin_mode)
+	<?	if ($top_level&&!$admin_mode && $parent_alias !='o_kompanii' && $parent_alias !='partneram')
 			echo $insur_species;
 
 		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
@@ -191,6 +191,8 @@ class setHTML{
  */
 	function buildFooterBlock($tp=false){?>
 			<div align="left" id="footer">
+    <?  if(Yii::app()->controller->getId()!='site')
+		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';?>
             <hr noshade size="1" style="margin-bottom:0; margin-left:-20px; margin-right:-20px;">
             <hr noshade size="1" style="margin:-4px -20px -8px -20px;">
   	<!--bottom_menu-->
@@ -457,7 +459,6 @@ class setHTML{
 						}
 						$parent_alias=implode("/",$parentAliases);
 					}
-
 					if ( isset($subMenuItems['children']) // есть вложенные уровни
 						 || $level>1	// вложенных нет, есть родительские
 					   ){
@@ -468,7 +469,7 @@ class setHTML{
 					$prev_level=$level; // установим текущий уровень подраздела
 
 					ob_start();
-						?><a href="<?=Yii::app()->request->baseUrl.'/'.$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
+						?><a href="<?=Yii::app()->request->baseUrl.'/'.@$link;?>"><?=$link_text?></a><? 	$linkContent=ob_get_contents();
 					ob_get_clean();
 					if ($curControllerLeftMenu){
 			?><div<?	//
@@ -515,7 +516,14 @@ class setHTML{
  */
 	static function getMainMenuItems($parent_id_level=false){
 		if (!$parent_id_level) $parent_id_level='-1';
-		$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias` FROM insur_insurance_object WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY id')->queryAll();
+		if ($parent_id_level=='-2'){
+			$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias`
+												FROM insur_insurance_object
+												LEFT JOIN order_by_menu as ob ON ob.id_object=insur_insurance_object.id
+												WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY ob.priority')->queryAll();
+		}else{
+			$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias` FROM insur_insurance_object WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY id')->queryAll();
+		}
 		for($i=0,$j=count($data);$i<$j;$i++){
 			$menuItems[$data[$i]['id']]=array('text'=>$data[$i]['name'],
 											 'alias'=>$data[$i]['alias']
@@ -600,6 +608,7 @@ class setHTML{
 			$section_data->first_header=$section_data->name;
 		
 		if (!$print_mode){?>
+  <div style="display:inline-block;padding-bottom:280px;">
 	<div class="floatLeft">
     	<div id="inner_left_menu">
 	<?	// сгенерировать ссылки:
@@ -619,10 +628,10 @@ class setHTML{
 		}else{ // загрузить макет?>
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
-    <div id="inner_content" class="schema<?=$tmpl['Schema']?>">
-		<?	if ($print_mode){
-                ?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo_blank.gif" width="182" height="44" /><br><br><? 
-            }
+    <div id="inner_content"<? if($tmpl['Schema']){?> class="schema<?=$tmpl['Schema']?>"<? }?> style="float: left;max-width:700px; width:700px;">
+	<?	if ($print_mode){
+			?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo_blank.gif" width="182" height="44" /><br><br><? 
+		}	
 			// если исключения для Views не были явно переданы как аргумент метода, проверим их наличие в массиве иселючений (создаётся разработчиком):
 			if (!$asModule){
 				$Views=new Views(); // сформировать "объёмный" (иерархический) массив исключений для подразделов, являющихся программными модулями
@@ -632,8 +641,8 @@ class setHTML{
 			if ( $asModule // если передан массив alias'ов (view/[controller_name]/index.php), контент страниц которых должен выводиться как специально разработанный модуль
 				 && is_array($asModule)
 				 && in_array($section_data['alias'],$asModule)
-			   ) {?><div id="innerXtraModule"><?
-			   require_once Yii::getPathOfAlias('webroot').'/protected/views/'.Yii::app()->controller->getId().'/' . $section_data['alias'] . '.php';?></div><? 
+			   ){?><div id="innerXtraModule"><?
+			   require_once Yii::getPathOfAlias('webroot').'/protected/views/'.Yii::app()->controller->getId().'/' . $section_data['alias'] . '.php';?></div><?
 			}else{
 				$bloxCnt=$colCount=(int)$tmpl['Schema'][0];
 				$bloxHeaderType=$tmpl['Schema'][1];
@@ -741,7 +750,6 @@ class setHTML{
 			}
 			echo "<div class='clear'>
 					<div style='padding-right:20px;'>";
-			require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';
 			echo "	</div>
 				</div>";
 			if ($print_mode){
@@ -752,6 +760,7 @@ class setHTML{
 				require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/preview_mode_menu.php';
 			endif;?>
    </div>
+  </div>
 	<?	}
 	}
 	public static function showCommonDate($date=false){

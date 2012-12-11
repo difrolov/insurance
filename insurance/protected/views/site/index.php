@@ -18,12 +18,16 @@
 			$slink=(isset($arrBanOut[$s]['link']))? $arrBanOut[$s]['link']:'';
 			$bname=(isset($arrBanOut[$s]['name']))? $arrBanOut[$s]['name']:'название не обнаружено...';?>        
         	<div id="slide-<?=$subname?>">
-            	<div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
-            		<div>
-                		<div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
-                    	<div><?=$subheader?></div>
-                	</div>
-            	</div>
+            	<div style="overflow: hidden;
+							width: 296px;
+							white-space: nowrap;"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
+                <div style="overflow: hidden;
+							width: 296px;
+							white-space: nowrap;">
+                    <div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
+                    <div><?=$subheader?></div>
+                </div>
+            </div>
          <?	$s++;
 		endforeach;?>            
         	</div>
