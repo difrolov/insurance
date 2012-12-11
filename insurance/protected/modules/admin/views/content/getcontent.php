@@ -16,6 +16,8 @@ if (isset($gridDataProvider)){
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider,
     'template'=>"{items}{pager}",
+ 		'enablePagination' => true,
+ 		'ajaxUpdate'=>false,
  	'filter'=>$model,
     'columns'=>array(
        	array('name'=>'id', 'header'=>'#'),

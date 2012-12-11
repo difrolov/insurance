@@ -22,7 +22,7 @@ class ModulesController extends Controller{
 			$model->attributes = $_POST['InsurJobs'];
 			$model->creat_date = date("Y-m-d H:i:s");
 			$model->save();
-			$this->redirect('GetJobs');
+			$this->redirect(Yii::app()->createUrl('admin/modules/getjobs'));
 		}elseif(isset($_GET['id'])){
 			$model = InsurJobs::model()->findByPk($_GET['id']);
 
@@ -163,6 +163,9 @@ class ModulesController extends Controller{
 			}
 			$model->attributes = $_POST['InsurNews'];
 			$model->date_edit = date("Y-m-d H:i:s");
+			if(!isset($_GET['id'])){
+				$model->status = 1;
+			}
 			$model->save();
 			$this->redirect(Yii::app()->createUrl('admin/modules/getnews'));
 		}elseif(isset($_GET['id'])){

@@ -3,7 +3,8 @@
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider,
     'template'=>"{items}{pager}",
-	'enablePagination' => true,
+		'enablePagination' => true,
+		'ajaxUpdate'=>false,
 	'columns'=>array(
        array('name'=>'id', 'header'=>'#','type'=>'html'),
         array('name'=>'baranch_name', 'header'=>'Название региона'),

@@ -3,6 +3,8 @@
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider,
     'template'=>"{items}{pager}",
+		'enablePagination' => true,
+		'ajaxUpdate'=>false,
 	'enablePagination' => true,
 	'columns'=>array(
        array('name'=>'id', 'header'=>'#','type'=>'html'),

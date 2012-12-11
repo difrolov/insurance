@@ -193,7 +193,7 @@ $(document).ready(function(){
   });
   $("#all_regions").click(function(){
 	  pos = $("#region").position();
-		$.post(baseUrl+"/Ajax/autocompleteRegion",{data:'all'},function(data){
+		$.post(baseUrl+"/Ajax/autocompleteRegion",{data:'contact'},function(data){
 			str="";
 			str+="<ul>";
 			if(data){

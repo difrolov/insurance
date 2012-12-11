@@ -72,6 +72,7 @@ class ContentController extends Controller
 				$model->content = $_POST['InsurArticleContent']['content'];
 				$model->name = $_POST['name_content'];
 				$model->save();
+				$this->redirect(Yii::app()->createUrl('admin/content/getcontent'));
 			}
 		}
 		if(isset($_GET['section_id'])){
@@ -95,6 +96,7 @@ class ContentController extends Controller
 				$model->delete();
 			}
 		}
+		$this->redirect(Yii::app()->createUrl('admin/content/getcontent'));
 	}
 	public function actionSetContent(){
 		if(!Yii::app()->user->checkAccess('admin')){
