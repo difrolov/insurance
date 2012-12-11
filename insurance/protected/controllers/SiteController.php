@@ -117,17 +117,13 @@ location.href='<?=Yii::app()->request->getBaseUrl(true)?>';
  */
 	function actionSearch(){
 		if ($_SERVER['REQUEST_METHOD']=="POST"){	
-			require_once Yii::getPathOfAlias('webroot').'/protected/views/site/search/class.search.php';
-			
-			$config = array('localhost','root','','insur_db');
+			require Yii::getPathOfAlias('webroot').'/protected/views/site/search/class.search.php';
 			$fields_to_look = array('name','content');
 			$table = 'insur_article_content';
 			$key = 'id';
 			$fields = array('name','content');
-			
 			$keywords = $post_words = $_POST['keywords'];
-			
-			$found = new search_engine($config);
+			$found = new search_engine();
 			$found->set_table($table);
 			$found->set_primarykey($key);
 			$found->set_keyword($keywords);
@@ -137,10 +133,11 @@ location.href='<?=Yii::app()->request->getBaseUrl(true)?>';
 			$result = $found->set_result($fields_to_look);
 			for($i=0,$j=count($result);$i<$j;$i++){
 				$article_id=$result[$i];
-				$sections_ids[$article_id]=Yii::app()->db->createCommand("
+				$query1="
 	SELECT `id`, `name`
 FROM insur_insurance_object WHERE 
-    `content` LIKE '%:: article id: ".$article_id."%'")->queryAll();
+    `content` LIKE '%:: article id: ".$article_id."%'";
+				$sections_ids[$article_id]=Yii::app()->db->createCommand($query1)->queryAll();
 				// 98 КАСКО
 				// 35 Компании перевозчики
 				$article_data = Yii::app()->db->createCommand()->select('name, content')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow();
@@ -149,10 +146,22 @@ FROM insur_insurance_object WHERE
 						'content'=>$article_data['content'],
 						'sections'=>$sections_ids[$article_id]
 					);
-			}
+				$test=false;
+				if ($test){
+					echo "<blockquote style='padding:10px; margin:10px; border:solid 1px'>";
+						echo "<div>id = ".$article_id."</div>"; 
+						echo "<div>name = ".$res[$article_id]['name']."</div>"; 
+						echo "<div>content here... </div>"; 
+						if (empty($res[$article_id]['sections']))
+							echo "<div class=''><pre>".$query1."</pre></div>";
+						else var_dump("<pre>sections:",$res[$article_id]['sections'],"</pre>"); 
+					echo "</blockquote>"; 
+				}
+			} 	
 			/*
-				["Здоровье"]=>
-				  array(2) {
+				[19]=>
+				  array(3) {
+					["name"]=>"Здоровье"
 					["content"]=>
 					string(2199) "
 							TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT

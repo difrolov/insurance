@@ -668,70 +668,76 @@ class setHTML{
 						);
 				}
 				$i=1;
-				if (isset($tmpl['blocks'])) {
-					foreach ($tmpl['blocks'] as $block_name=>$blockModules){
-					 // массив: блоки макета as имя блока => массив модулей (строка):
-					 	// 	$block_name:
-						//	[1] =>
-						//
-						//	$blockModules:
-							// 	[0] Новость
-							// 	[1] Текст :: article id: 13
-							// 	[2] Готовое решение 1
-							// 	[3] Текст :: article id: 93
-							// 	[4] Готовое решение 2
-
-					 	// 	$block_name:
-						// [2] =>
-
-						//	$blockModules:
-							//	[0] Новость |
-							//	[1] Готовое решение 2
-							//	[2] Готовое решение 2
-							//	[3] Текст :: article id: 94
-							//	[4] Текст :: article id: 95 	?>
-				<div id="div<?=$i?>">
-                	<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
-            	<? 	if($block_name==2&&$bloxHeaderType!='0'){
-						echo(is_array($blockModules))?
-							"<span style='color:red'>Ошибка: неправильный тип данных для заголовка (массив вместо строки)...</span>"
-							:
-						 	"<h2 class=\"subsectHeader\">".substr($blockModules,strpos($blockModules,":")+1)."</h2>";
-					}else{
-						$artIdSbstr="Текст :: article id:";
-						// собрать контент текущего блока:
-					  $for=true;
-					  if ($for) { // перебрать все модули в МАКЕТЕ:
-						for($b=0,$c=count($blockModules);$b<$c;$b++){
-							$moduleContent=$blockModules[$b];
-							// Новость
-							// Готовое решение 2
-							// ...
-							// если статья:
-							if(strstr($moduleContent,$artIdSbstr)){
-								$article_id=(int)substr($moduleContent,strlen($artIdSbstr));
-								$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow();
-								if ($article_data['name']){?>
-		<h3 class="contentHeader"><?=$article_data['name']?></h3>
-							<?	}	echo $article_data['content'];
-							}else{ // НЕ статья?>
-		<h3 class="contentHeader"><?=$moduleContent?></h3>
-        					<?	if ($mod_folder=array_search($moduleContent,$modules)){
-									$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
-									require $module_path;
-								}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+				if (isset($_GET['news_id'])){
+					self::showSingleNews($_GET['news_id']);
+				}else{
+					if (isset($tmpl['blocks'])) {
+						foreach ($tmpl['blocks'] as $block_name=>$blockModules){
+						 // массив: блоки макета as имя блока => массив модулей (строка):
+							// 	$block_name:
+							//	[1] =>
+							//
+							//	$blockModules:
+								// 	[0] Новость
+								// 	[1] Текст :: article id: 13
+								// 	[2] Готовое решение 1
+								// 	[3] Текст :: article id: 93
+								// 	[4] Готовое решение 2
+	
+							// 	$block_name:
+							// [2] =>
+	
+							//	$blockModules:
+								//	[0] Новость |
+								//	[1] Готовое решение 2
+								//	[2] Готовое решение 2
+								//	[3] Текст :: article id: 94
+								//	[4] Текст :: article id: 95 	?>
+					<div id="div<?=$i?>">
+						<div<? // echo ' style="background:'.$testColors[$i].';"'?>>
+					<? 	if($block_name==2&&$bloxHeaderType!='0'){
+							echo(is_array($blockModules))?
+								"<span style='color:red'>Ошибка: неправильный тип данных для заголовка (массив вместо строки)...</span>"
+								:
+								"<h2 class=\"subsectHeader\">".substr($blockModules,strpos($blockModules,":")+1)."</h2>";
+						}else{
+							$artIdSbstr="Текст :: article id:";
+							// собрать контент текущего блока:
+						  $for=true;
+						  if ($for) { // перебрать все модули в МАКЕТЕ:
+							for($b=0,$c=count($blockModules);$b<$c;$b++){
+								$moduleContent=$blockModules[$b];
+								// Новость
+								// Готовое решение 2
+								// ...
+								// если статья:
+								if(strstr($moduleContent,$artIdSbstr)){
+									$article_id=(int)substr($moduleContent,strlen($artIdSbstr));
+									$article_data = Yii::app()->db->createCommand()->select('*')->from('insur_article_content')->where('id=:id', array(':id'=>$article_id))->queryRow();
+									if ($article_data['name']){?>
+			<h3 class="contentHeader"><?=$article_data['name']?></h3>
+								<?	}	echo $article_data['content'];
+								}else{ // НЕ статья
+									if ($moduleContent!="Новость"):?>
+			<h3 class="contentHeader"><?=$moduleContent?></h3>
+								<?	endif;
+									if ($mod_folder=array_search($moduleContent,$modules)){
+										$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
+										require $module_path;
+									}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+								}
+								echo "<div class='clear'>&nbsp;</div>";
 							}
-							echo "<div class='clear'>&nbsp;</div>";
+						  }
+						}?>
+						</div>
+					</div>
+						<?	$i++;
 						}
-					  }
-					}?>
-                	</div>
-                </div>
-					<?	$i++;
-                    }
-                }else{?>
-            <h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
-			<? 	}
+					}else{?>
+				<h4>Раздел находится в стадии наполнения. Пожалуйста, подождите!</h4>
+				<? 	}
+				}
 			}
 			echo "<div class='clear'>
 					<div style='padding-right:20px;'>";
@@ -748,21 +754,25 @@ class setHTML{
    </div>
 	<?	}
 	}
+	public static function showCommonDate($date=false){
+		if(!$date) $date=date("Y-m-d H:i:s");
+		return $date[8].$date[9] . "." .
+		 $date[5].$date[6] . "." .
+		 $date[0].$date[1] . $date[2].$date[3];
+	}
 /**
  * @package		content
  * @subpackage		news
  *
  */
-	function showNews($src=false,$content=false){
-		if (!$content) {
-			$content="Итак, здесь у нас превью новости. Новость такая новость.
-			<p>А в последствии, между прочим, новости будут гороздо новостней, чем сейчас.</p>";
-		}?>
-	<div class="company_news"><img align="left" name="placeholder" src="<?=$src?>" width="48" height="64" alt="" style="background-color: #99FFCC" /><?=$content?>
-    	<div align="right"><?='<a href="#">'?>Подробности<?='&gt;&gt;&gt;</a>'?></div>
-    </div>
-    <br>
-<?	}
+	public static function showSingleNews($news_id){
+		$news = Yii::app()->db->createCommand()->select('*')->from('insur_news')->where('id=:id', array(':id'=>$news_id))->queryRow();?>
+    <h2 class="txtLightBlue subsectHeader"><?=$news['name']?></h2>
+	<div style="margin-bottom:4px; color:#999;">дата публикации: 
+	<? 	echo self::showCommonDate($news['date_edit']);?>
+	</div>
+	<?	echo nl2br($news['content']);
+	}
 /**
  * @package		content
  * @subpackage		product

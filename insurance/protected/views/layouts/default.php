@@ -43,12 +43,24 @@ if ($mode=='save'||$mode=='print'){	?>
         <div class="clear"></div>
 <?	
 	if(Yii::app()->controller->getId()!='site'):?>
-  	<div id="bottomBannersWrapper">
-<?		// подключить блок баннеров №3:
-		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';?>
+<? 	if (isset($_GET['b3'])):?>
+  	<div class="bottomBannersWrapper">
+    <?	for($i=0;$i<3;$i++):?>
+    	<div class="external">
+        	<div class="middle">
+            	<div class="internal">
+           	    <a href="#">
+                	<img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/spacer.png">
+                </a>
+                </div>
+            </div>
+        </div>
 	</div>
-<?	
-	endif;	?>
+<?		endfor;
+	endif;
+	// подключить блок баннеров №3:
+	if (!isset($_GET['b3'])) require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';?>
+<?	endif;	?>
   	</div>
   </div>
 <?	setHTML::buildFooterBlock($tp);	?>

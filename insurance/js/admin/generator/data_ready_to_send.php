@@ -127,7 +127,7 @@ function sendTmplData(preview,preview_stat){
 				sendToUrl+=(preview)? '&':'?';
 				sendToUrl+='section_id='+$('input#section_id').val();
 			}
-			alert(sendToUrl);		
+			// alert(sendToUrl);		
 			$.ajax ({
 					type: "POST",
 					url: sendToUrl,

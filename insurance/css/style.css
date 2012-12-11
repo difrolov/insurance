@@ -30,57 +30,20 @@ html{
 	margin:0;
 	text-align:center;
 }
-div#banners3 {
-	/*clear:both;
-	height:150px;
-	text-align:center;
-	width:initial;*/
-}
-#banners3 div{
-	display:inline-block !important;
-}
-#banners3 > div{
-	/*height:220px;*/
-	margin: 0 20px;
-	vertical-align:top;
-}
-#banners3 > div > div{
-	background:#FFF;
-	border:solid 1px #CCC;
-	border-left: solid 6px #CCC;
-	/*display:inline-block;
-	margin:0 2%;
-	width:28%;
-	*/
-	padding:0 !important;
-}
-#banners3 > div > div > div{
-	border:solid #FFF;
-	border-width:18px 10px;
-	border-left-width:16px;
-	border-right: solid 23px #06AEDD;
-}
-#banners3 
-	div img{
-	height:138px;
-	/*width:210px;*/
-}
-#banners3 span {
+div.bottomBannersWrapper span {
 	border:solid 4px #FFF;
 	border-left:solid 6px #06AEDD;
 	display:block;
 	height:40px; 
 	margin-bottom: 20px;
 	margin-top:10px;
-	max-width:255px;
-	/*padding:10px;*/ 
+	max-width:200px;
 	padding-left:14px; 
 	padding-right:14px;
 }
 #banners4,
 #content_from_right{
 	border-right-color:#00AFDE;
-	/*max-width:187px;*/
 	white-space:normal;
 }
 #bottomBannersWrapper{
@@ -129,6 +92,42 @@ div#banners4 +div a,
 	font-size: 13px;
 	text-decoration:none;
 }
+div.bottomBannersWrapper div{
+	border-style:solid !important;
+	border-color:#FFF !important;
+	display:inline-block;
+	vertical-align:top;
+}
+div.bottomBannersWrapper img{
+	height:138px;
+	width:239px; /*247*/
+}	
+div.bottomBannersWrapper 
+	> div:first-child{
+	margin-left:20px;
+}
+div.bottomBannersWrapper 
+	> div:first-child +div{
+	margin-left:26px;
+	margin-right:26px;
+}
+div.bottomBannersWrapper 
+	> div:last-child{
+	margin-right:20px;
+}
+div.bottomBannersWrapper 
+	div.internal{
+	border-left:18px;
+	border-right:solid 23px #06AEDD !important;
+	border-top:20px;
+	border-bottom:20px;
+}
+div.bottomBannersWrapper 
+	div.middle{
+		border:solid 1px #CCC !important;
+		border-left-width:6px !important;
+}
+
 div#bottom_insur{
 	margin-top:16px;
 }
@@ -885,6 +884,11 @@ div#slides div#slide-middle > div:first-child{
 }
 div#slides div#slide-last > div:first-child{
 	/*background:url(../images/slides/3.jpg);*/
+}
+.subsectHeader.News{
+	color:#06AEDD;
+	margin-bottom:0 !important;
+	text-transform:uppercase;
 }
 div[id^="slide-"] 
 	> div:first-child 
