@@ -50,7 +50,7 @@ div#content_from_right{ background:#FF99CC;}*/
 	border-bottom:solid 1px #666;
 	border-top:solid 1px #666;
 	height:3px;
-	margin-bottom:16px;
+	margin-bottom:6px;
 	margin-top:0 !important; 
 	margin-left:-40px;
 	margin-right:-40px;/*width:1060px;*/
