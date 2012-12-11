@@ -195,18 +195,19 @@ class setHTML{
  * @subpackage		footer
  *
  */
-	function buildFooterBlock($tp=false){?>
-    <div id="fhr1">&nbsp;</div>
+	function buildFooterBlock($tp=false){
+		if (!($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))) {
+			$hrs='<hr id="fhr1" noshade size="1">
+            <hr id="fhr2" noshade size="1">';
+		}else
+			$hrs='<div id="fhr1">&nbsp;</div>';?>
 			<div align="left" id="footer">
-    <?  if(Yii::app()->controller->getId()!='site')
-		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
-		if (!($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))) {?>
-            <hr id="fhr1" noshade size="1">
-            <hr id="fhr2" noshade size="1">
-  	<!--bottom_menu-->
-	<?	}else{?>
-    	
-	<?	}
+    <?  if( Yii::app()->controller->getId()!='site'
+		    && Yii::app()->controller->getId()!='user'
+		  ) require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+		
+			echo $hrs;
+		
 		if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
 	<?	setHTML::buildMainMenu($this); echo "\n"?>
