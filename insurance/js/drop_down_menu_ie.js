@@ -5,8 +5,7 @@ $(function(){
 		var mLayers=$('div[id^="ddMenu_"]');
 		$(mLayers).css({
 			borderBottom:'solid 3px #CCC',
-			borderRight:'solid 4px #DCDCDC',
-			opacity:0.8
+			borderRight:'solid 4px #DCDCDC'
 		});
 		$('*',mLayers).css({
 			display:'block',

@@ -7,8 +7,10 @@ table.tblMainMenu tr td.active{
 }
 table.tblMainMenu 
 	tr td.active 
-		div{
-	background:url(<?=Yii::app()->request->getBaseUrl(true)?>/images/ie/tab_bg_right.gif) !important;
+		> div:first-child{
+	background-image:url(<?=Yii::app()->request->getBaseUrl(true)?>/images/ie/tab_bg_right.gif) !important;
+	background-position:top right;
+	background-repeat:no-repeat !important;
 }
 div#bottom_menu 
 	table.tblMainMenu tr td.active{

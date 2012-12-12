@@ -143,6 +143,11 @@ div#ieSlidesHolder{
 	padding:20px; 
 }
 
+div#inner_left_menu,
+div#inner_content{
+	margin-top:40px !important;
+}
+
 /**/
 
 table {
@@ -165,16 +170,14 @@ td#alreadyCorps
 	font-size: 11px !important;
 	line-height: 22px;
 }
-table.tblMainMenu{
-	/*margin-top:-10px;*/
-}
 table.tblMainMenu a{
 	color: #06AEDD;
 	display: inline;
 	font-size: 16px;
 	letter-spacing: -1px;
 }
-table.tblMainMenu td.active a{
+table.tblMainMenu 
+	td.active > div:first-child > a{
 	color: #FFF;
 }
 table.tblMainSubMenu{
@@ -324,7 +327,9 @@ ul li{
 	display:inline;
 }
 div[id^="ddMenu"]{
+	background:yellow;
 	display:none;
+	opacity:0.8;
 }
 div#call_us 
 	div.txtLightBlue{
