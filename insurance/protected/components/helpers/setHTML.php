@@ -406,7 +406,7 @@ class setHTML{
 			break;
 		}	
 		$model = new InsurBanners();
-		var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();?>
+		//var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();?>
 				<div class="solution_content"><?
     	if (isset($test_logo)){
 			?><img src="../../../images/ready_solutions/for_business.jpg" width="248" height="143"><?
