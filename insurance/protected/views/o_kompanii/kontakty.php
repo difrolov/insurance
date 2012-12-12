@@ -208,8 +208,8 @@ $(document).ready(function(){
 								top: '294px',
 								left: pos.left,
 								display:'block',
-								overflow: 'scroll',
-								height:'400px'});
+								overflow: 'hidden'
+								});
 		},"json");
 	});
 });

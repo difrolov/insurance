@@ -5,7 +5,7 @@
 					'Страхование имущества',
 					'Страхование от несчастных случаев'
 				);
-		foreach($arrBan3 as $i=>$data):?>	
+		foreach($arrBan3 as $i=>$data):?>
     <div class="external">
         <div class="middle">
             <div class="internal">

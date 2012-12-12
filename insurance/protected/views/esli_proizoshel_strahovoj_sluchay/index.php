@@ -8,6 +8,8 @@ $this->breadcrumbs=array(
 	'Если произошёл страховой случай',
 );
 ?>
-<h1>Если произошёл страховой случай</h1>
-<?	var_dump("<h1>res:</h1><pre>",$res,"</pre>");?>
+<!-- <h1>Если произошёл страховой случай</h1> -->
+<? /* 	var_dump("<h1>res:</h1><pre>",$res,"</pre>"); */
+ /* setHTML::setPageData($this,$res,false); */ ?>
+
 

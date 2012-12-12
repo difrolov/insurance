@@ -7,7 +7,7 @@ class Data {
  */
 	static public function buildAliasPath($start_point,$parent_alias=false){
 		if (!$parent_alias) { // первая итерация (начало извлечения алиасов)
-			if (!$start_point || gettype($start_point)=='string') { 
+			if (!$start_point || gettype($start_point)=='string') {
 				$field='alias';
 				$alias_path=$start_point;
 			}else{
@@ -19,17 +19,17 @@ class Data {
 			$field="alias";
 			$condition=$parent_alias;
 			$alias_path=$start_point."/".$parent_alias;
-		}	
+		}
 		if( $get_parent_alias = Yii::app()->db->createCommand()->select('
-       ( SELECT alias 
+       ( SELECT alias
           FROM insur_insurance_object
          WHERE id = t.parent_id
        ) AS parent_alias')->from('insur_insurance_object AS t')->where($field." = '$condition' LIMIT 1")->queryScalar()){
 		   self::buildAliasPath(&$alias_path,$get_parent_alias);
-		}else{ 
+		}else{
 			if ($alias_path){
 				echo implode("/",array_reverse(explode("/",$alias_path)));
-			}else 
+			}else
 				return false;
 		}
 	}
@@ -39,7 +39,7 @@ class Data {
  * @subpackage
  */
 	public static function getAliasById($id){
-		return Yii::app()->db->createCommand()->select('alias')->from('insur_insurance_object')->where("id = ".$id)->queryScalar(); 
+		return Yii::app()->db->createCommand()->select('alias')->from('insur_insurance_object')->where("id = ".$id)->queryScalar();
 	}
 /**
   * @package		content
@@ -69,12 +69,12 @@ class Data {
 		if($subsection!='site'){
 			$Uri=explode("/",$_SERVER['REQUEST_URI']);
 			$hash=array_pop($Uri);
-			if (strstr($hash,"?")) 
+			if (strstr($hash,"?"))
 				$hash=substr($hash,0,strpos($hash,"?"));
 				// o_kompanii/istorija/historical/?mode=preview
 			if($hash!=$subsection) $subsection=$hash;
 		}
-		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection); 
+		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
 		$obj->pageTitle=$data->title;
 		$_SESSION['SUBSECTION_DATA_ARRAY']=array('alias'=>$data->alias); // метка для элементов, специфичных для подразделов, созданных генератором
 		$obj->render('index', array('res' => $data));
@@ -150,7 +150,7 @@ order by id ASC";
  */
 	function includeXtraCss($file_path=false){
 		if (!$file_path) $file_path='xtra_modules.css';
-		echo '<link href="'.Yii::app()->request->getBaseUrl(true).'/css/'.$file_path.'" rel="stylesheet" type="text/css">';	
+		echo '<link href="'.Yii::app()->request->getBaseUrl(true).'/css/'.$file_path.'" rel="stylesheet" type="text/css">';
 	}
 /**
  * Подключить дополнительный клиентский скрипт
@@ -158,7 +158,7 @@ order by id ASC";
  * @subpackage
  */
 	function includeXtraJS($file_path=false){
-		echo '<script src="'.Yii::app()->request->getBaseUrl(true).'/js/'.$file_path.'"></script>';	
+		echo '<script src="'.Yii::app()->request->getBaseUrl(true).'/js/'.$file_path.'"></script>';
 	}
 
 /**
@@ -184,7 +184,7 @@ class Views{
 	private $ViewsType;
 	// не объявлять как static, иначе не сработает array_walk_recursive()!
 	private $ViewsArray=array(
-					'esli_proizoshel_strahovoj_sluchay'=>false, 
+					'esli_proizoshel_strahovoj_sluchay'=>false,
 					'fizicheskim_litzam'=>false,
 					'korporativnym_klientam'=>false,
 					'malomu_i_srednemu_biznesu'=>false,
@@ -209,18 +209,18 @@ class Views{
  * Возвращает:
  *	либо true как подтверждение принадлежности текущего раздела к массиву исключений Views (если получен id раздела) - для изменения данных в Генераторе
  *  либо алиас в качестве исключения текущего раздела - для проверки в составе родительского раздела и определении способа загрузки контента
- *	либо false, если раздел не найден среди исключений 
+ *	либо false, если раздел не найден среди исключений
  * @package
  * @subpackage
  */
 	public function checkView( $section_data, // $section_data->alias/id
 							   $controller=false,
 							   $flat_list=false
-							 ){ 
+							 ){
 		$spViews=$this->getViews($flat_list); //
-		if ($controller) // фактически означает, что передавали алиас 
+		if ($controller) // фактически означает, что передавали алиас
 			$spViews=$spViews[$controller];// получить массив исключений для текущего контроллера (т.е., - основного раздела (главного меню))
-		if (is_array($spViews)){ 
+		if (is_array($spViews)){
 			// передавали id:
 			if ($flat_list){ // проверить, есть ли раздел среди исключений:
 				if (array_key_exists((int)$section_data,$spViews))
@@ -256,7 +256,7 @@ class Views{
 * @subpackage
 */
 function getUrlHashAsArray($rawUrl=false){
-	if (!$rawUrl) 
+	if (!$rawUrl)
 		$rawUrl=$_SERVER['REQUEST_URI'];
 	if (strstr($rawUrl,"?")){
 		$arrUrls=explode("?",$rawUrl);
@@ -271,9 +271,9 @@ function getUrlHashAsArray($rawUrl=false){
 					$urls[$urlParams[$u]]=$urlParams[$u+1];
 			}
 		}
-		return $urls;			
+		return $urls;
 	}else
-		return false;	
+		return false;
 }
 function parseUrl($make_string=false,$get_hash=false){
 	$arrUrl=explode("/",$_SERVER['REQUEST_URI']);
@@ -287,12 +287,12 @@ function parseUrl($make_string=false,$get_hash=false){
 		//echo "<div class=''>hash= ".$hash."</div>";
 	}
 	array_push($arrUrl,substr($last_piece,0,$pos));
-	if ($arrUrl[0]=='') 
+	if ($arrUrl[0]=='')
 		unset($arrUrl[0]);
 	array_unshift($arrUrl,'http:/',$_SERVER['HTTP_HOST']);
 	if ($make_string)
 		$arrUrl=implode("/",$arrUrl);
-	if($get_hash&&$hash){ 
+	if($get_hash&&$hash){
 		//echo "<div class=''>value: 1, hash: ".$hash."</div>";
 		$urls=getUrlHashAsArray($hash);
 		$arr=array('uris'=>$arrUrl,'hashes'=>$urls);

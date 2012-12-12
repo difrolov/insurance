@@ -29,6 +29,28 @@ class ObjectController extends Controller
 		}
 	}
 
+	//меняем разделы местами
+	public function actionPriorityObject(){
+
+		if(!Yii::app()->user->checkAccess('admin')){
+			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
+		}
+		if(isset($_GET['id'])){
+			//достаём объект из базы
+			$object = InsurInsuranceObject::model()->findByPk($_GET['id']);
+			if(!$object){
+				$this->redirect('index');
+			}
+
+			//таблица для отображения
+			$model = new InsurInsuranceObject();
+
+			$gridDataProvider['parent'] = $model->search('id='.$_GET['id']);
+			$gridDataProvider['child'] = $model->search('parent_id='.$_GET['id']);
+			$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
+		}
+	}
+
 
 	//удаляем раздел
 	// ** метод также может быть вызван методом $this->actionRemove(), в случае, если запрос поступает со страницы предпросмотра нового подраздела. В этом случае id приходит в виде аргумента от вызывающего метода; в противном случае, как и раньше - с $_GET['id']
