@@ -18,7 +18,9 @@ div#bottom_menu
 	table.tblMainMenu 
 	tr td.active 
 		div{
-	background:url(<?=Yii::app()->request->getBaseUrl(true)?>/images/ie/tab_bg_right_grey.gif) !important;
+	background-image:url(<?=Yii::app()->request->getBaseUrl(true)?>/images/ie/tab_bg_right_grey.gif) !important;
+	background-position:top right;
+	background-repeat:no-repeat !important;
 }
 #shadowLeft{
 	background-image:url(<?=Yii::app()->request->getBaseUrl(true)?>/images/ie/body_shadow_left.png) !important;

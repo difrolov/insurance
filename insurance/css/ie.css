@@ -79,6 +79,16 @@ div#cmd_micro{
 	border:none;
 	margin:0 2px;
 }
+div#content_from_right{
+	background:#D5D7D6;
+}
+img#company_museum,
+div#content_from_right{
+	border:0;
+	height:auto;
+	padding:0;
+	width:260px;
+}
 div#content_from_left{
 	margin-left:35px !important;
 }
@@ -109,6 +119,9 @@ div#content_from_right{
 /*div#content_from_left{ background:#FFFF66;}
 div#content_from_right{ background:#FF99CC;}*/
 
+div#fit_height{
+	padding-bottom:0;
+}
 
 #fhr1{
 	border-bottom:solid 1px #666;
@@ -123,8 +136,34 @@ div#content_from_right{ background:#FF99CC;}*/
 hr#fhr2{
 	margin:-10px -10px !important;
 }
+
+div#ieSlidesHolder{
+	background:#EDEEF0; 
+	margin-top:40px;
+	padding:20px; 
+}
+
+/**/
+
 table {
 	background:#FFF;
+}
+table#tblCorp td{
+	background:#FFF !important;
+	border:none;
+}
+td#almostCorps{
+}
+td#alreadyCorps{
+	padding-left:20px;
+}
+td#alreadyCorps 
+	div.txtGrey
+		a{
+	color: #333;
+	display: block;
+	font-size: 11px !important;
+	line-height: 22px;
 }
 table.tblMainMenu{
 	/*margin-top:-10px;*/
@@ -161,7 +200,6 @@ table.tblMainMenu tr td.active{
 table.tblMainMenu 
 	tr td.active 
 		div{
-	background-repeat:no-repeat !important;
 	background-position:top right !important;
 	line-height:31px;
 }
@@ -232,10 +270,6 @@ div#bottom_menu
 	background:#FFF;
 }
 
-div#bottom_menu 
-	table.tblMainMenu tr td.active{
-	background:#EDEEF0;
-}
 div#bottom_menu 
 	table.tblMainMenu 
 	tr td

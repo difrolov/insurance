@@ -13,7 +13,7 @@
 				);
 		$s=0;
 		if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
-      <div style="background:#EDEEF0; padding:20px; margin-top:10px;">
+      <div id="ieSlidesHolder">
         <table id="tblSlides" cellspacing="0" cellpadding="0" width="980">
         	<tr align="center">
     <?	}else{

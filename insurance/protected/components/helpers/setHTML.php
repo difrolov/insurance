@@ -145,44 +145,78 @@ class setHTML{
 										  $parent_id=false,
 										  $top_level=false
 										){
+		$oldIE=($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))? true:false;
 		$admin_mode=( // проверить, где находимся - frontend or backend
 			is_object(Yii::app()->controller->module)
 			&& Yii::app()->controller->module->id=='admin'
 		) ? true:false;
 		if (!$admin_mode)
-			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
-		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
+			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div>';
+		$test=(isset($_GET['test']))? true:false; ?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	if ($top_level&&!$admin_mode && $parent_alias !='o_kompanii' && $parent_alias !='partneram')
-			echo $insur_species;
-
+	<?	if ( $top_level
+			 && !$admin_mode 
+			 && $parent_alias !='o_kompanii' 
+			 && $parent_alias !='partneram'
+		   ) 
+		echo ($oldIE)? 
+		   		'<div style="border-bottom:solid 1px #999; padding-bottom:6px;">'.$insur_species.'</div>'
+					:
+				$insur_species.'
+					<hr style="opacity:0.5;">';
+		
 		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		if ($parent_alias=="korporativnym_klientam"&&!$admin_mode){?>
+		$corps=false; // если нужно подключить второе подменю, справа от того, что по умолчанию
+		if ( $parent_alias=="korporativnym_klientam"
+			 && !$admin_mode
+			 && $corps
+		   ){
+			
+			$arrCorps=array(
+					'building'=>'Строительные компании',
+					'trucking'=>'Транспортные компании',
+					'entertainment'=>'Организация развлекательных и спортивных мероприятий',
+					);
+			ob_start();
+			foreach($arrCorps as $alias=>$text):?>
+				<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
+		<?	endforeach;
+			$cpLinks=ob_get_contents();
+			ob_clean(); 
+				
+				if(!$oldIE){?>
           <ul class="asTable">
 			<li>
 		<?	if ($admin_mode)
 				self::buildAdminSubmenu($subMenuItems);
 			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
-        <?	$corps=false;
-			if ($corps){
-				$arrCorps=array(
-						'building'=>'Строительные компании',
-						'trucking'=>'Транспортные компании',
-						'entertainment'=>'Организация развлекательных и спортивных мероприятий',
-						);?>
             <li style="width:20px;">&nbsp;</li>
         	<li>
         		<div class="txtLightBlue txtMediumSmall">Корпоративным клиентам</div>
                 <div class="txtGrey">
-            <?	foreach($arrCorps as $alias=>$text):?>
-            		<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
-            <?	endforeach;?>
+            	<?=$cpLinks?>
             	</div>
             </li>
-		<?	}?>
           </ul>
-	<?
+			<?	}else{?>
+            <table id="tblCorp" cellspacing="0" cellpadding="0">
+              <tr valign="top">
+                <td id="almostCorps"><?
+				if ($admin_mode)
+					self::buildAdminSubmenu($subMenuItems);
+				else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
+				?></td>
+                <td id="alreadyCorps">
+                	<div class="txtLightBlue txtMediumSmall">
+                		Корпоративным клиентам
+                    </div>
+                <div class="txtGrey">
+            	<?=$cpLinks?>
+            	</div></td>
+              </tr>
+            </table>
+			<?	}			
 		}else{
 			if ($admin_mode)
 				self::buildAdminSubmenu($subMenuItems);
@@ -365,7 +399,7 @@ class setHTML{
 					
 				if ( $alias!='/'.$mainPageAlias.'/'
 			         && isset($newborn_menu)
-				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
+				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id,true);?>
             </td>
 		<?	}?>
         	</tr>
