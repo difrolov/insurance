@@ -33,12 +33,12 @@ class AjaxController extends Controller
 			}
 
 		}
-		if(isset($_POST['data']) && $_POST['data']=='all'){
-			$regions = InsurRegion::model()->findAll(array('order'=>'name'));
+		if(isset($_POST['data']) && $_POST['data']=='contact'){
+			$regions = InsurContacts::model()->findAll(array('select'=>'region','order'=>'region'));
 
 			$res = array();
 			foreach ($regions as $region) {
-				$res []= $region->name;
+				$res []= $region->region;
 			}
 			$resStr = json_encode($res);
 		}
