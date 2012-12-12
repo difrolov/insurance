@@ -68,6 +68,7 @@ div#bottom_menu
   </tr>
   <tr>
     <td><?
+		// view / setHTML::setPageData()
     	echo $content;
 	?></td>
   </tr>

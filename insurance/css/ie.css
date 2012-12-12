@@ -82,6 +82,9 @@ div#cmd_micro{
 div#content_from_right{
 	background:#D5D7D6;
 }
+img{
+	border:none;
+}
 img#company_museum,
 div#content_from_right{
 	border:0;
@@ -136,6 +139,17 @@ div#fit_height{
 hr#fhr2{
 	margin:-10px -10px !important;
 }
+.external{
+	display:inline;
+	width:288px;
+}
+#imExt2{
+	margin-left:26px;
+	margin-right:26px;
+}
+div#footer{
+	height:auto;
+}
 
 div#ieSlidesHolder{
 	background:#EDEEF0; 
@@ -148,6 +162,12 @@ div#inner_content{
 	margin-top:40px !important;
 }
 
+div#innerPageContent{
+	 display:inline-block;
+	 padding-bottom:280px;
+	 margin-left:20px;
+	 margin-right:20px;
+}
 /**/
 
 table {
@@ -169,6 +189,16 @@ td#alreadyCorps
 	display: block;
 	font-size: 11px !important;
 	line-height: 22px;
+}
+.pic_signature{
+	letter-spacing:-0.05em;
+}
+table#tblBanners3{
+	margin-left:16px;
+	margin-right:16px;
+}
+table#tblBanners3 td img{
+	width:242px;
 }
 table.tblMainMenu a{
 	color: #06AEDD;
