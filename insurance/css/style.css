@@ -338,7 +338,7 @@ div#content_from_left li p{
 #footer{
 	background:#FFF;
 	height: 140px;
-	padding:0 20px 10px 20px;
+	padding:0 20px 0px 20px;
 	width: 980px;
 }
 #footer_content div#faddress{
@@ -765,6 +765,9 @@ div#inner_left_menu a,
 div[id*="ddMenu_"] a{
 	color:#06AEDD;
 	letter-spacing:-0.07em;
+}
+div#mainmenu > ul > li > a {
+	letter-spacing:normal;
 }
 div#inner_left_menu > div> a{
 	font-size:15px;

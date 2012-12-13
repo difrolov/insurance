@@ -36,7 +36,7 @@ div#bottom_menu
 <? // in default.php: <div align="left" class="container" id="page">?>
     <div id="fit_height">
 <table id="main_content" cellspacing="0">
-  <tr>
+  <tr id="hatBlock">
     <td id="shadowLeft" rowspan="4" valign="top">&nbsp;</td>
     <td valign="top" width="1020" height="128" bgcolor="#FFFFFF">
         <table class="noPadding" id="hat" cellspacing="0">
@@ -58,7 +58,7 @@ div#bottom_menu
     </td>
     <td id="shadowRight" rowspan="4" valign="top">&nbsp;</td>
   </tr>
-  <tr>
+  <tr id="trMenuPlace">
     <td id="menuPlace">
     	<div id="mainmenu" align="left" style="position:relative;">
 <?	setHTML::buildMainMenu($this); // главное меню?>
@@ -66,8 +66,9 @@ div#bottom_menu
 <?	setHTML::buildDropDownMenu();?>
 </td>
   </tr>
-  <tr>
+  <tr valign="top" id="trContentPlace">
     <td><?
+		setHTML::buildBreadCrumbs();
 		// view / setHTML::setPageData()
     	echo $content;
 	?></td>
@@ -81,3 +82,4 @@ div#bottom_menu
 	</div>
 <? //</div>?>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu_ie.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/old_ie.js"></script>

@@ -70,6 +70,17 @@ html,body{
 div#all_phones{
 	text-align:right !important;
 }
+div#breadcrumbs{
+	margin-bottom:-48px;
+	margin-left:0;
+	margin-top:20px;
+	padding-left:292px;
+}
+div#breadcrumbs 
+	div.breadcrumbs{
+	padding-top:4px;
+	margin-top:-4px;
+}
 div#cmd_micro{
 	padding-right:10px;
 	text-align:right;
@@ -149,6 +160,7 @@ hr#fhr2{
 }
 div#footer{
 	height:auto;
+	padding-top:14px;
 }
 
 div#ieSlidesHolder{
@@ -159,7 +171,7 @@ div#ieSlidesHolder{
 
 div#inner_left_menu,
 div#inner_content{
-	margin-top:40px !important;
+	margin-top:46px !important;
 }
 
 div#innerPageContent{
@@ -203,7 +215,7 @@ table.tblMainMenu a{
 	color: #06AEDD;
 	display: inline;
 	font-size: 16px;
-	letter-spacing: -1px;
+	/*letter-spacing: -1px;*/
 }
 table.tblMainMenu 
 	td.active > div:first-child > a{
@@ -244,6 +256,8 @@ table.tblMainMenu tr{
 table.tblMainMenu td{
 	height:31px;
 	text-align:center;
+}
+table#main_content tr{
 }
 table#main_content,
 table#hat{

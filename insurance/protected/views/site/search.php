@@ -90,7 +90,7 @@ function selectFound(content,block_name,rowIndex,keepText){
 </script>
 <?	}?>
 <form method="post">
-<input placeholder="Введите поисковую строку" style="width:80%;"  name="keywords" value="<?=$seeking?>">
+<input placeholder="Введите поисковую строку" style="width:80%;"  name="keywords" id="keywords" value="<?=$seeking?>">
 <input id="seek_it" type="submit" value="Искать!">
 </form>
 </div>
