@@ -734,7 +734,7 @@ div#mainmenu
 div#bottom_menu
 	ul >
 		li:last-child{
-	border-right:none;
+	border-right:none !important;
 }
 #main_submenu ul[id^="yw"] li{/*верхнее главное подменю*/
 	background:#06AEDD;
@@ -798,6 +798,7 @@ div#bottom_menu ul[id^="yw"] li{
 	text-align:center;
 	white-space:nowrap;
 }
+
 ul.asTable li div.txtGrey a{
 	color:#333;
 }

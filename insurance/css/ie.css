@@ -164,7 +164,6 @@ div#inner_content{
 
 div#innerPageContent{
 	 display:inline-block;
-	 padding-bottom:280px;
 	 margin-left:20px;
 	 margin-right:20px;
 }
@@ -252,6 +251,9 @@ table#hat{
 }
 table.tblMainMenu td{
 	border-right:solid 1px #CCC;
+}
+td.lastCellMenu{
+	border-right:none !important;
 }
 table#tblSlides{
 	background:none;

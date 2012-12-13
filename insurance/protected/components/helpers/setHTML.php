@@ -379,8 +379,10 @@ class setHTML{
         <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
 			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$menuItems=self::getMainMenuItems($submenu);
-			//if (!$submenu) $dx=array_shift($menuItems);
+			$fr=0;
+			$lr=count($menuItems); // for old IE
 			foreach($menuItems as $parent_id=>$parentData){
+				$fr++;
 				$alias=$parentData['alias'];
 				$text=$parentData['text'];
 				$tdActive=false;
@@ -391,7 +393,8 @@ class setHTML{
 				?><a href="<?php echo Yii::app()->request->baseUrl.'/'.$alias; ?>"><? echo $text;?></a><?
 				$tLink=ob_get_contents();
 				ob_clean();?>
-            <td<? if ($tdActive):?> class="active"<? endif;?>><?
+            <td<? if ($tdActive):?> class="active"<? endif;
+				if ($fr==$lr){?> class="lastCellMenu"<? }?>><?
             	if ($tdActive){?>
                 <div><?=$tLink?></div>
 			<?	}else 
