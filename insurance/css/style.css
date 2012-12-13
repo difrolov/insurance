@@ -30,6 +30,7 @@ html{
 	margin:0;
 	text-align:center;
 }
+<<<<<<< HEAD
 div.bottomBannersWrapper span {
 	border:solid 4px #FFF;
 	border-left:solid 6px #06AEDD;
@@ -41,6 +42,8 @@ div.bottomBannersWrapper span {
 	padding-left:14px;
 	padding-right:14px;
 }
+=======
+>>>>>>> 1c381a7b9cf9686526b1d97ffaaf8ff45f8ed14a
 #banners4,
 #content_from_right{
 	border-right-color:#00AFDE;
@@ -50,6 +53,7 @@ div.bottomBannersWrapper span {
 	clear:both;
     margin-top:14px;
     width:100%;
+	white-space:nowrap;
 }
 div#banners4{
 	border-width:14px;
@@ -61,6 +65,18 @@ div#banners4 +div{
 	padding:14px;
 	padding-top:0;
 	width:187px;
+}
+div.bottomBannersWrapper span {
+	border:solid 4px #FFF;
+	border-left:solid 6px #06AEDD;
+	display:block;
+	height:40px;
+	margin-bottom: 20px;
+	margin-top:10px;
+	max-width:200px;
+	padding-left:14px;
+	padding-right:14px;
+	white-space:normal;
 }
 #banners4 img{
 	width:187px; /* 215: 201,187*/
@@ -104,7 +120,7 @@ div.bottomBannersWrapper img{
 }
 div.bottomBannersWrapper
 	> div:first-child{
-	margin-left:20px;
+	margin-left:17px;
 }
 div.bottomBannersWrapper
 	> div:first-child +div{
@@ -295,6 +311,16 @@ div#content_from_right{
 	vertical-align:top;
 	width:252px; /* 296 - 44 */
 }
+
+hr#fhr1{
+	margin-bottom:0; 
+	margin-left:-20px; 
+	margin-right:-20px;
+}
+hr#fhr2{
+	margin:-4px -20px -8px -20px;
+}
+
 div#last_news{
 	width:296px;
 }
@@ -578,7 +604,11 @@ div#main_submenu
 	font-size:0.9em;
 	line-height:27px;
 	list-style: none;
+<<<<<<< HEAD
 	margin:0 10px;
+=======
+	margin:0 15px;
+>>>>>>> 1c381a7b9cf9686526b1d97ffaaf8ff45f8ed14a
 }
 div#main_submenu
 	ul li a{
@@ -591,7 +621,7 @@ div#mod_insur_species{
 	vertical-align:top;
 	z-index:3;
 }
-div#mod_insur_species h2{
+#mod_insur_species h2{
 	font-size: 1.4em;
 	font-weight: 300;
 	margin-bottom: 14px;
@@ -751,6 +781,7 @@ div#bottom_menu a:hover,
 div#inner_left_menu a,
 div[id*="ddMenu_"] a{
 	color:#06AEDD;
+	letter-spacing:-0.07em;
 }
 div#inner_left_menu > div> a{
 	font-size:15px;
@@ -782,6 +813,7 @@ div#bottom_menu ul[id^="yw"] li{
 	list-style:none;
 	border-right:solid 1px #ccc;
 	text-align:center;
+	white-space:nowrap;
 }
 ul.asTable li div.txtGrey a{
 	color:#333;

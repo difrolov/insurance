@@ -17,7 +17,25 @@ return CMap::mergeArray(
 					'username' => 'root',
 					'password' => '',
 					'charset' => 'utf8',
+						// включаем профайлер
+						'enableProfiling'=>true,
+						// показываем значения параметров
+						'enableParamLogging' => true,
 				),
+					'log' => array(
+							'class' => 'CLogRouter',
+							'routes' => array(
+									array(
+											'db' => array(
+													'class' => 'CWebLogRoute',
+													'categories' => 'system.db.CDbCommand',
+													'showInFireBug' => true //Показывать в FireBug или внизу каждой страницы
+											)
+
+									),
+							),
+					),
+
 			),
 
 		)

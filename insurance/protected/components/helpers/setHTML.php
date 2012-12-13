@@ -97,27 +97,33 @@ class setHTML{
  * @subpackage		contacts
  *
  */
-	static function buildContactsAndSearchBlock(){?>
-    		<div id="call_us" align="right">
+	static function buildContactsAndSearchBlock(){
+		$arrPyctosGo=array(
+					'home'=>array('title'=>'На главную','href'=>'/','width'=>'18',''),
+					'map'=>array('title'=>'Карта сайта','href'=>'/site/map','width'=>'18'),
+					'search'=>array('title'=>'Поиск','href'=>'/site/search','width'=>'18'),
+			);?>
+    	<div id="call_us" align="right">
           	<div align="center" id="all_phones">
               <div id="cmd_micro">
-<?	$arrPyctosGo=array(
-				'home'=>array('title'=>'На главную','href'=>'/','width'=>'18'),
-				'map'=>array('title'=>'Карта сайта','href'=>'/site/map','width'=>'18'),
-				'search'=>array('title'=>'Поиск','href'=>'/site/search','width'=>'18'),
-			);
-	foreach ($arrPyctosGo as $data=>$array):?>
+	<?	if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){
+			foreach ($arrPyctosGo as $data=>$array):?>
+        <a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/ie/<?=$data?>.gif"></a>
+		<?	endforeach;
+		}else{
+			foreach ($arrPyctosGo as $data=>$array):?>
                 <div data-<?=$data?>="<?=$data?>" title="<?=$array['title']?>" onClick="location.href='<?=Yii::app()->request->getBaseUrl(true).$array['href']?>'">
            			<a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/spacer.png" width="<?=$array['width']?>" height="16"></a>
                 </div>
-<?	endforeach;?>
+<?			endforeach;
+		}?>
               </div>
            	  <div id="free_line" class="txtLightBlue">8 800 200 71 00</div>
 			  <div id="free_line_always" class="txtLightBlue">круглосуточно</div>
                 <div id="free_line_local" align="center">+7 495 649 71 71</div>
 			</div>
-          </div>
-<? 	}
+        </div>
+<?	}
 /**
  * @package		HTML
  * @subpackage		menu
@@ -139,44 +145,78 @@ class setHTML{
 										  $parent_id=false,
 										  $top_level=false
 										){
+		$oldIE=($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))? true:false;
 		$admin_mode=( // проверить, где находимся - frontend or backend
 			is_object(Yii::app()->controller->module)
 			&& Yii::app()->controller->module->id=='admin'
 		) ? true:false;
 		if (!$admin_mode)
-			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div><hr style="opacity:0.5;">';
-		$test=(isset($_GET['test']))? true:false; if ($test) echo "<h3>parent_id=$parent_id</h3>";?>
+			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div>';
+		$test=(isset($_GET['test']))? true:false; ?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	if ($top_level&&!$admin_mode && $parent_alias !='o_kompanii' && $parent_alias !='partneram')
-			echo $insur_species;
+	<?	if ( $top_level
+			 && !$admin_mode
+			 && $parent_alias !='o_kompanii'
+			 && $parent_alias !='partneram'
+		   )
+		echo ($oldIE)?
+		   		'<div style="border-bottom:solid 1px #999; padding-bottom:6px;">'.$insur_species.'</div>'
+					:
+				$insur_species.'
+					<hr style="opacity:0.5;">';
 
 		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		if ($parent_alias=="korporativnym_klientam"&&!$admin_mode){?>
+		$corps=false; // если нужно подключить второе подменю, справа от того, что по умолчанию
+		if ( $parent_alias=="korporativnym_klientam"
+			 && !$admin_mode
+			 && $corps
+		   ){
+
+			$arrCorps=array(
+					'building'=>'Строительные компании',
+					'trucking'=>'Транспортные компании',
+					'entertainment'=>'Организация развлекательных и спортивных мероприятий',
+					);
+			ob_start();
+			foreach($arrCorps as $alias=>$text):?>
+				<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
+		<?	endforeach;
+			$cpLinks=ob_get_contents();
+			ob_clean();
+
+				if(!$oldIE){?>
           <ul class="asTable">
 			<li>
 		<?	if ($admin_mode)
 				self::buildAdminSubmenu($subMenuItems);
 			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
-        <?	$corps=false;
-			if ($corps){
-				$arrCorps=array(
-						'building'=>'Строительные компании',
-						'trucking'=>'Транспортные компании',
-						'entertainment'=>'Организация развлекательных и спортивных мероприятий',
-						);?>
             <li style="width:20px;">&nbsp;</li>
         	<li>
         		<div class="txtLightBlue txtMediumSmall">Корпоративным клиентам</div>
                 <div class="txtGrey">
-            <?	foreach($arrCorps as $alias=>$text):?>
-            		<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
-            <?	endforeach;?>
+            	<?=$cpLinks?>
             	</div>
             </li>
-		<?	}?>
           </ul>
-	<?
+			<?	}else{?>
+            <table id="tblCorp" cellspacing="0" cellpadding="0">
+              <tr valign="top">
+                <td id="almostCorps"><?
+				if ($admin_mode)
+					self::buildAdminSubmenu($subMenuItems);
+				else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
+				?></td>
+                <td id="alreadyCorps">
+                	<div class="txtLightBlue txtMediumSmall">
+                		Корпоративным клиентам
+                    </div>
+                <div class="txtGrey">
+            	<?=$cpLinks?>
+            	</div></td>
+              </tr>
+            </table>
+			<?	}
 		}else{
 			if ($admin_mode)
 				self::buildAdminSubmenu($subMenuItems);
@@ -189,14 +229,22 @@ class setHTML{
  * @subpackage		footer
  *
  */
-	function buildFooterBlock($tp=false){?>
+	function buildFooterBlock($tp=false){
+		if (!($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))) {
+			$hrs='<hr id="fhr1" noshade size="1">
+            <hr id="fhr2" noshade size="1">';
+		}else
+			$hrs='<div id="fhr1">&nbsp;</div>';?>
 			<div align="left" id="footer">
-    <?  if(Yii::app()->controller->getId()!='site')
-		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';?>
-            <hr noshade size="1" style="margin-bottom:0; margin-left:-20px; margin-right:-20px;">
-            <hr noshade size="1" style="margin:-4px -20px -8px -20px;">
-  	<!--bottom_menu-->
-	<?	if ($tp){?><h3>bottom_menu</h3><? }?>
+
+    <?  if( Yii::app()->controller->getId()!='site'
+		    && Yii::app()->controller->getId()!='user'
+		  ) require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+
+			echo $hrs;
+
+		if ($tp){?><h3>bottom_menu</h3><? }?>
+
         <div align="left" id="bottom_menu">
 	<?	setHTML::buildMainMenu($this); echo "\n"?>
         </div>
@@ -324,26 +372,40 @@ class setHTML{
 				self::$arrMenuWidget=$menuWidget;
 		}
 		// старый IE
-		if (self::detectOldIE()){ //
+		if (self::detectOldIE()||isset($_GET['iexp'])){ //
 			$URL=explode("/",$_SERVER['REQUEST_URI']);
 			$nURL=array_reverse($URL);
 			if ($nURL[1]=='index')
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
 			else $urlAlias='/'.$nURL[1].'/';?>
-        <ul<? //id=yw0?>>
+        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
+			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$menuItems=self::getMainMenuItems($submenu);
-			$dx=array_shift($menuItems);
+			//if (!$submenu) $dx=array_shift($menuItems);
 			foreach($menuItems as $parent_id=>$parentData){
 				$alias=$parentData['alias'];
-				$text=$parentData['text'];?>
-			<li<? if ($urlAlias==$alias):?> class="active"<? endif;?>><a href="<?php echo Yii::app()->request->baseUrl.$alias; ?>"><?
-					echo $text;?></a>
-			<?	if ( $alias!='/'.$mainPageAlias.'/'
+				$text=$parentData['text'];
+				$tdActive=false;
+				if ( $currentController==$alias
+					   || ($currentController=='site'&&$alias=='site/index')
+					 ) $tdActive=true;
+				ob_start();
+				?><a href="<?php echo Yii::app()->request->baseUrl.'/'.$alias; ?>"><? echo $text;?></a><?
+				$tLink=ob_get_contents();
+				ob_clean();?>
+            <td<? if ($tdActive):?> class="active"<? endif;?>><?
+            	if ($tdActive){?>
+                <div><?=$tLink?></div>
+			<?	}else
+					echo $tLink;
+
+				if ( $alias!='/'.$mainPageAlias.'/'
 			         && isset($newborn_menu)
-				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id);?>
-            </li>
+				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id,true);?>
+            </td>
 		<?	}?>
-        </ul>
+        	</tr>
+        </table>
 	<?	}else $this_object->widget( 'zii.widgets.CMenu',
 							  array('items'=>$menuWidget)
 							);
@@ -380,7 +442,7 @@ class setHTML{
 			break;
 		}
 		$model = new InsurBanners();
-		var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();?>
+		//var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();?>
 				<div class="solution_content"><?
     	if (isset($test_logo)){
 			?><img src="../../../images/ready_solutions/for_business.jpg" width="248" height="143"><?
@@ -537,7 +599,7 @@ class setHTML{
  *
  */
 	static function detectOldIE($version=array(6,7,8)){
-		$usAg=$_SERVER['HTTP_USER_AGENT'];
+		$usAg=$_SERVER['HTTP_USER_AGENT']; // die("HTTP_USER_AGENT = <hr>$_SERVER[HTTP_USER_AGENT]<hr>");
 		for($i=0,$j=count($version);$i<$j;$i++)
 			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
 				$old_versions[]=$version[$i];
@@ -628,8 +690,9 @@ class setHTML{
 		}else{ // загрузить макет?>
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
-    <div id="inner_content"<? if($tmpl['Schema']){?> class="schema<?=$tmpl['Schema']?>"<? }
-	else{?> style="float: left;max-width: 670px; width:670px;"<? }?>>
+
+    <div id="inner_content"<? if($tmpl['Schema']){?> class="schema<?=$tmpl['Schema']?>"<? }?> style="float: left;max-width:700px; width:700px;">
+
 	<?	if ($print_mode){
 			?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo_blank.gif" width="182" height="44" /><br><br><?
 		}

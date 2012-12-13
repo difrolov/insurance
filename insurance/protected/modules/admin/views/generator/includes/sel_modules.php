@@ -5,10 +5,13 @@
       </ol>
         <div id="select_mod" style="max-width:700px;">
         <?php 
-			foreach($modules as $key_mod=>$val_mod):
-				$mod_name=$modules[$key_mod]['name'];?>
+			$allow_mods=false;
+			if ($allow_mods) {
+				foreach($modules as $key_mod=>$val_mod):
+					$mod_name=$modules[$key_mod]['name'];?>
             <div data-module-type="<?=$mod_name?>"><?=$mod_name?></div>
-        <?php endforeach;?>
+		<? 		endforeach;
+			}?>
         	<div data-module-type="Текст" class="mod_type_text" title="Содержание текстового модуля вы можете задавать/изменять самостоятельно">Текст</div>
         </div>
     </div>

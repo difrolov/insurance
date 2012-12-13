@@ -22,6 +22,16 @@
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/test.css" media="screen, projection" />
 <?	endif;?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/drop_down_menu.css" media="screen, projection" />
+<?php
+if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-1.4.2.min.js"></script>
+<?
+}else{
+?>
+<script src="<?=$url?>/js/jquery-1.7.2.min.js"></script>
+<?php
+}
+?>
 <script>
 testMode=false;
 <?	if (isset($_GET['test'])):?>

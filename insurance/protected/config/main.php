@@ -105,7 +105,25 @@ return array(
 				'username' => 'insur_mysql',
 				'password' => '64z3tzev',
 				'charset' => 'utf8',
+				'enableProfiling'=>true,
+				// показываем значения параметров
+				'enableParamLogging' => true,
+
 		),
+			'log' => array(
+					'class' => 'CLogRouter',
+					'routes' => array(
+							array(
+									'db' => array(
+											'class' => 'CWebLogRoute',
+											'categories' => 'system.db.CDbCommand',
+											'showInFireBug' => true //Показывать в FireBug или внизу каждой страницы
+									)
+
+							),
+					),
+			),
+
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

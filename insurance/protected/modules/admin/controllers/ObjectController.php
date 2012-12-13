@@ -29,7 +29,7 @@ class ObjectController extends Controller
 		}
 	}
 
-	//меняем разделы местами
+	//показываем разделы приоритет
 	public function actionPriorityObject(){
 
 		if(!Yii::app()->user->checkAccess('admin')){
@@ -41,16 +41,53 @@ class ObjectController extends Controller
 			if(!$object){
 				$this->redirect('index');
 			}
-
 			//таблица для отображения
 			$model = new InsurInsuranceObject();
-
-			$gridDataProvider['parent'] = $model->search('id='.$_GET['id']);
-			$gridDataProvider['child'] = $model->search('parent_id='.$_GET['id']);
-			$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
+			$sql = 'SELECT *
+					FROM insur_insurance_object as ob
+					LEFT JOIN order_by_menu as orm ON orm.id_object=ob.id
+					WHERE ob.parent_id='.$object->parent_id.'
+					ORDER BY orm.priority';
+			$gridDataProvider = Yii::app()->db->createCommand($sql)->queryAll();
+			$this->render('priority',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
 		}
 	}
-
+	//меняем разделы местами
+	public function actionPriority(){
+		if(isset($_POST['id'])){
+			if($_POST['type']=='up'){
+				$this_ob = InsurOrderMenu::model()->find(array('condition'=>'id_object='.$_POST['id']));
+				if($this_ob->priority==1){
+					echo json_encode(array('error'=>'этот элемент верхний в списке'));
+					exit;
+				}
+				//$prev_ob = InsurOrderMenu::model()->findAll(array('condition'=>'parent_id='.$this_ob->parent_id.' and priority='.$this_ob->priority-1));
+				$sql = 'SELECT *
+						FROM order_by_menu
+						WHERE parent_id='.$this_ob->parent_id.' and priority="'.($this_ob->priority-1).'"';
+				$prev_ob = Yii::app()->db->createCommand($sql)->queryAll();
+				InsurOrderMenu::model()->updateAll(array('priority' => $this_ob->priority-1),array('condition'=>'id_object = "'.$_POST['id'].'"'));
+				InsurOrderMenu::model()->updateAll(array('priority' => ($prev_ob[0]['priority']+1)),array('condition'=>'id_object = "'.$prev_ob[0]['id_object'].'"'));
+				echo json_encode(array('success'=>'Изменения внесены'));
+				exit;
+			}else{
+				$this_ob = InsurOrderMenu::model()->find(array('condition'=>'id_object='.$_POST['id']));
+				$sql = 'SELECT *
+				FROM order_by_menu
+				WHERE parent_id='.$this_ob->parent_id.' and priority="'.($this_ob->priority+1).'"';
+				$next_ob = Yii::app()->db->createCommand($sql)->queryAll();
+				if(count($next_ob)>0){
+					InsurOrderMenu::model()->updateAll(array('priority' => $this_ob->priority+1),array('condition'=>'id_object = "'.$_POST['id'].'"'));
+					InsurOrderMenu::model()->updateAll(array('priority' => ($next_ob[0]['priority']-1)),array('condition'=>'id_object = "'.$next_ob[0]['id_object'].'"'));
+					echo json_encode(array('success'=>'Изменения внесены'));
+					exit;
+				}else{
+					echo json_encode(array('error'=>'этот элемент последний в списке'));
+					exit;
+				}
+			}
+		}
+	}
 
 	//удаляем раздел
 	// ** метод также может быть вызван методом $this->actionRemove(), в случае, если запрос поступает со страницы предпросмотра нового подраздела. В этом случае id приходит в виде аргумента от вызывающего метода; в противном случае, как и раньше - с $_GET['id']
