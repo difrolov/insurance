@@ -231,8 +231,8 @@ class setHTML{
  */
 	function buildFooterBlock($tp=false){
 		if (!($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))) {
-			$hrs='<hr id="fhr1" noshade size="1">
-            <hr id="fhr2" noshade size="1">';
+			//$hrs='<hr id="fhr1" noshade size="1"><hr id="fhr2" noshade size="1">';
+			$hrs='<div id="fhr1">&nbsp;</div>';
 		}else
 			$hrs='<div id="fhr1">&nbsp;</div>';?>
 			<div align="left" id="footer">

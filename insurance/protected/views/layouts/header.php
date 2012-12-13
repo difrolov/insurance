@@ -14,6 +14,9 @@
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie9.css" media="screen, projection" />
+<![endif]-->
 <?	// если главная, удалим отступы главного контейнера:
 	if (!isset($this->breadcrumbs)||!$this->breadcrumbs){?>
 <style>

@@ -93,15 +93,12 @@ div#cmd_micro{
 div#content_from_right{
 	background:#D5D7D6;
 }
-img{
-	border:none;
-}
 img#company_museum,
 div#content_from_right{
 	border:0;
 	height:auto;
 	padding:0;
-	width:260px;
+	width:251px;
 }
 div#content_from_left{
 	margin-left:35px !important;
@@ -128,7 +125,7 @@ div#content_from_left
 	margin-bottom:8px;
 }
 div#content_from_right{
-	margin-left:16px;
+	margin-left:20px;
 }
 /*div#content_from_left{ background:#FFFF66;}
 div#content_from_right{ background:#FF99CC;}*/
@@ -138,9 +135,6 @@ div#fit_height{
 }
 
 #fhr1{
-	border-bottom:solid 1px #666;
-	border-top:solid 1px #666;
-	height:3px;
 	margin-bottom:6px;
 	margin-top:0 !important; 
 	margin-left:-40px;
@@ -273,10 +267,13 @@ table#tblSlides{
 	background:none;
 	margin:10px 20px;
 }
+table#tblSlides td,
+table#tblSlides td img{
+	width:295px;
+}
 table#tblSlides td{
 	padding-left:12px;
 	text-align:center;
-	width:296px;
 }
 table#tblSlides td div{
 	overflow: hidden;
@@ -284,7 +281,6 @@ table#tblSlides td div{
 table#tblSlides td img{
 	border:none;
 	height:203px;
-	width:296px;
 }
 table#tblSlides 
 	td div.txtBlock{
@@ -387,7 +383,10 @@ div#free_line_always.txtLightBlue{
 }
 /* news */
 .modSpNews{
-	width:296px;
+	width:295px;
+}
+table#innerSp table{
+
 }
 table#innerSp td a{
 	display:block;
