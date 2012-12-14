@@ -13,9 +13,8 @@ $( function(){
 			$('div#innerPageContent').css('margin-left','0');
 			//console.info('Empty!');
 		}
+		$('td#menuPlace > div[id^="ddMenu_"]').remove();
 		$('body > div').css({
-				marginBottom:'-20px',
-				backgroundColor:'yellow'
-				
+				marginBottom:'-20px',				
 			});
 	});

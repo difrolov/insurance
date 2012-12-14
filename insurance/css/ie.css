@@ -101,7 +101,7 @@ div#content_from_right{
 	width:251px;
 }
 div#content_from_left{
-	margin-left:35px !important;
+	margin-left:32px !important;
 }
 div#content_from_left,
 div#content_from_right{
@@ -159,8 +159,9 @@ div#footer{
 
 div#ieSlidesHolder{
 	background:#EDEEF0; 
-	margin-top:40px;
-	padding:20px; 
+	margin-top:54px;
+	padding:20px;
+	padding-bottom:0; 
 }
 
 div#inner_left_menu,
@@ -369,7 +370,6 @@ ul li{
 	display:inline;
 }
 div[id^="ddMenu"]{
-	background:yellow;
 	display:none;
 	opacity:0.8;
 }
