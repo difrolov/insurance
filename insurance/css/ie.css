@@ -101,7 +101,7 @@ div#content_from_right{
 	width:251px;
 }
 div#content_from_left{
-	margin-left:32px !important;
+	margin-left:42px !important;
 }
 div#content_from_left,
 div#content_from_right{
@@ -125,7 +125,7 @@ div#content_from_left
 	margin-bottom:8px;
 }
 div#content_from_right{
-	margin-left:20px;
+	margin-left:16px;
 }
 /*div#content_from_left{ background:#FFFF66;}
 div#content_from_right{ background:#FF99CC;}*/
@@ -154,14 +154,14 @@ hr#fhr2{
 }
 div#footer{
 	height:auto;
-	padding-top:14px;
 }
 
 div#ieSlidesHolder{
 	background:#EDEEF0; 
 	margin-top:54px;
 	padding:20px;
-	padding-bottom:0; 
+	padding-bottom:0;
+	padding-left:30px; 
 }
 
 div#inner_left_menu,

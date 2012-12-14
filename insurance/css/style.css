@@ -35,7 +35,8 @@ html{
 	border-right-color:#00AFDE;
 	white-space:normal;
 }
-#bottomBannersWrapper{
+#bottomBannersWrapper,
+.bottomBannersWrapper{
 	clear:both;
     margin-top:14px;
     width:100%;

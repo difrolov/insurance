@@ -14,12 +14,16 @@ div#fhr1{
 div#ieSlidesHolder{
 	padding:20px 10px;
 	padding-bottom:0;
+	padding-left:20px;
 }
 div#footer_inside_center{
 	padding-bottom:16px;
 }
+div#inner_left_menu a{
+	color:#06aedd;
+}
 td#leftOL{
-	padding-left:30px !important;
+	padding-left:40px !important;
 }
 td#leftOL ol.insideDiv{
 	margin-left:-20px;
@@ -33,8 +37,8 @@ table#tblSlides td{
 	padding-right:12px;
 }
 table#tblSlides td#sTd1{
-	padding-left:17px;
-	padding-right:17px;
+	/*padding-left:17px;
+	padding-right:17px;*/
 }
 td#rightBanner{
 	padding-right:10px;

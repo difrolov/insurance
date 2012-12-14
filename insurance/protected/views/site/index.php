@@ -16,7 +16,7 @@
 		if ($oldIE||isset($_GET['iexp'])){?>
       <div id="ieSlidesHolder">
         <table id="tblSlides" cellspacing="0" cellpadding="0"<? 
-			if($oldIE!=8){?> width="980"<? }?>>
+			if($oldIE!=8){?> width="970"<? }?>>
         	<tr align="center">
     <?	}else{
         	echo '<div align="center" id="slides">';

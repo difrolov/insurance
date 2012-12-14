@@ -375,8 +375,9 @@ class setHTML{
 			$nURL=array_reverse($URL);
 			if ($nURL[1]=='index')
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
-			else $urlAlias='/'.$nURL[1].'/';?>
-        <table id="tbl_main_submenu" class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
+			else $urlAlias='/'.$nURL[1].'/';
+			//echo "<div>old IE: ".self::detectOldIE()."</div>";?>
+        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
 			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$menuItems=self::getMainMenuItems($submenu);
 			$fr=0;
@@ -395,7 +396,8 @@ class setHTML{
 				ob_clean();?>
             <td<? if ($tdActive):?> class="active"<? endif;
 				if ($fr==$lr){?> class="lastCellMenu"<? }?>><?
-            	if ($tdActive){?>
+            	
+				if ($tdActive){?>
                 <div><?=$tLink?></div>
 			<?	}else 
 					echo $tLink;
@@ -407,7 +409,8 @@ class setHTML{
 		<?	}?>
         	</tr>
         </table>
-	<?	}else $this_object->widget( 'zii.widgets.CMenu',
+	<?	}else 
+			$this_object->widget( 'zii.widgets.CMenu',
 							  array('items'=>$menuWidget)
 							);
 	}
@@ -608,7 +611,7 @@ class setHTML{
 					$old_versions[]=$version[$i];
 				}
 		}
-		return (isset($old_versions))? $old_versions[0]:false;
+		return (isset($old_versions[0]))? $old_versions[0]:false;
 	}
 /**
  * @package		interface
