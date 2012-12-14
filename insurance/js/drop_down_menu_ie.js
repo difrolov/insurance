@@ -23,12 +23,20 @@ $(function(){
 			}
 		});
 		$(tMenus).mouseenter( function(){
+			//console.info('window width: '+window.screen.width);
+			var correctOffset=140;
+			if(window.screen.width<1280) // ok
+				correctOffset=76;
+			if (window.screen.width<1152)
+				correctOffset=28;
+			if (window.screen.width<1024)
+				correctOffset=26;
 			// get alias
 			var alias=getAlias(this);
 			var fl,tp,ofs=$(this).offset();
 			if ($('div#fit_height').size()>0){
 				var pOff=$('div#fit_height').offset();
-				tl=ofs.left-140+'px';
+				tl=ofs.left-correctOffset+'px';
 				tp=$(this).outerHeight()-1+'px';
 			}else{
 				var sectionsAdminMenu=$('div.sectionsAdminMenu');

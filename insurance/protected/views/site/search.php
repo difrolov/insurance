@@ -165,8 +165,7 @@ selectFound('ptext','content',<?=$ww?>);
 <?	endforeach;
 }?>
 </div>
-<? 	// require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
-	if(!$seeking&&$oldIE){?>
+<? 	if(!$seeking&&$oldIE){?>
 <script>
 $(	function(){
 		var strDef='поиск';
