@@ -510,6 +510,9 @@ div#innerXtraModule > h5{
 	margin-bottom:10px;
 	margin-top:0;
 }
+input#keywords{
+	width:80%;
+}
 div#last_articles{
 	display:inline-block;
 	height:212px;

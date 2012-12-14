@@ -6,6 +6,7 @@ $( function(){
 			var diff=bodyHeight-tblHeight;
 			var innerDivHeight=$('div#inner_left_menu').height();
 			$('div#inner_left_menu').height(innerDivHeight+diff);
+			//console.info('height = '+(innerDivHeight+diff));
 		}
 		//
 		if (!$('div#innerPageContent div.floatLeft div#inner_left_menu').size()) {
@@ -15,6 +16,6 @@ $( function(){
 		}
 		$('td#menuPlace > div[id^="ddMenu_"]').remove();
 		$('body > div').css({
-				marginBottom:'-20px',				
+				marginBottom:'-20px'
 			});
 	});

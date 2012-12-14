@@ -12,6 +12,10 @@
 ----------------------------------------------------------------------- */
 
 /* ie.css */
+div.found_header{
+	font-weight:700 !important;
+	margin-bottom:14px !important;
+}
 div#mainmenu ul li div {
 	background:#FFF;
 	border:solid 1px #CCCCCC;

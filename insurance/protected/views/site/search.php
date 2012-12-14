@@ -1,12 +1,15 @@
 <?	Data::includeXtraCss();
+	$oldIE=setHTML::detectOldIE();
+	
 	//var_dump("<h1>true_words:</h1><pre>",$true_words,"</pre>");die();?>
 <link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/search.css" type="text/css" rel="stylesheet">
-<div id="inner_left_menu">
-<h2 class="txtLightBlue">Поиск</h2>
+<div id="inner_left_menu"<? if ($oldIE){?> style="width:955px;"<? }?>>
+<?	/*<h2 class="txtLightBlue">Поиск</h2>*/ ?>
 <div id="innerPageContent">
 <? 	$seeking=''; 
 	if ($swords){
-		$seeking=$swords;?>
+		$seeking=$swords;
+		if (!$oldIE){?>
 <script>
 arrFoundWords=new Array(<?=$true_words?>);
 textWordsLimit=60;
@@ -21,7 +24,7 @@ function selectFound(content,block_name,rowIndex,keepText){
 		// ЦИКЛ слов текста; ДЕЛАТЬ:
 		$(arrTextWords).each( function(indexText, textElem) {
 			if (newTextCnt==textWordsLimit) {
-				if (newText[newText.length-1].indexOf(".")==-1)
+				if (!newText||newText[newText.length-1].indexOf(".")==-1)
 					newText+=' ...';
 				return false; 
 			}
@@ -32,7 +35,7 @@ function selectFound(content,block_name,rowIndex,keepText){
 				// ЕСЛИ текущее слово ТЕКСТА совпадает с текущим словом из НАЙДЕННЫХ
 				var lowerElem=textElem.toLowerCase();
 				var lowerFound=this.toLowerCase();
-				if (lowerElem.indexOf(lowerFound)!=-1){
+				if (!lowerElem||lowerElem.indexOf(lowerFound)!=-1){
 					var arrElems=lowerElem.split(lowerFound);
 					// +++ ВЫДЕЛИТЬ НАЙДЕННОЕ СЛОВО
 					if (arrElems[0]!=lowerElem){
@@ -88,10 +91,29 @@ function selectFound(content,block_name,rowIndex,keepText){
 	}
 }
 </script>
-<?	}?>
-<form method="post">
-<input placeholder="Введите поисковую строку" style="width:80%;"  name="keywords" id="keywords" value="<?=$seeking?>">
+<?		}
+	}?>
+<form method="post" style="margin-top:37px; width:100%;">
+<? 	ob_start();?>
+<input placeholder="поиск"  name="keywords" id="keywords" value="<?=$seeking?>">
+<?	$inputField=ob_get_contents();
+	ob_end_clean();?>
+<?	ob_start();?>
 <input id="seek_it" type="submit" value="Искать!">
+<?	$inputButton=ob_get_contents();
+	ob_end_clean();
+
+	if($oldIE==8){?>
+    <table cellspacing="0" cellpadding="0" width="940">
+    	<tr>
+        	<td width="80%"><?=$inputField?></td>
+        	<td width="20%"><?=$inputButton?></td>
+		</tr>
+    </table>
+<?	}else{
+		echo $inputField;
+		echo $inputButton;
+	}?>
 </form>
 </div>
 <? 	if ($swords){?>
@@ -99,27 +121,36 @@ function selectFound(content,block_name,rowIndex,keepText){
 <hr>
 Поисковый запрос: <b><?=$swords?></b>
 <hr>
-<h2 class="txtLightBlue">Результат поиска (<?
-echo (count($res))? count($res):'0';
-?>):</h2>
-<?	$ww=0;
+<h2 class="txtLightBlue">Результат поиска<?
+echo (is_array($res)&&count($res))? " (".count($res)."):":": ".$res;
+?></h2>
+<?	$ww=0; 
 	foreach($res as $id=>$array) :
 		$name=$array['name'];		
 		$text=strip_tags($array['content']);
 		$text=str_replace("&nbsp;"," ",$text); 
-		$ww++;
-		echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='pname".$ww."'>".$name."</div>";?>
-
+		$ww++;?>
 <h3 id="content_header<?=$ww?>"></h3>
+<?	if(!$oldIE){
+		echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='pname".$ww."'>".$name."</div>";?>
 <script>
 selectFound('pname','content_header',<?=$ww?>);
 </script>
 <?		echo "<div style='background:lightyellow; top:0; height:100%; width:50%;' id='ptext".$ww."'>".$text."</div>";?>    
-<div id="content<?=$ww?>"></div>
+		<div id="content<?=$ww?>"></div>
 <script>
 selectFound('ptext','content',<?=$ww?>);
 </script>
-<hr size="1" noshade color="#ccc">    
+
+<?	// <hr size="1" noshade color="#DDD">    
+	}else{?>
+		<div style="font-weight:700; margin-bottom:17px; margin-top:20px;"><?=$array['name']?></div>
+        <div class="found_content"><?
+			$arrText=explode(" ",$text);
+			$arrTxt=array_slice($arrText,0,49);
+			echo implode(" ",$arrTxt);
+		?></div>
+<?	}?>
 <span class="txtLightBlue">Источники:</span> 
 <?	if(empty($array['sections'])){?>
 	<span style="background:#EEE">статья не опубликована ни в одном из разделов...</span>
@@ -134,3 +165,21 @@ selectFound('ptext','content',<?=$ww?>);
 <?	endforeach;
 }?>
 </div>
+<? 	if(!$seeking&&$oldIE){?>
+<script>
+$(	function(){
+		var strDef='поиск';
+		var keyCell=$('input#keywords');
+		$(keyCell).val(strDef)
+			.css('color','#999')
+				.focus( function(){
+						if ($(keyCell).val()==strDef)
+							$(keyCell).val('');
+						
+					}).blur( function(){
+							if ($(keyCell).val()=='')
+							$(keyCell).val(strDef);
+						});
+	});
+</script>
+<? 	}

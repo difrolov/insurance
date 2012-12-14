@@ -1,8 +1,12 @@
 @charset "utf-8";
 /* CSS Document */
-div#main_submenu{
-	top:158px;
-	/*width:1022px;*/
+#content_from_right.imgBannerBorder{
+	border:solid 22px #D5D7D6;
+	border-right-color:#00AFDE;
+	display:block !important;
+	height:248px;
+    margin-right:33px;
+	margin-top:-70px;	 /* 296 - 44 */
 }
 div#footer{
 	width:auto;
@@ -11,13 +15,24 @@ div#fhr1{
 	margin-left:-20px;
 	margin-right:-20px;
 }
+div#footer_inside_center{
+	padding-bottom:16px;
+}
+input#keywords{
+	width:98%;
+}
+/*,
+input#seek_it{
+	display:inline;
+}*/
+div#main_submenu{
+	top:158px;
+	/*width:1022px;*/
+}
 div#ieSlidesHolder{
 	padding:20px 10px;
 	padding-bottom:0;
 	padding-left:20px;
-}
-div#footer_inside_center{
-	padding-bottom:16px;
 }
 div#inner_left_menu a{
 	color:#06aedd;
@@ -46,12 +61,4 @@ td#rightBanner{
 #why_open{
 	margin-left:auto;
 	margin-top:10px;
-}
-#content_from_right.imgBannerBorder{
-	border:solid 22px #D5D7D6;
-	border-right-color:#00AFDE;
-	display:block !important;
-	height:248px;
-    margin-right:33px;
-	margin-top:-70px;	 /* 296 - 44 */
 }
