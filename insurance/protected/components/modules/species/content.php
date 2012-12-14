@@ -5,18 +5,19 @@ $upers=Yii::app()->request->getBaseUrl(true).'/fizicheskim_litzam/';
 <div id="bottom_insur">
     <? 	
 	if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])) {?>
-	<table id="mod_insur_species" width="980" cellpadding="0" cellspacing="0" style="margin-left:25px; margin-bottom:20px;">
+	<table id="mod_insur_species" width="980" cellpadding="0" cellspacing="0" style="margin-left:25px; margin-bottom:10px;">
   <tr>
-    <td width="612" style="padding-left:20px;"><h2 class="txtLightBlue">Виды страхования</h2></td>
+    <td width="590" style="padding-left:10px;"><h2 class="txtLightBlue" style="margin-bottom:0;">Виды страхования</h2></td>
     <td class="modSpNews"><div class="clear">Новости</div>
     
 
     </td>
   </tr>
   <tr>
-    <td><table id="innerSp" width="100%" cellspacing="0" cellpadding="0">
-      <tr align="center">
-        <td width="25%"><div><img src="<?=$upersimg?>car.png" width="77" height="49">
+    <td valign="bottom">
+    	<table id="innerSp" width="100%" cellspacing="0" cellpadding="0">
+      		<tr align="center">
+        		<td width="25%"><div><img src="<?=$upersimg?>car.png" width="77" height="49">
     <a href="<?=$upers?>avtostrahovanie" class="txtLightBlue">Автострахование</a></div></td>
         <td width="25%"><div><img src="<?=$upersimg?>health.png" width="54" height="47">
     <a href="<?=$upers?>zdorovie_ch" class="txtLightBlue">Здоровье</a></div></td>

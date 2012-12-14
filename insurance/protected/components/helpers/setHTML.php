@@ -231,8 +231,8 @@ class setHTML{
  */
 	function buildFooterBlock($tp=false){
 		if (!($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))) {
-			$hrs='<hr id="fhr1" noshade size="1">
-            <hr id="fhr2" noshade size="1">';
+			//$hrs='<hr id="fhr1" noshade size="1"><hr id="fhr2" noshade size="1">';
+			$hrs='<div id="fhr1">&nbsp;</div>';
 		}else
 			$hrs='<div id="fhr1">&nbsp;</div>';?>
 			<div align="left" id="footer">
@@ -378,11 +378,13 @@ class setHTML{
 			if ($nURL[1]=='index')
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
 			else $urlAlias='/'.$nURL[1].'/';?>
-        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
+        <table id="tbl_main_submenu" class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
 			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$menuItems=self::getMainMenuItems($submenu);
-			//if (!$submenu) $dx=array_shift($menuItems);
+			$fr=0;
+			$lr=count($menuItems); // for old IE
 			foreach($menuItems as $parent_id=>$parentData){
+				$fr++;
 				$alias=$parentData['alias'];
 				$text=$parentData['text'];
 				$tdActive=false;
@@ -393,7 +395,8 @@ class setHTML{
 				?><a href="<?php echo Yii::app()->request->baseUrl.'/'.$alias; ?>"><? echo $text;?></a><?
 				$tLink=ob_get_contents();
 				ob_clean();?>
-            <td<? if ($tdActive):?> class="active"<? endif;?>><?
+            <td<? if ($tdActive):?> class="active"<? endif;
+				if ($fr==$lr){?> class="lastCellMenu"<? }?>><?
             	if ($tdActive){?>
                 <div><?=$tLink?></div>
 			<?	}else
@@ -646,8 +649,8 @@ class setHTML{
 		// устанавливает keywords страницы:
 		Yii::app()->clientScript->registerMetaTag($section_data->keywords, 'keywords');
 		// соорудить цепочку ссылок:
-		$breadcrumbs=array();
-		if ($section_data->parent_id>0)	{
+		$breadcrumbs=array(); // выводятся в self::buildBreadCrumbs();
+		if ($section_data->parent_id>0)	{ 
 			// получить имя и алиас для размещения в цепочке:
 			$parentName=InsurInsuranceObject::model()->find(array(
 							'select'=>'name,alias',

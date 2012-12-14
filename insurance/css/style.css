@@ -200,7 +200,7 @@ div#call_us
 }
 img#company_museum{
 	height:248px;
-	width:252px;
+	width:251px;
 }
 div#free_line_always{ /*круглосуточно*/
 	font-size: 0.65em !important;
@@ -256,6 +256,7 @@ td#cellPrograms >
 div#cmd_micro,
 div#cmd_micro div{
 	height:17px;
+	white-space:nowrap;
 }
 div#cmd_micro{
 	background: url(../images/cmd_micro.gif) no-repeat;
@@ -310,11 +311,14 @@ div#content_from_right{
 	display:inline-block;
 	margin-top:10px;
 	vertical-align:top;
-	width:252px; /* 296 - 44 */
+	width:251px; /* 296 - 44 */
 }
 
-hr#fhr1{
-	margin-bottom:0; 
+#fhr1{
+	border-bottom:solid 1px #999;
+	border-top:solid 1px #999;
+	height:3px;
+	margin-bottom:-10px; 
 	margin-left:-20px; 
 	margin-right:-20px;
 }
@@ -330,7 +334,7 @@ div#content_from_left{
 	margin-left:25px;
 	padding-right:18px;
 	vertical-align:top;
-	width:616px;
+	width:613px;
 }
 div#content_from_left ol{
 	margin-left: -15px;
@@ -352,7 +356,7 @@ div#content_from_left li p{
 #footer{
 	background:#FFF;
 	height: 140px;
-	padding:0 20px 10px 20px;
+	padding:0 20px 0px 20px;
 	width: 980px;
 }
 #footer_content div#faddress{
@@ -407,6 +411,9 @@ div#content_from_left li p{
 }
 .helpHint{
 	cursor:default;
+}
+img {
+	border:none;
 }
 img[align="left"]{
 	margin-left:0;
@@ -752,7 +759,7 @@ div#mainmenu
 div#bottom_menu
 	ul >
 		li:last-child{
-	border-right:none;
+	border-right:none !important;
 }
 #main_submenu ul[id^="yw"] li{/*верхнее главное подменю*/
 	background:#06AEDD;
@@ -783,6 +790,9 @@ div#inner_left_menu a,
 div[id*="ddMenu_"] a{
 	color:#06AEDD;
 	letter-spacing:-0.07em;
+}
+div#mainmenu > ul > li > a {
+	letter-spacing:normal;
 }
 div#inner_left_menu > div> a{
 	font-size:15px;
@@ -816,6 +826,7 @@ div#bottom_menu ul[id^="yw"] li{
 	text-align:center;
 	white-space:nowrap;
 }
+
 ul.asTable li div.txtGrey a{
 	color:#333;
 }
@@ -862,10 +873,17 @@ div#slide_marks
 	margin-right:2px;
 	width:9px;
 }
+.slideImgWrapper,
+.slideImgSubscript{
+	overflow: hidden;
+	width: 295px;
+	white-space: nowrap;
+}
 div#slides{
 	margin:10px -20px;
 	margin-top:-2px;
-	padding-left: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 div#slides div[id^="slide"]{
 	display:inline-block;
@@ -874,12 +892,8 @@ div#slides div[id^="slide"]{
 }
 div#slides div[id^="slide"]
 	> div:first-child{
-	background-repeat:no-repeat;
-	/*background:#FFFF00;*/
 	height:203px;
 	margin-bottom:17px;
-	overflow:hidden;
-	width:296px;
 }
 div#slides div[id^="slide"]
 	> div:last-child{
@@ -926,7 +940,7 @@ div[id^="slide-"]
 	> div:first-child
 		img{
 	height:203px;
-	width:296px;
+	width:295px;
 }
 #textLastNew{
 	display:inline-block;

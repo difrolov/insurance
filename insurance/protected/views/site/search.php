@@ -3,7 +3,7 @@
 <link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/search.css" type="text/css" rel="stylesheet">
 <div id="inner_left_menu">
 <h2 class="txtLightBlue">Поиск</h2>
-<div>
+<div id="innerPageContent">
 <? 	$seeking=''; 
 	if ($swords){
 		$seeking=$swords;?>
@@ -90,7 +90,7 @@ function selectFound(content,block_name,rowIndex,keepText){
 </script>
 <?	}?>
 <form method="post">
-<input placeholder="Введите поисковую строку" style="width:80%;"  name="keywords" value="<?=$seeking?>">
+<input placeholder="Введите поисковую строку" style="width:80%;"  name="keywords" id="keywords" value="<?=$seeking?>">
 <input id="seek_it" type="submit" value="Искать!">
 </form>
 </div>

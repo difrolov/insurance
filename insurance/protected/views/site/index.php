@@ -34,12 +34,8 @@
                 </td>
 		<?	}else{?>        
         	<div id="slide-<?=$subname?>">
-            	<div style="overflow: hidden;
-							width: 296px;
-							white-space: nowrap;"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
-                <div style="overflow: hidden;
-							width: 296px;
-							white-space: nowrap;">
+            	<div class="slideImgWrapper"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
+                <div class="slideImgSubscript">
                     <div><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
                     <div><?=$subheader?></div>
                 </div>
