@@ -42,7 +42,8 @@ if ($mode=='save'||$mode=='print'){	?>
 		echo $content;?>
         <div class="clear"></div>
 <?	
-	if(Yii::app()->controller->getId()!='site'):?>
+	$special_page=(in_array(Yii::app()->controller->action->id,Data::getSiteDefaultExceptions()))? true:false;
+	if(Yii::app()->controller->getId()!='site' || $special_page):?>
 <? 	if (isset($_GET['b3'])):?>
   	<div class="bottomBannersWrapper">
     <?	for($i=0;$i<3;$i++):?>
@@ -59,12 +60,16 @@ if ($mode=='save'||$mode=='print'){	?>
 <?		endfor;
 	endif;
 	// подключить блок баннеров №3:
-	if (!isset($_GET['b3'])) require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';?>
+	if (!isset($_GET['b3'])) 
+		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';?>
 <?	endif;	?>
   	</div>
   </div>
 <?	setHTML::buildFooterBlock($tp);	?>
 </div>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu.js"></script><?
+	if ($special_page){?>
+<script src="<?=Yii::app()->request->baseUrl?>/js/correct_banners3_position.js"></script>
+<?	}
 }
 // </body> - в main.php

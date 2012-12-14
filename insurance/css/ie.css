@@ -74,6 +74,9 @@ html,body{
 div#all_phones{
 	text-align:right !important;
 }
+table#tblBanners3.bottomBannersWrapper{
+	width:auto;
+}
 div#breadcrumbs{
 	margin-bottom:-48px;
 	margin-left:0;

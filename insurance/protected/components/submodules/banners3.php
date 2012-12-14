@@ -2,11 +2,11 @@
 		$oldIE=(setHTML::detectOldIE()||isset($_GET['iexp']))? true:false;
 		$arrBan3=setHTML::getBannersAsObjects('3');
 		if (!empty($arrBan3)){
-			if ($oldIE){?>
+			if (!$oldIE){?>
+	<div class="bottomBannersWrapper">
+		<? 	}else{?>
     <table class="bottomBannersWrapper" id="tblBanners3" cellpadding="0" cellspacing="0">
     	<tr>
-		<? 	}else{?>
-	<div class="bottomBannersWrapper">
 	<?		}
 			$subscr=array('Страхование строительно-монтажных работ',
 						'Страхование имущества',

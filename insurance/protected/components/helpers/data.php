@@ -1,5 +1,6 @@
 <?
 class Data {
+
 /**
  * Построить цепочку алиасов к конкретно взятой странице
  * @package
@@ -161,6 +162,14 @@ ORDER BY ";
 		}
 		return $result;
 	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function getSiteDefaultExceptions(){
+		return array('search');
+	}		
 /**
  * Подключить дополнительную таблицу стилей
  * @package
