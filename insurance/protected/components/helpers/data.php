@@ -102,6 +102,7 @@ class Data {
 				}
 			} // echo "<div class='txtRed'>GO FIELDS AGAIN! : ".$fields."</div>";
 		}
+		//$fields2=$fields; // потому что далее будем добавлять в $fields псевдоним таблицы, что нужно только на время
 		if (!$parent_id) {
 			$level=0;
 			$parent_id='-1';
@@ -109,17 +110,36 @@ class Data {
 			$level++;
 			$xtra_id=$parent_id; // для идентификации id родительского подраздела при рекурсивном вызове
 		}
+		$fields=preg_replace('/\b(\s|\,)parent_id\b/',",t1.parent_id",$fields);
+		//if (strstr($fields,"parent_id")
 		$query="SELECT ".$fields.", "; // запятая нужна, т.к. в \$fields отсутствует; не добавлять туда, поскольку это вызовет ошибку далее, при конвертации в массив в цикле!
 		$query.="
     (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
       WHERE parent_id = t1.id
 		AND `status` = 1
-    ) AS children
-FROM insur_insurance_object as t1
-WHERE parent_id = ".$parent_id." and `status` = 1
-order by id ASC";
+    ) AS children";
+		
+		if ((int)$parent_id>=0) {
+			$fields.=",priority";
+			$query.=", `priority`";
+		}
+		$query.=" FROM insur_insurance_object as t1 ";
+		if ($parent_id>=0)
+			$query.="
+    LEFT JOIN order_by_menu AS p ON p.id_object = id ";
+		
+		$query.=" 
+   WHERE t1.parent_id = ".$parent_id." AND `status` = 1
+ORDER BY ";
+		
+		$query.=($parent_id>=0)? "p.priority":"id";
+		
+		$query.=" ASC";
+		
 		$res=Yii::app()->db->createCommand($query)->queryAll();
-		$arrFields=explode(",",$fields); // поля с табличными данными
+		// $fields2, НЕ $fields!!!
+		$fields=preg_replace('/\bt1.parent_id\b/',"parent_id",$fields);
+		$arrFields=explode(",",$fields); // поля с табличными данными 
 		// присвоить данные полученным объектам:
 		for($i=0,$j=count($res);$i<$j;$i++){
 			$section_data=$res[$i]; // текущая запись из БД
