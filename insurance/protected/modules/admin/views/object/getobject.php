@@ -26,6 +26,16 @@
 )); ?>
 <br class="clear">
 
+<?php
+$this->widget('bootstrap.widgets.TbButton', array(
+		'label'=>'Упорядочить разделы в меню',
+		'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+		'size'=>'small', // null, 'large', 'small' or 'mini'
+		'url'=>Yii::app()->controller->createUrl("/admin/object/PriorityObject/".$_GET['id'])
+));
+?>
+<br class="clear">
+<br class="clear">
 <div>Подкатегории</div>
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',

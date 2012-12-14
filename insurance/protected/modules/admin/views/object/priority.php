@@ -16,10 +16,10 @@
 		<td><?=$value['name']?></td>
 		<td>
 			<span data_id="<?=$value['id']?>" data_parentid="<?=$value['parent_id']?>"
-				style="background-image:url('<?=Yii::app()->homeUrl?>/images/glyphicons-halflings.png'); width:16px; height:16px;display:block;background-position:-287px -95px;cursor:pointer"
+				style="background-image:url('<?=Yii::app()->request->baseUrl?>/images/glyphicons-halflings.png'); width:16px; height:16px;display:block;background-position:-287px -95px;cursor:pointer"
 				 onclick="_object.object_up($(this));return false"></span><br>
 			<span data_id="<?=$value['id']?>" data_parentid="<?=$value['parent_id']?>"
-				style="background-image:url('<?=Yii::app()->homeUrl?>/images/glyphicons-halflings.png'); width:16px; height:16px;display:block;background-position:-310px -95px;cursor:pointer"
+				style="background-image:url('<?=Yii::app()->request->baseUrl?>/images/glyphicons-halflings.png'); width:16px; height:16px;display:block;background-position:-310px -95px;cursor:pointer"
 				 onclick="_object.object_down($(this));return false"></span>
 		</td>
 		</tr>

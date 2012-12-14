@@ -108,7 +108,7 @@ class setHTML{
               <div id="cmd_micro">
 	<?	if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){
 			foreach ($arrPyctosGo as $data=>$array):?>
-        <a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/ie/<?=$data?>.gif"></a>
+        <a href="<?=Yii::app()->request->getBaseUrl(true).$array['href']?>" title="<?=$array['title']?>"><img style="opacity:0;" src="<?=Yii::app()->request->getBaseUrl(true);?>/images/ie/<?=$data?>.gif"></a>
 		<?	endforeach;
 		}else{
 			foreach ($arrPyctosGo as $data=>$array):?>
@@ -582,7 +582,7 @@ class setHTML{
 			$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias`
 												FROM insur_insurance_object
 												LEFT JOIN order_by_menu as ob ON ob.id_object=insur_insurance_object.id
-												WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY ob.priority')->queryAll();
+												WHERE insur_insurance_object.`parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY ob.priority')->queryAll();
 		}else{
 			$data=Yii::app()->db->createCommand("SELECT `id`, `name`, `alias` FROM insur_insurance_object WHERE `parent_id` = ".$parent_id_level.' AND status = 1 ORDER BY id')->queryAll();
 		}
@@ -670,7 +670,7 @@ class setHTML{
 			$section_data->first_header=$section_data->name;
 
 		if (!$print_mode){?>
-  <div style="display:inline-block;padding-bottom:280px;">
+  <div id="innerPageContent">
 	<div class="floatLeft">
     	<div id="inner_left_menu">
 	<?	// сгенерировать ссылки:
