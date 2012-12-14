@@ -600,12 +600,15 @@ class setHTML{
  *
  */
 	static function detectOldIE($version=array(6,7,8)){
-		$usAg=$_SERVER['HTTP_USER_AGENT']; // die("HTTP_USER_AGENT = <hr>$_SERVER[HTTP_USER_AGENT]<hr>");
-		for($i=0,$j=count($version);$i<$j;$i++)
-			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
-				$old_versions[]=$version[$i];
-			}
-		return (isset($old_versions))? true:false;
+		static $old_versions=array();
+		if (empty($old_versions)){
+			$usAg=$_SERVER['HTTP_USER_AGENT']; // die("HTTP_USER_AGENT = <hr>$_SERVER[HTTP_USER_AGENT]<hr>");
+			for($i=0,$j=count($version);$i<$j;$i++)
+				if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
+					$old_versions[]=$version[$i];
+				}
+		}
+		return (isset($old_versions))? $old_versions[0]:false;
 	}
 /**
  * @package		interface

@@ -102,7 +102,6 @@ class Data {
 				}
 			} // echo "<div class='txtRed'>GO FIELDS AGAIN! : ".$fields."</div>";
 		}
-		//$fields2=$fields; // потому что далее будем добавлять в $fields псевдоним таблицы, что нужно только на время
 		if (!$parent_id) {
 			$level=0;
 			$parent_id='-1';
@@ -137,7 +136,6 @@ ORDER BY ";
 		$query.=" ASC";
 		
 		$res=Yii::app()->db->createCommand($query)->queryAll();
-		// $fields2, НЕ $fields!!!
 		$fields=preg_replace('/\bt1.parent_id\b/',"parent_id",$fields);
 		$arrFields=explode(",",$fields); // поля с табличными данными 
 		// присвоить данные полученным объектам:

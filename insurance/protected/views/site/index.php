@@ -97,10 +97,9 @@ require_once Yii::app()->request->getBaseUrl(true).'/css/slideshow.css';
 <script type="text/javascript" src="<?=$baseURL?>js/jcarousellite.js"></script>
 <script src="<?	
 require_once Yii::app()->request->getBaseUrl(true)?>/js/slideshow.js"></script>
-<?	} // **********************************************************?>
-<div id="content_from_left" align="left">
+<?	} // **********************************************************
+	ob_start();?>  
   <div id="why_open" class="txtLightBlue">Почему &laquo;Открытие&raquo;?</div>
-  <!--<p>Сайт предназначен для:</p>-->
   <ol class="insideDiv">
     <li>
     	<p>Комплексные финансовые решения для наших клиентов.</p>
@@ -124,11 +123,30 @@ require_once Yii::app()->request->getBaseUrl(true)?>/js/slideshow.js"></script>
     
     <li><p>Круглосуточная поддержка клиентов.</p></li>
   </ol>
+<?	$leftOL=ob_get_contents();
+	ob_end_clean();
+
+	if(8!=setHTML::detectOldIE()){?>
+<div id="content_from_left" align="left">
+		<?=$leftOL?>
 </div>
-<div id="content_from_right" class="imgBannerBorder"><?	
+<div id="content_from_right" class="imgBannerBorder">
+<?	
 require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners2.php';?>	
 </div>
-<?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
+<?	}else{?>
+<table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><?=$leftOL?></td>
+    <td><?
+require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners2.php';    
+	?></td>
+  </tr>
+</table>
+		
+<?	}
+	
+require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
 	if ($tp){?><h3>/tblSlides</h3><? }?>
 		<!-- /tblSlides -->
 			<!--<div id="content_from_right" align="center">
