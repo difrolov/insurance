@@ -165,7 +165,7 @@ selectFound('ptext','content',<?=$ww?>);
 <?	endforeach;
 }?>
 </div>
-<? 	if(!$seeking&&$oldIE){?>
+<? 	if(!$seeking&&$oldIE!==NULL){?>
 <script>
 $(	function(){
 		var strDef='поиск';

@@ -2,14 +2,15 @@
 /* CSS Document 
 268+14=282 	Баннеры
 	   140 	Футер
+	    56  save and print
 ===================
 	   422	*/
 div#fit_height{
-	padding-bottom:380px;
+	padding-bottom:472px;
 }
 div#page.container{
-	background:#FFFF00;
-	margin-bottom:-420px;
+	/*background:#FFFF00;*/
+	margin-bottom:-472px;
 }
 
 

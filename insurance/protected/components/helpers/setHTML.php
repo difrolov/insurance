@@ -607,7 +607,7 @@ class setHTML{
  * @subpackage		browser
  *
  */
-	static function detectOldIE($version=array(6,7,8)){
+	static function detectOldIE($version=array(6,7,8,9)){
 		static $old_versions=array();
 		if (empty($old_versions)){
 			$usAg=$_SERVER['HTTP_USER_AGENT']; // die("HTTP_USER_AGENT = <hr>$_SERVER[HTTP_USER_AGENT]<hr>");
@@ -616,7 +616,10 @@ class setHTML{
 					$old_versions[]=$version[$i];
 				}
 		}
-		return (isset($old_versions[0]))? $old_versions[0]:false;
+		if (!isset($old_versions[0]))
+			return NULL;
+		else
+			return($old_versions[0]<9)? true:0;
 	}
 /**
  * @package		interface
@@ -809,7 +812,7 @@ class setHTML{
 										require $module_path;
 									}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 								}
-								echo "<div class='clear'>&nbsp;</div>";
+								/*echo "<div class='clear'>&nbsp;</div>";*/
 							}
 						  }
 						}?>
@@ -822,10 +825,10 @@ class setHTML{
 				<? 	}
 				}
 			}
-			echo "<div class='clear'>
+			/*echo "<div class='clear'>
 					<div style='padding-right:20px;'>";
 			echo "	</div>
-				</div>";
+				</div>";*/
 			if ($print_mode){
 				?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/contacts_blank.gif" width="700" height="109" /><? 
 			} 

@@ -8,9 +8,11 @@
 		<?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';?>
 		<?	}else{?>
     <table class="bottomBannersWrapper" id="tblBanners3" cellpadding="0" cellspacing="0">
-    	<tr><td><?
+    	<tr>
+        	<td colspan="3"><?
         require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';
-		?></td></tr>
+		?></td>
+        </tr>
         <tr>
 	<?		}
 			$subscr=array('Страхование строительно-монтажных работ',
