@@ -4,7 +4,8 @@
 /* @var $form CActiveForm */
 
 	Data::includeXtraCss();
-	Data::includeXtraJS('validate_data.js');?>
+	Data::includeXtraJS('validate_data.js');
+$this->breadcrumbs=array( 'Задать вопрос',);?>
 <div id="inner_left_menu">
 	<h2 class="txtLightBlue">Задать вопрос</h2>
     	<div class="blockMail" style="width:50%;">

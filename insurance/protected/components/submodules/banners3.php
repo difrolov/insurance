@@ -13,7 +13,7 @@
         require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';
 		?></td>
         </tr>
-        <tr>
+        <tr valign="top" class="spans">
 	<?		}
 			$subscr=array('Страхование строительно-монтажных работ',
 						'Страхование имущества',
@@ -25,17 +25,30 @@
             <div class="external" id="imExt<?=$cnt?>">
 				<div class="middle">
 					<div class="internal">
-						<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<? Data::buildAliasPath($arrBan3[$i]['link']);?>"><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBan3[$i]['src']?>"></a>	
-					</div>
+					<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<? Data::buildAliasPath($arrBan3[$i]['link']);?>"><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBan3[$i]['src']?>"></a>	</div>
 				</div>
-		  		<span><a href="<?=Yii::app()->request->getBaseUrl(true)?>/<? Data::buildAliasPath($arrBan3[$i]['link']);?>"><?=$subscr[$i]?></a>
+                <!---->
+                <?	if (!$oldIE){?>	
+		  		<span class="outer">
+                    <span class="bl">&nbsp;</span>
+                    <span class="bc">
+                    	<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<? Data::buildAliasPath($arrBan3[$i]['link']);?>"><?=$subscr[$i]?></a>
+                    </span>
           		</span>
+                <?	}else{?>
+                    	<table class="outer" cellspacing="0" cellpadding="0">
+                        	<tr>
+                            	<td class="linkImg"><img src="images/separator_vertical.png" width="4" height="35" align="absmiddle" style="height:35px; width:4px;" /></td>
+                                <td class="txtLink"><a href="<?=Yii::app()->request->getBaseUrl(true)?>/<? Data::buildAliasPath($arrBan3[$i]['link']);?>"><?=$subscr[$i]?></a></td>
+                            </tr>
+                        </table>
+				<? 	}?>
 			</div>
 			<?	$imgObjs=ob_get_contents();
 				ob_end_clean();
 				
 				if ($oldIE){?>
-            <td><?=$imgObjs?></td>
+            <td class="blueBorder"><?=$imgObjs?></td>
 			<? 	}else{
 					echo $imgObjs;
 				}
