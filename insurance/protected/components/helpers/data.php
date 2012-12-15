@@ -35,6 +35,19 @@ class Data {
 		}
 	}
 /**
+ * Выяснить тип макета для адекватного отображения вертикального выравнивания и набора блоков
+ * @package
+ * @subpackage
+ */
+	static public function detectLayoutType(){
+		$controller=Yii::app()->controller->getId();
+		$action=Yii::app()->controller->action->id;
+		$special_page=(in_array($action,self::getSiteDefaultExceptions()))? true:false;
+		return( $controller!='site' // не главная
+				|| $special_page // тоже не главная, поскольку при контроллере по умолчанию загружаем другой layout 
+			  )? array('controller'=>$controller,'action'=>$action):false;
+	}
+/**
  * Описание
  * @package
  * @subpackage

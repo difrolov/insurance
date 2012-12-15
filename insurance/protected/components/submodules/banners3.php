@@ -3,10 +3,15 @@
 		$arrBan3=setHTML::getBannersAsObjects('3');
 		if (!empty($arrBan3)){
 			if (!$oldIE){?>
-	<div class="bottomBannersWrapper">
-		<? 	}else{?>
+<div align="center">	
+    <div class="bottomBannersWrapper">
+		<?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';?>
+		<?	}else{?>
     <table class="bottomBannersWrapper" id="tblBanners3" cellpadding="0" cellspacing="0">
-    	<tr>
+    	<tr><td><?
+        require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';
+		?></td></tr>
+        <tr>
 	<?		}
 			$subscr=array('Страхование строительно-монтажных работ',
 						'Страхование имущества',
@@ -39,6 +44,7 @@
 	</table>
 		<? 	}else{?>
 	</div>
+</div>
 		<?	} 			
 		}
 	}?>

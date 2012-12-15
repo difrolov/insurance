@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document 
+268+14=282 	Баннеры
+	   140 	Футер
+===================
+	   422	*/
+div#fit_height{
+	padding-bottom:380px;
+}
+div#page.container{
+	background:#FFFF00;
+	margin-bottom:-420px;
+}
+
+

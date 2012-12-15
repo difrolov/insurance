@@ -93,7 +93,7 @@ function selectFound(content,block_name,rowIndex,keepText){
 </script>
 <?		}
 	}?>
-<form method="post" style="margin-top:37px; width:100%;">
+<form method="post" style="margin-bottom: 20px; margin-top:37px; width:100%;">
 <? 	ob_start();?>
 <input placeholder="поиск"  name="keywords" id="keywords" value="<?=$seeking?>">
 <?	$inputField=ob_get_contents();

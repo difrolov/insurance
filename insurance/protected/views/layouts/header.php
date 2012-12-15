@@ -9,8 +9,10 @@
 	if(isset($_SESSION['SUBSECTION_DATA_ARRAY'])) :?>
 <link href="<?=Yii::app()->request->baseUrl?>/css/section_template.css" rel="stylesheet" type="text/css">
 <?		unset($_SESSION['SUBSECTION_DATA_ARRAY']);
-	endif;?>
-
+	endif;
+	if(Data::detectLayoutType()):?>
+<link href="<?=Yii::app()->request->baseUrl?>/css/second_layout.css" rel="stylesheet" type="text/css">
+<?	endif;?>
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->

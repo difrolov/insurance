@@ -234,7 +234,7 @@ class setHTML{
 		$hrs='<div id="fhr1">&nbsp;</div>';?>
 		
         <div align="left" id="footer">
-    <?  if( 
+    <?  /*if( 
 			(  Yii::app()->controller->getId()!='site'  
 			   ||
 			   ( setHTML::detectOldIE()
@@ -243,8 +243,8 @@ class setHTML{
 			) 
 			&& Yii::app()->controller->getId()!='user'
 		  ) {	
-			  require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
-		  }
+			  // require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+		  }*/
 		echo $hrs;
 		
 		if ($tp){?><h3>bottom_menu</h3><? }?>
@@ -875,7 +875,7 @@ class setHTML{
 		</div>
 		<div><?='<a href="'.$link.'">'.$solution_name.'</a>'?></div>
     </div>
-    <div class="clear">&nbsp;</div>
+    <!--<div class="clear">&nbsp;</div>-->
 <?	}
 /**
  * Вуаль
