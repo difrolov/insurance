@@ -136,16 +136,22 @@ require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/ba
 <?	$rightContent=ob_get_contents();
 	ob_end_clean();
 	
-	if(8!=setHTML::detectOldIE()){?>
+	if(!setHTML::detectOldIE()){?>
 <div id="content_from_left" align="left">
 		<?=$leftOL?>
 </div>
 	<?=$rightContent?>
 <?	}else{?>
-<table cellspacing="0" cellpadding="0">
+<table cellspacing="0" cellpadding="0"<? 
+		if (setHTML::detectOldIE()==7){?> style="margin-top:20px;"
+	<? 	}
+	?>>
   <tr>
-    <td id="leftOL"><?=$leftOL?></td>
-    <td id="rightBanner"><?=$rightContent?></td>
+    <td id="leftOL"<? 
+		if (setHTML::detectOldIE()==7){?> style="padding-left:23px; width:642px;"
+	<? 	}
+	?>><?=$leftOL?></td>
+    <td valign="top" id="rightBanner"><?=$rightContent?></td>
   </tr>
 </table>
 <?	}

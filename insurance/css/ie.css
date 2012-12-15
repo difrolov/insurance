@@ -297,6 +297,7 @@ table#tblSlides td img{
 }
 table#tblSlides td{
 	padding-left:12px;
+	padding-right:12px;
 	text-align:center;
 }
 table#tblSlides td div{
@@ -357,6 +358,9 @@ div#footer_content{
 	margin-top:20px;
 }
 
+td.leftOL{
+	
+}
 div#main_menu ul > li{
 	padding:4px;
 }
@@ -416,4 +420,7 @@ table#innerSp td a{
 }
 input#keywords{
 	width:98%;
+}
+#why_open{ 
+	margin-left:16px;
 }
