@@ -1,4 +1,9 @@
-<?
+<style>
+span.preNews{
+	font-size:15px;
+	text-align:justify;
+}
+</style><?
 $gridDataProvider = action::getNews($params=false,$pager=false);
 $arrNews = $gridDataProvider->data; 
 for ($i=0,$j=count($arrNews);$i<$j;$i++){
@@ -16,5 +21,5 @@ for ($i=0,$j=count($arrNews);$i<$j;$i++){
 	$text=implode(" ",$prevArray);
 	if ($text[strlen($text)-1]!=".")
 		$text.="...";
-	echo nl2br($text);
+	echo "<span class='preNews' style='text-align:justify !important;'>".nl2br($text)."</span>";
 }?><br><br>
