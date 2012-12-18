@@ -30,7 +30,7 @@ html{
 	margin:0;
 	text-align:center;
 }
-<<<<<<< HEAD
+
 div.bottomBannersWrapper span {
 	border:solid 4px #FFF;
 	border-left:solid 6px #06AEDD;
@@ -42,8 +42,7 @@ div.bottomBannersWrapper span {
 	padding-left:14px;
 	padding-right:14px;
 }
-=======
->>>>>>> 1c381a7b9cf9686526b1d97ffaaf8ff45f8ed14a
+
 #banners4,
 #content_from_right{
 	border-right-color:#00AFDE;
@@ -318,8 +317,8 @@ div#content_from_right{
 	border-bottom:solid 1px #999;
 	border-top:solid 1px #999;
 	height:3px;
-	margin-bottom:-10px; 
-	margin-left:-20px; 
+	margin-bottom:-10px;
+	margin-left:-20px;
 	margin-right:-20px;
 }
 hr#fhr2{

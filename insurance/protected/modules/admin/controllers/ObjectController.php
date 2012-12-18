@@ -43,10 +43,11 @@ class ObjectController extends Controller
 			}
 			//таблица для отображения
 			$model = new InsurInsuranceObject();
-			$sql = 'SELECT *
+			$sql = 'SELECT ob.*
 					FROM insur_insurance_object as ob
 					LEFT JOIN order_by_menu as orm ON orm.id_object=ob.id
-					WHERE ob.parent_id='.$object->parent_id.'
+					WHERE ob.parent_id='.$object->parent_id.' and
+							ob.status=1
 					ORDER BY orm.priority';
 			$gridDataProvider = Yii::app()->db->createCommand($sql)->queryAll();
 			$this->render('priority',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
@@ -76,6 +77,7 @@ class ObjectController extends Controller
 				FROM order_by_menu
 				WHERE parent_id='.$this_ob->parent_id.' and priority="'.($this_ob->priority+1).'"';
 				$next_ob = Yii::app()->db->createCommand($sql)->queryAll();
+
 				if(count($next_ob)>0){
 					InsurOrderMenu::model()->updateAll(array('priority' => $this_ob->priority+1),array('condition'=>'id_object = "'.$_POST['id'].'"'));
 					InsurOrderMenu::model()->updateAll(array('priority' => ($next_ob[0]['priority']-1)),array('condition'=>'id_object = "'.$next_ob[0]['id_object'].'"'));
