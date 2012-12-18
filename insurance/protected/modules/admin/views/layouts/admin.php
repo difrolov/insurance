@@ -37,6 +37,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/generator.css" />
 <?
 	require_once Yii::getPathOfAlias('webroot')."/css/admin/generator2.php";
+	if (!setHTML::detectOldIE()) {
 	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
 	<script src="<?=$url?>/js/admin/generator/prepare_data.php"></script>
 	<script src="<?=$url?>/js/admin/generator/load_template.php?base_url=<?
@@ -50,6 +51,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
     <script src="<?=$url?>/js/admin/generator/customize_page.js"></script>
+<?	}?>    
     <script src="<?=$url?>/js/admin/generator/data_ready_to_send.php?base_url=<?
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>

@@ -56,6 +56,7 @@ if($inExViews) {?>
 	font-size:16px;
 	font-weight:300;
 }
+
 </style>
 <div align="center">
   <div id="mblock">	
@@ -65,7 +66,7 @@ if($inExViews) {?>
     </div>
 <?	require_once dirname(__FILE__).'/metadata.php';?>
     <hr>
-    <button id="save_metadata" name="save_metadata" type="submit" value="<?=$data['id']?>">Сохраненить данные</button>
+    <button id="save_metadata" name="save_metadata" type="submit" value="<?=$data['id']?>">Сохранить данные</button>
   </div>
 </div>
 <?
@@ -77,8 +78,9 @@ if($inExViews) {?>
 		}else{
 			?>none<? 
 		}?>;">Выберите родительский раздел для создаваемой страницы</h5>
-	<div id="<?="save_tmpl_block"?>"<? if(isset($_GET['test'])){?> style="display:block;"<? }?>>
-    	<div id="sections_radios">
+	<div id="<?="save_tmpl_block"?>"<? 
+		if(isset($_GET['test'])||setHTML::detectOldIE()){?> style="display:block;"<? }?>>
+    	<div id="sections_radios" style="text-align:left">
         <label>
           <span>
         	<input type="radio" name="menu" id="none" value="radio"<? 
@@ -89,7 +91,7 @@ if($inExViews) {?>
     	<hr>
     	</div>
         <hr>
-        <div id="subsection_ids">
+        <div style="text-align:left" id="subsection_ids">
             Укажите название подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Текст в меню для загрузки данного подраздела">
     <input name="name" type="text" id="name" required value="<?=$section_name?>">
             <hr>

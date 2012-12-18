@@ -1,7 +1,8 @@
-    <div align="left" id="manage_new_section" style="background:#666; border-radius:6px; box-shadow: 3px 1px 20px 1px #999; color:#FFF; cursor:move; display:<?="none"?>; left:200px; padding:10px; top:200px; position:fixed; width:180px;">
+    <div align="left" id="manage_new_section" style="background:#666; border-radius:6px; box-shadow: 3px 1px 20px 1px #999; color:#FFF;<?
+	if(setHTML::detectOldIE()===NULL){?> cursor:move;<? }?> display:<?="none"?>; left:200px; padding:10px; top:200px; position:fixed; width:180px;">
     	Подраздел загружен в режиме предпросмотра. Выберите дальнейшее действие:
         <div style="background:#06AEDD; border-radius:3px; margin-top:10px; padding:6px;">
-        	<ul>
+        	<ul id="prevManage">
         	  <li><a href="#" id="save_as_is">Сохранить </a></li>
         	  <li><a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/generator/edit/<?=$section_data->id?>">Изменить</a></li>
         	  <li class="txtRed"><a href="#" id="ask_to_delete">Удалить</a></li>
@@ -12,6 +13,10 @@
 <script>
 $( function(){
   try{
+<?	if(setHTML::detectOldIE()):?>
+	$('ul#prevManage li').css('display','block');
+<?	endif;?>
+	
 	$('a#ask_to_delete').css('color','#F00').click( function (){
 			var Url='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/remove';
 			if (confirm('Вы уверены, что хотите удалить этот раздел?\nмногие погибнут...')){
@@ -67,15 +72,17 @@ $( function(){
 	console.info('leftOff = '+typeof(leftOff)+', wdt = '+typeof(wdt)+', summ = '+goLeft);
 	$(mprev).css({
 			left:goLeft+'px',
-		}).fadeTo(1500,0.9)
-			.draggable()
-				.hover(
+		}).fadeTo(1500,0.9).hover(
 				function (){
 					$(this).css('opacity',1)
 				},
 				function (){
 					$(this).css('opacity',0.9)
 				});
+	
+<?	if(!setHTML::detectOldIE()):?>
+	$(mprev).draggable();
+<?	endif;?>
   }catch(e){
 		alert(e.message);
   }

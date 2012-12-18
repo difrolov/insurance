@@ -234,18 +234,7 @@ class setHTML{
 		$hrs='<div id="fhr1">&nbsp;</div>';?>
 		
         <div align="left" id="footer">
-    <?  /*if( 
-			(  Yii::app()->controller->getId()!='site'  
-			   ||
-			   ( setHTML::detectOldIE()
-			     && in_array(Yii::app()->controller->action->id,Data::getSiteDefaultExceptions())
-			   )
-			) 
-			&& Yii::app()->controller->getId()!='user'
-		  ) {	
-			  // require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
-		  }*/
-		echo $hrs;
+    <?  echo $hrs;
 		
 		if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
@@ -810,7 +799,7 @@ class setHTML{
 									if ($mod_folder=array_search($moduleContent,$modules)){
 										$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
 										require $module_path;
-									}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+									}elseif($moduleContent); //echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 								}
 								/*echo "<div class='clear'>&nbsp;</div>";*/
 							}

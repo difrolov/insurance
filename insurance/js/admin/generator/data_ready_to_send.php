@@ -112,12 +112,21 @@ function sendTmplData(preview,preview_stat){
 			$('body').animate({scrollTop:$(errPlace).offset().top+'px'},500);
 			return false;
 		}else{
+			
 			Layout.parent=$(radioChecked[0]).val();
 			Layout.name=$('#name').val();
 			Layout.alias=$('#alias').val();
 			Layout.title=$('#title').val();
 			Layout.keywords=$('#keywords').val();
 			Layout.description=$('#description').val();
+			
+			if (Layout.Schema="default"){ 
+				Layout.Schema="100";
+				Layout.blocks={
+					1: "Текст :: "+Layout.name+"^"+CKEDITOR.instances['InsurArticleContent[content]'].getData()
+				};
+			}
+			
 			//alert('action: '+$('#content_save').attr('action'));
 			var sendToUrl=$('#content_save').attr('action');
 			if (preview) 
@@ -128,6 +137,10 @@ function sendTmplData(preview,preview_stat){
 				sendToUrl+='section_id='+$('input#section_id').val();
 			}
 			// alert(sendToUrl);		
+			var t=false;
+			if (t)
+				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description);
+			else
 			$.ajax ({
 					type: "POST",
 					url: sendToUrl,
