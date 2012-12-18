@@ -1,6 +1,14 @@
 // JavaScript Document
 $(function(){
   try{
+		if ($.browser.mozilla)
+			$('div#mainmenu.sectionsAdminMenu ul:first-child').css({
+					paddingLeft:0,
+					paddingRight:0,
+					paddingTop:0,
+					paddingBottom:0
+				});
+
   	var tMenus=$('div#mainmenu >ul >li');
 	// проверить наличие подменю и определиться с видом курсора и отменой действия по клику
 	$(tMenus).find('a').mouseenter( function(){

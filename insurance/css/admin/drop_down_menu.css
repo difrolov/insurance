@@ -21,6 +21,7 @@ div#mainmenu
 }
 div#mainmenu 
 	ul[id*="yw"] li a{
+		background:#lightyellow;
 	font-family:Verdana, Arial, sans-serif;
 	font-weight:normal !important;
 	text-transform:none;
@@ -38,7 +39,7 @@ div[id*="ddMenu_"]{
 	display:none;
 	padding:2px;
 	position: absolute;
-	top:135px;
+	top:130px;
 	z-index:5000;
 }
 div[id*="ddMenu_"] a{
