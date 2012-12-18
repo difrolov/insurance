@@ -12,8 +12,7 @@ foreach($menu as $item){
 	    'htmlOptions'=>array('onclick'=>'_editMenu.MainMenuButton($(this))','data-item'=>$item->id),
 ));
 }
-?>
-	</p>
+?></p>
 </div>
 <br class="clear">
 <div class=table_menu>

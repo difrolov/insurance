@@ -5,7 +5,7 @@ ob_start();?>
 
 $( function(){
 	try{
-		var sPlus=$("#main_submenu li").eq(2);
+		var sPlus=$("#main_submenu li").eq(1);
 		var offLeft=$(sPlus).offset().left;
 		// offLeft: желательно в дальнейшем:
 		// 1. перерасчитать отступ слева в %%

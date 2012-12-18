@@ -122,7 +122,30 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		// выпадающее меню:
 		setHTML::buildDropDownMenu();	// выпадающее меню	?>
 	</div>
-<?	else:
+   	<div align="right" id="admin_main_submenu">
+	<?	setHTML::buildMainMenu($this,-2);?>
+    </div>
+	<?	if(!setHTML::detectOldIE()):
+			$arrSecondMenu=setHTML::getMainMenuItems(-2);
+			// var_dump("<h1>arrSecondMenu:</h1><pre>",$arrSecondMenu,"</pre>");die();?>
+<script>    
+$( function(){	
+	var getObjUrl='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/';
+		<?	$sc=0;
+			foreach($arrSecondMenu as $secMenuId=>$secMenuData){
+				//$mObj=$arrSecondMenu[$sc];
+				//$gAl=explode("/",$mObj);
+				//$mAlias=array_pop($gAl);?>
+	$('#admin_main_submenu ul li').eq(<?=$sc?>).click( function(){
+			location.href=getObjUrl+'<?=$secMenuId?>';
+			return false;
+		});
+		<?		$sc++;
+			}?>
+});
+</script>
+	<?	endif;
+	else:
 		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
 	endif;
 
