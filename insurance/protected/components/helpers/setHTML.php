@@ -230,21 +230,24 @@ class setHTML{
  *
  */
 	function buildFooterBlock($tp=false){
-		if (!($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))) {
-			//$hrs='<hr id="fhr1" noshade size="1"><hr id="fhr2" noshade size="1">';
-			$hrs='<div id="fhr1">&nbsp;</div>';
-		}else
-			$hrs='<div id="fhr1">&nbsp;</div>';?>
-			<div align="left" id="footer">
 
-    <?  if( Yii::app()->controller->getId()!='site'
-		    && Yii::app()->controller->getId()!='user'
-		  ) require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+		$hrs='<div id="fhr1">&nbsp;</div>';?>
 
-			echo $hrs;
+        <div align="left" id="footer">
+    <?  /*if(
+			(  Yii::app()->controller->getId()!='site'
+			   ||
+			   ( setHTML::detectOldIE()
+			     && in_array(Yii::app()->controller->action->id,Data::getSiteDefaultExceptions())
+			   )
+			)
+			&& Yii::app()->controller->getId()!='user'
+		  ) {
+			  // require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+		  }*/
+		echo $hrs;
 
 		if ($tp){?><h3>bottom_menu</h3><? }?>
-
         <div align="left" id="bottom_menu">
 	<?	setHTML::buildMainMenu($this); echo "\n"?>
         </div>
@@ -377,8 +380,9 @@ class setHTML{
 			$nURL=array_reverse($URL);
 			if ($nURL[1]=='index')
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
-			else $urlAlias='/'.$nURL[1].'/';?>
-        <table id="tbl_main_submenu" class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
+			else $urlAlias='/'.$nURL[1].'/';
+			//echo "<div>old IE: ".self::detectOldIE()."</div>";?>
+        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
 			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$menuItems=self::getMainMenuItems($submenu);
 			$fr=0;
@@ -397,7 +401,8 @@ class setHTML{
 				ob_clean();?>
             <td<? if ($tdActive):?> class="active"<? endif;
 				if ($fr==$lr){?> class="lastCellMenu"<? }?>><?
-            	if ($tdActive){?>
+
+				if ($tdActive){?>
                 <div><?=$tLink?></div>
 			<?	}else
 					echo $tLink;
@@ -409,7 +414,8 @@ class setHTML{
 		<?	}?>
         	</tr>
         </table>
-	<?	}else $this_object->widget( 'zii.widgets.CMenu',
+	<?	}else
+			$this_object->widget( 'zii.widgets.CMenu',
 							  array('items'=>$menuWidget)
 							);
 	}
@@ -601,13 +607,19 @@ class setHTML{
  * @subpackage		browser
  *
  */
-	static function detectOldIE($version=array(6,7,8)){
-		$usAg=$_SERVER['HTTP_USER_AGENT']; // die("HTTP_USER_AGENT = <hr>$_SERVER[HTTP_USER_AGENT]<hr>");
-		for($i=0,$j=count($version);$i<$j;$i++)
-			if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
-				$old_versions[]=$version[$i];
-			}
-		return (isset($old_versions))? true:false;
+	static function detectOldIE($version=array(6,7,8,9)){
+		static $old_versions=array();
+		if (empty($old_versions)){
+			$usAg=$_SERVER['HTTP_USER_AGENT']; // die("HTTP_USER_AGENT = <hr>$_SERVER[HTTP_USER_AGENT]<hr>");
+			for($i=0,$j=count($version);$i<$j;$i++)
+				if ( stristr($usAg,'MSIE '.$version[$i].'.')) {
+					$old_versions[]=$version[$i];
+				}
+		}
+		if (!isset($old_versions[0]))
+			return NULL;
+		else
+			return($old_versions[0]<9)? true:0;
 	}
 /**
  * @package		interface
@@ -650,7 +662,7 @@ class setHTML{
 		Yii::app()->clientScript->registerMetaTag($section_data->keywords, 'keywords');
 		// соорудить цепочку ссылок:
 		$breadcrumbs=array(); // выводятся в self::buildBreadCrumbs();
-		if ($section_data->parent_id>0)	{ 
+		if ($section_data->parent_id>0)	{
 			// получить имя и алиас для размещения в цепочке:
 			$parentName=InsurInsuranceObject::model()->find(array(
 							'select'=>'name,alias',
@@ -693,9 +705,7 @@ class setHTML{
 		}else{ // загрузить макет?>
 		<?	$tmpl=unserialize($section_data->content);
 			//var_dump("<h1>tmpl:</h1><pre>",$tmpl,"</pre>");?>
-
     <div id="inner_content"<? if($tmpl['Schema']){?> class="schema<?=$tmpl['Schema']?>"<? }?> style="float: left;max-width:700px; width:700px;">
-
 	<?	if ($print_mode){
 			?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/logo_blank.gif" width="182" height="44" /><br><br><?
 		}
@@ -802,7 +812,7 @@ class setHTML{
 										require $module_path;
 									}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 								}
-								echo "<div class='clear'>&nbsp;</div>";
+								/*echo "<div class='clear'>&nbsp;</div>";*/
 							}
 						  }
 						}?>
@@ -815,10 +825,10 @@ class setHTML{
 				<? 	}
 				}
 			}
-			echo "<div class='clear'>
+			/*echo "<div class='clear'>
 					<div style='padding-right:20px;'>";
 			echo "	</div>
-				</div>";
+				</div>";*/
 			if ($print_mode){
 				?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/contacts_blank.gif" width="700" height="109" /><?
 			}
@@ -868,7 +878,7 @@ class setHTML{
 		</div>
 		<div><?='<a href="'.$link.'">'.$solution_name.'</a>'?></div>
     </div>
-    <div class="clear">&nbsp;</div>
+    <!--<div class="clear">&nbsp;</div>-->
 <?	}
 /**
  * Вуаль

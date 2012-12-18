@@ -67,7 +67,17 @@ $this->widget('bootstrap.widgets.TbButton', array(
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/toogle-button.js');
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/object.js');
 ?>
+<?php
+if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/toogle-button_ie9.css" />
+<?
+}else{
+?>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/toogle-button.css" />
+<?php
+}
+?>
+
 <script type="text/javascript">
 $(document).ready(function(){
 		$('.toggle_off').toggles({on:false,dragable:false});

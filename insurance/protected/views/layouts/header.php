@@ -9,13 +9,18 @@
 	if(isset($_SESSION['SUBSECTION_DATA_ARRAY'])) :?>
 <link href="<?=Yii::app()->request->baseUrl?>/css/section_template.css" rel="stylesheet" type="text/css">
 <?		unset($_SESSION['SUBSECTION_DATA_ARRAY']);
-	endif;?>
-
+	endif;
+	if(Data::detectLayoutType()):?>
+<link href="<?=Yii::app()->request->baseUrl?>/css/second_layout.css" rel="stylesheet" type="text/css">
+<?	endif;?>
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 <![endif]-->
 <!--[if IE 9]>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie9.css" media="screen, projection" />
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie8.css" media="screen, projection" />
 <![endif]-->
 <?	// если главная, удалим отступы главного контейнера:
 	if (!isset($this->breadcrumbs)||!$this->breadcrumbs){?>

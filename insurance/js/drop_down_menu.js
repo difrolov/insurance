@@ -16,25 +16,12 @@ $(function(){
 	$(tMenus).mouseenter(function(){
 			// get alias
 			var alias=getAlias(this);
-			var fl,tp,ofs=$(this).offset();
-			if ($('div#fit_height').size()>0){
-				//alert('fit_height');
-				fl=$('div#fit_height').offset().left;
-				tl=ofs.left-fl+'px';
-				tp=$(this).outerHeight()-1+'px';
-			}else{
-				var sectionsAdminMenu=$('div.sectionsAdminMenu');
-				if($(sectionsAdminMenu).find('ul')){
-					fl=$(sectionsAdminMenu).offset().left;
-					tl=$(this).offset().left+'px';
-
-				}// console.info($(sectionsAdminMenu).html());
-			} // document.title='left:'+ofs.left;
 			$('div#ddMenu_'+alias).css({
-				display:'block',
-				left:tl,
-				top:tp,
-			}); //alert($('div#ddMenu_'+alias).css('display','block'););
+				display:'block'
+			}).offset({
+				left:$(this).offset().left,
+				top:$(this).offset().top+$(this).outerHeight()-1
+			});
 		});
 		$(tMenus).mouseleave(function(){
 				var alias=getAlias(this);

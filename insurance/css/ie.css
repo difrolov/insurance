@@ -12,6 +12,16 @@
 ----------------------------------------------------------------------- */
 
 /* ie.css */
+/*td.blueBorder{
+	background:url(../images/separator_vertical.png) left bottom no-repeat;
+}*/
+div#bottom_insur{
+	margin-bottom:30px;
+}
+div.found_header{
+	font-weight:700 !important;
+	margin-bottom:14px !important;
+}
 div#mainmenu ul li div {
 	background:#FFF;
 	border:solid 1px #CCCCCC;
@@ -38,37 +48,38 @@ div#mainmenu ul li div a:hover{
 div#mainmenu ul li:hover div{
 	top:22px;
 }
-/*
 
-old:
-
-body {text-align:center;}
-.container {text-align:left;}
-* html .column, * html .span-1, * html .span-2, * html .span-3, * html .span-4, * html .span-5, * html .span-6, * html .span-7, * html .span-8, * html .span-9, * html .span-10, * html .span-11, * html .span-12, * html .span-13, * html .span-14, * html .span-15, * html .span-16, * html .span-17, * html .span-18, * html .span-19, * html .span-20, * html .span-21, * html .span-22, * html .span-23, * html .span-24 {display:inline;overflow-x:hidden;}
-* html legend {margin:0px -8px 16px 0;padding:0;}
-sup {vertical-align:text-top;}
-sub {vertical-align:text-bottom;}
-html>body p code {*white-space:normal;}
-hr {margin:-8px auto 11px;}
-img {-ms-interpolation-mode:bicubic;}
-.clearfix, .container {display:inline-block;}
-* html .clearfix, * html .container {height:1%;}
-fieldset {padding-top:0;}
-legend {margin-top:-0.2em;margin-bottom:1em;margin-left:-0.5em;}
-textarea {overflow:auto;}
-label {vertical-align:middle;position:relative;top:-0.25em;}
-input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
-input.text:focus, input.title:focus {border-color:#666;}
-input.text, input.title, textarea, select {margin:0.5em 0;}
-input.checkbox, input.radio {position:relative;top:.25em;}
-form.inline div, form.inline p {vertical-align:middle;}
-form.inline input.checkbox, form.inline input.radio, form.inline input.button, form.inline button {margin:0.5em 0;}
-button, input.button {position:relative;top:0.25em;}*/
 html,body{
 	background:#666;
 }
 div#all_phones{
 	text-align:right !important;
+}
+table#tblBanners3.bottomBannersWrapper{
+	width:auto;
+}
+table#tblBanners3.bottomBannersWrapper
+	tr.spans 
+		td
+			div{
+	/*height:40px;*/
+}
+table.outer{
+	border:solid 4px #FFF;
+	border-left:solid 6px #06AEDD;
+	height:40px;
+	margin-bottom: 20px;
+	margin-top:10px;
+	max-width:250px;
+}
+table.outer td.linkImg{
+	width:4px;
+}
+table.outer td.txtLink{
+	padding-left:14px;
+	padding-right:14px;
+	text-align:left;
+	width:246px;
 }
 div#breadcrumbs{
 	margin-bottom:-48px;
@@ -101,7 +112,7 @@ div#content_from_right{
 	width:251px;
 }
 div#content_from_left{
-	margin-left:35px !important;
+	margin-left:42px !important;
 }
 div#content_from_left,
 div#content_from_right{
@@ -125,11 +136,8 @@ div#content_from_left
 	margin-bottom:8px;
 }
 div#content_from_right{
-	margin-left:20px;
+	margin-left:16px;
 }
-/*div#content_from_left{ background:#FFFF66;}
-div#content_from_right{ background:#FF99CC;}*/
-
 div#fit_height{
 	padding-bottom:0;
 }
@@ -154,13 +162,14 @@ hr#fhr2{
 }
 div#footer{
 	height:auto;
-	padding-top:14px;
 }
 
 div#ieSlidesHolder{
 	background:#EDEEF0; 
-	margin-top:40px;
-	padding:20px; 
+	margin-top:54px;
+	padding:20px;
+	padding-bottom:0;
+	padding-left:30px; 
 }
 
 div#inner_left_menu,
@@ -198,6 +207,14 @@ td#alreadyCorps
 .pic_signature{
 	letter-spacing:-0.05em;
 }
+div#banners3Wrapper{
+	width:auto;
+}
+div#banners3Wrapper 
+	div.save_and_print
+		> div{
+	display:inline;
+}
 table#tblBanners3{
 	margin-left:16px;
 	margin-right:16px;
@@ -205,6 +222,13 @@ table#tblBanners3{
 table#tblBanners3 td img{
 	width:242px;
 }
+table#tblBanners3 
+	div#banners3Wrapper img{
+	height:auto;
+	width:auto;
+}
+
+
 table.tblMainMenu a{
 	color: #06AEDD;
 	display: inline;
@@ -273,6 +297,7 @@ table#tblSlides td img{
 }
 table#tblSlides td{
 	padding-left:12px;
+	padding-right:12px;
 	text-align:center;
 }
 table#tblSlides td div{
@@ -333,6 +358,9 @@ div#footer_content{
 	margin-top:20px;
 }
 
+td.leftOL{
+	
+}
 div#main_menu ul > li{
 	padding:4px;
 }
@@ -369,7 +397,6 @@ ul li{
 	display:inline;
 }
 div[id^="ddMenu"]{
-	background:yellow;
 	display:none;
 	opacity:0.8;
 }
@@ -390,4 +417,10 @@ table#innerSp table{
 }
 table#innerSp td a{
 	display:block;
+}
+input#keywords{
+	width:98%;
+}
+#why_open{ 
+	margin-left:16px;
 }

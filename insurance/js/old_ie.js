@@ -6,6 +6,7 @@ $( function(){
 			var diff=bodyHeight-tblHeight;
 			var innerDivHeight=$('div#inner_left_menu').height();
 			$('div#inner_left_menu').height(innerDivHeight+diff);
+			//console.info('height = '+(innerDivHeight+diff));
 		}
 		//
 		if (!$('div#innerPageContent div.floatLeft div#inner_left_menu').size()) {
@@ -13,9 +14,8 @@ $( function(){
 			$('div#innerPageContent').css('margin-left','0');
 			//console.info('Empty!');
 		}
+		$('td#menuPlace > div[id^="ddMenu_"]').remove();
 		$('body > div').css({
-				marginBottom:'-20px',
-				backgroundColor:'yellow'
-				
+				marginBottom:'-20px'
 			});
 	});

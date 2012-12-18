@@ -187,7 +187,7 @@ FROM insur_insurance_object WHERE
 					  } */
 			if ($i)
 				$getStopWords=$found->getStopWords(false); // array
-			else $res="Данных не обнаружено...";
+			else $res="данных не обнаружено...";
 			
 			$true_words=array_diff($found->keywords,$getStopWords);
 			$true_words="'".implode("','",$true_words)."'";

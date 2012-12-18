@@ -19,7 +19,12 @@
   box-shadow: 0 0 0 1px #242529, 0 1px 0 1px #666;
 }
 .dark .slide .on,.dark .slide .off,.dark .slide .blob {
-  color: rgba(255, 255, 255, 0.7);
+<!--[if gte IE6]>
+
+  color: #666666;
+<![else]-->
+ color: rgba(255, 255, 255, 0.7);
+ <![endif]-->
   font-size: 11px;
 }
 .dark .slide .on {

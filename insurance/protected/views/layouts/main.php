@@ -40,7 +40,7 @@ $( function(){
 	var measure2=$('#measure2');
 	$(measure).draggable();
 	$(measure2).draggable();
-	$(bd).fadeOut('100');
+	// $(bd).fadeOut('100');
 	$(mock).hide();
 	$(mock).draggable({
 			revert: true

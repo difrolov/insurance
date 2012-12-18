@@ -75,6 +75,10 @@ div#bottom_menu
   </tr>
   <tr>
     <td><?
+	$arrSecondLayout=Data::detectLayoutType();
+	if($arrSecondLayout):
+		require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
+	endif;
     setHTML::buildFooterBlock($tp);
 	?></td>
   </tr>

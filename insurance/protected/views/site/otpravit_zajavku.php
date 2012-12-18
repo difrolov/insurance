@@ -4,12 +4,13 @@
 /* @var $form CActiveForm */
 	$this->widget('application.extensions.email.components.debug');		
 	Data::includeXtraCss();
-	Data::includeXtraJS('validate_data.js');?>
+	Data::includeXtraJS('validate_data.js');
+$this->breadcrumbs=array( 'Отправить заявку',);?>
 <div id="inner_left_menu">
 	<h2 class="txtLightBlue">Отправить заявку</h2>
     	<div class="blockMail" style="display:inline-block;">
     <?=CHtml::beginForm(Yii::app()->request->getBaseUrl(true).'/site/sendapplication','post',array('onsubmit'=>'return validateFields([\'name\',\'email\',\'phone\',\'message\',\'insur_species\']);'));?>
-          <table width="100%" cellspacing="0" cellpadding="0">
+          <table cellspacing="0" cellpadding="0">
               <tr>
                 <td>&nbsp;</td>
                 <td align="center" class="txtLightBlue bold" nowrap style="padding:8px;">Ваша заявка</td>
@@ -59,10 +60,14 @@
                 <td>Текст вашей заявки:</td>
                 <td><?=CHtml::textArea('message','',array('rows'=>10,'onblur'=>'toggleFieldWarning(this.id);'));?></td>
               </tr>
-	  </table>
-    	<div align="center" class="row submit">
+              <tr>
+                <td colspan="2">
+                	<div align="center" class="row submit">
     <?php echo CHtml::submitButton('Отправить заявку!'); ?>
-    	</div>
+    				</div>
+				</td>
+              </tr>
+	      </table>
     </div>
 <?=CHtml::endForm();?>
 </div>

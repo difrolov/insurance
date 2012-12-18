@@ -12,9 +12,11 @@
 					'last'=>'Для физических лиц'
 				);
 		$s=0;
-		if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+		$oldIE=setHTML::detectOldIE();
+		if ($oldIE||isset($_GET['iexp'])){?>
       <div id="ieSlidesHolder">
-        <table id="tblSlides" cellspacing="0" cellpadding="0" width="980">
+        <table id="tblSlides" cellspacing="0" cellpadding="0"<? 
+			if($oldIE!=8){?> width="970"<? }?>>
         	<tr align="center">
     <?	}else{
         	echo '<div align="center" id="slides">';
@@ -25,13 +27,13 @@
 			$slink=(isset($arrBanOut[$s]['link']))? $arrBanOut[$s]['link']:'';
 			$bname=(isset($arrBanOut[$s]['name']))? $arrBanOut[$s]['name']:'название не обнаружено...';
 			if($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
-			<td nowrap>
+			<td nowrap id="sTd<?=$s?>">
             	<div class="bigImage"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
                 <div class="txtBlock">
                     <div class="link"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><?=$bname?></a></div>
                 	<div class="justText"><?=$subheader?></div>
                 </div>
-                </td>
+            </td>
 		<?	}else{?>        
         	<div id="slide-<?=$subname?>">
             	<div class="slideImgWrapper"><a href="<?=$baseURL?><? Data::buildAliasPath($slink);?>"><img src="<?=$baseURL.$imgsrc?>"></a></div>
@@ -97,10 +99,9 @@ require_once Yii::app()->request->getBaseUrl(true).'/css/slideshow.css';
 <script type="text/javascript" src="<?=$baseURL?>js/jcarousellite.js"></script>
 <script src="<?	
 require_once Yii::app()->request->getBaseUrl(true)?>/js/slideshow.js"></script>
-<?	} // **********************************************************?>
-<div id="content_from_left" align="left">
+<?	} // **********************************************************
+	ob_start();?>  
   <div id="why_open" class="txtLightBlue">Почему &laquo;Открытие&raquo;?</div>
-  <!--<p>Сайт предназначен для:</p>-->
   <ol class="insideDiv">
     <li>
     	<p>Комплексные финансовые решения для наших клиентов.</p>
@@ -124,11 +125,38 @@ require_once Yii::app()->request->getBaseUrl(true)?>/js/slideshow.js"></script>
     
     <li><p>Круглосуточная поддержка клиентов.</p></li>
   </ol>
-</div>
-<div id="content_from_right" class="imgBannerBorder"><?	
+<?	$leftOL=ob_get_contents();
+	ob_end_clean();
+
+	ob_start();?>
+    <div id="content_from_right" class="imgBannerBorder">
+<?	
 require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners2.php';?>	
 </div>
-<?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
+<?	$rightContent=ob_get_contents();
+	ob_end_clean();
+	
+	if(!setHTML::detectOldIE()){?>
+<div id="content_from_left" align="left">
+		<?=$leftOL?>
+</div>
+	<?=$rightContent?>
+<?	}else{?>
+<table cellspacing="0" cellpadding="0"<? 
+		if (setHTML::detectOldIE()==7){?> style="margin-top:20px;"
+	<? 	}
+	?>>
+  <tr>
+    <td id="leftOL"<? 
+		if (setHTML::detectOldIE()==7){?> style="padding-left:23px; width:642px;"
+	<? 	}
+	?>><?=$leftOL?></td>
+    <td valign="top" id="rightBanner"><?=$rightContent?></td>
+  </tr>
+</table>
+<?	}
+	
+require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/species/default.php';
 	if ($tp){?><h3>/tblSlides</h3><? }?>
 		<!-- /tblSlides -->
 			<!--<div id="content_from_right" align="center">
