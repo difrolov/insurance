@@ -1,2 +1,14 @@
 @charset "utf-8";
 /* CSS Document */
+table.tblMainMenu td{
+	background: #08C;
+	border-radius: 6px;
+	border: solid 1px white;
+	display: table-cell !important;
+	list-style: none;
+	padding: 4px 8px;
+	text-align: center !important;
+}
+table.tblMainMenu td a{
+	color:#FFF;
+}

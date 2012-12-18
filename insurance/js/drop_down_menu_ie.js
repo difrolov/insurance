@@ -28,7 +28,7 @@ $(function(){
 				display:'block'
 			}).offset({
 				left:$(this).offset().left,
-				top:$(this).offset().top+$(this).outerHeight()
+				top:$(this).offset().top+$(this).outerHeight()-2
 			});			
 		});
 		

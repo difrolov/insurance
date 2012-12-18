@@ -1,7 +1,7 @@
 // JavaScript Document
 $(function(){
   try{
-		if ($.browser.mozilla)
+		// if ($.browser.mozilla)
 			$('div#mainmenu.sectionsAdminMenu ul:first-child').css({
 					paddingLeft:0,
 					paddingRight:0,

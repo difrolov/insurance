@@ -31,6 +31,15 @@ testMode=true;
 	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
+if (setHTML::detectOldIE()){?>
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/ie.css" />
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu_ie.js"></script>
+<?
+}else{?>
+<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu.js"></script>
+<? 
+}
 // если загрузили раздел добавления подраздела:
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
@@ -62,7 +71,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <?
 }?>
 <script src="<?=$url?>/js/wait_for.js"></script>
-<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu.js"></script>
+
 </head>
 <body>
 	<div id="header">
