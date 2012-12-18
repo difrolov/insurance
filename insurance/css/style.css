@@ -31,18 +31,6 @@ html{
 	text-align:center;
 }
 
-/*div.bottomBannersWrapper span {
-	border:solid 4px #FFF;
-	border-left:solid 6px #06AEDD;
-	display:block;
-	height:40px;
-	margin-bottom: 20px;
-	margin-top:10px;
-	max-width:200px;
-	padding-left:14px;
-	padding-right:14px;
-}*/
-
 #banners4,
 #content_from_right{
 	border-right-color:#00AFDE;

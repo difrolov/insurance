@@ -1,5 +1,6 @@
 <style>
-span.preNews{
+div.preNews{
+	display:block;
 	font-size:15px;
 	text-align:justify;
 }
@@ -21,5 +22,5 @@ for ($i=0,$j=count($arrNews);$i<$j;$i++){
 	$text=implode(" ",$prevArray);
 	if ($text[strlen($text)-1]!=".")
 		$text.="...";
-	echo "<span class='preNews' style='text-align:justify !important;'>".nl2br($text)."</span>";
+	echo "<div class='preNews' style='text-align:justify !important;'>".nl2br($text)."</div>";
 }?><br><br>
