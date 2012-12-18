@@ -6,6 +6,7 @@ class Esli_proizoshel_strahovoj_sluchayController extends Controller
 	 */
 	public function actions()
 	{
+
 		return array(
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha'=>array(
@@ -27,7 +28,7 @@ class Esli_proizoshel_strahovoj_sluchayController extends Controller
 	public function actionIndex($alias=false)
 	{
 		$data=Data::getDataByAlias('esli_proizoshel_strahovoj_sluchay',$alias);
-    	$this->render('index', array('res' => $data));
+		$this->render('index', array('res' => $data));
 	}
 	/**
 	 * Для подразделов, вложенных в главный раздел и в подраздел

@@ -5,7 +5,7 @@ class GeneratorController extends Controller
 	static protected $section_root;
 	static $modules_names;
 	protected $groot=NULL; // see getGeneratorRoot()
-	
+
 	static function getArticleContent($article_id){
 		return Yii::app()->db->createCommand()->select('content')->from('insur_article_content')->where('id='.$article_id)->queryScalar();		
 	}
@@ -26,13 +26,13 @@ class GeneratorController extends Controller
 	}
 /**
  * @package
- * 
+ *
  */
-	public function actionIndex(){ 
+	public function actionIndex(){
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		$model = new InsurInsuranceObject(); // для извлечения данных раздела 
+		$model = new InsurInsuranceObject(); // для извлечения данных раздела
 		$art_model=new InsurArticleContent(); // для редактора
 		$this->getGeneratorRoot();
 		$modules=$this->getAllModules();
@@ -40,9 +40,9 @@ class GeneratorController extends Controller
 	}
 	/**
 	 * @package
-	 * 
+	 *
 	 */
-	public function actionGetObject(){ 
+	public function actionGetObject(){
 
 		if(!Yii::app()->user->checkAccess('admin')){
 	    	Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
@@ -71,10 +71,10 @@ class GeneratorController extends Controller
 		}
 		if (isset($_GET['section_id'])&&$_GET['section_id'])
 			$id=$_GET['section_id'];
-		if (!$id){ 
-			die('Ошибка!<p>Не получен id подраздела</p>.'); 
+		if (!$id){
+			die('Ошибка!<p>Не получен id подраздела</p>.');
 		}else{
-			
+
 			$this->actionSave($id);
 		}
 	}
@@ -88,7 +88,7 @@ class GeneratorController extends Controller
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		$section_id=$_POST['save_metadata'];
-		InsurInsuranceObject::model()->updateByPk($section_id, 
+		InsurInsuranceObject::model()->updateByPk($section_id,
 					array(	'date_changes'=>date("Y-m-d H:i:s"),
 							'title'=>$_POST['title'],
 							'keywords'=>$_POST['keywords'],
@@ -105,12 +105,12 @@ class GeneratorController extends Controller
 		if(!Yii::app()->user->checkAccess('admin')){
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
-		if($section_id){ 
+		if($section_id){
 			require_once Yii::getPathOfAlias('webroot').'/protected/components/helpers/Data.php';
 			$checkView=new Views(true);
 			$inExViews=$checkView->checkView($section_id,false,true);
 			$this->getGeneratorRoot();
-			$model = new InsurInsuranceObject(); // для извлечения данных раздела 
+			$model = new InsurInsuranceObject(); // для извлечения данных раздела
 			$art_model=new InsurArticleContent(); // для редактора
 			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$modules=$this->getAllModules();
@@ -140,7 +140,7 @@ class GeneratorController extends Controller
 				var_dump("<pre>",$post,"</pre>");
 			echo "</div>";
 		}
-		// начало записи в текстовом модуле:	
+		// начало записи в текстовом модуле:
 		$dText="Текст :: "; // общее
 		$artId="article id: "; // дописать подстроку для добавленной существующей статьи
 		$dTextArtId=$dText.$artId; // вся подстрока для добавленной существующей статьи
@@ -153,17 +153,17 @@ class GeneratorController extends Controller
 					$arrBlockModules=explode("|",$modulesInBlockString); // получить массив модулей
 					// $arrBlockModules=array(новости, готовое решение, случайная статья)
 					// если в наборе модулей (т.е., во ВСЕЙ СТРОКЕ) есть начало для текстового блока
-					if (strstr($modulesInBlockString,$dText)){ 
-						
+					if (strstr($modulesInBlockString,$dText)){
+
 						for($i=0;$i<count($arrBlockModules);$i++){
-							
+
 							// повторить условие поиска но ТЕПЕРЬ - НЕ для всей строки со всеми модулями, а для ТЕКУЩЕГО МОДУЛЯ текста для текущего модуля:
 							if (strstr($arrBlockModules[$i],$dText) // текст новой статьи
 								 && !strstr($arrBlockModules[$i],$dTextArtId) // но не id существующей статьи
 							   ){
-								
-//		$jenc=json_encode(array("result"=>'We_GOT actionSave. LINE is '.__LINE__."\n\nText: ".$arrBlockModules[$i]));				
-//		echo $jenc;	
+
+//		$jenc=json_encode(array("result"=>'We_GOT actionSave. LINE is '.__LINE__."\n\nText: ".$arrBlockModules[$i]));
+//		echo $jenc;
 //		exit;
 								$start=strpos($arrBlockModules[$i],$dText)+strlen($dText);
 								$finish=strpos($arrBlockModules[$i],"^");
@@ -197,14 +197,14 @@ class GeneratorController extends Controller
 										$article_id = Yii::app()->db->createCommand()->select('auto_increment')->from('information_schema.TABLES')->where(" TABLE_NAME ='insur_article_content' and TABLE_SCHEMA='insur_db' ")->queryScalar();
 echo <<<STR
 								<blockquote>
-									<div>	
+									<div>
 										content = $model_content->content<br>
 										created = $model_content->created<br>
 										status = $model_content->status<br>
 										insur_coworkers_id = $model_content->insur_coworkers_id<br>
 										name = $model_content->name<br>
 									</div>
-										<h4>Эмуляция процесса сохранения новой статьи... </h4>										
+										<h4>Эмуляция процесса сохранения новой статьи... </h4>
 										<hr><b>added article_id = $article_id</b><hr>
 								</blockquote>
 STR;
@@ -217,12 +217,12 @@ STR;
 							}
 						}
 					}
-					if (!strstr($modulesInBlockString,"header:"))	
+					if (!strstr($modulesInBlockString,"header:"))
 						$sectionDataArray[$blockName]=$arrBlockModules;
 				}
 				$post[$key]=$sectionDataArray;
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$sectionDataArray);
-		}	
+		}
 		// модифицируем массив данных:
 		$parent_id=$post['parent'];
 		$name=$post['name'];
@@ -230,7 +230,7 @@ STR;
 		$title=$post['title'];
 		$keywords=$post['keywords'];
 		$description=$post['description'];
-		// удаляем элементы массива, которые не должны быть записаны в insur_insurance_object.content  
+		// удаляем элементы массива, которые не должны быть записаны в insur_insurance_object.content
 		unset($post["blocks"]["activeBlockIdentifier"]);
 		unset($post["blocks"]["moduleClickedLocalIndex"]);
 		unset($post["parent"]);
@@ -242,21 +242,21 @@ STR;
 		/************************************/
 		// 3. Сохранить подраздел
 		/************************************
-		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА 
+		ПРОЦЕДУРА СОХРАНЕНИЯ ПОДРАЗДЕЛА
 		(insur_insurance_object)
 		************************************/
-		
-//		$jenc=json_encode(array("result"=>'We_GOT actionSave. ERROR!!! LINE is '.__LINE__));				
-//		echo $jenc;	
+
+//		$jenc=json_encode(array("result"=>'We_GOT actionSave. ERROR!!! LINE is '.__LINE__));
+//		echo $jenc;
 //		exit;
-		
+
 		// если в режиме предпросмотра со значением 'yes' - выставляем статус неопубликованного ДО явного указания юзера, что делать дальше:
 		$status=(isset($_GET['preview'])&&$_GET['preview']=='yes')? 0:1;
 
 		$date_changes= date("Y-m-d H:i:s");
 		if($update_id){
 			$section_id=$update_id;
-			InsurInsuranceObject::model()->updateByPk($section_id, 
+			InsurInsuranceObject::model()->updateByPk($section_id,
 					array(	'parent_id'=>$parent_id,
 							'name'=>$name,
 							'status'=>$status,
@@ -282,13 +282,27 @@ STR;
 			if (!isset($_GET['gtest'])) { // если не тест
 				$model_obj->save();
 				$section_id=$model_obj->id;
+				//сохраняем для сортировки
+				$sql = 'SELECT *
+				FROM order_by_menu as orm
+				ORDER BY orm.priority DESC';
+				$order = Yii::app()->db->createCommand($sql)->queryAll();
+				$model_order = new InsurOrderMenu;
+				$model_order->id_object = $section_id;
+				if(count($order)>0){
+					$model_order->priority = ($order[0]['priority']+1);
+				}else{
+					$model_order->priority = 1;
+				}
+				$model_order->parent_id = $parent_id;
+				$model_order->save();
 			}else{
 				$section_id = Yii::app()->db->createCommand()->select('auto_increment')->from('information_schema.TABLES')->where(" TABLE_NAME ='insur_insurance_object' and TABLE_SCHEMA='insur_db' ")->queryScalar();
 echo <<<STR2
 		<blockquote>
 			<div>
 				parent_id = $model_obj->parent_id<br>
-				name = $model_obj->name<br>										
+				name = $model_obj->name<br>
 				status = $model_obj->status<br>
 				alias = $model_obj->alias<br>
 				date_changes = $model_obj->date_changes<br>
@@ -310,7 +324,7 @@ STR2;
 			if (!$status)
 				$direct_to.="?mode=preview";
 			// вернуть сообщение странице-отправителю:
-			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".$direct_to));				
+			$jenc=json_encode(array("result"=>Yii::app()->request->getBaseUrl(true)."/".$direct_to));
 			echo $jenc;
 			exit;
 		}
@@ -325,13 +339,13 @@ STR2;
 			Yii::app()->request->redirect(Yii::app()->createUrl('user/login'));
 		}
 		if (!$section_id){
-			$mess='ОШИБКА! Не получен id раздела.';	
-		}elseif (InsurInsuranceObject::model()->updateByPk($section_id, 
+			$mess='ОШИБКА! Не получен id раздела.';
+		}elseif (InsurInsuranceObject::model()->updateByPk($section_id,
 				array('status'=>1,'date_changes'=>date("Y-m-d H:i:s"))
 			)){
-			$mess='Раздел сохранён и опубликован.';	
+			$mess='Раздел сохранён и опубликован.';
 		}
-		echo $mess; 
+		echo $mess;
 		exit;
 	}
 /**
@@ -341,10 +355,10 @@ STR2;
  */
 	function actionAliasCheck(){
 		echo ($alias = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$_GET['alias'].'"')->queryScalar()) ?
-			'taken' : 'allow';		
+			'taken' : 'allow';
 	}
 /**
- * 
+ *
  * @package
  * @subpackage
  */
@@ -356,7 +370,7 @@ STR2;
 				section_id = 7
 				parent_id = 6
 				child_id = false
-		
+
 			2)	getParents(6,7)
 				section_id = 6
 				parent_id = 2
@@ -368,7 +382,7 @@ STR2;
 				parent_id = -1
 				child_id = 6/7
 				section_id = 2/6/7
-			
+
 			4)  getParents(-1,2/6/7)
 				section_id = -1
 				parent_id = 0
@@ -378,10 +392,10 @@ STR2;
 		*/
 		if (isset($arr_parent_id[0]))
 			$parent_id=$arr_parent_id[0]['parent_id'];
-		
+
 		if ($child_id)
 			$section_id.="/".$child_id;
-		
+
 		if (!isset($parent_id)||$parent_id<0){
 			$arrRoots=explode("/",$section_id);
 			$root=array();
@@ -402,7 +416,7 @@ STR2;
 //*********************************************************************************
 // для тестирования:
 class TestGenerator{
-	
+
 	public static $test_post=array(
 						// 100
 						array(
@@ -417,7 +431,7 @@ class TestGenerator{
 						),
 						// 4ss
 						array(
-							"Schema"=>"4ss",		
+							"Schema"=>"4ss",
 							"blocks"=>array(
 								"1"=>"Новость|Текст :: Статеюшка такая!^<p>\n\tПринцип нарушен, что человек, попадающий в другую эпоху, другое время, все равно остается самим собой. Но мне кажется этот прием работает на то, чтобы доказать то, что мы обычно любим говорить, вот если бы я был бы тогда, я бы сделал...</p>\n|Новость",
 								"2"=>"header:Подзаголовок такой подзаголовок!",
@@ -436,7 +450,7 @@ class TestGenerator{
 							"description"=>"Описание будет позже. Обязательно!"
 						)
 					);
-	
+
 	function testCodeOutput1($artId,$header,$text){
 		echo "<div>
 		<span style='color:red'>1. Добавляем в таблицу данные новой статьи:</div>
@@ -448,16 +462,16 @@ class TestGenerator{
 			<div style='border:solid 1px;'>id добавленной статьи: ".$artId."</div>
 		</div>";
 	}
-	
+
 	function testCodeOutput2($key,$sectionDataArray){
 		echo "<div><div>".__LINE__." $key: $sectionDataArray</div></div>";
 	}
-	
+
 	function testCodeOutput3($post,$seral_post,$line,$html_test_style){
 		echo "<div{$html_test_style}>";
-			echo "<h4>".$line." testCodeOutput3(\$post): Обработанный массив ДО сериализации:</h4>";	
+			echo "<h4>".$line." testCodeOutput3(\$post): Обработанный массив ДО сериализации:</h4>";
 			var_dump("<pre>",$post,"</pre>");
-			echo "<hr><h4>".$line." testCodeOutput3(\$post): Сериализованный массив:</h4>";	
+			echo "<hr><h4>".$line." testCodeOutput3(\$post): Сериализованный массив:</h4>";
 			var_dump("<pre>",$seral_post,"</pre>");
 		echo "</div>";
 	}

@@ -26,6 +26,16 @@
 )); ?>
 <br class="clear">
 
+<?php
+$this->widget('bootstrap.widgets.TbButton', array(
+		'label'=>'Упорядочить разделы в меню',
+		'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+		'size'=>'small', // null, 'large', 'small' or 'mini'
+		'url'=>Yii::app()->controller->createUrl("/admin/object/PriorityObject/".$_GET['id'])
+));
+?>
+<br class="clear">
+<br class="clear">
 <div>Подкатегории</div>
 <?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
@@ -57,7 +67,17 @@
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/toogle-button.js');
 $cs->registerScriptFile(Yii::app()->baseUrl.'/js/admin/object.js');
 ?>
+<?php
+if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/toogle-button_ie9.css" />
+<?
+}else{
+?>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/toogle-button.css" />
+<?php
+}
+?>
+
 <script type="text/javascript">
 $(document).ready(function(){
 		$('.toggle_off').toggles({on:false,dragable:false});

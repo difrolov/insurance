@@ -3,7 +3,7 @@
 		$arrBan3=setHTML::getBannersAsObjects('3');
 		if (!empty($arrBan3)){
 			if (!$oldIE){?>
-<div align="center">	
+<div align="center">
     <div class="bottomBannersWrapper">
 		<?	require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';?>
 		<?	}else{?>
@@ -28,7 +28,7 @@
 					<a href="<?=Yii::app()->request->getBaseUrl(true)?>/<? Data::buildAliasPath($arrBan3[$i]['link']);?>"><img src="<?=Yii::app()->request->getBaseUrl(true).'/'.$arrBan3[$i]['src']?>"></a>	</div>
 				</div>
                 <!---->
-                <?	if (!$oldIE){?>	
+                <?	if (!$oldIE){?>
 		  		<span class="outer">
                     <span class="bl">&nbsp;</span>
                     <span class="bc">
@@ -46,13 +46,13 @@
 			</div>
 			<?	$imgObjs=ob_get_contents();
 				ob_end_clean();
-				
+
 				if ($oldIE){?>
             <td class="blueBorder"><?=$imgObjs?></td>
 			<? 	}else{
 					echo $imgObjs;
 				}
-				$cnt++;			
+				$cnt++;
 			endforeach;
 			if($oldIE){?>
 		</tr>
@@ -60,6 +60,6 @@
 		<? 	}else{?>
 	</div>
 </div>
-		<?	} 			
+		<?	}
 		}
 	}?>

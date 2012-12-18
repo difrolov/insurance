@@ -80,6 +80,7 @@ return array(
 				'fizicheskim_litzam/*' =>  'fizicheskim_litzam/index',
 
 				'partneram/*' =>  'partneram/index',
+				'esli_proizoshel_strahovoj_sluchay/*' =>  'esli_proizoshel_strahovoj_sluchay/index',
 
 				//
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
@@ -104,7 +105,25 @@ return array(
 				'username' => 'insur_mysql',
 				'password' => '64z3tzev',
 				'charset' => 'utf8',
+				'enableProfiling'=>true,
+				// показываем значения параметров
+				'enableParamLogging' => true,
+
 		),
+			'log' => array(
+					'class' => 'CLogRouter',
+					'routes' => array(
+							array(
+									'db' => array(
+											'class' => 'CWebLogRoute',
+											'categories' => 'system.db.CDbCommand',
+											'showInFireBug' => true //Показывать в FireBug или внизу каждой страницы
+									)
+
+							),
+					),
+			),
+
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
@@ -134,7 +153,7 @@ return array(
 		),
 		'email'=>array(
 			'class'=>'application.extensions.email.components.Email',
-			'delivery'=>'php', //Will use the php mailing function.  
+			'delivery'=>'php', //Will use the php mailing function.
 			//May also be set to 'debug' to instead dump the contents of the email into the view
 		),
 	),
