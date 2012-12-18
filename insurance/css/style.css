@@ -31,7 +31,7 @@ html{
 	text-align:center;
 }
 
-div.bottomBannersWrapper span {
+/*div.bottomBannersWrapper span {
 	border:solid 4px #FFF;
 	border-left:solid 6px #06AEDD;
 	display:block;
@@ -41,7 +41,7 @@ div.bottomBannersWrapper span {
 	max-width:200px;
 	padding-left:14px;
 	padding-right:14px;
-}
+}*/
 
 #banners4,
 #content_from_right{
