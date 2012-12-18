@@ -94,13 +94,18 @@ if(setHTML::detectOldIE()){?>
 		?>
 </div>
 </form>
+<? 	if(isset($data)){?>
+<div id="preText" style="display:none;"><?
+$arrContent=unserialize($data['content']);
+$block=explode("article id: ",$arrContent['blocks'][1][0]);
+echo $this->getArticleContent(array_pop($block));?></div>
+<?	}?>
 <script>
-<?
-	if (!isset($data)) {?>
 Layout=new Object();
 Layout.Schema="default";
-<? 	}else{?>
-CKEDITOR.instances['InsurArticleContent[content]'].setData('ddddddddddddddddddd');		
+<?
+	if (isset($data)) {?>
+CKEDITOR.instances['InsurArticleContent[content]'].setData(document.getElementById('preText').innerText);		
 <?	}?>
 </script>    
 <?
