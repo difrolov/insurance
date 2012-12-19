@@ -26,6 +26,8 @@ class ObjectController extends Controller
 			$gridDataProvider['parent'] = $model->search('id='.$_GET['id']);
 			$gridDataProvider['child'] = $model->search('parent_id='.$_GET['id']);
 			$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));
+		}else{
+			$this->render('index');
 		}
 	}
 
