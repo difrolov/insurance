@@ -79,7 +79,10 @@ if($inExViews) {?>
 			?>none<? 
 		}?>;">Выберите родительский раздел для создаваемой страницы</h5>
 	<div id="<?="save_tmpl_block"?>"<? 
-		if(isset($_GET['test'])||setHTML::detectOldIE()){?> style="display:block;"<? }?>>
+		if( isset($_GET['test'])
+			|| setHTML::detectOldIE()
+			|| $primitive
+		  ){?> style="display:block;"<? }?>>
     	<div id="sections_radios" style="text-align:left">
         <label>
           <span>

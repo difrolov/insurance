@@ -77,11 +77,10 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <?
 }else{
 // если любой другой раздел, приаттачить скрипт генерации доп. кнопки:?>
-	<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
+<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
 <?
 }?>
 <script src="<?=$url?>/js/wait_for.js"></script>
-
 </head>
 <body>
 	<div id="header">
@@ -115,7 +114,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		));
 	endif;
 	//var_dump("<h1>breadcrumbs:</h1><pre>",$breadcrumbs,"</pre>");
-	if (Yii::app()->controller->getId()!='generator') : ?>
+	//if (Yii::app()->controller->getId()!='generator') : ?>
 	<div id="mainmenu" class="sectionsAdminMenu">
 <?		// главное меню:
 		setHTML::buildMainMenu($this); // главное меню
@@ -132,10 +131,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 $( function(){	
 	var getObjUrl='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/';
 		<?	$sc=0;
-			foreach($arrSecondMenu as $secMenuId=>$secMenuData){
-				//$mObj=$arrSecondMenu[$sc];
-				//$gAl=explode("/",$mObj);
-				//$mAlias=array_pop($gAl);?>
+			foreach($arrSecondMenu as $secMenuId=>$secMenuData){?>
 	$('#admin_main_submenu ul li').eq(<?=$sc?>).click( function(){
 			location.href=getObjUrl+'<?=$secMenuId?>';
 			return false;
@@ -145,9 +141,9 @@ $( function(){
 });
 </script>
 	<?	endif;
-	else:
+	//else:
 		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
-	endif;
+	//endif;
 
 	if(Yii::app()->controller->getId()=='generator'){?>
 	<div class="content_right">

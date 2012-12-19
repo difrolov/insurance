@@ -9,8 +9,8 @@ else
 
 $groot=$this->groot; // директория Генератора
 $includes=$groot.'includes/'; // директория подключаемых файлов
-
-if(setHTML::detectOldIE()){?>
+$primitive=true; 
+if(setHTML::detectOldIE()||$primitive){?>
 <link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/admin/ie.css" type="text/css">
 <form style="margin:0;" name="content_save" id="content_save" method="post" action="
 <?=Yii::app()->createUrl('admin/generator/'.$go_action)?>">
