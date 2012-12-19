@@ -252,7 +252,7 @@ class setHTML{
 
                 <div id="footer_inside_center">
                 	<div id="fcompany">&copy; &quot;ОТКРЫТИЕ СТРАХОВАНИЕ&quot; 2012</div>
-                    <div id="faddress">Адрес: 23007, Москва, ул. 4-я Магистральная, д. 11, стр. 2</div>
+                    <div id="faddress">Адрес: 123007, Москва, ул. 4-я Магистральная, д. 11, стр. 2</div>
                     <div id="fcopy" class="tiny_info">&copy; &quot;Открытие страхование&quot; 2012</div>
                 </div>
 
