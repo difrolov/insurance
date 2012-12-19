@@ -234,18 +234,7 @@ class setHTML{
 		$hrs='<div id="fhr1">&nbsp;</div>';?>
 
         <div align="left" id="footer">
-    <?  /*if(
-			(  Yii::app()->controller->getId()!='site'
-			   ||
-			   ( setHTML::detectOldIE()
-			     && in_array(Yii::app()->controller->action->id,Data::getSiteDefaultExceptions())
-			   )
-			)
-			&& Yii::app()->controller->getId()!='user'
-		  ) {
-			  // require_once Yii::getPathOfAlias('webroot').'/protected/components/submodules/banners3.php';
-		  }*/
-		echo $hrs;
+    <?  echo $hrs;
 
 		if ($tp){?><h3>bottom_menu</h3><? }?>
         <div align="left" id="bottom_menu">
@@ -353,7 +342,8 @@ class setHTML{
  */
 	static function buildMainMenu(
 					$this_object,
-					$submenu=false
+					$submenu=false,
+					$params=false
 				  ){
 		$mainPageAlias='site/index';
 		$currentController=Yii::app()->controller->getId();
@@ -381,11 +371,12 @@ class setHTML{
 			if ($nURL[1]=='index')
 				$urlAlias='/'.$nURL[2].'/'.$nURL[1].'/';
 			else $urlAlias='/'.$nURL[1].'/';
+			$menuItems=self::getMainMenuItems($submenu);
+			//if ($submenu==-2) {var_dump("<h1>menuItems:</h1><pre>",$menuItems,"</pre>");die();}
 			//echo "<div>old IE: ".self::detectOldIE()."</div>";?>
-        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0">
+        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0"> 
 			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
-		<?	$menuItems=self::getMainMenuItems($submenu);
-			$fr=0;
+		<?	$fr=0;
 			$lr=count($menuItems); // for old IE
 			foreach($menuItems as $parent_id=>$parentData){
 				$fr++;
@@ -396,7 +387,9 @@ class setHTML{
 					   || ($currentController=='site'&&$alias=='site/index')
 					 ) $tdActive=true;
 				ob_start();
-				?><a href="<?php echo Yii::app()->request->baseUrl.'/'.$alias; ?>"><? echo $text;?></a><?
+				?><a href="<?php echo Yii::app()->request->baseUrl."/";
+                echo($submenu==-2)? 
+					'admin/object/getobject/'.$parent_id:$alias; ?>"><? echo $text;?></a><?
 				$tLink=ob_get_contents();
 				ob_clean();?>
             <td<? if ($tdActive):?> class="active"<? endif;
@@ -810,7 +803,7 @@ class setHTML{
 									if ($mod_folder=array_search($moduleContent,$modules)){
 										$module_path=Yii::getPathOfAlias('webroot').'/protected/components/modules/'.$mod_folder.'/default.php';
 										require $module_path;
-									}elseif($moduleContent) echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
+									}elseif($moduleContent); //echo "<div style='color:red'>МОДУЛЬ index $b НЕ НАЙДЕН!</div>";
 								}
 								/*echo "<div class='clear'>&nbsp;</div>";*/
 							}

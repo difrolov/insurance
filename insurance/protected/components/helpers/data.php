@@ -61,7 +61,7 @@ class Data {
   * Загружает контент раздела/подраздела из БД по полученному алиасу
   * Требует установки правил в UrlManager!
   */
-	static function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
+	static public function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
 							 $alias=false // alias подраздела
 						   ){
 		if (!$alias) {

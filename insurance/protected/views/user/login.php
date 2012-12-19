@@ -1,4 +1,4 @@
-<div class="form">
+<div id="inner_left_menu" style="width:600px; background:#FFF;" class="form">
 <?php	$form=$this->beginWidget('CActiveForm', array(
     'id'=>'user-form',
     'enableAjaxValidation'=>true,

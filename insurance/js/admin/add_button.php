@@ -3,9 +3,9 @@ if (isset($dwshow)){?><script><? }
 
 ob_start();?>
 
-$(document).ready(function() {
+$( function(){
 	try{
-		var sPlus=$("#main_submenu li")[2];
+		var sPlus=$("#main_submenu li").eq(1);
 		var offLeft=$(sPlus).offset().left;
 		// offLeft: желательно в дальнейшем:
 		// 1. перерасчитать отступ слева в %%

@@ -6,6 +6,10 @@ class GeneratorController extends Controller
 	static $modules_names;
 	protected $groot=NULL; // see getGeneratorRoot()
 
+	static function getArticleContent($article_id){
+		return Yii::app()->db->createCommand()->select('content')->from('insur_article_content')->where('id='.$article_id)->queryScalar();		
+	}
+	
 	function getGeneratorRoot(){
 		if (!$this->groot)
 			$this->groot=Yii::getPathOfAlias('webroot').'/protected/modules/admin/views/generator/';

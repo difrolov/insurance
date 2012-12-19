@@ -31,18 +31,6 @@ html{
 	text-align:center;
 }
 
-div.bottomBannersWrapper span {
-	border:solid 4px #FFF;
-	border-left:solid 6px #06AEDD;
-	display:block;
-	height:40px;
-	margin-bottom: 20px;
-	margin-top:10px;
-	max-width:200px;
-	padding-left:14px;
-	padding-right:14px;
-}
-
 #banners4,
 #content_from_right{
 	border-right-color:#00AFDE;
@@ -655,11 +643,8 @@ div#main_submenu
 	font-size:0.9em;
 	line-height:27px;
 	list-style: none;
-<<<<<<< HEAD
 	margin:0 10px;
-=======
 	margin:0 15px;
->>>>>>> 1c381a7b9cf9686526b1d97ffaaf8ff45f8ed14a
 }
 div#main_submenu
 	ul li a{

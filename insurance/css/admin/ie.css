@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+table.tblMainMenu td{
+	background: #08C;
+	border-radius: 6px;
+	border: solid 1px white;
+	display: table-cell !important;
+	list-style: none;
+	padding: 4px 8px;
+	text-align: center !important;
+}
+table.tblMainMenu td a{
+	color:#FFF;
+}
+table.tblMainSubMenu{
+	display:inline;
+	margin-top:0px;
+	width:auto;
+}
+table.tblMainSubMenu td{
+	background: #08C;
+	border: solid 1px white;
+	border-radius: 4px;
+	display:inline-block;
+	padding:4px 24px;	
+	text-align: center !important;
+
+}
+table.tblMainSubMenu td a{
+	color:#FFF;
+}

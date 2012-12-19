@@ -41,12 +41,22 @@ testMode=true;
 	<script src="<?=$url?>/js/admin/banner.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 <?
+if (setHTML::detectOldIE()){?>
+	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/ie.css" />
+<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu_ie.js"></script>
+<?
+}else{?>
+<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu.js"></script>
+<? 
+}
 // если загрузили раздел добавления подраздела:
 	// 1. приаттачим дополнительную таблицу стилей:
 if (Yii::app()->controller->getId()=='generator'){?>
 	<link rel="stylesheet" type="text/css" href="<?=$url?>/css/admin/generator.css" />
 <?
 	require_once Yii::getPathOfAlias('webroot')."/css/admin/generator2.php";
+	if (!setHTML::detectOldIE()) {
 	// 2. приаттачим скрипты для генерации и обратобки макета:    ?>
 	<script src="<?=$url?>/js/admin/generator/prepare_data.php"></script>
 	<script src="<?=$url?>/js/admin/generator/load_template.php?base_url=<?
@@ -60,6 +70,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
     <script src="<?=$url?>/js/admin/generator/customize_page.js"></script>
+<?	}?>    
     <script src="<?=$url?>/js/admin/generator/data_ready_to_send.php?base_url=<?
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
@@ -70,7 +81,7 @@ if (Yii::app()->controller->getId()=='generator'){?>
 <?
 }?>
 <script src="<?=$url?>/js/wait_for.js"></script>
-<script type="text/javascript" src="<?=Yii::app()->request->getBaseUrl(true)?>/js/drop_down_menu.js"></script>
+
 </head>
 <body>
 	<div id="header">
@@ -111,7 +122,30 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		// выпадающее меню:
 		setHTML::buildDropDownMenu();	// выпадающее меню	?>
 	</div>
-<?	else:
+   	<div align="right" id="admin_main_submenu">
+	<?	setHTML::buildMainMenu($this,-2);?>
+    </div>
+	<?	if(!setHTML::detectOldIE()):
+			$arrSecondMenu=setHTML::getMainMenuItems(-2);
+			// var_dump("<h1>arrSecondMenu:</h1><pre>",$arrSecondMenu,"</pre>");die();?>
+<script>    
+$( function(){	
+	var getObjUrl='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/';
+		<?	$sc=0;
+			foreach($arrSecondMenu as $secMenuId=>$secMenuData){
+				//$mObj=$arrSecondMenu[$sc];
+				//$gAl=explode("/",$mObj);
+				//$mAlias=array_pop($gAl);?>
+	$('#admin_main_submenu ul li').eq(<?=$sc?>).click( function(){
+			location.href=getObjUrl+'<?=$secMenuId?>';
+			return false;
+		});
+		<?		$sc++;
+			}?>
+});
+</script>
+	<?	endif;
+	else:
 		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
 	endif;
 
