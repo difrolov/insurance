@@ -96,9 +96,11 @@ if(setHTML::detectOldIE()||$primitive){?>
 </form>
 <? 	if(isset($data)){?>
 <div id="preText" style="display:none;"><?
-$arrContent=unserialize($data['content']);
-$block=explode("article id: ",$arrContent['blocks'][1][0]);
-echo $this->getArticleContent(array_pop($block));?></div>
+	if($arrContent=unserialize($data['content'])){
+	//var_dump("<h1>arrContent:</h1><pre>",$arrContent,"</pre>");die();
+	$block=explode("article id: ",$arrContent['blocks'][1][0]);
+	echo $this->getArticleContent(array_pop($block));
+}else echo "&nbsp;";?></div>
 <?	}?>
 <script>
 Layout=new Object();
