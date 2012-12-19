@@ -43,9 +43,12 @@
 <div class="out_baner_img">
 <?php
 foreach ($out_query as $key=>$value){
+
+	if($out_query[$key]['src']){
 ?>
 	<img class="banner" id="banner_<?=$out_query[$key]['id']?>" alt="<?=$out_query[$key]['name']?>" src="<?=Yii::app()->homeUrl.$out_query[$key]['src']?>">
 <?php
+	}
 }
 ?>
 </div>
@@ -100,9 +103,11 @@ foreach ($out_query as $key=>$value){
 <?php
 
 foreach ($in_query as $key=>$value){
+	if($in_query[$key]['src']){
 ?>
 	<img class="banner" id="banner_<?=$in_query[$key]['id']?>" alt="<?=$in_query[$key]['name']?>" src="<?=Yii::app()->homeUrl.$in_query[$key]['src']?>">
 <?php
+	}
 }
 ?>
 </div>
@@ -130,9 +135,11 @@ foreach ($in_query as $key=>$value){
 <div class="out_baner_img">
 <?php
 foreach ($ban3->data as $key=>$value){
+	if($ban3->data[$key]['src']){
 ?>
 	<img class="banner" id="banner_<?=$ban3->data[$key]['id']?>" alt="<?=$ban3->data[$key]['name']?>" src="<?=Yii::app()->homeUrl.$ban3->data[$key]['src']?>">
 <?php
+	}
 }
 ?>
 <?php
@@ -181,9 +188,11 @@ if(isset($ban3->data) && count($ban3->data)>0){
 <div class="in_baner_img">
 <?php
 foreach ($ban4->data as $key=>$value){
+	if($ban4->data[$key]['src']){
 ?>
 	<img class="banner" id="banner_<?=$ban4->data[$key]['id']?>" alt="<?=$ban4->data[$key]['name']?>" src="<?=Yii::app()->homeUrl.$ban4->data[$key]['src']?>">
 <?php
+	}
 }
 ?>
 </div>

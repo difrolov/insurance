@@ -28,7 +28,7 @@ if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
 <?
 }else{
 ?>
-<script src="<?=$url?>/js/jquery-1.7.2.min.js"></script>
+<script src="<?=$url?>/js/jquery-1.4.2.min.js"></script>
 <?php
 }
 ?>
