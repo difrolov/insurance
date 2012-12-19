@@ -388,8 +388,11 @@ class setHTML{
 					 ) $tdActive=true;
 				ob_start();
 				?><a href="<?php echo Yii::app()->request->baseUrl."/";
-                echo($submenu==-2)? 
-					'admin/object/getobject/'.$parent_id:$alias; ?>"><? echo $text;?></a><?
+				$admin_mode=( // проверить, где находимся - frontend or backend
+					is_object(Yii::app()->controller->module)
+					&& Yii::app()->controller->module->id=='admin'
+				) ? true:false;
+                echo( $submenu==-2 && $admin_mode)? 'admin/object/getobject/'.$parent_id:$alias; ?>"><? echo $text;?></a><?
 				$tLink=ob_get_contents();
 				ob_clean();?>
             <td<? if ($tdActive):?> class="active"<? endif;
@@ -823,6 +826,7 @@ class setHTML{
 			echo "	</div>
 				</div>";*/
 			if ($print_mode){
+				require_once Yii::getPathOfAlias('webroot').'/protected/components/modules/save_and_print/default.php';
 				?><img src="<?=Yii::app()->request->getBaseUrl(true)?>/images/contacts_blank.gif" width="700" height="109" /><?
 			}
 			if ($mode=='preview') :
