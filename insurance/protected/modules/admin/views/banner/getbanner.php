@@ -236,35 +236,46 @@ if(isset($ban4->data) && count($ban4->data)>0){
 
 <div class="modal-body" id="<?="save_tmpl_block"?>">
 <div class="modal-section">
-    <?
-		if (!$items=HelperAdmin::$arrMenuItems){
-			//echo "<h1>No HelperAdmin::arrMenuItems</h1>";
-			$items=HelperAdmin::menuItem();
-		}
-		HelperAdmin::makeArrayForSelect($items);
-		$MainSections=HelperAdmin::$MainMenu;
-		$SubSections=HelperAdmin::$SubMenu;
-		foreach($MainSections as $section_id=>$section_name){?>
+<?
+// ПОЛУЧИМ ВСЕ РАЗДЕЛЫ САЙТА:
+// Начиная с главных:
+$allObjectsArray=Data::getObjectsRecursive();
+// Те, у которых parent_id = -2:
+$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
 
-        <label>
-          <span>
-        	<input class="modal_select_radio" data-banner="" data-id="<?=$section_id?>" name="menu" id="menu_<?=$section_id?>" type="radio" value="<?=$section_id?>"><b><?=$section_name?></b>
-          </span>
-        </label>
-		<?	if (isset($SubSections[$section_id])) {?>
-        <div>
-        	<blockquote>
-		<?		foreach ($SubSections[$section_id] as $id => $page){?>
-            	<label>
-                  <span>
-					<input class="modal_select_radio" data-banner="" data-id="<?=$id?>" name="menu" id="submenu_<?=$id?>" type="radio" value="<?=$id?>"><?=$page?>
-                  </span>
-                </label>
-			<?	}?>
-        	</blockquote>
-        </div>
-		<?	}?>
-	<?	}?>
+
+if (!isset($allObjectsArray)){ // ...
+	$allObjectsArray=Data::getObjectsRecursive();
+}
+if (!isset($allObjectsSecondArray)){ // ...
+	$allObjectsSecondArray=Data::getObjectsRecursive(false,-2);
+}
+$edit_mode=false;
+//-------------------------
+$section_name=false;
+$section_parent_id=false;
+$section_alias=false;
+$section_title=false;
+$section_keywords=false;
+$section_description=false;
+
+// если в режиме редактирования, получим данные макета:
+if (isset($data)&&isset($modules)){
+	$edit_mode=true;
+	//var_dump("<h1>data:</h1><pre>",$data,"</pre>");
+	//var_dump("<h1>model_modules:</h1><pre>",$model_modules,"</pre>");
+	$section_name=$data['name'];
+	$section_parent_id=$data['parent_id'];
+	$section_alias=$data['alias'];
+	$section_title=$data['title'];
+	$section_keywords=$data['keywords'];
+	$section_description=$data['description'];
+}?>
+   <div id="sections_radios" style="text-align:left">
+
+	<?	HelperAdmin::makeSectionsMap($allObjectsArray,$section_parent_id);?>
+    	<hr>
+    	</div>
 	</div>
 </div>
 <div class="modal-footer">
@@ -275,8 +286,8 @@ if(isset($ban4->data) && count($ban4->data)>0){
     	'htmlOptions'=>array('data-dismiss'=>'modal',
     							'onclick'=>'_banner.update_field(
     													"link",
-    													$(".modal_select_radio:checked").attr("data-id"),
-    													$(".modal_select_radio:checked").attr("data-banner"))'),
+    													$("input[name=menu]:checked").val(),
+    													$("input[name=menu]:checked").attr("data-banner"))'),
     )); ?>
     <?php $this->widget('application.extensions.bootstrap.widgets.TbButton', array(
         'label'=>'Отмена',
