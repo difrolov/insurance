@@ -114,6 +114,7 @@ function sendTmplData(preview,preview_stat){
 		}else{
 			
 			Layout.parent=$(radioChecked[0]).val();
+			//alert(Layout.parent);
 			Layout.name=$('#name').val();
 			Layout.alias=$('#alias').val();
 			Layout.title=$('#title').val();
@@ -136,12 +137,11 @@ function sendTmplData(preview,preview_stat){
 				sendToUrl+=(preview)? '&':'?';
 				sendToUrl+='section_id='+$('input#section_id').val();
 			}
-			// alert(sendToUrl);		
 			var t=false;
 			if (t)
-				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description);
+				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description+'\nparent: '+Layout.parent+'\nsendToUrl='+sendToUrl);
 			else
-			$.ajax ({
+				$.ajax ({
 					type: "POST",
 					url: sendToUrl,
 					dataType: 'json',

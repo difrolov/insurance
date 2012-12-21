@@ -205,6 +205,17 @@ FROM insur_insurance_object WHERE
 	{	$send_app="Контент страницы \"Отправить заявку\"";
 		$this->render('otpravit_zajavku', array('res'=>$send_app));
 	}
+/**
+ * Метод для разделов-сирот
+ * @package
+ * @subpackage
+ */
+	function actionTemp($alias=false){
+		require_once Yii::getPathOfAlias('webroot').'/protected/components/helpers/Data.php';
+		$arrUrls=parseUrl();
+		Data::getObjectByUrl($this,array(array_pop($arrUrls['uris'])));
+	}
+
 	/**
 	  *
 	  */

@@ -1,4 +1,4 @@
-<?
+<?	
 class Data {
 
 /**
@@ -63,12 +63,13 @@ class Data {
   */
 	static public function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
 							 $alias=false // alias подраздела
-						   ){
+						   ){ 
 		if (!$alias) {
 			$alias=$default_alias;
 			$subsection=true;
-		}
+		} // die($default_alias.', '.$alias);
 		$data = InsurInsuranceObject::model()->findByAttributes(array('alias' => $alias));
+		//var_dump("<h1>data:</h1><pre>",$data,"</pre>");die();
 		if ($data === null) {
 			throw new CHttpException(404, 'Not found');
 		}
@@ -80,6 +81,8 @@ class Data {
  * @subpackage
  */
 	static function getObjectByUrl($obj,$subsection){
+		if (is_array($subsection)) // if temp
+			$temp_page=$subsection[0];
 		if($subsection!='site'){
 			$Uri=explode("/",$_SERVER['REQUEST_URI']);
 			$hash=array_pop($Uri);
@@ -88,10 +91,15 @@ class Data {
 				// o_kompanii/istorija/historical/?mode=preview
 			if($hash!=$subsection) $subsection=$hash;
 		}
+		//die($subsection);
 		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
+		$dataArray=array('res' => $data);
+		if (isset($temp_page))
+			$dataArray['temp']=$temp_page;
 		$obj->pageTitle=$data->title;
 		$_SESSION['SUBSECTION_DATA_ARRAY']=array('alias'=>$data->alias); // метка для элементов, специфичных для подразделов, созданных генератором
-		$obj->render('index', array('res' => $data));
+		
+		$obj->render('index', $dataArray);
 	}
 
 /**
@@ -335,7 +343,6 @@ location.href='<?=$redirect?>';
 </script>
 	<?	}
 	}
-
 /**
  * Распарсить URL по "/"
  * @package

@@ -6,7 +6,7 @@ if ($exclusiveView)
 	$go_action='editView';
 else
 	$go_action=(isset($data))? "update":"save"; 
-
+//var_dump("<h1>data:</h1><pre>",$data,"</pre>");
 $groot=$this->groot; // директория Генератора
 $includes=$groot.'includes/'; // директория подключаемых файлов
 $primitive=true; 

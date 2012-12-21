@@ -225,7 +225,7 @@ STR;
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$sectionDataArray);
 		}
 		// модифицируем массив данных:
-		$parent_id=$post['parent'];
+		$parent_id=($post['parent'])? $post['parent']:'0'; // div#sections_radios input[type="radio"]:checked
 		$name=$post['name'];
 		$alias=$post['alias'];
 		$title=$post['title'];
@@ -320,8 +320,11 @@ STR2;
 			}
 		}
 		if (!isset($_GET['gtest'])) { // если не тест
-			self::getParents($section_id); // get URL path
-			$direct_to=self::$section_root;
+			if ((int)$parent_id!=0) {
+				self::getParents($section_id); // get URL path
+				$direct_to=self::$section_root;
+			}else
+				$direct_to='site/temp/'.$alias;
 			if (!$status)
 				$direct_to.="?mode=preview";
 			// вернуть сообщение странице-отправителю:
