@@ -223,8 +223,8 @@ ORDER BY name, parent_name';
 		//выводим селект
 		public static function createBannerlink($val,$field_name,$id){
 			return ($val!=null?'<a data-toggle="modal" href="#" data-target="#myModal"'.
-			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">'.$val.'</a>':'<a data-toggle="modal" href="#" data-target="#myModal"'.
-			'onclick="$(\'.modal_select_radio\').attr(\'data-banner\','.$id.')">Выберите ссылку</a>');
+			'onclick="$(\'input[name=menu]\').attr(\'data-banner\','.$id.')">'.$val.'</a>':'<a data-toggle="modal" href="#" data-target="#myModal"'.
+			'onclick="$(\'input[name=menu]\').attr(\'data-banner\','.$id.')">Выберите ссылку</a>');
 		}
 		public static function createStatusBaner($data,$id){
 			if($data){

@@ -88,7 +88,19 @@ $arrContacts = $gridDataProvider->data;
 $contr = new Controller('O_кompanii');
 ?>
 Выберите регион &nbsp
+<?
+if ($oldIE=setHTML::detectOldIE()||isset($_GET['iexp'])){?>
+<select id="region" style="width:400px" onclick="select_ie7()" onchange='$(".ac_results").hide();show_map($(this).val())'>
+<option value="">Выберите регион</option>
+</select>
+<?
+}else{
+?>
 <input id="region" type="text"  style="width:400px"/><img id="all_regions" style="height:20px;position: absolute;" src="<?=Yii::app()->homeUrl?>images/select_btn.png" alt="все регионы">
+
+<?php
+}?>
+
 <br>
 
 <?php
@@ -212,9 +224,21 @@ $(document).ready(function(){
 								});
 		},"json");
 	});
+
 });
+function select_ie7(){
+	$.post(baseUrl+"/Ajax/autocompleteRegion",{data:'contact'},function(data){
+		str="";
+		if(data){
+			for(i in data){
+				str+="<option value='"+data[i]+"'>"+data[i]+"</option>";
+			}
+		}
 
-
+		$("#region").html(str);
+	},"json");
+	$("#region").attr('onclick',"");
+};
 function selectItem(li) {
 	if( li == null ) sValue = "Ничего не выбрано!";
 	if( !!li.extra ) sValue = li.extra[2];
@@ -223,6 +247,7 @@ function selectItem(li) {
 
 }
 function show_map(val){
+
 	$("div[data-region='"+val+"']").attr('style','visibility:visible');
 }
 
