@@ -1,8 +1,8 @@
 <?
 //
-if(!isset($inExViews)) 
-	$inExViews=false;
-if ($inExViews)
+if(!isset($exclusiveView)) 
+	$exclusiveView=false;
+if ($exclusiveView)
 	$go_action='editView';
 else
 	$go_action=(isset($data))? "update":"save"; 
@@ -14,14 +14,19 @@ if(setHTML::detectOldIE()||$primitive){?>
 <link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/admin/ie.css" type="text/css">
 <form style="margin:0;" name="content_save" id="content_save" method="post" action="
 <?=Yii::app()->createUrl('admin/generator/'.$go_action)?>">
+<?	if(!$exclusiveView){?>
 <br><br>
 	<table id="new_art_header" cellspacing="0">
-      <!--<tr>
+<?	$show_header=false;
+	if($show_header){?>
+      <tr>
         <td nowrap>Заголовок статьи: </td>
         <td width="100%"><input placeholder="Укажите заголовок статьи" name="article_header" id="article_header" type="text"></td>
-      </tr>-->
+      </tr>
+<?	}?>
     </table>
-<?php	$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
+<?php	// editor tool:
+	$this->widget('application.extensions.TheCKEditor.TheCKEditorWidget',
   array(
     # Data-Model (form model):
 	'model'=>$art_model, // а патамушта основная модель-то должна быть - InsurInsuranceObject, дурилка! (и именно она сначала извлекается в GeneratorController). А иначе будет абсолютно нелогично и чревато проблемами при извлечении данных самого объекта            
@@ -61,56 +66,41 @@ if(setHTML::detectOldIE()||$primitive){?>
 			'filebrowserBrowseUrl'=>CHtml::normalizeUrl(array('default/browser')),
 
 	),
-) ); ?>
-<div style="position:relative;" data-target="load_in_editor">
-    <div id="upload_article_window">
-    	<span class="wclose" id="close_upartwin"></span>
-    	<div style="overflow:auto; height:100%;">
-  <?	$articles=HelperAdmin::getAllArticlesList(false); ?>
-    <table width="100%" cellspacing="0" cellpadding="0" id="tblArticles">
-      <tr bgcolor="#CCCCCC" class="bold">
-        <td>id</td>
-        <td>Название</td>
-        <td>&nbsp;</td>
-        <td>Статус</td>
-      </tr>
-<?	for($i=0,$j=count($articles);$i<$j;$i++){?>
-      <tr>
-        <td><?=($i+1)?></td>
-        <td nowrap data-article-id="<?=$articles[$i]['id']?>"><?=$articles[$i]['name']?></td>
-        <td><a class="view" rel="tooltip" href="#" onClick="return manageArticleText(<?=$articles[$i]['id']?>,this);" data-original-title="Предпросмотр статьи"><i class="icon-eye-open"></i></a></td>
-        <td><?=$articles[$i]['status']?></td>
-      </tr>
-<?	}?>
-    </table>
-  	  </div>
-    </div><?
-/*
-	<div style="position:absolute; left:10px; top:5px;"><a class="link" id="upload_article" href="#" title="Выбрать из имеющихся статей">Загрузить статью...</a></div>
-<input type="submit" name="submit" onclick="getDataFromCKeditor();return false;" value="Сохранить">*/
-	
-	require_once $includes.'save_tmpl_block.php';
-		
-		?>
-</div>
+)); 
+	}?>
+<? require_once $includes.'save_tmpl_block.php';?>
 </form>
 <? 	if(isset($data)){?>
 <div id="preText" style="display:none;"><?
-	if($arrContent=unserialize($data['content'])){
-	//var_dump("<h1>arrContent:</h1><pre>",$arrContent,"</pre>");die();
-	$block=explode("article id: ",$arrContent['blocks'][1][0]);
-	echo $this->getArticleContent(array_pop($block));
-}else echo "&nbsp;";?></div>
-<?	}?>
+		if($arrContent=unserialize($data['content'])){
+		$art_content=$arrContent['blocks'][1][0];
+			if (strstr($art_content,"Текст :: article id: ")) {
+				$block=explode("article id: ",$art_content);
+				//echo "<hr>count: ".count($block);
+				// var_dump("<h1>block:</h1><pre>",$block,"</pre>");die();
+				if (count($block)){
+					$article_text=str_replace("\n","",$this->getArticleContent(array_pop($block))); // otherwise FireFox go crazy....
+					echo $article_text;
+				}
+			}else echo "&nbsp;";
+		}else echo "&nbsp;";?></div>
+<?	}
+	if (!$exclusiveView){?>
 <script>
 Layout=new Object();
 Layout.Schema="default";
-<?
-	if (isset($data)) {?>
-CKEDITOR.instances['InsurArticleContent[content]'].setData(document.getElementById('preText').innerText);		
-<?	}?>
+	<?	if (isset($data)) {?>
+$( function(){
+	try{
+		var artText=$('#preText').text();
+		CKEDITOR.instances['InsurArticleContent[content]'].setData(artText);		
+	}catch(e){
+		alert(e.message);
+	}
+});
+	<?	}?>
 </script>    
-<?
+<?	}
 }else{
 	if (isset($data)) // подключить скрипт с js-обработкой существущего макета:
 	require_once Yii::getPathOfAlias('webroot')."/js/admin/generator/edit_template.php";
@@ -127,7 +117,7 @@ require_once $includes.'test_control.php';
 <form style="margin:0;" name="content_save" id="content_save" method="post" action="
 <?=Yii::app()->createUrl('admin/generator/'.$go_action)?>">
 <?	 	
-if(!$inExViews){
+if(!$exclusiveView){
 	// подключить опции начального выбора макета:
 	require_once $includes.'choice_init.php';?>
 	<? // подключить кнопки управления макетом:
@@ -146,7 +136,7 @@ if(!$inExViews){
 </div>
 <? 
 	// подключить WYSWYG-редактор и его опции:
-	if(!$inExViews)
+	if(!$exclusiveView)
 		require_once $includes.'editor.php';
 }
 ?>

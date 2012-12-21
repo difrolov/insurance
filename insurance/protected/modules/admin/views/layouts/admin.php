@@ -120,16 +120,19 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		setHTML::buildDropDownMenu();	// выпадающее меню	?>
 	</div>
    	<div align="right" id="admin_main_submenu"<?
-    if(setHTML::detectOldIE()){?> onclick="alert('Данный раздел разработан как программный модуль, вы не можете изменить его содержание самостоятельно.'); return false;"<? }?>>
+	/*
+    if(setHTML::detectOldIE()){?> onclick="alert('Данный раздел разработан как программный модуль, вы не можете изменить его содержание самостоятельно.'); return false;"<? }
+	*/?>>
 	<?	setHTML::buildMainMenu($this,-2);?>
     </div>
 	<?	if(!setHTML::detectOldIE()):
 			$arrSecondMenu=setHTML::getMainMenuItems(-2);?>
 <script>    
 $( function(){	
+			<?	/*?>
 	$('#admin_main_submenu ul li a').click( function(){
 			alert('Данный раздел разработан как программный модуль, вы не можете изменить его содержание самостоятельно.'); return false;
-		});<? /* ?>
+		});	<?*/  ?>
 	var getObjUrl='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/';
 		<?	$sc=0;
 			foreach($arrSecondMenu as $secMenuId=>$secMenuData){?>
@@ -138,7 +141,7 @@ $( function(){
 			return false;
 		});
 		<?		$sc++;
-			}*/?>
+			}?>
 });
 </script>
 	<?	endif;

@@ -224,12 +224,13 @@ class Views{
 	private $ViewsType;
 	// не объявлять как static, иначе не сработает array_walk_recursive()!
 	private $ViewsArray=array(
-					'esli_proizoshel_strahovoj_sluchay'=>false,
 					'fizicheskim_litzam'=>false,
 					'korporativnym_klientam'=>false,
 					'malomu_i_srednemu_biznesu'=>false,
 					'o_kompanii'=>array('vakansiji','kontakty','news'),
 					'partneram'=>false,
+					'esli_proizoshel_strahovoj_sluchay'=>false,
+					'site'=>array('otpravit_zajavku','zadat_vopros')
 				);
 	private $ViewsIds=array();
 /**
@@ -240,6 +241,7 @@ class Views{
 	public function __construct($flat_list=false){
 		if ($flat_list){
 			$array=$this->ViewsArray;
+			// пройтись по всему массиву  и собрать Ids эксклюзивных страниц (созданных, как программные компоненты):
 			array_walk_recursive($array,array($this,'getViewsIds'));
 			$this->ViewsType='ViewsIds';
 		}else
@@ -284,7 +286,7 @@ class Views{
  * @subpackage
  */
 	private function getViewsIds($item,$key){
-		if( $id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$item.'"')->queryScalar() )
+		if( $id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$item.'" OR alias = "site/'.$item.'"')->queryScalar() )
 			$this->ViewsIds[$id]=$item;
 	}
 	function tst(){echo "tst";}
@@ -315,6 +317,25 @@ function getUrlHashAsArray($rawUrl=false){
 	}else
 		return false;
 }
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+function jsRedirect($location_href,$base_alias=false){
+		$lstr=parseUrl();
+		$last_alias=array_pop($lstr['uris']);
+		if (Yii::app()->controller->getId()==$last_alias){ 
+			if(!$base_alias)
+				$base_alias=Yii::app()->controller->getId();
+		$redirect=Yii::app()->request->getBaseUrl(true).'/'.$base_alias.'/'.$location_href;?>
+<script>
+//alert('<?=$redirect?>');
+location.href='<?=$redirect?>';
+</script>
+	<?	}
+	}
+
 /**
  * Распарсить URL по "/"
  * @package

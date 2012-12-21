@@ -108,13 +108,14 @@ class GeneratorController extends Controller
 		if($section_id){
 			require_once Yii::getPathOfAlias('webroot').'/protected/components/helpers/Data.php';
 			$checkView=new Views(true);
-			$inExViews=$checkView->checkView($section_id,false,true);
+			// exclusive View 
+			$exclusiveView=$checkView->checkView($section_id,false,true);
 			$this->getGeneratorRoot();
 			$model = new InsurInsuranceObject(); // для извлечения данных раздела
 			$art_model=new InsurArticleContent(); // для редактора
 			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$modules=$this->getAllModules();
-			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model,'inExViews'=>$inExViews));
+			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model,'exclusiveView'=>$exclusiveView));
 		}
 	}
 /**

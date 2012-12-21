@@ -34,7 +34,7 @@ if (isset($data)&&isset($modules)){
 	$section_description=$data['description']; 
 }?>
 <?	
-if($inExViews) {?>
+if($exclusiveView) {?>
 <style>
 #mblock{
 	width:70%
