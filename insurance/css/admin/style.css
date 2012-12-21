@@ -283,9 +283,15 @@ div#mainmenu.sectionsAdminMenu
 	> ul{
 	position:relative;
 }
-div#mainmenu.sectionsAdminMenu
-	li.warning{
-	background:#F90 !important
+li.active.command{
+	position:absolute;
+}
+.active.command.warning{
+	background:#F90 !important;
+	margin-top:-2px;
+	padding:4px 8px;
+	position:absolute;
+	white-space:nowrap;
 }
 div#mainmenu ul{
 	margin:10px 0 8px 0;

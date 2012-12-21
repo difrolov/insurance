@@ -14,8 +14,9 @@ div#save_tmpl_block *{
 table.tblMainMenu td{
 	background: #08C;
 	border-radius: 6px;
-	border: solid 1px white !important;
+	border: solid 1px white;
 	display: table-cell !important;
+	list-style: none;
 	padding: 4px 8px;
 	text-align: center !important;
 }
@@ -39,10 +40,4 @@ table.tblMainSubMenu td{
 }
 table.tblMainSubMenu td a{
 	color:#FFF;
-}
-div.active.command.warning{
-	background:#F90 !important;
-	margin-top:-2px;
-	padding:4px 8px;
-	white-space:nowrap;
 }

@@ -53,17 +53,15 @@ function makeButtonInPlace(sPlus,tag,menu_block,eqIndex,class_name,HTML,pTop,old
 	if (oldIE){
 		$(menu_block).eq(eqIndex).append(addSubsectionButton);
 		posTop=140;
+		offLeft.left+=1;
 	}else{
 		$('#'+menu_block).eq(eqIndex).append(addSubsectionButton);
 		posTop=pTop;
-		if (oldIE===false){
+		if (oldIE===false)
 			offLeft.left-=137;
-			posTop-=2;
-		}
 	}
 	$(addSubsectionButton).css({
 		left: offLeft.left+'px',
-		position: 'absolute',
 		top: posTop+'px'
 	});
 }
