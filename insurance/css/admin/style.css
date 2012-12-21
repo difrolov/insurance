@@ -287,7 +287,7 @@ li.active.command{
 	position:absolute;
 }
 .active.command.warning{
-	background:#F90 !important;
+	background-color:#F90 !important;
 	margin-top:-2px;
 	padding:4px 8px;
 	position:absolute;

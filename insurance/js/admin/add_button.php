@@ -54,6 +54,8 @@ function makeButtonInPlace(sPlus,tag,menu_block,eqIndex,class_name,HTML,pTop,old
 		$(menu_block).eq(eqIndex).append(addSubsectionButton);
 		posTop=140;
 		offLeft.left+=1;
+		// для тупого oldIE в Генераторе:
+		$('a',addSubsectionButton).css('background-color','#F90');
 	}else{
 		$('#'+menu_block).eq(eqIndex).append(addSubsectionButton);
 		posTop=pTop;
