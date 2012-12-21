@@ -30,7 +30,7 @@ $( function(){
 						   menu_block,
 						   0,
 						   'active command warning',
-						   '<a href="<? echo $url;?>/admin/generator" style="background-color:initial; color:white;">! Без родительских разделов</a>',
+						   '<a href="<? echo $url;?>/admin/object/orphans" style="background-color:initial; color:white;">! Без родительских разделов</a>',
 						   '32',
 						   oldIE
 						 );
