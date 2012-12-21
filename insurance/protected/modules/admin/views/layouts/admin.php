@@ -75,11 +75,9 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
 <?
-}else{
+}
 // если любой другой раздел, приаттачить скрипт генерации доп. кнопки:?>
 <script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
-<?
-}?>
 <script src="<?=$url?>/js/wait_for.js"></script>
 </head>
 <body>

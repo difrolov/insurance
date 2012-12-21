@@ -39,7 +39,7 @@ class ObjectController extends Controller
 		
 		//die('actionOrphans');
 		$model = new InsurInsuranceObject();
-		$gridDataProvider['parent'] ='0';
+		$gridDataProvider['parent']=false;
 		$gridDataProvider['child'] = $model->search('parent_id=0');
 		$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));	
 	}
