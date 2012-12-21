@@ -279,6 +279,14 @@ div#mainmenu{
 	height:30px;
 	text-align:left;
 }
+div#mainmenu.sectionsAdminMenu
+	> ul{
+	position:relative;
+}
+div#mainmenu.sectionsAdminMenu
+	li.warning{
+	background:#F90 !important
+}
 div#mainmenu ul{
 	margin:10px 0 8px 0;
 	margin-left:-10px;

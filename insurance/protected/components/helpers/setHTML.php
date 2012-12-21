@@ -374,7 +374,7 @@ class setHTML{
 			$menuItems=self::getMainMenuItems($submenu);
 			//if ($submenu==-2) {var_dump("<h1>menuItems:</h1><pre>",$menuItems,"</pre>");die();}
 			//echo "<div>old IE: ".self::detectOldIE()."</div>";?>
-        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0"> 
+        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="1"> 
 			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$fr=0;
 			$lr=count($menuItems); // for old IE
