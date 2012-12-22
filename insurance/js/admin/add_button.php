@@ -25,7 +25,7 @@ $( function(){
 			menu_block='mainmenu ul';
 		}
 		//
-		makeButtonInPlace( $(elems).eq(0),
+		/*makeButtonInPlace( $(elems).eq(0),
 						   tag,
 						   menu_block,
 						   0,
@@ -33,7 +33,7 @@ $( function(){
 						   '<a href="<? echo $url;?>/admin/object/orphans" style="background-color:initial; color:white;">! Без родительских разделов</a>',
 						   '32',
 						   oldIE
-						 );
+						 );*/
 			//console.info('elems: '+$(elems).eq(0).html());	
 	}catch(e){
 		alert(e.message);
