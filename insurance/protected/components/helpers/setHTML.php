@@ -167,7 +167,7 @@ class setHTML{
 
 		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		$corps=true; // если нужно подключить второе подменю, справа от того, что по умолчанию
+		$corps=false; // если нужно подключить второе подменю, справа от того, что по умолчанию
 		if ( $parent_alias=="korporativnym_klientam"
 			 && !$admin_mode
 			 && $corps
