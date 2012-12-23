@@ -150,8 +150,17 @@ class setHTML{
 			is_object(Yii::app()->controller->module)
 			&& Yii::app()->controller->module->id=='admin'
 		) ? true:false;
-		if (!$admin_mode)
-			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div>';
+		if (!$admin_mode){
+			$spStyle=false;
+			if ( $oldIE
+				 && Yii::app()->controller->getId()==$parent_alias
+			   ) {
+				$spStyle=' style="margin-top:-10px;height:24px"';
+				//die();
+			}
+			$insur_species='<div class="txtLightBlue txtMediumSmall"'.$spStyle.'>Виды страхования</div>';
+			
+		}
 		$test=(isset($_GET['test']))? true:false; ?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
 	<?	if ( $topSectionName
@@ -219,16 +228,14 @@ class setHTML{
 				else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
 				?></td>
                 <td id="alreadyCorps" style="position:relative;">
-                	<div<? if(in_array($parent_id,$arrSpcs)){?> style="position:relative; white-space:nowrap; margin-top:-<?
-                switch($parent_id){
-					case "43":
-						$mt="37";
-							break;
-					default:
-						$mt="20";
-				}echo $mt;?>px; padding-bottom:6px; z-index:2;"<? }?> class="txtLightBlue txtMediumSmall"><?=$topSectionName?>
+                	<div<? if(in_array($parent_id,$arrSpcs)){?> style="position:relative; white-space:nowrap;<?
+					if($spStyle){
+						echo " margin-top:-30px; padding-bottom:0;";
+					}else{
+						?> margin-top:-20px; padding-bottom:6px;<? 
+					}?>"<? }?> class="txtLightBlue txtMediumSmall"><?=$topSectionName?>
                     </div>
-                	<div class="txtGrey"><?=$cpLinks?></div>
+					<div class="txtGrey"><?=$cpLinks?></div>
                 </td>
               </tr>
             </table>
