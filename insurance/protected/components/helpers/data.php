@@ -113,7 +113,7 @@ class Data {
 								  &$result=false // результат; при вхождении в рекурсию передаётся по ссылке
 								){
 		if(!$fields) { // набор полей извлечения данных по умолчанию
-			$fields='id,name,parent_id,alias'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
+			$fields='id,name,parent_id,alias,category_id'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
 		}elseif(!$result){ // если с дуру передали пустую строку, извлечь все поля таблицы:
 			if (!str_replace(" ",'',$fields)){
 				$qFields="DESC insur_insurance_object";

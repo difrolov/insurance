@@ -246,7 +246,6 @@ table.tblMainSubMenu a{
 	font-size: 14px;
 	letter-spacing: -1px;
 }
-table.tblMainMenu,
 table.tblMainSubMenu{
 	background:#06AEDD;
 	white-space:nowrap;

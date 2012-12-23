@@ -23,7 +23,7 @@ class setHTML{
 			<?		endif;
 				}elseif ($alias_value=="name"){
 				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
-		<a href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
+		<a<? if($subMenuItems['category_id']=='2'){?> style="color:green !important;"<? }?> href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
 			<?	}
 			endforeach;
 		}
@@ -133,7 +133,7 @@ class setHTML{
 		$menuItems=self::getMainMenuItems($submenu);
 		foreach($menuItems as $parent_id=>$parent_data){
 			if (!in_array($parent_data['alias'],self::$arrAvoidSubmenu))
-				self::buildDropDownSubMenu($parent_data['alias'],$parent_id,true);
+				self::buildDropDownSubMenu($parent_data['alias'],$parent_id,$menuItems[$parent_id]['text']);
 		}
 	}
 /**
@@ -143,8 +143,8 @@ class setHTML{
  */
 	static function buildDropDownSubMenu( $parent_alias='',
 										  $parent_id=false,
-										  $top_level=false
-										){
+										  $topSectionName=false
+										){	
 		$oldIE=($oldIE=setHTML::detectOldIE()||isset($_GET['iexp']))? true:false;
 		$admin_mode=( // проверить, где находимся - frontend or backend
 			is_object(Yii::app()->controller->module)
@@ -154,7 +154,7 @@ class setHTML{
 			static $insur_species='<div class="txtLightBlue txtMediumSmall">Виды страхования</div>';
 		$test=(isset($_GET['test']))? true:false; ?>
         <div<? if ($parent_alias) {?> id="ddMenu_<?=$parent_alias?>"<? }if($test){?> style="top:0;display:none;" class="testScroll"<? }?>>
-	<?	if ( $top_level
+	<?	if ( $topSectionName
 			 && !$admin_mode
 			 && $parent_alias !='o_kompanii'
 			 && $parent_alias !='partneram'
@@ -165,21 +165,29 @@ class setHTML{
 				$insur_species.'
 					<hr style="opacity:0.5;">';
 
-		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
-								  		  		$parent_id);
-		$corps=true; // если нужно подключить второе подменю, справа от того, что по умолчанию
-		if ( $parent_alias=="korporativnym_klientam"
-			 && !$admin_mode
-			 && $corps
+		$subMenuItems=Data::getObjectsRecursive(false,$parent_id);				
+		
+		$secondColumnMenu=false; // если нужно подключить второе подменю, справа от того, что по умолчанию
+		
+		$topId=key($subMenuItems);
+		if( isset($subMenuItems[$topId]['children'])
+		    && is_array($subMenuItems[$topId]['children'])
+			&& !empty($subMenuItems[$topId]['children'])
+		  ){
+			$arrSecondColumnSubMenu=array(); 
+			foreach($subMenuItems[$topId]['children'] as $sectId=>$array) {
+				if ($array['category_id']=='2'){
+					$arrSecondColumnSubMenu[$array['alias']]=$array['name'];
+				}
+			}
+			if(!empty($arrSecondColumnSubMenu))
+				$secondColumnMenu=true;
+		}
+		if ( !$admin_mode
+			 && $secondColumnMenu
 		   ){
-
-			$arrCorps=array(
-					'building'=>'Строительные компании',
-					'trucking'=>'Транспортные компании',
-					'entertainment'=>'Организация развлекательных и спортивных мероприятий',
-					);
 			ob_start();
-			foreach($arrCorps as $alias=>$text):?>
+			foreach($arrSecondColumnSubMenu as $alias=>$text):?>
 				<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
 		<?	endforeach;
 			$cpLinks=ob_get_contents();
@@ -188,14 +196,15 @@ class setHTML{
 				if(!$oldIE){?>
           <ul class="asTable">
 			<li>
-		<?	if ($admin_mode)
-				self::buildAdminSubmenu($subMenuItems);
-			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
+				<?	if ($admin_mode){ 
+						self::buildAdminSubmenu($subMenuItems);
+					}else 
+						self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
             <li class="ddCliff">&nbsp;</li>
         	<li>
-        		<div class="txtLightBlue txtMediumSmall">Корпоративным клиентам</div>
+        		<div class="txtLightBlue txtMediumSmall"><?=$topSectionName?></div>
                 <div class="txtGrey">
-            	<?=$cpLinks?>
+            		<?=$cpLinks?>
             	</div>
             </li>
           </ul>
@@ -208,19 +217,18 @@ class setHTML{
 				else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
 				?></td>
                 <td id="alreadyCorps">
-                	<div class="txtLightBlue txtMediumSmall">
-                		Корпоративным клиентам
-                    </div>
+                	<div class="txtLightBlue txtMediumSmall"><?=$topSectionName?></div>
                 <div class="txtGrey">
             	<?=$cpLinks?>
             	</div></td>
               </tr>
             </table>
 			<?	}
-		}else{
+		}else{ // backend 
 			if ($admin_mode)
 				self::buildAdminSubmenu($subMenuItems);
-			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
+			else 
+				self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
 		}?>
         </div>
 <?	}
@@ -374,7 +382,7 @@ class setHTML{
 			$menuItems=self::getMainMenuItems($submenu);
 			//if ($submenu==-2) {var_dump("<h1>menuItems:</h1><pre>",$menuItems,"</pre>");die();}
 			//echo "<div>old IE: ".self::detectOldIE()."</div>";?>
-        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="1"> 
+        <table class="<? if(!$submenu){?>tblMainMenu<? }else echo "tblMainSubMenu";?>" width="100%" cellpadding="0" cellspacing="0"> 
 			<tr<? if(!$submenu){?> bgcolor="#EDEEF0"<? }?>><? //id=yw0?>
 		<?	$fr=0;
 			$lr=count($menuItems); // for old IE
@@ -405,7 +413,7 @@ class setHTML{
 
 				if ( $alias!='/'.$mainPageAlias.'/'
 			         && isset($newborn_menu)
-				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id,true);?>
+				   ) self::buildDropDownSubMenu($parentData['alias'],$parent_id,$menuItems[$parent_id]['text']);//var_dump("<h1>menuItems:</h1><pre>",$menuItems,"</pre>");?>
             </td>
 		<?	}?>
         	</tr>
