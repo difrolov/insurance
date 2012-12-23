@@ -426,3 +426,9 @@ table#tblSlidesLastSeen td.slidesPointer{
 ul.insideDiv{
 	margin-left:-20px;
 }
+/*		*/
+div#page.container
+	div.content_banner
+		ul[id^="yw"].nav.nav-pills{
+	display:none;
+} 

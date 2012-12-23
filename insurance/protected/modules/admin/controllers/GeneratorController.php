@@ -134,7 +134,7 @@ class GeneratorController extends Controller
 		// если в режиме тестирования, т.е., данные извлекаются НЕ из запроса:
 		if (!$post=$_POST) {
 			$html_test_style=" style='background:lightyellow;border:solid 2px orange;border-radius:6px;padding:10px;'";
-			$localdata=true;
+			$localdata=false;
 			$post=TestGenerator::$test_post[0];
 			echo "<div{$html_test_style}>".__LINE__."
 				<h2>"." Входяций массив (\$_POST):</h2>";
@@ -284,6 +284,7 @@ STR;
 			$model_obj->keywords = $keywords;
 			$model_obj->description = $description;
 			$model_obj->content = serialize($post);
+			
 			if (!isset($_GET['gtest'])) { // если не тест
 				$model_obj->save();
 				$section_id=$model_obj->id;
@@ -294,6 +295,7 @@ STR;
 				$order = Yii::app()->db->createCommand($sql)->queryAll();
 				$model_order = new InsurOrderMenu;
 				$model_order->id_object = $section_id;
+				
 				if(count($order)>0){
 					$model_order->priority = ($order[0]['priority']+1);
 				}else{

@@ -106,6 +106,7 @@ $(document).ready(function(){
 				val=0;
 			}
 			_object.updateObjectStatus(id,val);
+			alert('Done!');
 		});
 })
 </script>

@@ -2,6 +2,15 @@
 ob_start();?>
 $(function(){
   try{
+	var blockRadios=$('div#sections_radios > div > blockquote');
+	$('input#category_id_1').click( function(){
+			$(blockRadios).show();
+		});
+	$('input#category_id_2').click( function(){
+		$('input[type="radio"]',blockRadios).attr('checked',false);
+		$(blockRadios).hide();
+	});
+
 	$('#alias').blur( function (){
 		var alias=$(this).val();
 		var checkAl=$('#check_alias_info');

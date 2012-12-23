@@ -34,8 +34,16 @@ if (isset($data)&&isset($modules)){
 	$section_title=$data['title'];
 	$section_keywords=$data['keywords'];
 	$section_description=$data['description']; 
-}?>
+}
+if(!isset($data)){?>
+<style>
+div#sections_radios 
+	> div > blockquote{
+	display:none;
+}
+</style>
 <?	
+}
 if($exclusiveView) {?>
 <style>
 #mblock{
@@ -58,7 +66,6 @@ if($exclusiveView) {?>
 	font-size:16px;
 	font-weight:300;
 }
-
 </style>
 <div align="center">
   <div id="mblock">	
@@ -85,10 +92,28 @@ if($exclusiveView) {?>
 			|| setHTML::detectOldIE()
 			|| $primitive
 		  ){?> style="display:block;"<? }?>>
+        
+        <h4 align="left">Выберите категорию подраздела:</h4>
+        <div align="left" id="category_id">
+        <label>
+            <input type="radio" name="category_id" value="1" id="category_id_1"<? 
+		if ($section_category_id=='1'){?> checked<? }?> />Программа страхования</label>
+        &nbsp;
+        &nbsp;
+          <label>
+            <input type="radio" name="category_id" value="2" id="category_id_2"<? 
+		if ($section_category_id=='2'){?> checked<? }?> />Готовое решение</label>
+        &nbsp;
+        &nbsp;
+          <label id="no_category">
+            <input type="radio" name="category_id" value="0" id="category_id_0" />Без категории</label>
+        </div>
+        <hr>
+
     	<div id="sections_radios" style="text-align:left">
         <label>
           <span>
-        	<input type="radio" name="menu" id="none" value="<? echo($section_parent_id=='-2')? '-2':'0';?>"<? 
+        	<input disabled type="radio" name="menu" id="none" value="<? echo($section_parent_id=='-2')? '-2':'0';?>"<? 
 			if ( ( $edit_mode
 				   &&
 				   !$section_parent_id
@@ -100,22 +125,6 @@ if($exclusiveView) {?>
 			HelperAdmin::makeSectionsMap($allObjectsArray,$section_parent_id);?>
     	<hr>
     	</div>
-        
-        <h4 align="left">Выберите категорию подраздела:</h4>
-        <div align="left" id="category_id">
-        <label>
-            <input type="radio" name="category_id" value="1" id="category_id_1"<? 
-		if ($section_category_id=='1'){?> checked<? }?> />
-            Программа страхования</label>
-          <label>
-            <input type="radio" name="category_id" value="2" id="category_id_2"<? 
-		if ($section_category_id=='2'){?> checked<? }?> />
-            Готовое решение</label>
-          
-          <label id="no_category">
-            <input type="radio" name="category_id" value="0" id="category_id_0" />Без категории</label>
-        </div>
-        <hr>
       <hr>
         <div style="text-align:left" id="subsection_ids">
             Укажите название подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Текст в меню для загрузки данного подраздела">
