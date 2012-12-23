@@ -42,7 +42,8 @@
 <?php 
 }else{?>
 	<h4>Страницы без родительских разделов</h4>
-<? }
+<? 
+}
 $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider['child'],

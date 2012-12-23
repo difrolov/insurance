@@ -854,7 +854,9 @@ div#bottom_menu ul[id^="yw"] li{
 	text-align:center;
 	white-space:nowrap;
 }
-
+ul.asTable li{
+	border:none;
+}
 ul.asTable li div.txtGrey a{
 	color:#333;
 }
@@ -865,6 +867,9 @@ ul.asTable li > div:first-child{
 	border-bottom:solid 1px #ccc;
 	margin-bottom:10px;
 	opacity:0.8;
+}
+.ddCliff{
+	width:20px;
 }
 div#our_museum{
 	margin-top:10px;

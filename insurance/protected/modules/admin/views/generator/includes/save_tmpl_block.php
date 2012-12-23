@@ -15,6 +15,7 @@ if (!isset($allObjectsSecondArray)){ // ...
 $edit_mode=false;
 //-------------------------
 $section_name=false;
+$section_category_id=false;
 $section_parent_id=false;
 $section_alias=false;
 $section_title=false;
@@ -27,6 +28,7 @@ if (isset($data)&&isset($modules)){
 	//var_dump("<h1>data:</h1><pre>",$data,"</pre>"); 
 	//var_dump("<h1>model_modules:</h1><pre>",$model_modules,"</pre>");
 	$section_name=$data['name'];
+	$section_category_id=$data['category_id'];
 	$section_parent_id=$data['parent_id'];
 	$section_alias=$data['alias'];
 	$section_title=$data['title'];
@@ -98,7 +100,23 @@ if($exclusiveView) {?>
 			HelperAdmin::makeSectionsMap($allObjectsArray,$section_parent_id);?>
     	<hr>
     	</div>
+        
+        <h4 align="left">Выберите категорию подраздела:</h4>
+        <div align="left" id="category_id">
+        <label>
+            <input type="radio" name="category_id" value="1" id="category_id_1"<? 
+		if ($section_category_id=='1'){?> checked<? }?> />
+            Программа страхования</label>
+          <label>
+            <input type="radio" name="category_id" value="2" id="category_id_2"<? 
+		if ($section_category_id=='2'){?> checked<? }?> />
+            Готовое решение</label>
+          
+          <label id="no_category">
+            <input type="radio" name="category_id" value="0" id="category_id_0" />Без категории</label>
+        </div>
         <hr>
+      <hr>
         <div style="text-align:left" id="subsection_ids">
             Укажите название подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Текст в меню для загрузки данного подраздела">
     <input name="name" type="text" id="name" required value="<?=$section_name?>">

@@ -226,6 +226,7 @@ STR;
 		}
 		// модифицируем массив данных:
 		$parent_id=($post['parent'])? $post['parent']:'0'; // div#sections_radios input[type="radio"]:checked
+		$category_id=$post['category_id'];
 		$name=$post['name'];
 		$alias=$post['alias'];
 		$title=$post['title'];
@@ -236,6 +237,7 @@ STR;
 		unset($post["blocks"]["moduleClickedLocalIndex"]);
 		unset($post["parent"]);
 		unset($post["name"]);
+		unset($post["category_id"]);
 		unset($post["alias"]);
 		unset($post["title"]);
 		unset($post["keywords"]);
@@ -260,6 +262,7 @@ STR;
 			InsurInsuranceObject::model()->updateByPk($section_id,
 					array(	'parent_id'=>$parent_id,
 							'name'=>$name,
+							'category_id'=>$category_id,
 							'status'=>$status,
 							'alias'=>$alias,
 							'date_changes'=>$date_changes,
@@ -273,6 +276,7 @@ STR;
 			$model_obj = new InsurInsuranceObject;
 			$model_obj->parent_id = $parent_id;
 			$model_obj->name = $name;
+			$model_obj->category_id = $category_id;
 			$model_obj->status = $status;
 			$model_obj->alias = $alias;
 			$model_obj->date_changes = $date_changes;

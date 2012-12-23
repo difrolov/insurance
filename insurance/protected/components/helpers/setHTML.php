@@ -167,7 +167,7 @@ class setHTML{
 
 		$subMenuItems=Data::getObjectsRecursive(false, // поля извлечения данных
 								  		  		$parent_id);
-		$corps=false; // если нужно подключить второе подменю, справа от того, что по умолчанию
+		$corps=true; // если нужно подключить второе подменю, справа от того, что по умолчанию
 		if ( $parent_alias=="korporativnym_klientam"
 			 && !$admin_mode
 			 && $corps
@@ -191,7 +191,7 @@ class setHTML{
 		<?	if ($admin_mode)
 				self::buildAdminSubmenu($subMenuItems);
 			else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
-            <li style="width:20px;">&nbsp;</li>
+            <li class="ddCliff">&nbsp;</li>
         	<li>
         		<div class="txtLightBlue txtMediumSmall">Корпоративным клиентам</div>
                 <div class="txtGrey">

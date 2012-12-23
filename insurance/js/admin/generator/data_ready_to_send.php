@@ -57,6 +57,7 @@ $(function(){
 });
 function sendTmplData(preview,preview_stat){
 		var radioChecked=$('div#sections_radios input[type="radio"]:checked');
+		var radioChecked2=$('div#category_id input[type="radio"]:checked');
 		var errMess=new Array();
 		var reqS=new Array();
 		var errCount=0;
@@ -64,6 +65,13 @@ function sendTmplData(preview,preview_stat){
 		if (!$(radioChecked).size()){
 			errMess[errCount]='Вы не отметили родительский раздел для создаваемого подраздела (если вы не хотите указывать его сейчас, отметьте радиокнопку "'+$('#no_parent').text()+'").';
 			errPlace=$('#pick_out_section');
+			errCount++;
+		}
+		if(!$(radioChecked2).size()){
+			errMess[errCount]='Вы не отметили категорию создаваемого подраздела (если вы не хотите указывать её, отметьте радиокнопку "'+$('#no_category').text()+'").';
+			if (!errPlace) 
+				errPlace=$('#category_id');
+			reqS[errCount]='category_id';
 			errCount++;
 		}
 		if (!$('#name').val()){
@@ -106,6 +114,7 @@ function sendTmplData(preview,preview_stat){
 				aMess+="* "+errMess[i];
 				if (reqS[i]) {
 					$('#'+reqS[i]).css('background-color','#FF6');
+					console.info('reqS[i] = '+reqS[i]);
 				}
 			}
 			alert(aMess);
@@ -115,6 +124,7 @@ function sendTmplData(preview,preview_stat){
 			
 			Layout.parent=$(radioChecked[0]).val();
 			//alert(Layout.parent);
+			Layout.category_id=$(radioChecked2[0]).val();
 			Layout.name=$('#name').val();
 			Layout.alias=$('#alias').val();
 			Layout.title=$('#title').val();
@@ -139,7 +149,7 @@ function sendTmplData(preview,preview_stat){
 			}
 			var t=false;
 			if (t)
-				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description+'\nparent: '+Layout.parent+'\nsendToUrl='+sendToUrl);
+				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description+'\nparent: '+Layout.parent+'\nsendToUrl='+sendToUrl+'\ncategory_id: '+Layout.category_id);
 			else
 				$.ajax ({
 					type: "POST",

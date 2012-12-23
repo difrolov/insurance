@@ -138,11 +138,11 @@ class Data {
     (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
       WHERE parent_id = t1.id
 		AND `status` = 1
-    ) AS children";
+    ) AS children, category_id";
 		
 		if ((int)$parent_id>=0) {
 			$fields.=",priority";
-			$query.=", `priority`";
+			$query.=",`priority`";
 		}
 		$query.=" FROM insur_insurance_object as t1 ";
 		if ($parent_id>=0)
@@ -151,11 +151,11 @@ class Data {
 		
 		$query.=" 
    WHERE t1.parent_id = ".$parent_id." AND `status` = 1
-ORDER BY ";
+ORDER BY category_id, ";
 		
 		$query.=($parent_id>=0)? "p.priority":"id";
 		
-		$query.=" ASC";
+		$query.=" ASC"; //die("<div class=''>query= ".$query."</div>");
 		
 		$res=Yii::app()->db->createCommand($query)->queryAll();
 		$fields=preg_replace('/\bt1.parent_id\b/',"parent_id",$fields);
