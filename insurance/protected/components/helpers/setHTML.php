@@ -23,7 +23,7 @@ class setHTML{
 			<?		endif;
 				}elseif ($alias_value=="name"){
 				// var_dump("<h1>alias_value:</h1><pre>",$alias_value,"</pre>");?>
-		<a<? if($subMenuItems['category_id']=='2'){?> style="color:green !important;"<? }?> href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
+		<a<? if($subMenuItems['product_type']=='2'){?> style="color:green !important;"<? }?> href="<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/<?=$subMenuItems['id']?>"><?=$link_text?></a>
 			<?	}
 			endforeach;
 		}
@@ -174,9 +174,10 @@ class setHTML{
 		    && is_array($subMenuItems[$topId]['children'])
 			&& !empty($subMenuItems[$topId]['children'])
 		  ){
+			$placeholder='<img src="'.Yii::app()->request->getBaseUrl(true).'/images/spacer.png" width="20" height="20" />';
 			$arrSecondColumnSubMenu=array(); 
 			foreach($subMenuItems[$topId]['children'] as $sectId=>$array) {
-				if ($array['category_id']=='2'){
+				if ($array['product_type']=='2'){
 					$arrSecondColumnSubMenu[$array['alias']]=$array['name'];
 				}
 			}
@@ -186,6 +187,7 @@ class setHTML{
 		if ( !$admin_mode
 			 && $secondColumnMenu
 		   ){
+			$arrSpcs=array('18','25','43'); // особо идиотические подменю
 			ob_start();
 			foreach($arrSecondColumnSubMenu as $alias=>$text):?>
 				<a href="<?=Yii::app()->request->baseUrl.'/'.$parent_alias.'/'.$alias?>"><?=$text?></a>
@@ -200,9 +202,9 @@ class setHTML{
 						self::buildAdminSubmenu($subMenuItems);
 					}else 
 						self::buildSubmenuLinks($subMenuItems,$parent_alias,true);?></li>
-            <li class="ddCliff">&nbsp;</li>
+            <li class="ddCliff"><?=$placeholder?></li>
         	<li>
-        		<div class="txtLightBlue txtMediumSmall"><?=$topSectionName?></div>
+        		<div<? if(in_array($parent_id,$arrSpcs)){?> style="margin-top:-33px;"<? }?> class="txtLightBlue txtMediumSmall"><?=$topSectionName?></div>
                 <div class="txtGrey">
             		<?=$cpLinks?>
             	</div>
@@ -216,11 +218,18 @@ class setHTML{
 					self::buildAdminSubmenu($subMenuItems);
 				else self::buildSubmenuLinks($subMenuItems,$parent_alias,true);
 				?></td>
-                <td id="alreadyCorps">
-                	<div class="txtLightBlue txtMediumSmall"><?=$topSectionName?></div>
-                <div class="txtGrey">
-            	<?=$cpLinks?>
-            	</div></td>
+                <td id="alreadyCorps" style="position:relative;">
+                	<div<? if(in_array($parent_id,$arrSpcs)){?> style="position:relative; white-space:nowrap; margin-top:-<?
+                switch($parent_id){
+					case "43":
+						$mt="37";
+							break;
+					default:
+						$mt="20";
+				}echo $mt;?>px; padding-bottom:6px; z-index:2;"<? }?> class="txtLightBlue txtMediumSmall"><?=$topSectionName?>
+                    </div>
+                	<div class="txtGrey"><?=$cpLinks?></div>
+                </td>
               </tr>
             </table>
 			<?	}

@@ -113,7 +113,7 @@ class GeneratorController extends Controller
 			$this->getGeneratorRoot();
 			$model = new InsurInsuranceObject(); // для извлечения данных раздела
 			$art_model=new InsurArticleContent(); // для редактора
-			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
+			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, product_type, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$modules=$this->getAllModules();
 			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model,'exclusiveView'=>$exclusiveView));
 		}
@@ -226,7 +226,7 @@ STR;
 		}
 		// модифицируем массив данных:
 		$parent_id=($post['parent'])? $post['parent']:'0'; // div#sections_radios input[type="radio"]:checked
-		$category_id=$post['category_id'];
+		$product_type=$post['product_type'];
 		$name=$post['name'];
 		$alias=$post['alias'];
 		$title=$post['title'];
@@ -237,7 +237,7 @@ STR;
 		unset($post["blocks"]["moduleClickedLocalIndex"]);
 		unset($post["parent"]);
 		unset($post["name"]);
-		unset($post["category_id"]);
+		unset($post["product_type"]);
 		unset($post["alias"]);
 		unset($post["title"]);
 		unset($post["keywords"]);
@@ -262,7 +262,7 @@ STR;
 			InsurInsuranceObject::model()->updateByPk($section_id,
 					array(	'parent_id'=>$parent_id,
 							'name'=>$name,
-							'category_id'=>$category_id,
+							'product_type'=>$product_type,
 							'status'=>$status,
 							'alias'=>$alias,
 							'date_changes'=>$date_changes,
@@ -276,7 +276,7 @@ STR;
 			$model_obj = new InsurInsuranceObject;
 			$model_obj->parent_id = $parent_id;
 			$model_obj->name = $name;
-			$model_obj->category_id = $category_id;
+			$model_obj->product_type = $product_type;
 			$model_obj->status = $status;
 			$model_obj->alias = $alias;
 			$model_obj->date_changes = $date_changes;
@@ -434,6 +434,7 @@ class TestGenerator{
 							"blocks"=>array("1" => "Новость|Готовое решение 1|Текст :: Про голых чувагов!^<p>\n\tЗа введение запрета на обнаженку в Сан-Франциско проголосовали 6 из 11 членов наблюдательного совета. А это значит, что больше не будет никаких раздеваний на площадях, улицах, в метро и автобусах одного из главных туристических центров мира.</p>\n"),
 							"parent" => "2",
 							"name" => "Исторический",
+							"product_type"=>"2",
 							"alias" => "historical",
 							"title" => "Про то, что было",
 							"keywords" => "история хистори слухи сплетни",

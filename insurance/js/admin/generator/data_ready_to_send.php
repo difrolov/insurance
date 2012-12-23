@@ -3,10 +3,10 @@ ob_start();?>
 $(function(){
   try{
 	var blockRadios=$('div#sections_radios > div > blockquote');
-	$('input#category_id_1').click( function(){
+	$('input#product_type_1').click( function(){
 			$(blockRadios).show();
 		});
-	$('input#category_id_2').click( function(){
+	$('input#product_type_2').click( function(){
 		$('input[type="radio"]',blockRadios).attr('checked',false);
 		$(blockRadios).hide();
 	});
@@ -66,7 +66,7 @@ $(function(){
 });
 function sendTmplData(preview,preview_stat){
 		var radioChecked=$('div#sections_radios input[type="radio"]:checked');
-		var radioChecked2=$('div#category_id input[type="radio"]:checked');
+		var radioChecked2=$('div#product_type input[type="radio"]:checked');
 		var errMess=new Array();
 		var reqS=new Array();
 		var errCount=0;
@@ -79,8 +79,8 @@ function sendTmplData(preview,preview_stat){
 		if(!$(radioChecked2).size()){
 			errMess[errCount]='Вы не отметили категорию создаваемого подраздела (если вы не хотите указывать её, отметьте радиокнопку "'+$('#no_category').text()+'").';
 			if (!errPlace) 
-				errPlace=$('#category_id');
-			reqS[errCount]='category_id';
+				errPlace=$('#product_type');
+			reqS[errCount]='product_type';
 			errCount++;
 		}
 		if (!$('#name').val()){
@@ -133,7 +133,7 @@ function sendTmplData(preview,preview_stat){
 			
 			Layout.parent=$(radioChecked[0]).val();
 			//alert(Layout.parent);
-			Layout.category_id=$(radioChecked2[0]).val();
+			Layout.product_type=$(radioChecked2[0]).val();
 			Layout.name=$('#name').val();
 			Layout.alias=$('#alias').val();
 			Layout.title=$('#title').val();
@@ -158,7 +158,7 @@ function sendTmplData(preview,preview_stat){
 			}
 			var t=false;
 			if (t)
-				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description+'\nparent: '+Layout.parent+'\nsendToUrl='+sendToUrl+'\ncategory_id: '+Layout.category_id);
+				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description+'\nparent: '+Layout.parent+'\nsendToUrl='+sendToUrl+'\nproduct_type: '+Layout.product_type);
 			else
 				$.ajax ({
 					type: "POST",

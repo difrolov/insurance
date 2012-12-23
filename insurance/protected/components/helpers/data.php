@@ -113,7 +113,7 @@ class Data {
 								  &$result=false // результат; при вхождении в рекурсию передаётся по ссылке
 								){
 		if(!$fields) { // набор полей извлечения данных по умолчанию
-			$fields='id,name,parent_id,alias,category_id'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
+			$fields='id,name,parent_id,alias,product_type'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
 		}elseif(!$result){ // если с дуру передали пустую строку, извлечь все поля таблицы:
 			if (!str_replace(" ",'',$fields)){
 				$qFields="DESC insur_insurance_object";
@@ -138,7 +138,7 @@ class Data {
     (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
       WHERE parent_id = t1.id
 		AND `status` = 1
-    ) AS children, category_id";
+    ) AS children, product_type";
 		
 		if ((int)$parent_id>=0) {
 			$fields.=",priority";
@@ -151,7 +151,7 @@ class Data {
 		
 		$query.=" 
    WHERE t1.parent_id = ".$parent_id." AND `status` = 1
-ORDER BY category_id, ";
+ORDER BY product_type, ";
 		
 		$query.=($parent_id>=0)? "p.priority":"id";
 		

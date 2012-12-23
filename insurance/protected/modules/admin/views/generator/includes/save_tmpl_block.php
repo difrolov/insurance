@@ -15,7 +15,7 @@ if (!isset($allObjectsSecondArray)){ // ...
 $edit_mode=false;
 //-------------------------
 $section_name=false;
-$section_category_id=false;
+$section_product_type=false;
 $section_parent_id=false;
 $section_alias=false;
 $section_title=false;
@@ -28,14 +28,16 @@ if (isset($data)&&isset($modules)){
 	//var_dump("<h1>data:</h1><pre>",$data,"</pre>"); 
 	//var_dump("<h1>model_modules:</h1><pre>",$model_modules,"</pre>");
 	$section_name=$data['name'];
-	$section_category_id=$data['category_id'];
+	$section_product_type=$data['product_type'];
 	$section_parent_id=$data['parent_id'];
 	$section_alias=$data['alias'];
 	$section_title=$data['title'];
 	$section_keywords=$data['keywords'];
 	$section_description=$data['description']; 
 }
-if(!isset($data)){?>
+if( !isset($data) // создаём раздел
+	|| $section_product_type=='2' // редактируем, но тип - Готовое решение
+  ){?>
 <style>
 div#sections_radios 
 	> div > blockquote{
@@ -94,19 +96,21 @@ if($exclusiveView) {?>
 		  ){?> style="display:block;"<? }?>>
         
         <h4 align="left">Выберите категорию подраздела:</h4>
-        <div align="left" id="category_id">
+        <div align="left" id="product_type">
         <label>
-            <input type="radio" name="category_id" value="1" id="category_id_1"<? 
-		if ($section_category_id=='1'){?> checked<? }?> />Программа страхования</label>
+            <input type="radio" name="product_type" value="1" id="product_type_1"<? 
+		if ( $section_product_type!='2'
+			 && $edit_mode
+		   ){?> checked<? }?> />Программа страхования</label>
         &nbsp;
         &nbsp;
           <label>
-            <input type="radio" name="category_id" value="2" id="category_id_2"<? 
-		if ($section_category_id=='2'){?> checked<? }?> />Готовое решение</label>
+            <input type="radio" name="product_type" value="2" id="product_type_2"<? 
+		if ($section_product_type=='2'){?> checked<? }?> />Готовое решение</label>
         &nbsp;
         &nbsp;
           <label id="no_category">
-            <input type="radio" name="category_id" value="0" id="category_id_0" />Без категории</label>
+            <input type="radio" name="product_type" value="0" id="product_type_0" />Без категории</label>
         </div>
         <hr>
 
