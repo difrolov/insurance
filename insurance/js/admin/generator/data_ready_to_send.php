@@ -132,7 +132,6 @@ function sendTmplData(preview,preview_stat){
 		}else{
 			
 			Layout.parent=$(radioChecked[0]).val();
-			//alert(Layout.parent);
 			Layout.product_type=$(radioChecked2[0]).val();
 			Layout.name=$('#name').val();
 			Layout.alias=$('#alias').val();
@@ -146,8 +145,6 @@ function sendTmplData(preview,preview_stat){
 					1: "Текст :: "+Layout.name+"^"+CKEDITOR.instances['InsurArticleContent[content]'].getData()
 				};
 			}
-			
-			//alert('action: '+$('#content_save').attr('action'));
 			var sendToUrl=$('#content_save').attr('action');
 			if (preview) 
 				sendToUrl+='?preview='+preview_stat;

@@ -92,7 +92,7 @@ Layout.Schema="default";
 	<?	if (isset($data)) {?>
 $( function(){
 	try{
-		var artText=$('#preText').text();
+		var artText=$('#preText').html();
 		CKEDITOR.instances['InsurArticleContent[content]'].setData(artText);		
 	}catch(e){
 		alert(e.message);

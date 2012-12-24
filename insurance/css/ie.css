@@ -202,7 +202,7 @@ td#alreadyCorps
 	color: #333;
 	display: block;
 	font-size: 11px !important;
-	line-height: 22px;
+	line-height: 17px;
 }
 .pic_signature{
 	letter-spacing:-0.05em;
@@ -226,6 +226,17 @@ table#tblBanners3
 	div#banners3Wrapper img{
 	height:auto;
 	width:auto;
+}
+
+div#pls_wait{
+	position:absolute;	
+	left:20%;
+	top:20% !important;
+	width:25% !important;
+}
+div#processing{
+	line-height:30px;
+	text-align:center;
 }
 
 
