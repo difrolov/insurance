@@ -11,8 +11,9 @@ creat_date
 status
 
 */
-$gridDataProvider = action::getJobs('status=1');
+$gridDataProvider = action::getJobs('status=1', false);
 $arrJobs = $gridDataProvider->data;
+
 ?>
 <style>
 a.txtLightBlue{
@@ -69,7 +70,7 @@ $(document).ready(function() {
 function replaceBall($str){
 	return trim(str_replace("•","<p>",$str));
 }
-for ($i=0,$j=count($arrJobs);$i<$j;$i++){
+for ($i=0;$i<count($arrJobs);$i++){
 		$job=$arrJobs[$i];?>
   <a name="job<?=$i?>"></a>
   <div class="jDef">
@@ -91,7 +92,7 @@ for ($i=0,$j=count($arrJobs);$i<$j;$i++){
             <dd><?=$job['contact_name']?></dd>
       </dl>
   </div>
-<?	
+<?
 }?>
 
 
