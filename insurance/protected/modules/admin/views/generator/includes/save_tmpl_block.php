@@ -15,6 +15,7 @@ if (!isset($allObjectsSecondArray)){ // ...
 $edit_mode=false;
 //-------------------------
 $section_name=false;
+$section_product_type=false;
 $section_parent_id=false;
 $section_alias=false;
 $section_title=false;
@@ -27,14 +28,25 @@ if (isset($data)&&isset($modules)){
 	//var_dump("<h1>data:</h1><pre>",$data,"</pre>"); 
 	//var_dump("<h1>model_modules:</h1><pre>",$model_modules,"</pre>");
 	$section_name=$data['name'];
+	$section_product_type=$data['product_type'];
 	$section_parent_id=$data['parent_id'];
 	$section_alias=$data['alias'];
 	$section_title=$data['title'];
 	$section_keywords=$data['keywords'];
 	$section_description=$data['description']; 
-}?>
+}
+if( !isset($data) // создаём раздел
+	|| $section_product_type=='2' // редактируем, но тип - Готовое решение
+  ){?>
+<style>
+div#sections_radios 
+	> div > blockquote{
+	display:none;
+}
+</style>
 <?	
-if($inExViews) {?>
+}
+if($exclusiveView) {?>
 <style>
 #mblock{
 	width:70%
@@ -56,7 +68,6 @@ if($inExViews) {?>
 	font-size:16px;
 	font-weight:300;
 }
-
 </style>
 <div align="center">
   <div id="mblock">	
@@ -79,18 +90,46 @@ if($inExViews) {?>
 			?>none<? 
 		}?>;">Выберите родительский раздел для создаваемой страницы</h5>
 	<div id="<?="save_tmpl_block"?>"<? 
-		if(isset($_GET['test'])||setHTML::detectOldIE()){?> style="display:block;"<? }?>>
+		if( isset($_GET['test'])
+			|| setHTML::detectOldIE()
+			|| $primitive
+		  ){?> style="display:block;"<? }?>>
+        
+        <h4 align="left">Выберите категорию подраздела:</h4>
+        <div align="left" id="product_type">
+        <label>
+            <input type="radio" name="product_type" value="1" id="product_type_1"<? 
+		if ( $section_product_type!='2'
+			 && $edit_mode
+		   ){?> checked<? }?> />Программа страхования</label>
+        &nbsp;
+        &nbsp;
+          <label>
+            <input type="radio" name="product_type" value="2" id="product_type_2"<? 
+		if ($section_product_type=='2'){?> checked<? }?> />Готовое решение</label>
+        &nbsp;
+        &nbsp;
+          <label id="no_category">
+            <input type="radio" name="product_type" value="0" id="product_type_0" />Без категории</label>
+        </div>
+        <hr>
+
     	<div id="sections_radios" style="text-align:left">
         <label>
           <span>
-        	<input type="radio" name="menu" id="none" value="radio"<? 
-			if ($edit_mode&&!$section_parent_id){?> checked<? }?>><b id="no_parent">Без родительского раздела</b>
+        	<input disabled type="radio" name="menu" id="none" value="<? echo($section_parent_id=='-2')? '-2':'0';?>"<? 
+			if ( ( $edit_mode
+				   &&
+				   !$section_parent_id
+				 ) || $section_parent_id=='-2'
+			   ){?> checked<? }?>><b id="no_parent">Без родительского раздела</b>
           </span>
         </label><br>
-	<?	HelperAdmin::makeSectionsMap($allObjectsArray,$section_parent_id);?>
+	<?	if ($section_parent_id!='-2') 
+			HelperAdmin::makeSectionsMap($allObjectsArray,$section_parent_id);?>
     	<hr>
     	</div>
-        <hr>
+      <hr>
         <div style="text-align:left" id="subsection_ids">
             Укажите название подраздела: <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/question_framed2.png" width="17" height="17" align="texttop" class="helpHint" title="Текст в меню для загрузки данного подраздела">
     <input name="name" type="text" id="name" required value="<?=$section_name?>">

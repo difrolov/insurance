@@ -1,4 +1,26 @@
-<div id="inner_left_menu" style="width:600px; background:#FFF;" class="form">
+<style>
+div#page.container{
+	margin-bottom:-140px;
+}
+div#fit_height{
+	padding-bottom:0px;
+}
+div#inner_left_menu{
+	background:#FFF;
+	margin-bottom:140px;
+	/*min-height:197px;*/
+	padding-top:40px;
+	padding-bottom:60px;
+	width:955px; 
+}
+input#InsurCoworkers_login,
+input#InsurCoworkers_password{
+	border:solid 1px #CCCCCC;
+	margin-left:10px;
+	padding:2px 4px;
+}
+</style>
+<div id="inner_left_menu" style="" class="form">
 <?php	$form=$this->beginWidget('CActiveForm', array(
     'id'=>'user-form',
     'enableAjaxValidation'=>true,

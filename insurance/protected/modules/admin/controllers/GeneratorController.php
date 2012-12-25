@@ -108,13 +108,14 @@ class GeneratorController extends Controller
 		if($section_id){
 			require_once Yii::getPathOfAlias('webroot').'/protected/components/helpers/Data.php';
 			$checkView=new Views(true);
-			$inExViews=$checkView->checkView($section_id,false,true);
+			// exclusive View 
+			$exclusiveView=$checkView->checkView($section_id,false,true);
 			$this->getGeneratorRoot();
 			$model = new InsurInsuranceObject(); // для извлечения данных раздела
 			$art_model=new InsurArticleContent(); // для редактора
-			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, category_id, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
+			$data = Yii::app()->db->createCommand()->select('id, name, parent_id, alias, product_type, title, keywords, description, content')->from('insur_insurance_object')->where('id=:id', array(':id'=>$section_id))->queryRow();
 			$modules=$this->getAllModules();
-			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model,'inExViews'=>$inExViews));
+			$this->render('index', array('data' => $data,'model'=>$model,'modules'=>$modules,'art_model' => $art_model,'exclusiveView'=>$exclusiveView));
 		}
 	}
 /**
@@ -133,7 +134,7 @@ class GeneratorController extends Controller
 		// если в режиме тестирования, т.е., данные извлекаются НЕ из запроса:
 		if (!$post=$_POST) {
 			$html_test_style=" style='background:lightyellow;border:solid 2px orange;border-radius:6px;padding:10px;'";
-			$localdata=true;
+			$localdata=false;
 			$post=TestGenerator::$test_post[0];
 			echo "<div{$html_test_style}>".__LINE__."
 				<h2>"." Входяций массив (\$_POST):</h2>";
@@ -224,7 +225,8 @@ STR;
 			}else if ($localdata) TestGenerator::testCodeOutput2($key,$sectionDataArray);
 		}
 		// модифицируем массив данных:
-		$parent_id=$post['parent'];
+		$parent_id=($post['parent'])? $post['parent']:'0'; // div#sections_radios input[type="radio"]:checked
+		$product_type=$post['product_type'];
 		$name=$post['name'];
 		$alias=$post['alias'];
 		$title=$post['title'];
@@ -235,6 +237,7 @@ STR;
 		unset($post["blocks"]["moduleClickedLocalIndex"]);
 		unset($post["parent"]);
 		unset($post["name"]);
+		unset($post["product_type"]);
 		unset($post["alias"]);
 		unset($post["title"]);
 		unset($post["keywords"]);
@@ -259,6 +262,7 @@ STR;
 			InsurInsuranceObject::model()->updateByPk($section_id,
 					array(	'parent_id'=>$parent_id,
 							'name'=>$name,
+							'product_type'=>$product_type,
 							'status'=>$status,
 							'alias'=>$alias,
 							'date_changes'=>$date_changes,
@@ -272,6 +276,7 @@ STR;
 			$model_obj = new InsurInsuranceObject;
 			$model_obj->parent_id = $parent_id;
 			$model_obj->name = $name;
+			$model_obj->product_type = $product_type;
 			$model_obj->status = $status;
 			$model_obj->alias = $alias;
 			$model_obj->date_changes = $date_changes;
@@ -279,6 +284,7 @@ STR;
 			$model_obj->keywords = $keywords;
 			$model_obj->description = $description;
 			$model_obj->content = serialize($post);
+			
 			if (!isset($_GET['gtest'])) { // если не тест
 				$model_obj->save();
 				$section_id=$model_obj->id;
@@ -289,6 +295,7 @@ STR;
 				$order = Yii::app()->db->createCommand($sql)->queryAll();
 				$model_order = new InsurOrderMenu;
 				$model_order->id_object = $section_id;
+				
 				if(count($order)>0){
 					$model_order->priority = ($order[0]['priority']+1);
 				}else{
@@ -319,8 +326,11 @@ STR2;
 			}
 		}
 		if (!isset($_GET['gtest'])) { // если не тест
-			self::getParents($section_id); // get URL path
-			$direct_to=self::$section_root;
+			if ((int)$parent_id!=0) {
+				self::getParents($section_id); // get URL path
+				$direct_to=self::$section_root;
+			}else
+				$direct_to='site/temp/'.$alias;
 			if (!$status)
 				$direct_to.="?mode=preview";
 			// вернуть сообщение странице-отправителю:
@@ -424,6 +434,7 @@ class TestGenerator{
 							"blocks"=>array("1" => "Новость|Готовое решение 1|Текст :: Про голых чувагов!^<p>\n\tЗа введение запрета на обнаженку в Сан-Франциско проголосовали 6 из 11 членов наблюдательного совета. А это значит, что больше не будет никаких раздеваний на площадях, улицах, в метро и автобусах одного из главных туристических центров мира.</p>\n"),
 							"parent" => "2",
 							"name" => "Исторический",
+							"product_type"=>"2",
 							"alias" => "historical",
 							"title" => "Про то, что было",
 							"keywords" => "история хистори слухи сплетни",

@@ -1,12 +1,15 @@
 @charset "utf-8";
 /* CSS Document */
+td.txtLink{
+	white-space:normal;
+}
 #content_from_right.imgBannerBorder{
 	border:solid 22px #D5D7D6;
 	border-right-color:#00AFDE;
 	display:block !important;
 	height:248px;
     margin-right:33px;
-	margin-top:-70px;	 /* 296 - 44 */
+	/*margin-top:-70px;	  296 - 44 */
 }
 div#footer{
 	width:auto;

@@ -11,7 +11,7 @@ div#admin_main_submenu ul{
 	margin:1px 2px;
 }
 div#admin_main_submenu ul li{
-	background: #08C;
+	background: #A8CADB;
 	border-radius: 4px;
 	display:inline-block;
 	margin:0 -1px;
@@ -279,6 +279,20 @@ div#mainmenu{
 	height:30px;
 	text-align:left;
 }
+div#mainmenu.sectionsAdminMenu
+	> ul{
+	position:relative;
+}
+li.active.command{
+	position:absolute;
+}
+.active.command.warning{
+	background-color:#F90 !important;
+	margin-top:-2px;
+	padding:4px 8px;
+	position:absolute;
+	white-space:nowrap;
+}
 div#mainmenu ul{
 	margin:10px 0 8px 0;
 	margin-left:-10px;
@@ -412,3 +426,9 @@ table#tblSlidesLastSeen td.slidesPointer{
 ul.insideDiv{
 	margin-left:-20px;
 }
+/*		*/
+div#page.container
+	div.content_banner
+		ul[id^="yw"].nav.nav-pills{
+	display:none;
+} 

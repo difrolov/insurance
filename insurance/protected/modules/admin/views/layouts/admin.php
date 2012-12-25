@@ -75,13 +75,10 @@ if (Yii::app()->controller->getId()=='generator'){?>
 	echo $url;
 	if (isset($_GET['test'])){?>&test=1<? }?>"></script>
 <?
-}else{
+}
 // если любой другой раздел, приаттачить скрипт генерации доп. кнопки:?>
-	<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
-<?
-}?>
+<script src="<?=$url?>/js/admin/add_button.php?base_url=<?=$url?>"></script>
 <script src="<?=$url?>/js/wait_for.js"></script>
-
 </head>
 <body>
 	<div id="header">
@@ -113,29 +110,30 @@ if (Yii::app()->controller->getId()=='generator'){?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
 		));
-	endif;
-	//var_dump("<h1>breadcrumbs:</h1><pre>",$breadcrumbs,"</pre>");
-	if (Yii::app()->controller->getId()!='generator') : ?>
+	endif;?>
 	<div id="mainmenu" class="sectionsAdminMenu">
 <?		// главное меню:
 		setHTML::buildMainMenu($this); // главное меню
 		// выпадающее меню:
 		setHTML::buildDropDownMenu();	// выпадающее меню	?>
 	</div>
-   	<div align="right" id="admin_main_submenu">
+   	<div align="right" id="admin_main_submenu"<?
+	/*
+    if(setHTML::detectOldIE()){?> onclick="alert('Данный раздел разработан как программный модуль, вы не можете изменить его содержание самостоятельно.'); return false;"<? }
+	*/?>>
 	<?	setHTML::buildMainMenu($this,-2);?>
     </div>
 	<?	if(!setHTML::detectOldIE()):
-			$arrSecondMenu=setHTML::getMainMenuItems(-2);
-			// var_dump("<h1>arrSecondMenu:</h1><pre>",$arrSecondMenu,"</pre>");die();?>
+			$arrSecondMenu=setHTML::getMainMenuItems(-2);?>
 <script>    
 $( function(){	
+			<?	/*?>
+	$('#admin_main_submenu ul li a').click( function(){
+			alert('Данный раздел разработан как программный модуль, вы не можете изменить его содержание самостоятельно.'); return false;
+		});	<?*/  ?>
 	var getObjUrl='<?=Yii::app()->request->getBaseUrl(true)?>/admin/object/getobject/';
 		<?	$sc=0;
-			foreach($arrSecondMenu as $secMenuId=>$secMenuData){
-				//$mObj=$arrSecondMenu[$sc];
-				//$gAl=explode("/",$mObj);
-				//$mAlias=array_pop($gAl);?>
+			foreach($arrSecondMenu as $secMenuId=>$secMenuData){?>
 	$('#admin_main_submenu ul li').eq(<?=$sc?>).click( function(){
 			location.href=getObjUrl+'<?=$secMenuId?>';
 			return false;
@@ -145,9 +143,7 @@ $( function(){
 });
 </script>
 	<?	endif;
-	else:
-		$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
-	endif;
+	$this->widget('ext.efgmenu.EFgMenu',array('bDev'=>true));
 
 	if(Yii::app()->controller->getId()=='generator'){?>
 	<div class="content_right">

@@ -30,6 +30,19 @@ class ObjectController extends Controller
 			$this->render('index');
 		}
 	}
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	function actionOrphans(){
+		
+		//die('actionOrphans');
+		$model = new InsurInsuranceObject();
+		$gridDataProvider['parent']=false;
+		$gridDataProvider['child'] = $model->search('parent_id=0');
+		$this->render('getobject',array(/* 'obj'=>$obj,'child_obj'=>$child_obj, */'gridDataProvider'=>$gridDataProvider));	
+	}
 
 	//показываем разделы приоритет
 	public function actionPriorityObject(){

@@ -31,9 +31,29 @@ div#bottom_menu
 	background-image:url(<?=Yii::app()->request->getBaseUrl(true)?>/images/ie/body_shadow_right.png) !important;
 }
 </style>
-<? require_once dirname(__FILE__).'/header.php'; // for fun, yeah...?>
+<? 	require_once dirname(__FILE__).'/header.php'; // for fun, yeah...
+	$mode=(isset($_GET['mode']))? $_GET['mode']:false;?>
 <body>
-<? // in default.php: <div align="left" class="container" id="page">?>
+<? // in default.php: <div align="left" class="container" id="page">// если пытались подать на печать:
+if ($mode=='save'||$mode=='print'){	?>
+<link href="<?=Yii::app()->request->getBaseUrl(true)?>/css/print_blank.css" rel="stylesheet" type="text/css">
+<style>
+div#page.container{
+	/*float: left;*/
+	max-width:700px; 
+	padding-right:100px;
+	padding-top:0;
+	width:700px;
+}
+ul li{
+	display:block;
+	list-style: circle !important;
+}
+</style>
+<?	
+	require_once Yii::getPathOfAlias('webroot').'/protected/views/layouts/save_and_print.php';
+
+}else{ // не пытались?>
     <div id="fit_height">
 <table id="main_content" cellspacing="0">
   <tr id="hatBlock">
@@ -86,4 +106,6 @@ div#bottom_menu
 	</div>
 <? //</div>?>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/drop_down_menu_ie.js"></script>
+<?
+}?>
 <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/old_ie.js"></script>

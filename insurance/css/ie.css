@@ -202,7 +202,7 @@ td#alreadyCorps
 	color: #333;
 	display: block;
 	font-size: 11px !important;
-	line-height: 22px;
+	line-height: 17px;
 }
 .pic_signature{
 	letter-spacing:-0.05em;
@@ -228,6 +228,17 @@ table#tblBanners3
 	width:auto;
 }
 
+div#pls_wait{
+	position:absolute;	
+	left:20%;
+	top:20% !important;
+	width:25% !important;
+}
+div#processing{
+	line-height:30px;
+	text-align:center;
+}
+
 
 table.tblMainMenu a{
 	color: #06AEDD;
@@ -246,7 +257,6 @@ table.tblMainSubMenu a{
 	font-size: 14px;
 	letter-spacing: -1px;
 }
-table.tblMainMenu,
 table.tblMainSubMenu{
 	background:#06AEDD;
 	white-space:nowrap;

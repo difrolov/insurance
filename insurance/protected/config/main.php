@@ -71,6 +71,7 @@ return array(
 
 				// Frontend
 				// извлечь данные подразделов:
+				'site/temp/*' => 'site/temp',
 				'o_kompanii/*' =>  'o_kompanii/index',
 
 				'korporativnym_klientam/*' =>  'korporativnym_klientam/index',

@@ -2,6 +2,15 @@
 ob_start();?>
 $(function(){
   try{
+	var blockRadios=$('div#sections_radios > div > blockquote');
+	$('input#product_type_1').click( function(){
+			$(blockRadios).show();
+		});
+	$('input#product_type_2').click( function(){
+		$('input[type="radio"]',blockRadios).attr('checked',false);
+		$(blockRadios).hide();
+	});
+
 	$('#alias').blur( function (){
 		var alias=$(this).val();
 		var checkAl=$('#check_alias_info');
@@ -57,6 +66,7 @@ $(function(){
 });
 function sendTmplData(preview,preview_stat){
 		var radioChecked=$('div#sections_radios input[type="radio"]:checked');
+		var radioChecked2=$('div#product_type input[type="radio"]:checked');
 		var errMess=new Array();
 		var reqS=new Array();
 		var errCount=0;
@@ -64,6 +74,13 @@ function sendTmplData(preview,preview_stat){
 		if (!$(radioChecked).size()){
 			errMess[errCount]='Вы не отметили родительский раздел для создаваемого подраздела (если вы не хотите указывать его сейчас, отметьте радиокнопку "'+$('#no_parent').text()+'").';
 			errPlace=$('#pick_out_section');
+			errCount++;
+		}
+		if(!$(radioChecked2).size()){
+			errMess[errCount]='Вы не отметили категорию создаваемого подраздела (если вы не хотите указывать её, отметьте радиокнопку "'+$('#no_category').text()+'").';
+			if (!errPlace) 
+				errPlace=$('#product_type');
+			reqS[errCount]='product_type';
 			errCount++;
 		}
 		if (!$('#name').val()){
@@ -106,6 +123,7 @@ function sendTmplData(preview,preview_stat){
 				aMess+="* "+errMess[i];
 				if (reqS[i]) {
 					$('#'+reqS[i]).css('background-color','#FF6');
+					console.info('reqS[i] = '+reqS[i]);
 				}
 			}
 			alert(aMess);
@@ -114,6 +132,7 @@ function sendTmplData(preview,preview_stat){
 		}else{
 			
 			Layout.parent=$(radioChecked[0]).val();
+			Layout.product_type=$(radioChecked2[0]).val();
 			Layout.name=$('#name').val();
 			Layout.alias=$('#alias').val();
 			Layout.title=$('#title').val();
@@ -126,8 +145,6 @@ function sendTmplData(preview,preview_stat){
 					1: "Текст :: "+Layout.name+"^"+CKEDITOR.instances['InsurArticleContent[content]'].getData()
 				};
 			}
-			
-			//alert('action: '+$('#content_save').attr('action'));
 			var sendToUrl=$('#content_save').attr('action');
 			if (preview) 
 				sendToUrl+='?preview='+preview_stat;
@@ -136,12 +153,11 @@ function sendTmplData(preview,preview_stat){
 				sendToUrl+=(preview)? '&':'?';
 				sendToUrl+='section_id='+$('input#section_id').val();
 			}
-			// alert(sendToUrl);		
 			var t=false;
 			if (t)
-				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description);
+				console.info('Schema: '+Layout.Schema+'\nText: '+Layout.blocks['1']+'\nname: '+Layout.name+'\nalias: '+Layout.alias+'\ntitle: '+Layout.title+'\nkeywords: '+Layout.keywords+'\ndescription: '+Layout.description+'\nparent: '+Layout.parent+'\nsendToUrl='+sendToUrl+'\nproduct_type: '+Layout.product_type);
 			else
-			$.ajax ({
+				$.ajax ({
 					type: "POST",
 					url: sendToUrl,
 					dataType: 'json',

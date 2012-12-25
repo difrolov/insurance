@@ -1,43 +1,50 @@
 <br class="clear">
+<? if ($gridDataProvider['parent']){?>
 <div>Продукт</div>
-<?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
-    'type'=>'striped bordered condensed',
-    'dataProvider'=>$gridDataProvider['parent'],
-    'template'=>"{items}",
-    'columns'=>array(
-       array('name'=>'id', 'header'=>'#','type'=>'html', 'value'=>'HelperAdmin::createUrl($data->id,$data->id)'),
-        array('name'=>'name', 'header'=>'Наименование','type'=>'html', 'value'=>'HelperAdmin::createUrl($data->id,$data->name)'),
-        /* array('name'=>'status', 'header'=>'Видимость'), */
-        array('name'=>'alias', 'header'=>'Алиас'),
-    	array('name'=>'date_changes', 'header'=>'Дата изменения'),
-    	array('name'=>'status','header'=>'Статус','type'=>'html',
-        		'value'=>'HelperAdmin::createStatusContent($data->status,$data->id)'),
-        array(
-            'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
-            'htmlOptions'=>array('style'=>'width: 50px'),
-        	'template'=>'{update}{delete}',
-        	'buttons'=>array(
-        			'update' => array(
-        					'url'=>'Yii::app()->controller->createUrl("/admin/generator/edit/$data->id")',
-        		),
-        	),
-        ),
-    ),
-)); ?>
-<br class="clear">
-
-<?php
-$this->widget('bootstrap.widgets.TbButton', array(
-		'label'=>'Упорядочить разделы в меню',
-		'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-		'size'=>'small', // null, 'large', 'small' or 'mini'
-		'url'=>Yii::app()->controller->createUrl("/admin/object/PriorityObject/".$_GET['id'])
-));
+<?php 
+	$this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
+		'type'=>'striped bordered condensed',
+		'dataProvider'=>$gridDataProvider['parent'],
+		'template'=>"{items}",
+		'columns'=>array(
+		   array('name'=>'id', 'header'=>'#','type'=>'html', 'value'=>'HelperAdmin::createUrl($data->id,$data->id)'),
+			array('name'=>'name', 'header'=>'Наименование','type'=>'html', 'value'=>'HelperAdmin::createUrl($data->id,$data->name)'),
+			/* array('name'=>'status', 'header'=>'Видимость'), */
+			array('name'=>'alias', 'header'=>'Алиас'),
+			array('name'=>'date_changes', 'header'=>'Дата изменения'),
+			array('name'=>'status','header'=>'Статус','type'=>'html',
+					'value'=>'HelperAdmin::createStatusContent($data->status,$data->id)'),
+			array(
+				'class'=>'application.extensions.bootstrap.widgets.TbButtonColumn',
+				'htmlOptions'=>array('style'=>'width: 50px'),
+				'template'=>'{update}{delete}',
+				'buttons'=>array(
+						'update' => array(
+								'url'=>'Yii::app()->controller->createUrl("/admin/generator/edit/$data->id")',
+					),
+				),
+			),
+		),
+	)); ?>
+	<br class="clear">
+	
+	<?php
+	$this->widget('bootstrap.widgets.TbButton', array(
+			'label'=>'Упорядочить разделы в меню',
+			'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+			'size'=>'small', // null, 'large', 'small' or 'mini'
+			'url'=>Yii::app()->controller->createUrl("/admin/object/PriorityObject/".$_GET['id'])
+	));
 ?>
 <br class="clear">
 <br class="clear">
 <div>Подкатегории</div>
-<?php $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
+<?php 
+}else{?>
+	<h4>Страницы без родительских разделов</h4>
+<? 
+}
+$this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
     'dataProvider'=>$gridDataProvider['child'],
     'template'=>"{items}",
@@ -99,6 +106,7 @@ $(document).ready(function(){
 				val=0;
 			}
 			_object.updateObjectStatus(id,val);
+			alert('Done!');
 		});
 })
 </script>

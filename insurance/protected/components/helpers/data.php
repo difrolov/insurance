@@ -1,4 +1,4 @@
-<?
+<?	
 class Data {
 
 /**
@@ -63,12 +63,13 @@ class Data {
   */
 	static public function getDataByAlias( $default_alias, // главный раздел. То, что в БД с parent_id -1/-2
 							 $alias=false // alias подраздела
-						   ){
+						   ){ 
 		if (!$alias) {
 			$alias=$default_alias;
 			$subsection=true;
-		}
+		} // die($default_alias.', '.$alias);
 		$data = InsurInsuranceObject::model()->findByAttributes(array('alias' => $alias));
+		//var_dump("<h1>data:</h1><pre>",$data,"</pre>");die();
 		if ($data === null) {
 			throw new CHttpException(404, 'Not found');
 		}
@@ -80,6 +81,8 @@ class Data {
  * @subpackage
  */
 	static function getObjectByUrl($obj,$subsection){
+		if (is_array($subsection)) // if temp
+			$temp_page=$subsection[0];
 		if($subsection!='site'){
 			$Uri=explode("/",$_SERVER['REQUEST_URI']);
 			$hash=array_pop($Uri);
@@ -88,10 +91,15 @@ class Data {
 				// o_kompanii/istorija/historical/?mode=preview
 			if($hash!=$subsection) $subsection=$hash;
 		}
+		//die($subsection);
 		$data=Data::getDataByAlias(Yii::app()->controller->getId(),$subsection);
+		$dataArray=array('res' => $data);
+		if (isset($temp_page))
+			$dataArray['temp']=$temp_page;
 		$obj->pageTitle=$data->title;
 		$_SESSION['SUBSECTION_DATA_ARRAY']=array('alias'=>$data->alias); // метка для элементов, специфичных для подразделов, созданных генератором
-		$obj->render('index', array('res' => $data));
+		
+		$obj->render('index', $dataArray);
 	}
 
 /**
@@ -105,7 +113,7 @@ class Data {
 								  &$result=false // результат; при вхождении в рекурсию передаётся по ссылке
 								){
 		if(!$fields) { // набор полей извлечения данных по умолчанию
-			$fields='id,name,parent_id,alias'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
+			$fields='id,name,parent_id,alias,product_type'; //echo "<div class='txtLightBlue'>GO FIELDS! : ".$fields."</div>";
 		}elseif(!$result){ // если с дуру передали пустую строку, извлечь все поля таблицы:
 			if (!str_replace(" ",'',$fields)){
 				$qFields="DESC insur_insurance_object";
@@ -130,11 +138,11 @@ class Data {
     (   SELECT COUNT(*) AS cnt FROM insur_insurance_object
       WHERE parent_id = t1.id
 		AND `status` = 1
-    ) AS children";
+    ) AS children, product_type";
 		
 		if ((int)$parent_id>=0) {
 			$fields.=",priority";
-			$query.=", `priority`";
+			$query.=",`priority`";
 		}
 		$query.=" FROM insur_insurance_object as t1 ";
 		if ($parent_id>=0)
@@ -143,11 +151,11 @@ class Data {
 		
 		$query.=" 
    WHERE t1.parent_id = ".$parent_id." AND `status` = 1
-ORDER BY ";
+ORDER BY product_type, ";
 		
 		$query.=($parent_id>=0)? "p.priority":"id";
 		
-		$query.=" ASC";
+		$query.=" ASC"; //die("<div class=''>query= ".$query."</div>");
 		
 		$res=Yii::app()->db->createCommand($query)->queryAll();
 		$fields=preg_replace('/\bt1.parent_id\b/',"parent_id",$fields);
@@ -224,12 +232,13 @@ class Views{
 	private $ViewsType;
 	// не объявлять как static, иначе не сработает array_walk_recursive()!
 	private $ViewsArray=array(
-					'esli_proizoshel_strahovoj_sluchay'=>false,
 					'fizicheskim_litzam'=>false,
 					'korporativnym_klientam'=>false,
 					'malomu_i_srednemu_biznesu'=>false,
 					'o_kompanii'=>array('vakansiji','kontakty','news'),
 					'partneram'=>false,
+					'esli_proizoshel_strahovoj_sluchay'=>false,
+					'site'=>array('otpravit_zajavku','zadat_vopros')
 				);
 	private $ViewsIds=array();
 /**
@@ -240,6 +249,7 @@ class Views{
 	public function __construct($flat_list=false){
 		if ($flat_list){
 			$array=$this->ViewsArray;
+			// пройтись по всему массиву  и собрать Ids эксклюзивных страниц (созданных, как программные компоненты):
 			array_walk_recursive($array,array($this,'getViewsIds'));
 			$this->ViewsType='ViewsIds';
 		}else
@@ -284,7 +294,7 @@ class Views{
  * @subpackage
  */
 	private function getViewsIds($item,$key){
-		if( $id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$item.'"')->queryScalar() )
+		if( $id = Yii::app()->db->createCommand()->select('id')->from('insur_insurance_object')->where('alias="'.$item.'" OR alias = "site/'.$item.'"')->queryScalar() )
 			$this->ViewsIds[$id]=$item;
 	}
 	function tst(){echo "tst";}
@@ -315,6 +325,24 @@ function getUrlHashAsArray($rawUrl=false){
 	}else
 		return false;
 }
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+function jsRedirect($location_href,$base_alias=false){
+		$lstr=parseUrl();
+		$last_alias=array_pop($lstr['uris']);
+		if (Yii::app()->controller->getId()==$last_alias){ 
+			if(!$base_alias)
+				$base_alias=Yii::app()->controller->getId();
+		$redirect=Yii::app()->request->getBaseUrl(true).'/'.$base_alias.'/'.$location_href;?>
+<script>
+//alert('<?=$redirect?>');
+location.href='<?=$redirect?>';
+</script>
+	<?	}
+	}
 /**
  * Распарсить URL по "/"
  * @package
