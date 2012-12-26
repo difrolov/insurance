@@ -1,6 +1,10 @@
 <?
 $upersimg=Yii::app()->request->getBaseUrl(true).'/upload/img/vidi_srahovania/';
 $upers=Yii::app()->request->getBaseUrl(true).'/fizicheskim_litzam/';
+$lnews=$this->getLastNews();
+$wdate=$lnews[0];
+$wtext=$lnews[1];
+$all_news='<a href="'.Yii::app()->request->getBaseUrl(true).'/o_kompanii/novosti_kompanii"  style="text-decoration:none;">все новости</a>';
 ?>
 <div id="bottom_insur">
     <? 	
@@ -28,11 +32,15 @@ $upers=Yii::app()->request->getBaseUrl(true).'/fizicheskim_litzam/';
       </tr>
     </table></td>
     <td class="modSpNews"><div class="clear" style="margin-bottom:26px;">
-        <span id="issue_date" style="margin-top:20px;">31.08.2012</span>
-        <span class="floatRight txtLightBlue" id="all_news" style="border-bottom:dotted 1px; font-size:10.5px; margin-top:18px;"><a href="#" style="text-decoration:none;">все новости</a></span>
+        <span id="issue_date" style="margin-top:20px;"><?=$wdate?></span>
+        <span class="floatRight txtLightBlue" id="all_news" style="border-bottom:dotted 1px; font-size:10.5px; margin-top:18px;"><?=$all_news?></span>
         </div>
-        <p id="new_preview">
-        мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок</p>
+        <div id="new_preview"><? /*
+        мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок*/
+		
+		echo $wtext;
+		
+		?></div>
 </td>
   </tr>
 </table>
@@ -55,12 +63,14 @@ $upers=Yii::app()->request->getBaseUrl(true).'/fizicheskim_litzam/';
         <div class="clear">Новости</div>
         <!--<p class="txtLightBlue txtInpact floatLeft" id="textLastNew">Последняя новость</p>-->
         <div class="clear" style="margin-bottom:26px;">
-        	<span id="issue_date" style="margin-top:20px;">31.08.2012</span>
-        	<span class="floatRight txtLightBlue" id="all_news" style="border-bottom:dotted 1px; font-size:10.5px; margin-top:18px;"><a href="#" style="text-decoration:none;">все новости</a></span>
+        	<span id="issue_date" style="margin-top:20px;"><?=$wdate?></span>
+        	<span class="floatRight txtLightBlue" id="all_news" style="border-bottom:dotted 1px; font-size:10.5px; margin-top:18px;"><?=$all_news?></span>
         </div>
-        <p id="new_preview">
-        <!--В рамках начала сотрудничества с информационным порталом, директор нашего главного департамента дала  развёрнутое интервью о перспективах развития коммерческой недвижимости в России, осветив общую ситуацию послекризисного 2009 года.-->
-        мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок мы делаем вам подарок</p>
+        <div id="new_preview"><?
+		
+		echo $wtext;
+		
+		?></div>
     </div>        
 <?	}?>
 </div>

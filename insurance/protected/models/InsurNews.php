@@ -13,6 +13,14 @@ class InsurNews extends CActiveRecord
 		return parent::model($className);
 	}
 
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function getLastNew(){
+		return Yii::app()->db->createCommand()->select('*')->from('insur_news')->where(' id=(SELECT MAX(id) FROM insur_news)')->queryRow();	
+	}
 	/**
 	 * @return string the associated database table name
 	 */

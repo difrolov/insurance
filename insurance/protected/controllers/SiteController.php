@@ -1,6 +1,7 @@
 <?php
 class SiteController extends Controller
 {
+	public $last_news;
 	/**
 	 * Declares class-based actions.
 	 */
@@ -92,6 +93,23 @@ location.href='<?=Yii::app()->request->getBaseUrl(true)?>';
 	{	// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('index');
+	}
+	public function getLastNews(){
+		$this->last_news=InsurNews::getLastNew();
+		$last_news=explode(" ",$this->last_news['content']);
+		$wtext='';
+		$tlen=300;
+		for($i=0,$j=count($last_news);$i<$j;$i++){
+			if (strlen($wtext)<$tlen){
+				$ttext=$wtext." ".$last_news[$i];
+				if (strlen($ttext)>$tlen)
+					break;
+				else 
+					$wtext=$ttext;
+			}
+		}
+		$news_date=setHTML::showCommonDate($this->last_news['date_edit']);
+		return array($news_date,$wtext);		
 	}
 /**
  * Описание
