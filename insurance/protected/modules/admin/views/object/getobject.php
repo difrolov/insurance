@@ -1,7 +1,7 @@
 <br class="clear">
 <? if ($gridDataProvider['parent']){?>
 <div>Продукт</div>
-<?php 
+<?php
 	$this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
 		'type'=>'striped bordered condensed',
 		'dataProvider'=>$gridDataProvider['parent'],
@@ -27,7 +27,7 @@
 		),
 	)); ?>
 	<br class="clear">
-	
+
 	<?php
 	$this->widget('bootstrap.widgets.TbButton', array(
 			'label'=>'Упорядочить разделы в меню',
@@ -39,10 +39,10 @@
 <br class="clear">
 <br class="clear">
 <div>Подкатегории</div>
-<?php 
+<?php
 }else{?>
 	<h4>Страницы без родительских разделов</h4>
-<? 
+<?
 }
 $this->widget('application.extensions.bootstrap.widgets.TbGridView', array(
     'type'=>'striped bordered condensed',
@@ -106,7 +106,7 @@ $(document).ready(function(){
 				val=0;
 			}
 			_object.updateObjectStatus(id,val);
-			alert('Done!');
+
 		});
 })
 </script>
